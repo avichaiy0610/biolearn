@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/prisma";
-import { getModel } from "@/lib/google-ai";
+import { groq, QUALITY_MODEL } from "@/lib/groq";
 
 export async function POST(request: Request) {
   const formData = await request.formData();
@@ -35,21 +35,27 @@ export async function POST(request: Request) {
 
   const prompt =
     lang === "he"
-      ? `להלן תוכן של סילבוס או חומר לימוד בביולוגיה:\n\n${rawText}\n\nבהתבסס על תוכן זה, הפק רשימה של 3-6 תתי-נושאים רלוונטיים לאתר לימודי ביולוגיה לתואר ראשון. החזר JSON בלבד (ללא הסבר נוסף) במבנה הבא:
-[{"slug":"unique-slug-en","nameHe":"שם בעברית","nameEn":"Name in English","contentHe":"תוכן מפורט בעברית (3-5 משפטים)","contentEn":"Detailed content in English (3-5 sentences)"}]`
+      ? `להלן תוכן של סילבוס או חומר לימוד בביולוגיה:\n\n${rawText}\n\nבהתבסס על תוכן זה, הפק רשימה של 3-6 תתי-נושאים רלוונטיים לאתר לימודי ביולוגיה לתואר ראשון. החזר JSON בלבד במבנה הבא:
+{"subtopics":[{"slug":"unique-slug-en","nameHe":"שם בעברית","nameEn":"Name in English","contentHe":"תוכן מפורט בעברית (3-5 משפטים)","contentEn":"Detailed content in English (3-5 sentences)"}]}`
       : `The following is a biology syllabus or study material:\n\n${rawText}\n\nExtract 3-6 relevant subtopics for an undergraduate biology education website. Return JSON only:
-[{"slug":"unique-slug-en","nameHe":"Hebrew name","nameEn":"Name in English","contentHe":"Detailed Hebrew content (3-5 sentences)","contentEn":"Detailed English content (3-5 sentences)"}]`;
+{"subtopics":[{"slug":"unique-slug-en","nameHe":"Hebrew name","nameEn":"Name in English","contentHe":"Detailed Hebrew content (3-5 sentences)","contentEn":"Detailed English content (3-5 sentences)"}]}`;
 
   let suggestions: object[] = [];
   try {
-    const model = getModel(true);
-    const result = await model.generateContent(
-      "You are a biology educator. Extract educational subtopics from biology materials and format them as JSON. Return ONLY valid JSON array, no markdown fences.\n\n" +
-        prompt
-    );
-    const responseText = result.response.text();
-    const cleaned = responseText.replace(/```json\n?|\n?```/g, "").trim();
-    suggestions = JSON.parse(cleaned);
+    const completion = await groq.chat.completions.create({
+      messages: [
+        {
+          role: "system",
+          content: "You are a biology educator. Extract educational subtopics from biology materials and format them as JSON.",
+        },
+        { role: "user", content: prompt },
+      ],
+      model: QUALITY_MODEL,
+      response_format: { type: "json_object" },
+    });
+    const responseText = completion.choices[0]?.message?.content ?? "{}";
+    const parsed = JSON.parse(responseText);
+    suggestions = parsed.subtopics ?? [];
   } catch {
     suggestions = [];
   }

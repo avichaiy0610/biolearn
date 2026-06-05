@@ -1,54 +1,11 @@
 import { prisma } from "@/lib/prisma";
-import { getModel } from "@/lib/google-ai";
-
-const ANIMATION_SCHEMA = {
-  type: "object",
-  properties: {
-    steps: {
-      type: "array",
-      items: {
-        type: "object",
-        properties: {
-          titleHe: { type: "string" },
-          titleEn: { type: "string" },
-          descHe: { type: "string" },
-          descEn: { type: "string" },
-          elements: {
-            type: "array",
-            items: {
-              type: "object",
-              properties: {
-                id: { type: "string" },
-                type: { type: "string" },
-                cx: { type: "number" }, cy: { type: "number" }, r: { type: "number" },
-                x: { type: "number" }, y: { type: "number" },
-                width: { type: "number" }, height: { type: "number" },
-                x1: { type: "number" }, y1: { type: "number" },
-                x2: { type: "number" }, y2: { type: "number" },
-                rx: { type: "number" }, ry: { type: "number" },
-                d: { type: "string" }, label: { type: "string" },
-                color: { type: "string" }, textColor: { type: "string" },
-                fontSize: { type: "number" },
-              },
-              required: ["id", "type"],
-            },
-          },
-          highlight: { type: "array", items: { type: "string" } },
-        },
-        required: ["titleHe", "titleEn", "descHe", "descEn", "elements", "highlight"],
-      },
-    },
-  },
-  required: ["steps"],
-};
+import { groq, QUALITY_MODEL } from "@/lib/groq";
 
 async function generateAnimationSteps(
   nameEn: string,
   nameHe: string,
   contentEn: string
 ): Promise<object[]> {
-  const model = getModel(true);
-
   const prompt = `You are generating SVG animation data for a biology education website.
 Create 3-4 animation steps that visually explain the concept: "${nameEn}" (${nameHe})
 
@@ -66,17 +23,20 @@ Rules for SVG elements (viewBox is 0 0 400 300):
 - Non-highlighted elements appear dimmed automatically
 - Keep elements simple and well-spaced within the 400x300 viewBox
 
-Return ONLY valid JSON matching the schema. No markdown fences.`;
+Return ONLY valid JSON in this exact format:
+{"steps":[{"titleHe":"...","titleEn":"...","descHe":"...","descEn":"...","elements":[{"id":"e1","type":"circle","cx":200,"cy":150,"r":20,"color":"#3b82f6"}],"highlight":["e1"]}]}`;
 
   try {
-    const result = await model.generateContent({
-      contents: [{ role: "user", parts: [{ text: prompt }] }],
-      generationConfig: {
-        responseMimeType: "application/json",
-        responseSchema: ANIMATION_SCHEMA as never,
-      },
+    const completion = await groq.chat.completions.create({
+      messages: [
+        { role: "system", content: "You are a biology visualization expert. Return only valid JSON." },
+        { role: "user", content: prompt },
+      ],
+      model: QUALITY_MODEL,
+      response_format: { type: "json_object" },
     });
-    const parsed = JSON.parse(result.response.text());
+    const responseText = completion.choices[0]?.message?.content ?? "{}";
+    const parsed = JSON.parse(responseText);
     return parsed.steps ?? [];
   } catch {
     return [];
@@ -98,10 +58,8 @@ export async function POST(request: Request) {
   const finalSlug = existing ? `${slug}-${Date.now()}` : slug;
   const processSlug = `${finalSlug}-animation`;
 
-  // Generate animation steps via Gemini
   const steps = await generateAnimationSteps(nameEn, nameHe ?? nameEn, contentEn ?? "");
 
-  // Create subtopic + linked process in one transaction
   const [subtopic, process] = await prisma.$transaction(async (tx) => {
     const sub = await tx.subtopic.create({
       data: {

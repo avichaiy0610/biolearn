@@ -1,4 +1,4 @@
-import { getModel } from "@/lib/google-ai";
+import { groq, QUALITY_MODEL, BIOLOGY_SYSTEM } from "@/lib/groq";
 
 export async function POST(request: Request) {
   const { query, lang, subtopicName, topicName } = await request.json();
@@ -13,9 +13,14 @@ Include: definition, mechanism, biological significance, and specific examples.
 Be accurate and use proper scientific terminology. ${query ?? ""}`;
 
   try {
-    const model = getModel();
-    const result = await model.generateContent(prompt);
-    const content = result.response.text();
+    const completion = await groq.chat.completions.create({
+      messages: [
+        { role: "system", content: BIOLOGY_SYSTEM },
+        { role: "user", content: prompt },
+      ],
+      model: QUALITY_MODEL,
+    });
+    const content = completion.choices[0]?.message?.content ?? "";
     return Response.json({ content, citations: [] });
   } catch (err) {
     const msg = err instanceof Error ? err.message : "Unknown error";

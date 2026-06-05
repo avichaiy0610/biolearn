@@ -1,4 +1,4 @@
-import { getModel, BIOLOGY_SYSTEM } from "@/lib/google-ai";
+import { groq, FAST_MODEL, BIOLOGY_SYSTEM } from "@/lib/groq";
 
 export async function POST(request: Request) {
   const { lang, processName, stepTitle, stepDesc } = await request.json();
@@ -13,14 +13,17 @@ export async function POST(request: Request) {
   const stream = new ReadableStream({
     async start(controller) {
       try {
-        const model = getModel();
-        const chat = model.startChat({
-          history: [{ role: "user", parts: [{ text: BIOLOGY_SYSTEM }] }],
+        const completion = await groq.chat.completions.create({
+          messages: [
+            { role: "system", content: BIOLOGY_SYSTEM },
+            { role: "user", content: userMessage },
+          ],
+          model: FAST_MODEL,
+          stream: true,
         });
-        const result = await chat.sendMessageStream(userMessage);
 
-        for await (const chunk of result.stream) {
-          const text = chunk.text();
+        for await (const chunk of completion) {
+          const text = chunk.choices[0]?.delta?.content ?? "";
           if (text) controller.enqueue(encoder.encode(`data: ${text}\n\n`));
         }
         controller.enqueue(encoder.encode("data: [DONE]\n\n"));
