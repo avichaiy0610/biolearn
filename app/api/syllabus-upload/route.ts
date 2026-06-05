@@ -40,15 +40,14 @@ export async function POST(request: Request) {
       : `The following is a biology syllabus or study material:\n\n${rawText}\n\nExtract 3-6 relevant subtopics for an undergraduate biology education website. Return JSON only:
 [{"slug":"unique-slug-en","nameHe":"Hebrew name","nameEn":"Name in English","contentHe":"Detailed Hebrew content (3-5 sentences)","contentEn":"Detailed English content (3-5 sentences)"}]`;
 
-  const model = getModel(true);
-  const result = await model.generateContent(
-    "You are a biology educator. Extract educational subtopics from biology materials and format them as JSON. Return ONLY valid JSON array, no markdown fences.\n\n" +
-      prompt
-  );
-  const responseText = result.response.text();
-
   let suggestions: object[] = [];
   try {
+    const model = getModel(true);
+    const result = await model.generateContent(
+      "You are a biology educator. Extract educational subtopics from biology materials and format them as JSON. Return ONLY valid JSON array, no markdown fences.\n\n" +
+        prompt
+    );
+    const responseText = result.response.text();
     const cleaned = responseText.replace(/```json\n?|\n?```/g, "").trim();
     suggestions = JSON.parse(cleaned);
   } catch {
