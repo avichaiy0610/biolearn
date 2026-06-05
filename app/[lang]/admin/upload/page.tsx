@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import { getDictionary, hasLocale, type Locale } from "@/lib/dictionaries";
 import { prisma } from "@/lib/prisma";
 import { notFound } from "next/navigation";
