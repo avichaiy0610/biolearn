@@ -119,6 +119,7 @@ export default async function TopicPage({
       <ChatPanel
         lang={lang as Locale}
         topicName={name}
+        topicSlug={topic.slug}
         subtopics={topic.subtopics.map((s) => ({
           name: lang === "he" ? s.nameHe : s.nameEn,
           content: lang === "he" ? s.contentHe : s.contentEn,

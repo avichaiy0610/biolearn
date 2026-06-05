@@ -1,7 +1,16 @@
 import { groq, QUALITY_MODEL } from "@/lib/groq";
+import { prisma } from "@/lib/prisma";
 
 export async function POST(request: Request) {
-  const { messages, lang, topicName, subtopics } = await request.json();
+  const { messages, lang, topicName, topicSlug, subtopics } = await request.json();
+
+  // Log the latest user question (fire-and-forget, don't block the response)
+  const lastUserMsg = [...messages].reverse().find((m: { role: string }) => m.role === "user");
+  if (lastUserMsg?.content) {
+    prisma.chatLog.create({
+      data: { topicSlug: topicSlug ?? null, topicName, question: lastUserMsg.content },
+    }).catch(() => {});
+  }
 
   const subtopicContext = subtopics?.length
     ? subtopics

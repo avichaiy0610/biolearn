@@ -8,11 +8,12 @@ type Message = { role: "user" | "assistant"; content: string };
 type Props = {
   lang: Locale;
   topicName: string;
+  topicSlug: string;
   subtopics: { name: string; content: string }[];
   dict: { placeholder: string; title: string; thinking: string };
 };
 
-export default function ChatPanel({ lang, topicName, subtopics, dict }: Props) {
+export default function ChatPanel({ lang, topicName, topicSlug, subtopics, dict }: Props) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
@@ -43,6 +44,7 @@ export default function ChatPanel({ lang, topicName, subtopics, dict }: Props) {
           messages: nextMessages,
           lang,
           topicName,
+          topicSlug,
           subtopics,
         }),
       });

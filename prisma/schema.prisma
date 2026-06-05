@@ -65,3 +65,27 @@ model UploadedMaterial {
   approved    Boolean  @default(false)
   createdAt   DateTime @default(now())
 }
+
+model ChatLog {
+  id        String   @id @default(cuid())
+  topicSlug String?
+  topicName String
+  question  String
+  createdAt DateTime @default(now())
+}
+
+model ContentSuggestion {
+  id        String   @id @default(cuid())
+  topicSlug String?
+  topicName String
+  nameHe    String
+  nameEn    String
+  contentHe String
+  contentEn String
+  slug      String
+  reason    String   // Why the AI suggested this
+  priority  Int      @default(0) // Higher = more important
+  approved  Boolean  @default(false)
+  rejected  Boolean  @default(false)
+  createdAt DateTime @default(now())
+}

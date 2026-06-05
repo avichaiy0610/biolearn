@@ -19,6 +19,14 @@ export default async function AdminPage({ params }: PageProps<"/[lang]/admin">) 
       descHe: "נתח קבצי PDF/טקסט וצור תתי-נושאים חדשים",
       descEn: "Analyze PDF/text files and generate new subtopics",
     },
+    {
+      href: `/${lang}/admin/suggestions`,
+      icon: "🧠",
+      titleHe: "הצעות תוכן (AI)",
+      titleEn: "Content Suggestions (AI)",
+      descHe: "סקור הצעות שנוצרו מניתוח שאלות הצ'אט — אשר או דחה",
+      descEn: "Review suggestions generated from chat question analysis — approve or reject",
+    },
   ];
 
   return (
