@@ -3,7 +3,11 @@ import "dotenv/config";
 import { PrismaLibSql } from "@prisma/adapter-libsql";
 import { PrismaClient } from "../app/generated/prisma/client";
 
-const adapter = new PrismaLibSql({ url: process.env.DATABASE_URL ?? "file:./dev.db" });
+const authToken = process.env.DATABASE_AUTH_TOKEN;
+const adapter = new PrismaLibSql({
+  url: process.env.DATABASE_URL ?? "file:./dev.db",
+  ...(authToken ? { authToken } : {}),
+});
 const prisma = new PrismaClient({ adapter });
 
 const translationSteps = [
