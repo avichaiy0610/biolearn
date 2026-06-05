@@ -43,8 +43,9 @@ export default function SubtopicResearch({
       if (!res.ok) throw new Error(data.error);
       setContent(data.content);
       setCitations(data.citations ?? []);
-    } catch {
-      setContent(dict.subtopic.researchError);
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : String(err);
+      setContent(`${dict.subtopic.researchError} (${msg})`);
     } finally {
       setLoading(false);
     }
