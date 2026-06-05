@@ -29,7 +29,12 @@ type SvgElement = {
 };
 
 function parseSvgData(raw: string) {
-  try { return JSON.parse(raw); } catch { return { elements: [] }; }
+  try {
+    const parsed = JSON.parse(raw);
+    return { elements: Array.isArray(parsed?.elements) ? parsed.elements : [], highlight: parsed?.highlight };
+  } catch {
+    return { elements: [] };
+  }
 }
 
 function renderElement(el: SvgElement, isHighlighted: boolean) {
@@ -91,6 +96,20 @@ export default function ProcessVideoMode({
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const typewriterRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const startTimeRef = useRef(Date.now());
+
+  if (steps.length === 0) {
+    return (
+      <div className="fixed inset-0 z-50 bg-zinc-950 text-white flex items-center justify-center">
+        <div className="text-center">
+          <div className="text-4xl mb-4">🔬</div>
+          <p className="text-zinc-400 mb-6">{lang === "he" ? "אין שלבי אנימציה" : "No animation steps"}</p>
+          <button onClick={onExit} className="px-4 py-2 rounded-xl border border-zinc-700 text-zinc-300 hover:text-white">
+            {lang === "he" ? "חזור" : "Go back"}
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   const step = steps[currentStep];
   const title = lang === "he" ? step.titleHe : step.titleEn;

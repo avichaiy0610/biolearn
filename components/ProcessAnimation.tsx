@@ -49,7 +49,8 @@ type SvgData = {
 
 function parseSvgData(raw: string): SvgData {
   try {
-    return JSON.parse(raw) as SvgData;
+    const parsed = JSON.parse(raw);
+    return { elements: Array.isArray(parsed?.elements) ? parsed.elements : [], highlight: parsed?.highlight };
   } catch {
     return { elements: [] };
   }
@@ -169,6 +170,16 @@ export default function ProcessAnimation({
 }) {
   const [currentStep, setCurrentStep] = useState(0);
   const [videoMode, setVideoMode] = useState(false);
+
+  if (steps.length === 0) {
+    return (
+      <div className="rounded-2xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 p-10 text-center text-zinc-400 dark:text-zinc-500">
+        <div className="text-4xl mb-3">🔬</div>
+        <p className="text-sm">{lang === "he" ? "אין שלבי אנימציה עבור תהליך זה" : "No animation steps for this process"}</p>
+      </div>
+    );
+  }
+
   const step = steps[currentStep];
 
   if (videoMode) {
