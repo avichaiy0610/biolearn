@@ -64,6 +64,11 @@
     "citations": "Sources",
     "researchError": "Search error. Check your API key."
   },
+  "chat": {
+    "title": "Ask the AI about this topic",
+    "placeholder": "Ask anything about this topic...",
+    "thinking": "Thinking..."
+  },
   "upload": {
     "title": "Upload Syllabus / Study Material",
     "description": "Upload a PDF or text file — the system will analyze and suggest new subtopics",

@@ -1,0 +1,59 @@
+import { groq, QUALITY_MODEL } from "@/lib/groq";
+
+export async function POST(request: Request) {
+  const { messages, lang, topicName, subtopics } = await request.json();
+
+  const subtopicContext = subtopics?.length
+    ? subtopics
+        .map((s: { name: string; content: string }) => `- ${s.name}: ${s.content}`)
+        .join("\n")
+    : "";
+
+  const systemPrompt =
+    lang === "he"
+      ? `אתה מדריך ביולוגיה חכם המסייע לסטודנטים לתואר ראשון.
+אתה כרגע עוזר בנושא: "${topicName}".
+${subtopicContext ? `\nתוכן הנושא:\n${subtopicContext}\n` : ""}
+ענה תמיד בעברית, בצורה ברורה ומדויקת מדעית.
+אם שאלה לא קשורה לביולוגיה, הפנה בעדינות בחזרה לנושא.
+שמור על תשובות ממוקדות — 2-4 משפטים בדרך כלל, אלא אם נדרש הסבר מפורט יותר.`
+      : `You are a smart biology guide helping undergraduate students.
+You are currently assisting with the topic: "${topicName}".
+${subtopicContext ? `\nTopic content:\n${subtopicContext}\n` : ""}
+Always answer in English, clearly and scientifically accurately.
+If a question is unrelated to biology, gently redirect back to the topic.
+Keep answers focused — 2-4 sentences usually, unless a more detailed explanation is needed.`;
+
+  const encoder = new TextEncoder();
+
+  const stream = new ReadableStream({
+    async start(controller) {
+      try {
+        const completion = await groq.chat.completions.create({
+          messages: [
+            { role: "system", content: systemPrompt },
+            ...messages,
+          ],
+          model: QUALITY_MODEL,
+          stream: true,
+          max_tokens: 512,
+        });
+
+        for await (const chunk of completion) {
+          const text = chunk.choices[0]?.delta?.content ?? "";
+          if (text) controller.enqueue(encoder.encode(`data: ${text}\n\n`));
+        }
+        controller.enqueue(encoder.encode("data: [DONE]\n\n"));
+        controller.close();
+      } catch {
+        const msg = lang === "he" ? "שגיאה. נסה שנית." : "Error. Please try again.";
+        controller.enqueue(encoder.encode(`data: ${msg}\n\n`));
+        controller.close();
+      }
+    },
+  });
+
+  return new Response(stream, {
+    headers: { "Content-Type": "text/event-stream", "Cache-Control": "no-cache" },
+  });
+}

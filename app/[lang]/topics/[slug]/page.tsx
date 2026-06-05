@@ -5,6 +5,7 @@ import { getDictionary, hasLocale, type Locale } from "@/lib/dictionaries";
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 import SubtopicResearch from "@/components/SubtopicResearch";
+import ChatPanel from "@/components/ChatPanel";
 
 export default async function TopicPage({
   params,
@@ -113,6 +114,17 @@ export default async function TopicPage({
           </div>
         </section>
       )}
+
+      {/* Free-form AI chat */}
+      <ChatPanel
+        lang={lang as Locale}
+        topicName={name}
+        subtopics={topic.subtopics.map((s) => ({
+          name: lang === "he" ? s.nameHe : s.nameEn,
+          content: lang === "he" ? s.contentHe : s.contentEn,
+        }))}
+        dict={dict.chat}
+      />
     </div>
   );
 }
