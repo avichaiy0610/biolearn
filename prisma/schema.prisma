@@ -1,0 +1,67 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Topic {
+  id        String     @id @default(cuid())
+  slug      String     @unique
+  nameHe    String
+  nameEn    String
+  descHe    String
+  descEn    String
+  category  String
+  icon      String
+  subtopics Subtopic[]
+  processes Process[]
+}
+
+model Subtopic {
+  id                 String  @id @default(cuid())
+  topicId            String
+  topic              Topic   @relation(fields: [topicId], references: [id])
+  slug               String
+  nameHe             String
+  nameEn             String
+  contentHe          String
+  contentEn          String
+  relatedProcessSlug String? // links to a Process.slug for "view animation" button
+}
+
+model Process {
+  id      String        @id @default(cuid())
+  topicId String
+  topic   Topic         @relation(fields: [topicId], references: [id])
+  slug    String
+  nameHe  String
+  nameEn  String
+  descHe  String
+  descEn  String
+  steps   ProcessStep[]
+}
+
+model ProcessStep {
+  id        String  @id @default(cuid())
+  processId String
+  process   Process @relation(fields: [processId], references: [id])
+  order     Int
+  titleHe   String
+  titleEn   String
+  descHe    String
+  descEn    String
+  svgData   String  // JSON-serialized animation data
+}
+
+model UploadedMaterial {
+  id          String   @id @default(cuid())
+  fileName    String
+  topicSlug   String?
+  rawText     String
+  suggestions String   // JSON: array of suggested subtopics
+  approved    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+}

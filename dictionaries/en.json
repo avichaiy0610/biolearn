@@ -1,0 +1,79 @@
+{
+  "nav": {
+    "home": "Home",
+    "topics": "Topics",
+    "search": "Search",
+    "admin": "Admin"
+  },
+  "home": {
+    "title": "BioLearn",
+    "subtitle": "Biology Platform for Undergraduates",
+    "description": "Learn core biology topics through interactive animations and AI-powered explanations",
+    "exploreTopics": "Explore Topics",
+    "searchPlaceholder": "Search topics, processes, terms..."
+  },
+  "topics": {
+    "title": "Biology Topics",
+    "processes": "Processes",
+    "subtopics": "Subtopics",
+    "viewAll": "View All"
+  },
+  "process": {
+    "step": "Step",
+    "of": "of",
+    "previous": "Previous",
+    "next": "Next",
+    "explain": "Explain this",
+    "explaining": "Explaining...",
+    "playAnimation": "Play Animation",
+    "pauseAnimation": "Pause Animation"
+  },
+  "search": {
+    "title": "Search Results",
+    "noResults": "No results found for",
+    "resultsFor": "Results for"
+  },
+  "admin": {
+    "title": "Admin Dashboard",
+    "login": "Sign In",
+    "logout": "Sign Out"
+  },
+  "auth": {
+    "login": "Sign In",
+    "register": "Create Account",
+    "email": "Email address",
+    "password": "Password (at least 6 characters)",
+    "submit": "Sign In",
+    "toggle": "Don't have an account? Register",
+    "error": "Error",
+    "success": "Success"
+  },
+  "categories": {
+    "molecular": "Molecular Biology",
+    "cell": "Cell Biology",
+    "genetics": "Genetics",
+    "biochemistry": "Biochemistry",
+    "microbiology": "Microbiology",
+    "physiology": "Physiology"
+  },
+  "subtopic": {
+    "viewAnimation": "View Animation",
+    "research": "Deep Research (AI)",
+    "researching": "Searching...",
+    "researchResult": "Research Result",
+    "citations": "Sources",
+    "researchError": "Search error. Check your API key."
+  },
+  "upload": {
+    "title": "Upload Syllabus / Study Material",
+    "description": "Upload a PDF or text file — the system will analyze and suggest new subtopics",
+    "selectTopic": "Select topic (optional)",
+    "noTopic": "No specific topic",
+    "uploadButton": "Analyze File",
+    "uploading": "Analyzing...",
+    "results": "Suggested Subtopics",
+    "noResults": "No subtopics found in file",
+    "addToDb": "Add to Site",
+    "added": "Added!"
+  }
+}

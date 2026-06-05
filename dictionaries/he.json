@@ -1,0 +1,79 @@
+{
+  "nav": {
+    "home": "דף הבית",
+    "topics": "נושאים",
+    "search": "חיפוש",
+    "admin": "ניהול"
+  },
+  "home": {
+    "title": "BioLearn",
+    "subtitle": "הפלטפורמה לביולוגיה לתואר ראשון",
+    "description": "למד נושאי ביולוגיה בעזרת אנימציות אינטראקטיביות והסברי AI",
+    "exploreTopics": "גלה נושאים",
+    "searchPlaceholder": "חפש נושא, תהליך, מונח..."
+  },
+  "topics": {
+    "title": "נושאי ביולוגיה",
+    "processes": "תהליכים",
+    "subtopics": "תת-נושאים",
+    "viewAll": "הצג הכל"
+  },
+  "process": {
+    "step": "שלב",
+    "of": "מתוך",
+    "previous": "הקודם",
+    "next": "הבא",
+    "explain": "הסבר לי",
+    "explaining": "מסביר...",
+    "playAnimation": "הפעל אנימציה",
+    "pauseAnimation": "עצור אנימציה"
+  },
+  "search": {
+    "title": "תוצאות חיפוש",
+    "noResults": "לא נמצאו תוצאות עבור",
+    "resultsFor": "תוצאות עבור"
+  },
+  "admin": {
+    "title": "לוח ניהול",
+    "login": "התחבר",
+    "logout": "התנתק"
+  },
+  "auth": {
+    "login": "התחברות",
+    "register": "הרשמה",
+    "email": "כתובת מייל",
+    "password": "סיסמה (לפחות 6 תווים)",
+    "submit": "כניסה",
+    "toggle": "אין לך חשבון? הירשם",
+    "error": "שגיאה",
+    "success": "הצלחה"
+  },
+  "categories": {
+    "molecular": "ביולוגיה מולקולרית",
+    "cell": "ביולוגיה של התא",
+    "genetics": "גנטיקה",
+    "biochemistry": "ביוכימיה",
+    "microbiology": "מיקרוביולוגיה",
+    "physiology": "פיזיולוגיה"
+  },
+  "subtopic": {
+    "viewAnimation": "צפה באנימציה",
+    "research": "מחקר מעמיק (AI)",
+    "researching": "מחפש מידע...",
+    "researchResult": "תוצאת מחקר",
+    "citations": "מקורות",
+    "researchError": "שגיאה בחיפוש. בדוק את מפתח ה-API."
+  },
+  "upload": {
+    "title": "העלאת סילבוס / חומר לימוד",
+    "description": "העלה קובץ PDF או טקסט — המערכת תנתח ותציע תתי-נושאים חדשים",
+    "selectTopic": "בחר נושא (אופציונלי)",
+    "noTopic": "ללא נושא ספציפי",
+    "uploadButton": "נתח קובץ",
+    "uploading": "מנתח...",
+    "results": "הצעות לתתי-נושאים",
+    "noResults": "לא נמצאו תתי-נושאים בקובץ",
+    "addToDb": "הוסף לאתר",
+    "added": "נוסף!"
+  }
+}
