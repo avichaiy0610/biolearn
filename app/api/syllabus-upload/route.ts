@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/prisma";
-import { groq, GROQ_MODEL } from "@/lib/groq";
+import { getModel } from "@/lib/google-ai";
 
 export async function POST(request: Request) {
   const formData = await request.formData();
@@ -14,21 +14,19 @@ export async function POST(request: Request) {
   let rawText = "";
 
   if (file.type === "application/pdf") {
-    // Basic PDF text extraction using ArrayBuffer
     const arrayBuffer = await file.arrayBuffer();
     const buffer = Buffer.from(arrayBuffer);
     try {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const pdfModule = await import("pdf-parse") as any;
+      const pdfModule = (await import("pdf-parse")) as any;
       const pdfParse = pdfModule.default ?? pdfModule;
       const data = await pdfParse(buffer);
-      rawText = data.text.slice(0, 8000); // limit to 8k chars
+      rawText = data.text.slice(0, 8000);
     } catch {
       return Response.json({ error: "Failed to parse PDF" }, { status: 400 });
     }
   } else {
-    rawText = await file.text();
-    rawText = rawText.slice(0, 8000);
+    rawText = (await file.text()).slice(0, 8000);
   }
 
   if (!rawText.trim()) {
@@ -37,45 +35,17 @@ export async function POST(request: Request) {
 
   const prompt =
     lang === "he"
-      ? `להלן תוכן של סילבוס או חומר לימוד בביולוגיה:\n\n${rawText}\n\n
-בהתבסס על תוכן זה, הפק רשימה של 3-6 תתי-נושאים רלוונטיים לאתר לימודי ביולוגיה לתואר ראשון.
-החזר JSON בלבד (ללא הסבר נוסף) במבנה הבא:
-[
-  {
-    "slug": "unique-slug-en",
-    "nameHe": "שם בעברית",
-    "nameEn": "Name in English",
-    "contentHe": "תוכן מפורט בעברית (3-5 משפטים)",
-    "contentEn": "Detailed content in English (3-5 sentences)"
-  }
-]`
-      : `The following is a biology syllabus or study material:\n\n${rawText}\n\n
-Based on this content, extract 3-6 relevant subtopics for an undergraduate biology education website.
-Return JSON only (no additional explanation) in this structure:
-[
-  {
-    "slug": "unique-slug-en",
-    "nameHe": "Hebrew name",
-    "nameEn": "Name in English",
-    "contentHe": "Detailed Hebrew content (3-5 sentences)",
-    "contentEn": "Detailed English content (3-5 sentences)"
-  }
-]`;
+      ? `להלן תוכן של סילבוס או חומר לימוד בביולוגיה:\n\n${rawText}\n\nבהתבסס על תוכן זה, הפק רשימה של 3-6 תתי-נושאים רלוונטיים לאתר לימודי ביולוגיה לתואר ראשון. החזר JSON בלבד (ללא הסבר נוסף) במבנה הבא:
+[{"slug":"unique-slug-en","nameHe":"שם בעברית","nameEn":"Name in English","contentHe":"תוכן מפורט בעברית (3-5 משפטים)","contentEn":"Detailed content in English (3-5 sentences)"}]`
+      : `The following is a biology syllabus or study material:\n\n${rawText}\n\nExtract 3-6 relevant subtopics for an undergraduate biology education website. Return JSON only:
+[{"slug":"unique-slug-en","nameHe":"Hebrew name","nameEn":"Name in English","contentHe":"Detailed Hebrew content (3-5 sentences)","contentEn":"Detailed English content (3-5 sentences)"}]`;
 
-  const completion = await groq.chat.completions.create({
-    model: GROQ_MODEL,
-    max_tokens: 2000,
-    messages: [
-      {
-        role: "system",
-        content:
-          "You are a biology educator. Extract educational subtopics from biology materials and format them as JSON. Return ONLY valid JSON, no markdown fences.",
-      },
-      { role: "user", content: prompt },
-    ],
-  });
-
-  const responseText = completion.choices[0]?.message?.content ?? "[]";
+  const model = getModel(true);
+  const result = await model.generateContent(
+    "You are a biology educator. Extract educational subtopics from biology materials and format them as JSON. Return ONLY valid JSON array, no markdown fences.\n\n" +
+      prompt
+  );
+  const responseText = result.response.text();
 
   let suggestions: object[] = [];
   try {
