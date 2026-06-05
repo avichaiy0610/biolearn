@@ -3,7 +3,9 @@ import { PrismaClient } from "../app/generated/prisma/client";
 
 function createPrisma() {
   const url = process.env.DATABASE_URL ?? "file:./dev.db";
-  const adapter = new PrismaLibSql({ url });
+  const authToken = process.env.DATABASE_AUTH_TOKEN;
+  // authToken is required for Turso (cloud) but not for local SQLite
+  const adapter = new PrismaLibSql({ url, ...(authToken ? { authToken } : {}) });
   return new PrismaClient({ adapter, log: ["error"] });
 }
 

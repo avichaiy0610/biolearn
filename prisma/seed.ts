@@ -3,7 +3,8 @@ import { PrismaLibSql } from "@prisma/adapter-libsql";
 import { PrismaClient } from "../app/generated/prisma/client";
 
 const DB_URL = process.env.DATABASE_URL ?? "file:./dev.db";
-const adapter = new PrismaLibSql({ url: DB_URL });
+const authToken = process.env.DATABASE_AUTH_TOKEN;
+const adapter = new PrismaLibSql({ url: DB_URL, ...(authToken ? { authToken } : {}) });
 const prisma = new PrismaClient({ adapter });
 
 // ─── SVG DATA ────────────────────────────────────────────────────────────────
