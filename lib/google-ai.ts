@@ -4,7 +4,7 @@ export const genAI = new GoogleGenerativeAI(
   process.env.GOOGLE_AI_KEY ?? ""
 );
 
-export const FLASH_MODEL = "gemini-1.5-flash-latest";
+export const FLASH_MODEL = "gemini-1.5-flash";
 
 export const BIOLOGY_SYSTEM = `You are a biology tutor specializing in undergraduate-level biology.
 When explaining biological processes, be clear and concise.
