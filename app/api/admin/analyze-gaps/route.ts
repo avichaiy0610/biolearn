@@ -33,7 +33,9 @@ export async function POST() {
         })
       : [];
 
-    const existingNames = existingSubtopics.map((s) => s.nameEn).join(", ");
+    const existingNames = existingSubtopics.length > 0
+      ? existingSubtopics.map((s) => `"${s.nameEn}" (${s.nameHe})`).join(", ")
+      : "none yet";
 
     // Count question frequency
     const questionFreq = new Map<string, number>();

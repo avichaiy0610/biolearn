@@ -33,7 +33,7 @@ function parseSvgData(raw: string) {
     const parsed = JSON.parse(raw);
     return { elements: Array.isArray(parsed?.elements) ? parsed.elements : [], highlight: parsed?.highlight };
   } catch {
-    return { elements: [] };
+    return { elements: [] as SvgElement[] };
   }
 }
 
@@ -76,7 +76,7 @@ function renderElement(el: SvgElement, isHighlighted: boolean) {
   }
 }
 
-const STEP_DURATION = 7000; // ms per step
+const STEP_DURATION = 7000;
 
 export default function ProcessVideoMode({
   steps,
@@ -97,6 +97,56 @@ export default function ProcessVideoMode({
   const typewriterRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const startTimeRef = useRef(Date.now());
 
+  // All hooks must be called unconditionally — derive desc safely before the guard
+  const step = steps[currentStep] ?? null;
+  const title = step ? (lang === "he" ? step.titleHe : step.titleEn) : "";
+  const desc = step ? (lang === "he" ? step.descHe : step.descEn) : "";
+  const svgData = step ? parseSvgData(step.svgData) : { elements: [] as SvgElement[] };
+
+  const startTypewriter = useCallback((text: string) => {
+    if (typewriterRef.current) clearInterval(typewriterRef.current);
+    setDisplayedText("");
+    if (!text) return;
+    let i = 0;
+    const speed = Math.max(12, Math.floor(4000 / text.length));
+    typewriterRef.current = setInterval(() => {
+      i++;
+      setDisplayedText(text.slice(0, i));
+      if (i >= text.length && typewriterRef.current) {
+        clearInterval(typewriterRef.current);
+      }
+    }, speed);
+  }, []);
+
+  useEffect(() => {
+    if (!desc) return;
+    startTypewriter(desc);
+    startTimeRef.current = Date.now();
+    setProgress(0);
+  }, [currentStep, desc, startTypewriter]);
+
+  useEffect(() => {
+    if (!playing || steps.length === 0) {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+      return;
+    }
+    startTimeRef.current = Date.now() - progress * STEP_DURATION;
+    intervalRef.current = setInterval(() => {
+      const elapsed = Date.now() - startTimeRef.current;
+      const p = Math.min(elapsed / STEP_DURATION, 1);
+      setProgress(p);
+      if (p >= 1) {
+        setCurrentStep((c) => {
+          if (c < steps.length - 1) return c + 1;
+          setPlaying(false);
+          return c;
+        });
+      }
+    }, 50);
+    return () => { if (intervalRef.current) clearInterval(intervalRef.current); };
+  }, [playing, steps.length, progress]);
+
+  // Guard rendered AFTER all hooks
   if (steps.length === 0) {
     return (
       <div className="fixed inset-0 z-50 bg-zinc-950 text-white flex items-center justify-center">
@@ -111,57 +161,6 @@ export default function ProcessVideoMode({
     );
   }
 
-  const step = steps[currentStep];
-  const title = lang === "he" ? step.titleHe : step.titleEn;
-  const desc = lang === "he" ? step.descHe : step.descEn;
-  const svgData = parseSvgData(step.svgData);
-
-  // Typewriter effect for description
-  const startTypewriter = useCallback((text: string) => {
-    if (typewriterRef.current) clearInterval(typewriterRef.current);
-    setDisplayedText("");
-    let i = 0;
-    const speed = Math.max(12, Math.floor(4000 / text.length));
-    typewriterRef.current = setInterval(() => {
-      i++;
-      setDisplayedText(text.slice(0, i));
-      if (i >= text.length && typewriterRef.current) {
-        clearInterval(typewriterRef.current);
-      }
-    }, speed);
-  }, []);
-
-  // Reset typewriter when step changes
-  useEffect(() => {
-    startTypewriter(desc);
-    startTimeRef.current = Date.now();
-    setProgress(0);
-  }, [currentStep, desc, startTypewriter]);
-
-  // Progress bar + auto-advance
-  useEffect(() => {
-    if (!playing) {
-      if (intervalRef.current) clearInterval(intervalRef.current);
-      return;
-    }
-
-    startTimeRef.current = Date.now() - progress * STEP_DURATION;
-    intervalRef.current = setInterval(() => {
-      const elapsed = Date.now() - startTimeRef.current;
-      const p = Math.min(elapsed / STEP_DURATION, 1);
-      setProgress(p);
-      if (p >= 1) {
-        setCurrentStep((c) => {
-          if (c < steps.length - 1) return c + 1;
-          setPlaying(false);
-          return c;
-        });
-      }
-    }, 50);
-
-    return () => { if (intervalRef.current) clearInterval(intervalRef.current); };
-  }, [playing, steps.length, progress]);
-
   function goToStep(i: number) {
     setCurrentStep(i);
     setProgress(0);
@@ -172,7 +171,6 @@ export default function ProcessVideoMode({
 
   return (
     <div className="fixed inset-0 z-50 bg-zinc-950 text-white flex flex-col">
-      {/* Header */}
       <div className="flex items-center justify-between px-5 py-3 border-b border-zinc-800">
         <div className="flex items-center gap-3">
           <span className="text-emerald-400 font-semibold text-sm">{processName}</span>
@@ -186,9 +184,7 @@ export default function ProcessVideoMode({
         </button>
       </div>
 
-      {/* Main content */}
       <div className="flex-1 flex flex-col md:flex-row overflow-hidden">
-        {/* SVG canvas */}
         <div className="md:flex-1 flex items-center justify-center p-4 bg-zinc-900">
           <AnimatePresence mode="wait">
             <motion.div key={currentStep}
@@ -208,7 +204,6 @@ export default function ProcessVideoMode({
           </AnimatePresence>
         </div>
 
-        {/* Narration panel */}
         <div className="md:w-80 flex flex-col p-5 border-t md:border-t-0 md:border-s border-zinc-800">
           <AnimatePresence mode="wait">
             <motion.div key={currentStep}
@@ -228,40 +223,31 @@ export default function ProcessVideoMode({
             </motion.div>
           </AnimatePresence>
 
-          {/* Step dots */}
           <div className="flex gap-1.5 justify-center my-3 flex-wrap">
             {steps.map((_, i) => (
               <button key={i} onClick={() => goToStep(i)}
                 className={`w-2 h-2 rounded-full transition-all ${i === currentStep
                   ? "bg-emerald-400 scale-125"
-                  : i < currentStep
-                  ? "bg-emerald-700"
-                  : "bg-zinc-600"
-                  }`} />
+                  : i < currentStep ? "bg-emerald-700" : "bg-zinc-600"}`} />
             ))}
           </div>
         </div>
       </div>
 
-      {/* Bottom controls */}
       <div className="px-5 py-3 border-t border-zinc-800">
-        {/* Progress bar */}
         <div className="h-1 w-full rounded-full bg-zinc-700 mb-3 overflow-hidden">
-          <motion.div
-            className="h-full bg-emerald-500 rounded-full"
+          <motion.div className="h-full bg-emerald-500 rounded-full"
             animate={{ width: `${progress * 100}%` }}
             transition={{ duration: 0.05, ease: "linear" }} />
         </div>
 
         <div className="flex items-center justify-between gap-3">
-          {/* Back */}
           <button onClick={() => goToStep(Math.max(0, currentStep - 1))}
             disabled={currentStep === 0}
             className="px-3 py-1.5 rounded-lg text-sm border border-zinc-700 text-zinc-300 hover:text-white hover:border-zinc-500 disabled:opacity-40 transition-colors">
             {lang === "he" ? "◀ הקודם" : "◀ Prev"}
           </button>
 
-          {/* Play/Pause */}
           <button onClick={() => {
             if (isFinished) { goToStep(0); setPlaying(true); }
             else { setPlaying((p) => !p); }
@@ -269,12 +255,10 @@ export default function ProcessVideoMode({
             className="px-6 py-2 rounded-xl font-semibold text-sm bg-emerald-600 hover:bg-emerald-500 text-white transition-colors">
             {isFinished
               ? (lang === "he" ? "↺ חזור להתחלה" : "↺ Restart")
-              : playing
-              ? (lang === "he" ? "⏸ השהה" : "⏸ Pause")
+              : playing ? (lang === "he" ? "⏸ השהה" : "⏸ Pause")
               : (lang === "he" ? "▶ המשך" : "▶ Play")}
           </button>
 
-          {/* Next */}
           <button onClick={() => goToStep(Math.min(steps.length - 1, currentStep + 1))}
             disabled={currentStep === steps.length - 1}
             className="px-3 py-1.5 rounded-lg text-sm border border-zinc-700 text-zinc-300 hover:text-white hover:border-zinc-500 disabled:opacity-40 transition-colors">

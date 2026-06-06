@@ -32,6 +32,22 @@ export async function POST(request: Request) {
       return Response.json({ error: "Topic not found — assign to a topic first" }, { status: 400 });
     }
 
+    // Check if a subtopic with the same name already exists in this topic
+    const nameDupe = await prisma.subtopic.findFirst({
+      where: {
+        topicId: topic.id,
+        OR: [
+          { nameEn: { equals: suggestion.nameEn } },
+          { nameHe: { equals: suggestion.nameHe } },
+        ],
+      },
+    });
+    if (nameDupe) {
+      // Mark as approved without creating a duplicate
+      await prisma.contentSuggestion.update({ where: { id }, data: { approved: true } });
+      return Response.json({ ok: true, skipped: true, reason: "Subtopic already exists" });
+    }
+
     // Check slug uniqueness
     const existing = await prisma.subtopic.findFirst({ where: { slug: suggestion.slug } });
     const finalSlug = existing ? `${suggestion.slug}-${Date.now()}` : suggestion.slug;

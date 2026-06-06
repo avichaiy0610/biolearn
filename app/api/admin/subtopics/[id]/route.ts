@@ -7,13 +7,24 @@ export async function PUT(request: Request, ctx: RouteContext<"/api/admin/subtop
   }
 
   const { id } = await ctx.params;
-  const { nameHe, nameEn, contentHe, contentEn } = await request.json();
+  const body = await request.json();
 
+  // Move to another topic
+  if (body.newTopicSlug) {
+    const topic = await prisma.topic.findUnique({ where: { slug: body.newTopicSlug } });
+    if (!topic) return Response.json({ error: "Target topic not found" }, { status: 404 });
+    const subtopic = await prisma.subtopic.update({
+      where: { id },
+      data: { topicId: topic.id },
+    });
+    return Response.json(subtopic);
+  }
+
+  const { nameHe, nameEn, contentHe, contentEn } = body;
   const subtopic = await prisma.subtopic.update({
     where: { id },
     data: { nameHe, nameEn, contentHe, contentEn },
   });
-
   return Response.json(subtopic);
 }
 

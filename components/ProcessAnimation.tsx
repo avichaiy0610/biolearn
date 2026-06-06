@@ -171,6 +171,20 @@ export default function ProcessAnimation({
   const [currentStep, setCurrentStep] = useState(0);
   const [videoMode, setVideoMode] = useState(false);
 
+  // All hooks before any conditional returns
+  const step = steps[currentStep] ?? null;
+  const title = step ? (lang === "he" ? step.titleHe : step.titleEn) : "";
+  const desc = step ? (lang === "he" ? step.descHe : step.descEn) : "";
+  const svgData = step ? parseSvgData(step.svgData) : { elements: [] as SvgElement[], highlight: undefined };
+
+  const goNext = useCallback(() => {
+    setCurrentStep((i) => Math.min(i + 1, steps.length - 1));
+  }, [steps.length]);
+
+  const goPrev = useCallback(() => {
+    setCurrentStep((i) => Math.max(i - 1, 0));
+  }, []);
+
   if (steps.length === 0) {
     return (
       <div className="rounded-2xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 p-10 text-center text-zinc-400 dark:text-zinc-500">
@@ -179,8 +193,6 @@ export default function ProcessAnimation({
       </div>
     );
   }
-
-  const step = steps[currentStep];
 
   if (videoMode) {
     return (
@@ -192,18 +204,6 @@ export default function ProcessAnimation({
       />
     );
   }
-
-  const title = lang === "he" ? step.titleHe : step.titleEn;
-  const desc = lang === "he" ? step.descHe : step.descEn;
-  const svgData = parseSvgData(step.svgData);
-
-  const goNext = useCallback(() => {
-    setCurrentStep((i) => Math.min(i + 1, steps.length - 1));
-  }, [steps.length]);
-
-  const goPrev = useCallback(() => {
-    setCurrentStep((i) => Math.max(i - 1, 0));
-  }, []);
 
   return (
     <div className="flex flex-col gap-6">

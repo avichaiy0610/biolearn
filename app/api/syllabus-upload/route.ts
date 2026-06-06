@@ -17,13 +17,16 @@ export async function POST(request: Request) {
     const arrayBuffer = await file.arrayBuffer();
     const buffer = Buffer.from(arrayBuffer);
     try {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const pdfModule = (await import("pdf-parse")) as any;
+      // Import the internal implementation to avoid filesystem access in serverless
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/ban-ts-comment
+      // @ts-ignore – pdf-parse has no types for this subpath
+      const pdfModule = (await import("pdf-parse/lib/pdf-parse.js")) as any;
       const pdfParse = pdfModule.default ?? pdfModule;
       const data = await pdfParse(buffer);
       rawText = data.text.slice(0, 8000);
-    } catch {
-      return Response.json({ error: "Failed to parse PDF" }, { status: 400 });
+    } catch (err) {
+      console.error("[syllabus-upload] PDF parse error:", err);
+      return Response.json({ error: "Failed to parse PDF. Try uploading as a .txt file instead." }, { status: 400 });
     }
   } else {
     rawText = (await file.text()).slice(0, 8000);
