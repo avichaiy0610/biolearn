@@ -47,6 +47,7 @@
     "password": "Password (at least 6 characters)",
     "submit": "Sign In",
     "toggle": "Don't have an account? Register",
+    "toggleToLogin": "Already have an account? Sign in",
     "error": "Error",
     "success": "Success"
   },

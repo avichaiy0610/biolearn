@@ -14,6 +14,7 @@ type Dict = {
     password: string;
     submit: string;
     toggle: string;
+    toggleToLogin: string;
     error: string;
     success: string;
   };
@@ -147,7 +148,7 @@ export default function AuthForm({
             href={`/${lang}/auth/${isLogin ? "register" : "login"}`}
             className="text-emerald-600 hover:underline"
           >
-            {d.toggle}
+            {isLogin ? d.toggle : d.toggleToLogin}
           </Link>
         </p>
       </div>

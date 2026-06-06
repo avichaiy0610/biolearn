@@ -64,7 +64,7 @@ export default function Navbar({
         <div className="flex items-center gap-2">
           {isLoggedIn ? (
             <button
-              onClick={() => signOut({ callbackUrl: `/${lang}` })}
+              onClick={() => signOut({ callbackUrl: `${window.location.origin}/${lang}` })}
               className="px-3 py-1.5 rounded-md text-sm font-medium text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50 transition-colors"
             >
               {dict.nav.logout}

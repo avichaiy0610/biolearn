@@ -29,6 +29,13 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
   pages: {
     signIn: "/he/auth/login",
   },
+  // Force v4-compatible cookie name so getToken() in proxy.ts can find it
+  cookies: {
+    sessionToken: {
+      name: "next-auth.session-token",
+      options: { httpOnly: true, sameSite: "lax" as const, path: "/", secure: false },
+    },
+  },
   callbacks: {
     jwt: ({ token, user }) => {
       if (user) token.id = user.id;
