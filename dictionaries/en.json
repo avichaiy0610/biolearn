@@ -3,7 +3,9 @@
     "home": "Home",
     "topics": "Topics",
     "search": "Search",
-    "admin": "Admin"
+    "admin": "Admin",
+    "login": "Login",
+    "logout": "Logout"
   },
   "home": {
     "title": "BioLearn",

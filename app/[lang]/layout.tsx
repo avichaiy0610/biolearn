@@ -4,6 +4,7 @@ import "../globals.css";
 import { hasLocale, getDictionary, type Locale } from "@/lib/dictionaries";
 import { notFound } from "next/navigation";
 import Navbar from "@/components/Navbar";
+import { getUser, isAdmin as checkIsAdmin } from "@/lib/supabase/server";
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-geist" });
 
@@ -27,6 +28,11 @@ export default async function LangLayout({
   const dict = await getDictionary(lang as Locale);
   const isRtl = lang === "he";
 
+  const [user, adminFlag] = await Promise.all([
+    getUser().catch(() => null),
+    checkIsAdmin().catch(() => false),
+  ]);
+
   return (
     <html
       lang={lang}
@@ -34,7 +40,12 @@ export default async function LangLayout({
       className={`${geist.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-zinc-50 dark:bg-zinc-900 text-zinc-900 dark:text-zinc-50">
-        <Navbar dict={dict} lang={lang as Locale} />
+        <Navbar
+          dict={dict}
+          lang={lang as Locale}
+          isAdmin={adminFlag}
+          isLoggedIn={!!user}
+        />
         <main className="flex-1">{children}</main>
         <footer className="border-t border-zinc-200 dark:border-zinc-800 py-6 text-center text-sm text-zinc-500">
           BioLearn &copy; {new Date().getFullYear()}

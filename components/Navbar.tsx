@@ -2,22 +2,33 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { signOut } from "next-auth/react";
 import type { Locale } from "@/lib/dictionaries";
 import LanguageSwitcher from "./LanguageSwitcher";
 import SearchBar from "./SearchBar";
 
 type Dict = {
-  nav: { home: string; topics: string; search: string; admin: string };
+  nav: { home: string; topics: string; search: string; admin: string; login: string; logout: string };
   home: { searchPlaceholder: string };
 };
 
-export default function Navbar({ dict, lang }: { dict: Dict; lang: Locale }) {
+export default function Navbar({
+  dict,
+  lang,
+  isAdmin = false,
+  isLoggedIn = false,
+}: {
+  dict: Dict;
+  lang: Locale;
+  isAdmin?: boolean;
+  isLoggedIn?: boolean;
+}) {
   const pathname = usePathname();
 
   const navLinks = [
     { href: `/${lang}`, label: dict.nav.home },
     { href: `/${lang}/topics`, label: dict.nav.topics },
-    { href: `/${lang}/admin`, label: dict.nav.admin },
+    ...(isAdmin ? [{ href: `/${lang}/admin`, label: dict.nav.admin }] : []),
   ];
 
   return (
@@ -50,7 +61,24 @@ export default function Navbar({ dict, lang }: { dict: Dict; lang: Locale }) {
           <SearchBar lang={lang} placeholder={dict.home.searchPlaceholder} />
         </div>
 
-        <LanguageSwitcher currentLang={lang} />
+        <div className="flex items-center gap-2">
+          {isLoggedIn ? (
+            <button
+              onClick={() => signOut({ callbackUrl: `/${lang}` })}
+              className="px-3 py-1.5 rounded-md text-sm font-medium text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50 transition-colors"
+            >
+              {dict.nav.logout}
+            </button>
+          ) : (
+            <Link
+              href={`/${lang}/auth/login`}
+              className="px-3 py-1.5 rounded-md text-sm font-medium text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-50 transition-colors"
+            >
+              {dict.nav.login}
+            </Link>
+          )}
+          <LanguageSwitcher currentLang={lang} />
+        </div>
       </div>
     </header>
   );

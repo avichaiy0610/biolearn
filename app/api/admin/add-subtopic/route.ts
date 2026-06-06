@@ -34,11 +34,21 @@ Return ONLY valid JSON in this exact format:
       ],
       model: QUALITY_MODEL,
       response_format: { type: "json_object" },
+      max_tokens: 2000,
     });
     const responseText = completion.choices[0]?.message?.content ?? "{}";
     const parsed = JSON.parse(responseText);
-    return parsed.steps ?? [];
-  } catch {
+    // Try multiple possible keys Groq might use
+    const steps =
+      parsed.steps ??
+      parsed.animation?.steps ??
+      parsed.animationSteps ??
+      parsed.data?.steps ??
+      parsed.result?.steps ??
+      [];
+    return Array.isArray(steps) ? steps : [];
+  } catch (err) {
+    console.error("[add-subtopic] generateAnimationSteps failed:", err);
     return [];
   }
 }

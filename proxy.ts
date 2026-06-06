@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { getToken } from "next-auth/jwt";
 import { locales, defaultLocale } from "./lib/dictionaries";
-import { createServerClient } from "@supabase/ssr";
 
 function getLocale(request: NextRequest) {
   const acceptLanguage = request.headers.get("accept-language") ?? "";
@@ -21,7 +21,7 @@ export async function proxy(request: NextRequest) {
     return;
   }
 
-  // Locale detection: redirect / -> /he or /en
+  // Locale redirect: / → /he or /en
   const pathnameHasLocale = locales.some(
     (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
   );
@@ -32,44 +32,37 @@ export async function proxy(request: NextRequest) {
     return NextResponse.redirect(request.nextUrl);
   }
 
-  // Admin protection — requires Supabase auth
+  // Admin route protection
   const isAdminRoute = locales.some(
-    (locale) =>
-      pathname.startsWith(`/${locale}/admin`) &&
-      !pathname.startsWith(`/${locale}/auth`)
+    (locale) => pathname.startsWith(`/${locale}/admin`)
   );
 
-  if (isAdminRoute && process.env.NEXT_PUBLIC_SUPABASE_URL) {
-    const response = NextResponse.next();
-    const supabase = createServerClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL,
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-      {
-        cookies: {
-          getAll: () => request.cookies.getAll(),
-          setAll: (cookiesToSet) =>
-            cookiesToSet.forEach(({ name, value, options }) =>
-              response.cookies.set(name, value, options)
-            ),
-        },
-      }
-    );
+  if (isAdminRoute) {
+    const token = await getToken({
+      req: request,
+      secret: process.env.NEXTAUTH_SECRET,
+    });
 
-    const { data: { user } } = await supabase.auth.getUser();
-    if (!user) {
+    const userEmail = token?.email as string | undefined;
+
+    if (!userEmail) {
       const locale = locales.find((l) => pathname.startsWith(`/${l}/`)) ?? defaultLocale;
       return NextResponse.redirect(
-        new URL(`/${locale}/auth/login?next=${encodeURIComponent(pathname)}`, request.url)
+        new URL(
+          `/${locale}/auth/login?next=${encodeURIComponent(pathname)}`,
+          request.url
+        )
       );
     }
 
-    const adminEmails = (process.env.ADMIN_EMAILS ?? "").split(",").map((e) => e.trim());
-    if (!adminEmails.includes(user.email ?? "")) {
+    const adminEmails = (process.env.ADMIN_EMAILS ?? "")
+      .split(",")
+      .map((e) => e.trim());
+
+    if (!adminEmails.includes(userEmail)) {
       const locale = locales.find((l) => pathname.startsWith(`/${l}/`)) ?? defaultLocale;
       return NextResponse.redirect(new URL(`/${locale}`, request.url));
     }
-
-    return response;
   }
 }
 

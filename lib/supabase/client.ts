@@ -1,10 +1,4 @@
-"use client";
-
-import { createBrowserClient } from "@supabase/ssr";
-
-export function createClient() {
-  return createBrowserClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-  );
-}
+// Supabase client — kept as empty module; auth is now handled by NextAuth.
+// This file is referenced by legacy imports and can be removed when all
+// references are fully cleaned up.
+export {};

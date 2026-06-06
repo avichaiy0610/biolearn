@@ -12,10 +12,18 @@ export default async function AdminPage({ params }: PageProps<"/[lang]/admin">) 
 
   const cards = [
     {
+      href: `/${lang}/admin/content`,
+      icon: "📚",
+      titleHe: "ניהול תוכן",
+      titleEn: "Content Management",
+      descHe: "צור ועדכן נושאים, תתי-נושאים ותהליכים ישירות",
+      descEn: "Create and edit topics, subtopics and processes directly",
+    },
+    {
       href: `/${lang}/admin/upload`,
       icon: "📄",
-      titleHe: "העלאת סילבוס",
-      titleEn: "Upload Syllabus",
+      titleHe: "העלאת סילבוס (AI)",
+      titleEn: "Upload Syllabus (AI)",
       descHe: "נתח קבצי PDF/טקסט וצור תתי-נושאים חדשים",
       descEn: "Analyze PDF/text files and generate new subtopics",
     },
@@ -34,7 +42,7 @@ export default async function AdminPage({ params }: PageProps<"/[lang]/admin">) 
       <h1 className="text-3xl font-bold text-zinc-900 dark:text-zinc-50 mb-8">
         {dict.admin.title}
       </h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {cards.map((card) => (
           <Link
             key={card.href}

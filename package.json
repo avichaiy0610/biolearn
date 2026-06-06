@@ -10,6 +10,7 @@
     "db:migrate": "prisma migrate dev",
     "db:seed": "tsx prisma/seed.ts",
     "db:reset": "prisma migrate reset && tsx prisma/seed.ts",
+    "db:tables": "tsx scripts/create-user-table.ts && tsx scripts/create-missing-tables.ts",
     "postinstall": "prisma generate"
   },
   "prisma": {

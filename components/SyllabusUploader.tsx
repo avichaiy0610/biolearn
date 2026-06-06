@@ -81,7 +81,15 @@ export default function SyllabusUploader({
         body: JSON.stringify({ ...s, topicSlug: selectedTopic }),
       });
       if (!res.ok) throw new Error("Failed");
+      const data = await res.json();
       setAddedSlugs((prev) => new Set([...prev, s.slug]));
+      if (!data.animationCreated) {
+        alert(
+          lang === "he"
+            ? "תת-הנושא נוסף, אך לא נוצרה אנימציה (ה-AI לא הצליח לייצר שלבים). ניתן להוסיף אנימציה ידנית."
+            : "Subtopic added, but no animation was created (AI failed to generate steps). You can add an animation manually."
+        );
+      }
     } catch {
       alert(lang === "he" ? "שגיאה בהוספה" : "Failed to add subtopic");
     }

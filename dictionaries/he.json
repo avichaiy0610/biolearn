@@ -3,7 +3,9 @@
     "home": "דף הבית",
     "topics": "נושאים",
     "search": "חיפוש",
-    "admin": "ניהול"
+    "admin": "ניהול",
+    "login": "כניסה",
+    "logout": "יציאה"
   },
   "home": {
     "title": "BioLearn",

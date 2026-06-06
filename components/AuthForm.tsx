@@ -3,10 +3,21 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { createClient } from "@/lib/supabase/client";
+import { signIn } from "next-auth/react";
 import type { Locale } from "@/lib/dictionaries";
 
-type Dict = { auth: { login: string; register: string; email: string; password: string; submit: string; toggle: string; error: string; success: string } };
+type Dict = {
+  auth: {
+    login: string;
+    register: string;
+    email: string;
+    password: string;
+    submit: string;
+    toggle: string;
+    error: string;
+    success: string;
+  };
+};
 
 export default function AuthForm({
   mode,
@@ -32,24 +43,51 @@ export default function AuthForm({
     setLoading(true);
     setError("");
     setSuccess("");
-    const supabase = createClient();
 
     if (isLogin) {
-      const { error: err } = await supabase.auth.signInWithPassword({ email, password });
-      if (err) { setError(err.message); setLoading(false); return; }
-      router.push(`/${lang}`);
-      router.refresh();
-    } else {
-      const { error: err } = await supabase.auth.signUp({
+      const result = await signIn("credentials", {
         email,
         password,
-        options: { emailRedirectTo: `${location.origin}/${lang}/auth/callback` },
+        redirect: false,
       });
-      if (err) { setError(err.message); setLoading(false); return; }
-      setSuccess(lang === "he"
-        ? "נשלח מייל אימות לכתובת שלך. אנא בדוק את תיבת הדואר."
-        : "Verification email sent. Please check your inbox.");
-      setLoading(false);
+      if (result?.error) {
+        setError(lang === "he" ? "מייל או סיסמה שגויים" : "Invalid email or password");
+        setLoading(false);
+      } else {
+        router.push(`/${lang}`);
+        router.refresh();
+      }
+    } else {
+      const res = await fetch("/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+      const data = await res.json();
+
+      if (!res.ok) {
+        setError(data.error ?? (lang === "he" ? "שגיאה בהרשמה" : "Registration failed"));
+        setLoading(false);
+        return;
+      }
+
+      // Auto-sign-in after successful registration
+      const result = await signIn("credentials", {
+        email,
+        password,
+        redirect: false,
+      });
+      if (result?.error) {
+        setSuccess(
+          lang === "he"
+            ? "ההרשמה הצליחה! עכשיו תוכל להתחבר."
+            : "Registered successfully! You can now log in."
+        );
+        setLoading(false);
+      } else {
+        router.push(`/${lang}`);
+        router.refresh();
+      }
     }
   }
 
@@ -68,17 +106,27 @@ export default function AuthForm({
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-1">{d.email}</label>
+            <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-1">
+              {d.email}
+            </label>
             <input
-              type="email" value={email} onChange={(e) => setEmail(e.target.value)} required
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
               className="w-full h-10 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-900 px-3 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-1">{d.password}</label>
+            <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-1">
+              {d.password}
+            </label>
             <input
-              type="password" value={password} onChange={(e) => setPassword(e.target.value)}
-              required minLength={6}
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              minLength={6}
               className="w-full h-10 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-900 px-3 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
             />
           </div>
@@ -86,7 +134,8 @@ export default function AuthForm({
           {error && <p className="text-sm text-red-600 dark:text-red-400">{error}</p>}
 
           <button
-            type="submit" disabled={loading}
+            type="submit"
+            disabled={loading}
             className="w-full h-11 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-semibold disabled:opacity-60 transition-colors"
           >
             {loading ? "..." : d.submit}
@@ -94,8 +143,10 @@ export default function AuthForm({
         </form>
 
         <p className="mt-5 text-sm text-center text-zinc-500 dark:text-zinc-400">
-          <Link href={`/${lang}/auth/${isLogin ? "register" : "login"}`}
-            className="text-emerald-600 hover:underline">
+          <Link
+            href={`/${lang}/auth/${isLogin ? "register" : "login"}`}
+            className="text-emerald-600 hover:underline"
+          >
             {d.toggle}
           </Link>
         </p>
