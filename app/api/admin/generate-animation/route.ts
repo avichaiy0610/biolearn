@@ -2,6 +2,8 @@ import { prisma } from "@/lib/prisma";
 import { isAdmin } from "@/lib/supabase/server";
 import { groq, QUALITY_MODEL } from "@/lib/groq";
 
+export const maxDuration = 60;
+
 async function generateAnimationSteps(
   nameEn: string,
   nameHe: string,

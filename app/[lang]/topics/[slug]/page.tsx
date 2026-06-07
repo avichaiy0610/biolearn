@@ -88,8 +88,8 @@ export default async function TopicPage({
                     </p>
 
                     <div className="flex flex-wrap gap-2 items-center">
-                      {/* Animation link if linked to a process */}
-                      {sub.relatedProcessSlug && (
+                      {/* Animation link — only shown when the process actually exists */}
+                      {sub.relatedProcessSlug && topic.processes.some((p) => p.slug === sub.relatedProcessSlug) && (
                         <Link
                           href={`/${lang}/topics/${slug}/${sub.relatedProcessSlug}`}
                           className="inline-flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-700 hover:bg-emerald-100 dark:hover:bg-emerald-800/40 transition-colors"

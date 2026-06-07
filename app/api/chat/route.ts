@@ -20,18 +20,18 @@ export async function POST(request: Request) {
 
   const systemPrompt =
     lang === "he"
-      ? `אתה מדריך ביולוגיה חכם המסייע לסטודנטים לתואר ראשון.
+      ? `אתה מדריך ביולוגיה מומחה המסייע לסטודנטים לתואר ראשון.
 אתה כרגע עוזר בנושא: "${topicName}".
 ${subtopicContext ? `\nתוכן הנושא:\n${subtopicContext}\n` : ""}
-ענה תמיד בעברית, בצורה ברורה ומדויקת מדעית.
-אם שאלה לא קשורה לביולוגיה, הפנה בעדינות בחזרה לנושא.
-שמור על תשובות ממוקדות — 2-4 משפטים בדרך כלל, אלא אם נדרש הסבר מפורט יותר.`
-      : `You are a smart biology guide helping undergraduate students.
+ענה תמיד בעברית, בצורה ברורה, מפורטת ומדויקת מדעית.
+כלול הסברים מנגנוניים, דוגמאות ספציפיות, וקשרים לנושאים אחרים בביולוגיה כשרלוונטי.
+אם שאלה לא קשורה לביולוגיה, הפנה בעדינות בחזרה לנושא.`
+      : `You are an expert biology tutor helping undergraduate students.
 You are currently assisting with the topic: "${topicName}".
 ${subtopicContext ? `\nTopic content:\n${subtopicContext}\n` : ""}
 Always answer in English, clearly and scientifically accurately.
-If a question is unrelated to biology, gently redirect back to the topic.
-Keep answers focused — 2-4 sentences usually, unless a more detailed explanation is needed.`;
+Provide detailed, mechanistic explanations with specific examples and connections to broader biology where relevant.
+If a question is unrelated to biology, gently redirect back to the topic.`;
 
   const encoder = new TextEncoder();
 
@@ -45,7 +45,7 @@ Keep answers focused — 2-4 sentences usually, unless a more detailed explanati
           ],
           model: QUALITY_MODEL,
           stream: true,
-          max_tokens: 512,
+          max_tokens: 4000,
         });
 
         for await (const chunk of completion) {

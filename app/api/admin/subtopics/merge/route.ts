@@ -1,6 +1,8 @@
 import { prisma } from "@/lib/prisma";
 import { groq, QUALITY_MODEL } from "@/lib/groq";
 
+export const maxDuration = 60;
+
 // Preview: AI generates merged subtopic content
 export async function POST(request: Request) {
   const { subtopicIds } = await request.json();

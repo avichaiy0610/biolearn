@@ -1,5 +1,7 @@
 import { prisma } from "@/lib/prisma";
 
+export const maxDuration = 60;
+
 function slugify(s: string) {
   return s.toLowerCase().replace(/\s+/g, "-").replace(/[^\w-]/g, "").slice(0, 50);
 }

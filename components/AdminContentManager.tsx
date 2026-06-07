@@ -320,6 +320,10 @@ function SubtopicRow({ subtopic, topic, allTopics, lang, onDeleted, onMoved, onA
   }
 
   const otherTopics = allTopics.filter((t) => t.slug !== topic.slug);
+  // Validate animation actually exists in this topic's processes
+  const animationExists = subtopic.relatedProcessSlug
+    ? topic.processes.some((p) => p.slug === subtopic.relatedProcessSlug)
+    : false;
 
   return (
     <li className={`flex flex-col gap-2 py-2 px-3 rounded-lg transition-colors ${selected ? "bg-violet-100 dark:bg-violet-900/30 border border-violet-300 dark:border-violet-700" : "bg-zinc-50 dark:bg-zinc-700/50"} ${subtopic.hidden ? "opacity-60" : ""}`}>
@@ -335,7 +339,7 @@ function SubtopicRow({ subtopic, topic, allTopics, lang, onDeleted, onMoved, onA
           </span>
         </div>
         <div className="flex items-center gap-1.5 shrink-0">
-          {subtopic.relatedProcessSlug ? (
+          {animationExists ? (
             <span className="text-xs text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/30 px-2 py-0.5 rounded-full">
               {isHe ? "🎬 יש אנימציה" : "🎬 animated"}
             </span>
@@ -446,7 +450,7 @@ function ProcessRow({ process, topic, allTopics, lang, onDeleted, onMoved }: {
 
 // ─── AI Suggestions Panel ────────────────────────────────────────────────────
 
-type AISuggestion = { nameEn: string; nameHe: string; slug: string; contentEn?: string; contentHe?: string; descEn?: string; descHe?: string; reason: string };
+type AISuggestion = { nameEn: string; nameHe: string; slug: string; contentEn?: string; contentHe?: string; descEn?: string; descHe?: string; reason: string; action?: "create" | "update"; matchedSubtopicId?: string };
 
 function AISuggestPanel({ topicSlug, lang, onAddSubtopic, onClose }: {
   topicSlug: string; lang: Locale;
@@ -466,24 +470,44 @@ function AISuggestPanel({ topicSlug, lang, onAddSubtopic, onClose }: {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ topicSlug }),
     })
-      .then((r) => r.json())
+      .then(async (r) => {
+        const data = await r.json();
+        if (!r.ok) throw new Error(data.error ?? "API error");
+        return data;
+      })
       .then((data) => { setSubtopics(data.subtopics ?? []); setProcesses(data.processes ?? []); })
-      .catch(() => setError(isHe ? "שגיאה בטעינת הצעות" : "Failed to load suggestions"))
+      .catch((err) => setError(err.message ?? (isHe ? "שגיאה בטעינת הצעות" : "Failed to load suggestions")))
       .finally(() => setLoading(false));
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [topicSlug]);
 
+  function toggleAction(slug: string) {
+    setSubtopics((prev) => prev.map((s) => {
+      if (s.slug !== slug || !s.matchedSubtopicId) return s;
+      return { ...s, action: s.action === "update" ? "create" : "update" };
+    }));
+  }
+
   async function addSubtopic(s: AISuggestion) {
     setAdding(s.slug);
-    const res = await fetch("/api/admin/subtopics", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ topicSlug, nameHe: s.nameHe, nameEn: s.nameEn, contentHe: s.contentHe ?? "", contentEn: s.contentEn ?? "" }),
-    });
-    const data = await res.json();
-    if (res.ok) {
-      onAddSubtopic(data);
-      setSubtopics((prev) => prev.filter((x) => x.slug !== s.slug));
+    if (s.action === "update" && s.matchedSubtopicId) {
+      const res = await fetch("/api/admin/update-subtopic", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ subtopicId: s.matchedSubtopicId, nameHe: s.nameHe, nameEn: s.nameEn, contentHe: s.contentHe ?? "", contentEn: s.contentEn ?? "" }),
+      });
+      if (res.ok) setSubtopics((prev) => prev.filter((x) => x.slug !== s.slug));
+    } else {
+      const res = await fetch("/api/admin/subtopics", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ topicSlug, nameHe: s.nameHe, nameEn: s.nameEn, contentHe: s.contentHe ?? "", contentEn: s.contentEn ?? "" }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        onAddSubtopic(data);
+        setSubtopics((prev) => prev.filter((x) => x.slug !== s.slug));
+      }
     }
     setAdding(null);
   }
@@ -497,7 +521,12 @@ function AISuggestPanel({ topicSlug, lang, onAddSubtopic, onClose }: {
         <button onClick={onClose} className="text-xs text-zinc-500 hover:text-zinc-700">✕</button>
       </div>
 
-      {loading && <p className="text-xs text-zinc-400 animate-pulse">{isHe ? "מנתח את הנושא..." : "Analyzing topic..."}</p>}
+      {loading && (
+        <div className="flex items-center gap-2">
+          <div className="w-4 h-4 border-2 border-violet-500 border-t-transparent rounded-full animate-spin shrink-0" />
+          <p className="text-xs text-zinc-400 animate-pulse">{isHe ? "AI מנתח את הנושא ומחפש פערים..." : "AI is analyzing the topic for gaps..."}</p>
+        </div>
+      )}
       {error && <p className="text-xs text-red-500">{error}</p>}
 
       {!loading && subtopics.length === 0 && processes.length === 0 && !error && (
@@ -511,16 +540,38 @@ function AISuggestPanel({ topicSlug, lang, onAddSubtopic, onClose }: {
             {subtopics.map((s) => (
               <div key={s.slug} className="flex items-start gap-2 p-2 rounded-lg bg-white dark:bg-zinc-800 border border-violet-100 dark:border-violet-900">
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-zinc-800 dark:text-zinc-200">{isHe ? s.nameHe : s.nameEn}</p>
+                  <div className="flex items-center gap-1.5 mb-0.5 flex-wrap">
+                    {s.action === "update" ? (
+                      <span className="text-xs px-1.5 py-0.5 rounded-full bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-400 font-medium">✏️ {isHe ? "עדכון קיים" : "Update existing"}</span>
+                    ) : s.matchedSubtopicId ? (
+                      <span className="text-xs px-1.5 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-400 font-medium">✨ {isHe ? "חדש" : "New"}</span>
+                    ) : null}
+                    <p className="text-sm font-medium text-zinc-800 dark:text-zinc-200">{isHe ? s.nameHe : s.nameEn}</p>
+                  </div>
                   <p className="text-xs text-zinc-500 mt-0.5">{s.reason}</p>
+                  {s.matchedSubtopicId && (
+                    <button onClick={() => toggleAction(s.slug)} className="text-xs text-violet-500 hover:text-violet-700 mt-1 underline">
+                      {s.action === "update"
+                        ? (isHe ? "➕ צור חדש במקום" : "➕ Create new instead")
+                        : (isHe ? "✏️ עדכן קיים במקום" : "✏️ Update existing instead")}
+                    </button>
+                  )}
                 </div>
-                <button
-                  onClick={() => addSubtopic(s)}
-                  disabled={adding === s.slug}
-                  className="shrink-0 px-2 py-1 rounded text-xs bg-violet-600 hover:bg-violet-700 text-white disabled:opacity-50 transition-colors"
-                >
-                  {adding === s.slug ? "..." : (isHe ? "➕ הוסף" : "➕ Add")}
-                </button>
+                <div className="flex flex-col gap-1 shrink-0">
+                  <button
+                    onClick={() => addSubtopic(s)}
+                    disabled={adding === s.slug}
+                    className="px-2 py-1 rounded text-xs bg-violet-600 hover:bg-violet-700 text-white disabled:opacity-50 transition-colors"
+                  >
+                    {adding === s.slug ? "..." : s.action === "update" ? (isHe ? "✏️ עדכן" : "✏️ Update") : (isHe ? "➕ הוסף" : "➕ Add")}
+                  </button>
+                  <button
+                    onClick={() => setSubtopics((prev) => prev.filter((x) => x.slug !== s.slug))}
+                    className="px-2 py-0.5 rounded text-xs text-zinc-400 hover:text-zinc-600 border border-zinc-200 dark:border-zinc-700"
+                  >
+                    {isHe ? "דלג" : "Skip"}
+                  </button>
+                </div>
               </div>
             ))}
           </div>
@@ -570,14 +621,19 @@ function MergeModal({ subtopics, lang, onConfirm, onCancel }: {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ subtopicIds: subtopics.map((s) => s.id) }),
     })
-      .then((r) => r.json())
+      .then(async (r) => {
+        const data = await r.json();
+        if (!r.ok) throw new Error(data.error ?? "AI request failed");
+        return data;
+      })
       .then((data) => {
+        if (!data.merged) throw new Error(isHe ? "תגובת AI לא תקינה" : "Invalid AI response");
         setPreview(data.merged);
         const initial: Record<string, "delete" | "hide" | "keep"> = {};
         for (const s of subtopics) initial[s.id] = "delete";
         setActions(initial);
       })
-      .catch(() => setError(isHe ? "שגיאה ביצירת תצוגה מקדימה" : "Failed to generate preview"))
+      .catch((err) => setError(err.message ?? (isHe ? "שגיאה ביצירת תצוגה מקדימה" : "Failed to generate preview")))
       .finally(() => setLoading(false));
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -600,8 +656,22 @@ function MergeModal({ subtopics, lang, onConfirm, onCancel }: {
           <button onClick={onCancel} className="text-zinc-400 hover:text-zinc-600">✕</button>
         </div>
 
-        {loading && <p className="text-sm text-zinc-400 animate-pulse">{isHe ? "AI מייצר תוצר מאוחד..." : "AI is generating merged content..."}</p>}
-        {error && <p className="text-sm text-red-500">{error}</p>}
+        {loading && (
+          <div className="flex flex-col items-center gap-4 py-8">
+            <div className="w-10 h-10 border-4 border-emerald-500 border-t-transparent rounded-full animate-spin" />
+            <div className="text-center">
+              <p className="text-sm font-medium text-zinc-700 dark:text-zinc-300">
+                {isHe ? "AI מנתח ומייצר תוכן מאוחד..." : "AI is generating merged content..."}
+              </p>
+              <p className="text-xs text-zinc-400 mt-1">{isHe ? "תהליך זה לוקח 10-20 שניות" : "This takes 10-20 seconds"}</p>
+            </div>
+          </div>
+        )}
+        {error && (
+          <div className="p-4 rounded-xl bg-red-50 dark:bg-red-950/30 border border-red-200 dark:border-red-800 text-sm text-red-600 dark:text-red-400">
+            {error}
+          </div>
+        )}
 
         {preview && !loading && (
           <>
@@ -856,6 +926,177 @@ function TopicCard({ topic, allTopics, lang, onTopicDeleted, onSubtopicAdded, on
   );
 }
 
+// ─── University Research Panel ────────────────────────────────────────────────
+
+type UniversitySubtopicSuggestion = { slug: string; nameEn: string; nameHe: string; contentEn: string; contentHe: string };
+type UniversityTopicSuggestion = {
+  slug: string; nameEn: string; nameHe: string; descEn: string; descHe: string;
+  category: string; icon: string; reason: string;
+  subtopics: UniversitySubtopicSuggestion[];
+};
+
+function UniversityResearchPanel({ lang, onTopicAdded, onClose }: {
+  lang: Locale; onTopicAdded: (t: Topic) => void; onClose: () => void;
+}) {
+  const isHe = lang === "he";
+  const [loading, setLoading] = useState(true);
+  const [suggestions, setSuggestions] = useState<UniversityTopicSuggestion[]>([]);
+  const [adding, setAdding] = useState<string | null>(null);
+  const [addedSlugs, setAddedSlugs] = useState<Set<string>>(new Set());
+  const [error, setError] = useState("");
+  const [expanded, setExpanded] = useState<string | null>(null);
+
+  useEffect(() => {
+    fetch("/api/admin/research-university-topics", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ lang }),
+    })
+      .then((r) => r.json())
+      .then((data) => setSuggestions(data.suggestions ?? []))
+      .catch(() => setError(isHe ? "שגיאה בטעינת ההמלצות" : "Failed to load suggestions"))
+      .finally(() => setLoading(false));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  async function addTopic(s: UniversityTopicSuggestion) {
+    setAdding(s.slug);
+    try {
+      const res = await fetch("/api/admin/topics/with-subtopics", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          slug: s.slug, nameEn: s.nameEn, nameHe: s.nameHe,
+          descEn: s.descEn, descHe: s.descHe,
+          category: s.category || "biology", icon: s.icon || "🔬",
+          subtopics: s.subtopics,
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error);
+      // Build a minimal Topic object so the parent can add it to state
+      const newTopic: Topic = {
+        id: data.id, slug: data.slug,
+        nameHe: s.nameHe, nameEn: s.nameEn,
+        descHe: s.descHe, descEn: s.descEn,
+        category: s.category, icon: s.icon || "🔬",
+        subtopics: s.subtopics.map((sub, i) => ({
+          id: `temp-${i}`, slug: sub.slug,
+          nameHe: sub.nameHe, nameEn: sub.nameEn,
+          contentHe: sub.contentHe, contentEn: sub.contentEn,
+          relatedProcessSlug: null,
+        })),
+        processes: [],
+      };
+      onTopicAdded(newTopic);
+      setAddedSlugs((prev) => new Set([...prev, s.slug]));
+    } catch (e) {
+      alert(e instanceof Error ? e.message : (isHe ? "שגיאה בהוספה" : "Failed to add topic"));
+    } finally {
+      setAdding(null);
+    }
+  }
+
+  return (
+    <div className="rounded-2xl border border-blue-200 dark:border-blue-800 bg-blue-50/50 dark:bg-blue-950/20 p-5 space-y-4">
+      <div className="flex items-center justify-between">
+        <div>
+          <p className="text-sm font-semibold text-blue-800 dark:text-blue-300">
+            🎓 {isHe ? "מחקר נושאים אוניברסיטאיים" : "University Topic Research"}
+          </p>
+          <p className="text-xs text-blue-600 dark:text-blue-400 mt-0.5">
+            {isHe ? "AI מנתח ומציע נושאי ביולוגיה הנלמדים באוניברסיטאות" : "AI analyzes and suggests biology topics taught at universities"}
+          </p>
+        </div>
+        <button onClick={onClose} className="text-xs text-zinc-500 hover:text-zinc-700">✕</button>
+      </div>
+
+      {loading && (
+        <div className="flex items-center gap-3 py-4">
+          <div className="w-6 h-6 border-2 border-blue-500 border-t-transparent rounded-full animate-spin" />
+          <p className="text-sm text-blue-600 dark:text-blue-400 animate-pulse">
+            {isHe ? "AI מחפש נושאים חסרים..." : "AI is searching for missing topics..."}
+          </p>
+        </div>
+      )}
+      {error && <p className="text-xs text-red-500">{error}</p>}
+
+      {!loading && suggestions.length === 0 && !error && (
+        <p className="text-xs text-zinc-400">
+          {isHe ? "לא נמצאו נושאים חסרים — הספרייה נראית מקיפה!" : "No missing topics found — your library looks comprehensive!"}
+        </p>
+      )}
+
+      <div className="space-y-3">
+        {suggestions.map((s) => {
+          const done = addedSlugs.has(s.slug);
+          const isExpanded = expanded === s.slug;
+          return (
+            <div
+              key={s.slug}
+              className={`rounded-xl border p-4 transition-colors ${
+                done
+                  ? "border-emerald-300 dark:border-emerald-700 bg-emerald-50 dark:bg-emerald-900/20"
+                  : "border-blue-200 dark:border-blue-800 bg-white dark:bg-zinc-800"
+              }`}
+            >
+              <div className="flex items-start gap-3">
+                <span className="text-2xl">{s.icon || "🔬"}</span>
+                <div className="flex-1 min-w-0">
+                  <p className="font-medium text-zinc-900 dark:text-zinc-50">
+                    {isHe ? s.nameHe : s.nameEn}
+                  </p>
+                  <p className="text-xs text-zinc-500 mt-0.5">{s.reason}</p>
+                  <p className="text-xs text-blue-600 dark:text-blue-400 mt-0.5">
+                    {isHe ? `${s.subtopics.length} תתי-נושאים` : `${s.subtopics.length} subtopics`} · {s.category}
+                  </p>
+
+                  {/* Subtopic list toggle */}
+                  <button
+                    onClick={() => setExpanded(isExpanded ? null : s.slug)}
+                    className="text-xs text-blue-500 hover:text-blue-700 mt-1.5"
+                  >
+                    {isExpanded
+                      ? (isHe ? "▲ הסתר תתי-נושאים" : "▲ Hide subtopics")
+                      : (isHe ? "▼ הצג תתי-נושאים" : "▼ Show subtopics")}
+                  </button>
+                  {isExpanded && (
+                    <ul className="mt-2 space-y-1 pl-2 border-l-2 border-blue-200 dark:border-blue-700">
+                      {s.subtopics.map((sub) => (
+                        <li key={sub.slug} className="text-xs text-zinc-600 dark:text-zinc-400">
+                          <span className="font-medium">{isHe ? sub.nameHe : sub.nameEn}</span>
+                          {" — "}{isHe ? sub.contentHe : sub.contentEn}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+                <button
+                  onClick={() => addTopic(s)}
+                  disabled={done || adding === s.slug}
+                  className={`shrink-0 px-3 py-1.5 rounded-lg text-sm font-medium text-white transition-colors disabled:cursor-default ${
+                    done
+                      ? "bg-zinc-300 dark:bg-zinc-600"
+                      : adding === s.slug
+                      ? "bg-blue-400"
+                      : "bg-blue-600 hover:bg-blue-700"
+                  }`}
+                >
+                  {done
+                    ? (isHe ? "✓ נוסף" : "✓ Added")
+                    : adding === s.slug
+                    ? "..."
+                    : (isHe ? "➕ הוסף נושא" : "➕ Add Topic")}
+                </button>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 // ─── Main Component ───────────────────────────────────────────────────────────
 
 export default function AdminContentManager({
@@ -870,6 +1111,7 @@ export default function AdminContentManager({
   const router = useRouter();
   const [topics, setTopics] = useState<Topic[]>(initialTopics);
   const [showCreateTopic, setShowCreateTopic] = useState(false);
+  const [showResearchPanel, setShowResearchPanel] = useState(false);
 
   const existingCategories = [...new Set(topics.map((t) => t.category).filter(Boolean))];
 
@@ -931,16 +1173,32 @@ export default function AdminContentManager({
         >
           {isHe ? "↻ רענן" : "↻ Refresh"}
         </button>
-        <button
-          onClick={() => setShowCreateTopic((v) => !v)}
-          className="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-medium transition-colors"
-        >
-          {showCreateTopic ? (isHe ? "ביטול" : "Cancel") : (isHe ? "+ נושא חדש" : "+ New Topic")}
-        </button>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => { setShowResearchPanel((v) => !v); setShowCreateTopic(false); }}
+            className="px-3 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium transition-colors"
+          >
+            {showResearchPanel ? (isHe ? "ביטול" : "Cancel") : (isHe ? "🎓 חקור אוניברסיטאות" : "🎓 Research Universities")}
+          </button>
+          <button
+            onClick={() => { setShowCreateTopic((v) => !v); setShowResearchPanel(false); }}
+            className="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-medium transition-colors"
+          >
+            {showCreateTopic ? (isHe ? "ביטול" : "Cancel") : (isHe ? "+ נושא חדש" : "+ New Topic")}
+          </button>
+        </div>
       </div>
 
       {showCreateTopic && (
         <CreateTopicForm lang={lang} existingCategories={existingCategories} onCreated={handleTopicCreated} />
+      )}
+
+      {showResearchPanel && (
+        <UniversityResearchPanel
+          lang={lang}
+          onTopicAdded={(t) => { setTopics((prev) => [...prev, t]); }}
+          onClose={() => setShowResearchPanel(false)}
+        />
       )}
 
       {topics.length === 0 ? (
