@@ -9,38 +9,67 @@ async function generateAnimationSteps(
   nameHe: string,
   contentEn: string
 ): Promise<object[]> {
-  const prompt = `You are generating a smooth continuous SVG animation for a biology education website.
-Animate the process: "${nameEn}" (${nameHe})
+  const prompt = `You are creating a CINEMATIC BIOLOGY ANIMATION where molecules and cells dramatically MOVE across the screen like a real scientific video.
 
-Content: ${contentEn.slice(0, 600)}
+Process to animate: "${nameEn}" (${nameHe})
+Biology content: ${contentEn.slice(0, 800)}
 
-CRITICAL RULE: You MUST use the SAME element IDs across ALL steps. Elements will smoothly animate (move, resize, recolor) between steps — this creates a real video-like animation.
+═══════════════════════════════════════════
+CRITICAL MOTION RULES — MANDATORY:
+═══════════════════════════════════════════
+1. Elements MUST travel large distances between steps (50-150 pixels of movement)
+2. Objects should approach each other, bind, then separate
+3. Products should move AWAY from the reaction center
+4. Use 7-9 steps for detailed, smooth cinematic motion
+5. Each step should show a CLEARLY DIFFERENT spatial arrangement
 
-To make elements appear: set opacity 0 in early steps, then 1 later.
-To make elements disappear: fade opacity from 1 to 0.
-Elements should MOVE (change cx/cy/x/y) to show the biological process happening.
-Elements should RESIZE (change r/rx/ry/width/height) to show growth/division.
-Elements should RECOLOR to show state changes.
+CANVAS: viewBox 0 0 400 300
+Spatial zones:
+  Left side:   x=20-130,  Center: x=150-250,  Right side: x=270-380
+  Top:         y=20-80,   Middle: y=100-200,   Bottom:     y=220-280
 
-viewBox: 0 0 400 300
-Types: circle(cx,cy,r), ellipse(cx,cy,rx,ry), rect(x,y,width,height), line(x1,y1,x2,y2), text(x,y,label,fontSize 10-13,textColor), path(d)
-All elements need: id, type, color(hex), opacity(0-1)
-Colors: "#3b82f6","#22c55e","#f59e0b","#ec4899","#7c3aed","#06b6d4","#ef4444","#10b981","#f97316"
+═══════════════════════════════════════════
+EXAMPLE OF GOOD DRAMATIC MOTION (DNA Replication):
+═══════════════════════════════════════════
+Step 1 "Double Helix at Rest":
+  dna_left(ellipse,cx=90,cy=150,rx=70,ry=18,blue,op=1)   ← left strand
+  dna_right(ellipse,cx=310,cy=150,rx=70,ry=18,cyan,op=1) ← right strand
+  helicase(circle,cx=200,cy=150,r=22,orange,op=0)         ← enzyme not yet visible
+  arrow(line,x1=200,y1=60,x2=200,y2=110,gray,op=0)
 
-Create 5-6 steps showing the process evolving continuously. Use 6-12 elements with meaningful movement between steps.
+Step 2 "Helicase Arrives" (helicase APPEARS and moves to center):
+  dna_left(ellipse,cx=90,cy=150,rx=70,ry=18,blue)
+  dna_right(ellipse,cx=310,cy=150,rx=70,ry=18,cyan)
+  helicase(circle,cx=200,cy=150,r=22,orange,op=1)         ← NOW VISIBLE
+
+Step 3 "Strands Begin Separating" (DNA strands MOVE APART):
+  dna_left(ellipse,cx=90,cy=100,rx=70,ry=18,blue)         ← MOVES UP by 50px
+  dna_right(ellipse,cx=310,cy=200,rx=70,ry=18,cyan)       ← MOVES DOWN by 50px
+  helicase(circle,cx=200,cy=150,r=28,orange)              ← grows bigger
+
+Step 4 "Full Separation + New Strands Form" (products appear and MOVE):
+  dna_left(ellipse,cx=50,cy=70,rx=90,ry=15,blue)          ← moves far top-left
+  dna_right(ellipse,cx=350,cy=230,rx=90,ry=15,cyan)       ← moves far bottom-right
+  helicase(circle,cx=200,cy=150,r=28,orange,op=0.4)       ← fades
+  new_strand_a(ellipse,cx=50,cy=100,rx=80,ry=15,green,op=0.8)  ← NEW appears
+  new_strand_b(ellipse,cx=350,cy=200,rx=80,ry=15,pink,op=0.8)  ← NEW appears
+
+... continue with products separating and moving to final positions
+═══════════════════════════════════════════
+
+Element types: circle(cx,cy,r), ellipse(cx,cy,rx,ry), rect(x,y,width,height), line(x1,y1,x2,y2), text(x,y,label,fontSize 10-12,textColor), path(d)
+Required fields per element: id, type, color(hex), opacity(0-1)
+Rich color palette: "#3b82f6","#22c55e","#f59e0b","#ec4899","#7c3aed","#06b6d4","#ef4444","#10b981","#f97316","#8b5cf6","#14b8a6","#f43f5e"
+
+Use 8-14 elements. Include text labels so viewers know what each element is.
+Highlights (highlight array) = which elements are the focus of each step.
 
 Return ONLY valid JSON:
 {"steps":[
-  {"titleHe":"שלב 1","titleEn":"Phase 1","descHe":"תיאור עברי","descEn":"Description","elements":[
-    {"id":"cell","type":"ellipse","cx":200,"cy":150,"rx":60,"ry":45,"color":"#3b82f6","opacity":1},
-    {"id":"nucleus","type":"circle","cx":200,"cy":150,"r":20,"color":"#1d4ed8","opacity":1},
-    {"id":"lbl_cell","type":"text","x":200,"y":215,"label":"Cell","textColor":"#1e40af","fontSize":11,"opacity":1}
-  ],"highlight":["cell","nucleus"]},
-  {"titleHe":"שלב 2","titleEn":"Phase 2","descHe":"...","descEn":"...","elements":[
-    {"id":"cell","type":"ellipse","cx":200,"cy":150,"rx":75,"ry":55,"color":"#7c3aed","opacity":1},
-    {"id":"nucleus","type":"circle","cx":200,"cy":150,"r":28,"color":"#6d28d9","opacity":1},
-    {"id":"lbl_cell","type":"text","x":200,"y":225,"label":"Growing Cell","textColor":"#5b21b6","fontSize":11,"opacity":1}
-  ],"highlight":["nucleus"]}
+  {"titleHe":"שם השלב","titleEn":"Step Name","descHe":"תיאור מדויק מה קורה בשלב זה","descEn":"Precise description of what happens in this step","elements":[
+    {"id":"elementId","type":"circle","cx":200,"cy":150,"r":25,"color":"#3b82f6","opacity":1},
+    {"id":"lbl_element","type":"text","x":200,"y":185,"label":"Enzyme","textColor":"#1d4ed8","fontSize":11,"opacity":1}
+  ],"highlight":["elementId"]}
 ]}`;
 
   try {
@@ -51,7 +80,7 @@ Return ONLY valid JSON:
       ],
       model: QUALITY_MODEL,
       response_format: { type: "json_object" },
-      max_tokens: 3000,
+      max_tokens: 5000,
     });
     const responseText = completion.choices[0]?.message?.content ?? "{}";
     const parsed = JSON.parse(responseText);

@@ -13,7 +13,10 @@ export default async function UploadPage({
 
   const dict = await getDictionary(lang as Locale);
   const topics = await prisma.topic.findMany({
-    select: { slug: true, nameHe: true, nameEn: true },
+    select: {
+      slug: true, nameHe: true, nameEn: true,
+      subtopics: { select: { id: true, slug: true, nameHe: true, nameEn: true, contentHe: true, contentEn: true } },
+    },
     orderBy: { nameEn: "asc" },
   });
 

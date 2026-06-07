@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import type { Locale } from "@/lib/dictionaries";
 import AIExplainPanel from "./AIExplainPanel";
@@ -20,34 +20,20 @@ type Step = {
 type SvgElement = {
   id: string;
   type: "circle" | "rect" | "path" | "text" | "line" | "ellipse";
-  x?: number;
-  y?: number;
-  cx?: number;
-  cy?: number;
-  r?: number;
-  rx?: number;
-  ry?: number;
-  width?: number;
-  height?: number;
-  x1?: number;
-  y1?: number;
-  x2?: number;
-  y2?: number;
+  x?: number; y?: number;
+  cx?: number; cy?: number;
+  r?: number; rx?: number; ry?: number;
+  width?: number; height?: number;
+  x1?: number; y1?: number; x2?: number; y2?: number;
   d?: string;
   label?: string;
   color?: string;
   textColor?: string;
   fontSize?: number;
-  active?: boolean;
   opacity?: number;
 };
 
-type SvgData = {
-  elements: SvgElement[];
-  highlight?: string[];
-};
-
-function parseSvgData(raw: string): SvgData {
+function parseSvgData(raw: string): { elements: SvgElement[]; highlight?: string[] } {
   try {
     const parsed = JSON.parse(raw);
     return { elements: Array.isArray(parsed?.elements) ? parsed.elements : [], highlight: parsed?.highlight };
@@ -56,98 +42,105 @@ function parseSvgData(raw: string): SvgData {
   }
 }
 
-function renderElement(el: SvgElement, isHighlighted: boolean) {
-  const fill = isHighlighted
-    ? el.color ?? "#059669"
-    : (el.color ?? "#94a3b8") + "80";
-  const opacity = el.opacity ?? 1;
+// Collect unique element IDs in the order they first appear across all steps
+function getAllElementIds(steps: Step[]): string[] {
+  const seen = new Set<string>();
+  const ids: string[] = [];
+  for (const step of steps) {
+    for (const el of parseSvgData(step.svgData).elements) {
+      if (!seen.has(el.id)) { seen.add(el.id); ids.push(el.id); }
+    }
+  }
+  return ids;
+}
+
+// Get element state for a specific step (or last-known-before fade to opacity 0)
+function getElementAtStep(id: string, stepIndex: number, steps: Step[]): SvgElement | null {
+  const { elements } = parseSvgData(steps[stepIndex].svgData);
+  const found = elements.find((e) => e.id === id);
+  if (found) return found;
+  for (let i = stepIndex - 1; i >= 0; i--) {
+    const prev = parseSvgData(steps[i].svgData).elements.find((e) => e.id === id);
+    if (prev) return { ...prev, opacity: 0 };
+  }
+  return null;
+}
+
+// Renders a single SVG element that smoothly animates between step positions
+function AnimatedSvgElement({
+  id, stepIndex, steps, isHighlighted,
+}: {
+  id: string; stepIndex: number; steps: Step[]; isHighlighted: boolean;
+}) {
+  const el = getElementAtStep(id, stepIndex, steps);
+  if (!el) return null;
+
+  const baseOpacity = el.opacity ?? 1;
+  const effectiveOpacity = isHighlighted ? baseOpacity : baseOpacity * 0.3;
+  const fill = el.color ?? (isHighlighted ? "#059669" : "#94a3b8");
+  const strokeColor = isHighlighted ? (el.color ?? "#059669") : "#94a3b8";
+  const t = { duration: 0.9, ease: [0.4, 0, 0.2, 1] as [number, number, number, number] };
 
   switch (el.type) {
     case "circle":
       return (
         <motion.circle
-          key={el.id}
-          cx={el.cx ?? 0}
-          cy={el.cy ?? 0}
-          r={el.r ?? 10}
-          fill={fill}
-          opacity={opacity}
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: isHighlighted ? 1 : 0.5 }}
-          transition={{ duration: 0.4 }}
+          key={id}
+          initial={{ cx: el.cx, cy: el.cy, r: el.r, opacity: 0 }}
+          animate={{ cx: el.cx, cy: el.cy, r: el.r, fill, opacity: effectiveOpacity }}
+          transition={t}
         />
       );
     case "ellipse":
       return (
         <motion.ellipse
-          key={el.id}
-          cx={el.cx ?? 0}
-          cy={el.cy ?? 0}
-          rx={el.rx ?? 20}
-          ry={el.ry ?? 10}
-          fill={fill}
-          opacity={opacity}
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: isHighlighted ? 1 : 0.5 }}
-          transition={{ duration: 0.4 }}
+          key={id}
+          initial={{ cx: el.cx, cy: el.cy, rx: el.rx, ry: el.ry, opacity: 0 }}
+          animate={{ cx: el.cx, cy: el.cy, rx: el.rx, ry: el.ry, fill, opacity: effectiveOpacity }}
+          transition={t}
         />
       );
     case "rect":
       return (
         <motion.rect
-          key={el.id}
-          x={el.x ?? 0}
-          y={el.y ?? 0}
-          width={el.width ?? 40}
-          height={el.height ?? 20}
+          key={id}
           rx={4}
-          fill={fill}
-          opacity={opacity}
-          initial={{ scaleX: 0, opacity: 0 }}
-          animate={{ scaleX: 1, opacity: isHighlighted ? 1 : 0.5 }}
-          transition={{ duration: 0.4 }}
+          initial={{ x: el.x, y: el.y, width: el.width, height: el.height, opacity: 0 }}
+          animate={{ x: el.x, y: el.y, width: el.width, height: el.height, fill, opacity: effectiveOpacity }}
+          transition={t}
         />
       );
     case "line":
       return (
         <motion.line
-          key={el.id}
-          x1={el.x1 ?? 0}
-          y1={el.y1 ?? 0}
-          x2={el.x2 ?? 50}
-          y2={el.y2 ?? 0}
-          stroke={isHighlighted ? el.color ?? "#059669" : "#94a3b8"}
-          strokeWidth={2}
-          initial={{ pathLength: 0, opacity: 0 }}
-          animate={{ pathLength: 1, opacity: isHighlighted ? 1 : 0.4 }}
-          transition={{ duration: 0.6 }}
+          key={id}
+          strokeWidth={2.5}
+          initial={{ x1: el.x1, y1: el.y1, x2: el.x2, y2: el.y2, opacity: 0 }}
+          animate={{ x1: el.x1, y1: el.y1, x2: el.x2, y2: el.y2, stroke: strokeColor, opacity: effectiveOpacity }}
+          transition={t}
         />
       );
     case "path":
       return (
         <motion.path
-          key={el.id}
+          key={id}
           d={el.d ?? ""}
           fill="none"
-          stroke={isHighlighted ? el.color ?? "#059669" : "#94a3b8"}
-          strokeWidth={2}
-          initial={{ pathLength: 0, opacity: 0 }}
-          animate={{ pathLength: 1, opacity: isHighlighted ? 1 : 0.4 }}
-          transition={{ duration: 0.7 }}
+          strokeWidth={2.5}
+          initial={{ opacity: 0 }}
+          animate={{ stroke: strokeColor, opacity: effectiveOpacity }}
+          transition={t}
         />
       );
     case "text":
       return (
         <motion.text
-          key={el.id}
-          x={el.x ?? 0}
-          y={el.y ?? 0}
-          fill={el.textColor ?? (isHighlighted ? "#065f46" : "#6b7280")}
-          fontSize={el.fontSize ?? 12}
+          key={id}
+          fontSize={el.fontSize ?? 11}
           textAnchor="middle"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: isHighlighted ? 1 : 0.5 }}
-          transition={{ duration: 0.3 }}
+          initial={{ x: el.x, y: el.y, opacity: 0 }}
+          animate={{ x: el.x, y: el.y, fill: el.textColor ?? (isHighlighted ? "#065f46" : "#9ca3af"), opacity: effectiveOpacity }}
+          transition={t}
         >
           {el.label}
         </motion.text>
@@ -158,10 +151,7 @@ function renderElement(el: SvgElement, isHighlighted: boolean) {
 }
 
 export default function ProcessAnimation({
-  steps,
-  lang,
-  dict,
-  processName,
+  steps, lang, dict, processName,
 }: {
   steps: Step[];
   lang: Locale;
@@ -171,19 +161,16 @@ export default function ProcessAnimation({
   const [currentStep, setCurrentStep] = useState(0);
   const [videoMode, setVideoMode] = useState(false);
 
-  // All hooks before any conditional returns
   const step = steps[currentStep] ?? null;
   const title = step ? (lang === "he" ? step.titleHe : step.titleEn) : "";
   const desc = step ? (lang === "he" ? step.descHe : step.descEn) : "";
-  const svgData = step ? parseSvgData(step.svgData) : { elements: [] as SvgElement[], highlight: undefined };
+  const { highlight } = step ? parseSvgData(step.svgData) : { highlight: undefined };
 
-  const goNext = useCallback(() => {
-    setCurrentStep((i) => Math.min(i + 1, steps.length - 1));
-  }, [steps.length]);
+  // Stable list of all element IDs across all steps — never remount SVG elements
+  const allElementIds = useMemo(() => getAllElementIds(steps), [steps]);
 
-  const goPrev = useCallback(() => {
-    setCurrentStep((i) => Math.max(i - 1, 0));
-  }, []);
+  const goNext = useCallback(() => setCurrentStep((i) => Math.min(i + 1, steps.length - 1)), [steps.length]);
+  const goPrev = useCallback(() => setCurrentStep((i) => Math.max(i - 1, 0)), []);
 
   if (steps.length === 0) {
     return (
@@ -195,19 +182,12 @@ export default function ProcessAnimation({
   }
 
   if (videoMode) {
-    return (
-      <ProcessVideoMode
-        steps={steps}
-        lang={lang}
-        processName={processName}
-        onExit={() => setVideoMode(false)}
-      />
-    );
+    return <ProcessVideoMode steps={steps} lang={lang} processName={processName} onExit={() => setVideoMode(false)} />;
   }
 
   return (
     <div className="flex flex-col gap-6">
-      {/* Video mode launch button */}
+      {/* Video mode button */}
       <button
         onClick={() => setVideoMode(true)}
         className="flex items-center gap-2 self-end px-4 py-2 rounded-xl bg-zinc-900 dark:bg-zinc-700 text-white text-sm font-medium hover:bg-zinc-800 dark:hover:bg-zinc-600 transition-colors"
@@ -216,37 +196,30 @@ export default function ProcessAnimation({
         {lang === "he" ? "צפה כסרטון" : "Watch as Video"}
       </button>
 
-      {/* SVG Canvas */}
+      {/* Unified SVG canvas — elements stay mounted and animate their positions */}
       <div className="rounded-2xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 overflow-hidden">
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={currentStep}
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -20 }}
-            transition={{ duration: 0.3 }}
-            className="p-4"
-          >
-            {svgData.elements.length > 0 ? (
-              <svg
-                viewBox="0 0 400 300"
-                className="w-full h-64 md:h-80"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                {svgData.elements.map((el) => {
-                  const isHighlighted =
-                    !svgData.highlight ||
-                    svgData.highlight.includes(el.id);
-                  return renderElement(el, isHighlighted);
-                })}
-              </svg>
-            ) : (
-              <div className="w-full h-64 md:h-80 flex items-center justify-center">
-                <div className="text-6xl opacity-30">🔬</div>
-              </div>
-            )}
-          </motion.div>
-        </AnimatePresence>
+        <div className="p-4">
+          {allElementIds.length > 0 ? (
+            <svg viewBox="0 0 400 300" className="w-full h-64 md:h-80" xmlns="http://www.w3.org/2000/svg">
+              {allElementIds.map((id) => {
+                const isHighlighted = !highlight || highlight.includes(id);
+                return (
+                  <AnimatedSvgElement
+                    key={id}
+                    id={id}
+                    stepIndex={currentStep}
+                    steps={steps}
+                    isHighlighted={isHighlighted}
+                  />
+                );
+              })}
+            </svg>
+          ) : (
+            <div className="w-full h-64 md:h-80 flex items-center justify-center">
+              <div className="text-6xl opacity-30">🔬</div>
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Step info */}
@@ -264,12 +237,8 @@ export default function ProcessAnimation({
               <p className="text-xs font-semibold text-emerald-600 dark:text-emerald-400 mb-1 uppercase tracking-wide">
                 {dict.process.step} {currentStep + 1} {dict.process.of} {steps.length}
               </p>
-              <h3 className="text-lg font-semibold text-zinc-900 dark:text-zinc-50 mb-2">
-                {title}
-              </h3>
-              <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
-                {desc}
-              </p>
+              <h3 className="text-lg font-semibold text-zinc-900 dark:text-zinc-50 mb-2">{title}</h3>
+              <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">{desc}</p>
             </div>
           </div>
         </motion.div>

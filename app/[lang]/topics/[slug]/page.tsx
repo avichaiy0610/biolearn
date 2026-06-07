@@ -16,7 +16,7 @@ export default async function TopicPage({
   const dict = await getDictionary(lang as Locale);
   const topic = await prisma.topic.findUnique({
     where: { slug },
-    include: { subtopics: true, processes: true },
+    include: { subtopics: { where: { hidden: false } }, processes: true },
   });
 
   if (!topic) notFound();

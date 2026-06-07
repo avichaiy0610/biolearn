@@ -271,15 +271,22 @@ function CreateProcessForm({ topic, lang, onCreated }: {
 
 // ─── Subtopic Row ─────────────────────────────────────────────────────────────
 
-function SubtopicRow({ subtopic, topic, allTopics, lang, onDeleted, onMoved, onAnimationGenerated, mergeMode, selected, onToggleSelect }: {
+function SubtopicRow({ subtopic, topic, allTopics, lang, onDeleted, onMoved, onAnimationGenerated, onUpdated, mergeMode, selected, onToggleSelect }: {
   subtopic: Subtopic; topic: Topic; allTopics: Topic[]; lang: Locale;
   onDeleted: () => void; onMoved: (newTopicSlug: string) => void; onAnimationGenerated: (s: Subtopic) => void;
+  onUpdated: (s: Subtopic) => void;
   mergeMode?: boolean; selected?: boolean; onToggleSelect?: () => void;
 }) {
   const isHe = lang === "he";
   const [moveTo, setMoveTo] = useState("");
   const [moving, setMoving] = useState(false);
   const [generatingAnim, setGeneratingAnim] = useState(false);
+  const [editing, setEditing] = useState(false);
+  const [editNameHe, setEditNameHe] = useState(subtopic.nameHe);
+  const [editNameEn, setEditNameEn] = useState(subtopic.nameEn);
+  const [editContentHe, setEditContentHe] = useState(subtopic.contentHe);
+  const [editContentEn, setEditContentEn] = useState(subtopic.contentEn);
+  const [saving, setSaving] = useState(false);
 
   async function handleMove() {
     if (!moveTo) return;
@@ -313,6 +320,20 @@ function SubtopicRow({ subtopic, topic, allTopics, lang, onDeleted, onMoved, onA
     setGeneratingAnim(false);
   }
 
+  async function handleSave() {
+    setSaving(true);
+    const res = await fetch("/api/admin/update-subtopic", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ subtopicId: subtopic.id, nameHe: editNameHe, nameEn: editNameEn, contentHe: editContentHe, contentEn: editContentEn }),
+    });
+    if (res.ok) {
+      onUpdated({ ...subtopic, nameHe: editNameHe, nameEn: editNameEn, contentHe: editContentHe, contentEn: editContentEn });
+      setEditing(false);
+    }
+    setSaving(false);
+  }
+
   async function handleDelete() {
     if (!confirm(isHe ? `מחק "${isHe ? subtopic.nameHe : subtopic.nameEn}"?` : `Delete "${subtopic.nameEn}"?`)) return;
     await fetch(`/api/admin/subtopics/${subtopic.id}`, { method: "DELETE" });
@@ -320,7 +341,6 @@ function SubtopicRow({ subtopic, topic, allTopics, lang, onDeleted, onMoved, onA
   }
 
   const otherTopics = allTopics.filter((t) => t.slug !== topic.slug);
-  // Validate animation actually exists in this topic's processes
   const animationExists = subtopic.relatedProcessSlug
     ? topic.processes.some((p) => p.slug === subtopic.relatedProcessSlug)
     : false;
@@ -339,9 +359,16 @@ function SubtopicRow({ subtopic, topic, allTopics, lang, onDeleted, onMoved, onA
           </span>
         </div>
         <div className="flex items-center gap-1.5 shrink-0">
+          <button
+            onClick={() => setEditing((v) => !v)}
+            className="text-xs text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300"
+            title={isHe ? "ערוך" : "Edit"}
+          >
+            ✏️
+          </button>
           {animationExists ? (
             <span className="text-xs text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/30 px-2 py-0.5 rounded-full">
-              {isHe ? "🎬 יש אנימציה" : "🎬 animated"}
+              {isHe ? "🎬 אנימציה" : "🎬 animated"}
             </span>
           ) : (
             <button
@@ -356,7 +383,45 @@ function SubtopicRow({ subtopic, topic, allTopics, lang, onDeleted, onMoved, onA
           <button onClick={handleDelete} className="text-xs text-red-500 hover:text-red-700">✕</button>
         </div>
       </div>
-      {otherTopics.length > 0 && (
+
+      {editing && (
+        <div className="mt-1 p-3 rounded-lg border border-amber-200 dark:border-amber-800 bg-amber-50 dark:bg-amber-950/20 space-y-2">
+          <p className="text-xs font-semibold text-amber-700 dark:text-amber-400">{isHe ? "✏️ עריכת תת-נושא" : "✏️ Edit Subtopic"}</p>
+          <div className="grid grid-cols-2 gap-2">
+            <div>
+              <label className="block text-xs text-zinc-500 mb-0.5">{isHe ? "שם עברית" : "Hebrew Name"}</label>
+              <input value={editNameHe} onChange={(e) => setEditNameHe(e.target.value)} dir="rtl"
+                className="w-full h-8 rounded border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-2 text-xs focus:outline-none focus:ring-1 focus:ring-amber-500" />
+            </div>
+            <div>
+              <label className="block text-xs text-zinc-500 mb-0.5">{isHe ? "שם אנגלית" : "English Name"}</label>
+              <input value={editNameEn} onChange={(e) => setEditNameEn(e.target.value)}
+                className="w-full h-8 rounded border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-2 text-xs focus:outline-none focus:ring-1 focus:ring-amber-500" />
+            </div>
+          </div>
+          <div>
+            <label className="block text-xs text-zinc-500 mb-0.5">{isHe ? "תוכן עברית" : "Hebrew Content"}</label>
+            <textarea value={editContentHe} onChange={(e) => setEditContentHe(e.target.value)} dir="rtl" rows={3}
+              className="w-full rounded border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-2 py-1 text-xs focus:outline-none focus:ring-1 focus:ring-amber-500 resize-y" />
+          </div>
+          <div>
+            <label className="block text-xs text-zinc-500 mb-0.5">{isHe ? "תוכן אנגלית" : "English Content"}</label>
+            <textarea value={editContentEn} onChange={(e) => setEditContentEn(e.target.value)} rows={3}
+              className="w-full rounded border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-2 py-1 text-xs focus:outline-none focus:ring-1 focus:ring-amber-500 resize-y" />
+          </div>
+          <div className="flex gap-2">
+            <button onClick={handleSave} disabled={saving}
+              className="px-3 py-1.5 rounded text-xs bg-amber-600 hover:bg-amber-700 text-white disabled:opacity-50 font-medium transition-colors">
+              {saving ? "..." : (isHe ? "שמור" : "Save")}
+            </button>
+            <button onClick={() => setEditing(false)} className="px-3 py-1.5 rounded text-xs border border-zinc-300 dark:border-zinc-600 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors">
+              {isHe ? "ביטול" : "Cancel"}
+            </button>
+          </div>
+        </div>
+      )}
+
+      {otherTopics.length > 0 && !editing && (
         <div className="flex items-center gap-2">
           <select
             value={moveTo}
@@ -726,10 +791,11 @@ function MergeModal({ subtopics, lang, onConfirm, onCancel }: {
 
 // ─── Topic Card ───────────────────────────────────────────────────────────────
 
-function TopicCard({ topic, allTopics, lang, onTopicDeleted, onSubtopicAdded, onProcessAdded,
-  onSubtopicDeleted, onProcessDeleted, onSubtopicMoved, onProcessMoved, onSubtopicAnimated }: {
+function TopicCard({ topic, allTopics, lang, onTopicDeleted, onTopicUpdated, onSubtopicAdded, onProcessAdded,
+  onSubtopicDeleted, onProcessDeleted, onSubtopicMoved, onProcessMoved, onSubtopicAnimated, onSubtopicUpdated }: {
   topic: Topic; allTopics: Topic[]; lang: Locale;
   onTopicDeleted: (slug: string) => void;
+  onTopicUpdated: (t: Topic) => void;
   onSubtopicAdded: (topicSlug: string, s: Subtopic) => void;
   onProcessAdded: (topicSlug: string, p: Process) => void;
   onSubtopicDeleted: (topicSlug: string, id: string) => void;
@@ -737,6 +803,7 @@ function TopicCard({ topic, allTopics, lang, onTopicDeleted, onSubtopicAdded, on
   onSubtopicMoved: (fromSlug: string, subtopicId: string, toTopicSlug: string) => void;
   onProcessMoved: (fromSlug: string, processSlug: string, toTopicSlug: string) => void;
   onSubtopicAnimated: (topicSlug: string, s: Subtopic) => void;
+  onSubtopicUpdated: (topicSlug: string, s: Subtopic) => void;
 }) {
   const isHe = lang === "he";
   const [expanded, setExpanded] = useState(false);
@@ -748,6 +815,14 @@ function TopicCard({ topic, allTopics, lang, onTopicDeleted, onSubtopicAdded, on
   const [selectedForMerge, setSelectedForMerge] = useState<Set<string>>(new Set());
   const [mergeSubtopics, setMergeSubtopics] = useState<Array<{ id: string; nameHe: string; nameEn: string }> | null>(null);
   const [mergingConfirm, setMergingConfirm] = useState(false);
+  const [editingTopic, setEditingTopic] = useState(false);
+  const [editNameHe, setEditNameHe] = useState(topic.nameHe);
+  const [editNameEn, setEditNameEn] = useState(topic.nameEn);
+  const [editDescHe, setEditDescHe] = useState(topic.descHe);
+  const [editDescEn, setEditDescEn] = useState(topic.descEn);
+  const [editIcon, setEditIcon] = useState(topic.icon);
+  const [editCategory, setEditCategory] = useState(topic.category);
+  const [savingTopic, setSavingTopic] = useState(false);
 
   function toggleMergeSelect(id: string) {
     setSelectedForMerge((prev) => {
@@ -780,6 +855,20 @@ function TopicCard({ topic, allTopics, lang, onTopicDeleted, onSubtopicAdded, on
     setMergingConfirm(false);
   }
 
+  async function saveTopic() {
+    setSavingTopic(true);
+    const res = await fetch(`/api/admin/topics/${topic.slug}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ nameHe: editNameHe, nameEn: editNameEn, descHe: editDescHe, descEn: editDescEn, icon: editIcon, category: editCategory }),
+    });
+    if (res.ok) {
+      onTopicUpdated({ ...topic, nameHe: editNameHe, nameEn: editNameEn, descHe: editDescHe, descEn: editDescEn, icon: editIcon, category: editCategory });
+      setEditingTopic(false);
+    }
+    setSavingTopic(false);
+  }
+
   async function deleteTopic() {
     if (!confirm(isHe ? `למחוק את "${topic.nameHe}"?` : `Delete "${topic.nameEn}"?`)) return;
     setDeleting(true);
@@ -799,9 +888,14 @@ function TopicCard({ topic, allTopics, lang, onTopicDeleted, onSubtopicAdded, on
         </div>
         <div className="flex items-center gap-2">
           <button
+            onClick={() => setEditingTopic((v) => !v)}
+            className="px-3 py-1.5 rounded-lg text-xs border border-amber-200 dark:border-amber-700 text-amber-600 dark:text-amber-400 hover:bg-amber-50 dark:hover:bg-amber-950/30 transition-colors">
+            {editingTopic ? (isHe ? "ביטול" : "Cancel") : "✏️"}
+          </button>
+          <button
             onClick={() => { setExpanded((v) => !v); if (!expanded) { setShowAISuggest(false); setMergeMode(false); } }}
             className="px-3 py-1.5 rounded-lg text-xs border border-zinc-200 dark:border-zinc-600 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors">
-            {expanded ? (isHe ? "סגור" : "Close") : (isHe ? "ערוך" : "Manage")}
+            {expanded ? (isHe ? "סגור" : "Close") : (isHe ? "נהל" : "Manage")}
           </button>
           {expanded && (
             <button
@@ -816,6 +910,36 @@ function TopicCard({ topic, allTopics, lang, onTopicDeleted, onSubtopicAdded, on
           </button>
         </div>
       </div>
+
+      {editingTopic && (
+        <div className="px-5 pb-4 pt-0 border-t border-zinc-100 dark:border-zinc-700">
+          <div className="mt-3 p-4 rounded-xl border border-amber-200 dark:border-amber-800 bg-amber-50/50 dark:bg-amber-950/20 space-y-3">
+            <p className="text-xs font-semibold text-amber-700 dark:text-amber-400">✏️ {isHe ? "עריכת נושא" : "Edit Topic"}</p>
+            <div className="grid grid-cols-2 gap-3">
+              <Input label={isHe ? "שם עברית" : "Hebrew Name"} value={editNameHe} onChange={setEditNameHe} dir="rtl" />
+              <Input label={isHe ? "שם אנגלית" : "English Name"} value={editNameEn} onChange={setEditNameEn} />
+            </div>
+            <div className="grid grid-cols-2 gap-3">
+              <Textarea label={isHe ? "תיאור עברית" : "Hebrew Desc"} value={editDescHe} onChange={setEditDescHe} dir="rtl" rows={2} />
+              <Textarea label={isHe ? "תיאור אנגלית" : "English Desc"} value={editDescEn} onChange={setEditDescEn} rows={2} />
+            </div>
+            <div className="grid grid-cols-2 gap-3">
+              <Input label={isHe ? "אייקון" : "Icon"} value={editIcon} onChange={setEditIcon} placeholder="🔬" />
+              <Input label={isHe ? "קטגוריה" : "Category"} value={editCategory} onChange={setEditCategory} />
+            </div>
+            <div className="flex gap-2">
+              <button onClick={saveTopic} disabled={savingTopic}
+                className="px-4 py-1.5 rounded-lg text-sm bg-amber-600 hover:bg-amber-700 text-white disabled:opacity-50 font-medium transition-colors">
+                {savingTopic ? "..." : (isHe ? "שמור" : "Save")}
+              </button>
+              <button onClick={() => setEditingTopic(false)}
+                className="px-4 py-1.5 rounded-lg text-sm border border-zinc-300 dark:border-zinc-600 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors">
+                {isHe ? "ביטול" : "Cancel"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {expanded && (
         <div className="px-5 pb-5 space-y-5 border-t border-zinc-100 dark:border-zinc-700 pt-4">
@@ -851,6 +975,7 @@ function TopicCard({ topic, allTopics, lang, onTopicDeleted, onSubtopicAdded, on
                     onDeleted={() => onSubtopicDeleted(topic.slug, s.id)}
                     onMoved={(toSlug) => onSubtopicMoved(topic.slug, s.id, toSlug)}
                     onAnimationGenerated={(updated) => onSubtopicAnimated(topic.slug, updated)}
+                    onUpdated={(updated) => onSubtopicUpdated(topic.slug, updated)}
                     mergeMode={mergeMode}
                     selected={selectedForMerge.has(s.id)}
                     onToggleSelect={() => toggleMergeSelect(s.id)}
@@ -1163,6 +1288,16 @@ export default function AdminContentManager({
         : t
     ));
   }
+  function handleSubtopicUpdated(topicSlug: string, updated: Subtopic) {
+    setTopics((prev) => prev.map((t) =>
+      t.slug === topicSlug
+        ? { ...t, subtopics: t.subtopics.map((s) => s.id === updated.id ? updated : s) }
+        : t
+    ));
+  }
+  function handleTopicUpdated(updated: Topic) {
+    setTopics((prev) => prev.map((t) => t.slug === updated.slug ? updated : t));
+  }
 
   return (
     <div className="space-y-6">
@@ -1215,6 +1350,7 @@ export default function AdminContentManager({
               allTopics={topics}
               lang={lang}
               onTopicDeleted={handleTopicDeleted}
+              onTopicUpdated={handleTopicUpdated}
               onSubtopicAdded={handleSubtopicAdded}
               onProcessAdded={handleProcessAdded}
               onSubtopicDeleted={handleSubtopicDeleted}
@@ -1222,6 +1358,7 @@ export default function AdminContentManager({
               onSubtopicMoved={handleSubtopicMoved}
               onProcessMoved={handleProcessMoved}
               onSubtopicAnimated={handleSubtopicAnimated}
+              onSubtopicUpdated={handleSubtopicUpdated}
             />
           ))}
         </div>
