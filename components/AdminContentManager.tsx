@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import type { Locale } from "@/lib/dictionaries";
+import ContentDiff from "./ContentDiff";
 
 type ProcessStep = { id: string; order: number; titleHe: string; titleEn: string; descHe: string; descEn: string };
 type Process = { id: string; slug: string; nameHe: string; nameEn: string; descHe: string; descEn: string; steps: ProcessStep[] };
@@ -481,9 +482,11 @@ function SubtopicRow({ subtopic, topic, allTopics, lang, onDeleted, onMoved, onA
               </ul>
             </div>
           )}
-          <div className="text-xs text-zinc-600 dark:text-zinc-300 line-clamp-3 bg-white dark:bg-zinc-800 rounded p-2 border border-violet-100 dark:border-violet-900">
-            {isHe ? enrichResult.contentHe : enrichResult.contentEn}
-          </div>
+          <ContentDiff
+            oldText={isHe ? subtopic.contentHe : subtopic.contentEn}
+            newText={isHe ? enrichResult.contentHe : enrichResult.contentEn}
+            label={isHe ? "השוואת תוכן (עברית)" : "Content diff (English)"}
+          />
           {enrichResult.sources.articles.length > 0 && (
             <div className="flex flex-wrap gap-1">
               {enrichResult.sources.articles.map((a) => (
@@ -644,15 +647,22 @@ function SubtopicReviewInline({ subtopicId, currentContentHe, currentContentEn, 
           )}
 
           {(review.improvedContentHe || review.improvedContentEn) && (
-            <button
-              onClick={() => onApplyContent(
-                review.improvedContentHe ?? currentContentHe,
-                review.improvedContentEn ?? currentContentEn
-              )}
-              className="w-full py-1.5 rounded text-xs bg-amber-600 hover:bg-amber-700 text-white font-medium transition-colors"
-            >
-              {isHe ? "✏️ החל תוכן משופר ועבור לעריכה" : "✏️ Apply improved content & edit"}
-            </button>
+            <>
+              <ContentDiff
+                oldText={isHe ? currentContentHe : currentContentEn}
+                newText={isHe ? (review.improvedContentHe ?? currentContentHe) : (review.improvedContentEn ?? currentContentEn)}
+                label={isHe ? "שינויים מוצעים" : "Proposed changes"}
+              />
+              <button
+                onClick={() => onApplyContent(
+                  review.improvedContentHe ?? currentContentHe,
+                  review.improvedContentEn ?? currentContentEn
+                )}
+                className="w-full py-1.5 rounded text-xs bg-amber-600 hover:bg-amber-700 text-white font-medium transition-colors"
+              >
+                {isHe ? "✏️ החל תוכן משופר ועבור לעריכה" : "✏️ Apply improved content & edit"}
+              </button>
+            </>
           )}
         </div>
       )}

@@ -2,6 +2,20 @@ import { prisma } from "@/lib/prisma";
 
 type SubtopicInput = { slug: string; nameEn: string; nameHe: string; contentEn: string; contentHe: string };
 
+export async function GET() {
+  const topics = await prisma.topic.findMany({
+    orderBy: { nameHe: "asc" },
+    include: {
+      subtopics: {
+        where: { hidden: false },
+        orderBy: { nameHe: "asc" },
+        select: { id: true, nameHe: true, nameEn: true },
+      },
+    },
+  });
+  return Response.json(topics);
+}
+
 export async function POST(request: Request) {
   const { slug, nameEn, nameHe, descEn, descHe, category, icon, subtopics } = await request.json();
 
