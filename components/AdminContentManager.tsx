@@ -1360,7 +1360,7 @@ function TopicCard({ topic, allTopics, lang, onTopicDeleted, onTopicUpdated, onS
         <div className="flex-1 min-w-0">
           <h3 className="font-semibold text-zinc-900 dark:text-zinc-50">{isHe ? topic.nameHe : topic.nameEn}</h3>
           <p className="text-xs text-zinc-500 dark:text-zinc-400">
-            {topic.subtopics.length} {isHe ? "תתי-נושאים" : "subtopics"} · {topic.processes.length} {isHe ? "תהליכים" : "processes"}
+            {topic.subtopics.filter(s => !s.hidden).length} {isHe ? "תתי-נושאים" : "subtopics"} · {topic.processes.length} {isHe ? "תהליכים" : "processes"}
           </p>
         </div>
         <div className="flex items-center gap-2">
@@ -1432,7 +1432,7 @@ function TopicCard({ topic, allTopics, lang, onTopicDeleted, onTopicUpdated, onS
             <div className="flex items-center justify-between mb-2">
               <p className="text-sm font-medium text-zinc-700 dark:text-zinc-300">{isHe ? "תתי-נושאים" : "Subtopics"}</p>
               <div className="flex items-center gap-2">
-                {topic.subtopics.length >= 2 && (
+                {topic.subtopics.filter(s => !s.hidden).length >= 2 && (
                   <button
                     onClick={() => { setMergeMode((v) => !v); setSelectedForMerge(new Set()); }}
                     className={`text-xs hover:underline ${mergeMode ? "text-red-500" : "text-violet-600 dark:text-violet-400"}`}>
@@ -1445,7 +1445,7 @@ function TopicCard({ topic, allTopics, lang, onTopicDeleted, onTopicUpdated, onS
                 </button>
               </div>
             </div>
-            {topic.subtopics.length === 0 ? (
+            {topic.subtopics.filter(s => !s.hidden).length === 0 ? (
               <p className="text-xs text-zinc-400">{isHe ? "אין תתי-נושאים" : "No subtopics yet"}</p>
             ) : (
               <ul className="space-y-1">
