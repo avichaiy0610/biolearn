@@ -76,6 +76,8 @@ export default function ArticlesManager() {
 
   // Re-analyze
   const [reanalyzingId, setReanalyzingId] = useState<string | null>(null);
+  const [articleError, setArticleError] = useState<Record<string, string | null>>({});
+  const [addError, setAddError] = useState<string | null>(null);
 
   // Upload
   const fileRef = useRef<HTMLInputElement>(null);
@@ -201,46 +203,59 @@ export default function ArticlesManager() {
   // ── Add article (analyze + save) ─────────────────────────
   async function analyzeAndAdd(result: PubMedResult) {
     setAddingId(result.pubmedId);
-    const analysisRes = await fetch("/api/admin/analyze-article", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        title: result.title, abstract: result.abstract,
-        authors: result.authors, journal: result.journal, year: result.year,
-      }),
-    });
-    const analysis = analysisRes.ok ? await analysisRes.json() : {};
-    const saveRes = await fetch("/api/admin/articles", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        pubmedId: result.pubmedId, title: result.title, authors: result.authors,
-        journal: result.journal, year: result.year, abstract: result.abstract,
-        abstractHe: analysis.abstractHe, keyFindings: analysis.keyFindings,
-        topicSlugs: analysis.topicSlugs, subtopicIds: analysis.subtopicIds,
-        url: result.url, source: "pubmed",
-      }),
-    });
+    setAddError(null);
+    try {
+      const analysisRes = await fetch("/api/admin/analyze-article", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          title: result.title, abstract: result.abstract,
+          authors: result.authors, journal: result.journal, year: result.year,
+        }),
+      });
+      const analysis = await analysisRes.json();
+      if (!analysisRes.ok) throw new Error(analysis.error ?? `ניתוח AI נכשל (${analysisRes.status})`);
+
+      const saveRes = await fetch("/api/admin/articles", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          pubmedId: result.pubmedId, title: result.title, authors: result.authors,
+          journal: result.journal, year: result.year, abstract: result.abstract,
+          abstractHe: analysis.abstractHe, keyFindings: analysis.keyFindings,
+          topicSlugs: analysis.topicSlugs, subtopicIds: analysis.subtopicIds,
+          url: result.url, source: "pubmed",
+        }),
+      });
+      const saveData = await saveRes.json();
+      if (!saveRes.ok) throw new Error(saveData.error ?? `שמירה נכשלה (${saveRes.status})`);
+      await fetchArticles();
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : String(err);
+      setAddError(msg);
+    }
     setAddingId(null);
-    if (saveRes.ok) await fetchArticles();
-    else alert((await saveRes.json()).error ?? "שגיאה בשמירה");
   }
 
   // ── Re-analyze existing article ──────────────────────────
   async function reanalyzeArticle(article: Article) {
     setReanalyzingId(article.id);
-    const analysisRes = await fetch("/api/admin/analyze-article", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        title: article.title, abstract: article.abstract,
-        authors: parseJson(article.authors, []),
-        journal: article.journal, year: article.year,
-      }),
-    });
-    if (analysisRes.ok) {
+    setArticleError((prev) => ({ ...prev, [article.id]: null }));
+    try {
+      const analysisRes = await fetch("/api/admin/analyze-article", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          title: article.title, abstract: article.abstract,
+          authors: parseJson(article.authors, []),
+          journal: article.journal, year: article.year,
+        }),
+      });
       const analysis = await analysisRes.json();
-      await fetch(`/api/admin/articles/${article.id}`, {
+      if (!analysisRes.ok) throw new Error(analysis.error ?? `שגיאת שרת ${analysisRes.status}`);
+      if (!analysis.abstractHe) throw new Error("ה-AI לא החזיר תקציר — בדוק את מפתח Groq בהגדרות Vercel");
+
+      const patchRes = await fetch(`/api/admin/articles/${article.id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -249,7 +264,11 @@ export default function ArticlesManager() {
           topicSlugs: analysis.topicSlugs,
         }),
       });
+      if (!patchRes.ok) throw new Error("שגיאה בשמירה לDB");
       await fetchArticles();
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : String(err);
+      setArticleError((prev) => ({ ...prev, [article.id]: msg }));
     }
     setReanalyzingId(null);
   }
@@ -344,7 +363,7 @@ export default function ArticlesManager() {
           {alreadySaved ? (
             <span className="text-xs text-emerald-600 dark:text-emerald-400">✓ כבר קיים</span>
           ) : (
-            <button onClick={() => analyzeAndAdd(result)} disabled={!!addingId}
+            <button onClick={() => { setAddError(null); analyzeAndAdd(result); }} disabled={isAdding}
               className="px-3 py-1.5 rounded-lg bg-emerald-600 text-white text-xs font-medium hover:bg-emerald-700 disabled:opacity-50 transition-colors">
               {isAdding ? "מנתח ושומר..." : "נתח והוסף"}
             </button>
@@ -354,6 +373,9 @@ export default function ArticlesManager() {
               className="text-xs text-emerald-500 hover:underline">PubMed →</a>
           )}
         </div>
+        {isAdding && addError && (
+          <p className="mt-2 text-xs text-red-500">{addError}</p>
+        )}
       </div>
     );
   }
@@ -432,12 +454,17 @@ export default function ArticlesManager() {
                     <p className="text-xs text-zinc-600 dark:text-zinc-300 leading-relaxed line-clamp-4">{article.abstractHe}</p>
                   </div>
                 ) : (
-                  <div className="mb-3 rounded-lg bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 p-3 flex items-center justify-between gap-3">
-                    <p className="text-xs text-amber-700 dark:text-amber-400">אין תקציר בעברית — הניתוח לא הסתיים</p>
-                    <button onClick={() => reanalyzeArticle(article)} disabled={isReanalyzing}
-                      className="shrink-0 px-3 py-1 text-xs rounded-lg bg-amber-100 dark:bg-amber-900 text-amber-700 dark:text-amber-300 hover:bg-amber-200 disabled:opacity-50 transition-colors">
-                      {isReanalyzing ? "מנתח..." : "⚡ נתח עם AI"}
-                    </button>
+                  <div className="mb-3 rounded-lg bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 p-3">
+                    <div className="flex items-center justify-between gap-3">
+                      <p className="text-xs text-amber-700 dark:text-amber-400">אין תקציר בעברית — הניתוח לא הסתיים</p>
+                      <button onClick={() => reanalyzeArticle(article)} disabled={isReanalyzing}
+                        className="shrink-0 px-3 py-1 text-xs rounded-lg bg-amber-100 dark:bg-amber-900 text-amber-700 dark:text-amber-300 hover:bg-amber-200 disabled:opacity-50 transition-colors">
+                        {isReanalyzing ? "מנתח..." : "⚡ נתח עם AI"}
+                      </button>
+                    </div>
+                    {articleError[article.id] && (
+                      <p className="mt-2 text-xs text-red-500">{articleError[article.id]}</p>
+                    )}
                   </div>
                 )}
 
