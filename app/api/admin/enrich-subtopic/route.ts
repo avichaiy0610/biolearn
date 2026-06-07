@@ -55,10 +55,10 @@ Your task: Write ENRICHED educational content that:
 3. Is clear and accurate for undergraduate biology students
 4. Expands on mechanisms, clinical relevance, and recent discoveries
 
-Respond ONLY with valid JSON (no markdown):
+Return ONLY raw JSON — no markdown fences, no backticks. Start directly with {
 {
-  "contentEn": "enriched English content (2-4 paragraphs, plain text)",
-  "contentHe": "enriched Hebrew content (same level of detail, plain text, in Hebrew)",
+  "contentEn": "enriched English content (2-3 paragraphs, plain text)",
+  "contentHe": "תוכן עברית מועשר (2-3 פסקאות, טקסט רגיל)",
   "highlights": ["key scientific insight 1", "key insight 2", "key insight 3"]
 }`;
 
@@ -66,13 +66,13 @@ Respond ONLY with valid JSON (no markdown):
     const completion = await groq.chat.completions.create({
       model: QUALITY_MODEL,
       messages: [{ role: "user", content: prompt }],
+      response_format: { type: "json_object" },
       temperature: 0.4,
-      max_tokens: 2000,
+      max_tokens: 4000,
     });
 
     const raw = completion.choices[0]?.message?.content ?? "{}";
-    const cleaned = raw.replace(/```json\n?/g, "").replace(/```\n?/g, "").trim();
-    const result = JSON.parse(cleaned);
+    const result = JSON.parse(raw);
 
     return Response.json({
       subtopicId,

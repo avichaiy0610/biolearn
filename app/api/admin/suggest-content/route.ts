@@ -43,15 +43,16 @@ ${processList}
 
 Identify what is MISSING from this topic for a thorough undergraduate biology course. Be specific and practical.
 
-Return JSON only:
+IMPORTANT: Return ONLY raw JSON — no markdown, no code fences, no backticks. Start directly with {
+
 {
   "subtopics": [
     {
       "nameEn": "...",
       "nameHe": "...",
       "slug": "unique-en-slug",
-      "contentEn": "Comprehensive 8-12 sentence explanation. Cover: key concepts and definitions, underlying molecular/cellular mechanisms, specific real-world examples, clinical or research significance, connections to other biology topics.",
-      "contentHe": "הסבר מקיף של 8-12 משפטים. לכלול: מושגי מפתח והגדרות, מנגנונים מולקולריים/תאיים, דוגמאות ספציפיות מהמציאות, חשיבות קלינית או מחקרית, קשרים לנושאים אחרים בביולוגיה.",
+      "contentEn": "3-5 sentence explanation covering key concepts, mechanisms, and significance.",
+      "contentHe": "הסבר של 3-5 משפטים הכולל מושגי מפתח, מנגנונים וחשיבות.",
       "reason": "Why this subtopic is essential for a complete understanding"
     }
   ],
@@ -77,7 +78,7 @@ Return 3-5 subtopics and 1-3 processes. Only suggest what is genuinely missing �
       ],
       model: QUALITY_MODEL,
       response_format: { type: "json_object" },
-      max_tokens: 4000,
+      max_tokens: 6000,
     });
     const text = completion.choices[0]?.message?.content ?? "{}";
     const parsed = JSON.parse(text);

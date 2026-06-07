@@ -1,6 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { isAdmin } from "@/lib/supabase/server";
-import { groq, REVIEW_MODEL } from "@/lib/groq";
+import { groq, QUALITY_MODEL } from "@/lib/groq";
 
 export const maxDuration = 60;
 
@@ -46,8 +46,8 @@ ${subtopic.contentEn}
     {"type": "clarity", "description": "הסבר לא ברור"}
   ],
   "missingConcepts": ["מושג חסר 1", "מושג חסר 2"],
-  "improvedContentEn": "Improved English content (8-12 sentences, university level, scientifically accurate)",
-  "improvedContentHe": "תוכן עברית משופר (8-12 משפטים, רמה אוניברסיטאית, מדויק מדעית)"
+  "improvedContentEn": "Improved English content (5-7 sentences, university level, scientifically accurate)",
+  "improvedContentHe": "תוכן עברית משופר (5-7 משפטים, רמה אוניברסיטאית, מדויק מדעית)"
 }`
     : `You are a university biology professor. Review the following subtopic for an educational platform.
 
@@ -76,7 +76,7 @@ Return ONLY valid JSON:
     {"type": "clarity", "description": "Unclear explanation"}
   ],
   "missingConcepts": ["Missing concept 1"],
-  "improvedContentEn": "Improved English content (8-12 sentences, university level)",
+  "improvedContentEn": "Improved English content (5-7 sentences, university level)",
   "improvedContentHe": "תוכן עברית משופר (8-12 משפטים, רמה אוניברסיטאית)"
 }`;
 
@@ -91,9 +91,9 @@ Return ONLY valid JSON:
         },
         { role: "user", content: prompt },
       ],
-      model: REVIEW_MODEL,
+      model: QUALITY_MODEL,
       response_format: { type: "json_object" },
-      max_tokens: 2000,
+      max_tokens: 4000,
     });
     const parsed = JSON.parse(completion.choices[0]?.message?.content ?? "{}");
     return Response.json(parsed);
