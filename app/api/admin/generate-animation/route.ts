@@ -7,27 +7,39 @@ async function generateAnimationSteps(
   nameHe: string,
   contentEn: string
 ): Promise<object[]> {
-  const prompt = `You are generating SVG animation data for a biology education website.
-Create 4-5 animation steps that visually explain the concept: "${nameEn}" (${nameHe})
+  const prompt = `You are generating a smooth continuous SVG animation for a biology education website.
+Animate the process: "${nameEn}" (${nameHe})
 
 Content: ${contentEn.slice(0, 600)}
 
-Rules (viewBox is 0 0 400 300):
-- "circle": cx, cy, r, color (hex)
-- "rect": x, y, width, height, color
-- "ellipse": cx, cy, rx, ry, color
-- "text": x, y, label, textColor, fontSize (10-14)
-- "line": x1, y1, x2, y2, color
-- "path": d (SVG path string), color
-- Use rich, varied hex colors: "#3b82f6", "#22c55e", "#f59e0b", "#ec4899", "#7c3aed", "#06b6d4", "#ef4444"
-- Each step: 5-10 elements spread across the canvas, with 2-4 highlighted in the "highlight" array
-- Non-highlighted elements appear dimmed
-- Include text labels for key elements
-- Design each step to visually show a distinct phase or component of the biological process
-- Make it visually informative with proper biological layout
+CRITICAL RULE: You MUST use the SAME element IDs across ALL steps. Elements will smoothly animate (move, resize, recolor) between steps — this creates a real video-like animation.
+
+To make elements appear: set opacity 0 in early steps, then 1 later.
+To make elements disappear: fade opacity from 1 to 0.
+Elements should MOVE (change cx/cy/x/y) to show the biological process happening.
+Elements should RESIZE (change r/rx/ry/width/height) to show growth/division.
+Elements should RECOLOR to show state changes.
+
+viewBox: 0 0 400 300
+Types: circle(cx,cy,r), ellipse(cx,cy,rx,ry), rect(x,y,width,height), line(x1,y1,x2,y2), text(x,y,label,fontSize 10-13,textColor), path(d)
+All elements need: id, type, color(hex), opacity(0-1)
+Colors: "#3b82f6","#22c55e","#f59e0b","#ec4899","#7c3aed","#06b6d4","#ef4444","#10b981","#f97316"
+
+Create 5-6 steps showing the process evolving continuously. Use 6-12 elements with meaningful movement between steps.
 
 Return ONLY valid JSON:
-{"steps":[{"titleHe":"...","titleEn":"...","descHe":"...","descEn":"...","elements":[{"id":"e1","type":"circle","cx":200,"cy":150,"r":25,"color":"#3b82f6"},{"id":"e2","type":"text","x":200,"y":185,"label":"Cell","textColor":"#1d4ed8","fontSize":11}],"highlight":["e1","e2"]}]}`;
+{"steps":[
+  {"titleHe":"שלב 1","titleEn":"Phase 1","descHe":"תיאור עברי","descEn":"Description","elements":[
+    {"id":"cell","type":"ellipse","cx":200,"cy":150,"rx":60,"ry":45,"color":"#3b82f6","opacity":1},
+    {"id":"nucleus","type":"circle","cx":200,"cy":150,"r":20,"color":"#1d4ed8","opacity":1},
+    {"id":"lbl_cell","type":"text","x":200,"y":215,"label":"Cell","textColor":"#1e40af","fontSize":11,"opacity":1}
+  ],"highlight":["cell","nucleus"]},
+  {"titleHe":"שלב 2","titleEn":"Phase 2","descHe":"...","descEn":"...","elements":[
+    {"id":"cell","type":"ellipse","cx":200,"cy":150,"rx":75,"ry":55,"color":"#7c3aed","opacity":1},
+    {"id":"nucleus","type":"circle","cx":200,"cy":150,"r":28,"color":"#6d28d9","opacity":1},
+    {"id":"lbl_cell","type":"text","x":200,"y":225,"label":"Growing Cell","textColor":"#5b21b6","fontSize":11,"opacity":1}
+  ],"highlight":["nucleus"]}
+]}`;
 
   try {
     const completion = await groq.chat.completions.create({

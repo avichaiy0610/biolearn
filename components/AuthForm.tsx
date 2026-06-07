@@ -32,6 +32,7 @@ export default function AuthForm({
   const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [rememberMe, setRememberMe] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
@@ -49,6 +50,7 @@ export default function AuthForm({
       const result = await signIn("credentials", {
         email,
         password,
+        rememberMe: rememberMe.toString(),
         redirect: false,
       });
       if (result?.error) {
@@ -131,6 +133,20 @@ export default function AuthForm({
               className="w-full h-10 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-900 px-3 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
             />
           </div>
+
+          {isLogin && (
+            <label className="flex items-center gap-2 cursor-pointer select-none">
+              <input
+                type="checkbox"
+                checked={rememberMe}
+                onChange={(e) => setRememberMe(e.target.checked)}
+                className="w-4 h-4 rounded border-zinc-300 dark:border-zinc-600 accent-emerald-600"
+              />
+              <span className="text-sm text-zinc-600 dark:text-zinc-400">
+                {lang === "he" ? "זכור אותי" : "Remember me"}
+              </span>
+            </label>
+          )}
 
           {error && <p className="text-sm text-red-600 dark:text-red-400">{error}</p>}
 

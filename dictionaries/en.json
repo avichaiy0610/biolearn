@@ -65,7 +65,10 @@
     "researching": "Searching...",
     "researchResult": "Research Result",
     "citations": "Sources",
-    "researchError": "Search error. Check your API key."
+    "researchError": "Search error. Check your API key.",
+    "askFollowUp": "Ask a follow-up question",
+    "askPlaceholder": "Something unclear? Ask here...",
+    "asking": "Thinking..."
   },
   "chat": {
     "title": "Ask the AI about this topic",

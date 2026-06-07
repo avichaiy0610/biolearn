@@ -30,6 +30,7 @@ model Subtopic {
   contentHe          String
   contentEn          String
   relatedProcessSlug String? // links to a Process.slug for "view animation" button
+  hidden             Boolean @default(false) // hidden from site but visible in admin
 }
 
 model Process {

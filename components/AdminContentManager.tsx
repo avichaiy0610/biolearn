@@ -1,12 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import type { Locale } from "@/lib/dictionaries";
 
 type ProcessStep = { id: string; order: number; titleHe: string; titleEn: string; descHe: string; descEn: string };
 type Process = { id: string; slug: string; nameHe: string; nameEn: string; descHe: string; descEn: string; steps: ProcessStep[] };
-type Subtopic = { id: string; slug: string; nameHe: string; nameEn: string; contentHe: string; contentEn: string; relatedProcessSlug?: string | null };
+type Subtopic = { id: string; slug: string; nameHe: string; nameEn: string; contentHe: string; contentEn: string; relatedProcessSlug?: string | null; hidden?: boolean };
 type Topic = { id: string; slug: string; nameHe: string; nameEn: string; descHe: string; descEn: string; category: string; icon: string; subtopics: Subtopic[]; processes: Process[] };
 
 function slugify(s: string) {
@@ -271,9 +271,10 @@ function CreateProcessForm({ topic, lang, onCreated }: {
 
 // ─── Subtopic Row ─────────────────────────────────────────────────────────────
 
-function SubtopicRow({ subtopic, topic, allTopics, lang, onDeleted, onMoved, onAnimationGenerated }: {
+function SubtopicRow({ subtopic, topic, allTopics, lang, onDeleted, onMoved, onAnimationGenerated, mergeMode, selected, onToggleSelect }: {
   subtopic: Subtopic; topic: Topic; allTopics: Topic[]; lang: Locale;
   onDeleted: () => void; onMoved: (newTopicSlug: string) => void; onAnimationGenerated: (s: Subtopic) => void;
+  mergeMode?: boolean; selected?: boolean; onToggleSelect?: () => void;
 }) {
   const isHe = lang === "he";
   const [moveTo, setMoveTo] = useState("");
@@ -321,9 +322,18 @@ function SubtopicRow({ subtopic, topic, allTopics, lang, onDeleted, onMoved, onA
   const otherTopics = allTopics.filter((t) => t.slug !== topic.slug);
 
   return (
-    <li className="flex flex-col gap-2 py-2 px-3 rounded-lg bg-zinc-50 dark:bg-zinc-700/50">
+    <li className={`flex flex-col gap-2 py-2 px-3 rounded-lg transition-colors ${selected ? "bg-violet-100 dark:bg-violet-900/30 border border-violet-300 dark:border-violet-700" : "bg-zinc-50 dark:bg-zinc-700/50"} ${subtopic.hidden ? "opacity-60" : ""}`}>
       <div className="flex items-center justify-between gap-2">
-        <span className="text-sm flex-1 min-w-0 truncate">{isHe ? subtopic.nameHe : subtopic.nameEn}</span>
+        <div className="flex items-center gap-2 flex-1 min-w-0">
+          {mergeMode && (
+            <input type="checkbox" checked={!!selected} onChange={onToggleSelect}
+              className="w-4 h-4 rounded accent-violet-600 shrink-0 cursor-pointer" />
+          )}
+          <span className="text-sm min-w-0 truncate">
+            {isHe ? subtopic.nameHe : subtopic.nameEn}
+            {subtopic.hidden && <span className="ml-1 text-xs text-zinc-400">(מוסתר)</span>}
+          </span>
+        </div>
         <div className="flex items-center gap-1.5 shrink-0">
           {subtopic.relatedProcessSlug ? (
             <span className="text-xs text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/30 px-2 py-0.5 rounded-full">
@@ -434,6 +444,216 @@ function ProcessRow({ process, topic, allTopics, lang, onDeleted, onMoved }: {
   );
 }
 
+// ─── AI Suggestions Panel ────────────────────────────────────────────────────
+
+type AISuggestion = { nameEn: string; nameHe: string; slug: string; contentEn?: string; contentHe?: string; descEn?: string; descHe?: string; reason: string };
+
+function AISuggestPanel({ topicSlug, lang, onAddSubtopic, onClose }: {
+  topicSlug: string; lang: Locale;
+  onAddSubtopic: (s: Subtopic) => void;
+  onClose: () => void;
+}) {
+  const isHe = lang === "he";
+  const [loading, setLoading] = useState(true);
+  const [subtopics, setSubtopics] = useState<AISuggestion[]>([]);
+  const [processes, setProcesses] = useState<AISuggestion[]>([]);
+  const [adding, setAdding] = useState<string | null>(null);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    fetch("/api/admin/suggest-content", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ topicSlug }),
+    })
+      .then((r) => r.json())
+      .then((data) => { setSubtopics(data.subtopics ?? []); setProcesses(data.processes ?? []); })
+      .catch(() => setError(isHe ? "שגיאה בטעינת הצעות" : "Failed to load suggestions"))
+      .finally(() => setLoading(false));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [topicSlug]);
+
+  async function addSubtopic(s: AISuggestion) {
+    setAdding(s.slug);
+    const res = await fetch("/api/admin/subtopics", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ topicSlug, nameHe: s.nameHe, nameEn: s.nameEn, contentHe: s.contentHe ?? "", contentEn: s.contentEn ?? "" }),
+    });
+    const data = await res.json();
+    if (res.ok) {
+      onAddSubtopic(data);
+      setSubtopics((prev) => prev.filter((x) => x.slug !== s.slug));
+    }
+    setAdding(null);
+  }
+
+  return (
+    <div className="mt-4 p-4 rounded-xl border border-violet-200 dark:border-violet-800 bg-violet-50/50 dark:bg-violet-950/20 space-y-3">
+      <div className="flex items-center justify-between">
+        <p className="text-sm font-semibold text-violet-800 dark:text-violet-300">
+          🤖 {isHe ? "המלצות AI לתוכן חסר" : "AI Content Suggestions"}
+        </p>
+        <button onClick={onClose} className="text-xs text-zinc-500 hover:text-zinc-700">✕</button>
+      </div>
+
+      {loading && <p className="text-xs text-zinc-400 animate-pulse">{isHe ? "מנתח את הנושא..." : "Analyzing topic..."}</p>}
+      {error && <p className="text-xs text-red-500">{error}</p>}
+
+      {!loading && subtopics.length === 0 && processes.length === 0 && !error && (
+        <p className="text-xs text-zinc-400">{isHe ? "לא נמצאו חוסרים — הנושא נראה שלם!" : "No gaps found — topic looks complete!"}</p>
+      )}
+
+      {subtopics.length > 0 && (
+        <div>
+          <p className="text-xs font-medium text-zinc-600 dark:text-zinc-400 mb-2">{isHe ? "תתי-נושאים מוצעים:" : "Suggested subtopics:"}</p>
+          <div className="space-y-2">
+            {subtopics.map((s) => (
+              <div key={s.slug} className="flex items-start gap-2 p-2 rounded-lg bg-white dark:bg-zinc-800 border border-violet-100 dark:border-violet-900">
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm font-medium text-zinc-800 dark:text-zinc-200">{isHe ? s.nameHe : s.nameEn}</p>
+                  <p className="text-xs text-zinc-500 mt-0.5">{s.reason}</p>
+                </div>
+                <button
+                  onClick={() => addSubtopic(s)}
+                  disabled={adding === s.slug}
+                  className="shrink-0 px-2 py-1 rounded text-xs bg-violet-600 hover:bg-violet-700 text-white disabled:opacity-50 transition-colors"
+                >
+                  {adding === s.slug ? "..." : (isHe ? "➕ הוסף" : "➕ Add")}
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {processes.length > 0 && (
+        <div>
+          <p className="text-xs font-medium text-zinc-600 dark:text-zinc-400 mb-2">{isHe ? "תהליכים מוצעים:" : "Suggested processes:"}</p>
+          <div className="space-y-2">
+            {processes.map((p) => (
+              <div key={p.slug} className="flex items-start gap-2 p-2 rounded-lg bg-white dark:bg-zinc-800 border border-blue-100 dark:border-blue-900">
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm font-medium text-zinc-800 dark:text-zinc-200">{isHe ? p.nameHe : p.nameEn}</p>
+                  <p className="text-xs text-zinc-500 mt-0.5">{p.reason}</p>
+                </div>
+                <span className="shrink-0 text-xs text-zinc-400 italic">{isHe ? "הוסף ידנית" : "Add manually"}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ─── Merge Modal ──────────────────────────────────────────────────────────────
+
+type MergedPreview = { nameEn: string; nameHe: string; slug: string; contentEn: string; contentHe: string };
+type MergeSubtopicInfo = { id: string; nameHe: string; nameEn: string };
+
+function MergeModal({ subtopics, lang, onConfirm, onCancel }: {
+  subtopics: MergeSubtopicInfo[]; lang: Locale;
+  onConfirm: (merged: MergedPreview, idsToDelete: string[], idsToHide: string[]) => void;
+  onCancel: () => void;
+}) {
+  const isHe = lang === "he";
+  const [loading, setLoading] = useState(true);
+  const [preview, setPreview] = useState<MergedPreview | null>(null);
+  const [error, setError] = useState("");
+  const [actions, setActions] = useState<Record<string, "delete" | "hide" | "keep">>({});
+  const [confirming, setConfirming] = useState(false);
+
+  useEffect(() => {
+    fetch("/api/admin/subtopics/merge", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ subtopicIds: subtopics.map((s) => s.id) }),
+    })
+      .then((r) => r.json())
+      .then((data) => {
+        setPreview(data.merged);
+        const initial: Record<string, "delete" | "hide" | "keep"> = {};
+        for (const s of subtopics) initial[s.id] = "delete";
+        setActions(initial);
+      })
+      .catch(() => setError(isHe ? "שגיאה ביצירת תצוגה מקדימה" : "Failed to generate preview"))
+      .finally(() => setLoading(false));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  async function handleConfirm() {
+    if (!preview) return;
+    setConfirming(true);
+    const idsToDelete = Object.entries(actions).filter(([, v]) => v === "delete").map(([id]) => id);
+    const idsToHide = Object.entries(actions).filter(([, v]) => v === "hide").map(([id]) => id);
+    onConfirm(preview, idsToDelete, idsToHide);
+  }
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4">
+      <div className="w-full max-w-lg max-h-[90vh] overflow-y-auto rounded-2xl bg-white dark:bg-zinc-800 shadow-2xl p-6 space-y-4">
+        <div className="flex items-center justify-between">
+          <h2 className="text-lg font-bold text-zinc-900 dark:text-zinc-50">
+            {isHe ? "מיזוג תתי-נושאים" : "Merge Subtopics"}
+          </h2>
+          <button onClick={onCancel} className="text-zinc-400 hover:text-zinc-600">✕</button>
+        </div>
+
+        {loading && <p className="text-sm text-zinc-400 animate-pulse">{isHe ? "AI מייצר תוצר מאוחד..." : "AI is generating merged content..."}</p>}
+        {error && <p className="text-sm text-red-500">{error}</p>}
+
+        {preview && !loading && (
+          <>
+            <div className="p-4 rounded-xl border border-emerald-200 dark:border-emerald-800 bg-emerald-50 dark:bg-emerald-950/20 space-y-2">
+              <p className="text-xs font-semibold text-emerald-700 dark:text-emerald-400">
+                {isHe ? "תת-נושא מאוחד (תצוגה מקדימה):" : "Merged subtopic (preview):"}
+              </p>
+              <p className="font-semibold text-zinc-900 dark:text-zinc-50">{isHe ? preview.nameHe : preview.nameEn}</p>
+              <p className="text-sm text-zinc-700 dark:text-zinc-300 leading-relaxed">{isHe ? preview.contentHe : preview.contentEn}</p>
+            </div>
+
+            <div className="space-y-2">
+              <p className="text-xs font-semibold text-zinc-600 dark:text-zinc-400">
+                {isHe ? "מה לעשות עם כל אחד מהמקוריים?" : "What to do with each original?"}
+              </p>
+              {subtopics.map((s) => (
+                <div key={s.id} className="flex items-center gap-3 p-3 rounded-lg border border-zinc-200 dark:border-zinc-700">
+                  <span className="flex-1 text-sm text-zinc-800 dark:text-zinc-200">{isHe ? s.nameHe : s.nameEn}</span>
+                  <div className="flex gap-2 text-xs">
+                    {(["delete", "hide", "keep"] as const).map((action) => (
+                      <label key={action} className="flex items-center gap-1 cursor-pointer">
+                        <input type="radio" name={s.id} value={action}
+                          checked={actions[s.id] === action}
+                          onChange={() => setActions((prev) => ({ ...prev, [s.id]: action }))}
+                          className="accent-emerald-600" />
+                        <span className={action === "delete" ? "text-red-600" : action === "hide" ? "text-amber-600" : "text-zinc-500"}>
+                          {action === "delete" ? (isHe ? "מחק" : "Delete") : action === "hide" ? (isHe ? "הסתר" : "Hide") : (isHe ? "השאר" : "Keep")}
+                        </span>
+                      </label>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="flex gap-3 pt-2">
+              <button onClick={handleConfirm} disabled={confirming}
+                className="flex-1 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-semibold disabled:opacity-50 transition-colors">
+                {confirming ? "..." : (isHe ? "✓ אשר מיזוג" : "✓ Confirm Merge")}
+              </button>
+              <button onClick={onCancel}
+                className="px-4 py-2 rounded-xl border border-zinc-300 dark:border-zinc-600 text-zinc-600 dark:text-zinc-400 text-sm hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors">
+                {isHe ? "ביטול" : "Cancel"}
+              </button>
+            </div>
+          </>
+        )}
+      </div>
+    </div>
+  );
+}
+
 // ─── Topic Card ───────────────────────────────────────────────────────────────
 
 function TopicCard({ topic, allTopics, lang, onTopicDeleted, onSubtopicAdded, onProcessAdded,
@@ -453,6 +673,42 @@ function TopicCard({ topic, allTopics, lang, onTopicDeleted, onSubtopicAdded, on
   const [showSubtopicForm, setShowSubtopicForm] = useState(false);
   const [showProcessForm, setShowProcessForm] = useState(false);
   const [deleting, setDeleting] = useState(false);
+  const [showAISuggest, setShowAISuggest] = useState(false);
+  const [mergeMode, setMergeMode] = useState(false);
+  const [selectedForMerge, setSelectedForMerge] = useState<Set<string>>(new Set());
+  const [mergeSubtopics, setMergeSubtopics] = useState<Array<{ id: string; nameHe: string; nameEn: string }> | null>(null);
+  const [mergingConfirm, setMergingConfirm] = useState(false);
+
+  function toggleMergeSelect(id: string) {
+    setSelectedForMerge((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id); else next.add(id);
+      return next;
+    });
+  }
+
+  function startMerge() {
+    const selected = topic.subtopics.filter((s) => selectedForMerge.has(s.id));
+    setMergeSubtopics(selected.map((s) => ({ id: s.id, nameHe: s.nameHe, nameEn: s.nameEn })));
+  }
+
+  async function confirmMerge(merged: MergedPreview, idsToDelete: string[], idsToHide: string[]) {
+    setMergingConfirm(true);
+    const res = await fetch("/api/admin/subtopics/merge/confirm", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ subtopicIds: mergeSubtopics!.map((s) => s.id), idsToDelete, idsToHide, merged }),
+    });
+    const newSubtopic = await res.json();
+    if (res.ok) {
+      for (const id of idsToDelete) onSubtopicDeleted(topic.slug, id);
+      onSubtopicAdded(topic.slug, newSubtopic);
+    }
+    setMergeSubtopics(null);
+    setMergeMode(false);
+    setSelectedForMerge(new Set());
+    setMergingConfirm(false);
+  }
 
   async function deleteTopic() {
     if (!confirm(isHe ? `למחוק את "${topic.nameHe}"?` : `Delete "${topic.nameEn}"?`)) return;
@@ -472,10 +728,18 @@ function TopicCard({ topic, allTopics, lang, onTopicDeleted, onSubtopicAdded, on
           </p>
         </div>
         <div className="flex items-center gap-2">
-          <button onClick={() => setExpanded((v) => !v)}
+          <button
+            onClick={() => { setExpanded((v) => !v); if (!expanded) { setShowAISuggest(false); setMergeMode(false); } }}
             className="px-3 py-1.5 rounded-lg text-xs border border-zinc-200 dark:border-zinc-600 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors">
             {expanded ? (isHe ? "סגור" : "Close") : (isHe ? "ערוך" : "Manage")}
           </button>
+          {expanded && (
+            <button
+              onClick={() => setShowAISuggest((v) => !v)}
+              className="px-3 py-1.5 rounded-lg text-xs border border-violet-200 dark:border-violet-700 text-violet-600 dark:text-violet-400 hover:bg-violet-50 dark:hover:bg-violet-950/30 transition-colors">
+              🤖 {isHe ? "הצע תוכן" : "Suggest"}
+            </button>
+          )}
           <button onClick={deleteTopic} disabled={deleting}
             className="px-3 py-1.5 rounded-lg text-xs border border-red-200 dark:border-red-800 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/30 transition-colors">
             {isHe ? "מחק" : "Delete"}
@@ -489,10 +753,19 @@ function TopicCard({ topic, allTopics, lang, onTopicDeleted, onSubtopicAdded, on
           <div>
             <div className="flex items-center justify-between mb-2">
               <p className="text-sm font-medium text-zinc-700 dark:text-zinc-300">{isHe ? "תתי-נושאים" : "Subtopics"}</p>
-              <button onClick={() => setShowSubtopicForm((v) => !v)}
-                className="text-xs text-emerald-600 dark:text-emerald-400 hover:underline">
-                {showSubtopicForm ? (isHe ? "ביטול" : "Cancel") : (isHe ? "+ הוסף" : "+ Add")}
-              </button>
+              <div className="flex items-center gap-2">
+                {topic.subtopics.length >= 2 && (
+                  <button
+                    onClick={() => { setMergeMode((v) => !v); setSelectedForMerge(new Set()); }}
+                    className={`text-xs hover:underline ${mergeMode ? "text-red-500" : "text-violet-600 dark:text-violet-400"}`}>
+                    {mergeMode ? (isHe ? "בטל מיזוג" : "Cancel merge") : (isHe ? "⛓ מזג" : "⛓ Merge")}
+                  </button>
+                )}
+                <button onClick={() => setShowSubtopicForm((v) => !v)}
+                  className="text-xs text-emerald-600 dark:text-emerald-400 hover:underline">
+                  {showSubtopicForm ? (isHe ? "ביטול" : "Cancel") : (isHe ? "+ הוסף" : "+ Add")}
+                </button>
+              </div>
             </div>
             {topic.subtopics.length === 0 ? (
               <p className="text-xs text-zinc-400">{isHe ? "אין תתי-נושאים" : "No subtopics yet"}</p>
@@ -508,9 +781,19 @@ function TopicCard({ topic, allTopics, lang, onTopicDeleted, onSubtopicAdded, on
                     onDeleted={() => onSubtopicDeleted(topic.slug, s.id)}
                     onMoved={(toSlug) => onSubtopicMoved(topic.slug, s.id, toSlug)}
                     onAnimationGenerated={(updated) => onSubtopicAnimated(topic.slug, updated)}
+                    mergeMode={mergeMode}
+                    selected={selectedForMerge.has(s.id)}
+                    onToggleSelect={() => toggleMergeSelect(s.id)}
                   />
                 ))}
               </ul>
+            )}
+            {mergeMode && selectedForMerge.size >= 2 && (
+              <button
+                onClick={startMerge}
+                className="mt-2 w-full py-2 rounded-xl bg-violet-600 hover:bg-violet-700 text-white text-sm font-medium transition-colors">
+                {isHe ? `⛓ מזג ${selectedForMerge.size} נבחרים` : `⛓ Merge ${selectedForMerge.size} selected`}
+              </button>
             )}
             {showSubtopicForm && (
               <CreateSubtopicForm topic={topic} lang={lang}
@@ -549,7 +832,25 @@ function TopicCard({ topic, allTopics, lang, onTopicDeleted, onSubtopicAdded, on
                 onCreated={(p) => { onProcessAdded(topic.slug, p); setShowProcessForm(false); }} />
             )}
           </div>
+
+          {showAISuggest && (
+            <AISuggestPanel
+              topicSlug={topic.slug}
+              lang={lang}
+              onAddSubtopic={(s) => onSubtopicAdded(topic.slug, s)}
+              onClose={() => setShowAISuggest(false)}
+            />
+          )}
         </div>
+      )}
+
+      {mergeSubtopics && (
+        <MergeModal
+          subtopics={mergeSubtopics}
+          lang={lang}
+          onConfirm={confirmMerge}
+          onCancel={() => { setMergeSubtopics(null); }}
+        />
       )}
     </div>
   );

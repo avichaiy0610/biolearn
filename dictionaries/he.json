@@ -65,7 +65,10 @@
     "researching": "מחפש מידע...",
     "researchResult": "תוצאת מחקר",
     "citations": "מקורות",
-    "researchError": "שגיאה בחיפוש. בדוק את מפתח ה-API."
+    "researchError": "שגיאה בחיפוש. בדוק את מפתח ה-API.",
+    "askFollowUp": "שאל שאלת המשך",
+    "askPlaceholder": "לא הבנת משהו? שאל כאן...",
+    "asking": "חושב..."
   },
   "chat": {
     "title": "שאל את ה-AI על הנושא",

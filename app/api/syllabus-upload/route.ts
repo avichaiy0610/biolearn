@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { groq, QUALITY_MODEL } from "@/lib/groq";
+import { extractText } from "unpdf";
 
 export async function POST(request: Request) {
   const formData = await request.formData();
@@ -15,15 +16,9 @@ export async function POST(request: Request) {
 
   if (file.type === "application/pdf") {
     const arrayBuffer = await file.arrayBuffer();
-    const buffer = Buffer.from(arrayBuffer);
     try {
-      // Import the internal implementation to avoid filesystem access in serverless
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/ban-ts-comment
-      // @ts-ignore – pdf-parse has no types for this subpath
-      const pdfModule = (await import("pdf-parse/lib/pdf-parse.js")) as any;
-      const pdfParse = pdfModule.default ?? pdfModule;
-      const data = await pdfParse(buffer);
-      rawText = data.text.slice(0, 8000);
+      const { text } = await extractText(new Uint8Array(arrayBuffer), { mergePages: true });
+      rawText = text.slice(0, 8000);
     } catch (err) {
       console.error("[syllabus-upload] PDF parse error:", err);
       return Response.json({ error: "Failed to parse PDF. Try uploading as a .txt file instead." }, { status: 400 });
