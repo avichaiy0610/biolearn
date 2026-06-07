@@ -7,6 +7,7 @@ import Link from "next/link";
 import SubtopicResearch from "@/components/SubtopicResearch";
 import ChatPanel from "@/components/ChatPanel";
 import SubtopicQuiz from "@/components/SubtopicQuiz";
+import StudentQuizCreator from "@/components/StudentQuizCreator";
 
 export default async function TopicPage({
   params,
@@ -115,11 +116,18 @@ export default async function TopicPage({
                       />
                     </div>
 
-                    <SubtopicQuiz
-                      subtopicId={sub.id}
-                      lang={lang}
-                      questionCount={sub._count.questions}
-                    />
+                    <div className="flex flex-wrap gap-2">
+                      <SubtopicQuiz
+                        subtopicId={sub.id}
+                        lang={lang}
+                        questionCount={sub._count.questions}
+                      />
+                      <StudentQuizCreator
+                        subtopicId={sub.id}
+                        subtopicName={subName}
+                        lang={lang}
+                      />
+                    </div>
                   </div>
                 </details>
               );

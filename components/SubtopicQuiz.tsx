@@ -20,21 +20,21 @@ export default function SubtopicQuiz({
   if (questionCount === 0) return null;
 
   return (
-    <div className="mt-4">
+    <div>
       {!open ? (
         <button
           onClick={() => setOpen(true)}
-          className="inline-flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg bg-violet-50 dark:bg-violet-900/30 text-violet-700 dark:text-violet-300 border border-violet-200 dark:border-violet-700 hover:bg-violet-100 dark:hover:bg-violet-800/40 transition-colors"
+          className="inline-flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-700 hover:bg-emerald-100 dark:hover:bg-emerald-800/40 transition-colors"
         >
-          <span>🧩</span>
-          {isHe ? `תרגול (${questionCount} שאלות)` : `Practice (${questionCount} questions)`}
+          <span>🎓</span>
+          {isHe ? `מבחן רשמי (${questionCount} שאלות)` : `Official quiz (${questionCount} questions)`}
         </button>
       ) : (
-        <div>
-          <div className="flex items-center justify-between mb-3">
-            <span className="text-sm font-medium text-violet-700 dark:text-violet-300">
-              {isHe ? "שאלות תרגול" : "Practice Questions"}
-            </span>
+        <div className="rounded-2xl border border-emerald-200 dark:border-emerald-800 bg-emerald-50/30 dark:bg-emerald-950/20 overflow-hidden">
+          <div className="flex items-center justify-between px-5 py-3 border-b border-emerald-100 dark:border-emerald-800/50">
+            <p className="text-sm font-semibold text-emerald-800 dark:text-emerald-200">
+              {isHe ? "🎓 מבחן רשמי" : "🎓 Official Quiz"}
+            </p>
             <button
               onClick={() => setOpen(false)}
               className="text-xs text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300"
@@ -42,7 +42,9 @@ export default function SubtopicQuiz({
               {isHe ? "סגור" : "Close"}
             </button>
           </div>
-          <QuizPanel subtopicId={subtopicId} lang={lang} />
+          <div className="p-4">
+            <QuizPanel subtopicId={subtopicId} lang={lang} />
+          </div>
         </div>
       )}
     </div>
