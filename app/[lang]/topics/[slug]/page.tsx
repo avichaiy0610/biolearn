@@ -8,6 +8,8 @@ import SubtopicResearch from "@/components/SubtopicResearch";
 import ChatPanel from "@/components/ChatPanel";
 import SubtopicQuiz from "@/components/SubtopicQuiz";
 import StudentQuizCreator from "@/components/StudentQuizCreator";
+import StudentFlashcards from "@/components/StudentFlashcards";
+import ExamCreator from "@/components/ExamCreator";
 
 export default async function TopicPage({
   params,
@@ -116,7 +118,7 @@ export default async function TopicPage({
                       />
                     </div>
 
-                    <div className="flex flex-wrap gap-2">
+                    <div className="flex flex-wrap gap-2 mt-2">
                       <SubtopicQuiz
                         subtopicId={sub.id}
                         lang={lang}
@@ -127,6 +129,10 @@ export default async function TopicPage({
                         subtopicName={subName}
                         lang={lang}
                       />
+                      <StudentFlashcards
+                        subtopicId={sub.id}
+                        lang={lang}
+                      />
                     </div>
                   </div>
                 </details>
@@ -134,6 +140,16 @@ export default async function TopicPage({
             })}
           </div>
         </section>
+      )}
+
+      {/* Exam mode */}
+      {topic.subtopics.length > 0 && (
+        <ExamCreator
+          topicSlug={topic.slug}
+          topicName={name}
+          subtopicCount={topic.subtopics.length}
+          lang={lang}
+        />
       )}
 
       {/* Free-form AI chat */}
