@@ -4,12 +4,9 @@ import { notFound } from "next/navigation";
 import { getDictionary, hasLocale, type Locale } from "@/lib/dictionaries";
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
-import SubtopicResearch from "@/components/SubtopicResearch";
 import ChatPanel from "@/components/ChatPanel";
-import SubtopicQuiz from "@/components/SubtopicQuiz";
-import StudentQuizCreator from "@/components/StudentQuizCreator";
-import StudentFlashcards from "@/components/StudentFlashcards";
 import ExamCreator from "@/components/ExamCreator";
+import TopicPageClient from "@/components/TopicPageClient";
 
 type ReactomePathway = { id: string; name: string; summary: string | null; url: string };
 
@@ -144,66 +141,14 @@ export default async function TopicPage({
           <h2 className="text-xl font-semibold text-zinc-800 dark:text-zinc-200 mb-4">
             {dict.topics.subtopics}
           </h2>
-          <div className="space-y-3">
-            {topic.subtopics.map((sub) => {
-              const subName = lang === "he" ? sub.nameHe : sub.nameEn;
-              const subContent = lang === "he" ? sub.contentHe : sub.contentEn;
-              return (
-                <details
-                  key={sub.id}
-                  className="rounded-xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 overflow-hidden group"
-                >
-                  <summary className="px-5 py-4 font-medium cursor-pointer text-zinc-900 dark:text-zinc-50 hover:bg-zinc-50 dark:hover:bg-zinc-700/50 flex items-center justify-between">
-                    <span>{subName}</span>
-                    <span className="text-zinc-400 text-sm group-open:rotate-90 transition-transform inline-block">▶</span>
-                  </summary>
-                  <div className="px-5 pb-5 pt-2 border-t border-zinc-100 dark:border-zinc-700/50">
-                    <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed whitespace-pre-wrap mb-3">
-                      {subContent}
-                    </p>
-
-                    <div className="flex flex-wrap gap-2 items-center">
-                      {/* Animation link — only shown when the process actually exists */}
-                      {sub.relatedProcessSlug && topic.processes.some((p) => p.slug === sub.relatedProcessSlug) && (
-                        <Link
-                          href={`/${lang}/topics/${slug}/${sub.relatedProcessSlug}`}
-                          className="inline-flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-700 hover:bg-emerald-100 dark:hover:bg-emerald-800/40 transition-colors"
-                        >
-                          <span>🎬</span>
-                          {dict.subtopic.viewAnimation}
-                        </Link>
-                      )}
-
-                      {/* Perplexity research button */}
-                      <SubtopicResearch
-                        lang={lang as Locale}
-                        subtopicName={subName}
-                        topicName={name}
-                        dict={dict}
-                      />
-                    </div>
-
-                    <div className="flex flex-wrap gap-2 mt-2">
-                      <SubtopicQuiz
-                        subtopicId={sub.id}
-                        lang={lang}
-                        questionCount={sub._count.questions}
-                      />
-                      <StudentQuizCreator
-                        subtopicId={sub.id}
-                        subtopicName={subName}
-                        lang={lang}
-                      />
-                      <StudentFlashcards
-                        subtopicId={sub.id}
-                        lang={lang}
-                      />
-                    </div>
-                  </div>
-                </details>
-              );
-            })}
-          </div>
+          <TopicPageClient
+            subtopics={topic.subtopics}
+            processes={topic.processes}
+            topicSlug={slug}
+            topicName={name}
+            lang={lang}
+            dict={dict}
+          />
         </section>
       )}
 

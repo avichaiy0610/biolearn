@@ -30,8 +30,10 @@ model Subtopic {
   contentHe          String
   contentEn          String
   relatedProcessSlug String? // links to a Process.slug for "view animation" button
-  hidden             Boolean  @default(false) // hidden from site but visible in admin
+  hidden             Boolean       @default(false) // hidden from site but visible in admin
   questions          Question[]
+  userProgress       UserProgress[]
+  quizResults        QuizResult[]
 }
 
 model Process {
@@ -69,11 +71,38 @@ model UploadedMaterial {
 }
 
 model User {
-  id             String   @id @default(cuid())
-  email          String   @unique
+  id             String         @id @default(cuid())
+  email          String         @unique
   hashedPassword String
   name           String?
-  createdAt      DateTime @default(now())
+  createdAt      DateTime       @default(now())
+  progress       UserProgress[]
+  quizResults    QuizResult[]
+}
+
+model UserProgress {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  subtopicId  String
+  subtopic    Subtopic @relation(fields: [subtopicId], references: [id], onDelete: Cascade)
+  visited     Boolean  @default(true)
+  updatedAt   DateTime @updatedAt
+
+  @@unique([userId, subtopicId])
+}
+
+model QuizResult {
+  id         String   @id @default(cuid())
+  userId     String
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  subtopicId String
+  subtopic   Subtopic @relation(fields: [subtopicId], references: [id], onDelete: Cascade)
+  score      Int      // percentage 0-100
+  total      Int
+  correct    Int
+  type       String   @default("official") // "official" | "ai"
+  createdAt  DateTime @default(now())
 }
 
 model ChatLog {
