@@ -30,7 +30,8 @@ model Subtopic {
   contentHe          String
   contentEn          String
   relatedProcessSlug String? // links to a Process.slug for "view animation" button
-  hidden             Boolean @default(false) // hidden from site but visible in admin
+  hidden             Boolean  @default(false) // hidden from site but visible in admin
+  questions          Question[]
 }
 
 model Process {
@@ -97,6 +98,20 @@ model ContentSuggestion {
   approved  Boolean  @default(false)
   rejected  Boolean  @default(false)
   createdAt DateTime @default(now())
+}
+
+model Question {
+  id           String   @id @default(cuid())
+  subtopicId   String
+  subtopic     Subtopic @relation(fields: [subtopicId], references: [id])
+  type         String   @default("mcq") // "mcq" | "tf" | "open"
+  question     String
+  options      String?  // JSON: string[] — only for mcq
+  answer       String   // correct answer (option text or "true"/"false")
+  explanation  String   // why this is the correct answer
+  difficulty   String   @default("medium") // "easy" | "medium" | "hard"
+  approved     Boolean  @default(false)
+  createdAt    DateTime @default(now())
 }
 
 model Article {

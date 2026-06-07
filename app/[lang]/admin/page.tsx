@@ -43,6 +43,14 @@ export default async function AdminPage({ params }: PageProps<"/[lang]/admin">) 
       descHe: "חפש ב-PubMed, העלה PDF — נתח עם AI ופרסם",
       descEn: "Search PubMed, upload PDFs — analyze with AI and publish",
     },
+    {
+      href: `/${lang}/admin/questions`,
+      icon: "❓",
+      titleHe: "שאלות תרגול",
+      titleEn: "Practice Questions",
+      descHe: "צור שאלות אמריקאיות ונכון/לא-נכון עם AI לכל תת-נושא",
+      descEn: "Generate MCQ and true/false questions with AI per subtopic",
+    },
   ];
 
   return (

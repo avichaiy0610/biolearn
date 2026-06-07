@@ -6,6 +6,7 @@ import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 import SubtopicResearch from "@/components/SubtopicResearch";
 import ChatPanel from "@/components/ChatPanel";
+import SubtopicQuiz from "@/components/SubtopicQuiz";
 
 export default async function TopicPage({
   params,
@@ -16,7 +17,13 @@ export default async function TopicPage({
   const dict = await getDictionary(lang as Locale);
   const topic = await prisma.topic.findUnique({
     where: { slug },
-    include: { subtopics: { where: { hidden: false } }, processes: true },
+    include: {
+      subtopics: {
+        where: { hidden: false },
+        include: { _count: { select: { questions: { where: { approved: true } } } } },
+      },
+      processes: true,
+    },
   });
 
   if (!topic) notFound();
@@ -107,6 +114,12 @@ export default async function TopicPage({
                         dict={dict}
                       />
                     </div>
+
+                    <SubtopicQuiz
+                      subtopicId={sub.id}
+                      lang={lang}
+                      questionCount={sub._count.questions}
+                    />
                   </div>
                 </details>
               );
