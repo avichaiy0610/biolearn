@@ -517,9 +517,10 @@ function ProcessRow({ process, topic, allTopics, lang, onDeleted, onMoved }: {
 
 type AISuggestion = { nameEn: string; nameHe: string; slug: string; contentEn?: string; contentHe?: string; descEn?: string; descHe?: string; reason: string; action?: "create" | "update"; matchedSubtopicId?: string };
 
-function AISuggestPanel({ topicSlug, lang, onAddSubtopic, onClose }: {
+function AISuggestPanel({ topicSlug, lang, onAddSubtopic, onProcessAdded, onClose }: {
   topicSlug: string; lang: Locale;
   onAddSubtopic: (s: Subtopic) => void;
+  onProcessAdded: (p: Process) => void;
   onClose: () => void;
 }) {
   const isHe = lang === "he";
@@ -527,6 +528,7 @@ function AISuggestPanel({ topicSlug, lang, onAddSubtopic, onClose }: {
   const [subtopics, setSubtopics] = useState<AISuggestion[]>([]);
   const [processes, setProcesses] = useState<AISuggestion[]>([]);
   const [adding, setAdding] = useState<string | null>(null);
+  const [generatingProcess, setGeneratingProcess] = useState<Record<string, boolean>>({});
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -551,6 +553,40 @@ function AISuggestPanel({ topicSlug, lang, onAddSubtopic, onClose }: {
       if (s.slug !== slug || !s.matchedSubtopicId) return s;
       return { ...s, action: s.action === "update" ? "create" : "update" };
     }));
+  }
+
+  async function generateProcess(p: AISuggestion) {
+    setGeneratingProcess((prev) => ({ ...prev, [p.slug]: true }));
+    try {
+      const res = await fetch("/api/admin/generate-animation", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          topicSlug,
+          nameHe: p.nameHe,
+          nameEn: p.nameEn,
+          contentEn: p.descEn ?? p.contentEn ?? p.reason,
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error ?? "Failed");
+      const newProcess: Process = {
+        id: data.processSlug,
+        slug: data.processSlug,
+        nameHe: p.nameHe,
+        nameEn: p.nameEn,
+        descHe: `אנימציה: ${p.nameHe}`,
+        descEn: `Animation: ${p.nameEn}`,
+        steps: Array.from({ length: data.stepsCreated ?? 0 }, (_, i) => ({
+          id: `step-${i}`, order: i + 1, titleHe: "", titleEn: "", descHe: "", descEn: "",
+        })),
+      };
+      onProcessAdded(newProcess);
+      setProcesses((prev) => prev.filter((x) => x.slug !== p.slug));
+    } catch (e) {
+      alert(e instanceof Error ? e.message : (isHe ? "שגיאה ביצירת אנימציה" : "Failed to generate animation"));
+    }
+    setGeneratingProcess((prev) => ({ ...prev, [p.slug]: false }));
   }
 
   async function addSubtopic(s: AISuggestion) {
@@ -645,17 +681,26 @@ function AISuggestPanel({ topicSlug, lang, onAddSubtopic, onClose }: {
 
       {processes.length > 0 && (
         <div>
-          <p className="text-xs font-medium text-zinc-600 dark:text-zinc-400 mb-2">{isHe ? "תהליכים מוצעים:" : "Suggested processes:"}</p>
+          <p className="text-xs font-medium text-zinc-600 dark:text-zinc-400 mb-2">{isHe ? "תהליכים / אנימציות מוצעות:" : "Suggested processes / animations:"}</p>
           <div className="space-y-2">
-            {processes.map((p) => (
-              <div key={p.slug} className="flex items-start gap-2 p-2 rounded-lg bg-white dark:bg-zinc-800 border border-blue-100 dark:border-blue-900">
-                <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-zinc-800 dark:text-zinc-200">{isHe ? p.nameHe : p.nameEn}</p>
-                  <p className="text-xs text-zinc-500 mt-0.5">{p.reason}</p>
+            {processes.map((p) => {
+              const isGenerating = !!generatingProcess[p.slug];
+              return (
+                <div key={p.slug} className="flex items-start gap-2 p-2 rounded-lg bg-white dark:bg-zinc-800 border border-blue-100 dark:border-blue-900">
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-medium text-zinc-800 dark:text-zinc-200">{isHe ? p.nameHe : p.nameEn}</p>
+                    <p className="text-xs text-zinc-500 mt-0.5">{p.reason}</p>
+                  </div>
+                  <button
+                    onClick={() => generateProcess(p)}
+                    disabled={isGenerating}
+                    className="shrink-0 px-2 py-1 rounded text-xs bg-blue-600 hover:bg-blue-700 text-white disabled:opacity-50 transition-colors"
+                  >
+                    {isGenerating ? "⏳" : (isHe ? "✨ צור אנימציה" : "✨ Generate")}
+                  </button>
                 </div>
-                <span className="shrink-0 text-xs text-zinc-400 italic">{isHe ? "הוסף ידנית" : "Add manually"}</span>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       )}
@@ -789,6 +834,154 @@ function MergeModal({ subtopics, lang, onConfirm, onCancel }: {
   );
 }
 
+// ─── Topic Review Panel ───────────────────────────────────────────────────────
+
+type TopicReview = {
+  overall?: string;
+  score?: number;
+  missing?: Array<{ nameEn: string; nameHe: string; reason: string; priority: string }>;
+  concerns?: Array<{ subtopicName: string; concern: string; suggestion: string }>;
+  improvements?: Array<{ subtopicName: string; improvement: string }>;
+};
+
+function TopicReviewPanel({ topicSlug, lang, onClose }: {
+  topicSlug: string; lang: Locale; onClose: () => void;
+}) {
+  const isHe = lang === "he";
+  const [loading, setLoading] = useState(true);
+  const [review, setReview] = useState<TopicReview | null>(null);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    fetch("/api/admin/review-topic", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ topicSlug }),
+    })
+      .then(async (r) => {
+        const data = await r.json();
+        if (!r.ok) throw new Error(data.error ?? "Review failed");
+        return data;
+      })
+      .then(setReview)
+      .catch((e) => setError(e.message))
+      .finally(() => setLoading(false));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [topicSlug]);
+
+  return (
+    <div className="mt-4 p-4 rounded-xl border border-amber-200 dark:border-amber-800 bg-amber-50/50 dark:bg-amber-950/20 space-y-4">
+      <div className="flex items-center justify-between">
+        <p className="text-sm font-semibold text-amber-800 dark:text-amber-300">
+          🔍 {isHe ? "ביקורת AI על הנושא" : "AI Topic Review"}
+        </p>
+        <button onClick={onClose} className="text-xs text-zinc-500 hover:text-zinc-700">✕</button>
+      </div>
+
+      {loading && (
+        <div className="flex items-center gap-2 py-2">
+          <div className="w-4 h-4 border-2 border-amber-500 border-t-transparent rounded-full animate-spin" />
+          <p className="text-xs text-zinc-400 animate-pulse">
+            {isHe ? "AI בודק את הנושא לעומק..." : "AI is reviewing the topic..."}
+          </p>
+        </div>
+      )}
+
+      {error && <p className="text-xs text-red-500">{error}</p>}
+
+      {review && !loading && (
+        <div className="space-y-4">
+          {review.overall && (
+            <div className="p-3 rounded-lg bg-white dark:bg-zinc-800 border border-amber-100 dark:border-amber-900">
+              <div className="flex items-center gap-2 mb-1.5">
+                <span className="text-xs font-semibold text-zinc-700 dark:text-zinc-300">
+                  {isHe ? "הערכה כללית" : "Overall Assessment"}
+                </span>
+                {review.score !== undefined && (
+                  <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${
+                    review.score >= 8 ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-400" :
+                    review.score >= 5 ? "bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-400" :
+                    "bg-red-100 text-red-700 dark:bg-red-900/40 dark:text-red-400"
+                  }`}>
+                    {review.score}/10
+                  </span>
+                )}
+              </div>
+              <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">{review.overall}</p>
+            </div>
+          )}
+
+          {review.missing && review.missing.length > 0 && (
+            <div>
+              <p className="text-xs font-semibold text-red-600 dark:text-red-400 mb-2">
+                ❌ {isHe ? "תתי-נושאים חסרים:" : "Missing subtopics:"}
+              </p>
+              <div className="space-y-1.5">
+                {review.missing.map((m, i) => (
+                  <div key={i} className="p-2.5 rounded-lg bg-red-50 dark:bg-red-950/20 border border-red-100 dark:border-red-900">
+                    <div className="flex items-center gap-2 mb-0.5">
+                      <span className={`text-xs px-1.5 py-0.5 rounded-full font-medium ${
+                        m.priority === "high" ? "bg-red-200 text-red-700 dark:bg-red-800 dark:text-red-300" :
+                        m.priority === "medium" ? "bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-400" :
+                        "bg-zinc-100 text-zinc-600 dark:bg-zinc-700 dark:text-zinc-400"
+                      }`}>{m.priority}</span>
+                      <span className="text-xs font-medium text-zinc-800 dark:text-zinc-200">
+                        {isHe ? m.nameHe : m.nameEn}
+                      </span>
+                    </div>
+                    <p className="text-xs text-zinc-500 dark:text-zinc-400">{m.reason}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {review.concerns && review.concerns.length > 0 && (
+            <div>
+              <p className="text-xs font-semibold text-amber-600 dark:text-amber-400 mb-2">
+                ⚠️ {isHe ? "חששות ואי-דיוקים:" : "Concerns & inaccuracies:"}
+              </p>
+              <div className="space-y-1.5">
+                {review.concerns.map((c, i) => (
+                  <div key={i} className="p-2.5 rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-100 dark:border-amber-900">
+                    <p className="text-xs font-medium text-zinc-800 dark:text-zinc-200 mb-0.5">{c.subtopicName}</p>
+                    <p className="text-xs text-zinc-500 dark:text-zinc-400">{c.concern}</p>
+                    {c.suggestion && (
+                      <p className="text-xs text-amber-600 dark:text-amber-400 mt-1">→ {c.suggestion}</p>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {review.improvements && review.improvements.length > 0 && (
+            <div>
+              <p className="text-xs font-semibold text-blue-600 dark:text-blue-400 mb-2">
+                💡 {isHe ? "הצעות לשיפור:" : "Suggested improvements:"}
+              </p>
+              <div className="space-y-1.5">
+                {review.improvements.map((imp, i) => (
+                  <div key={i} className="p-2.5 rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-100 dark:border-blue-900">
+                    <p className="text-xs font-medium text-zinc-800 dark:text-zinc-200 mb-0.5">{imp.subtopicName}</p>
+                    <p className="text-xs text-zinc-500 dark:text-zinc-400">{imp.improvement}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {!review.missing?.length && !review.concerns?.length && !review.improvements?.length && (
+            <p className="text-xs text-emerald-600 dark:text-emerald-400">
+              ✅ {isHe ? "הנושא נראה מקיף ומדויק ברמה אוניברסיטאית!" : "Topic looks comprehensive and accurate at university level!"}
+            </p>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
 // ─── Topic Card ───────────────────────────────────────────────────────────────
 
 function TopicCard({ topic, allTopics, lang, onTopicDeleted, onTopicUpdated, onSubtopicAdded, onProcessAdded,
@@ -811,6 +1004,7 @@ function TopicCard({ topic, allTopics, lang, onTopicDeleted, onTopicUpdated, onS
   const [showProcessForm, setShowProcessForm] = useState(false);
   const [deleting, setDeleting] = useState(false);
   const [showAISuggest, setShowAISuggest] = useState(false);
+  const [showReview, setShowReview] = useState(false);
   const [mergeMode, setMergeMode] = useState(false);
   const [selectedForMerge, setSelectedForMerge] = useState<Set<string>>(new Set());
   const [mergeSubtopics, setMergeSubtopics] = useState<Array<{ id: string; nameHe: string; nameEn: string }> | null>(null);
@@ -893,16 +1087,23 @@ function TopicCard({ topic, allTopics, lang, onTopicDeleted, onTopicUpdated, onS
             {editingTopic ? (isHe ? "ביטול" : "Cancel") : "✏️"}
           </button>
           <button
-            onClick={() => { setExpanded((v) => !v); if (!expanded) { setShowAISuggest(false); setMergeMode(false); } }}
+            onClick={() => { setExpanded((v) => !v); if (!expanded) { setShowAISuggest(false); setShowReview(false); setMergeMode(false); } }}
             className="px-3 py-1.5 rounded-lg text-xs border border-zinc-200 dark:border-zinc-600 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors">
             {expanded ? (isHe ? "סגור" : "Close") : (isHe ? "נהל" : "Manage")}
           </button>
           {expanded && (
-            <button
-              onClick={() => setShowAISuggest((v) => !v)}
-              className="px-3 py-1.5 rounded-lg text-xs border border-violet-200 dark:border-violet-700 text-violet-600 dark:text-violet-400 hover:bg-violet-50 dark:hover:bg-violet-950/30 transition-colors">
-              🤖 {isHe ? "הצע תוכן" : "Suggest"}
-            </button>
+            <>
+              <button
+                onClick={() => { setShowReview((v) => !v); setShowAISuggest(false); }}
+                className="px-3 py-1.5 rounded-lg text-xs border border-amber-200 dark:border-amber-700 text-amber-600 dark:text-amber-400 hover:bg-amber-50 dark:hover:bg-amber-950/30 transition-colors">
+                🔍 {isHe ? "ביקורת" : "Review"}
+              </button>
+              <button
+                onClick={() => { setShowAISuggest((v) => !v); setShowReview(false); }}
+                className="px-3 py-1.5 rounded-lg text-xs border border-violet-200 dark:border-violet-700 text-violet-600 dark:text-violet-400 hover:bg-violet-50 dark:hover:bg-violet-950/30 transition-colors">
+                🤖 {isHe ? "הצע תוכן" : "Suggest"}
+              </button>
+            </>
           )}
           <button onClick={deleteTopic} disabled={deleting}
             className="px-3 py-1.5 rounded-lg text-xs border border-red-200 dark:border-red-800 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/30 transition-colors">
@@ -1028,11 +1229,20 @@ function TopicCard({ topic, allTopics, lang, onTopicDeleted, onTopicUpdated, onS
             )}
           </div>
 
+          {showReview && (
+            <TopicReviewPanel
+              topicSlug={topic.slug}
+              lang={lang}
+              onClose={() => setShowReview(false)}
+            />
+          )}
+
           {showAISuggest && (
             <AISuggestPanel
               topicSlug={topic.slug}
               lang={lang}
               onAddSubtopic={(s) => onSubtopicAdded(topic.slug, s)}
+              onProcessAdded={(p) => onProcessAdded(topic.slug, p)}
               onClose={() => setShowAISuggest(false)}
             />
           )}

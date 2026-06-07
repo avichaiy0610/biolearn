@@ -28,6 +28,8 @@ type SvgElement = {
   d?: string;
   label?: string;
   color?: string;
+  stroke?: string;
+  strokeWidth?: number;
   textColor?: string;
   fontSize?: number;
   opacity?: number;
@@ -87,7 +89,7 @@ function AnimatedSvgElement({
         <motion.circle
           key={id}
           initial={{ cx: el.cx, cy: el.cy, r: el.r, opacity: 0 }}
-          animate={{ cx: el.cx, cy: el.cy, r: el.r, fill, opacity: effectiveOpacity }}
+          animate={{ cx: el.cx, cy: el.cy, r: el.r, fill, stroke: el.stroke ?? "none", strokeWidth: el.strokeWidth ?? (el.stroke ? 2 : 0), opacity: effectiveOpacity }}
           transition={t}
         />
       );
@@ -96,7 +98,7 @@ function AnimatedSvgElement({
         <motion.ellipse
           key={id}
           initial={{ cx: el.cx, cy: el.cy, rx: el.rx, ry: el.ry, opacity: 0 }}
-          animate={{ cx: el.cx, cy: el.cy, rx: el.rx, ry: el.ry, fill, opacity: effectiveOpacity }}
+          animate={{ cx: el.cx, cy: el.cy, rx: el.rx, ry: el.ry, fill, stroke: el.stroke ?? "none", strokeWidth: el.strokeWidth ?? (el.stroke ? 2 : 0), opacity: effectiveOpacity }}
           transition={t}
         />
       );
@@ -104,9 +106,8 @@ function AnimatedSvgElement({
       return (
         <motion.rect
           key={id}
-          rx={4}
           initial={{ x: el.x, y: el.y, width: el.width, height: el.height, opacity: 0 }}
-          animate={{ x: el.x, y: el.y, width: el.width, height: el.height, fill, opacity: effectiveOpacity }}
+          animate={{ x: el.x, y: el.y, width: el.width, height: el.height, fill, stroke: el.stroke ?? "none", strokeWidth: el.strokeWidth ?? (el.stroke ? 2 : 0), opacity: effectiveOpacity }}
           transition={t}
         />
       );
