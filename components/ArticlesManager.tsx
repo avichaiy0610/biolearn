@@ -61,6 +61,7 @@ export default function ArticlesManager() {
   // Search
   const [query, setQuery] = useState("");
   const [resultType, setResultType] = useState<"top" | "new">("top");
+  const [searchSource, setSearchSource] = useState<"pubmed" | "europepmc" | "openalex">("pubmed");
   const [searchResults, setSearchResults] = useState<PubMedResult[]>([]);
   const [searchTotal, setSearchTotal] = useState(0);
   const [searchPage, setSearchPage] = useState(0);
@@ -95,29 +96,54 @@ export default function ArticlesManager() {
   }
 
   // ── Search ──────────────────────────────────────────────
-  async function runSearch(page: number, append: boolean) {
+  async function runSearch(page: number, append: boolean, overrideSource?: "pubmed" | "europepmc" | "openalex") {
     if (!query.trim()) return;
+    const src = overrideSource ?? searchSource;
     if (append) setLoadingMore(true);
     else { setSearching(true); setSearchResults([]); setRefinement(null); }
 
-    const sort = resultType === "new" ? "date" : "relevance";
-    const recency = resultType === "new" ? "3" : "";
-    const url =
-      `/api/admin/pubmed-search?query=${encodeURIComponent(query)}&limit=${PAGE_SIZE}&page=${page}&sort=${sort}` +
-      (recency ? `&recency=${recency}` : "");
+    let newResults: PubMedResult[] = [];
+    let total = 0;
 
-    const res = await fetch(url);
-    const data = await res.json();
-    const newResults: PubMedResult[] = data.articles ?? [];
+    if (src !== "pubmed") {
+      const res = await fetch(
+        `/api/admin/europepmc-search?q=${encodeURIComponent(query)}&source=${src}&limit=${PAGE_SIZE}`
+      );
+      const data = res.ok ? await res.json() : { articles: [] };
+      newResults = (data.articles ?? []).map((a: {
+        id: string; pubmedId?: string | null; title: string; authors: string[];
+        journal?: string | null; year?: number | null; abstract: string; url: string; citationCount?: number | null;
+      }) => ({
+        pubmedId: a.pubmedId ?? a.id,
+        title: a.title,
+        authors: a.authors,
+        journal: a.journal ?? "",
+        year: a.year ?? null,
+        abstract: a.abstract,
+        url: a.url,
+        citationCount: a.citationCount ?? undefined,
+      }));
+      total = newResults.length;
+    } else {
+      const sort = resultType === "new" ? "date" : "relevance";
+      const recency = resultType === "new" ? "3" : "";
+      const url =
+        `/api/admin/pubmed-search?query=${encodeURIComponent(query)}&limit=${PAGE_SIZE}&page=${page}&sort=${sort}` +
+        (recency ? `&recency=${recency}` : "");
+      const res = await fetch(url);
+      const data = await res.json();
+      newResults = data.articles ?? [];
+      total = data.total ?? 0;
+    }
 
     setSearchResults((prev) => append ? [...prev, ...newResults] : newResults);
-    setSearchTotal(data.total ?? 0);
+    setSearchTotal(total);
     setSearchPage(page);
 
     if (append) { setLoadingMore(false); return; }
 
     setSearching(false);
-    if (newResults.length > 0) {
+    if (newResults.length > 0 && src === "pubmed") {
       setRefining(true);
       const rRes = await fetch("/api/admin/refine-search", {
         method: "POST",
@@ -394,7 +420,7 @@ export default function ArticlesManager() {
                 : "border-transparent text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300"
             }`}>
             {t === "list" ? `רשימה (${articles.length})`
-              : t === "search" ? "חיפוש PubMed"
+              : t === "search" ? "🔍 חיפוש מאמרים"
               : t === "ai-suggest" ? "🤖 הצעות AI"
               : "העלאת PDF"}
           </button>
@@ -507,6 +533,24 @@ export default function ArticlesManager() {
       {/* ─── SEARCH ─── */}
       {tab === "search" && (
         <div>
+          {/* Source selector */}
+          <div className="flex gap-2 mb-3">
+            {(["pubmed", "europepmc", "openalex"] as const).map((src) => (
+              <button key={src} onClick={() => { setSearchSource(src); setSearchResults([]); setRefinement(null); }}
+                className={`px-3 py-1.5 rounded-full text-xs font-medium transition-colors ${
+                  searchSource === src
+                    ? "bg-emerald-600 text-white"
+                    : "bg-zinc-100 dark:bg-zinc-700 text-zinc-500 hover:bg-zinc-200 dark:hover:bg-zinc-600"}`}>
+                {src === "pubmed" ? "PubMed" : src === "europepmc" ? "EuropePMC" : "OpenAlex"}
+              </button>
+            ))}
+            {searchSource !== "pubmed" && (
+              <span className="self-center text-xs text-zinc-400">
+                {searchSource === "europepmc" ? "28M+ מאמרים, ציטוטים" : "250M+ מאמרים, גישה פתוחה"}
+              </span>
+            )}
+          </div>
+
           <div className="flex gap-2 mb-3">
             <input type="text" value={query}
               onChange={(e) => setQuery(e.target.value)}
