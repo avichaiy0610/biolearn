@@ -288,6 +288,32 @@ function SubtopicRow({ subtopic, topic, allTopics, lang, onDeleted, onMoved, onA
   const [editContentHe, setEditContentHe] = useState(subtopic.contentHe);
   const [editContentEn, setEditContentEn] = useState(subtopic.contentEn);
   const [saving, setSaving] = useState(false);
+  const [enriching, setEnriching] = useState(false);
+  const [enrichResult, setEnrichResult] = useState<{
+    contentHe: string; contentEn: string;
+    highlights: string[];
+    sources: { articles: { title: string; year: number | null; url: string }[]; pathways: { name: string; id: string; url: string }[] };
+  } | null>(null);
+
+  async function handleEnrich() {
+    setEnriching(true);
+    setEnrichResult(null);
+    const res = await fetch("/api/admin/enrich-subtopic", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        subtopicId: subtopic.id,
+        subtopicNameEn: subtopic.nameEn,
+        subtopicNameHe: subtopic.nameHe,
+        topicNameEn: topic.nameEn,
+        contentEn: subtopic.contentEn,
+        contentHe: subtopic.contentHe,
+      }),
+    });
+    if (res.ok) setEnrichResult(await res.json());
+    else alert(isHe ? "שגיאה בהעשרה" : "Enrichment failed");
+    setEnriching(false);
+  }
 
   async function handleMove() {
     if (!moveTo) return;
@@ -368,11 +394,19 @@ function SubtopicRow({ subtopic, topic, allTopics, lang, onDeleted, onMoved, onA
             ✏️
           </button>
           <button
-            onClick={() => { setReviewing((v) => !v); setEditing(false); }}
+            onClick={() => { setReviewing((v) => !v); setEditing(false); setEnrichResult(null); }}
             className="text-xs text-amber-500 hover:text-amber-700 dark:hover:text-amber-300"
             title={isHe ? "בקשת ביקורת AI" : "AI Review"}
           >
             🔍
+          </button>
+          <button
+            onClick={() => { setEnriching(true); setEditing(false); setReviewing(false); handleEnrich(); }}
+            disabled={enriching}
+            className="text-xs text-violet-600 dark:text-violet-400 hover:underline disabled:opacity-50"
+            title={isHe ? "העשר עם ידע מדעי (PubMed + Reactome)" : "Enrich with scientific data (PubMed + Reactome)"}
+          >
+            {enriching ? "⏳" : "🧪"}
           </button>
           {animationExists ? (
             <span className="text-xs text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/30 px-2 py-0.5 rounded-full">
@@ -426,6 +460,57 @@ function SubtopicRow({ subtopic, topic, allTopics, lang, onDeleted, onMoved, onA
               {isHe ? "ביטול" : "Cancel"}
             </button>
           </div>
+        </div>
+      )}
+
+      {enrichResult && (
+        <div className="mt-1 p-3 rounded-lg border border-violet-200 dark:border-violet-800 bg-violet-50 dark:bg-violet-950/20 space-y-2">
+          <div className="flex items-center justify-between">
+            <p className="text-xs font-semibold text-violet-700 dark:text-violet-400">
+              {isHe ? "🧪 תוכן מועשר (PubMed + Reactome)" : "🧪 Enriched Content (PubMed + Reactome)"}
+            </p>
+            <button onClick={() => setEnrichResult(null)} className="text-xs text-zinc-400 hover:text-zinc-600">✕</button>
+          </div>
+          {enrichResult.highlights.length > 0 && (
+            <div>
+              <p className="text-xs text-zinc-500 mb-1">{isHe ? "תובנות מדעיות מרכזיות:" : "Key scientific insights:"}</p>
+              <ul className="space-y-0.5">
+                {enrichResult.highlights.map((h, i) => (
+                  <li key={i} className="text-xs text-violet-700 dark:text-violet-300">• {h}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+          <div className="text-xs text-zinc-600 dark:text-zinc-300 line-clamp-3 bg-white dark:bg-zinc-800 rounded p-2 border border-violet-100 dark:border-violet-900">
+            {isHe ? enrichResult.contentHe : enrichResult.contentEn}
+          </div>
+          {enrichResult.sources.articles.length > 0 && (
+            <div className="flex flex-wrap gap-1">
+              {enrichResult.sources.articles.map((a) => (
+                <a key={a.url} href={a.url} target="_blank" rel="noopener noreferrer"
+                  className="text-xs px-2 py-0.5 rounded-full bg-zinc-100 dark:bg-zinc-700 text-zinc-500 hover:text-violet-600 truncate max-w-[200px]">
+                  📄 {a.year}
+                </a>
+              ))}
+              {enrichResult.sources.pathways.map((p) => (
+                <a key={p.id} href={p.url} target="_blank" rel="noopener noreferrer"
+                  className="text-xs px-2 py-0.5 rounded-full bg-violet-100 dark:bg-violet-900/50 text-violet-600 dark:text-violet-300 hover:underline truncate max-w-[200px]">
+                  ⬡ {p.id}
+                </a>
+              ))}
+            </div>
+          )}
+          <button
+            onClick={() => {
+              setEditContentHe(enrichResult.contentHe);
+              setEditContentEn(enrichResult.contentEn);
+              setEnrichResult(null);
+              setEditing(true);
+            }}
+            className="px-3 py-1.5 rounded text-xs bg-violet-600 hover:bg-violet-700 text-white font-medium transition-colors"
+          >
+            {isHe ? "החל תוכן ועבור לעריכה" : "Apply content & edit"}
+          </button>
         </div>
       )}
 

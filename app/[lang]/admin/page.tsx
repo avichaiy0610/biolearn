@@ -51,6 +51,14 @@ export default async function AdminPage({ params }: PageProps<"/[lang]/admin">) 
       descHe: "צור שאלות אמריקאיות ונכון/לא-נכון עם AI לכל תת-נושא",
       descEn: "Generate MCQ and true/false questions with AI per subtopic",
     },
+    {
+      href: `/${lang}/admin/stats`,
+      icon: "📊",
+      titleHe: "סטטיסטיקות",
+      titleEn: "Statistics",
+      descHe: "משתמשים, תוכן, מאמרים, נושאים פופולריים",
+      descEn: "Users, content, articles, most popular topics",
+    },
   ];
 
   return (
