@@ -680,7 +680,29 @@ function ProcessRow({ process, topic, allTopics, lang, onDeleted, onMoved }: {
   const [moveTo, setMoveTo] = useState("");
   const [moving, setMoving] = useState(false);
   const [reviewing, setReviewing] = useState(false);
+  const [generatingVideo, setGeneratingVideo] = useState(false);
+  const [videoResult, setVideoResult] = useState<string | null>(null);
+  const [videoError, setVideoError] = useState<string | null>(null);
   const otherTopics = allTopics.filter((t) => t.slug !== topic.slug);
+
+  async function handleGenerateVideo() {
+    setGeneratingVideo(true);
+    setVideoError(null);
+    setVideoResult(null);
+    try {
+      const res = await fetch("/api/admin/generate-process-video", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ processSlug: process.slug }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error ?? "Failed");
+      setVideoResult(data.videoUrl);
+    } catch (e) {
+      setVideoError(e instanceof Error ? e.message : "Error");
+    }
+    setGeneratingVideo(false);
+  }
 
   async function handleMove() {
     if (!moveTo) return;
@@ -715,9 +737,32 @@ function ProcessRow({ process, topic, allTopics, lang, onDeleted, onMoved }: {
           >
             🔍
           </button>
+          <button
+            onClick={handleGenerateVideo}
+            disabled={generatingVideo}
+            className="text-xs text-violet-500 hover:text-violet-700 dark:hover:text-violet-300 disabled:opacity-40"
+            title={isHe ? "צור סרטון MP4" : "Generate MP4 video"}
+          >
+            {generatingVideo ? "⏳" : "🎬"}
+          </button>
           <button onClick={handleDelete} className="text-xs text-red-500 hover:text-red-700">✕</button>
         </div>
       </div>
+
+      {generatingVideo && (
+        <p className="text-xs text-violet-500 animate-pulse">
+          {isHe ? "מייצר סרטון... (עד 2 דקות)" : "Generating video… (up to 2 min)"}
+        </p>
+      )}
+      {videoResult && (
+        <p className="text-xs text-emerald-600 dark:text-emerald-400">
+          ✓ {isHe ? "סרטון נוצר:" : "Video ready:"}{" "}
+          <a href={videoResult} target="_blank" rel="noopener noreferrer" className="underline">{videoResult}</a>
+        </p>
+      )}
+      {videoError && (
+        <p className="text-xs text-red-500">{isHe ? "שגיאה:" : "Error:"} {videoError}</p>
+      )}
 
       {reviewing && (
         <ProcessReviewInline processSlug={process.slug} lang={lang} />
