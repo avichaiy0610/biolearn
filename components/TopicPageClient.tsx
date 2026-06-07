@@ -41,7 +41,7 @@ export default function TopicPageClient({
   dict: Dict;
 }) {
   const isHe = lang === "he";
-  const { data, loaded, markVisited } = useTopicProgress(topicSlug);
+  const { data, loaded, markVisited, saveQuizScore } = useTopicProgress(topicSlug);
   const [openId, setOpenId] = useState<string | null>(null);
 
   function toggleSubtopic(id: string) {
@@ -119,11 +119,17 @@ export default function TopicPageClient({
                       subtopicId={sub.id}
                       lang={lang}
                       questionCount={sub._count.questions}
+                      onFinish={(score, total) =>
+                        saveQuizScore(sub.id, Math.round((score / total) * 100), total, score, "official")
+                      }
                     />
                     <StudentQuizCreator
                       subtopicId={sub.id}
                       subtopicName={subName}
                       lang={lang}
+                      onFinish={(score, total) =>
+                        saveQuizScore(sub.id, Math.round((score / total) * 100), total, score, "ai")
+                      }
                     />
                     <StudentFlashcards
                       subtopicId={sub.id}

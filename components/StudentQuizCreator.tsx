@@ -28,10 +28,12 @@ export default function StudentQuizCreator({
   subtopicId,
   subtopicName,
   lang,
+  onFinish,
 }: {
   subtopicId: string;
   subtopicName: string;
   lang: string;
+  onFinish?: (score: number, total: number) => void;
 }) {
   const [open, setOpen] = useState(false);
   const [quizType, setQuizType] = useState<QuizType>("mixed");
@@ -100,7 +102,7 @@ export default function StudentQuizCreator({
       {/* Active quiz */}
       {questions ? (
         <div className="p-4">
-          <QuizGame questions={questions} lang={lang} />
+          <QuizGame questions={questions} lang={lang} onFinish={onFinish} />
           <button
             onClick={reset}
             className="mt-4 text-xs text-violet-600 dark:text-violet-400 hover:underline"

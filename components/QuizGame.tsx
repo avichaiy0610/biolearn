@@ -25,9 +25,11 @@ function shuffle<T>(arr: T[]): T[] {
 export default function QuizGame({
   questions: rawQuestions,
   lang,
+  onFinish,
 }: {
   questions: QuizQuestion[];
   lang: string;
+  onFinish?: (score: number, total: number) => void;
 }) {
   const [questions] = useState(() => shuffle(rawQuestions));
   const [current, setCurrent] = useState(0);
@@ -82,6 +84,11 @@ export default function QuizGame({
     setSelfScore(correct);
     if (correct) setScore((s) => s + 1);
   }
+
+  useEffect(() => {
+    if (done) onFinish?.(score, questions.length);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [done]);
 
   function handleNext() {
     if (current + 1 >= questions.length) setDone(true);

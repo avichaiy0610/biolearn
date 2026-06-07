@@ -9,10 +9,12 @@ export default function SubtopicQuiz({
   subtopicId,
   lang,
   questionCount,
+  onFinish,
 }: {
   subtopicId: string;
   lang: string;
   questionCount: number;
+  onFinish?: (score: number, total: number) => void;
 }) {
   const [open, setOpen] = useState(false);
   const isHe = lang === "he";
@@ -43,7 +45,7 @@ export default function SubtopicQuiz({
             </button>
           </div>
           <div className="p-4">
-            <QuizPanel subtopicId={subtopicId} lang={lang} />
+            <QuizPanel subtopicId={subtopicId} lang={lang} onFinish={onFinish} />
           </div>
         </div>
       )}
