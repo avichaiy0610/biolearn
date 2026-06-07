@@ -1076,18 +1076,21 @@ function MergeModal({ subtopics, lang, onConfirm, onCancel }: {
 type TopicReview = {
   overall?: string;
   score?: number;
-  missing?: Array<{ nameEn: string; nameHe: string; reason: string; priority: string }>;
+  missing?: Array<{ nameEn: string; nameHe: string; reason: string; priority: string; contentEn?: string; contentHe?: string }>;
   concerns?: Array<{ subtopicName: string; concern: string; suggestion: string }>;
   improvements?: Array<{ subtopicName: string; improvement: string }>;
 };
 
-function TopicReviewPanel({ topicSlug, lang, onClose }: {
-  topicSlug: string; lang: Locale; onClose: () => void;
+function TopicReviewPanel({ topicSlug, lang, onSubtopicAdded, onClose }: {
+  topicSlug: string; lang: Locale;
+  onSubtopicAdded: (s: Subtopic) => void;
+  onClose: () => void;
 }) {
   const isHe = lang === "he";
   const [loading, setLoading] = useState(true);
   const [review, setReview] = useState<TopicReview | null>(null);
   const [error, setError] = useState("");
+  const [addingSlug, setAddingSlug] = useState<string | null>(null);
 
   useEffect(() => {
     fetch("/api/admin/review-topic", {
@@ -1105,6 +1108,34 @@ function TopicReviewPanel({ topicSlug, lang, onClose }: {
       .finally(() => setLoading(false));
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [topicSlug]);
+
+  async function addMissing(m: NonNullable<TopicReview["missing"]>[number]) {
+    const slug = m.nameEn.toLowerCase().replace(/\s+/g, "-").replace(/[^\w-]/g, "").slice(0, 50);
+    setAddingSlug(slug);
+    try {
+      const res = await fetch("/api/admin/subtopics", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          topicSlug,
+          nameHe: m.nameHe,
+          nameEn: m.nameEn,
+          contentHe: m.contentHe ?? m.reason,
+          contentEn: m.contentEn ?? m.reason,
+        }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error ?? "Failed");
+      onSubtopicAdded(data);
+      setReview((prev) => prev
+        ? { ...prev, missing: prev.missing?.filter((x) => x.nameEn !== m.nameEn) }
+        : prev
+      );
+    } catch (e) {
+      alert(e instanceof Error ? e.message : "Failed to add subtopic");
+    }
+    setAddingSlug(null);
+  }
 
   return (
     <div className="mt-4 p-4 rounded-xl border border-amber-200 dark:border-amber-800 bg-amber-50/50 dark:bg-amber-950/20 space-y-4">
@@ -1154,21 +1185,36 @@ function TopicReviewPanel({ topicSlug, lang, onClose }: {
                 ❌ {isHe ? "תתי-נושאים חסרים:" : "Missing subtopics:"}
               </p>
               <div className="space-y-1.5">
-                {review.missing.map((m, i) => (
-                  <div key={i} className="p-2.5 rounded-lg bg-red-50 dark:bg-red-950/20 border border-red-100 dark:border-red-900">
-                    <div className="flex items-center gap-2 mb-0.5">
-                      <span className={`text-xs px-1.5 py-0.5 rounded-full font-medium ${
-                        m.priority === "high" ? "bg-red-200 text-red-700 dark:bg-red-800 dark:text-red-300" :
-                        m.priority === "medium" ? "bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-400" :
-                        "bg-zinc-100 text-zinc-600 dark:bg-zinc-700 dark:text-zinc-400"
-                      }`}>{m.priority}</span>
-                      <span className="text-xs font-medium text-zinc-800 dark:text-zinc-200">
-                        {isHe ? m.nameHe : m.nameEn}
-                      </span>
+                {review.missing.map((m, i) => {
+                  const slug = m.nameEn.toLowerCase().replace(/\s+/g, "-").replace(/[^\w-]/g, "").slice(0, 50);
+                  const isAdding = addingSlug === slug;
+                  return (
+                    <div key={i} className="p-2.5 rounded-lg bg-red-50 dark:bg-red-950/20 border border-red-100 dark:border-red-900">
+                      <div className="flex items-start justify-between gap-2">
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-2 mb-0.5 flex-wrap">
+                            <span className={`text-xs px-1.5 py-0.5 rounded-full font-medium shrink-0 ${
+                              m.priority === "high" ? "bg-red-200 text-red-700 dark:bg-red-800 dark:text-red-300" :
+                              m.priority === "medium" ? "bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-400" :
+                              "bg-zinc-100 text-zinc-600 dark:bg-zinc-700 dark:text-zinc-400"
+                            }`}>{m.priority}</span>
+                            <span className="text-xs font-medium text-zinc-800 dark:text-zinc-200">
+                              {isHe ? m.nameHe : m.nameEn}
+                            </span>
+                          </div>
+                          <p className="text-xs text-zinc-500 dark:text-zinc-400">{m.reason}</p>
+                        </div>
+                        <button
+                          onClick={() => addMissing(m)}
+                          disabled={isAdding}
+                          className="shrink-0 px-2 py-1 rounded text-xs bg-red-600 hover:bg-red-700 text-white disabled:opacity-50 transition-colors"
+                        >
+                          {isAdding ? "⏳" : (isHe ? "➕ הוסף" : "➕ Add")}
+                        </button>
+                      </div>
                     </div>
-                    <p className="text-xs text-zinc-500 dark:text-zinc-400">{m.reason}</p>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
           )}
@@ -1470,6 +1516,7 @@ function TopicCard({ topic, allTopics, lang, onTopicDeleted, onTopicUpdated, onS
             <TopicReviewPanel
               topicSlug={topic.slug}
               lang={lang}
+              onSubtopicAdded={(s) => onSubtopicAdded(topic.slug, s)}
               onClose={() => setShowReview(false)}
             />
           )}
