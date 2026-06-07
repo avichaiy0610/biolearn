@@ -41,7 +41,7 @@ Return ONLY valid JSON:
   "overall": "2-3 sentence overall assessment",
   "score": 7,
   "missing": [
-    {"nameEn": "Topic Name", "nameHe": "שם בעברית", "reason": "Why this is essential for university students", "priority": "high"}
+    {"nameEn": "Topic Name", "nameHe": "שם בעברית", "reason": "Why this is essential for university students", "priority": "high", "contentEn": "3-5 sentence introduction to this subtopic at university level", "contentHe": "מבוא של 3-5 משפטים לתת-נושא זה ברמה אוניברסיטאית"}
   ],
   "concerns": [
     {"subtopicName": "Existing subtopic nameEn", "concern": "Specific issue with this content", "suggestion": "How to fix or improve it"}
