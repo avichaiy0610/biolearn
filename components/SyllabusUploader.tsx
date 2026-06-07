@@ -64,11 +64,25 @@ export default function SyllabusUploader({
     formData.append("lang", lang);
     if (selectedTopic) formData.append("topicSlug", selectedTopic);
 
+    // Warn about large files before upload
+    if (file.size > 4 * 1024 * 1024) {
+      alert(lang === "he" ? "הקובץ גדול מ-4MB. ייתכן שהעלאה תיכשל. מנסה בכל זאת..." : "File is larger than 4MB. Upload may fail.");
+    }
+
     try {
       const res = await fetch("/api/syllabus-upload", { method: "POST", body: formData });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error);
-      setSuggestions(data.suggestions ?? []);
+      let data: { error?: string; suggestions?: unknown[]; id?: string };
+      try {
+        data = await res.json();
+      } catch {
+        throw new Error(
+          lang === "he"
+            ? "הקובץ גדול מדי או שהשרת החזיר תגובה לא תקינה. נסה קובץ קטן יותר."
+            : "File too large or server returned unexpected response. Try a smaller file."
+        );
+      }
+      if (!res.ok) throw new Error(data.error ?? "Upload failed");
+      setSuggestions((data.suggestions ?? []) as Suggestion[]);
       setMaterialId(data.id ?? "");
     } catch (e) {
       alert(e instanceof Error ? e.message : "Upload failed");

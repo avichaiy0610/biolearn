@@ -1,6 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { isAdmin } from "@/lib/supabase/server";
-import { groq, QUALITY_MODEL } from "@/lib/groq";
+import { groq, REVIEW_MODEL } from "@/lib/groq";
 
 export const maxDuration = 60;
 
@@ -62,9 +62,9 @@ Priority levels: "high" (essential, core concept), "medium" (important but optio
         },
         { role: "user", content: prompt },
       ],
-      model: QUALITY_MODEL,
+      model: REVIEW_MODEL,
       response_format: { type: "json_object" },
-      max_tokens: 3000,
+      max_tokens: 2000,
     });
     const parsed = JSON.parse(completion.choices[0]?.message?.content ?? "{}");
     return Response.json(parsed);

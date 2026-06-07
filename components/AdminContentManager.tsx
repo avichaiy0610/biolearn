@@ -430,12 +430,18 @@ function SubtopicRow({ subtopic, topic, allTopics, lang, onDeleted, onMoved, onA
       )}
 
       {reviewing && (
-        <SubtopicReviewInline subtopicId={subtopic.id} lang={lang} onApplyContent={(he, en) => {
-          setEditContentHe(he);
-          setEditContentEn(en);
-          setReviewing(false);
-          setEditing(true);
-        }} />
+        <SubtopicReviewInline
+          subtopicId={subtopic.id}
+          currentContentHe={subtopic.contentHe}
+          currentContentEn={subtopic.contentEn}
+          lang={lang}
+          onApplyContent={(he, en) => {
+            setEditContentHe(he);
+            setEditContentEn(en);
+            setReviewing(false);
+            setEditing(true);
+          }}
+        />
       )}
 
       {otherTopics.length > 0 && !editing && !reviewing && (
@@ -476,8 +482,8 @@ type SubtopicReview = {
   improvedContentHe?: string;
 };
 
-function SubtopicReviewInline({ subtopicId, lang, onApplyContent }: {
-  subtopicId: string; lang: Locale;
+function SubtopicReviewInline({ subtopicId, currentContentHe, currentContentEn, lang, onApplyContent }: {
+  subtopicId: string; currentContentHe: string; currentContentEn: string; lang: Locale;
   onApplyContent: (he: string, en: string) => void;
 }) {
   const isHe = lang === "he";
@@ -489,14 +495,14 @@ function SubtopicReviewInline({ subtopicId, lang, onApplyContent }: {
     fetch("/api/admin/review-subtopic", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ subtopicId }),
+      body: JSON.stringify({ subtopicId, lang }),
     })
       .then(async (r) => { const d = await r.json(); if (!r.ok) throw new Error(d.error); return d; })
       .then(setReview)
       .catch((e) => setError(e.message))
       .finally(() => setLoading(false));
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [subtopicId]);
+  }, [subtopicId, lang]);
 
   const issueColor = (type: string) =>
     type === "accuracy" ? "text-red-600 dark:text-red-400" :
@@ -552,9 +558,12 @@ function SubtopicReviewInline({ subtopicId, lang, onApplyContent }: {
             </div>
           )}
 
-          {review.improvedContentHe && review.improvedContentEn && (
+          {(review.improvedContentHe || review.improvedContentEn) && (
             <button
-              onClick={() => onApplyContent(review.improvedContentHe!, review.improvedContentEn!)}
+              onClick={() => onApplyContent(
+                review.improvedContentHe ?? currentContentHe,
+                review.improvedContentEn ?? currentContentEn
+              )}
               className="w-full py-1.5 rounded text-xs bg-amber-600 hover:bg-amber-700 text-white font-medium transition-colors"
             >
               {isHe ? "✏️ החל תוכן משופר ועבור לעריכה" : "✏️ Apply improved content & edit"}
