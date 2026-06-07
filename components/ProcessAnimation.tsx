@@ -139,8 +139,12 @@ function AnimatedSvgElement({
           key={id}
           fontSize={el.fontSize ?? 11}
           textAnchor="middle"
+          paintOrder="stroke"
+          strokeLinejoin="round"
+          stroke="rgba(255,255,255,0.92)"
+          strokeWidth={3}
           initial={{ x: el.x, y: el.y, opacity: 0 }}
-          animate={{ x: el.x, y: el.y, fill: el.textColor ?? (isHighlighted ? "#065f46" : "#9ca3af"), opacity: effectiveOpacity }}
+          animate={{ x: el.x, y: el.y, fill: el.textColor ?? "#1e293b", opacity: el.opacity ?? 1 }}
           transition={t}
         >
           {el.label}

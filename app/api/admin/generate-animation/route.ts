@@ -106,10 +106,10 @@ Optional per element: stroke(hex), strokeWidth(number)
 
 Return ONLY valid JSON:
 {"steps":[
-  {"titleHe":"שם השלב","titleEn":"Step Name","descHe":"תיאור מדויק מה קורה","descEn":"Precise description of what happens","elements":[
+  {"titleHe":"היקשרות האנזים","titleEn":"Enzyme Binding","descHe":"האנזים פולימראז נקשר לאתר הפרומוטר על גבי רצף ה-DNA ויוצר קומפלקס פתיחה. הכריכה מביאה לשינוי תצורתי שמתח את שני גדילי ה-DNA.","descEn":"RNA polymerase binds to the promoter region of the DNA, forming an open complex. This binding causes a conformational change that unwinds the two DNA strands at the transcription start site.","elements":[
     {"id":"cell","type":"circle","cx":200,"cy":150,"r":85,"color":"#fdf4e3","stroke":"#c9a55a","strokeWidth":2.5,"opacity":1},
     {"id":"nucleus","type":"ellipse","cx":200,"cy":150,"rx":42,"ry":38,"color":"#e8d4a0","stroke":"#b89040","strokeWidth":1.5,"opacity":1},
-    {"id":"lbl","type":"text","x":200,"y":258,"label":"Cell","textColor":"#78350f","fontSize":11,"opacity":1}
+    {"id":"lbl","type":"text","x":200,"y":258,"label":"Enzyme binds DNA","textColor":"#1e3a5f","fontSize":11,"opacity":1}
   ],"highlight":["cell","nucleus"]}
 ]}`;
 

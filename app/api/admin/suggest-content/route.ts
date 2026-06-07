@@ -101,6 +101,7 @@ Return 3-5 subtopics and 1-3 processes. Only suggest what is genuinely missing â
     return Response.json({ subtopics, processes });
   } catch (err) {
     console.error("[suggest-content]", err);
-    return Response.json({ error: "AI request failed" }, { status: 500 });
+    const msg = err instanceof Error ? err.message : String(err);
+    return Response.json({ error: `AI request failed: ${msg}` }, { status: 500 });
   }
 }

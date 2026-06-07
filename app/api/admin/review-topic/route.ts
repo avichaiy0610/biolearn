@@ -70,6 +70,7 @@ Priority levels: "high" (essential, core concept), "medium" (important but optio
     return Response.json(parsed);
   } catch (err) {
     console.error("[review-topic] error:", err);
-    return Response.json({ error: "AI review failed" }, { status: 500 });
+    const msg = err instanceof Error ? err.message : String(err);
+    return Response.json({ error: `AI review failed: ${msg}` }, { status: 500 });
   }
 }

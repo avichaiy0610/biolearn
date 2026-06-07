@@ -282,6 +282,7 @@ function SubtopicRow({ subtopic, topic, allTopics, lang, onDeleted, onMoved, onA
   const [moving, setMoving] = useState(false);
   const [generatingAnim, setGeneratingAnim] = useState(false);
   const [editing, setEditing] = useState(false);
+  const [reviewing, setReviewing] = useState(false);
   const [editNameHe, setEditNameHe] = useState(subtopic.nameHe);
   const [editNameEn, setEditNameEn] = useState(subtopic.nameEn);
   const [editContentHe, setEditContentHe] = useState(subtopic.contentHe);
@@ -360,11 +361,18 @@ function SubtopicRow({ subtopic, topic, allTopics, lang, onDeleted, onMoved, onA
         </div>
         <div className="flex items-center gap-1.5 shrink-0">
           <button
-            onClick={() => setEditing((v) => !v)}
+            onClick={() => { setEditing((v) => !v); setReviewing(false); }}
             className="text-xs text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300"
             title={isHe ? "ערוך" : "Edit"}
           >
             ✏️
+          </button>
+          <button
+            onClick={() => { setReviewing((v) => !v); setEditing(false); }}
+            className="text-xs text-amber-500 hover:text-amber-700 dark:hover:text-amber-300"
+            title={isHe ? "בקשת ביקורת AI" : "AI Review"}
+          >
+            🔍
           </button>
           {animationExists ? (
             <span className="text-xs text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/30 px-2 py-0.5 rounded-full">
@@ -421,7 +429,16 @@ function SubtopicRow({ subtopic, topic, allTopics, lang, onDeleted, onMoved, onA
         </div>
       )}
 
-      {otherTopics.length > 0 && !editing && (
+      {reviewing && (
+        <SubtopicReviewInline subtopicId={subtopic.id} lang={lang} onApplyContent={(he, en) => {
+          setEditContentHe(he);
+          setEditContentEn(en);
+          setReviewing(false);
+          setEditing(true);
+        }} />
+      )}
+
+      {otherTopics.length > 0 && !editing && !reviewing && (
         <div className="flex items-center gap-2">
           <select
             value={moveTo}
@@ -448,6 +465,107 @@ function SubtopicRow({ subtopic, topic, allTopics, lang, onDeleted, onMoved, onA
   );
 }
 
+// ─── Subtopic Review Inline ───────────────────────────────────────────────────
+
+type SubtopicReview = {
+  score?: number;
+  assessment?: string;
+  issues?: Array<{ type: string; description: string }>;
+  missingConcepts?: string[];
+  improvedContentEn?: string;
+  improvedContentHe?: string;
+};
+
+function SubtopicReviewInline({ subtopicId, lang, onApplyContent }: {
+  subtopicId: string; lang: Locale;
+  onApplyContent: (he: string, en: string) => void;
+}) {
+  const isHe = lang === "he";
+  const [loading, setLoading] = useState(true);
+  const [review, setReview] = useState<SubtopicReview | null>(null);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    fetch("/api/admin/review-subtopic", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ subtopicId }),
+    })
+      .then(async (r) => { const d = await r.json(); if (!r.ok) throw new Error(d.error); return d; })
+      .then(setReview)
+      .catch((e) => setError(e.message))
+      .finally(() => setLoading(false));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [subtopicId]);
+
+  const issueColor = (type: string) =>
+    type === "accuracy" ? "text-red-600 dark:text-red-400" :
+    type === "completeness" ? "text-amber-600 dark:text-amber-400" :
+    "text-blue-600 dark:text-blue-400";
+
+  return (
+    <div className="p-3 rounded-lg border border-amber-200 dark:border-amber-800 bg-amber-50/60 dark:bg-amber-950/20 space-y-2">
+      <p className="text-xs font-semibold text-amber-700 dark:text-amber-400">
+        🔍 {isHe ? "ביקורת AI על תת-הנושא" : "AI Subtopic Review"}
+      </p>
+
+      {loading && (
+        <div className="flex items-center gap-2">
+          <div className="w-3 h-3 border-2 border-amber-500 border-t-transparent rounded-full animate-spin" />
+          <p className="text-xs text-zinc-400 animate-pulse">{isHe ? "מנתח..." : "Analyzing..."}</p>
+        </div>
+      )}
+      {error && <p className="text-xs text-red-500">{error}</p>}
+
+      {review && !loading && (
+        <div className="space-y-2">
+          <div className="flex items-center gap-2">
+            {review.score !== undefined && (
+              <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${
+                review.score >= 8 ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-400" :
+                review.score >= 5 ? "bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-400" :
+                "bg-red-100 text-red-700 dark:bg-red-900/40 dark:text-red-400"
+              }`}>{review.score}/10</span>
+            )}
+            <p className="text-xs text-zinc-600 dark:text-zinc-400 leading-relaxed">{review.assessment}</p>
+          </div>
+
+          {review.issues && review.issues.length > 0 && (
+            <ul className="space-y-1">
+              {review.issues.map((issue, i) => (
+                <li key={i} className="text-xs flex gap-1.5">
+                  <span className={`font-semibold uppercase shrink-0 ${issueColor(issue.type)}`}>[{issue.type}]</span>
+                  <span className="text-zinc-600 dark:text-zinc-400">{issue.description}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+
+          {review.missingConcepts && review.missingConcepts.length > 0 && (
+            <div>
+              <p className="text-xs font-semibold text-zinc-500 mb-1">{isHe ? "חסר:" : "Missing:"}</p>
+              <ul className="space-y-0.5">
+                {review.missingConcepts.map((c, i) => (
+                  <li key={i} className="text-xs text-zinc-500 before:content-['•'] before:mr-1">{c}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {review.improvedContentHe && review.improvedContentEn && (
+            <button
+              onClick={() => onApplyContent(review.improvedContentHe!, review.improvedContentEn!)}
+              className="w-full py-1.5 rounded text-xs bg-amber-600 hover:bg-amber-700 text-white font-medium transition-colors"
+            >
+              {isHe ? "✏️ החל תוכן משופר ועבור לעריכה" : "✏️ Apply improved content & edit"}
+            </button>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
 // ─── Process Row ──────────────────────────────────────────────────────────────
 
 function ProcessRow({ process, topic, allTopics, lang, onDeleted, onMoved }: {
@@ -457,6 +575,7 @@ function ProcessRow({ process, topic, allTopics, lang, onDeleted, onMoved }: {
   const isHe = lang === "he";
   const [moveTo, setMoveTo] = useState("");
   const [moving, setMoving] = useState(false);
+  const [reviewing, setReviewing] = useState(false);
   const otherTopics = allTopics.filter((t) => t.slug !== topic.slug);
 
   async function handleMove() {
@@ -484,8 +603,22 @@ function ProcessRow({ process, topic, allTopics, lang, onDeleted, onMoved }: {
           {isHe ? process.nameHe : process.nameEn}
           <span className="text-xs text-zinc-400 ms-1">({process.steps.length} {isHe ? "שלבים" : "steps"})</span>
         </span>
-        <button onClick={handleDelete} className="text-xs text-red-500 hover:text-red-700 shrink-0">✕</button>
+        <div className="flex items-center gap-1.5 shrink-0">
+          <button
+            onClick={() => setReviewing((v) => !v)}
+            className="text-xs text-amber-500 hover:text-amber-700 dark:hover:text-amber-300"
+            title={isHe ? "בקשת ביקורת AI" : "AI Review"}
+          >
+            🔍
+          </button>
+          <button onClick={handleDelete} className="text-xs text-red-500 hover:text-red-700">✕</button>
+        </div>
       </div>
+
+      {reviewing && (
+        <ProcessReviewInline processSlug={process.slug} lang={lang} />
+      )}
+
       {otherTopics.length > 0 && (
         <div className="flex items-center gap-2">
           <select
@@ -510,6 +643,101 @@ function ProcessRow({ process, topic, allTopics, lang, onDeleted, onMoved }: {
         </div>
       )}
     </li>
+  );
+}
+
+// ─── Process Review Inline ────────────────────────────────────────────────────
+
+type ProcessReview = {
+  score?: number;
+  assessment?: string;
+  issues?: Array<{ step?: number; type: string; description: string }>;
+  missingSteps?: string[];
+  suggestions?: string[];
+};
+
+function ProcessReviewInline({ processSlug, lang }: { processSlug: string; lang: Locale }) {
+  const isHe = lang === "he";
+  const [loading, setLoading] = useState(true);
+  const [review, setReview] = useState<ProcessReview | null>(null);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    fetch("/api/admin/review-process", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ processSlug }),
+    })
+      .then(async (r) => { const d = await r.json(); if (!r.ok) throw new Error(d.error); return d; })
+      .then(setReview)
+      .catch((e) => setError(e.message))
+      .finally(() => setLoading(false));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [processSlug]);
+
+  return (
+    <div className="p-3 rounded-lg border border-amber-200 dark:border-amber-800 bg-amber-50/60 dark:bg-amber-950/20 space-y-2">
+      <p className="text-xs font-semibold text-amber-700 dark:text-amber-400">
+        🔍 {isHe ? "ביקורת AI על האנימציה" : "AI Animation Review"}
+      </p>
+      {loading && (
+        <div className="flex items-center gap-2">
+          <div className="w-3 h-3 border-2 border-amber-500 border-t-transparent rounded-full animate-spin" />
+          <p className="text-xs text-zinc-400 animate-pulse">{isHe ? "מנתח..." : "Analyzing..."}</p>
+        </div>
+      )}
+      {error && <p className="text-xs text-red-500">{error}</p>}
+      {review && !loading && (
+        <div className="space-y-2">
+          <div className="flex items-center gap-2">
+            {review.score !== undefined && (
+              <span className={`text-xs font-bold px-2 py-0.5 rounded-full shrink-0 ${
+                review.score >= 8 ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-400" :
+                review.score >= 5 ? "bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-400" :
+                "bg-red-100 text-red-700 dark:bg-red-900/40 dark:text-red-400"
+              }`}>{review.score}/10</span>
+            )}
+            <p className="text-xs text-zinc-600 dark:text-zinc-400">{review.assessment}</p>
+          </div>
+          {review.issues && review.issues.length > 0 && (
+            <ul className="space-y-1">
+              {review.issues.map((issue, i) => (
+                <li key={i} className="text-xs text-zinc-600 dark:text-zinc-400 flex gap-1.5">
+                  {issue.step !== undefined && (
+                    <span className="font-semibold text-amber-600 dark:text-amber-400 shrink-0">
+                      {isHe ? `שלב ${issue.step}:` : `Step ${issue.step}:`}
+                    </span>
+                  )}
+                  <span>{issue.description}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+          {review.missingSteps && review.missingSteps.length > 0 && (
+            <div>
+              <p className="text-xs font-semibold text-zinc-500 mb-1">{isHe ? "שלבים חסרים:" : "Missing steps:"}</p>
+              <ul className="space-y-0.5">
+                {review.missingSteps.map((s, i) => (
+                  <li key={i} className="text-xs text-zinc-500 before:content-['•'] before:mr-1">{s}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+          {review.suggestions && review.suggestions.length > 0 && (
+            <div>
+              <p className="text-xs font-semibold text-blue-600 dark:text-blue-400 mb-1">
+                {isHe ? "הצעות לשיפור:" : "Suggestions:"}
+              </p>
+              <ul className="space-y-0.5">
+                {review.suggestions.map((s, i) => (
+                  <li key={i} className="text-xs text-zinc-500 before:content-['•'] before:mr-1">{s}</li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+      )}
+    </div>
   );
 }
 
