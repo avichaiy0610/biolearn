@@ -19,10 +19,11 @@ async function fetchPathways(query: string): Promise<ReactomePathway[]> {
     if (!res.ok) return [];
     const data = await res.json();
     const entries = data.results?.[0]?.entries ?? [];
+    const stripHtml = (s: string) => s.replace(/<[^>]+>/g, "");
     return entries.slice(0, 5).map((r: { stId: string; name: string; summation?: string }) => ({
       id: r.stId,
-      name: r.name,
-      summary: r.summation?.replace(/<[^>]+>/g, "").slice(0, 140) ?? null,
+      name: stripHtml(r.name),
+      summary: r.summation ? stripHtml(r.summation).slice(0, 140) : null,
       url: `https://reactome.org/PathwayBrowser/#/${r.stId}`,
     }));
   } catch { return []; }

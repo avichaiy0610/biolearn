@@ -22,11 +22,12 @@ export async function GET(req: NextRequest) {
     const data = await res.json();
     const entries: ReactomeEntry[] = data.results?.[0]?.entries ?? [];
 
+    const stripHtml = (s: string) => s.replace(/<[^>]+>/g, "");
     return Response.json(
       entries.slice(0, 6).map((r) => ({
         id: r.stId,
-        name: r.name,
-        summary: r.summation?.replace(/<[^>]+>/g, "").slice(0, 160) ?? null,
+        name: stripHtml(r.name),
+        summary: r.summation ? stripHtml(r.summation).slice(0, 160) : null,
         url: `https://reactome.org/PathwayBrowser/#/${r.stId}`,
       }))
     );
