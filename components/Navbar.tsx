@@ -8,7 +8,7 @@ import LanguageSwitcher from "./LanguageSwitcher";
 import SearchBar from "./SearchBar";
 
 type Dict = {
-  nav: { home: string; topics: string; search: string; admin: string; login: string; logout: string };
+  nav: { home: string; topics: string; search: string; research: string; admin: string; login: string; logout: string };
   home: { searchPlaceholder: string };
 };
 
@@ -28,6 +28,7 @@ export default function Navbar({
   const navLinks = [
     { href: `/${lang}`, label: dict.nav.home },
     { href: `/${lang}/topics`, label: dict.nav.topics },
+    { href: `/${lang}/research`, label: dict.nav.research },
     ...(isAdmin ? [{ href: `/${lang}/admin`, label: dict.nav.admin }] : []),
   ];
 

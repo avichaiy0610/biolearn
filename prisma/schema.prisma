@@ -98,3 +98,21 @@ model ContentSuggestion {
   rejected  Boolean  @default(false)
   createdAt DateTime @default(now())
 }
+
+model Article {
+  id           String   @id @default(cuid())
+  pubmedId     String?  @unique // null for uploaded PDFs
+  title        String
+  authors      String   // JSON: string[]
+  journal      String?
+  year         Int?
+  abstract     String
+  abstractHe   String?  // AI-translated Hebrew abstract
+  keyFindings  String?  // JSON: string[] of key findings in Hebrew
+  topicSlugs   String?  // JSON: string[] of related topic slugs
+  subtopicIds  String?  // JSON: string[] of related subtopic IDs
+  url          String?  // PubMed / DOI link
+  source       String   @default("pubmed") // "pubmed" | "upload"
+  hidden       Boolean  @default(true) // requires admin approval before publishing
+  createdAt    DateTime @default(now())
+}

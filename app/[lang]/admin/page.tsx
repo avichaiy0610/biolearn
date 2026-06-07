@@ -35,6 +35,14 @@ export default async function AdminPage({ params }: PageProps<"/[lang]/admin">) 
       descHe: "סקור הצעות שנוצרו מניתוח שאלות הצ'אט — אשר או דחה",
       descEn: "Review suggestions generated from chat question analysis — approve or reject",
     },
+    {
+      href: `/${lang}/admin/articles`,
+      icon: "🔬",
+      titleHe: "מאמרים מדעיים",
+      titleEn: "Scientific Articles",
+      descHe: "חפש ב-PubMed, העלה PDF — נתח עם AI ופרסם",
+      descEn: "Search PubMed, upload PDFs — analyze with AI and publish",
+    },
   ];
 
   return (

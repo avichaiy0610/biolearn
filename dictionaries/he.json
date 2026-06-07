@@ -3,6 +3,7 @@
     "home": "דף הבית",
     "topics": "נושאים",
     "search": "חיפוש",
+    "research": "מחקר",
     "admin": "ניהול",
     "login": "כניסה",
     "logout": "יציאה"
@@ -74,6 +75,19 @@
     "title": "שאל את ה-AI על הנושא",
     "placeholder": "שאל שאלה חופשית על הנושא...",
     "thinking": "חושב..."
+  },
+  "research": {
+    "title": "מאמרים מדעיים",
+    "subtitle": "מחקרים עדכניים בביולוגיה — מנותחים ומתורגמים",
+    "noArticles": "אין מאמרים עדיין",
+    "keyFindings": "ממצאים מרכזיים",
+    "readOriginal": "קרא מאמר מקורי",
+    "filterByTopic": "סנן לפי נושא",
+    "allTopics": "כל הנושאים",
+    "source_pubmed": "PubMed",
+    "source_upload": "הועלה ידנית",
+    "authors": "מחברים",
+    "abstract": "תקציר"
   },
   "upload": {
     "title": "העלאת סילבוס / חומר לימוד",

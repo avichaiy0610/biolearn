@@ -3,6 +3,7 @@
     "home": "Home",
     "topics": "Topics",
     "search": "Search",
+    "research": "Research",
     "admin": "Admin",
     "login": "Login",
     "logout": "Logout"
@@ -74,6 +75,19 @@
     "title": "Ask the AI about this topic",
     "placeholder": "Ask anything about this topic...",
     "thinking": "Thinking..."
+  },
+  "research": {
+    "title": "Scientific Articles",
+    "subtitle": "Recent biology research — analyzed and summarized",
+    "noArticles": "No articles yet",
+    "keyFindings": "Key Findings",
+    "readOriginal": "Read Original Article",
+    "filterByTopic": "Filter by Topic",
+    "allTopics": "All Topics",
+    "source_pubmed": "PubMed",
+    "source_upload": "Uploaded",
+    "authors": "Authors",
+    "abstract": "Abstract"
   },
   "upload": {
     "title": "Upload Syllabus / Study Material",

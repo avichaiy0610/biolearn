@@ -13,7 +13,7 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
   const dict = await getDictionary(lang as Locale);
 
   const topics = await prisma.topic.findMany({
-    include: { _count: { select: { processes: true, subtopics: true } } },
+    include: { _count: { select: { processes: true, subtopics: { where: { hidden: false } } } } },
     orderBy: { nameEn: "asc" },
   });
 
