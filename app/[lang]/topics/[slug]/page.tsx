@@ -11,6 +11,8 @@ import ReactomePathwayCard from "@/components/ReactomePathwayCard";
 
 type ReactomePathway = { id: string; name: string; summary: string | null; url: string };
 
+const stripHtml = (s: string) => s.replace(/<[^>]+>/g, "");
+
 async function fetchPathways(query: string): Promise<ReactomePathway[]> {
   try {
     const url =
@@ -20,14 +22,39 @@ async function fetchPathways(query: string): Promise<ReactomePathway[]> {
     if (!res.ok) return [];
     const data = await res.json();
     const entries = data.results?.[0]?.entries ?? [];
-    const stripHtml = (s: string) => s.replace(/<[^>]+>/g, "");
     return entries.slice(0, 5).map((r: { stId: string; name: string; summation?: string }) => ({
       id: r.stId,
       name: stripHtml(r.name),
-      summary: r.summation ? stripHtml(r.summation).slice(0, 140) : null,
+      summary: r.summation ? stripHtml(r.summation).slice(0, 400) : null,
       url: `https://reactome.org/PathwayBrowser/#/${r.stId}`,
     }));
   } catch { return []; }
+}
+
+async function fetchPathwaysByIds(stIds: string[]): Promise<ReactomePathway[]> {
+  if (stIds.length === 0) return [];
+  const results = await Promise.all(
+    stIds.map(async (stId) => {
+      try {
+        const res = await fetch(
+          `https://reactome.org/ContentService/data/query/${stId}`,
+          { next: { revalidate: 3600 } }
+        );
+        if (!res.ok) return null;
+        const d = await res.json();
+        const summary = Array.isArray(d.summation) && d.summation[0]?.text
+          ? stripHtml(d.summation[0].text).slice(0, 400)
+          : null;
+        return {
+          id: stId,
+          name: stripHtml(d.displayName ?? stId),
+          summary,
+          url: `https://reactome.org/PathwayBrowser/#/${stId}`,
+        } satisfies ReactomePathway;
+      } catch { return null; }
+    })
+  );
+  return results.filter((r): r is ReactomePathway => r !== null);
 }
 
 export default async function TopicPage({
@@ -53,7 +80,12 @@ export default async function TopicPage({
   const name = lang === "he" ? topic.nameHe : topic.nameEn;
   const desc = lang === "he" ? topic.descHe : topic.descEn;
 
-  const pathways = await fetchPathways(topic.nameEn);
+  const pinnedIds: string[] | null = topic.reactomePathwayIds
+    ? JSON.parse(topic.reactomePathwayIds)
+    : null;
+  const pathways = pinnedIds === null
+    ? await fetchPathways(topic.nameEn)
+    : await fetchPathwaysByIds(pinnedIds);
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-10">

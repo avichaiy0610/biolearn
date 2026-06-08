@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import ProteinTranslate from "./ProteinTranslate";
 
@@ -55,6 +55,7 @@ export default function ProteinDetailContent({
 }) {
   const isHe = lang === "he";
 
+  const [autoTranslating, setAutoTranslating] = useState(false);
   const [translated, setTranslated] = useState<{
     name?: string;
     organism?: string;
@@ -63,6 +64,27 @@ export default function ProteinDetailContent({
     diseases?: string[];
     keywords?: string[];
   } | null>(null);
+
+  useEffect(() => {
+    if (!isHe) return;
+    setAutoTranslating(true);
+    fetch("/api/translate-protein", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name: protein.name,
+        organism: protein.organism,
+        fn: protein.fn,
+        locations: protein.locations,
+        diseases: protein.diseases,
+        keywords: protein.keywords,
+      }),
+    })
+      .then((r) => (r.ok ? r.json() : null))
+      .then((d) => { if (d) setTranslated(d); })
+      .finally(() => setAutoTranslating(false));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const name = translated?.name ?? protein.name;
   const organism = translated?.organism ?? protein.organism;
@@ -148,7 +170,12 @@ export default function ProteinDetailContent({
           />
         </div>
 
-        {translated && !isHe && (
+        {autoTranslating && (
+          <div className="mt-2 text-xs text-zinc-400 flex items-center gap-1">
+            <span className="animate-spin inline-block">⏳</span> {isHe ? "מתרגם לעברית..." : "Translating…"}
+          </div>
+        )}
+        {translated && !autoTranslating && !isHe && (
           <div className="mt-2 text-xs text-emerald-600 dark:text-emerald-400 flex items-center gap-1">
             <span>✓</span> תוכן מתורגם לעברית
           </div>

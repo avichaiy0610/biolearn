@@ -8,16 +8,17 @@ datasource db {
 }
 
 model Topic {
-  id        String     @id @default(cuid())
-  slug      String     @unique
-  nameHe    String
-  nameEn    String
-  descHe    String
-  descEn    String
-  category  String
-  icon      String
-  subtopics Subtopic[]
-  processes Process[]
+  id                 String     @id @default(cuid())
+  slug               String     @unique
+  nameHe             String
+  nameEn             String
+  descHe             String
+  descEn             String
+  category           String
+  icon               String
+  reactomePathwayIds String?    // JSON: string[] of pinned Reactome stIds; null = auto-search
+  subtopics          Subtopic[]
+  processes          Process[]
 }
 
 model Subtopic {

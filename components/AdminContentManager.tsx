@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import type { Locale } from "@/lib/dictionaries";
 import ContentDiff from "./ContentDiff";
+import ReactomePathwaysPanel from "./ReactomePathwaysPanel";
 
 type ProcessStep = { id: string; order: number; titleHe: string; titleEn: string; descHe: string; descEn: string };
 type Process = { id: string; slug: string; nameHe: string; nameEn: string; descHe: string; descEn: string; steps: ProcessStep[] };
@@ -1556,6 +1557,7 @@ function TopicCard({ topic, allTopics, lang, onTopicDeleted, onTopicUpdated, onS
   const [deleting, setDeleting] = useState(false);
   const [showAISuggest, setShowAISuggest] = useState(false);
   const [showReview, setShowReview] = useState(false);
+  const [showPathways, setShowPathways] = useState(false);
   const [mergeMode, setMergeMode] = useState(false);
   const [selectedForMerge, setSelectedForMerge] = useState<Set<string>>(new Set());
   const [mergeSubtopics, setMergeSubtopics] = useState<Array<{ id: string; nameHe: string; nameEn: string }> | null>(null);
@@ -1650,9 +1652,14 @@ function TopicCard({ topic, allTopics, lang, onTopicDeleted, onTopicUpdated, onS
                 🔍 {isHe ? "ביקורת" : "Review"}
               </button>
               <button
-                onClick={() => { setShowAISuggest((v) => !v); setShowReview(false); }}
+                onClick={() => { setShowAISuggest((v) => !v); setShowReview(false); setShowPathways(false); }}
                 className="px-3 py-1.5 rounded-lg text-xs border border-violet-200 dark:border-violet-700 text-violet-600 dark:text-violet-400 hover:bg-violet-50 dark:hover:bg-violet-950/30 transition-colors">
                 🤖 {isHe ? "הצע תוכן" : "Suggest"}
+              </button>
+              <button
+                onClick={() => { setShowPathways((v) => !v); setShowAISuggest(false); setShowReview(false); }}
+                className="px-3 py-1.5 rounded-lg text-xs border border-violet-200 dark:border-violet-700 text-violet-600 dark:text-violet-400 hover:bg-violet-50 dark:hover:bg-violet-950/30 transition-colors">
+                ⬡ {isHe ? "מסלולים" : "Pathways"}
               </button>
             </>
           )}
@@ -1797,6 +1804,14 @@ function TopicCard({ topic, allTopics, lang, onTopicDeleted, onTopicUpdated, onS
               onAddSubtopic={(s) => onSubtopicAdded(topic.slug, s)}
               onProcessAdded={(p) => onProcessAdded(topic.slug, p)}
               onClose={() => setShowAISuggest(false)}
+            />
+          )}
+
+          {showPathways && (
+            <ReactomePathwaysPanel
+              topicSlug={topic.slug}
+              lang={lang}
+              onClose={() => setShowPathways(false)}
             />
           )}
         </div>
