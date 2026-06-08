@@ -180,20 +180,22 @@ export default function ProteinDetailContent({
             </a>
           )}
 
-          {/* Translate button — always available since UniProt data is in English */}
-          <ProteinTranslate
-            originalData={{
-              name: protein.name,
-              organism: protein.organism,
-              fn: protein.fn,
-              locations: protein.locations,
-              diseases: protein.diseases,
-              keywords: protein.keywords,
-            }}
-            onTranslated={setTranslated}
-            onReset={() => setTranslated(null)}
-            isTranslated={!!translated}
-          />
+          {/* Translate button — hidden while auto-translate is running to prevent duplicate requests */}
+          {!autoTranslating && (
+            <ProteinTranslate
+              originalData={{
+                name: protein.name,
+                organism: protein.organism,
+                fn: protein.fn,
+                locations: protein.locations,
+                diseases: protein.diseases,
+                keywords: protein.keywords,
+              }}
+              onTranslated={setTranslated}
+              onReset={() => setTranslated(null)}
+              isTranslated={!!translated}
+            />
+          )}
         </div>
 
         {autoTranslating && (

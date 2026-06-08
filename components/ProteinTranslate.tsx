@@ -38,11 +38,11 @@ export default function ProteinTranslate({ originalData, onTranslated, onReset, 
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(originalData),
       });
-      if (!res.ok) throw new Error("failed");
-      const data: TranslatedData = await res.json();
-      onTranslated(data);
-    } catch {
-      setError("שגיאה בתרגום. נסה שנית.");
+      const body = await res.json();
+      if (!res.ok) throw new Error(body?.error ?? `HTTP ${res.status}`);
+      onTranslated(body as TranslatedData);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "שגיאה בתרגום");
     }
     setLoading(false);
   }

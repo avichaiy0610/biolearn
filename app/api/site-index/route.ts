@@ -1,6 +1,6 @@
-import { prisma } from "@/lib/prisma";
+export const dynamic = "force-dynamic";
 
-export const revalidate = 3600;
+import { prisma } from "@/lib/prisma";
 
 export async function GET() {
   const topics = await prisma.topic.findMany({
