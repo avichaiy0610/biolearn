@@ -5,11 +5,12 @@ import fs from "fs";
 import os from "os";
 import { spawnSync } from "child_process";
 import sharp from "sharp";
+// @ts-expect-error — no type declarations for ffmpeg-static
+import ffmpegStatic from "ffmpeg-static";
 
 export const maxDuration = 120;
 
-const FFMPEG =
-  "C:/Users/avich/AppData/Local/Microsoft/WinGet/Packages/Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe/ffmpeg-8.1.1-full_build/bin/ffmpeg.exe";
+const FFMPEG: string = ffmpegStatic as string;
 
 const W = 1280;
 const H = 720;
@@ -153,6 +154,7 @@ export async function POST(req: Request) {
     return Response.json({ error: "Invalid request body" }, { status: 400 });
   }
   if (!processSlug) return Response.json({ error: "processSlug required" }, { status: 400 });
+  if (!FFMPEG) return Response.json({ error: "FFmpeg binary not found (ffmpeg-static returned null)" }, { status: 500 });
 
   const proc = await prisma.process.findFirst({
     where: { slug: processSlug },
