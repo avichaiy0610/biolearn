@@ -711,8 +711,16 @@ function ProcessRow({ process, topic, allTopics, lang, onDeleted, onMoved }: {
         body: JSON.stringify({ processSlug: process.slug }),
       });
       const data = await res.json();
-      if (!res.ok) throw new Error(data.error ?? "Failed");
-      setVideoResult(data.videoUrl);
+      if (!res.ok) throw new Error(data.details ?? data.error ?? "Failed");
+      if (data.videoUrl) {
+        setVideoResult(data.videoUrl);
+      } else if (data.videoBase64) {
+        const blob = new Blob(
+          [Uint8Array.from(atob(data.videoBase64), (c) => c.charCodeAt(0))],
+          { type: "video/mp4" }
+        );
+        setVideoResult(URL.createObjectURL(blob));
+      }
     } catch (e) {
       setVideoError(e instanceof Error ? e.message : "Error");
     }
@@ -770,10 +778,15 @@ function ProcessRow({ process, topic, allTopics, lang, onDeleted, onMoved }: {
         </p>
       )}
       {videoResult && (
-        <p className="text-xs text-emerald-600 dark:text-emerald-400">
-          ✓ {isHe ? "סרטון נוצר:" : "Video ready:"}{" "}
-          <a href={videoResult} target="_blank" rel="noopener noreferrer" className="underline">{videoResult}</a>
-        </p>
+        <div className="mt-1 space-y-1">
+          <p className="text-xs text-emerald-600 dark:text-emerald-400">
+            ✓ {isHe ? "סרטון נוצר" : "Video ready"}
+            {!videoResult.startsWith("blob:") && (
+              <> — <a href={videoResult} target="_blank" rel="noopener noreferrer" className="underline">{videoResult}</a></>
+            )}
+          </p>
+          <video controls playsInline className="w-full rounded-lg max-h-48" src={videoResult} />
+        </div>
       )}
       {videoError && (
         <p className="text-xs text-red-500">{isHe ? "שגיאה:" : "Error:"} {videoError}</p>
@@ -1236,8 +1249,8 @@ type TopicReview = {
   improvements?: Array<{ subtopicName: string; improvement: string }>;
 };
 
-function TopicReviewPanel({ topicSlug, lang, onSubtopicAdded, onClose }: {
-  topicSlug: string; lang: Locale;
+function TopicReviewPanel({ topicSlug, subtopics, lang, onSubtopicAdded, onClose }: {
+  topicSlug: string; subtopics: Subtopic[]; lang: Locale;
   onSubtopicAdded: (s: Subtopic) => void;
   onClose: () => void;
 }) {
@@ -1246,6 +1259,34 @@ function TopicReviewPanel({ topicSlug, lang, onSubtopicAdded, onClose }: {
   const [review, setReview] = useState<TopicReview | null>(null);
   const [error, setError] = useState("");
   const [addingSlug, setAddingSlug] = useState<string | null>(null);
+  const [reviewingSubtopicId, setReviewingSubtopicId] = useState<string | null>(null);
+  const [savingSubtopicId, setSavingSubtopicId] = useState<string | null>(null);
+  const [savedSubtopicIds, setSavedSubtopicIds] = useState<Set<string>>(new Set());
+
+  function findSubtopic(nameEn: string) {
+    return subtopics.find(
+      (s) => s.nameEn.toLowerCase().trim() === nameEn.toLowerCase().trim() ||
+             s.nameEn.toLowerCase().includes(nameEn.toLowerCase()) ||
+             nameEn.toLowerCase().includes(s.nameEn.toLowerCase())
+    ) ?? null;
+  }
+
+  async function handleApplyImproved(subtopicId: string, he: string, en: string) {
+    setSavingSubtopicId(subtopicId);
+    try {
+      const res = await fetch("/api/admin/update-subtopic", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ subtopicId, contentHe: he, contentEn: en }),
+      });
+      if (res.ok) {
+        setSavedSubtopicIds((prev) => new Set([...prev, subtopicId]));
+        setReviewingSubtopicId(null);
+      }
+    } finally {
+      setSavingSubtopicId(null);
+    }
+  }
 
   useEffect(() => {
     fetch("/api/admin/review-topic", {
@@ -1379,16 +1420,52 @@ function TopicReviewPanel({ topicSlug, lang, onSubtopicAdded, onClose }: {
               <p className="text-xs font-semibold text-amber-600 dark:text-amber-400 mb-2">
                 ⚠️ {isHe ? "חששות ואי-דיוקים:" : "Concerns & inaccuracies:"}
               </p>
-              <div className="space-y-1.5">
-                {review.concerns.map((c, i) => (
-                  <div key={i} className="p-2.5 rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-100 dark:border-amber-900">
-                    <p className="text-xs font-medium text-zinc-800 dark:text-zinc-200 mb-0.5">{c.subtopicName}</p>
-                    <p className="text-xs text-zinc-500 dark:text-zinc-400">{c.concern}</p>
-                    {c.suggestion && (
-                      <p className="text-xs text-amber-600 dark:text-amber-400 mt-1">→ {c.suggestion}</p>
-                    )}
-                  </div>
-                ))}
+              <div className="space-y-2">
+                {review.concerns.map((c, i) => {
+                  const sub = findSubtopic(c.subtopicName);
+                  const isSaved = sub ? savedSubtopicIds.has(sub.id) : false;
+                  return (
+                    <div key={i} className="rounded-lg bg-amber-50 dark:bg-amber-950/20 border border-amber-100 dark:border-amber-900 overflow-hidden">
+                      <div className="p-2.5">
+                        <div className="flex items-start justify-between gap-2">
+                          <div className="flex-1 min-w-0">
+                            <p className="text-xs font-medium text-zinc-800 dark:text-zinc-200 mb-0.5">{c.subtopicName}</p>
+                            <p className="text-xs text-zinc-500 dark:text-zinc-400">{c.concern}</p>
+                            {c.suggestion && (
+                              <p className="text-xs text-amber-600 dark:text-amber-400 mt-1">→ {c.suggestion}</p>
+                            )}
+                          </div>
+                          {sub && (
+                            isSaved ? (
+                              <span className="shrink-0 text-xs text-emerald-600 dark:text-emerald-400">✓ {isHe ? "נשמר" : "Saved"}</span>
+                            ) : (
+                              <button
+                                onClick={() => setReviewingSubtopicId(reviewingSubtopicId === sub.id ? null : sub.id)}
+                                className="shrink-0 text-xs text-amber-600 dark:text-amber-400 hover:underline"
+                              >
+                                {reviewingSubtopicId === sub.id ? (isHe ? "סגור" : "Close") : "🔍 AI"}
+                              </button>
+                            )
+                          )}
+                        </div>
+                      </div>
+                      {sub && reviewingSubtopicId === sub.id && (
+                        <div className="border-t border-amber-100 dark:border-amber-900 p-2.5">
+                          {savingSubtopicId === sub.id
+                            ? <p className="text-xs text-zinc-400 animate-pulse">{isHe ? "שומר..." : "Saving..."}</p>
+                            : <SubtopicReviewInline
+                                subtopicId={sub.id}
+                                currentContentHe={sub.contentHe}
+                                currentContentEn={sub.contentEn}
+                                lang={lang}
+                                onApplyContent={(he, en) => handleApplyImproved(sub.id, he, en)}
+                              />
+                          }
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
               </div>
             </div>
           )}
@@ -1398,13 +1475,49 @@ function TopicReviewPanel({ topicSlug, lang, onSubtopicAdded, onClose }: {
               <p className="text-xs font-semibold text-blue-600 dark:text-blue-400 mb-2">
                 💡 {isHe ? "הצעות לשיפור:" : "Suggested improvements:"}
               </p>
-              <div className="space-y-1.5">
-                {review.improvements.map((imp, i) => (
-                  <div key={i} className="p-2.5 rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-100 dark:border-blue-900">
-                    <p className="text-xs font-medium text-zinc-800 dark:text-zinc-200 mb-0.5">{imp.subtopicName}</p>
-                    <p className="text-xs text-zinc-500 dark:text-zinc-400">{imp.improvement}</p>
-                  </div>
-                ))}
+              <div className="space-y-2">
+                {review.improvements.map((imp, i) => {
+                  const sub = findSubtopic(imp.subtopicName);
+                  const isSaved = sub ? savedSubtopicIds.has(sub.id) : false;
+                  return (
+                    <div key={i} className="rounded-lg bg-blue-50 dark:bg-blue-950/20 border border-blue-100 dark:border-blue-900 overflow-hidden">
+                      <div className="p-2.5">
+                        <div className="flex items-start justify-between gap-2">
+                          <div className="flex-1 min-w-0">
+                            <p className="text-xs font-medium text-zinc-800 dark:text-zinc-200 mb-0.5">{imp.subtopicName}</p>
+                            <p className="text-xs text-zinc-500 dark:text-zinc-400">{imp.improvement}</p>
+                          </div>
+                          {sub && (
+                            isSaved ? (
+                              <span className="shrink-0 text-xs text-emerald-600 dark:text-emerald-400">✓ {isHe ? "נשמר" : "Saved"}</span>
+                            ) : (
+                              <button
+                                onClick={() => setReviewingSubtopicId(reviewingSubtopicId === sub.id ? null : sub.id)}
+                                className="shrink-0 text-xs text-blue-600 dark:text-blue-400 hover:underline"
+                              >
+                                {reviewingSubtopicId === sub.id ? (isHe ? "סגור" : "Close") : "🔍 AI"}
+                              </button>
+                            )
+                          )}
+                        </div>
+                      </div>
+                      {sub && reviewingSubtopicId === sub.id && (
+                        <div className="border-t border-blue-100 dark:border-blue-900 p-2.5">
+                          {savingSubtopicId === sub.id
+                            ? <p className="text-xs text-zinc-400 animate-pulse">{isHe ? "שומר..." : "Saving..."}</p>
+                            : <SubtopicReviewInline
+                                subtopicId={sub.id}
+                                currentContentHe={sub.contentHe}
+                                currentContentEn={sub.contentEn}
+                                lang={lang}
+                                onApplyContent={(he, en) => handleApplyImproved(sub.id, he, en)}
+                              />
+                          }
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
               </div>
             </div>
           )}
@@ -1670,6 +1783,7 @@ function TopicCard({ topic, allTopics, lang, onTopicDeleted, onTopicUpdated, onS
           {showReview && (
             <TopicReviewPanel
               topicSlug={topic.slug}
+              subtopics={topic.subtopics}
               lang={lang}
               onSubtopicAdded={(s) => onSubtopicAdded(topic.slug, s)}
               onClose={() => setShowReview(false)}

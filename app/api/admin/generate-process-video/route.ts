@@ -2,6 +2,7 @@ import { prisma } from "@/lib/prisma";
 import { isAdmin } from "@/lib/supabase/server";
 import path from "path";
 import fs from "fs";
+import os from "os";
 import { spawnSync } from "child_process";
 import sharp from "sharp";
 
@@ -161,7 +162,7 @@ export async function POST(req: Request) {
 
   if (!proc.steps.length) return Response.json({ error: "No steps found for this process" }, { status: 400 });
 
-  const tmpDir = path.join(process.cwd(), ".tmp-video", processSlug);
+  const tmpDir = path.join(os.tmpdir(), ".tmp-video", processSlug);
   try {
     fs.mkdirSync(tmpDir, { recursive: true });
   } catch (e) {
@@ -192,8 +193,18 @@ export async function POST(req: Request) {
     }
 
     // ── 2. Build FFmpeg filter_complex for xfade transitions ─────────────
-    const outDir = path.join(process.cwd(), "public", "videos");
-    fs.mkdirSync(outDir, { recursive: true });
+    // Try to write to public/videos/ (works in local dev). On Vercel it's
+    // read-only, so fall back to os.tmpdir() and return the file inline.
+    let outDir = path.join(process.cwd(), "public", "videos");
+    let useLocalPublic = true;
+    try {
+      fs.mkdirSync(outDir, { recursive: true });
+      fs.accessSync(outDir, fs.constants.W_OK);
+    } catch {
+      outDir = path.join(os.tmpdir(), "biolearn-videos");
+      fs.mkdirSync(outDir, { recursive: true });
+      useLocalPublic = false;
+    }
     const outPath = path.join(outDir, `${processSlug}.mp4`);
 
     const n = pngPaths.length;
@@ -244,8 +255,17 @@ export async function POST(req: Request) {
       return Response.json({ error: "FFmpeg failed", details }, { status: 500 });
     }
 
-    const videoUrl = `/videos/${processSlug}.mp4`;
-    return Response.json({ videoUrl, steps: n });
+    if (useLocalPublic) {
+      return Response.json({ videoUrl: `/videos/${processSlug}.mp4`, steps: n });
+    }
+    // Vercel: return file as base64 so the client can create a blob URL
+    const videoBuffer = fs.readFileSync(outPath);
+    fs.rmSync(outPath, { force: true });
+    return Response.json({
+      videoBase64: videoBuffer.toString("base64"),
+      steps: n,
+      note: "Vercel mode — video served inline",
+    });
 
   } catch (err) {
     try { fs.rmSync(tmpDir, { recursive: true, force: true }); } catch { /* ignore */ }
