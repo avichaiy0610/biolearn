@@ -82,6 +82,8 @@ export default async function ProcessPage({
         lang={lang as Locale}
         dict={dict}
         processName={processName}
+        topicSlug={slug}
+        processSlug={processSlug}
       />
     </div>
   );

@@ -8,16 +8,52 @@ function slugify(s: string) {
 
 export const maxDuration = 60;
 
+const MEIOSIS_KEYWORDS = /\bmeiosis\b|\bmeios[ei]s\b|מיוזה/i;
+
+function isMeiosisProcess(nameEn: string, nameHe: string): boolean {
+  return MEIOSIS_KEYWORDS.test(nameEn) || MEIOSIS_KEYWORDS.test(nameHe);
+}
+
 async function generateAnimationSteps(
   nameEn: string,
   nameHe: string,
   contentEn: string
 ): Promise<object[]> {
+  const stepCount = isMeiosisProcess(nameEn, nameHe) ? "12-14" : "7-9";
+
+  const meiosisExtra = isMeiosisProcess(nameEn, nameHe) ? `
+═══════════════════════════════════════════
+MEIOSIS — MANDATORY 12-STEP SEQUENCE:
+═══════════════════════════════════════════
+You MUST generate ALL 12 stages below in order. Each must be visually distinct:
+ 1. Interphase       — cell with chromatin (diffuse), large nucleus
+ 2. Prophase I (Leptotene/Zygotene) — chromosomes condense as individual threads; homologs start to recognise
+ 3. Prophase I (Pachytene/Synapsis) — homologous pairs fully synapsed side-by-side → BIVALENTS (4 chromatids each pair, drawn as 4 closely packed thin ellipses)
+ 4. Prophase I (Diplotene/Diakinesis) — crossing-over: X-shaped chiasmata visible; show an overlapping X between one pair
+ 5. Metaphase I      — bivalents align at metaphase plate; spindle fibres from both poles
+ 6. Anaphase I       — homologous PAIRS (not chromatids) move to opposite poles; cell elongates
+ 7. Telophase I / Cytokinesis I — two haploid cells form; each has n chromosomes, each still consisting of 2 sister chromatids
+ 8. Prophase II      — show BOTH daughter cells; chromosomes recondense in each
+ 9. Metaphase II     — in both cells chromosomes (each = 2 chromatids) align at metaphase plate
+10. Anaphase II      — sister chromatids separate and move to opposite poles in BOTH cells
+11. Telophase II / Cytokinesis II — four haploid cells begin to form
+12. Final result     — four distinct haploid daughter cells (gametes), each drawn as a small cell with single-chromatid chromosomes; label as "Haploid (n)"
+
+KEY BIOLOGICAL RULES FOR MEIOSIS:
+- Use TWO homolog colours: green (#16a34a / #4ade80) = homolog A, red (#dc2626 / #f87171) = homolog B
+- In steps 3-7 (Meiosis I): homologs stay PAIRED. Move paired homologs together.
+- In steps 8-12 (Meiosis II): sister chromatids separate. Each cell has n chromosomes.
+- Chromosomes: use _b suffix for body (rx=4-5, ry=18-22), _c suffix for centromere (rx=8, ry=4)
+- Step 4 crossing-over: show a line(x1,y1,x2,y2) in color="#f59e0b" crossing between the paired chromatids
+- Steps 7 onward: draw TWO side-by-side cells (cell_l and cell_r) with their chromosomes
+- Step 12: draw FOUR small cells (two rows of two) each labelled "n"
+` : "";
+
   const prompt = `You are creating a VISUALLY RICH, BIOLOGICALLY ACCURATE animation for a biology education platform. The animation must look like a professional textbook diagram that MOVES — with proper cellular structures, realistic shapes, and dramatic motion.
 
 Process to animate: "${nameEn}" (${nameHe})
 Biology content: ${contentEn.slice(0, 800)}
-
+${meiosisExtra}
 ═══════════════════════════════════════════
 VISUAL DESIGN RULES — MANDATORY:
 ═══════════════════════════════════════════
@@ -34,7 +70,7 @@ VISUAL DESIGN RULES — MANDATORY:
      chr_g2_c(ellipse,cx=198,cy=135,rx=9,ry=5,color="#9f1239",op=0.9)
 4. PROTEINS/ENZYMES = medium circles (r=18-25) with vivid colors (#7c3aed, #f59e0b, #3b82f6)
 5. Elements MUST travel 50-150 pixels between steps — show dramatic spatial change
-6. Use 7-9 steps. Each step must be clearly different from the previous.
+6. Use ${stepCount} steps. Each step must be clearly different from the previous.
 7. Include text labels for every key structure
 
 CANVAS: viewBox 0 0 400 300
@@ -145,7 +181,7 @@ Return ONLY valid JSON:
       ],
       model: QUALITY_MODEL,
       response_format: { type: "json_object" },
-      max_tokens: 8000,
+      max_tokens: isMeiosisProcess(nameEn, nameHe) ? 14000 : 8000,
     });
     const responseText = completion.choices[0]?.message?.content ?? "{}";
     const parsed = JSON.parse(responseText);

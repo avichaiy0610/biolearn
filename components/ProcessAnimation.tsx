@@ -6,6 +6,7 @@ import type { Locale } from "@/lib/dictionaries";
 import AIExplainPanel from "./AIExplainPanel";
 import AnimationControls from "./AnimationControls";
 import ProcessInlineVideo from "./ProcessInlineVideo";
+import FeedbackButton from "./FeedbackButton";
 
 type Step = {
   id: string;
@@ -354,12 +355,14 @@ function StepDots({ total, current, onGo }: { total: number; current: number; on
 
 /* ─── Main component ─────────────────────────────────────────────────────── */
 export default function ProcessAnimation({
-  steps, lang, dict, processName,
+  steps, lang, dict, processName, topicSlug, processSlug,
 }: {
   steps: Step[];
   lang: Locale;
   dict: { process: { step: string; of: string; explain: string; explaining: string; previous: string; next: string; playAnimation: string; pauseAnimation: string } };
   processName: string;
+  topicSlug?: string;
+  processSlug?: string;
 }) {
   const [currentStep, setCurrentStep] = useState(0);
   const [videoMode, setVideoMode] = useState(false);
@@ -411,6 +414,16 @@ export default function ProcessAnimation({
           <span className="w-2.5 h-2.5 rounded-full bg-yellow-400 opacity-70" />
           <span className="w-2.5 h-2.5 rounded-full bg-green-400 opacity-70" />
           <span className="ms-3 text-xs font-mono text-zinc-400 select-none">{processName}</span>
+          <span className="ms-auto">
+            {topicSlug && (
+              <FeedbackButton
+                topicSlug={topicSlug}
+                processSlug={processSlug}
+                targetType="animation"
+                lang={lang}
+              />
+            )}
+          </span>
         </div>
 
         <div className="p-4">

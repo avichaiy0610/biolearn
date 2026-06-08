@@ -7,6 +7,7 @@ import SubtopicQuiz from "./SubtopicQuiz";
 import StudentQuizCreator from "./StudentQuizCreator";
 import StudentFlashcards from "./StudentFlashcards";
 import SubtopicDiagram from "./SubtopicDiagram";
+import FeedbackButton from "./FeedbackButton";
 import type { Locale } from "@/lib/dictionaries";
 import Link from "next/link";
 
@@ -106,6 +107,13 @@ export default function TopicPageClient({
                         {dict.subtopic.viewAnimation}
                       </Link>
                     )}
+
+                    <FeedbackButton
+                      topicSlug={topicSlug}
+                      subtopicId={sub.id}
+                      targetType="description"
+                      lang={lang}
+                    />
 
                     <SubtopicResearch
                       lang={lang as Locale}

@@ -144,6 +144,17 @@ model Question {
   createdAt    DateTime @default(now())
 }
 
+model ContentFeedback {
+  id          String   @id @default(cuid())
+  topicSlug   String
+  processSlug String?  // set when feedback is on an animation
+  subtopicId  String?  // set when feedback is on a subtopic description
+  targetType  String   // "animation" | "description" | "diagram"
+  comment     String
+  status      String   @default("open") // "open" | "resolved"
+  createdAt   DateTime @default(now())
+}
+
 model Article {
   id           String   @id @default(cuid())
   pubmedId     String?  @unique // null for uploaded PDFs

@@ -59,6 +59,14 @@ export default async function AdminPage({ params }: PageProps<"/[lang]/admin">) 
       descHe: "משתמשים, תוכן, מאמרים, נושאים פופולריים",
       descEn: "Users, content, articles, most popular topics",
     },
+    {
+      href: `/${lang}/admin/feedback`,
+      icon: "💬",
+      titleHe: "הערות תוכן",
+      titleEn: "Content Feedback",
+      descHe: "צפה בהערות שהשארת על אנימציות ותיאורים, סמן כטופל",
+      descEn: "View notes left on animations and descriptions, mark as resolved",
+    },
   ];
 
   return (
