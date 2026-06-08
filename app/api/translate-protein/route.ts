@@ -3,13 +3,16 @@ import { groq, QUALITY_MODEL } from "@/lib/groq";
 export async function POST(request: Request) {
   const { fn, locations, diseases, keywords, name, organism } = await request.json();
 
+  // Truncate long function description to prevent token overflow
+  const fnTruncated = fn ? String(fn).slice(0, 1000) : "";
+
   const prompt = `Translate the following biological protein data to Hebrew. Return ONLY valid JSON with the same structure.
 
 Input:
 {
   "name": ${JSON.stringify(name ?? "")},
   "organism": ${JSON.stringify(organism ?? "")},
-  "fn": ${JSON.stringify(fn ?? "")},
+  "fn": ${JSON.stringify(fnTruncated)},
   "locations": ${JSON.stringify(locations ?? [])},
   "diseases": ${JSON.stringify(diseases ?? [])},
   "keywords": ${JSON.stringify(keywords ?? [])}
@@ -29,11 +32,24 @@ Rules:
       ],
       model: QUALITY_MODEL,
       response_format: { type: "json_object" },
-      max_tokens: 2000,
+      max_tokens: 4000,
     });
 
     const text = completion.choices[0]?.message?.content ?? "{}";
-    const translated = JSON.parse(text);
+    let translated: Record<string, unknown>;
+    try {
+      translated = JSON.parse(text);
+    } catch {
+      // If JSON is truncated, try to extract partial fields with regex
+      console.error("[translate-protein] JSON parse failed, text:", text.slice(0, 200));
+      return Response.json({ error: "Translation failed" }, { status: 500 });
+    }
+
+    // Validate that we got at least some translated content
+    if (!translated || typeof translated !== "object" || Object.keys(translated).length === 0) {
+      return Response.json({ error: "Empty translation response" }, { status: 500 });
+    }
+
     return Response.json(translated);
   } catch (err) {
     console.error("[translate-protein] failed:", err);
