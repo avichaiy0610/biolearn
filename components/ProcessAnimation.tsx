@@ -148,8 +148,9 @@ function AnimatedSvgElement({
         const cx = el.cx!, cy = el.cy!;
         const rx = el.rx ?? 6, ry = el.ry ?? 20;
         // Two sister chromatids side by side (like ChromosomeDiagram)
-        const offset = rx * 0.5;   // each chromatid center offset from chromosome center
-        const cw    = rx * 0.45;   // each chromatid half-width
+        // Cap width at 15% of ry so chromatids stay elongated even for wide ellipses
+        const cw     = Math.min(rx * 0.45, ry * 0.15);
+        const offset = cw;  // chromatids just touch at center (matches ChromosomeDiagram)
         const dL = makeChromosomePath(cx - offset, cy, cw, ry);
         const dR = makeChromosomePath(cx + offset, cy, cw, ry);
         // Telomere caps at the 4 arm tips
@@ -444,9 +445,10 @@ export default function ProcessAnimation({
                   const baseOpacity = el.opacity ?? 1;
                   const isHighlighted = !highlight || highlight.includes(id);
                   const effectiveOpacity = isHighlighted ? baseOpacity : baseOpacity * 0.25;
-                  // Centromere spans both sister chromatids (offset±cw at constriction ≈ 75% of el.rx)
-                  const centRx = Math.round((el.rx ?? 5) * 0.75);
-                  const centRy = Math.max(4, Math.round((el.ry ?? 20) * 0.2));
+                  // Centromere width matches the rendered chromatids (same cw formula as above)
+                  const _cw = Math.min((el.rx ?? 5) * 0.45, (el.ry ?? 20) * 0.15);
+                  const centRx = Math.round(_cw * 1.6);  // spans both chromatids at constriction
+                  const centRy = Math.max(3, Math.round((el.ry ?? 20) * 0.15));
                   const t = { duration: 0.9, ease: [0.4, 0, 0.2, 1] as [number, number, number, number] };
                   return (
                     <motion.ellipse
