@@ -4,6 +4,25 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import ProteinTranslate from "./ProteinTranslate";
 
+type SiteItem = { type: string; slug: string; topicSlug?: string; nameEn: string; nameHe: string };
+
+function matchSiteLink(term: string, index: SiteItem[], lang: string): string | null {
+  if (!term || term.length < 3) return null;
+  const t = term.toLowerCase().trim();
+  let best: SiteItem | null = null;
+  for (const item of index) {
+    const en = item.nameEn.toLowerCase();
+    const he = item.nameHe.toLowerCase();
+    if (en === t || he === t) { best = item; break; }
+    if (!best && (en.includes(t) || t.includes(en) || he.includes(t) || t.includes(he))) {
+      if (t.length >= 4 && (en.length >= 4 || he.length >= 4)) best = item;
+    }
+  }
+  if (!best) return null;
+  if (best.type === "topic") return `/${lang}/topics/${best.slug}`;
+  return `/${lang}/topics/${best.topicSlug}`;
+}
+
 type Protein = {
   accession: string;
   id?: string;
@@ -55,6 +74,7 @@ export default function ProteinDetailContent({
 }) {
   const isHe = lang === "he";
 
+  const [siteIndex, setSiteIndex] = useState<SiteItem[]>([]);
   const [autoTranslating, setAutoTranslating] = useState(false);
   const [translated, setTranslated] = useState<{
     name?: string;
@@ -64,6 +84,12 @@ export default function ProteinDetailContent({
     diseases?: string[];
     keywords?: string[];
   } | null>(null);
+
+  useEffect(() => {
+    fetch("/api/site-index")
+      .then((r) => r.json())
+      .then((d) => setSiteIndex([...(d.topics ?? []), ...(d.subtopics ?? [])]));
+  }, []);
 
   useEffect(() => {
     if (!isHe) return;
@@ -241,11 +267,17 @@ export default function ProteinDetailContent({
               {isHe ? "📍 מיקום תת-תאי" : "📍 Subcellular Location"}
             </h2>
             <div className="flex flex-wrap gap-2">
-              {locations.map((loc, i) => (
-                <span key={i} className="text-sm px-3 py-1.5 rounded-lg bg-violet-50 dark:bg-violet-900/30 text-violet-700 dark:text-violet-300 border border-violet-200 dark:border-violet-800">
-                  {loc}
-                </span>
-              ))}
+              {locations.map((loc, i) => {
+                const href = matchSiteLink(loc, siteIndex, lang);
+                const cls = "text-sm px-3 py-1.5 rounded-lg bg-violet-50 dark:bg-violet-900/30 text-violet-700 dark:text-violet-300 border border-violet-200 dark:border-violet-800 transition-colors";
+                return href ? (
+                  <Link key={i} href={href} className={`${cls} hover:bg-violet-100 dark:hover:bg-violet-900/50 hover:border-violet-400 inline-flex items-center gap-1`}>
+                    {loc} <span className="text-xs opacity-60">↗</span>
+                  </Link>
+                ) : (
+                  <span key={i} className={cls}>{loc}</span>
+                );
+              })}
             </div>
           </section>
         )}
@@ -285,11 +317,17 @@ export default function ProteinDetailContent({
               {isHe ? "🏷️ מילות מפתח" : "🏷️ Keywords"}
             </h2>
             <div className="flex flex-wrap gap-2">
-              {keywords.map((kw, i) => (
-                <span key={i} className="text-xs px-2.5 py-1 rounded-lg bg-zinc-100 dark:bg-zinc-700 text-zinc-600 dark:text-zinc-400">
-                  {kw}
-                </span>
-              ))}
+              {keywords.map((kw, i) => {
+                const href = matchSiteLink(kw, siteIndex, lang);
+                const cls = "text-xs px-2.5 py-1 rounded-lg bg-zinc-100 dark:bg-zinc-700 text-zinc-600 dark:text-zinc-400 transition-colors";
+                return href ? (
+                  <Link key={i} href={href} className={`${cls} hover:bg-emerald-100 dark:hover:bg-emerald-900/30 hover:text-emerald-700 dark:hover:text-emerald-400 inline-flex items-center gap-1`}>
+                    {kw} <span className="text-xs opacity-60">↗</span>
+                  </Link>
+                ) : (
+                  <span key={i} className={cls}>{kw}</span>
+                );
+              })}
             </div>
           </section>
         )}
@@ -301,11 +339,17 @@ export default function ProteinDetailContent({
               {isHe ? "🏥 מחלות קשורות" : "🏥 Associated Diseases"}
             </h2>
             <div className="flex flex-wrap gap-2">
-              {diseases.map((d, i) => (
-                <span key={i} className="text-xs px-2.5 py-1 rounded-lg bg-red-100 dark:bg-red-900/40 text-red-700 dark:text-red-300">
-                  {d}
-                </span>
-              ))}
+              {diseases.map((d, i) => {
+                const href = matchSiteLink(d, siteIndex, lang);
+                const cls = "text-xs px-2.5 py-1 rounded-lg bg-red-100 dark:bg-red-900/40 text-red-700 dark:text-red-300 transition-colors";
+                return href ? (
+                  <Link key={i} href={href} className={`${cls} hover:bg-red-200 dark:hover:bg-red-900/60 inline-flex items-center gap-1`}>
+                    {d} <span className="text-xs opacity-60">↗</span>
+                  </Link>
+                ) : (
+                  <span key={i} className={cls}>{d}</span>
+                );
+              })}
             </div>
           </section>
         )}

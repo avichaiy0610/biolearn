@@ -121,7 +121,7 @@ Return ONLY valid JSON:
       ],
       model: QUALITY_MODEL,
       response_format: { type: "json_object" },
-      max_tokens: 5000,
+      max_tokens: 8000,
     });
     const responseText = completion.choices[0]?.message?.content ?? "{}";
     const parsed = JSON.parse(responseText);
