@@ -1,6 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { isAdmin } from "@/lib/supabase/server";
-import { groq, REVIEW_MODEL } from "@/lib/groq";
+import { groq, QUALITY_MODEL } from "@/lib/groq";
 
 export const maxDuration = 60;
 
@@ -36,12 +36,24 @@ Review this topic carefully and provide structured JSON feedback on:
 
 Score the topic overall from 1-10 for university-level completeness.
 
+CRITICAL RULES for the missing subtopics:
+- contentEn: Write 3-5 sentences explaining the concept directly as educational content. Do NOT write "students need to understand..." or "this subtopic covers...". Write as if you are a textbook explaining the concept itself.
+- contentHe: Same as contentEn but in Hebrew.
+- Both contentEn and contentHe are MANDATORY — never leave them empty.
+
 Return ONLY valid JSON:
 {
   "overall": "2-3 sentence overall assessment",
   "score": 7,
   "missing": [
-    {"nameEn": "Topic Name", "nameHe": "שם בעברית", "reason": "Why this is essential for university students", "priority": "high", "contentEn": "3-5 sentence introduction to this subtopic at university level", "contentHe": "מבוא של 3-5 משפטים לתת-נושא זה ברמה אוניברסיטאית"}
+    {
+      "nameEn": "Topic Name",
+      "nameHe": "שם בעברית",
+      "reason": "Why this is essential for university students",
+      "priority": "high",
+      "contentEn": "Direct educational explanation of the concept in 3-5 sentences. Explain mechanisms, significance, and key facts as if writing a textbook. Never start with 'Students need to...'",
+      "contentHe": "הסבר חינוכי ישיר של המושג ב-3-5 משפטים. הסבר מנגנונים, חשיבות ועובדות מרכזיות כאילו כותבים ספר לימוד. לעולם אל תתחיל ב'תלמידים צריכים...'"
+    }
   ],
   "concerns": [
     {"subtopicName": "Existing subtopic nameEn", "concern": "Specific issue with this content", "suggestion": "How to fix or improve it"}
@@ -62,9 +74,9 @@ Priority levels: "high" (essential, core concept), "medium" (important but optio
         },
         { role: "user", content: prompt },
       ],
-      model: REVIEW_MODEL,
+      model: QUALITY_MODEL,
       response_format: { type: "json_object" },
-      max_tokens: 2000,
+      max_tokens: 4000,
     });
     const parsed = JSON.parse(completion.choices[0]?.message?.content ?? "{}");
     return Response.json(parsed);

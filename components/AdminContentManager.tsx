@@ -290,6 +290,7 @@ function SubtopicRow({ subtopic, topic, allTopics, lang, onDeleted, onMoved, onA
   const [editContentEn, setEditContentEn] = useState(subtopic.contentEn);
   const [saving, setSaving] = useState(false);
   const [enriching, setEnriching] = useState(false);
+  const [enrichError, setEnrichError] = useState("");
   const [enrichResult, setEnrichResult] = useState<{
     contentHe: string; contentEn: string;
     highlights: string[];
@@ -299,20 +300,26 @@ function SubtopicRow({ subtopic, topic, allTopics, lang, onDeleted, onMoved, onA
   async function handleEnrich() {
     setEnriching(true);
     setEnrichResult(null);
-    const res = await fetch("/api/admin/enrich-subtopic", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        subtopicId: subtopic.id,
-        subtopicNameEn: subtopic.nameEn,
-        subtopicNameHe: subtopic.nameHe,
-        topicNameEn: topic.nameEn,
-        contentEn: subtopic.contentEn,
-        contentHe: subtopic.contentHe,
-      }),
-    });
-    if (res.ok) setEnrichResult(await res.json());
-    else alert(isHe ? "שגיאה בהעשרה" : "Enrichment failed");
+    setEnrichError("");
+    try {
+      const res = await fetch("/api/admin/enrich-subtopic", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          subtopicId: subtopic.id,
+          subtopicNameEn: subtopic.nameEn,
+          subtopicNameHe: subtopic.nameHe,
+          topicNameEn: topic.nameEn,
+          contentEn: subtopic.contentEn,
+          contentHe: subtopic.contentHe,
+        }),
+      });
+      const data = await res.json();
+      if (res.ok) setEnrichResult(data);
+      else setEnrichError(data?.error ?? (isHe ? "שגיאה בהעשרה" : "Enrichment failed"));
+    } catch (e) {
+      setEnrichError(e instanceof Error ? e.message : (isHe ? "שגיאה בהעשרה" : "Enrichment failed"));
+    }
     setEnriching(false);
   }
 
@@ -461,6 +468,14 @@ function SubtopicRow({ subtopic, topic, allTopics, lang, onDeleted, onMoved, onA
               {isHe ? "ביטול" : "Cancel"}
             </button>
           </div>
+        </div>
+      )}
+
+      {enrichError && (
+        <div className="mt-1 p-2 rounded-lg border border-red-200 dark:border-red-800 bg-red-50 dark:bg-red-950/20 flex items-start gap-2">
+          <span className="text-red-500 text-xs shrink-0">⚠️</span>
+          <p className="text-xs text-red-600 dark:text-red-400 break-all">{enrichError}</p>
+          <button onClick={() => setEnrichError("")} className="text-xs text-zinc-400 hover:text-zinc-600 shrink-0 ml-auto">✕</button>
         </div>
       )}
 
@@ -647,23 +662,23 @@ function SubtopicReviewInline({ subtopicId, currentContentHe, currentContentEn, 
           )}
 
           {(review.improvedContentHe || review.improvedContentEn) && (
-            <>
-              <ContentDiff
-                oldText={isHe ? currentContentHe : currentContentEn}
-                newText={isHe ? (review.improvedContentHe ?? currentContentHe) : (review.improvedContentEn ?? currentContentEn)}
-                label={isHe ? "שינויים מוצעים" : "Proposed changes"}
-              />
-              <button
-                onClick={() => onApplyContent(
-                  review.improvedContentHe ?? currentContentHe,
-                  review.improvedContentEn ?? currentContentEn
-                )}
-                className="w-full py-1.5 rounded text-xs bg-amber-600 hover:bg-amber-700 text-white font-medium transition-colors"
-              >
-                {isHe ? "✏️ החל תוכן משופר ועבור לעריכה" : "✏️ Apply improved content & edit"}
-              </button>
-            </>
+            <ContentDiff
+              oldText={isHe ? currentContentHe : currentContentEn}
+              newText={isHe ? (review.improvedContentHe ?? currentContentHe) : (review.improvedContentEn ?? currentContentEn)}
+              label={isHe ? "שינויים מוצעים" : "Proposed changes"}
+            />
           )}
+          <button
+            onClick={() => onApplyContent(
+              review.improvedContentHe || currentContentHe,
+              review.improvedContentEn || currentContentEn
+            )}
+            className="w-full py-1.5 rounded text-xs bg-amber-600 hover:bg-amber-700 text-white font-medium transition-colors"
+          >
+            {(review.improvedContentHe || review.improvedContentEn)
+              ? (isHe ? "✏️ החל תוכן משופר ועבור לעריכה" : "✏️ Apply improved content & edit")
+              : (isHe ? "✏️ ערוך תוכן" : "✏️ Edit content")}
+          </button>
         </div>
       )}
     </div>
@@ -1260,8 +1275,8 @@ function TopicReviewPanel({ topicSlug, lang, onSubtopicAdded, onClose }: {
           topicSlug,
           nameHe: m.nameHe,
           nameEn: m.nameEn,
-          contentHe: m.contentHe ?? m.reason,
-          contentEn: m.contentEn ?? m.reason,
+          contentHe: m.contentHe || "",
+          contentEn: m.contentEn || "",
         }),
       });
       const data = await res.json();

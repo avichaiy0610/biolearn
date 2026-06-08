@@ -144,7 +144,13 @@ function buildSvg(
 export async function POST(req: Request) {
   if (!(await isAdmin())) return Response.json({ error: "Unauthorized" }, { status: 403 });
 
-  const { processSlug } = await req.json();
+  let processSlug = "";
+  try {
+    const body = await req.json();
+    processSlug = body.processSlug ?? "";
+  } catch {
+    return Response.json({ error: "Invalid request body" }, { status: 400 });
+  }
   if (!processSlug) return Response.json({ error: "processSlug required" }, { status: 400 });
 
   const proc = await prisma.process.findFirst({
@@ -153,89 +159,98 @@ export async function POST(req: Request) {
   });
   if (!proc) return Response.json({ error: "Process not found" }, { status: 404 });
 
+  if (!proc.steps.length) return Response.json({ error: "No steps found for this process" }, { status: 400 });
+
   const tmpDir = path.join(process.cwd(), ".tmp-video", processSlug);
-  fs.mkdirSync(tmpDir, { recursive: true });
+  try {
+    fs.mkdirSync(tmpDir, { recursive: true });
+  } catch (e) {
+    return Response.json({ error: `Cannot create temp dir: ${e}` }, { status: 500 });
+  }
 
   const pngPaths: string[] = [];
 
-  // ── 1. Render each step to PNG via sharp ──────────────────────────────
-  for (let i = 0; i < proc.steps.length; i++) {
-    const step = proc.steps[i];
-    const { elements, highlight } = parseSvg(step.svgData);
+  try {
+    // ── 1. Render each step to PNG via sharp ─────────────────────────────
+    for (let i = 0; i < proc.steps.length; i++) {
+      const step = proc.steps[i];
+      const { elements, highlight } = parseSvg(step.svgData);
 
-    const svg = buildSvg(
-      elements,
-      highlight,
-      step.titleHe,
-      step.titleEn,
-      i + 1,
-      proc.steps.length,
-      proc.nameEn
-    );
+      const svg = buildSvg(
+        elements,
+        highlight,
+        step.titleHe,
+        step.titleEn,
+        i + 1,
+        proc.steps.length,
+        proc.nameEn
+      );
 
-    const pngPath = path.join(tmpDir, `step${String(i).padStart(3, "0")}.png`);
-    await sharp(Buffer.from(svg)).png().toFile(pngPath);
-    pngPaths.push(pngPath);
-  }
-
-  // ── 2. Build FFmpeg filter_complex for xfade transitions ──────────────
-  const outDir = path.join(process.cwd(), "public", "videos");
-  fs.mkdirSync(outDir, { recursive: true });
-  const outPath = path.join(outDir, `${processSlug}.mp4`);
-
-  const n = pngPaths.length;
-
-  // Build args
-  const inputArgs: string[] = [];
-  for (const p of pngPaths) {
-    inputArgs.push("-loop", "1", "-t", String(STEP_SECS), "-i", p);
-  }
-
-  let filterComplex = "";
-  let lastLabel = "[v0]";
-
-  if (n === 1) {
-    filterComplex = `[0:v]scale=${W}:${H}[v0]`;
-  } else {
-    // scale all inputs
-    const scales = pngPaths.map((_, i) => `[${i}:v]scale=${W}:${H}[s${i}]`).join("; ");
-
-    // chain xfade
-    const xfades: string[] = [];
-    for (let i = 0; i < n - 1; i++) {
-      const inA = i === 0 ? `[s0]` : `[xf${i - 1}]`;
-      const inB = `[s${i + 1}]`;
-      const out = i === n - 2 ? `[vout]` : `[xf${i}]`;
-      const offset = (i + 1) * (STEP_SECS - XFADE_SECS);
-      xfades.push(`${inA}${inB}xfade=transition=fade:duration=${XFADE_SECS}:offset=${offset}${out}`);
+      const pngPath = path.join(tmpDir, `step${String(i).padStart(3, "0")}.png`);
+      await sharp(Buffer.from(svg, "utf8")).png().toFile(pngPath);
+      pngPaths.push(pngPath);
     }
 
-    filterComplex = [scales, ...xfades].join("; ");
-    lastLabel = n > 1 ? "[vout]" : "[v0]";
+    // ── 2. Build FFmpeg filter_complex for xfade transitions ─────────────
+    const outDir = path.join(process.cwd(), "public", "videos");
+    fs.mkdirSync(outDir, { recursive: true });
+    const outPath = path.join(outDir, `${processSlug}.mp4`);
+
+    const n = pngPaths.length;
+
+    const inputArgs: string[] = [];
+    for (const p of pngPaths) {
+      inputArgs.push("-loop", "1", "-t", String(STEP_SECS), "-i", p);
+    }
+
+    let filterComplex = "";
+    let lastLabel = "[v0]";
+
+    if (n === 1) {
+      filterComplex = `[0:v]scale=${W}:${H}[v0]`;
+    } else {
+      const scales = pngPaths.map((_, i) => `[${i}:v]scale=${W}:${H}[s${i}]`).join("; ");
+      const xfades: string[] = [];
+      for (let i = 0; i < n - 1; i++) {
+        const inA = i === 0 ? `[s0]` : `[xf${i - 1}]`;
+        const inB = `[s${i + 1}]`;
+        const out = i === n - 2 ? `[vout]` : `[xf${i}]`;
+        const offset = (i + 1) * (STEP_SECS - XFADE_SECS);
+        xfades.push(`${inA}${inB}xfade=transition=fade:duration=${XFADE_SECS}:offset=${offset}${out}`);
+      }
+      filterComplex = [scales, ...xfades].join("; ");
+      lastLabel = n > 1 ? "[vout]" : "[v0]";
+    }
+
+    const ffmpegArgs = [
+      ...inputArgs,
+      "-filter_complex", filterComplex,
+      "-map", lastLabel,
+      "-c:v", "libx264",
+      "-preset", "fast",
+      "-pix_fmt", "yuv420p",
+      "-r", "30",
+      "-y",
+      outPath,
+    ];
+
+    const result = spawnSync(FFMPEG, ffmpegArgs, { encoding: "utf8", maxBuffer: 50 * 1024 * 1024 });
+
+    fs.rmSync(tmpDir, { recursive: true, force: true });
+
+    if (result.status !== 0) {
+      const details = result.stderr?.slice(-1000) ?? result.error?.message ?? "unknown error";
+      console.error("[generate-video] FFmpeg failed:", details);
+      return Response.json({ error: "FFmpeg failed", details }, { status: 500 });
+    }
+
+    const videoUrl = `/videos/${processSlug}.mp4`;
+    return Response.json({ videoUrl, steps: n });
+
+  } catch (err) {
+    try { fs.rmSync(tmpDir, { recursive: true, force: true }); } catch { /* ignore */ }
+    const msg = err instanceof Error ? err.message : String(err);
+    console.error("[generate-video] error:", msg);
+    return Response.json({ error: msg }, { status: 500 });
   }
-
-  const ffmpegArgs = [
-    ...inputArgs,
-    "-filter_complex", filterComplex,
-    "-map", lastLabel,
-    "-c:v", "libx264",
-    "-preset", "fast",
-    "-pix_fmt", "yuv420p",
-    "-r", "30",
-    "-y",
-    outPath,
-  ];
-
-  const result = spawnSync(FFMPEG, ffmpegArgs, { encoding: "utf8", maxBuffer: 50 * 1024 * 1024 });
-
-  // Clean up temp frames
-  fs.rmSync(tmpDir, { recursive: true, force: true });
-
-  if (result.status !== 0) {
-    console.error("[generate-video] FFmpeg stderr:", result.stderr?.slice(-2000));
-    return Response.json({ error: "FFmpeg failed", details: result.stderr?.slice(-500) }, { status: 500 });
-  }
-
-  const videoUrl = `/videos/${processSlug}.mp4`;
-  return Response.json({ videoUrl, steps: n });
 }

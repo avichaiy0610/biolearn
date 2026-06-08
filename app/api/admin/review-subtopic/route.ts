@@ -46,9 +46,11 @@ ${subtopic.contentEn}
     {"type": "clarity", "description": "הסבר לא ברור"}
   ],
   "missingConcepts": ["מושג חסר 1", "מושג חסר 2"],
-  "improvedContentEn": "Improved English content (5-7 sentences, university level, scientifically accurate)",
-  "improvedContentHe": "תוכן עברית משופר (5-7 משפטים, רמה אוניברסיטאית, מדויק מדעית)"
-}`
+  "improvedContentEn": "MANDATORY: Write a fully improved version of the content in English (5-7 sentences). Always provide this even if score is high.",
+  "improvedContentHe": "חובה: כתוב גרסה מלאה ומשופרת של התוכן בעברית (5-7 משפטים). תמיד ספק שדה זה גם אם הציון גבוה."
+}
+
+IMPORTANT: improvedContentEn and improvedContentHe are MANDATORY. Always write a complete improved version of the content. Never return empty strings for these fields.`
     : `You are a university biology professor. Review the following subtopic for an educational platform.
 
 Topic: "${subtopic.topic.nameEn}" (${subtopic.topic.nameHe})
@@ -76,9 +78,11 @@ Return ONLY valid JSON:
     {"type": "clarity", "description": "Unclear explanation"}
   ],
   "missingConcepts": ["Missing concept 1"],
-  "improvedContentEn": "Improved English content (5-7 sentences, university level)",
-  "improvedContentHe": "תוכן עברית משופר (8-12 משפטים, רמה אוניברסיטאית)"
-}`;
+  "improvedContentEn": "MANDATORY: Write a fully improved version of the content in English (5-7 sentences). Always provide this even if score is high.",
+  "improvedContentHe": "חובה: כתוב גרסה מלאה ומשופרת של התוכן בעברית (5-7 משפטים). תמיד ספק שדה זה גם אם הציון גבוה."
+}
+
+IMPORTANT: improvedContentEn and improvedContentHe are MANDATORY. Always write a complete improved version of the content. Never return empty strings for these fields.`;
 
   try {
     const completion = await groq.chat.completions.create({
