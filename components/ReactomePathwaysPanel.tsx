@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 type Suggestion = { stId: string; name: string; summary: string | null };
 
@@ -20,20 +20,43 @@ export default function ReactomePathwaysPanel({
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
   const [fetchError, setFetchError] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searching, setSearching] = useState(false);
+  const searchRef = useRef<HTMLInputElement>(null);
 
-  useEffect(() => {
-    setLoading(true);
+  function fetchSuggestions(q?: string) {
+    const url = `/api/admin/topics/${topicSlug}/pathways${q ? `?q=${encodeURIComponent(q)}` : ""}`;
     setFetchError(false);
-    fetch(`/api/admin/topics/${topicSlug}/pathways`)
+    return fetch(url)
       .then((r) => r.json())
       .then((d) => {
         setSuggestions(d.suggestions ?? []);
-        setPinned(d.pinned ?? []);
+        if (!q) setPinned(d.pinned ?? []);
         if (d.reactomeError) setFetchError(true);
       })
-      .catch(() => setFetchError(true))
-      .finally(() => setLoading(false));
+      .catch(() => setFetchError(true));
+  }
+
+  useEffect(() => {
+    setLoading(true);
+    fetchSuggestions().finally(() => setLoading(false));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [topicSlug]);
+
+  async function handleSearch(e: React.FormEvent) {
+    e.preventDefault();
+    if (!searchQuery.trim()) return;
+    setSearching(true);
+    await fetchSuggestions(searchQuery.trim());
+    setSearching(false);
+  }
+
+  function clearSearch() {
+    setSearchQuery("");
+    setLoading(true);
+    fetchSuggestions().finally(() => setLoading(false));
+    searchRef.current?.focus();
+  }
 
   function toggle(stId: string) {
     setPinned((prev) =>
@@ -72,6 +95,34 @@ export default function ReactomePathwaysPanel({
         </p>
         <button onClick={onClose} className="text-xs text-zinc-400 hover:text-zinc-600">✕</button>
       </div>
+
+      {/* Search bar */}
+      <form onSubmit={handleSearch} className="flex gap-2">
+        <input
+          ref={searchRef}
+          type="text"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          placeholder={isHe ? "חפש מסלול ב-Reactome…" : "Search Reactome pathway…"}
+          className="flex-1 text-xs px-3 py-1.5 rounded-lg border border-zinc-300 dark:border-zinc-600 bg-white dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 placeholder-zinc-400 focus:outline-none focus:ring-1 focus:ring-violet-400"
+        />
+        <button
+          type="submit"
+          disabled={searching || !searchQuery.trim()}
+          className="px-3 py-1.5 rounded-lg text-xs bg-violet-600 hover:bg-violet-700 text-white disabled:opacity-50 transition-colors"
+        >
+          {searching ? "…" : "🔍"}
+        </button>
+        {searchQuery && (
+          <button
+            type="button"
+            onClick={clearSearch}
+            className="px-2 py-1.5 rounded-lg text-xs border border-zinc-300 dark:border-zinc-600 text-zinc-500 hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors"
+          >
+            ✕
+          </button>
+        )}
+      </form>
 
       {loading ? (
         <p className="text-xs text-zinc-400">{isHe ? "טוען מ-Reactome..." : "Loading from Reactome…"}</p>

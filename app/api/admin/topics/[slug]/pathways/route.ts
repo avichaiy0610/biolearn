@@ -1,17 +1,19 @@
 import { prisma } from "@/lib/prisma";
 import { isAdmin } from "@/lib/supabase/server";
 
-// GET: fetch Reactome pathway search suggestions for this topic
-export async function GET(_req: Request, ctx: { params: Promise<{ slug: string }> }) {
+// GET: fetch Reactome pathway search suggestions for this topic (or ?q=custom+query)
+export async function GET(req: Request, ctx: { params: Promise<{ slug: string }> }) {
   if (!(await isAdmin())) return Response.json({ error: "Unauthorized" }, { status: 403 });
 
   const { slug } = await ctx.params;
   const topic = await prisma.topic.findUnique({ where: { slug }, select: { nameEn: true, reactomePathwayIds: true } });
   if (!topic) return Response.json({ error: "Not found" }, { status: 404 });
 
+  const q = new URL(req.url).searchParams.get("q") ?? topic.nameEn;
+
   // Fetch search suggestions from Reactome
   const url =
-    `https://reactome.org/ContentService/search/query?query=${encodeURIComponent(topic.nameEn)}` +
+    `https://reactome.org/ContentService/search/query?query=${encodeURIComponent(q)}` +
     `&types=Pathway&species=Homo%20sapiens&cluster=true&rows=10&start=0`;
   const pinned: string[] = topic.reactomePathwayIds ? JSON.parse(topic.reactomePathwayIds) : [];
   try {

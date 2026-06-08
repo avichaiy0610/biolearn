@@ -361,6 +361,27 @@ export default function ProcessAnimation({
                   />
                 );
               })}
+              {/* Auto-centromere overlays for legacy chromosome elements (ids like chr_g1, chr_r2) */}
+              {allElementIds
+                .filter((id) => /^chr[_]/.test(id) && !id.endsWith("_c") && !id.endsWith("_b"))
+                .map((id) => {
+                  const el = getElementAtStep(id, currentStep, steps);
+                  if (!el || el.type !== "ellipse" || (el.ry ?? 0) <= (el.rx ?? 0) * 2) return null;
+                  const baseOpacity = el.opacity ?? 1;
+                  const isHighlighted = !highlight || highlight.includes(id);
+                  const effectiveOpacity = isHighlighted ? baseOpacity : baseOpacity * 0.25;
+                  const rx = Math.round((el.rx ?? 5) * 1.8);
+                  const ry = Math.max(4, Math.round((el.ry ?? 20) * 0.25));
+                  const t = { duration: 0.9, ease: [0.4, 0, 0.2, 1] as [number, number, number, number] };
+                  return (
+                    <motion.ellipse
+                      key={`${id}-ac`}
+                      initial={{ cx: el.cx, cy: el.cy, rx, ry, opacity: 0 }}
+                      animate={{ cx: el.cx, cy: el.cy, rx, ry, fill: "#9f1239", opacity: effectiveOpacity }}
+                      transition={t}
+                    />
+                  );
+                })}
             </svg>
           ) : (
             <div className="w-full h-64 md:h-80 flex items-center justify-center">
