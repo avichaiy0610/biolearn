@@ -145,15 +145,37 @@ function AnimatedSvgElement({
       );
     case "ellipse": {
       if (isLegacyChromosome(el)) {
-        const d = makeChromosomePath(el.cx!, el.cy!, el.rx ?? 6, el.ry ?? 20);
+        const cx = el.cx!, cy = el.cy!;
+        const rx = el.rx ?? 6, ry = el.ry ?? 20;
+        // Two sister chromatids side by side (like ChromosomeDiagram)
+        const offset = rx * 0.5;   // each chromatid center offset from chromosome center
+        const cw    = rx * 0.45;   // each chromatid half-width
+        const dL = makeChromosomePath(cx - offset, cy, cw, ry);
+        const dR = makeChromosomePath(cx + offset, cy, cw, ry);
+        // Telomere caps at the 4 arm tips
+        const tRx = cw + 1.5;
+        const tRy = Math.max(4, Math.min(9, ry * 0.12));
+        const tips: [number, number][] = [
+          [cx - offset, cy - ry], [cx - offset, cy + ry],
+          [cx + offset, cy - ry], [cx + offset, cy + ry],
+        ];
         return (
-          <motion.path
-            key={id}
-            filter={filterRef}
-            initial={{ d, opacity: 0 }}
-            animate={{ d, fill, opacity: effectiveOpacity }}
-            transition={t}
-          />
+          <g filter={filterRef}>
+            <motion.path key={`${id}-L`}
+              initial={{ d: dL, opacity: 0 }}
+              animate={{ d: dL, fill, opacity: effectiveOpacity }}
+              transition={t} />
+            <motion.path key={`${id}-R`}
+              initial={{ d: dR, opacity: 0 }}
+              animate={{ d: dR, fill, opacity: effectiveOpacity * 0.8 }}
+              transition={t} />
+            {tips.map(([tcx, tcy], i) => (
+              <motion.ellipse key={`${id}-tl${i}`}
+                initial={{ cx: tcx, cy: tcy, rx: tRx, ry: tRy, opacity: 0 }}
+                animate={{ cx: tcx, cy: tcy, rx: tRx, ry: tRy, fill: "#0f766e", opacity: effectiveOpacity }}
+                transition={t} />
+            ))}
+          </g>
         );
       }
       return (
@@ -418,18 +440,19 @@ export default function ProcessAnimation({
                 .filter((id) => !id.endsWith("_c") && !id.endsWith("_b") && !NON_CHROM_IDS.test(id))
                 .map((id) => {
                   const el = getElementAtStep(id, currentStep, steps);
-                  if (!el || el.type !== "ellipse" || (el.ry ?? 0) <= (el.rx ?? 0) * 2) return null;
+                  if (!el || !isLegacyChromosome(el)) return null;
                   const baseOpacity = el.opacity ?? 1;
                   const isHighlighted = !highlight || highlight.includes(id);
                   const effectiveOpacity = isHighlighted ? baseOpacity : baseOpacity * 0.25;
-                  const rx = Math.round((el.rx ?? 5) * 1.8);
-                  const ry = Math.max(4, Math.round((el.ry ?? 20) * 0.25));
+                  // Centromere spans both sister chromatids (offset±cw at constriction ≈ 75% of el.rx)
+                  const centRx = Math.round((el.rx ?? 5) * 0.75);
+                  const centRy = Math.max(4, Math.round((el.ry ?? 20) * 0.2));
                   const t = { duration: 0.9, ease: [0.4, 0, 0.2, 1] as [number, number, number, number] };
                   return (
                     <motion.ellipse
                       key={`${id}-ac`}
-                      initial={{ cx: el.cx, cy: el.cy, rx, ry, opacity: 0 }}
-                      animate={{ cx: el.cx, cy: el.cy, rx, ry, fill: "#9f1239", opacity: effectiveOpacity }}
+                      initial={{ cx: el.cx, cy: el.cy, rx: centRx, ry: centRy, opacity: 0 }}
+                      animate={{ cx: el.cx, cy: el.cy, rx: centRx, ry: centRy, fill: "#9f1239", opacity: effectiveOpacity }}
                       transition={t}
                     />
                   );
