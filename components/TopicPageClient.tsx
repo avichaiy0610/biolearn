@@ -6,6 +6,7 @@ import SubtopicResearch from "./SubtopicResearch";
 import SubtopicQuiz from "./SubtopicQuiz";
 import StudentQuizCreator from "./StudentQuizCreator";
 import StudentFlashcards from "./StudentFlashcards";
+import SubtopicDiagram from "./SubtopicDiagram";
 import type { Locale } from "@/lib/dictionaries";
 import Link from "next/link";
 
@@ -111,6 +112,17 @@ export default function TopicPageClient({
                       subtopicName={subName}
                       topicName={topicName}
                       dict={dict}
+                    />
+                  </div>
+
+                  <div className="mt-3">
+                    <SubtopicDiagram
+                      nameEn={sub.nameEn}
+                      nameHe={sub.nameHe}
+                      contentEn={sub.contentEn}
+                      contentHe={sub.contentHe}
+                      topicName={topicName}
+                      lang={lang}
                     />
                   </div>
 

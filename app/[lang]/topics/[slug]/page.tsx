@@ -7,6 +7,7 @@ import Link from "next/link";
 import ChatPanel from "@/components/ChatPanel";
 import ExamCreator from "@/components/ExamCreator";
 import TopicPageClient from "@/components/TopicPageClient";
+import ReactomePathwayCard from "@/components/ReactomePathwayCard";
 
 type ReactomePathway = { id: string; name: string; summary: string | null; url: string };
 
@@ -109,28 +110,16 @@ export default async function TopicPage({
               ↗ Reactome
             </a>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 gap-3">
             {pathways.map((p) => (
-              <a
+              <ReactomePathwayCard
                 key={p.id}
-                href={p.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex flex-col gap-1 p-4 rounded-xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 hover:border-violet-400 dark:hover:border-violet-600 transition-colors group"
-              >
-                <div className="flex items-start gap-2">
-                  <span className="text-violet-500 text-lg shrink-0">⬡</span>
-                  <div>
-                    <p className="text-sm font-medium text-zinc-900 dark:text-zinc-50 group-hover:text-violet-700 dark:group-hover:text-violet-400 leading-snug mb-1">
-                      {p.name}
-                    </p>
-                    {p.summary && (
-                      <p className="text-xs text-zinc-500 dark:text-zinc-400 line-clamp-2">{p.summary}</p>
-                    )}
-                    <p className="text-xs text-zinc-400 font-mono mt-1">{p.id}</p>
-                  </div>
-                </div>
-              </a>
+                stId={p.id}
+                name={p.name}
+                summary={p.summary}
+                url={p.url}
+                lang={lang}
+              />
             ))}
           </div>
         </section>
