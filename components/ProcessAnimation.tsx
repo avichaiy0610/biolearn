@@ -91,13 +91,16 @@ function makeChromosomePath(cx: number, cy: number, rx: number, ry: number): str
   ].join(" ");
 }
 
+// Nucleus/cell IDs to never reshape — they're round by design
+const NON_CHROM_IDS = /^(cell|nuc|nucleus|membrane|cytoplasm|organelle|lbl|text|label|spindle|protein|enzyme|rna|dna|atp)/i;
+
 function isLegacyChromosome(el: SvgElement): boolean {
   return (
     el.type === "ellipse" &&
-    /^chr[_]/.test(el.id) &&
     !el.id.endsWith("_c") &&
     !el.id.endsWith("_b") &&
-    (el.ry ?? 0) > (el.rx ?? 0) * 2 &&
+    !NON_CHROM_IDS.test(el.id) &&
+    (el.ry ?? 0) > (el.rx ?? 0) * 1.5 &&   // moderately elongated — catches all chromosome shapes
     el.cx !== undefined && el.cy !== undefined
   );
 }
@@ -410,9 +413,9 @@ export default function ProcessAnimation({
                   />
                 );
               })}
-              {/* Auto-centromere overlays for legacy chromosome elements (ids like chr_g1, chr_r2) */}
+              {/* Auto-centromere overlays for chromosome-shaped ellipses */}
               {allElementIds
-                .filter((id) => /^chr[_]/.test(id) && !id.endsWith("_c") && !id.endsWith("_b"))
+                .filter((id) => !id.endsWith("_c") && !id.endsWith("_b") && !NON_CHROM_IDS.test(id))
                 .map((id) => {
                   const el = getElementAtStep(id, currentStep, steps);
                   if (!el || el.type !== "ellipse" || (el.ry ?? 0) <= (el.rx ?? 0) * 2) return null;
