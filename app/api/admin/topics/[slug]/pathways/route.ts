@@ -13,8 +13,10 @@ export async function GET(_req: Request, ctx: { params: Promise<{ slug: string }
   const url =
     `https://reactome.org/ContentService/search/query?query=${encodeURIComponent(topic.nameEn)}` +
     `&types=Pathway&species=Homo%20sapiens&cluster=true&rows=10&start=0`;
+  const pinned: string[] = topic.reactomePathwayIds ? JSON.parse(topic.reactomePathwayIds) : [];
   try {
-    const res = await fetch(url);
+    const res = await fetch(url, { signal: AbortSignal.timeout(8000) });
+    if (!res.ok) return Response.json({ suggestions: [], pinned, reactomeError: true });
     const data = await res.json();
     const stripHtml = (s: string) => s.replace(/<[^>]+>/g, "");
     const entries = data.results?.[0]?.entries ?? [];
@@ -23,10 +25,9 @@ export async function GET(_req: Request, ctx: { params: Promise<{ slug: string }
       name: stripHtml(r.name),
       summary: r.summation ? stripHtml(r.summation).slice(0, 200) : null,
     }));
-    const pinned: string[] = topic.reactomePathwayIds ? JSON.parse(topic.reactomePathwayIds) : [];
     return Response.json({ suggestions, pinned });
   } catch {
-    return Response.json({ suggestions: [], pinned: [] });
+    return Response.json({ suggestions: [], pinned, reactomeError: true });
   }
 }
 

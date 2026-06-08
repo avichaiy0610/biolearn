@@ -19,14 +19,19 @@ export default function ReactomePathwaysPanel({
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
+  const [fetchError, setFetchError] = useState(false);
 
   useEffect(() => {
+    setLoading(true);
+    setFetchError(false);
     fetch(`/api/admin/topics/${topicSlug}/pathways`)
       .then((r) => r.json())
       .then((d) => {
         setSuggestions(d.suggestions ?? []);
         setPinned(d.pinned ?? []);
+        if (d.reactomeError) setFetchError(true);
       })
+      .catch(() => setFetchError(true))
       .finally(() => setLoading(false));
   }, [topicSlug]);
 
@@ -69,9 +74,13 @@ export default function ReactomePathwaysPanel({
       </div>
 
       {loading ? (
-        <p className="text-xs text-zinc-400">{isHe ? "טוען..." : "Loading…"}</p>
+        <p className="text-xs text-zinc-400">{isHe ? "טוען מ-Reactome..." : "Loading from Reactome…"}</p>
+      ) : fetchError ? (
+        <p className="text-xs text-amber-500">
+          {isHe ? "⚠ Reactome לא זמין כרגע — ניתן עדיין לנהל מסלולים שמורים" : "⚠ Reactome unavailable — you can still manage saved pathways"}
+        </p>
       ) : suggestions.length === 0 ? (
-        <p className="text-xs text-zinc-400">{isHe ? "לא נמצאו מסלולים" : "No pathways found"}</p>
+        <p className="text-xs text-zinc-400">{isHe ? "לא נמצאו מסלולים עבור נושא זה" : "No pathways found for this topic"}</p>
       ) : (
         <div className="space-y-2">
           {suggestions.map((s) => {

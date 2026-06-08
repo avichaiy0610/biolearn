@@ -23,7 +23,15 @@ VISUAL DESIGN RULES — MANDATORY:
 ═══════════════════════════════════════════
 1. LAYER shapes to create biological depth: outer membrane → cytoplasm → nucleus → contents
 2. CELLS = large circle (color="#fdf4e3", stroke="#c9a55a", strokeWidth=2.5) + inner circle/ellipse for nucleus (color="#e8d4a0", stroke="#b89040", strokeWidth=1.5)
-3. CHROMOSOMES = elongated ellipses (rx=6, ry=20) colored red (#dc2626) or green (#16a34a), not plain circles
+3. CHROMOSOMES = ALWAYS two elements: an elongated chromatid body + a centromere disc at the midpoint:
+   - Body: ellipse(rx=5, ry=20) — use id suffix _b — colored #dc2626 (red) or #16a34a (green)
+   - Centromere: ellipse(rx=9, ry=5) — use id suffix _c — ALWAYS color="#9f1239", layered on top of body, same cx/cy
+   - When chromosomes MOVE, move BOTH elements by the same delta (keep cx/cy identical)
+   Example (green chromosome pair at center 190,135):
+     chr_g1_b(ellipse,cx=190,cy=135,rx=5,ry=20,color="#16a34a",op=1)
+     chr_g1_c(ellipse,cx=190,cy=135,rx=9,ry=5,color="#9f1239",op=1)
+     chr_g2_b(ellipse,cx=198,cy=135,rx=5,ry=20,color="#4ade80",op=0.9)
+     chr_g2_c(ellipse,cx=198,cy=135,rx=9,ry=5,color="#9f1239",op=0.9)
 4. PROTEINS/ENZYMES = medium circles (r=18-25) with vivid colors (#7c3aed, #f59e0b, #3b82f6)
 5. Elements MUST travel 50-150 pixels between steps — show dramatic spatial change
 6. Use 7-9 steps. Each step must be clearly different from the previous.
@@ -54,38 +62,54 @@ Step 1 "Interphase":
 Step 2 "Prophase — Chromosomes Condense" (nucleus fades, chr rods appear):
   cell(circle,cx=200,cy=150,r=85,color="#fdf4e3",stroke="#c9a55a",strokeWidth=2.5,op=1)
   nucleus(ellipse,cx=200,cy=150,rx=42,ry=38,color="#e8d4a0",stroke="#b89040",strokeWidth=1.5,op=0.3)
-  chr_g1(ellipse,cx=188,cy=136,rx=6,ry=20,color="#16a34a",op=1)
-  chr_g2(ellipse,cx=196,cy=136,rx=6,ry=20,color="#16a34a",op=0.8)
-  chr_r1(ellipse,cx=204,cy=164,rx=6,ry=20,color="#dc2626",op=1)
-  chr_r2(ellipse,cx=212,cy=164,rx=6,ry=20,color="#dc2626",op=0.8)
+  chr_g1_b(ellipse,cx=188,cy=136,rx=5,ry=20,color="#16a34a",op=1)
+  chr_g1_c(ellipse,cx=188,cy=136,rx=9,ry=5,color="#9f1239",op=1)
+  chr_g2_b(ellipse,cx=196,cy=136,rx=5,ry=20,color="#4ade80",op=0.85)
+  chr_g2_c(ellipse,cx=196,cy=136,rx=9,ry=5,color="#9f1239",op=0.85)
+  chr_r1_b(ellipse,cx=204,cy=164,rx=5,ry=20,color="#dc2626",op=1)
+  chr_r1_c(ellipse,cx=204,cy=164,rx=9,ry=5,color="#9f1239",op=1)
+  chr_r2_b(ellipse,cx=212,cy=164,rx=5,ry=20,color="#f87171",op=0.85)
+  chr_r2_c(ellipse,cx=212,cy=164,rx=9,ry=5,color="#9f1239",op=0.85)
   lbl(text,x=200,y=258,label="Prophase — chromosomes condense",fontSize=11,textColor="#78350f",op=1)
 
 Step 3 "Metaphase — Spindle Forms, Chromosomes Align":
   cell(circle,cx=200,cy=150,r=85,color="#fdf4e3",stroke="#c9a55a",strokeWidth=2.5,op=1)
   spindle_l(line,x1=115,y1=150,x2=200,y2=150,color="#94a3b8",op=0.7)
   spindle_r(line,x1=285,y1=150,x2=200,y2=150,color="#94a3b8",op=0.7)
-  chr_g1(ellipse,cx=197,cy=132,rx=6,ry=20,color="#16a34a",op=1)    ← MOVED to center
-  chr_g2(ellipse,cx=203,cy=132,rx=6,ry=20,color="#16a34a",op=0.8)
-  chr_r1(ellipse,cx=197,cy=168,rx=6,ry=20,color="#dc2626",op=1)    ← MOVED to center
-  chr_r2(ellipse,cx=203,cy=168,rx=6,ry=20,color="#dc2626",op=0.8)
+  chr_g1_b(ellipse,cx=197,cy=132,rx=5,ry=20,color="#16a34a",op=1)    ← MOVED to center
+  chr_g1_c(ellipse,cx=197,cy=132,rx=9,ry=5,color="#9f1239",op=1)
+  chr_g2_b(ellipse,cx=203,cy=132,rx=5,ry=20,color="#4ade80",op=0.85)
+  chr_g2_c(ellipse,cx=203,cy=132,rx=9,ry=5,color="#9f1239",op=0.85)
+  chr_r1_b(ellipse,cx=197,cy=168,rx=5,ry=20,color="#dc2626",op=1)    ← MOVED to center
+  chr_r1_c(ellipse,cx=197,cy=168,rx=9,ry=5,color="#9f1239",op=1)
+  chr_r2_b(ellipse,cx=203,cy=168,rx=5,ry=20,color="#f87171",op=0.85)
+  chr_r2_c(ellipse,cx=203,cy=168,rx=9,ry=5,color="#9f1239",op=0.85)
   lbl(text,x=200,y=258,label="Metaphase — chromosomes aligned",fontSize=11,textColor="#78350f",op=1)
 
 Step 4 "Anaphase — Chromatids PULLED APART (LARGE MOVEMENT)":
   cell(circle,cx=200,cy=150,r=85,color="#fdf4e3",stroke="#c9a55a",strokeWidth=2.5,op=1)
-  chr_g1(ellipse,cx=155,cy=132,rx=6,ry=18,color="#16a34a",op=1)    ← MOVES LEFT 42px
-  chr_g2(ellipse,cx=245,cy=132,rx=6,ry=18,color="#16a34a",op=0.8)  ← MOVES RIGHT 42px
-  chr_r1(ellipse,cx=155,cy=168,rx=6,ry=18,color="#dc2626",op=1)    ← MOVES LEFT
-  chr_r2(ellipse,cx=245,cy=168,rx=6,ry=18,color="#dc2626",op=0.8)  ← MOVES RIGHT
+  chr_g1_b(ellipse,cx=155,cy=132,rx=5,ry=18,color="#16a34a",op=1)    ← MOVES LEFT 42px
+  chr_g1_c(ellipse,cx=155,cy=132,rx=9,ry=5,color="#9f1239",op=1)
+  chr_g2_b(ellipse,cx=245,cy=132,rx=5,ry=18,color="#4ade80",op=0.85) ← MOVES RIGHT 42px
+  chr_g2_c(ellipse,cx=245,cy=132,rx=9,ry=5,color="#9f1239",op=0.85)
+  chr_r1_b(ellipse,cx=155,cy=168,rx=5,ry=18,color="#dc2626",op=1)    ← MOVES LEFT
+  chr_r1_c(ellipse,cx=155,cy=168,rx=9,ry=5,color="#9f1239",op=1)
+  chr_r2_b(ellipse,cx=245,cy=168,rx=5,ry=18,color="#f87171",op=0.85) ← MOVES RIGHT
+  chr_r2_c(ellipse,cx=245,cy=168,rx=9,ry=5,color="#9f1239",op=0.85)
   lbl(text,x=200,y=258,label="Anaphase — chromatids separating",fontSize=11,textColor="#78350f",op=1)
 
 Step 5 "Telophase — Two Nuclei Form":
   cell(circle,cx=200,cy=150,r=85,color="#fdf4e3",stroke="#c9a55a",strokeWidth=2.5,op=1)
   nuc_l(circle,cx=148,cy=150,r=32,color="#e8d4a0",stroke="#b89040",strokeWidth=1.5,op=1)
   nuc_r(circle,cx=252,cy=150,r=32,color="#e8d4a0",stroke="#b89040",strokeWidth=1.5,op=1)
-  chr_g1(ellipse,cx=140,cy=141,rx=5,ry=14,color="#16a34a",op=0.9)
-  chr_r1(ellipse,cx=156,cy=159,rx=5,ry=14,color="#dc2626",op=0.9)
-  chr_g2(ellipse,cx=244,cy=141,rx=5,ry=14,color="#16a34a",op=0.9)
-  chr_r2(ellipse,cx=260,cy=159,rx=5,ry=14,color="#dc2626",op=0.9)
+  chr_g1_b(ellipse,cx=140,cy=141,rx=4,ry=14,color="#16a34a",op=0.9)
+  chr_g1_c(ellipse,cx=140,cy=141,rx=7,ry=4,color="#9f1239",op=0.9)
+  chr_r1_b(ellipse,cx=156,cy=159,rx=4,ry=14,color="#dc2626",op=0.9)
+  chr_r1_c(ellipse,cx=156,cy=159,rx=7,ry=4,color="#9f1239",op=0.9)
+  chr_g2_b(ellipse,cx=244,cy=141,rx=4,ry=14,color="#16a34a",op=0.9)
+  chr_g2_c(ellipse,cx=244,cy=141,rx=7,ry=4,color="#9f1239",op=0.9)
+  chr_r2_b(ellipse,cx=260,cy=159,rx=4,ry=14,color="#dc2626",op=0.9)
+  chr_r2_c(ellipse,cx=260,cy=159,rx=7,ry=4,color="#9f1239",op=0.9)
   lbl(text,x=200,y=258,label="Telophase — two nuclei form",fontSize=11,textColor="#78350f",op=1)
 
 Step 6 "Cytokinesis — Cell Divides":
