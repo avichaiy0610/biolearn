@@ -2,8 +2,23 @@
 
 import { useState } from "react";
 import dynamic from "next/dynamic";
+import ChromosomeDiagram from "./ChromosomeDiagram";
 
 const StaticSVGDiagram = dynamic(() => import("./StaticSVGDiagram"), { ssr: false });
+
+const CHROM_TERMS = new Set([
+  "chromosome", "chromosomes", "chromatid", "chromatids",
+  "centromere", "telomere", "telomeres", "karyotype",
+  "chromatin", "nucleosome", "nucleosomes", "histone", "histones",
+  "כרומוזום", "כרומוזומים", "כרומטיד", "כרומטידות",
+  "צנטרומר", "טלומר", "טלומרים", "קריוטיפ", "כרומטין",
+  "נוקלאוסום", "נוקלאוסומים", "היסטון", "היסטונים",
+]);
+
+function isChromosomeTopic(nameEn: string, nameHe: string): boolean {
+  const words = (s: string) => s.toLowerCase().split(/[\s,;()\-/]+/);
+  return [...words(nameEn), ...words(nameHe)].some(w => CHROM_TERMS.has(w));
+}
 
 type Props = {
   nameEn: string;
@@ -21,6 +36,14 @@ export default function SubtopicDiagram({ nameEn, nameHe, contentEn, contentHe, 
   const [elements, setElements] = useState<object[]>([]);
   const [error, setError] = useState("");
   const isHe = lang === "he";
+
+  if (isChromosomeTopic(nameEn, nameHe)) {
+    return (
+      <div className="w-full mt-3">
+        <ChromosomeDiagram lang={lang} title={isHe ? nameHe : nameEn} />
+      </div>
+    );
+  }
 
   async function handleToggle() {
     if (state === "shown") { setState("idle"); return; }
