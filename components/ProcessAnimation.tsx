@@ -66,6 +66,42 @@ function getElementAtStep(id: string, stepIndex: number, steps: Step[]): SvgElem
   return null;
 }
 
+/* ─── Chromosome path builder (anatomically accurate shape) ────────────── */
+function r(n: number) { return Math.round(n * 10) / 10; }
+
+function makeChromosomePath(cx: number, cy: number, rx: number, ry: number): string {
+  const L = r(cx - rx), R = r(cx + rx);
+  const constrict = r(rx * 0.55);
+  const LC = r(cx - constrict), RC = r(cx + constrict);
+  const top = r(cy - ry), bot = r(cy + ry);
+  const taper = r(ry * 0.17);
+  const cap = r(rx * 0.75);
+  return [
+    `M ${L} ${top}`,
+    `C ${L} ${r(top - cap)} ${R} ${r(top - cap)} ${R} ${top}`,
+    `L ${R} ${r(cy - taper)}`,
+    `C ${R} ${r(cy - taper * 0.4)} ${RC} ${r(cy - taper * 0.15)} ${RC} ${cy}`,
+    `C ${RC} ${r(cy + taper * 0.15)} ${R} ${r(cy + taper * 0.4)} ${R} ${r(cy + taper)}`,
+    `L ${R} ${bot}`,
+    `C ${R} ${r(bot + cap)} ${L} ${r(bot + cap)} ${L} ${bot}`,
+    `L ${L} ${r(cy + taper)}`,
+    `C ${L} ${r(cy + taper * 0.4)} ${LC} ${r(cy + taper * 0.15)} ${LC} ${cy}`,
+    `C ${LC} ${r(cy - taper * 0.15)} ${L} ${r(cy - taper * 0.4)} ${L} ${r(cy - taper)}`,
+    "Z",
+  ].join(" ");
+}
+
+function isLegacyChromosome(el: SvgElement): boolean {
+  return (
+    el.type === "ellipse" &&
+    /^chr[_]/.test(el.id) &&
+    !el.id.endsWith("_c") &&
+    !el.id.endsWith("_b") &&
+    (el.ry ?? 0) > (el.rx ?? 0) * 2 &&
+    el.cx !== undefined && el.cy !== undefined
+  );
+}
+
 /* ─── Professional SVG element renderer ─────────────────────────────────── */
 function AnimatedSvgElement({
   id, stepIndex, steps, isHighlighted,
@@ -104,7 +140,19 @@ function AnimatedSvgElement({
           transition={t}
         />
       );
-    case "ellipse":
+    case "ellipse": {
+      if (isLegacyChromosome(el)) {
+        const d = makeChromosomePath(el.cx!, el.cy!, el.rx ?? 6, el.ry ?? 20);
+        return (
+          <motion.path
+            key={id}
+            filter={filterRef}
+            initial={{ d, opacity: 0 }}
+            animate={{ d, fill, opacity: effectiveOpacity }}
+            transition={t}
+          />
+        );
+      }
       return (
         <motion.ellipse
           key={id}
@@ -118,6 +166,7 @@ function AnimatedSvgElement({
           transition={t}
         />
       );
+    }
     case "rect":
       return (
         <motion.rect
