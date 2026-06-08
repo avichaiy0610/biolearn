@@ -5,8 +5,8 @@ import fs from "fs";
 import os from "os";
 import { spawnSync } from "child_process";
 import sharp from "sharp";
-// @ts-expect-error — no type declarations for ffmpeg-static
-import ffmpegStatic from "ffmpeg-static";
+// eslint-disable-next-line @typescript-eslint/no-require-imports
+const ffmpegStatic = require("ffmpeg-static") as string | null;
 
 export const maxDuration = 120;
 
