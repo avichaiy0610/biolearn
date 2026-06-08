@@ -78,7 +78,7 @@ export default function FeedbackButton({
       {open && (
         <div
           className="absolute z-50 w-72 rounded-xl border border-amber-200 dark:border-amber-800 bg-white dark:bg-zinc-900 shadow-2xl p-3 space-y-2"
-          style={{ bottom: "calc(100% + 6px)", left: 0 }}
+          style={{ top: "calc(100% + 6px)", left: 0 }}
         >
           <div className="flex items-center justify-between">
             <p className="text-xs font-semibold text-amber-700 dark:text-amber-400">

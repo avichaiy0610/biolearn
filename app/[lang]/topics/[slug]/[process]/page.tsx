@@ -5,6 +5,7 @@ import { getDictionary, hasLocale, type Locale } from "@/lib/dictionaries";
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 import ProcessAnimation from "@/components/ProcessAnimation";
+import AdminAnimationControls from "@/components/AdminAnimationControls";
 import fs from "fs";
 import path from "path";
 
@@ -84,6 +85,12 @@ export default async function ProcessPage({
         processName={processName}
         topicSlug={slug}
         processSlug={processSlug}
+      />
+
+      <AdminAnimationControls
+        topicSlug={slug}
+        processSlug={processSlug}
+        lang={lang}
       />
     </div>
   );

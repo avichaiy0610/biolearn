@@ -414,16 +414,7 @@ export default function ProcessAnimation({
           <span className="w-2.5 h-2.5 rounded-full bg-yellow-400 opacity-70" />
           <span className="w-2.5 h-2.5 rounded-full bg-green-400 opacity-70" />
           <span className="ms-3 text-xs font-mono text-zinc-400 select-none">{processName}</span>
-          <span className="ms-auto">
-            {topicSlug && (
-              <FeedbackButton
-                topicSlug={topicSlug}
-                processSlug={processSlug}
-                targetType="animation"
-                lang={lang}
-              />
-            )}
-          </span>
+          <span className="ms-auto" />
         </div>
 
         <div className="p-4">
