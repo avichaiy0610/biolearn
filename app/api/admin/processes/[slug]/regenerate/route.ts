@@ -32,10 +32,18 @@ export async function POST(
   const nameHe = proc.nameHe;
   const contentEn = subtopic?.contentEn ?? proc.descEn;
 
-  // Generate new steps
-  const steps = await generateAnimationSteps(nameEn, nameHe, contentEn, feedback);
+  // Generate new steps (surface real AI errors; tolerate truncated JSON)
+  let steps: object[];
+  try {
+    steps = await generateAnimationSteps(nameEn, nameHe, contentEn, feedback);
+  } catch (e) {
+    return Response.json({ error: e instanceof Error ? e.message : String(e) }, { status: 502 });
+  }
   if (steps.length === 0) {
-    return Response.json({ error: "AI failed to generate animation steps" }, { status: 500 });
+    return Response.json(
+      { error: "AI returned no usable steps (possibly truncated or rate-limited). Try again." },
+      { status: 502 }
+    );
   }
 
   // The libSQL (Turso) adapter does NOT reliably support createMany, so mirror

@@ -150,6 +150,47 @@ perox / enzyme / protein / dna / rna / mrna / trna / atp / vesicle / spindle.
 Only elongated ellipses whose id is NOT one of those become chromosomes.
 `;
 
+// Robustly extract steps even from a TRUNCATED JSON response (the 70B model can
+// exceed max_tokens on rich animations, leaving the JSON unterminated). We
+// bracket-match each complete object inside the "steps" array and drop any
+// incomplete trailing one, so a cut-off response still yields usable steps.
+function parseStepsLoose(raw: string): object[] {
+  if (!raw) return [];
+  try {
+    const p = JSON.parse(raw);
+    const s = p.steps ?? p.animation?.steps ?? p.animationSteps ?? p.data?.steps;
+    if (Array.isArray(s)) return s;
+  } catch {
+    /* fall through to salvage */
+  }
+
+  const keyIdx = raw.indexOf('"steps"');
+  const arrStart = raw.indexOf("[", keyIdx >= 0 ? keyIdx : 0);
+  if (arrStart < 0) return [];
+
+  const objs: object[] = [];
+  let depth = 0, objStart = -1, inStr = false, esc = false;
+  for (let i = arrStart + 1; i < raw.length; i++) {
+    const ch = raw[i];
+    if (inStr) {
+      if (esc) esc = false;
+      else if (ch === "\\") esc = true;
+      else if (ch === '"') inStr = false;
+      continue;
+    }
+    if (ch === '"') inStr = true;
+    else if (ch === "{") { if (depth === 0) objStart = i; depth++; }
+    else if (ch === "}") {
+      depth--;
+      if (depth === 0 && objStart >= 0) {
+        try { objs.push(JSON.parse(raw.slice(objStart, i + 1))); } catch { /* skip bad chunk */ }
+        objStart = -1;
+      }
+    } else if (ch === "]" && depth === 0) break;
+  }
+  return objs;
+}
+
 export async function generateAnimationSteps(
   nameEn: string,
   nameHe: string,
@@ -248,8 +289,9 @@ Return ONLY valid JSON (no markdown):
   ],"highlight":["cell"]}
 ]}`;
 
+  let completion;
   try {
-    const completion = await groq.chat.completions.create({
+    completion = await groq.chat.completions.create({
       messages: [
         {
           role: "system",
@@ -262,17 +304,23 @@ Return ONLY valid JSON (no markdown):
       response_format: { type: "json_object" },
       max_tokens: isMeiosis ? 14000 : 10000,
     });
-    const responseText = completion.choices[0]?.message?.content ?? "{}";
-    const parsed = JSON.parse(responseText);
-    const steps =
-      parsed.steps ??
-      parsed.animation?.steps ??
-      parsed.animationSteps ??
-      parsed.data?.steps ??
-      [];
-    return Array.isArray(steps) ? steps : [];
   } catch (err) {
-    console.error("[generate-animation-steps] failed:", err);
-    return [];
+    // Surface real API failures (rate limit, bad key, model error) to the caller.
+    const msg = err instanceof Error ? err.message : String(err);
+    console.error("[generate-animation-steps] Groq API error:", msg);
+    throw new Error(`AI service error: ${msg}`);
   }
+
+  const choice = completion.choices[0];
+  const responseText = choice?.message?.content ?? "";
+  const steps = parseStepsLoose(responseText);
+  if (steps.length === 0) {
+    console.error(
+      "[generate-animation-steps] no steps parsed. finish_reason:",
+      choice?.finish_reason,
+      "output_len:",
+      responseText.length
+    );
+  }
+  return steps;
 }

@@ -50,10 +50,18 @@ export async function POST(request: Request) {
     return Response.json({ error: "subtopicId or (topicSlug + nameEn) required" }, { status: 400 });
   }
 
-  const steps = await generateAnimationSteps(nameEn, nameHe, contentEn);
+  let steps: object[];
+  try {
+    steps = await generateAnimationSteps(nameEn, nameHe, contentEn);
+  } catch (e) {
+    return Response.json({ error: e instanceof Error ? e.message : String(e) }, { status: 502 });
+  }
 
   if (steps.length === 0) {
-    return Response.json({ error: "AI failed to generate animation steps" }, { status: 500 });
+    return Response.json(
+      { error: "AI returned no usable steps (possibly truncated or rate-limited). Try again." },
+      { status: 502 }
+    );
   }
 
   const processSlug = `${processSlugBase}-animation-${Date.now()}`;
