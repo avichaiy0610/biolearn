@@ -22,12 +22,70 @@ type Structure = {
   afUrl: string;
 };
 
+type PdbStructure = {
+  id: string;
+  title: string;
+  resolution: number | null;
+  method: string;
+  imageUrl: string;
+  rscbUrl: string;
+};
+
 type Interaction = { name: string; score: number };
 type Article = { pubmedId: string; title: string; year: number | null };
+
+async function fetchPdbStructure(accession: string): Promise<PdbStructure | null> {
+  try {
+    const query = {
+      query: {
+        type: "terminal",
+        service: "text",
+        parameters: {
+          operator: "exact_match",
+          value: accession,
+          attribute: "rcsb_polymer_entity_container_identifiers.reference_sequence_identifiers.database_accession",
+        },
+      },
+      return_type: "entry",
+      request_options: {
+        paginate: { start: 0, rows: 1 },
+        sort: [{ sort_by: "rcsb_entry_info.resolution_combined", direction: "asc" }],
+      },
+    };
+    const searchRes = await fetch("https://search.rcsb.org/rcsbsearch/v2/query", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(query),
+      next: { revalidate: 86400 },
+    });
+    if (!searchRes.ok) return null;
+    const searchData = await searchRes.json();
+    const pdbId: string | undefined = searchData.result_set?.[0]?.identifier;
+    if (!pdbId) return null;
+
+    const metaRes = await fetch(`https://data.rcsb.org/rest/v1/core/entry/${pdbId}`, {
+      next: { revalidate: 86400 },
+    });
+    if (!metaRes.ok) return null;
+    const meta = await metaRes.json();
+
+    return {
+      id: pdbId,
+      title: meta.struct?.title ?? pdbId,
+      resolution: meta.rcsb_entry_info?.resolution_combined?.[0] ?? null,
+      method: meta.rcsb_entry_info?.experimental_method ?? "",
+      imageUrl: `https://cdn.rcsb.org/images/structures/${pdbId.toLowerCase()}_assembly-1.jpeg`,
+      rscbUrl: `https://www.rcsb.org/structure/${pdbId}`,
+    };
+  } catch {
+    return null;
+  }
+}
 
 async function fetchAll(accession: string): Promise<{
   protein: Protein;
   structure: Structure | null;
+  pdbStructure: PdbStructure | null;
   interactions: Interaction[];
   articles: Article[];
 } | null> {
@@ -35,6 +93,7 @@ async function fetchAll(accession: string): Promise<{
     fetch(`https://rest.uniprot.org/uniprotkb/${accession}?format=json`, { next: { revalidate: 3600 } }),
     fetch(`https://alphafold.ebi.ac.uk/api/prediction/${accession}`, { next: { revalidate: 86400 } }),
   ]);
+  const pdbStructure = await fetchPdbStructure(accession);
 
   if (uniRes.status === "rejected" || !uniRes.value.ok) return null;
   const protein = parseUniProt(await uniRes.value.json());
@@ -93,7 +152,15 @@ async function fetchAll(accession: string): Promise<{
     }
   } catch { /* optional */ }
 
-  return { protein, structure, interactions, articles };
+  return { protein, structure, pdbStructure, interactions, articles };
+}
+
+function stripCitations(text: string): string {
+  return text
+    .replace(/\s*\((?:PubMed:\d+(?:,\s*PubMed:\d+)*)\)/g, "")
+    .replace(/\s*\(By similarity\)/gi, "")
+    .replace(/\s{2,}/g, " ")
+    .trim();
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -104,7 +171,8 @@ function parseUniProt(d: any): Protein {
     d.primaryAccession;
   const gene = d.genes?.[0]?.geneName?.value ?? null;
   const comments = d.comments ?? [];
-  const fn = comments.find((c: { commentType: string }) => c.commentType === "FUNCTION")?.texts?.[0]?.value ?? null;
+  const rawFn = comments.find((c: { commentType: string }) => c.commentType === "FUNCTION")?.texts?.[0]?.value ?? null;
+  const fn = rawFn ? stripCitations(rawFn) : null;
   const locations = comments
     .filter((c: { commentType: string }) => c.commentType === "SUBCELLULAR LOCATION")
     .flatMap((c: { subcellularLocations?: { location: { value: string } }[] }) =>
@@ -145,6 +213,7 @@ export default async function ProteinPage({
       lang={lang}
       protein={data.protein}
       structure={data.structure}
+      pdbStructure={data.pdbStructure}
       interactions={data.interactions}
       articles={data.articles}
     />

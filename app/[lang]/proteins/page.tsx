@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, Suspense } from "react";
 import Link from "next/link";
-import { useParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 
 type ProteinResult = {
   accession: string;
@@ -13,17 +13,28 @@ type ProteinResult = {
   id: string | null;
 };
 
-const POPULAR = ["insulin", "hemoglobin", "p53", "BRCA1", "albumin", "collagen", "actin", "myosin"];
+const POPULAR = [
+  "insulin", "hemoglobin", "p53", "BRCA1", "albumin", "collagen",
+  "actin", "myosin", "tubulin", "histone", "ATP synthase", "RuBisCO",
+  "trypsin", "keratin", "ferritin", "catalase", "rhodopsin", "fibrinogen",
+];
 
-export default function ProteinsPage() {
+function ProteinsSearch() {
   const params = useParams();
+  const searchParams = useSearchParams();
   const lang = params.lang as string;
   const isHe = lang === "he";
 
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState(searchParams.get("q") ?? "");
   const [results, setResults] = useState<ProteinResult[]>([]);
   const [loading, setLoading] = useState(false);
   const [searched, setSearched] = useState(false);
+
+  useEffect(() => {
+    const q = searchParams.get("q");
+    if (q) search(q);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   async function search(q: string) {
     if (!q.trim()) return;
@@ -141,5 +152,13 @@ export default function ProteinsPage() {
         </div>
       )}
     </div>
+  );
+}
+
+export default function ProteinsPage() {
+  return (
+    <Suspense>
+      <ProteinsSearch />
+    </Suspense>
   );
 }

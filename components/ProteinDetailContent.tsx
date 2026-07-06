@@ -45,6 +45,15 @@ type Structure = {
 type Interaction = { name: string; score: number };
 type Article = { pubmedId: string; title: string; year: number | null };
 
+type PdbStructure = {
+  id: string;
+  title: string;
+  resolution: number | null;
+  method: string;
+  imageUrl: string;
+  rscbUrl: string;
+};
+
 const CONFIDENCE_STYLE: Record<string, string> = {
   VERY_HIGH: "bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300",
   HIGH: "bg-green-100 dark:bg-green-900/40 text-green-700 dark:text-green-300",
@@ -63,12 +72,14 @@ export default function ProteinDetailContent({
   lang,
   protein,
   structure,
+  pdbStructure,
   interactions,
   articles,
 }: {
   lang: string;
   protein: Protein;
   structure: Structure | null;
+  pdbStructure: PdbStructure | null;
   interactions: Interaction[];
   articles: Article[];
 }) {
@@ -262,6 +273,68 @@ export default function ProteinDetailContent({
           </section>
         )}
 
+        {/* PDB Experimental Structure */}
+        {pdbStructure && (
+          <section className="rounded-2xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 p-5">
+            <h2 className="text-sm font-semibold text-zinc-500 dark:text-zinc-400 uppercase tracking-wide mb-3">
+              {isHe ? "🔭 מבנה ניסויי (RCSB PDB)" : "🔭 Experimental Structure (RCSB PDB)"}
+            </h2>
+            <div className="flex gap-4 items-start">
+              <a
+                href={pdbStructure.rscbUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="shrink-0 rounded-xl overflow-hidden border border-zinc-100 dark:border-zinc-700 hover:border-emerald-400 transition-colors"
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={pdbStructure.imageUrl}
+                  alt={pdbStructure.title}
+                  width={120}
+                  height={120}
+                  className="w-[120px] h-[120px] object-cover"
+                />
+              </a>
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-medium text-zinc-800 dark:text-zinc-100 mb-1 line-clamp-2">
+                  {pdbStructure.title}
+                </p>
+                <div className="flex flex-wrap gap-2 mb-3">
+                  <span className="font-mono text-xs px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-700 text-zinc-600 dark:text-zinc-300">
+                    {pdbStructure.id}
+                  </span>
+                  <span className="text-xs px-2 py-0.5 rounded bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300">
+                    {pdbStructure.method}
+                  </span>
+                  {pdbStructure.resolution && (
+                    <span className="text-xs px-2 py-0.5 rounded bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300">
+                      {pdbStructure.resolution} Å
+                    </span>
+                  )}
+                </div>
+                <div className="flex gap-2 flex-wrap">
+                  <a
+                    href={pdbStructure.rscbUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-xs px-3 py-1.5 rounded-lg border border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 hover:border-emerald-400 hover:text-emerald-700 transition-colors"
+                  >
+                    RCSB PDB ↗
+                  </a>
+                  <a
+                    href={`https://www.rcsb.org/3d-view/${pdbStructure.id}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-xs px-3 py-1.5 rounded-lg border border-blue-200 dark:border-blue-800 text-blue-600 dark:text-blue-400 hover:border-blue-400 hover:text-blue-700 transition-colors"
+                  >
+                    {isHe ? "צפייה תלת-מימד ↗" : "3D View ↗"}
+                  </a>
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
+
         {/* Subcellular Location */}
         {locations.length > 0 && (
           <section className="rounded-2xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 p-5">
@@ -295,18 +368,16 @@ export default function ProteinDetailContent({
             </p>
             <div className="flex flex-wrap gap-2">
               {interactions.map((i) => (
-                <a
+                <Link
                   key={i.name}
-                  href={`https://string-db.org/network/${i.name}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href={`/${lang}/proteins?q=${encodeURIComponent(i.name)}`}
                   className="inline-flex items-center gap-1.5 text-xs px-3 py-1.5 rounded-lg bg-zinc-50 dark:bg-zinc-700 border border-zinc-200 dark:border-zinc-600 hover:border-emerald-400 transition-colors"
                 >
                   <span className="font-mono font-medium text-zinc-700 dark:text-zinc-300">{i.name}</span>
                   <span className={`text-xs ${i.score >= 90 ? "text-green-600 dark:text-green-400" : i.score >= 70 ? "text-yellow-600 dark:text-yellow-400" : "text-zinc-400"}`}>
                     {i.score}%
                   </span>
-                </a>
+                </Link>
               ))}
             </div>
           </section>
