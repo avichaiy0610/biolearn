@@ -38,20 +38,31 @@ export async function POST(
     return Response.json({ error: "AI failed to generate animation steps" }, { status: 500 });
   }
 
-  // Sequential ops — libSQL adapter doesn't support array transactions
-  await prisma.processStep.deleteMany({ where: { processId: proc.id } });
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  await prisma.processStep.createMany({
-    data: steps.map((s: any, i: number) => ({
-      processId: proc.id,
-      order: i + 1,
-      titleHe: String(s.titleHe ?? ""),
-      titleEn: String(s.titleEn ?? ""),
-      descHe: String(s.descHe ?? ""),
-      descEn: String(s.descEn ?? ""),
-      svgData: JSON.stringify({ elements: s.elements ?? [], highlight: s.highlight ?? [] }),
-    })),
-  });
+  // The libSQL (Turso) adapter does NOT reliably support createMany, so mirror
+  // the working generate-animation route and use a nested `create` instead.
+  try {
+    await prisma.processStep.deleteMany({ where: { processId: proc.id } });
+    await prisma.process.update({
+      where: { id: proc.id },
+      data: {
+        steps: {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          create: steps.map((s: any, i: number) => ({
+            order: i + 1,
+            titleHe: String(s.titleHe ?? ""),
+            titleEn: String(s.titleEn ?? ""),
+            descHe: String(s.descHe ?? ""),
+            descEn: String(s.descEn ?? ""),
+            svgData: JSON.stringify({ elements: s.elements ?? [], highlight: s.highlight ?? [] }),
+          })),
+        },
+      },
+    });
+  } catch (e) {
+    const msg = e instanceof Error ? e.message : String(e);
+    console.error("[regenerate] DB write failed:", msg);
+    return Response.json({ error: `Failed to save animation: ${msg}` }, { status: 500 });
+  }
 
   return Response.json({ stepsCreated: steps.length });
 }

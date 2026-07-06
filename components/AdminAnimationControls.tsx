@@ -17,6 +17,7 @@ export default function AdminAnimationControls({ topicSlug, processSlug, lang = 
   const [mode, setMode]       = useState<Mode>("closed");
   const [text, setText]       = useState("");
   const [state, setState]     = useState<"idle" | "saving" | "done" | "error">("idle");
+  const [errMsg, setErrMsg]   = useState("");
   const [stepCount, setStepCount] = useState<number | null>(null);
   const router = useRouter();
   const isHe = lang === "he";
@@ -53,22 +54,24 @@ export default function AdminAnimationControls({ topicSlug, processSlug, lang = 
 
   async function rebuild() {
     setState("saving");
+    setErrMsg("");
     try {
       const res = await fetch(`/api/admin/processes/${processSlug}/regenerate`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ feedback: text.trim() || undefined }),
       });
-      if (!res.ok) throw new Error();
-      const { stepsCreated } = await res.json();
-      setStepCount(stepsCreated);
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(data?.error || `HTTP ${res.status}`);
+      setStepCount(data.stepsCreated);
       setState("done");
       setTimeout(() => {
         setMode("closed");
         setState("idle");
         router.refresh();
       }, 1800);
-    } catch {
+    } catch (e) {
+      setErrMsg(e instanceof Error ? e.message : String(e));
       setState("error");
     }
   }
@@ -139,7 +142,10 @@ export default function AdminAnimationControls({ topicSlug, processSlug, lang = 
               />
 
               {state === "error" && (
-                <p className="text-xs text-red-500">{isHe ? "שגיאה — נסה שוב" : "Error — try again"}</p>
+                <p className="text-xs text-red-500 break-words">
+                  {isHe ? "שגיאה — נסה שוב" : "Error — try again"}
+                  {errMsg ? ` · ${errMsg}` : ""}
+                </p>
               )}
 
               <div className="flex items-center gap-2">
