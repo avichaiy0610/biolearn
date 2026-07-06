@@ -66,8 +66,8 @@ function buildSvg(
   const sy = H / 300;  // 2.4
 
   const elSvg = elements.map((el) => {
-    const isH = !highlight || highlight.includes(el.id);
-    const op = (el.opacity ?? 1) * (isH ? 1 : 0.2);
+    const isH = !highlight || highlight.length === 0 || highlight.includes(el.id);
+    const op = (el.opacity ?? 1) * (isH ? 1 : 0.5);
     const fill = el.color ?? (isH ? "#059669" : "#94a3b8");
     const stroke = el.stroke ?? (el.strokeWidth ? (isH ? fill : "#64748b") : "none");
     const sw = el.strokeWidth ?? (el.stroke ? 2 : 0);

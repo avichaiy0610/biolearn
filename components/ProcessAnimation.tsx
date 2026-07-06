@@ -116,7 +116,7 @@ function AnimatedSvgElement({
   if (!el) return null;
 
   const baseOpacity = el.opacity ?? 1;
-  const effectiveOpacity = isHighlighted ? baseOpacity : baseOpacity * 0.25;
+  const effectiveOpacity = isHighlighted ? baseOpacity : baseOpacity * 0.55;
 
   // Use element's own color; fall back to palette based on highlight state
   const fill = el.color ?? (isHighlighted ? "#059669" : "#94a3b8");
@@ -432,7 +432,7 @@ export default function ProcessAnimation({
               <rect width="400" height="300" fill="url(#dotgrid)" />
               {/* Animated elements */}
               {allElementIds.map((id) => {
-                const isHighlighted = !highlight || highlight.includes(id);
+                const isHighlighted = !highlight || highlight.length === 0 || highlight.includes(id);
                 return (
                   <AnimatedSvgElement
                     key={id}
@@ -450,8 +450,8 @@ export default function ProcessAnimation({
                   const el = getElementAtStep(id, currentStep, steps);
                   if (!el || !isLegacyChromosome(el)) return null;
                   const baseOpacity = el.opacity ?? 1;
-                  const isHighlighted = !highlight || highlight.includes(id);
-                  const effectiveOpacity = isHighlighted ? baseOpacity : baseOpacity * 0.25;
+                  const isHighlighted = !highlight || highlight.length === 0 || highlight.includes(id);
+                  const effectiveOpacity = isHighlighted ? baseOpacity : baseOpacity * 0.55;
                   // Centromere width matches the rendered chromatids (same cw formula as above)
                   const _cw = Math.min((el.rx ?? 5) * 0.45, (el.ry ?? 20) * 0.15);
                   const centRx = Math.round(_cw * 1.6);  // spans both chromatids at constriction

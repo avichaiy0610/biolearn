@@ -176,7 +176,7 @@ export async function generateAnimationSteps(
   feedback?: string
 ): Promise<object[]> {
   const isMeiosis = isMeiosisProcess(nameEn, nameHe);
-  const stepCount = isMeiosis ? "10-12" : "8";
+  const stepCount = isMeiosis ? "8-10" : "5-6";
 
   const feedbackBlock = feedback?.trim()
     ? `\n═══════════════════════════════════════════\nIMPROVEMENT INSTRUCTIONS FROM ADMIN:\n═══════════════════════════════════════════\n${feedback.trim()}\nPlease address every point above in the new animation.\n`
@@ -249,16 +249,20 @@ ANIMATION DESIGN RULES — MANDATORY:
    - Organelles moving or changing shape
    - Membranes deforming, fusing, or pinching
 
-7. Use exactly ${stepCount} steps. Non-meiosis processes: aim for 8-10 richly detailed steps.
+7. Use exactly ${stepCount} steps. FEWER but DENSER steps beat many empty ones.
 
-8. QUALITY BAR — treat EVERY process with the same care as a meiosis animation:
-   - Open with an establishing step (the full labelled scene at rest), then one clear
-     event per step, and close with the finished product/outcome.
-   - Carry elements across steps by REUSING THE SAME id so they animate smoothly;
-     only change coordinates/opacity. Introduce a new id only for something genuinely new.
-   - Every step's "descHe"/"descEn" must state what physically changed since the prior step.
-   - Prefer the detailed path-based organelles over lone circles. A step should never be
-     just 2-3 primitives — build a real scene (membrane + organelles + molecules + labels).
+8. DENSITY IS MANDATORY. Each step MUST contain at LEAST 7 drawn elements (excluding
+   text labels): the cell membrane + 2 or more organelles + every molecule/actor of THIS
+   step, and a text label on each key structure. A step with only 2–4 shapes is WRONG —
+   add more until the scene is full and busy. Reuse elements from the shape library.
+
+9. QUALITY BAR — treat EVERY process with the care of a meiosis animation:
+   - Establishing step first (full labelled scene), one clear event per step, outcome last.
+   - Reuse the SAME id across steps so elements animate smoothly; new id only for something new.
+   - Each "descHe"/"descEn" states what physically changed since the previous step.
+   - Use the detailed path-based organelles, not lone circles.
+   - Put the elements you want emphasised in "highlight"; leave "highlight" as [] to show
+     the WHOLE scene at full strength (never highlight just one element and hide the rest).
 
 Return ONLY valid JSON (no markdown):
 {"steps":[
