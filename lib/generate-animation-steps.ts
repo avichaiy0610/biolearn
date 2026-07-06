@@ -125,29 +125,7 @@ over plain circles — they render with gradients, shadow and glow automatically
 ▸ CELL PLATE / DIVIDING WALL:
   {"id":"cell_plate","type":"line","x1":200,"y1":75,"x2":200,"y2":235,"stroke":"#84cc16","strokeWidth":3}
 
-COLOR PALETTE:
-  cell fill: #fdf4e3  cell stroke: #c9a55a
-  nucleus fill: #fef9c3  nucleus stroke: #ca8a04
-  mitochondria: #fed7aa / #ea580c   cristae: #c2410c
-  chloroplast: #bbf7d0 / #15803d    grana: #22c55e
-  rough ER: #d97706 (stroke)   vacuole: #e0f2fe / #0284c7
-  lysosome: #fbcfe8 / #be185d
-  golgi: #a7f3d0→#059669 (green gradient)
-  ribosome: #fbbf24 / #fde68a
-  enzyme/protein: #c7d2fe / #6366f1   receptor: #c4b5fd / #7c3aed
-  DNA strand A: #2563eb  DNA strand B: #dc2626
-  mRNA: #f59e0b  tRNA: #d8b4fe
-  chromosome A: #4ade80/#16a34a  chromosome B: #f87171/#dc2626
-  centromere: #9f1239
-  spindle: #7c3aed
-  vesicle: #fce7f3/#db2777
-  ATP: #fef08a/#ca8a04
-
-ID PREFIX RULE (IMPORTANT): keep organelle ids on their canonical prefix so the
-renderer styles them correctly and never mistakes them for chromosomes —
-cell / nuc / membrane / mito / chloro / er_ / rib / golgi / lyso / vacuole /
-perox / enzyme / protein / dna / rna / mrna / trna / atp / vesicle / spindle.
-Only elongated ellipses whose id is NOT one of those become chromosomes.
+ID PREFIX RULE: keep organelle ids on their canonical prefix (cell, nuc, membrane, mito, chloro, er_, rib, golgi, lyso, vacuole, perox, enzyme, protein, dna, rna, mrna, trna, atp, vesicle, spindle). Only elongated ellipses whose id is none of these become chromosomes.
 `;
 
 // Robustly extract steps even from a TRUNCATED JSON response (the 70B model can
@@ -198,7 +176,7 @@ export async function generateAnimationSteps(
   feedback?: string
 ): Promise<object[]> {
   const isMeiosis = isMeiosisProcess(nameEn, nameHe);
-  const stepCount = isMeiosis ? "12-14" : "8-10";
+  const stepCount = isMeiosis ? "10-12" : "8";
 
   const feedbackBlock = feedback?.trim()
     ? `\n═══════════════════════════════════════════\nIMPROVEMENT INSTRUCTIONS FROM ADMIN:\n═══════════════════════════════════════════\n${feedback.trim()}\nPlease address every point above in the new animation.\n`
@@ -235,7 +213,7 @@ KEY RULES FOR MEIOSIS:
   const prompt = `You are creating a VISUALLY RICH, BIOLOGICALLY ACCURATE step-by-step animation for a high school/university biology platform.
 ${feedbackBlock}
 Process to animate: "${nameEn}" (${nameHe})
-Biology content: ${contentEn.slice(0, 1200)}
+Biology content: ${contentEn.slice(0, 900)}
 ${meiosisExtra}
 ${SHAPE_LIBRARY}
 ═══════════════════════════════════════════
@@ -302,7 +280,10 @@ Return ONLY valid JSON (no markdown):
       ],
       model: QUALITY_MODEL,
       response_format: { type: "json_object" },
-      max_tokens: isMeiosis ? 14000 : 10000,
+      // Groq free tier caps TOTAL tokens/minute (prompt + output) at 12000. Keep
+      // prompt(~4-5k) + max_tokens under that or the request is rejected (413).
+      // The salvage parser recovers usable steps if the output is cut short.
+      max_tokens: isMeiosis ? 5500 : 6000,
     });
   } catch (err) {
     // Surface real API failures (rate limit, bad key, model error) to the caller.
