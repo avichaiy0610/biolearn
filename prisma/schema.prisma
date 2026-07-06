@@ -61,6 +61,16 @@ model ProcessStep {
   svgData   String  // JSON-serialized animation data
 }
 
+// Durable storage for generated MP4s. Separate table (not a Process column) so
+// existing Process queries keep working even before this table is migrated.
+// FREE backend (Turso DB) for testing; swap to a paid CDN/blob store later via
+// lib/video-storage.ts without touching the rest of the app.
+model ProcessVideo {
+  slug      String   @id // matches Process.slug
+  data      String       // base64-encoded MP4
+  createdAt DateTime @default(now())
+}
+
 model UploadedMaterial {
   id          String   @id @default(cuid())
   fileName    String

@@ -38,22 +38,20 @@ export async function POST(
     return Response.json({ error: "AI failed to generate animation steps" }, { status: 500 });
   }
 
-  // Replace all steps in a transaction
-  await prisma.$transaction([
-    prisma.processStep.deleteMany({ where: { processId: proc.id } }),
-    prisma.processStep.createMany({
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      data: steps.map((s: any, i: number) => ({
-        processId: proc.id,
-        order: i + 1,
-        titleHe: String(s.titleHe ?? ""),
-        titleEn: String(s.titleEn ?? ""),
-        descHe: String(s.descHe ?? ""),
-        descEn: String(s.descEn ?? ""),
-        svgData: JSON.stringify({ elements: s.elements ?? [], highlight: s.highlight ?? [] }),
-      })),
-    }),
-  ]);
+  // Sequential ops — libSQL adapter doesn't support array transactions
+  await prisma.processStep.deleteMany({ where: { processId: proc.id } });
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  await prisma.processStep.createMany({
+    data: steps.map((s: any, i: number) => ({
+      processId: proc.id,
+      order: i + 1,
+      titleHe: String(s.titleHe ?? ""),
+      titleEn: String(s.titleEn ?? ""),
+      descHe: String(s.descHe ?? ""),
+      descEn: String(s.descEn ?? ""),
+      svgData: JSON.stringify({ elements: s.elements ?? [], highlight: s.highlight ?? [] }),
+    })),
+  });
 
   return Response.json({ stepsCreated: steps.length });
 }

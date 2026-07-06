@@ -92,8 +92,8 @@ function makeChromosomePath(cx: number, cy: number, rx: number, ry: number): str
   ].join(" ");
 }
 
-// Nucleus/cell IDs to never reshape — they're round by design
-const NON_CHROM_IDS = /^(cell|nuc|nucleus|membrane|cytoplasm|organelle|lbl|text|label|spindle|protein|enzyme|rna|dna|atp)/i;
+// IDs that should never be reshaped as chromosomes — organelles, molecules, labels
+const NON_CHROM_IDS = /^(cell|nuc|nucleus|membrane|cytoplasm|organelle|lbl|text|label|spindle|protein|enzyme|rna|dna|atp|mito|golgi|rib|vesicle|trna|polypep|mrna|vacuole|chloro|lyso|er_|perox)/i;
 
 function isLegacyChromosome(el: SvgElement): boolean {
   return (
@@ -225,24 +225,27 @@ function AnimatedSvgElement({
           transition={t}
         />
       );
-    case "path":
+    case "path": {
+      // Filled path (Golgi, vesicle buds, etc.) vs stroke-only (DNA, mRNA, cristae)
+      const isFilled = !!el.color;
       return (
         <motion.path
           key={id}
           d={el.d ?? ""}
-          fill="none"
-          markerEnd="url(#arrowhead)"
           strokeLinecap="round"
           strokeLinejoin="round"
+          filter={isFilled ? filterRef : undefined}
           initial={{ opacity: 0 }}
           animate={{
-            stroke: isHighlighted ? (el.stroke ?? "#059669") : "#64748b",
-            strokeWidth: el.strokeWidth ?? 2.5,
+            fill: isFilled ? fill : "none",
+            stroke: isHighlighted ? (el.stroke ?? (isFilled ? fill : "#059669")) : "#64748b",
+            strokeWidth: el.strokeWidth ?? (isFilled ? 1.5 : 2),
             opacity: effectiveOpacity,
           }}
           transition={t}
         />
       );
+    }
     case "text":
       return (
         <motion.text

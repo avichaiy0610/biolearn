@@ -6,8 +6,7 @@ import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 import ProcessAnimation from "@/components/ProcessAnimation";
 import AdminAnimationControls from "@/components/AdminAnimationControls";
-import fs from "fs";
-import path from "path";
+import { hasProcessVideo, videoUrlFor } from "@/lib/video-storage";
 
 export default async function ProcessPage({
   params,
@@ -30,9 +29,8 @@ export default async function ProcessPage({
   const processName = lang === "he" ? proc.nameHe : proc.nameEn;
   const topicName = lang === "he" ? proc.topic.nameHe : proc.topic.nameEn;
 
-  // Check if a pre-generated MP4 video exists in public/videos/
-  const videoFilePath = path.join(process.cwd(), "public", "videos", `${processSlug}.mp4`);
-  const videoUrl = fs.existsSync(videoFilePath) ? `/videos/${processSlug}.mp4` : null;
+  // A generated MP4 is stored durably (see lib/video-storage.ts) — served via API route.
+  const videoUrl = (await hasProcessVideo(processSlug)) ? videoUrlFor(processSlug) : null;
 
   return (
     <div className="max-w-3xl mx-auto px-4 py-10">

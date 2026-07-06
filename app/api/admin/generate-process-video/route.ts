@@ -1,5 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { isAdmin } from "@/lib/supabase/server";
+import { saveProcessVideo } from "@/lib/video-storage";
 import path from "path";
 import fs from "fs";
 import os from "os";
@@ -10,7 +11,11 @@ const ffmpegStatic = require("ffmpeg-static") as string | null;
 
 export const maxDuration = 120;
 
-const FFMPEG: string = ffmpegStatic as string;
+// Prefer ffmpeg-static if its binary actually exists on disk; fall back to system ffmpeg
+const FFMPEG: string =
+  ffmpegStatic && fs.existsSync(ffmpegStatic)
+    ? ffmpegStatic
+    : "ffmpeg"; // system ffmpeg (available on most Linux/macOS hosts)
 
 const W = 1280;
 const H = 720;
@@ -87,8 +92,11 @@ function buildSvg(
         return `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${isH ? (el.stroke ?? "#059669") : "#64748b"}" stroke-width="${(el.strokeWidth ?? 2.5) * Math.min(sx, sy)}" stroke-linecap="round" opacity="${op}"/>
 <polygon points="${x2},${y2} ${ax1},${ay1} ${ax2},${ay2}" fill="${isH ? "#059669" : "#64748b"}" opacity="${op}"/>`;
       }
-      case "path":
-        return `<path d="${escapeXml(el.d ?? "")}" fill="none" stroke="${isH ? (el.stroke ?? "#059669") : "#64748b"}" stroke-width="${(el.strokeWidth ?? 2.5) * Math.min(sx, sy)}" stroke-linecap="round" stroke-linejoin="round" opacity="${op}"/>`;
+      case "path": {
+        // Match ProcessAnimation: a path WITH color is filled; without, stroke-only.
+        const isFilled = !!el.color;
+        return `<path d="${escapeXml(el.d ?? "")}" fill="${isFilled ? fill : "none"}" stroke="${isH ? (el.stroke ?? (isFilled ? fill : "#059669")) : "#64748b"}" stroke-width="${(el.strokeWidth ?? (isFilled ? 1.5 : 2.5)) * Math.min(sx, sy)}" stroke-linecap="round" stroke-linejoin="round" opacity="${op}"/>`;
+      }
       case "text": {
         const fs2 = (el.fontSize ?? 11) * Math.min(sx, sy) * 1.1;
         const lbl = escapeXml(el.label ?? "");
@@ -154,7 +162,6 @@ export async function POST(req: Request) {
     return Response.json({ error: "Invalid request body" }, { status: 400 });
   }
   if (!processSlug) return Response.json({ error: "processSlug required" }, { status: 400 });
-  if (!FFMPEG) return Response.json({ error: "FFmpeg binary not found (ffmpeg-static returned null)" }, { status: 500 });
 
   const proc = await prisma.process.findFirst({
     where: { slug: processSlug },
@@ -195,18 +202,10 @@ export async function POST(req: Request) {
     }
 
     // ── 2. Build FFmpeg filter_complex for xfade transitions ─────────────
-    // Try to write to public/videos/ (works in local dev). On Vercel it's
-    // read-only, so fall back to os.tmpdir() and return the file inline.
-    let outDir = path.join(process.cwd(), "public", "videos");
-    let useLocalPublic = true;
-    try {
-      fs.mkdirSync(outDir, { recursive: true });
-      fs.accessSync(outDir, fs.constants.W_OK);
-    } catch {
-      outDir = path.join(os.tmpdir(), "biolearn-videos");
-      fs.mkdirSync(outDir, { recursive: true });
-      useLocalPublic = false;
-    }
+    // Render to a temp file, then persist through the storage abstraction
+    // (lib/video-storage.ts) — durable and Vercel-safe (public/ is read-only there).
+    const outDir = path.join(os.tmpdir(), "biolearn-videos");
+    fs.mkdirSync(outDir, { recursive: true });
     const outPath = path.join(outDir, `${processSlug}.mp4`);
 
     const n = pngPaths.length;
@@ -251,23 +250,23 @@ export async function POST(req: Request) {
 
     fs.rmSync(tmpDir, { recursive: true, force: true });
 
-    if (result.status !== 0) {
+    if (result.error || result.status !== 0) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      if ((result.error as any)?.code === "ENOENT") {
+        return Response.json(
+          { error: `FFmpeg not found. Install it: https://ffmpeg.org/download.html (tried: ${FFMPEG})` },
+          { status: 500 }
+        );
+      }
       const details = result.stderr?.slice(-1000) ?? result.error?.message ?? "unknown error";
       console.error("[generate-video] FFmpeg failed:", details);
       return Response.json({ error: "FFmpeg failed", details }, { status: 500 });
     }
 
-    if (useLocalPublic) {
-      return Response.json({ videoUrl: `/videos/${processSlug}.mp4`, steps: n });
-    }
-    // Vercel: return file as base64 so the client can create a blob URL
     const videoBuffer = fs.readFileSync(outPath);
     fs.rmSync(outPath, { force: true });
-    return Response.json({
-      videoBase64: videoBuffer.toString("base64"),
-      steps: n,
-      note: "Vercel mode — video served inline",
-    });
+    const videoUrl = await saveProcessVideo(processSlug, videoBuffer);
+    return Response.json({ videoUrl, steps: n });
 
   } catch (err) {
     try { fs.rmSync(tmpDir, { recursive: true, force: true }); } catch { /* ignore */ }
