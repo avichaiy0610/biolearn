@@ -169,6 +169,67 @@ function parseStepsLoose(raw: string): object[] {
   return objs;
 }
 
+/* ─── Per-process teaching scripts (the meiosis approach, generalised) ───────
+   The 70B model builds FAR better animations from an explicit step-by-step
+   script than from a general shape library. Add one entry per important process.
+   A focused script is also smaller than the full library, freeing tokens for a
+   richer (higher max_tokens) output while staying under Groq's 12k TPM cap. */
+type ProcessScript = { id: string; match: RegExp; stepCount: string; maxTokens: number; body: string };
+
+const PROCESS_SCRIPTS: ProcessScript[] = [
+  {
+    id: "ubiquitin-proteasome",
+    match: /ubiquitin|proteasom|אוביקוו?יטין|פרוטא[אז]ום|פירוק חלבונ/i,
+    stepCount: "7",
+    maxTokens: 8000,
+    body: `UBIQUITIN–PROTEASOME SYSTEM — MANDATORY 7-STEP SCRIPT. Draw EVERY element a step lists (>=7 shapes) and label each key structure.
+Colours: substrate #f9a8d4/#be185d ; ubiquitin #fde047/#a16207 (label "Ub") ; E1 #93c5fd/#2563eb ; E2 #86efac/#16a34a ; E3 #c4b5fd/#7c3aed ; proteasome #e2e8f0/#475569 , caps #94a3b8 ; ATP #fef08a/#ca8a04 ; peptides #fca5a5/#dc2626.
+Keep these across steps (reuse ids): cell membrane {"id":"cell","type":"ellipse","cx":200,"cy":150,"rx":155,"ry":120,"color":"#fdf4e3","stroke":"#c9a55a","strokeWidth":2}; one context organelle (e.g. a mitochondrion bottom-left) for depth.
+
+STEP 1 "Target protein & ubiquitin": cell; misfolded substrate blob id "protein_substrate" ellipse cx130 cy150 rx26 ry20 #f9a8d4; four free ubiquitins ids ub1..ub4 circles r8 #fde047 scattered on the right (labelled "Ub"); labels "Target protein","Ubiquitin".
+STEP 2 "E1 activates Ub (ATP)": keep all; add E1 id "enzyme_e1" circle cx255 cy105 r22 #93c5fd with ub1 sitting on it; add ATP id "atp" circle cx305 cy90 r9 #fef08a label "ATP"; label "E1".
+STEP 3 "E2 & E3 tag the substrate": add E2 id "enzyme_e2" circle cx250 cy175 r18 #86efac and E3 id "enzyme_e3" ellipse cx195 cy190 rx30 ry18 #c4b5fd; move ub1 onto the substrate; labels "E2","E3 ligase".
+STEP 4 "Poly-ubiquitin chain (K48)": stack four ubiquitins ids ub_c1..ub_c4 in a short vertical chain on the substrate (cx130, cy 122,106,90,74); label "Poly-ubiquitin chain".
+STEP 5 "26S proteasome recognises the tag": build the barrel on the right from rects — 20S core id "protein_core" rect x270 y100 width70 height100 #e2e8f0; caps id "protein_cap_t" rect x268 y82 width74 height20 and id "protein_cap_b" rect x268 y200 width74 height20 #94a3b8; move the tagged substrate toward the top cap; labels "26S proteasome","20S core","19S cap".
+STEP 6 "Unfold, thread in, recycle Ub": narrow the substrate and move it INTO the core (cx~303 cy~150); detach ub_c1..ub_c4 and move them left (recycled); label "Deubiquitination + unfolding".
+STEP 7 "Peptides released": remove the substrate from view; emit four short peptides ids pep1..pep4 small #fca5a5 circles from the bottom cap spreading outward; keep some free Ub floating; labels "Short peptides","Recycled ubiquitin".`,
+  },
+];
+
+function findProcessScript(nameEn: string, nameHe: string): ProcessScript | null {
+  return PROCESS_SCRIPTS.find((s) => s.match.test(nameEn) || s.match.test(nameHe)) ?? null;
+}
+
+function buildScriptedPrompt(
+  nameEn: string,
+  nameHe: string,
+  contentEn: string,
+  feedbackBlock: string,
+  script: ProcessScript
+): string {
+  return `You are creating a VISUALLY RICH, BIOLOGICALLY ACCURATE step-by-step SVG animation for a biology learning platform.
+${feedbackBlock}
+Process: "${nameEn}" (${nameHe})
+Biology context: ${contentEn.slice(0, 500)}
+
+CANVAS: viewBox 0 0 400 300 (x:0=left..400=right, y:0=top..300=bottom).
+ELEMENT FORMAT — each element is one JSON object with an "id" and "type":
+  circle/ellipse → cx,cy + r OR rx,ry ; rect → x,y,width,height ; line → x1,y1,x2,y2 ; path → d ; text → x,y,label.
+  A shape/path WITH "color" is FILLED; without "color" it is a stroke outline (use "stroke").
+  Reuse the SAME id across steps so an element animates smoothly; change only its coordinates.
+  Keep "highlight":[] so the whole scene stays at full strength.
+
+${script.body}
+
+RULES:
+- Follow the script EXACTLY: each step MUST include ALL the elements it lists (7+ shapes) plus a short English text label on each key structure.
+- Use exactly ${script.stepCount} steps, in order.
+- Between consecutive steps, physically MOVE the actors so the process visibly advances.
+
+Return ONLY valid JSON (no markdown):
+{"steps":[{"titleHe":"...","titleEn":"...","descHe":"...","descEn":"...","elements":[ ... ],"highlight":[]}]}`;
+}
+
 export async function generateAnimationSteps(
   nameEn: string,
   nameHe: string,
@@ -176,7 +237,8 @@ export async function generateAnimationSteps(
   feedback?: string
 ): Promise<object[]> {
   const isMeiosis = isMeiosisProcess(nameEn, nameHe);
-  const stepCount = isMeiosis ? "8-10" : "5-6";
+  const script = isMeiosis ? null : findProcessScript(nameEn, nameHe);
+  const stepCount = isMeiosis ? "8-10" : script ? script.stepCount : "5-6";
 
   const feedbackBlock = feedback?.trim()
     ? `\n═══════════════════════════════════════════\nIMPROVEMENT INSTRUCTIONS FROM ADMIN:\n═══════════════════════════════════════════\n${feedback.trim()}\nPlease address every point above in the new animation.\n`
@@ -210,7 +272,7 @@ KEY RULES FOR MEIOSIS:
 - Step 12: draw FOUR small cells, two rows of two
 ` : "";
 
-  const prompt = `You are creating a VISUALLY RICH, BIOLOGICALLY ACCURATE step-by-step animation for a high school/university biology platform.
+  const generalPrompt = `You are creating a VISUALLY RICH, BIOLOGICALLY ACCURATE step-by-step animation for a high school/university biology platform.
 ${feedbackBlock}
 Process to animate: "${nameEn}" (${nameHe})
 Biology content: ${contentEn.slice(0, 900)}
@@ -271,6 +333,13 @@ Return ONLY valid JSON (no markdown):
   ],"highlight":["cell"]}
 ]}`;
 
+  // A matched process script (meiosis-style) gives far better results and is
+  // smaller, so it can afford a bigger output budget; otherwise use the library.
+  const prompt = script
+    ? buildScriptedPrompt(nameEn, nameHe, contentEn, feedbackBlock, script)
+    : generalPrompt;
+  const maxTokens = isMeiosis ? 5500 : script ? script.maxTokens : 6000;
+
   let completion;
   try {
     completion = await groq.chat.completions.create({
@@ -287,7 +356,7 @@ Return ONLY valid JSON (no markdown):
       // Groq free tier caps TOTAL tokens/minute (prompt + output) at 12000. Keep
       // prompt(~4-5k) + max_tokens under that or the request is rejected (413).
       // The salvage parser recovers usable steps if the output is cut short.
-      max_tokens: isMeiosis ? 5500 : 6000,
+      max_tokens: maxTokens,
     });
   } catch (err) {
     // Surface real API failures (rate limit, bad key, model error) to the caller.
