@@ -6,6 +6,8 @@ import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 import ProcessAnimation from "@/components/ProcessAnimation";
 import AdminAnimationControls from "@/components/AdminAnimationControls";
+import ProcessScene from "@/components/scenes/ProcessScene";
+import { findSceneId } from "@/components/scenes/registry";
 import { hasProcessVideo, videoUrlFor } from "@/lib/video-storage";
 
 export default async function ProcessPage({
@@ -75,15 +77,23 @@ export default async function ProcessPage({
         </div>
       )}
 
-      {/* ── Interactive step diagram ─────────────────────────────────── */}
-      <ProcessAnimation
-        steps={proc.steps}
-        lang={lang as Locale}
-        dict={dict}
-        processName={processName}
-        topicSlug={slug}
-        processSlug={processSlug}
-      />
+      {/* ── Visual: bespoke hand-crafted scene if one exists, else the step animation ── */}
+      {findSceneId(proc.nameEn, proc.nameHe) ? (
+        <ProcessScene
+          sceneId={findSceneId(proc.nameEn, proc.nameHe)!}
+          lang={lang}
+          processName={processName}
+        />
+      ) : (
+        <ProcessAnimation
+          steps={proc.steps}
+          lang={lang as Locale}
+          dict={dict}
+          processName={processName}
+          topicSlug={slug}
+          processSlug={processSlug}
+        />
+      )}
 
       <AdminAnimationControls
         topicSlug={slug}
