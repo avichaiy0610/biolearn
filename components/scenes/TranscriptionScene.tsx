@@ -1,11 +1,11 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 /* Hand-crafted, continuously-animated transcription scene (RNA Polymerase).
-   Unlike the LLM step animations, this is a fixed high-quality scene that RUNS
-   by itself: the DNA feeds through a stationary polymerase and the mRNA strand
-   streams out — a real motion clip, not auto-advancing slides. */
+   Runs by itself: DNA feeds through a stationary polymerase and the mRNA strand
+   streams out. Rotating captions explain what happens as it plays. */
 
 const P = 64;   // helix wavelength
 const A = 16;   // helix amplitude
@@ -30,6 +30,13 @@ const RUNGS = (() => {
   return arr;
 })();
 
+const CAPTIONS: { he: string; en: string }[] = [
+  { he: "1 · ה-DNA נפתח וגדיליו נפרדים בתוך הפולימראז", en: "1 · The DNA unwinds; its strands separate inside the polymerase" },
+  { he: "2 · RNA פולימראז קורא את הגדיל התבניתי בכיוון 3′→5′", en: "2 · RNA polymerase reads the template strand (3′→5′)" },
+  { he: "3 · נוקלאוטידים משלימים מתווספים ובונים את שרשרת ה-mRNA", en: "3 · Complementary nucleotides are added, building the mRNA chain" },
+  { he: "4 · תעתיק ה-mRNA משתחרר, וה-DNA נסגר מחדש מאחור", en: "4 · The mRNA transcript is released and the DNA rewinds behind" },
+];
+
 export default function TranscriptionScene({
   lang = "he",
   processName,
@@ -38,6 +45,12 @@ export default function TranscriptionScene({
   processName?: string;
 }) {
   const he = lang !== "en";
+  const [ci, setCi] = useState(0);
+
+  useEffect(() => {
+    const t = setInterval(() => setCi((c) => (c + 1) % CAPTIONS.length), 3200);
+    return () => clearInterval(t);
+  }, []);
 
   return (
     <div className="rounded-2xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 overflow-hidden shadow-sm">
@@ -81,13 +94,6 @@ export default function TranscriptionScene({
             <path d={strandPath(-1)} fill="none" stroke="#60a5fa" strokeWidth={4} strokeLinecap="round" />
           </motion.g>
 
-          {/* strand labels (static, on the incoming side) */}
-          <g fontFamily="system-ui, sans-serif" fontWeight={600} fontSize={12}
-             paintOrder="stroke" stroke="#ffffff" strokeWidth={3} strokeLinejoin="round">
-            <text x={470} y={112} textAnchor="end" fill="#be185d">{he ? "גדיל מקודד" : "Coding strand"}</text>
-            <text x={470} y={200} textAnchor="end" fill="#2563eb">{he ? "גדיל תבנית" : "Template strand"}</text>
-          </g>
-
           {/* ── RNA Polymerase (stationary, gentle breathing) ── */}
           <motion.g
             animate={{ scale: [1, 1.025, 1] }}
@@ -115,25 +121,56 @@ export default function TranscriptionScene({
               animate={{ cx: [234, 188, 120], cy: [206, 250, 290], opacity: [0, 1, 1, 0] }}
               transition={{ duration: 2.6, repeat: Infinity, delay: i * 0.52, ease: "linear" }} />
           ))}
-          <text x={112} y={292} textAnchor="end" fontFamily="system-ui, sans-serif"
-            fontSize={12} fontWeight={700} fill="#047857"
-            paintOrder="stroke" stroke="#ffffff" strokeWidth={3} strokeLinejoin="round">
-            {he ? "תעתיק mRNA" : "mRNA transcript"}
-          </text>
 
           {/* direction arrow along the DNA */}
           <g opacity={0.8}>
-            <line x1={300} y1={228} x2={360} y2={228} stroke="#0f766e" strokeWidth={2} />
-            <path d="M 360 228 l -7 -4 l 0 8 Z" fill="#0f766e" />
-            <text x={330} y={222} textAnchor="middle" fontSize={10} fontWeight={600} fill="#0f766e">5′→3′</text>
+            <line x1={300} y1={232} x2={356} y2={232} stroke="#0f766e" strokeWidth={2} />
+            <path d="M 356 232 l -7 -4 l 0 8 Z" fill="#0f766e" />
+            <text x={328} y={226} textAnchor="middle" fontSize={10} fontWeight={600} fill="#0f766e">5′→3′</text>
           </g>
         </svg>
 
-        <p className="mt-3 text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed text-center">
-          {he
-            ? "RNA פולימראז נע לאורך ה-DNA, מפריד את הגדילים, ומסנתז גדיל mRNA משלים מהגדיל התבניתי."
-            : "RNA polymerase moves along the DNA, separates the strands, and synthesises a complementary mRNA strand from the template."}
-        </p>
+        {/* Legend (HTML — RTL-safe, never clipped) */}
+        <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 mt-3 text-xs font-medium text-zinc-600 dark:text-zinc-300">
+          <span className="inline-flex items-center gap-1.5">
+            <span className="w-3 h-3 rounded-full" style={{ background: "#f472b6" }} />
+            {he ? "גדיל מקודד" : "Coding strand"}
+          </span>
+          <span className="inline-flex items-center gap-1.5">
+            <span className="w-3 h-3 rounded-full" style={{ background: "#60a5fa" }} />
+            {he ? "גדיל תבנית" : "Template strand"}
+          </span>
+          <span className="inline-flex items-center gap-1.5">
+            <span className="w-3 h-3 rounded-full" style={{ background: "#10b981" }} />
+            {he ? "תעתיק mRNA" : "mRNA transcript"}
+          </span>
+        </div>
+
+        {/* Rotating explanation of the running process */}
+        <div className="mt-3 min-h-[2.75rem] flex items-center justify-center">
+          <AnimatePresence mode="wait">
+            <motion.p
+              key={ci}
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -6 }}
+              transition={{ duration: 0.35 }}
+              className="text-sm text-zinc-700 dark:text-zinc-300 text-center leading-relaxed px-2"
+            >
+              {he ? CAPTIONS[ci].he : CAPTIONS[ci].en}
+            </motion.p>
+          </AnimatePresence>
+        </div>
+        <div className="flex justify-center gap-1.5 mt-1">
+          {CAPTIONS.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setCi(i)}
+              aria-label={`explanation ${i + 1}`}
+              className={`h-1.5 rounded-full transition-all ${i === ci ? "w-5 bg-emerald-500" : "w-1.5 bg-zinc-300 dark:bg-zinc-600"}`}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );
