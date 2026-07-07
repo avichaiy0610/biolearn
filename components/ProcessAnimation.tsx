@@ -128,6 +128,34 @@ function AnimatedSvgElement({
 
   const t = { duration: 0.9, ease: [0.4, 0, 0.2, 1] as [number, number, number, number] };
 
+  // ── Composite shape: 26S proteasome (classic banded barrel + 19S cap) ──────
+  // The model only emits a placeholder rect id="proteasome"; we draw the real
+  // structure here (same idea as makeChromosomePath for chromosomes).
+  if (/^proteasome/i.test(el.id)) {
+    const x = el.x ?? 270, y = el.y ?? 70, w = el.width ?? 74, h = el.height ?? 150;
+    const capH = h * 0.28;
+    const by = y + capH;          // barrel top
+    const bh = h - capH;          // barrel height
+    const barrel = el.color ?? "#5eead4";
+    const cap = "#c4b5fd";
+    const capPath = `M ${r(x + w * 0.08)} ${r(by)} L ${r(x + w * 0.3)} ${r(y)} L ${r(x + w * 0.7)} ${r(y)} L ${r(x + w * 0.92)} ${r(by)} Z`;
+    const rings = [0.25, 0.5, 0.75].map((f) => r(by + bh * f));
+    return (
+      <motion.g key={id} filter={filterRef} initial={{ opacity: 0 }} animate={{ opacity: effectiveOpacity }} transition={t}>
+        {/* 19S regulatory cap (lid) */}
+        <path d={capPath} fill={cap} stroke="#7c3aed" strokeWidth={2} strokeLinejoin="round" />
+        {/* 20S core barrel */}
+        <rect x={r(x)} y={r(by)} width={r(w)} height={r(bh)} rx={7} fill={barrel} stroke="#0f766e" strokeWidth={2} />
+        {/* four stacked rings (α7 β7 β7 α7) */}
+        {rings.map((ry, i) => (
+          <line key={i} x1={r(x + 2)} y1={ry} x2={r(x + w - 2)} y2={ry} stroke="#0f766e" strokeWidth={1.5} opacity={0.65} />
+        ))}
+        {/* substrate entry gate at the top of the core */}
+        <rect x={r(x + w * 0.4)} y={r(by - 3)} width={r(w * 0.2)} height={6} rx={2} fill="#0f766e" />
+      </motion.g>
+    );
+  }
+
   switch (el.type) {
     case "circle":
       return (
