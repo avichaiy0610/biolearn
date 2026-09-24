@@ -49,3 +49,6 @@ next-env.d.ts
 
 # MCP config (may contain service role keys)
 .mcp.json
+
+# local DB backups written by scripts/content-fix-*.ts
+/.backups/

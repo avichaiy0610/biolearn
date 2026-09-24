@@ -50,14 +50,14 @@ export default function ReactomePathwayCard({ stId, name, summary, url, lang }: 
           <span className="text-violet-500 text-lg shrink-0 mt-0.5">⬡</span>
           <div className="flex-1 min-w-0">
             <p className="text-sm font-semibold text-zinc-900 dark:text-zinc-50 leading-snug mb-1">
-              {name}
+              <bdi dir="ltr">{name}</bdi>
             </p>
             <p className="text-xs text-zinc-400 font-mono">{stId}</p>
           </div>
         </div>
 
         {summary && (
-          <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed mb-3 ps-6">
+          <p dir="ltr" className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed mb-3 ps-6 text-start">
             {summary}
           </p>
         )}

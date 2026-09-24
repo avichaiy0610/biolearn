@@ -370,6 +370,17 @@ function SubtopicRow({ subtopic, topic, allTopics, lang, onDeleted, onMoved, onA
     setSaving(false);
   }
 
+  // AI-generated subtopics are created hidden; publishing records that a human
+  // reviewed them against a textbook (sets reviewedAt).
+  async function setPublished(publish: boolean) {
+    const res = await fetch(`/api/admin/subtopics/${subtopic.id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ publish }),
+    });
+    if (res.ok) onUpdated({ ...subtopic, hidden: !publish });
+  }
+
   async function handleDelete() {
     if (!confirm(isHe ? `מחק "${isHe ? subtopic.nameHe : subtopic.nameEn}"?` : `Delete "${subtopic.nameEn}"?`)) return;
     await fetch(`/api/admin/subtopics/${subtopic.id}`, { method: "DELETE" });
@@ -395,6 +406,15 @@ function SubtopicRow({ subtopic, topic, allTopics, lang, onDeleted, onMoved, onA
           </span>
         </div>
         <div className="flex items-center gap-1.5 shrink-0">
+          <button
+            onClick={() => setPublished(!!subtopic.hidden)}
+            className={`text-xs px-2 py-0.5 rounded-full border ${subtopic.hidden ? "border-emerald-300 text-emerald-700 dark:text-emerald-300" : "border-zinc-300 text-zinc-500"}`}
+            title={subtopic.hidden
+              ? (isHe ? "פרסם רק אחרי בדיקה מול ספר לימוד (Campbell / Alberts)" : "Publish only after checking against a textbook")
+              : (isHe ? "הסתר מהאתר" : "Hide from site")}
+          >
+            {subtopic.hidden ? (isHe ? "✓ נבדק מול ספר — פרסם" : "✓ Reviewed — publish") : (isHe ? "הסתר" : "Hide")}
+          </button>
           <button
             onClick={() => { setEditing((v) => !v); setReviewing(false); }}
             className="text-xs text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300"

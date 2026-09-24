@@ -142,7 +142,7 @@ function ProteinsSearch() {
                   </div>
                   <div className="flex items-center gap-3 text-xs text-zinc-400 font-mono">
                     <span>{p.accession}</span>
-                    {p.length && <span>{p.length} aa</span>}
+                    {p.length && <bdi dir="ltr">{p.length} aa</bdi>}
                   </div>
                 </div>
                 <span className="text-zinc-300 dark:text-zinc-600 group-hover:text-emerald-400 shrink-0">→</span>

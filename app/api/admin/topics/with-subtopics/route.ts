@@ -42,6 +42,7 @@ export async function POST(request: Request) {
           nameHe: s.nameHe,
           contentEn: s.contentEn,
           contentHe: s.contentHe,
+          hidden: true, // AI draft — published only after textbook review
         })),
       });
     }

@@ -36,6 +36,7 @@ export async function POST(request: Request) {
       nameEn: merged.nameEn,
       contentHe: merged.contentHe,
       contentEn: merged.contentEn,
+      hidden: true, // AI draft — published only after textbook review
     },
   });
 

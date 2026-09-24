@@ -5,6 +5,7 @@ import { getDictionary, hasLocale, type Locale } from "@/lib/dictionaries";
 import { prisma } from "@/lib/prisma";
 import TopicGrid from "@/components/TopicGrid";
 import Link from "next/link";
+import { isComingSoon } from "@/lib/topics";
 
 export default async function HomePage({ params }: PageProps<"/[lang]">) {
   const { lang } = await params;
@@ -13,15 +14,17 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
   const dict = await getDictionary(lang as Locale);
   const isHe = lang === "he";
 
-  const [topics, subtopicCount, articleCount, questionCount] = await Promise.all([
+  const [topics, articleCount, questionCount] = await Promise.all([
     prisma.topic.findMany({
       include: { _count: { select: { processes: true, subtopics: { where: { hidden: false } } } } },
       orderBy: { nameEn: "asc" },
     }),
-    prisma.subtopic.count({ where: { hidden: false } }),
     prisma.article.count({ where: { hidden: false } }),
     prisma.question.count({ where: { approved: true } }),
   ]);
+
+  const activeTopics = topics.filter((t) => !isComingSoon(t));
+  const subtopicCount = activeTopics.reduce((n, t) => n + t._count.subtopics, 0);
 
   const features = [
     {
@@ -52,8 +55,8 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
       icon: "🔬",
       titleHe: "מאמרים מדעיים",
       titleEn: "Scientific Articles",
-      descHe: "מחקרים עדכניים מנותחים ומתורגמים לעברית",
-      descEn: "Recent research analyzed and translated into Hebrew",
+      descHe: "מאמרים נבחרים מ-PubMed, מנותחים ומתורגמים לעברית",
+      descEn: "Selected PubMed papers, analyzed and translated into Hebrew",
       href: `/${lang}/research`,
     },
   ];
@@ -94,13 +97,13 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
       {/* Platform stats */}
       <section className="flex justify-center gap-8 mb-12 flex-wrap">
         {[
-          { value: topics.length, label: isHe ? "נושאים" : "Topics" },
+          { value: activeTopics.length, label: isHe ? "נושאים" : "Topics" },
           { value: subtopicCount, label: isHe ? "תת-נושאים" : "Subtopics" },
           { value: articleCount, label: isHe ? "מאמרים" : "Articles" },
           { value: questionCount, label: isHe ? "שאלות תרגול" : "Practice Q's" },
         ].map((s) => (
           <div key={s.label} className="text-center">
-            <div className="text-3xl font-bold text-zinc-900 dark:text-zinc-50">{s.value}+</div>
+            <div className="text-3xl font-bold text-zinc-900 dark:text-zinc-50"><bdi dir="ltr">{s.value}+</bdi></div>
             <div className="text-sm text-zinc-400">{s.label}</div>
           </div>
         ))}

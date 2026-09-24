@@ -80,6 +80,7 @@ export async function POST(request: Request) {
         contentHe: contentHe ?? contentEn,
         contentEn,
         relatedProcessSlug: steps.length > 0 ? processSlug : null,
+        hidden: true, // AI draft — published only after textbook review
       },
     });
 

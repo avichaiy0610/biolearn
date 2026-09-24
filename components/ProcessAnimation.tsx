@@ -7,6 +7,7 @@ import AIExplainPanel from "./AIExplainPanel";
 import AnimationControls from "./AnimationControls";
 import ProcessInlineVideo from "./ProcessInlineVideo";
 import FeedbackButton from "./FeedbackButton";
+import { svgLabel, MIN_SVG_LABEL_SIZE } from "@/lib/svg-labels-he";
 
 type Step = {
   id: string;
@@ -108,9 +109,9 @@ function isLegacyChromosome(el: SvgElement): boolean {
 
 /* ─── Professional SVG element renderer ─────────────────────────────────── */
 function AnimatedSvgElement({
-  id, stepIndex, steps, isHighlighted,
+  id, stepIndex, steps, isHighlighted, lang,
 }: {
-  id: string; stepIndex: number; steps: Step[]; isHighlighted: boolean;
+  id: string; stepIndex: number; steps: Step[]; isHighlighted: boolean; lang: string;
 }) {
   const el = getElementAtStep(id, stepIndex, steps);
   if (!el) return null;
@@ -278,7 +279,8 @@ function AnimatedSvgElement({
       return (
         <motion.text
           key={id}
-          fontSize={el.fontSize ?? 11}
+          fontSize={Math.max(MIN_SVG_LABEL_SIZE, el.fontSize ?? 11)}
+          direction={lang === "he" ? "rtl" : "ltr"}
           fontFamily="system-ui, sans-serif"
           fontWeight="600"
           textAnchor="middle"
@@ -294,7 +296,7 @@ function AnimatedSvgElement({
           }}
           transition={t}
         >
-          {el.label}
+          {svgLabel(el.label ?? "", lang)}
         </motion.text>
       );
     default:
@@ -468,6 +470,7 @@ export default function ProcessAnimation({
                     stepIndex={currentStep}
                     steps={steps}
                     isHighlighted={isHighlighted}
+                    lang={lang}
                   />
                 );
               })}

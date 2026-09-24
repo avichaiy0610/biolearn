@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import type { Locale } from "@/lib/dictionaries";
+import { svgLabel, MIN_SVG_LABEL_SIZE } from "@/lib/svg-labels-he";
 
 type Step = {
   id: string;
@@ -66,7 +67,8 @@ function drawFrame(
   steps: Step[],
   stepIndex: number,
   width: number,
-  height: number
+  height: number,
+  lang: string
 ) {
   const scaleX = width / 400;
   const scaleY = height / 300;
@@ -185,17 +187,18 @@ function drawFrame(
       case "text": {
         ctx.shadowBlur = 0;
         ctx.globalAlpha = el.opacity ?? 1;
-        const fontSize = (el.fontSize ?? 11) * Math.min(scaleX, scaleY) * 1.1;
+        const fontSize = Math.max(MIN_SVG_LABEL_SIZE, el.fontSize ?? 11) * Math.min(scaleX, scaleY) * 1.1;
         ctx.font = `600 ${fontSize}px system-ui, sans-serif`;
+        ctx.direction = lang === "he" ? "rtl" : "ltr";
         ctx.textAlign = "center";
         ctx.textBaseline = "middle";
         // White outline for readability
         ctx.strokeStyle = "rgba(255,255,255,0.9)";
         ctx.lineWidth = 3;
         ctx.lineJoin = "round";
-        ctx.strokeText(el.label ?? "", (el.x ?? 0) * scaleX, (el.y ?? 0) * scaleY);
+        ctx.strokeText(svgLabel(el.label ?? "", lang), (el.x ?? 0) * scaleX, (el.y ?? 0) * scaleY);
         ctx.fillStyle = el.textColor ?? (isHighlighted ? "#f1f5f9" : "#64748b");
-        ctx.fillText(el.label ?? "", (el.x ?? 0) * scaleX, (el.y ?? 0) * scaleY);
+        ctx.fillText(svgLabel(el.label ?? "", lang), (el.x ?? 0) * scaleX, (el.y ?? 0) * scaleY);
         break;
       }
     }
@@ -292,7 +295,7 @@ export default function ProcessInlineVideo({
 
     function render(now: number) {
       if (!localPlaying) {
-        drawFrame(ctx!, steps, localStep, CANVAS_W, CANVAS_H);
+        drawFrame(ctx!, steps, localStep, CANVAS_W, CANVAS_H, lang);
         const t = steps[localStep];
         const ttl = t ? (lang === "he" ? t.titleHe : t.titleEn) : "";
         drawOverlay(ctx!, ttl, localStep, steps.length, CANVAS_W, CANVAS_H);
@@ -306,7 +309,7 @@ export default function ProcessInlineVideo({
 
       setProgress(p);
 
-      drawFrame(ctx!, steps, localStep, CANVAS_W, CANVAS_H);
+      drawFrame(ctx!, steps, localStep, CANVAS_W, CANVAS_H, lang);
       const t = steps[localStep];
       const ttl = t ? (lang === "he" ? t.titleHe : t.titleEn) : "";
       drawOverlay(ctx!, ttl, localStep, steps.length, CANVAS_W, CANVAS_H);

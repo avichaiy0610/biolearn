@@ -8,21 +8,40 @@ import ChatPanel from "@/components/ChatPanel";
 import ExamCreator from "@/components/ExamCreator";
 import TopicPageClient from "@/components/TopicPageClient";
 import ReactomePathwayCard from "@/components/ReactomePathwayCard";
+import AiContentNote from "@/components/AiContentNote";
+import { isComingSoon } from "@/lib/topics";
+import type { Metadata } from "next";
 
 type ReactomePathway = { id: string; name: string; summary: string | null; url: string };
 
 const stripHtml = (s: string) => s.replace(/<[^>]+>/g, "");
 
-async function fetchPathways(query: string): Promise<ReactomePathway[]> {
+// Auto-search fallback for topics without curated pins (Topic.reactomePathwayIds).
+// Reactome only has good coverage for human pathways, so plant topics get nothing,
+// disease/infection pathways are dropped unless the topic is about them, and a
+// result must share a meaningful word with the topic name.
+const STOPWORDS = new Set(["biology", "and", "of", "the", "cell", "cellular"]);
+const DISEASE_RE = /disease|infection|sars|covid|virus|viral|defective|disorder|cancer|deficiency/i;
+
+async function fetchPathways(query: string, slug: string): Promise<ReactomePathway[]> {
+  if (/plant/i.test(slug) || /plant/i.test(query)) return [];
+  const words = query.toLowerCase().split(/\W+/).filter((w) => w.length > 3 && !STOPWORDS.has(w));
+  if (words.length === 0) return [];
+  const allowDisease = /immun|microb|disease/i.test(slug);
   try {
     const url =
       `https://reactome.org/ContentService/search/query?query=${encodeURIComponent(query)}` +
-      `&types=Pathway&species=Homo%20sapiens&cluster=true&rows=5&start=0`;
+      `&types=Pathway&species=Homo%20sapiens&cluster=true&rows=20&start=0`;
     const res = await fetch(url, { next: { revalidate: 3600 } });
     if (!res.ok) return [];
     const data = await res.json();
-    const entries = data.results?.[0]?.entries ?? [];
-    return entries.slice(0, 5).map((r: { stId: string; name: string; summation?: string }) => ({
+    const entries: { stId: string; name: string; summation?: string; species?: string[] }[] = data.results?.[0]?.entries ?? [];
+    return entries
+      .filter((r) => !r.species || r.species.includes("Homo sapiens"))
+      .filter((r) => allowDisease || !DISEASE_RE.test(r.name))
+      .filter((r) => words.some((w) => stripHtml(r.name).toLowerCase().includes(w)))
+      .slice(0, 5)
+      .map((r) => ({
       id: r.stId,
       name: stripHtml(r.name),
       summary: r.summation ? stripHtml(r.summation).slice(0, 400) : null,
@@ -57,6 +76,24 @@ async function fetchPathwaysByIds(stIds: string[]): Promise<ReactomePathway[]> {
   return results.filter((r): r is ReactomePathway => r !== null);
 }
 
+export async function generateMetadata({ params }: PageProps<"/[lang]/topics/[slug]">): Promise<Metadata> {
+  const { lang, slug } = await params;
+  const topic = await prisma.topic.findUnique({
+    where: { slug },
+    select: { slug: true, nameHe: true, nameEn: true, descHe: true, descEn: true, _count: { select: { processes: true, subtopics: { where: { hidden: false } } } } },
+  });
+  if (!topic) return {};
+  const title = lang === "he" ? topic.nameHe : topic.nameEn;
+  const description = lang === "he" ? topic.descHe : topic.descEn;
+  return {
+    title,
+    description,
+    openGraph: { title: `${title} | BioLearn`, description },
+    alternates: { languages: { he: `/he/topics/${slug}`, en: `/en/topics/${slug}` } },
+    ...(isComingSoon(topic) ? { robots: { index: false } } : {}),
+  };
+}
+
 export default async function TopicPage({
   params,
 }: PageProps<"/[lang]/topics/[slug]">) {
@@ -84,8 +121,13 @@ export default async function TopicPage({
     ? JSON.parse(topic.reactomePathwayIds)
     : null;
   const pathways = pinnedIds === null
-    ? await fetchPathways(topic.nameEn)
+    ? await fetchPathways(topic.nameEn, topic.slug)
     : await fetchPathwaysByIds(pinnedIds);
+
+  const comingSoon = isComingSoon({ slug: topic.slug, _count: { processes: topic.processes.length, subtopics: topic.subtopics.length } });
+  const updatedAt = topic.subtopics.reduce<Date | null>(
+    (max, s) => (s.updatedAt && (!max || s.updatedAt > max) ? s.updatedAt : max), null);
+  const reviewed = topic.subtopics.length > 0 && topic.subtopics.every((s) => s.reviewedAt);
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-10">
@@ -94,6 +136,11 @@ export default async function TopicPage({
         <div className="text-4xl mb-3">{topic.icon}</div>
         <h1 className="text-3xl font-bold text-zinc-900 dark:text-zinc-50 mb-2">{name}</h1>
         <p className="text-zinc-500 dark:text-zinc-400">{desc}</p>
+        {comingSoon && (
+          <p className="mt-4 inline-block rounded-lg border border-dashed border-zinc-300 dark:border-zinc-600 px-3 py-2 text-sm text-zinc-500 dark:text-zinc-400">
+            🚧 {lang === "he" ? "הנושא בפיתוח — התוכן כאן עדיין חלקי." : "This topic is in development — content is still partial."}
+          </p>
+        )}
       </div>
 
       {/* Processes */}
@@ -195,6 +242,8 @@ export default async function TopicPage({
         }))}
         dict={dict.chat}
       />
+
+      <AiContentNote lang={lang} topicSlug={topic.slug} updatedAt={updatedAt} reviewed={reviewed} />
     </div>
   );
 }

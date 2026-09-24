@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { getDictionary, hasLocale, type Locale } from "@/lib/dictionaries";
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
+import { decodeEntities } from "@/lib/text";
 
 type Article = {
   id: string;
@@ -66,10 +67,10 @@ export default async function ResearchPage({ params }: { params: Promise<{ lang:
       ) : (
         <div className="flex flex-col gap-6">
           {articles.map((article: Article) => {
-            const authors = parseJson<string[]>(article.authors, []);
+            const authors = parseJson<string[]>(article.authors, []).map(decodeEntities);
             const keyFindings = parseJson<string[]>(article.keyFindings, []);
             const relatedTopicSlugs = parseJson<string[]>(article.topicSlugs, []);
-            const displayAbstract = isHe && article.abstractHe ? article.abstractHe : article.abstract;
+            const displayAbstract = decodeEntities(isHe && article.abstractHe ? article.abstractHe : article.abstract);
 
             return (
               <article
@@ -86,18 +87,17 @@ export default async function ResearchPage({ params }: { params: Promise<{ lang:
                       <span className="text-xs text-zinc-400">{article.year}</span>
                     )}
                     {article.journal && (
-                      <span className="text-xs text-zinc-400 italic">{article.journal}</span>
+                      <bdi dir="ltr" className="text-xs text-zinc-400 italic">{decodeEntities(article.journal)}</bdi>
                     )}
                   </div>
 
                   <h2 className="text-lg font-semibold text-zinc-900 dark:text-zinc-50 leading-snug">
-                    {article.title}
+                    <bdi dir="ltr">{decodeEntities(article.title)}</bdi>
                   </h2>
 
                   {authors.length > 0 && (
                     <p className="mt-1 text-xs text-zinc-500 dark:text-zinc-400">
-                      {dict.research.authors}: {authors.slice(0, 5).join(", ")}
-                      {authors.length > 5 && " ..."}
+                      {dict.research.authors}: <bdi dir="ltr">{authors.join(", ")}</bdi>
                     </p>
                   )}
                 </div>
@@ -153,7 +153,7 @@ export default async function ResearchPage({ params }: { params: Promise<{ lang:
                       rel="noopener noreferrer"
                       className="text-sm text-emerald-600 dark:text-emerald-400 hover:underline"
                     >
-                      {dict.research.readOriginal} →
+                      {dict.research.readOriginal} <span aria-hidden className="inline-block rtl:rotate-180">→</span>
                     </a>
                   </div>
                 )}

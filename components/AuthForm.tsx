@@ -168,6 +168,23 @@ export default function AuthForm({
           </Link>
         </p>
       </div>
+
+      {/* Why sign in — everything else on the site works without an account */}
+      <section className="mt-4 rounded-2xl border border-emerald-200 dark:border-emerald-800 bg-emerald-50/60 dark:bg-emerald-950/20 p-5 text-sm">
+        <h2 className="font-semibold text-emerald-800 dark:text-emerald-300 mb-2">
+          {lang === "he" ? "מה מקבלים עם חשבון?" : "What does an account give you?"}
+        </h2>
+        <ul className="space-y-1.5 text-zinc-700 dark:text-zinc-300">
+          <li>✓ {lang === "he" ? "מעקב התקדמות: אילו תתי-נושאים כבר קראתם בכל נושא" : "Progress tracking: which subtopics you've already read"}</li>
+          <li>✓ {lang === "he" ? "שמירת הציון הטוב ביותר בכל בוחן וממוצע ציונים" : "Your best score on every quiz, plus your average"}</li>
+          <li>✓ {lang === "he" ? "דף פרופיל עם סיכום הלמידה שלכם" : "A profile page summarizing your learning"}</li>
+        </ul>
+        <p className="mt-3 text-xs text-zinc-500 dark:text-zinc-400">
+          {lang === "he"
+            ? "כל התכנים, האנימציות והבחנים זמינים גם בלי להירשם. אנחנו שומרים רק מייל וסיסמה מוצפנת."
+            : "All content, animations and quizzes work without an account. We store only your email and a hashed password."}
+        </p>
+      </section>
     </div>
   );
 }

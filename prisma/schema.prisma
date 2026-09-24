@@ -32,6 +32,8 @@ model Subtopic {
   contentEn          String
   relatedProcessSlug String? // links to a Process.slug for "view animation" button
   hidden             Boolean       @default(false) // hidden from site but visible in admin
+  updatedAt          DateTime?     @updatedAt
+  reviewedAt         DateTime?     // set when a human checked it against a textbook
   questions          Question[]
   userProgress       UserProgress[]
   quizResults        QuizResult[]
@@ -47,6 +49,8 @@ model Process {
   descHe  String
   descEn  String
   steps   ProcessStep[]
+  updatedAt  DateTime? @updatedAt
+  reviewedAt DateTime? // set when a human checked it against a textbook
 }
 
 model ProcessStep {

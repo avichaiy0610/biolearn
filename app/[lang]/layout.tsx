@@ -5,12 +5,26 @@ import { hasLocale, getDictionary, type Locale } from "@/lib/dictionaries";
 import { notFound } from "next/navigation";
 import Navbar from "@/components/Navbar";
 import { getUser, isAdmin as checkIsAdmin } from "@/lib/supabase/server";
+import { SITE_URL } from "@/lib/site";
 
 const geist = Geist({ subsets: ["latin"], variable: "--font-geist" });
 
+const TITLE = "BioLearn — פלטפורמת לימוד ביולוגיה";
+const DESCRIPTION = "ביולוגיה לתואר ראשון — אנימציות אינטראקטיביות והסברי AI";
+
 export const metadata: Metadata = {
-  title: "BioLearn — פלטפורמת לימוד ביולוגיה",
-  description: "ביולוגיה לתואר ראשון — אנימציות אינטראקטיביות והסברי AI",
+  metadataBase: new URL(SITE_URL),
+  title: { default: TITLE, template: "%s | BioLearn" },
+  description: DESCRIPTION,
+  openGraph: {
+    type: "website",
+    siteName: "BioLearn",
+    locale: "he_IL",
+    alternateLocale: ["en_US"],
+    title: TITLE,
+    description: DESCRIPTION,
+  },
+  twitter: { card: "summary_large_image", title: TITLE, description: DESCRIPTION },
 };
 
 export async function generateStaticParams() {

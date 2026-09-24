@@ -62,9 +62,10 @@ export default function Navbar({
           ))}
         </nav>
 
-        <div className="flex-1 max-w-xs">
+        <div className="hidden md:block flex-1 max-w-xs">
           <SearchBar lang={lang} placeholder={dict.home.searchPlaceholder} />
         </div>
+        <div className="flex-1 md:hidden" />
 
         <div className="flex items-center gap-2">
           {isLoggedIn ? (
@@ -110,6 +111,11 @@ export default function Navbar({
             )}
           </button>
         </div>
+      </div>
+
+      {/* Mobile: full-width search row (too narrow to share the top row) */}
+      <div className="md:hidden px-4 pb-3">
+        <SearchBar lang={lang} placeholder={dict.home.searchPlaceholder} />
       </div>
 
       {/* Mobile dropdown menu */}

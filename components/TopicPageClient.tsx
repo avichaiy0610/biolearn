@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useTopicProgress, ProgressBar, SubtopicBadge } from "./TopicProgress";
 import SubtopicResearch from "./SubtopicResearch";
 import SubtopicQuiz from "./SubtopicQuiz";
@@ -20,6 +20,34 @@ type Subtopic = {
   relatedProcessSlug: string | null;
   _count: { questions: number };
 };
+
+// Marks a subtopic as read only after the end of its text has been on screen and
+// it stayed open long enough to actually read it (not merely on open).
+function ReadTracker({ text, onRead }: { text: string; onRead: () => void }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const onReadRef = useRef(onRead);
+  useEffect(() => { onReadRef.current = onRead; });
+  useEffect(() => {
+    const done = () => onReadRef.current();
+    const words = text.split(/\s+/).length;
+    const minMs = Math.min(45000, Math.max(6000, (words / 200) * 60000 * 0.4));
+    const openedAt = Date.now();
+    let seen = false;
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    const check = () => {
+      if (!seen) return;
+      const left = minMs - (Date.now() - openedAt);
+      if (left <= 0) done();
+      else timer = setTimeout(done, left);
+    };
+    const io = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting && !seen) { seen = true; check(); }
+    });
+    if (ref.current) io.observe(ref.current);
+    return () => { io.disconnect(); if (timer) clearTimeout(timer); };
+  }, [text]);
+  return <div ref={ref} aria-hidden className="h-px" />;
+}
 
 type Process = { slug: string; nameHe: string; nameEn: string; descHe: string; descEn: string };
 
@@ -51,7 +79,6 @@ export default function TopicPageClient({
       setOpenId(null);
     } else {
       setOpenId(id);
-      markVisited(id);
     }
   }
 
@@ -88,7 +115,7 @@ export default function TopicPageClient({
                   {subName}
                   <SubtopicBadge subtopicId={sub.id} visited={isVisited} score={bestScore} />
                 </span>
-                <span className={`text-zinc-400 text-sm transition-transform inline-block ${isOpen ? "rotate-90" : ""}`}>▶</span>
+                <span aria-hidden className={`text-zinc-400 text-sm transition-transform inline-block ${isOpen ? "rotate-90" : "rtl:rotate-180"}`}>▶</span>
               </button>
 
               {isOpen && (
@@ -96,6 +123,7 @@ export default function TopicPageClient({
                   <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed whitespace-pre-wrap mb-3">
                     {subContent}
                   </p>
+                  {!isVisited && <ReadTracker text={subContent} onRead={() => markVisited(sub.id)} />}
 
                   <div className="flex flex-wrap gap-2 items-center">
                     {sub.relatedProcessSlug && processes.some((p) => p.slug === sub.relatedProcessSlug) && (

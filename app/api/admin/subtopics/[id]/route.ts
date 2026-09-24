@@ -20,6 +20,15 @@ export async function PUT(request: Request, ctx: RouteContext<"/api/admin/subtop
     return Response.json(subtopic);
   }
 
+  // Publish (after human textbook review) / unpublish
+  if (typeof body.publish === "boolean") {
+    const subtopic = await prisma.subtopic.update({
+      where: { id },
+      data: body.publish ? { hidden: false, reviewedAt: new Date() } : { hidden: true },
+    });
+    return Response.json(subtopic);
+  }
+
   const { nameHe, nameEn, contentHe, contentEn } = body;
   const subtopic = await prisma.subtopic.update({
     where: { id },
