@@ -14,7 +14,7 @@ export async function POST(request: Request) {
   try {
     const completion = await aiStream({
       label: "ai-explain",
-      tier: "fast",
+      tier: "quality", // scientific accuracy > speed; the 20b model produced inaccurate Hebrew
       maxTokens: 600,
       messages: [
         { role: "system", content: BIOLOGY_SYSTEM },
