@@ -23,8 +23,9 @@ export const metadata: Metadata = {
     alternateLocale: ["en_US"],
     title: TITLE,
     description: DESCRIPTION,
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: "BioLearn — הפלטפורמה לביולוגיה לתואר ראשון" }],
   },
-  twitter: { card: "summary_large_image", title: TITLE, description: DESCRIPTION },
+  twitter: { card: "summary_large_image", title: TITLE, description: DESCRIPTION, images: ["/og.png"] },
 };
 
 export async function generateStaticParams() {
