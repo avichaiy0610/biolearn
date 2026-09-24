@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import ProteinTranslate from "./ProteinTranslate";
+import MolstarViewer, { type StructureSource } from "./MolstarViewer";
 
 type SiteItem = { type: string; slug: string; topicSlug?: string; nameEn: string; nameHe: string };
 
@@ -156,7 +157,7 @@ export default function ProteinDetailContent({
               )}
               <span className="font-mono text-sm text-zinc-400">{protein.accession}</span>
               {organism && <span className="text-sm text-zinc-400 italic">{organism}</span>}
-              {protein.length && <span className="text-sm text-zinc-400">{protein.length} aa</span>}
+              {protein.length && <bdi dir="ltr" className="text-sm text-zinc-400">{protein.length} aa</bdi>}
             </div>
           </div>
         </div>
@@ -270,6 +271,22 @@ export default function ProteinDetailContent({
                 </p>
               </div>
             </div>
+            <div className="mt-4">
+              <MolstarViewer
+                lang={lang}
+                sources={[
+                  { key: "af", label: isHe ? "מודל AlphaFold" : "AlphaFold model", kind: "afdb", id: protein.accession },
+                  ...(pdbStructure ? [{ key: "pdb", label: isHe ? `מבנה ניסויי ${pdbStructure.id}` : `Experimental ${pdbStructure.id}`, kind: "pdb", id: pdbStructure.id } satisfies StructureSource] : []),
+                ]}
+              />
+              <p className="flex flex-wrap gap-x-3 gap-y-1 text-xs text-zinc-500 mt-2">
+                <span>{isHe ? "צבעי מודל AlphaFold לפי pLDDT:" : "AlphaFold colors by pLDDT:"}</span>
+                <span className="inline-flex items-center gap-1"><i className="inline-block w-3 h-3 rounded-sm" style={{ background: "#0053d6" }} /> <bdi dir="ltr">&gt;90</bdi></span>
+                <span className="inline-flex items-center gap-1"><i className="inline-block w-3 h-3 rounded-sm" style={{ background: "#65cbf3" }} /> <bdi dir="ltr">70–90</bdi></span>
+                <span className="inline-flex items-center gap-1"><i className="inline-block w-3 h-3 rounded-sm" style={{ background: "#ffdb13" }} /> <bdi dir="ltr">50–70</bdi></span>
+                <span className="inline-flex items-center gap-1"><i className="inline-block w-3 h-3 rounded-sm" style={{ background: "#ff7d45" }} /> <bdi dir="ltr">&lt;50</bdi></span>
+              </p>
+            </div>
           </section>
         )}
 
@@ -307,9 +324,9 @@ export default function ProteinDetailContent({
                     {pdbStructure.method}
                   </span>
                   {pdbStructure.resolution && (
-                    <span className="text-xs px-2 py-0.5 rounded bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300">
+                    <bdi dir="ltr" className="text-xs px-2 py-0.5 rounded bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300">
                       {pdbStructure.resolution} Å
-                    </span>
+                    </bdi>
                   )}
                 </div>
                 <div className="flex gap-2 flex-wrap">
@@ -443,7 +460,7 @@ export default function ProteinDetailContent({
                   className="flex items-start gap-2 p-3 rounded-xl border border-zinc-100 dark:border-zinc-700/50 hover:border-emerald-300 dark:hover:border-emerald-700 transition-colors group"
                 >
                   <div className="flex-1">
-                    <p className="text-sm text-zinc-700 dark:text-zinc-300 group-hover:text-emerald-700 dark:group-hover:text-emerald-400 line-clamp-2">
+                    <p dir="ltr" className="text-sm text-zinc-700 dark:text-zinc-300 group-hover:text-emerald-700 dark:group-hover:text-emerald-400 line-clamp-2 text-start">
                       {a.title}
                     </p>
                     {a.year && <p className="text-xs text-zinc-400 mt-0.5">{a.year}</p>}

@@ -9,6 +9,22 @@ import AdminAnimationControls from "@/components/AdminAnimationControls";
 import ProcessVisual from "@/components/ProcessVisual";
 import { findSceneId } from "@/components/scenes/registry";
 import { hasProcessVideo, videoUrlFor } from "@/lib/video-storage";
+import LottieProcessPlayer from "@/components/lottie/LottieProcessPlayer";
+import { LOTTIE_SCENES } from "@/components/lottie/scenes";
+import AiContentNote from "@/components/AiContentNote";
+import type { Metadata } from "next";
+
+export async function generateMetadata({ params }: PageProps<"/[lang]/topics/[slug]/[process]">): Promise<Metadata> {
+  const { lang, slug, process: processSlug } = await params;
+  const proc = await prisma.process.findFirst({
+    where: { slug: processSlug, topic: { slug } },
+    select: { nameHe: true, nameEn: true, descHe: true, descEn: true },
+  });
+  if (!proc) return {};
+  const title = lang === "he" ? proc.nameHe : proc.nameEn;
+  const description = lang === "he" ? proc.descHe : proc.descEn;
+  return { title, description, openGraph: { title: `${title} | BioLearn`, description } };
+}
 
 export default async function ProcessPage({
   params,
@@ -77,8 +93,18 @@ export default async function ProcessPage({
         </div>
       )}
 
-      {/* ── Visual: bespoke continuous scene (+ step toggle) if one exists, else the step animation ── */}
-      {(() => {
+      {/* ── Visual: vector (Lottie) scene, else bespoke continuous scene, else the step animation ── */}
+      {LOTTIE_SCENES[processSlug] ? (
+        <LottieProcessPlayer
+          scene={LOTTIE_SCENES[processSlug]}
+          steps={proc.steps}
+          lang={lang as Locale}
+          dict={dict}
+          processName={processName}
+          topicSlug={slug}
+          processSlug={processSlug}
+        />
+      ) : (() => {
         const sceneId = findSceneId(proc.nameEn, proc.nameHe);
         const animProps = {
           steps: proc.steps,
@@ -99,6 +125,14 @@ export default async function ProcessPage({
         topicSlug={slug}
         processSlug={processSlug}
         lang={lang}
+      />
+
+      <AiContentNote
+        lang={lang}
+        topicSlug={slug}
+        processSlug={processSlug}
+        updatedAt={proc.updatedAt}
+        reviewed={!!proc.reviewedAt}
       />
     </div>
   );

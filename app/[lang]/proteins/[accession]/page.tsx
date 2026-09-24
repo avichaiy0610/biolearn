@@ -2,6 +2,7 @@ export const dynamic = "force-dynamic";
 
 import { notFound } from "next/navigation";
 import ProteinDetailContent from "@/components/ProteinDetailContent";
+import { decodeEntities } from "@/lib/text";
 
 type Protein = {
   accession: string;
@@ -21,6 +22,12 @@ type Structure = {
   category: string;
   afUrl: string;
 };
+
+// AlphaFold DB no longer returns confidenceCategory; derive it from mean pLDDT
+// using AlphaFold's own bands.
+function plddtCategory(v: number) {
+  return v >= 90 ? "VERY_HIGH" : v >= 70 ? "CONFIDENT" : v >= 50 ? "LOW" : "VERY_LOW";
+}
 
 type PdbStructure = {
   id: string;
@@ -91,7 +98,11 @@ async function fetchAll(accession: string): Promise<{
 } | null> {
   const [uniRes, afRes] = await Promise.allSettled([
     fetch(`https://rest.uniprot.org/uniprotkb/${accession}?format=json`, { next: { revalidate: 3600 } }),
-    fetch(`https://alphafold.ebi.ac.uk/api/prediction/${accession}`, { next: { revalidate: 86400 } }),
+    // AlphaFold DB answers 403 to requests without a User-Agent (Node's fetch sends none)
+    fetch(`https://alphafold.ebi.ac.uk/api/prediction/${accession}`, {
+      headers: { "User-Agent": "BioLearn/1.0 (+https://biolearn-neon.vercel.app)", Accept: "application/json" },
+      next: { revalidate: 86400 },
+    }),
   ]);
   const pdbStructure = await fetchPdbStructure(accession);
 
@@ -101,9 +112,9 @@ async function fetchAll(accession: string): Promise<{
   let structure: Structure | null = null;
   if (afRes.status === "fulfilled" && afRes.value.ok) {
     const af = await afRes.value.json();
-    if (af[0]) structure = {
+    if (af[0] && typeof af[0].globalMetricValue === "number") structure = {
       confidence: Math.round(af[0].globalMetricValue * 10) / 10,
-      category: af[0].confidenceCategory,
+      category: af[0].confidenceCategory ?? plddtCategory(af[0].globalMetricValue),
       afUrl: `https://alphafold.ebi.ac.uk/entry/${accession}`,
     };
   }
@@ -127,14 +138,26 @@ async function fetchAll(accession: string): Promise<{
 
   let articles: Article[] = [];
   try {
-    const pmQ = protein.gene ?? protein.name;
-    const pmSearch = await fetch(
-      `https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=${encodeURIComponent(pmQ)}[Title/Abstract]+AND+review[pt]&retmax=4&sort=relevance&retmode=json`,
-      { next: { revalidate: 3600 } }
-    );
-    if (pmSearch.ok) {
-      const pmData = await pmSearch.json();
-      const ids: string[] = pmData.esearchresult?.idlist ?? [];
+    // Search by the full protein name as a phrase — gene symbols alone are
+    // ambiguous ("INS" matched inositol papers). Fall back to the name in the
+    // abstract, then the symbol constrained by the start of the full name.
+    const name = protein.name.replace(/"/g, "");
+    const terms = [
+      `"${name}"[Title] AND review[pt] AND humans[mh]`,
+      `"${name}"[Title/Abstract] AND review[pt]`,
+      ...(protein.gene ? [`${protein.gene}[Title] AND "${name.split(/\s+/).slice(0, 3).join(" ")}"[Title/Abstract] AND review[pt]`] : []),
+    ];
+    let ids: string[] = [];
+    for (const term of terms) {
+      const pmSearch = await fetch(
+        `https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=pubmed&term=${encodeURIComponent(term)}&retmax=4&sort=relevance&retmode=json`,
+        { next: { revalidate: 3600 } }
+      );
+      if (!pmSearch.ok) break;
+      ids = (await pmSearch.json()).esearchresult?.idlist ?? [];
+      if (ids.length > 0) break;
+    }
+    {
       if (ids.length > 0) {
         const pmFetch = await fetch(
           `https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=pubmed&id=${ids.join(",")}&retmode=xml`,
@@ -142,11 +165,12 @@ async function fetchAll(accession: string): Promise<{
         );
         if (pmFetch.ok) {
           const xml = await pmFetch.text();
-          articles = xml.split("<PubmedArticle>").slice(1).map((block, i) => {
+          articles = xml.split("<PubmedArticle>").slice(1).map((block) => {
             const t = block.match(/<ArticleTitle[^>]*>([\s\S]*?)<\/ArticleTitle>/)?.[1]?.replace(/<[^>]+>/g, "").trim() ?? "";
-            const y = block.match(/<Year>(\d{4})<\/Year>/)?.[1];
-            return { pubmedId: ids[i] ?? "", title: t, year: y ? parseInt(y) : null };
-          }).filter((a) => a.title);
+            const y = block.match(/<PubDate>[\s\S]*?<Year>(\d{4})<\/Year>/)?.[1];
+            const pmid = block.match(/<PMID[^>]*>(\d+)<\/PMID>/)?.[1] ?? "";
+            return { pubmedId: pmid, title: decodeEntities(t), year: y ? parseInt(y) : null };
+          }).filter((a) => a.title && a.pubmedId);
         }
       }
     }
