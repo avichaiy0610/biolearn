@@ -1,19 +1,16 @@
 import { prisma } from "@/lib/prisma";
-import Groq from "groq-sdk";
+import { aiCompleteJSON, aiErrorResponse } from "@/lib/groq";
 import { NextRequest } from "next/server";
 
-const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
-const MODEL = "llama-3.3-70b-versatile";
-
 export async function POST(req: NextRequest) {
-  const { subtopicId, type = "mixed", difficulty = "medium", count = 5 } = await req.json();
-  if (!subtopicId) return Response.json({ error: "Missing subtopicId" }, { status: 400 });
+  const { subtopicId, type = "mixed", difficulty = "medium", count = 5 } = await req.json().catch(() => ({}));
+  if (!subtopicId) return Response.json({ error: "חסר מזהה תת-נושא.", code: "bad_request" }, { status: 400 });
 
   const subtopic = await prisma.subtopic.findUnique({
     where: { id: subtopicId },
     include: { topic: { select: { nameHe: true } } },
   });
-  if (!subtopic) return Response.json({ error: "Subtopic not found" }, { status: 404 });
+  if (!subtopic) return Response.json({ error: "תת-הנושא לא נמצא.", code: "not_found" }, { status: 404 });
 
   const content = subtopic.contentHe || subtopic.contentEn || "";
 
@@ -33,7 +30,7 @@ ${content}
 ${typeGuide}
 Difficulty level: ${difficulty}
 
-Return a JSON array of question objects. Each object must have:
+Return a JSON object {"questions": [...]}. Each question object must have:
 - type: "mcq" | "tf" | "open"
 - question: question text in Hebrew
 - options: for mcq: array of exactly 4 answer strings in Hebrew; for tf and open: null
@@ -41,24 +38,25 @@ Return a JSON array of question objects. Each object must have:
 - explanation: 1-2 sentence explanation in Hebrew
 - difficulty: "${difficulty}"
 
-Return ONLY the JSON array, nothing else.`;
+Return ONLY the JSON object, nothing else.`;
 
   try {
-    const res = await groq.chat.completions.create({
-      model: MODEL,
+    const questions = await aiCompleteJSON({
+      label: "generate-quiz",
+      tier: "quality",
+      json: true,
       messages: [{ role: "user", content: prompt }],
       temperature: 0.7,
-      max_tokens: 2500,
+      maxTokens: 3000,
+    }, (parsed) => {
+      const arr = Array.isArray(parsed) ? parsed : (parsed as { questions?: unknown })?.questions;
+      if (!Array.isArray(arr) || arr.length === 0) return null;
+      const ok = arr.filter((q) => q && typeof q.question === "string" && typeof q.answer === "string"
+        && (q.type !== "mcq" || (Array.isArray(q.options) && q.options.includes(q.answer))));
+      return ok.length ? ok : null;
     });
-
-    const raw = res.choices[0].message.content ?? "[]";
-    const match = raw.match(/\[[\s\S]*\]/);
-    if (!match) return Response.json({ error: "AI did not return valid JSON" }, { status: 500 });
-
-    const questions = JSON.parse(match[0]);
     return Response.json(questions);
   } catch (err) {
-    const msg = err instanceof Error ? err.message : String(err);
-    return Response.json({ error: msg }, { status: 500 });
+    return aiErrorResponse(err);
   }
 }

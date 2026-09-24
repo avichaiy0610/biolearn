@@ -3,6 +3,7 @@
 import { useState } from "react";
 import dynamic from "next/dynamic";
 import type { QuizQuestion } from "./QuizGame";
+import { postAiJSON, genericAiError } from "@/lib/ai-client";
 
 const QuizGame = dynamic(() => import("./QuizGame"), { ssr: false });
 
@@ -50,16 +51,10 @@ export default function StudentQuizCreator({
     setError(null);
     setQuestions(null);
     try {
-      const res = await fetch("/api/generate-quiz", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ subtopicId, type: quizType, difficulty, count }),
-      });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error ?? `שגיאה ${res.status}`);
+      const data = await postAiJSON<NonNullable<Parameters<typeof setQuestions>[0]>>("/api/generate-quiz", { subtopicId, type: quizType, difficulty, count }, lang);
       setQuestions(data);
     } catch (err) {
-      setError(err instanceof Error ? err.message : String(err));
+      setError(err instanceof Error ? err.message : genericAiError(lang));
     }
     setLoading(false);
   }

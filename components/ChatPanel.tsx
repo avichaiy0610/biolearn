@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import type { Locale } from "@/lib/dictionaries";
+import { streamAi, genericAiError } from "@/lib/ai-client";
 
 type Message = { role: "user" | "assistant"; content: string };
 
@@ -36,53 +37,17 @@ export default function ChatPanel({ lang, topicName, topicSlug, subtopics, dict 
     const assistantMsg: Message = { role: "assistant", content: "" };
     setMessages((prev) => [...prev, assistantMsg]);
 
-    try {
-      const res = await fetch("/api/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          messages: nextMessages,
-          lang,
-          topicName,
-          topicSlug,
-          subtopics,
-        }),
-      });
-
-      if (!res.body) throw new Error("No stream");
-
-      const reader = res.body.getReader();
-      const decoder = new TextDecoder();
-
-      while (true) {
-        const { done, value } = await reader.read();
-        if (done) break;
-        const chunk = decoder.decode(value, { stream: true });
-        for (const line of chunk.split("\n")) {
-          if (line.startsWith("data: ")) {
-            const part = line.slice(6);
-            if (part !== "[DONE]") {
-              setMessages((prev) => {
-                const updated = [...prev];
-                updated[updated.length - 1] = {
-                  role: "assistant",
-                  content: updated[updated.length - 1].content + part,
-                };
-                return updated;
-              });
-            }
-          }
-        }
-      }
-    } catch {
+    const setLast = (content: string) =>
       setMessages((prev) => {
         const updated = [...prev];
-        updated[updated.length - 1] = {
-          role: "assistant",
-          content: lang === "he" ? "שגיאה. נסה שנית." : "Error. Please try again.",
-        };
+        updated[updated.length - 1] = { role: "assistant", content };
         return updated;
       });
+
+    try {
+      await streamAi("/api/chat", { messages: nextMessages, lang, topicName, topicSlug, subtopics }, lang, setLast);
+    } catch (err) {
+      setLast(err instanceof Error ? err.message : genericAiError(lang));
     } finally {
       setLoading(false);
     }

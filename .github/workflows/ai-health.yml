@@ -1,0 +1,37 @@
+name: AI endpoints health check
+
+on:
+  schedule:
+    - cron: "17 */6 * * *"
+  workflow_dispatch:
+
+permissions:
+  issues: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping /api/health/ai
+        id: ping
+        run: |
+          code=$(curl -s -o result.json -w "%{http_code}" --max-time 90 \
+            -H "Authorization: Bearer ${{ secrets.HEALTHCHECK_SECRET }}" \
+            https://biolearn-neon.vercel.app/api/health/ai)
+          echo "HTTP $code"; cat result.json
+          echo "code=$code" >> "$GITHUB_OUTPUT"
+          [ "$code" = "200" ]
+
+      - name: Open an issue on failure
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          body=$(printf 'Scheduled AI health check failed (HTTP %s).\n\n```json\n%s\n```\n\nRun: %s/%s/actions/runs/%s' \
+            "${{ steps.ping.outputs.code }}" "$(cat result.json 2>/dev/null)" "$GITHUB_SERVER_URL" "$GITHUB_REPOSITORY" "$GITHUB_RUN_ID")
+          existing=$(gh issue list -R "$GITHUB_REPOSITORY" --state open --search "AI health check failing in:title" --json number -q '.[0].number')
+          if [ -n "$existing" ]; then
+            gh issue comment "$existing" -R "$GITHUB_REPOSITORY" --body "$body"
+          else
+            gh issue create -R "$GITHUB_REPOSITORY" --title "AI health check failing" --body "$body"
+          fi

@@ -2,6 +2,7 @@
 
 import { useState, useRef } from "react";
 import type { Locale } from "@/lib/dictionaries";
+import { streamAi, postAiJSON, genericAiError } from "@/lib/ai-client";
 
 type Dict = {
   subtopic: {
@@ -31,6 +32,7 @@ export default function SubtopicResearch({
   const [citations, setCitations] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
@@ -39,21 +41,16 @@ export default function SubtopicResearch({
 
   async function doResearch() {
     if (content) { setOpen((v) => !v); return; }
+    setError(null);
     setLoading(true);
     setOpen(true);
     try {
-      const res = await fetch("/api/research", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ lang, subtopicName, topicName }),
-      });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error);
+      const data = await postAiJSON<{ content: string; citations?: string[] }>("/api/research", { lang, subtopicName, topicName }, lang);
       setContent(data.content);
       setCitations(data.citations ?? []);
     } catch (err) {
-      const msg = err instanceof Error ? err.message : String(err);
-      setContent(`${dict.subtopic.researchError} (${msg})`);
+      setError(err instanceof Error ? err.message : genericAiError(lang));
+      setOpen(false);
     } finally {
       setLoading(false);
     }
@@ -67,38 +64,14 @@ export default function SubtopicResearch({
     answerRef.current = "";
 
     try {
-      const res = await fetch("/api/chat", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          lang,
-          topicName,
-          messages: [
-            { role: "user", content: question.trim() },
-          ],
-          subtopics: [{ name: subtopicName, content }],
-        }),
-      });
-
-      if (!res.ok || !res.body) throw new Error("Request failed");
-
-      const reader = res.body.getReader();
-      const decoder = new TextDecoder();
-      while (true) {
-        const { done, value } = await reader.read();
-        if (done) break;
-        const chunk = decoder.decode(value);
-        for (const line of chunk.split("\n")) {
-          if (line.startsWith("data: ")) {
-            const text = line.slice(6);
-            if (text === "[DONE]") break;
-            answerRef.current += text;
-            setAnswer(answerRef.current);
-          }
-        }
-      }
-    } catch {
-      setAnswer(lang === "he" ? "שגיאה. נסה שנית." : "Error. Please try again.");
+      await streamAi("/api/chat", {
+        lang,
+        topicName,
+        messages: [{ role: "user", content: question.trim() }],
+        subtopics: [{ name: subtopicName, content }],
+      }, lang, (full) => { answerRef.current = full; setAnswer(full); });
+    } catch (err) {
+      setAnswer(err instanceof Error ? err.message : genericAiError(lang));
     } finally {
       setAsking(false);
       setQuestion("");
@@ -115,6 +88,10 @@ export default function SubtopicResearch({
         <span>🔍</span>
         {loading ? dict.subtopic.researching : dict.subtopic.research}
       </button>
+
+      {error && (
+        <p role="alert" className="mt-2 text-xs text-red-600 dark:text-red-400">{error}</p>
+      )}
 
       {open && content && (
         <div className="mt-3 rounded-lg border border-violet-200 dark:border-violet-700 bg-violet-50 dark:bg-violet-950/30 p-4 space-y-3">

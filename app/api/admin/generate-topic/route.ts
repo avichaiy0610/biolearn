@@ -1,8 +1,5 @@
 import { isAdmin } from "@/lib/supabase/server";
-import Groq from "groq-sdk";
-
-const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
-const QUALITY_MODEL = "llama-3.3-70b-versatile";
+import { groq, QUALITY_MODEL } from "@/lib/groq";
 
 export async function POST(req: Request) {
   if (!(await isAdmin())) return Response.json({ error: "Unauthorized" }, { status: 403 });

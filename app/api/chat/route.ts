@@ -1,8 +1,11 @@
-import { groq, QUALITY_MODEL } from "@/lib/groq";
+import { aiStream, aiErrorResponse, sseResponse } from "@/lib/groq";
 import { prisma } from "@/lib/prisma";
 
 export async function POST(request: Request) {
-  const { messages, lang, topicName, topicSlug, subtopics } = await request.json();
+  const { messages, lang, topicName, topicSlug, subtopics } = await request.json().catch(() => ({}));
+  if (!Array.isArray(messages) || messages.length === 0) {
+    return Response.json({ error: lang === "en" ? "Empty question." : "השאלה ריקה.", code: "bad_request" }, { status: 400 });
+  }
 
   // Log the latest user question (fire-and-forget, don't block the response)
   const lastUserMsg = [...messages].reverse().find((m: { role: string }) => m.role === "user");
@@ -33,36 +36,20 @@ Always answer in English, clearly and scientifically accurately.
 Provide detailed, mechanistic explanations with specific examples and connections to broader biology where relevant.
 If a question is unrelated to biology, gently redirect back to the topic.`;
 
-  const encoder = new TextEncoder();
-
-  const stream = new ReadableStream({
-    async start(controller) {
-      try {
-        const completion = await groq.chat.completions.create({
-          messages: [
-            { role: "system", content: systemPrompt },
-            ...messages,
-          ],
-          model: QUALITY_MODEL,
-          stream: true,
-          max_tokens: 4000,
-        });
-
-        for await (const chunk of completion) {
-          const text = chunk.choices[0]?.delta?.content ?? "";
-          if (text) controller.enqueue(encoder.encode(`data: ${text}\n\n`));
-        }
-        controller.enqueue(encoder.encode("data: [DONE]\n\n"));
-        controller.close();
-      } catch {
-        const msg = lang === "he" ? "שגיאה. נסה שנית." : "Error. Please try again.";
-        controller.enqueue(encoder.encode(`data: ${msg}\n\n`));
-        controller.close();
-      }
-    },
-  });
-
-  return new Response(stream, {
-    headers: { "Content-Type": "text/event-stream", "Cache-Control": "no-cache" },
-  });
+  try {
+    const completion = await aiStream({
+      label: "chat",
+      tier: "quality",
+      maxTokens: 3000,
+      messages: [
+        { role: "system", content: systemPrompt },
+        ...messages
+          .filter((m: { role: string; content: unknown }) => (m.role === "user" || m.role === "assistant") && typeof m.content === "string")
+          .slice(-20),
+      ],
+    });
+    return sseResponse(completion, lang);
+  } catch (err) {
+    return aiErrorResponse(err, lang);
+  }
 }

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import dynamic from "next/dynamic";
 import type { Flashcard } from "./FlashcardDeck";
+import { postAiJSON, genericAiError } from "@/lib/ai-client";
 
 const FlashcardDeck = dynamic(() => import("./FlashcardDeck"), { ssr: false });
 
@@ -24,16 +25,10 @@ export default function StudentFlashcards({
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch("/api/generate-flashcards", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ subtopicId }),
-      });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error ?? `שגיאה ${res.status}`);
+      const data = await postAiJSON<NonNullable<Parameters<typeof setCards>[0]>>("/api/generate-flashcards", { subtopicId }, lang);
       setCards(data);
     } catch (err) {
-      setError(err instanceof Error ? err.message : String(err));
+      setError(err instanceof Error ? err.message : genericAiError(lang));
     }
     setLoading(false);
   }

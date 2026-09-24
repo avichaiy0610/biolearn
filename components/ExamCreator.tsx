@@ -3,6 +3,7 @@
 import { useState } from "react";
 import dynamic from "next/dynamic";
 import type { QuizQuestion } from "./QuizGame";
+import { postAiJSON, genericAiError } from "@/lib/ai-client";
 
 const QuizGame = dynamic(() => import("./QuizGame"), { ssr: false });
 
@@ -32,16 +33,10 @@ export default function ExamCreator({
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch("/api/generate-exam", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ topicSlug, difficulty, count }),
-      });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error ?? `שגיאה ${res.status}`);
+      const data = await postAiJSON<NonNullable<Parameters<typeof setQuestions>[0]>>("/api/generate-exam", { topicSlug, difficulty, count }, lang);
       setQuestions(data);
     } catch (err) {
-      setError(err instanceof Error ? err.message : String(err));
+      setError(err instanceof Error ? err.message : genericAiError(lang));
     }
     setLoading(false);
   }
@@ -129,11 +124,11 @@ export default function ExamCreator({
             <p className="mb-3 text-xs text-red-500 bg-red-50 dark:bg-red-900/20 rounded-lg px-3 py-2">{error}</p>
           )}
 
-          <div className="flex gap-2">
+          <div className="flex flex-wrap gap-2">
             <button
               onClick={generate}
               disabled={loading}
-              className="flex-1 py-2.5 rounded-xl bg-orange-500 text-white text-sm font-medium hover:bg-orange-600 disabled:opacity-50 transition-colors"
+              className="px-5 py-2.5 rounded-xl bg-orange-500 text-white text-sm font-medium hover:bg-orange-600 disabled:opacity-50 transition-colors"
             >
               {loading ? (isHe ? "מייצר מבחן... ⏳" : "Generating... ⏳") : (isHe ? `📝 צור מבחן (${count} שאלות)` : `📝 Generate exam (${count} questions)`)}
             </button>

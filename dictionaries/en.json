@@ -67,7 +67,7 @@
     "researching": "Searching...",
     "researchResult": "Research Result",
     "citations": "Sources",
-    "researchError": "Search error. Check your API key.",
+    "researchError": "The AI service is temporarily unavailable. Please try again.",
     "askFollowUp": "Ask a follow-up question",
     "askPlaceholder": "Something unclear? Ask here...",
     "asking": "Thinking..."
@@ -79,7 +79,7 @@
   },
   "research": {
     "title": "Scientific Articles",
-    "subtitle": "Recent biology research — analyzed and summarized",
+    "subtitle": "Selected biology papers — analyzed and summarized",
     "noArticles": "No articles yet",
     "keyFindings": "Key Findings",
     "readOriginal": "Read Original Article",

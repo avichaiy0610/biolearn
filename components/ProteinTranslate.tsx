@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { postAiJSON, genericAiError } from "@/lib/ai-client";
 
 type TranslatedData = {
   name?: string;
@@ -33,16 +34,10 @@ export default function ProteinTranslate({ originalData, onTranslated, onReset, 
     setLoading(true);
     setError(null);
     try {
-      const res = await fetch("/api/translate-protein", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(originalData),
-      });
-      const body = await res.json();
-      if (!res.ok) throw new Error(body?.error ?? `HTTP ${res.status}`);
-      onTranslated(body as TranslatedData);
+      const body = await postAiJSON<TranslatedData>("/api/translate-protein", originalData, "he");
+      onTranslated(body);
     } catch (err) {
-      setError(err instanceof Error ? err.message : "שגיאה בתרגום");
+      setError(err instanceof Error ? err.message : genericAiError("he"));
     }
     setLoading(false);
   }

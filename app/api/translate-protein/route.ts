@@ -1,7 +1,7 @@
-import { groq, QUALITY_MODEL } from "@/lib/groq";
+import { aiCompleteJSON, aiErrorResponse } from "@/lib/groq";
 
 export async function POST(request: Request) {
-  const { fn, locations, diseases, keywords, name, organism } = await request.json();
+  const { fn, locations, diseases, keywords, name, organism } = await request.json().catch(() => ({}));
 
   const truncatedFn = (fn ?? "").length > 1200 ? (fn as string).slice(0, 1200) + "…" : (fn ?? "");
 
@@ -27,22 +27,18 @@ Rules:
 - Return only JSON, no extra text`;
 
   try {
-    const completion = await groq.chat.completions.create({
+    const translated = await aiCompleteJSON({
+      label: "translate-protein",
+      tier: "quality",
+      json: true,
+      maxTokens: 3000,
       messages: [
         { role: "system", content: "You are a scientific Hebrew translator specializing in molecular biology. Return only valid JSON." },
         { role: "user", content: prompt },
       ],
-      model: QUALITY_MODEL,
-      response_format: { type: "json_object" },
-      max_tokens: 4000,
-    });
-
-    const text = completion.choices[0]?.message?.content ?? "{}";
-    const translated = JSON.parse(text);
+    }, (parsed) => (parsed && typeof parsed === "object" && typeof (parsed as { name?: unknown }).name === "string" ? parsed : null));
     return Response.json(translated);
   } catch (err) {
-    const detail = err instanceof Error ? err.message : String(err);
-    console.error("[translate-protein] failed:", detail);
-    return Response.json({ error: detail }, { status: 500 });
+    return aiErrorResponse(err);
   }
 }

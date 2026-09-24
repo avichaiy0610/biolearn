@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import type { Locale } from "@/lib/dictionaries";
+import { streamAi, genericAiError } from "@/lib/ai-client";
 
 export default function AIExplainPanel({
   lang,
@@ -24,31 +25,9 @@ export default function AIExplainPanel({
     setExplanation("");
 
     try {
-      const res = await fetch("/api/ai-explain", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ lang, processName, stepTitle, stepDesc }),
-      });
-
-      if (!res.ok || !res.body) throw new Error("Failed to fetch");
-
-      const reader = res.body.getReader();
-      const decoder = new TextDecoder();
-
-      while (true) {
-        const { done, value } = await reader.read();
-        if (done) break;
-        const chunk = decoder.decode(value, { stream: true });
-        // Parse SSE lines: "data: <text>"
-        for (const line of chunk.split("\n")) {
-          if (line.startsWith("data: ")) {
-            const text = line.slice(6);
-            if (text !== "[DONE]") setExplanation((prev) => prev + text);
-          }
-        }
-      }
-    } catch {
-      setExplanation(lang === "he" ? "שגיאה בטעינת ההסבר." : "Failed to load explanation.");
+      await streamAi("/api/ai-explain", { lang, processName, stepTitle, stepDesc }, lang, setExplanation);
+    } catch (err) {
+      setExplanation(err instanceof Error ? err.message : genericAiError(lang));
     } finally {
       setLoading(false);
     }

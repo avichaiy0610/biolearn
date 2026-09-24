@@ -1,7 +1,10 @@
-import { groq, QUALITY_MODEL, BIOLOGY_SYSTEM } from "@/lib/groq";
+import { aiComplete, aiErrorResponse, BIOLOGY_SYSTEM } from "@/lib/groq";
 
 export async function POST(request: Request) {
-  const { query, lang, subtopicName, topicName } = await request.json();
+  const { query, lang, subtopicName, topicName } = await request.json().catch(() => ({}));
+  if (!subtopicName) {
+    return Response.json({ error: lang === "en" ? "Missing subtopic." : "חסר שם תת-נושא.", code: "bad_request" }, { status: 400 });
+  }
 
   const prompt =
     lang === "he"
@@ -13,17 +16,17 @@ Include: definition, mechanism, biological significance, and specific examples.
 Be accurate and use proper scientific terminology. ${query ?? ""}`;
 
   try {
-    const completion = await groq.chat.completions.create({
+    const content = await aiComplete({
+      label: "research",
+      tier: "quality",
+      maxTokens: 2500,
       messages: [
         { role: "system", content: BIOLOGY_SYSTEM },
         { role: "user", content: prompt },
       ],
-      model: QUALITY_MODEL,
     });
-    const content = completion.choices[0]?.message?.content ?? "";
     return Response.json({ content, citations: [] });
   } catch (err) {
-    const msg = err instanceof Error ? err.message : "Unknown error";
-    return Response.json({ error: msg }, { status: 500 });
+    return aiErrorResponse(err, lang);
   }
 }
