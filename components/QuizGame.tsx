@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { isolatePrimes } from "@/lib/text";
 
 export type QuizQuestion = {
   id?: string;
@@ -10,6 +11,9 @@ export type QuizQuestion = {
   answer: string;
   explanation: string;
   difficulty: string;
+  optionWhy?: Record<string, string>; // static bank: why each option is right/wrong
+  ref?: string;                       // static bank: textbook source
+  subtopicId?: string;
 };
 
 function parseOptions(val: string | string[] | null): string[] {
@@ -26,12 +30,18 @@ export default function QuizGame({
   questions: rawQuestions,
   lang,
   onFinish,
+  onAnswer,
 }: {
   questions: QuizQuestion[];
   lang: string;
   onFinish?: (score: number, total: number) => void;
+  onAnswer?: (q: QuizQuestion, correct: boolean) => void;
 }) {
-  const [questions] = useState(() => shuffle(rawQuestions));
+  // Question order and each question's option order are fixed once per game.
+  const [{ questions, optionOrder }] = useState(() => {
+    const qs = shuffle(rawQuestions);
+    return { questions: qs, optionOrder: qs.map((x) => shuffle(parseOptions(x.options))) };
+  });
   const [current, setCurrent] = useState(0);
   const [selected, setSelected] = useState<string | null>(null);
   const [openAnswer, setOpenAnswer] = useState("");
@@ -39,22 +49,10 @@ export default function QuizGame({
   const [submitted, setSubmitted] = useState(false);
   const [score, setScore] = useState(0);
   const [done, setDone] = useState(false);
-  const [shuffledOptions, setShuffledOptions] = useState<string[]>([]);
-
   const isHe = lang === "he";
 
-  useEffect(() => {
-    const q = questions[current];
-    if (!q) return;
-    const opts = parseOptions(q.options);
-    setShuffledOptions(opts.length ? shuffle(opts) : []);
-    setSelected(null);
-    setOpenAnswer("");
-    setSelfScore(null);
-    setSubmitted(false);
-  }, [current, questions]);
-
   if (questions.length === 0) return null;
+  const shuffledOptions = optionOrder[current] ?? [];
 
   const q = questions[current];
   const isTF = q.type === "tf";
@@ -74,6 +72,7 @@ export default function QuizGame({
       if (!selected) return;
       setSubmitted(true);
       if (selected === q.answer) setScore((s) => s + 1);
+      onAnswer?.(q, selected === q.answer);
     } else {
       if (!openAnswer.trim()) return;
       setSubmitted(true);
@@ -83,16 +82,20 @@ export default function QuizGame({
   function handleSelfScore(correct: boolean) {
     setSelfScore(correct);
     if (correct) setScore((s) => s + 1);
+    onAnswer?.(q, correct);
   }
 
-  useEffect(() => {
-    if (done) onFinish?.(score, questions.length);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [done]);
-
   function handleNext() {
-    if (current + 1 >= questions.length) setDone(true);
-    else setCurrent((c) => c + 1);
+    if (current + 1 >= questions.length) {
+      setDone(true);
+      onFinish?.(score, questions.length);
+      return;
+    }
+    setCurrent((c) => c + 1);
+    setSelected(null);
+    setOpenAnswer("");
+    setSelfScore(null);
+    setSubmitted(false);
   }
 
   // Done screen
@@ -141,7 +144,7 @@ export default function QuizGame({
         </div>
 
         {/* Question */}
-        <p className="text-base font-medium text-zinc-900 dark:text-zinc-50 mb-5 leading-relaxed">{q.question}</p>
+        <p className="text-base font-medium text-zinc-900 dark:text-zinc-50 mb-5 leading-relaxed">{isolatePrimes(q.question)}</p>
 
         {/* MCQ Options */}
         {isMCQ && (
@@ -155,7 +158,7 @@ export default function QuizGame({
                   key={opt}
                   onClick={() => handleSelect(opt)}
                   disabled={submitted}
-                  className={`w-full text-right px-4 py-3 rounded-xl border text-sm transition-all ${
+                  className={`w-full text-start px-4 py-3 rounded-xl border text-sm transition-all ${
                     isRight ? "border-emerald-500 bg-emerald-50 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-300 font-medium"
                     : isWrong ? "border-red-400 bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400"
                     : isSelected ? "border-violet-400 bg-violet-50/50 dark:bg-violet-900/20 text-zinc-900 dark:text-zinc-50"
@@ -163,10 +166,15 @@ export default function QuizGame({
                   }`}
                 >
                   <span className="flex items-center justify-between gap-2">
-                    <span>{opt}</span>
+                    <span>{isolatePrimes(opt)}</span>
                     {isRight && <span>✓</span>}
                     {isWrong && <span>✗</span>}
                   </span>
+                  {submitted && q.optionWhy?.[opt] && (
+                    <span className="block mt-1.5 text-xs font-normal text-zinc-600 dark:text-zinc-400">
+                      {isolatePrimes(q.optionWhy[opt])}
+                    </span>
+                  )}
                 </button>
               );
             })}
@@ -228,7 +236,8 @@ export default function QuizGame({
             <p className="font-semibold mb-1">
               {isCorrect ? (isHe ? "✓ נכון!" : "✓ Correct!") : (isHe ? "✗ לא נכון" : "✗ Incorrect")}
             </p>
-            <p>{q.explanation}</p>
+            <p>{isolatePrimes(q.explanation)}</p>
+            {q.ref && <p className="mt-2 text-xs opacity-75">📚 {isHe ? "מקור:" : "Source:"} <bdi dir="ltr">{q.ref}</bdi></p>}
           </div>
         )}
 

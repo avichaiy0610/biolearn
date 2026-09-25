@@ -13,6 +13,8 @@ import TopicGuide from "@/components/TopicGuide";
 import Glossary from "@/components/Glossary";
 import { TOPIC_GUIDES } from "@/content/topic-guides";
 import { GLOSSARY } from "@/content/glossary";
+import { bankForSubtopic, bankForTopic } from "@/content/question-bank";
+import TopicPractice from "@/components/TopicPractice";
 import { isComingSoon } from "@/lib/topics";
 import type { Metadata } from "next";
 
@@ -217,7 +219,10 @@ export default async function TopicPage({
             {dict.topics.subtopics}
           </h2>
           <TopicPageClient
-            subtopics={topic.subtopics}
+            subtopics={topic.subtopics.map((s) => ({
+              ...s,
+              _count: { questions: s._count.questions + bankForSubtopic(s.id).length },
+            }))}
             processes={topic.processes}
             topicSlug={slug}
             topicName={name}
@@ -227,7 +232,11 @@ export default async function TopicPage({
         </section>
       )}
 
-      {GLOSSARY[topic.slug] && <Glossary terms={GLOSSARY[topic.slug]} lang={lang} />}
+      {GLOSSARY[topic.slug] && <Glossary terms={GLOSSARY[topic.slug]} lang={lang} topicSlug={topic.slug} />}
+
+      {bankForTopic(topic.slug).length > 0 && (
+        <TopicPractice topicSlug={topic.slug} total={bankForTopic(topic.slug).length} lang={lang} />
+      )}
 
       {/* Exam mode */}
       {topic.subtopics.length > 0 && (

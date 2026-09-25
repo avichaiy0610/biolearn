@@ -4,6 +4,7 @@ import { useState } from "react";
 import dynamic from "next/dynamic";
 import type { QuizQuestion } from "./QuizGame";
 import { postAiJSON, genericAiError } from "@/lib/ai-client";
+import { BankFallback } from "./BankQuiz";
 
 const QuizGame = dynamic(() => import("./QuizGame"), { ssr: false });
 
@@ -121,7 +122,10 @@ export default function ExamCreator({
           </div>
 
           {error && (
-            <p className="mb-3 text-xs text-red-500 bg-red-50 dark:bg-red-900/20 rounded-lg px-3 py-2">{error}</p>
+            <div className="mb-3">
+              <p className="text-xs text-red-500 bg-red-50 dark:bg-red-900/20 rounded-lg px-3 py-2">{error}</p>
+              <BankFallback query={`topic=${topicSlug}&limit=10`} lang={lang} />
+            </div>
           )}
 
           <div className="flex flex-wrap gap-2">

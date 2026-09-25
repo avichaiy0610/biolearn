@@ -23,9 +23,16 @@ export default async function CoursePage({ params }: PageProps<"/[lang]/courses/
   const he = lang === "he";
   const L = he ? "he" : "en";
 
-  const [units, topics] = await Promise.all([
+  const [units, topics, exams] = await Promise.all([
     resolveCourseUnits(course, lang),
     prisma.topic.findMany({ where: { slug: { in: course.topics } }, select: { slug: true, nameHe: true, nameEn: true, icon: true } }),
+    prisma.pastExam
+      .findMany({
+        where: { courseSlug: course.slug },
+        select: { id: true, year: true, moed: true, university: true, notes: true, fileName: true, url: true, solutionUrl: true },
+        orderBy: [{ year: "desc" }, { moed: "asc" }],
+      })
+      .catch(() => []),
   ]);
 
   return (
@@ -62,6 +69,33 @@ export default async function CoursePage({ params }: PageProps<"/[lang]/courses/
             </li>
           ))}
         </ol>
+      </section>
+
+      <section className="mb-10" aria-labelledby="exams-title">
+        <h2 id="exams-title" className="text-xl font-semibold text-zinc-800 dark:text-zinc-200 mb-3">📄 {he ? "מבחני עבר" : "Past exams"}</h2>
+        {exams.length === 0 ? (
+          <p className="text-sm text-zinc-500 dark:text-zinc-400 rounded-xl border border-dashed border-zinc-300 dark:border-zinc-600 p-4">
+            {he
+              ? "עדיין אין מבחני עבר לקורס הזה. בינתיים אפשר לתרגל ממאגר השאלות בדפי הנושאים."
+              : "No past exams for this course yet. Meanwhile, practice with the question bank on the topic pages."}
+          </p>
+        ) : (
+          <ul className="space-y-2">
+            {exams.map((x) => (
+              <li key={x.id} className="flex items-center gap-3 flex-wrap rounded-xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 px-4 py-3 text-sm">
+                <span className="font-semibold">{x.year}</span>
+                <span>{x.moed === "מיוחד" ? (he ? "מועד מיוחד" : "Special") : he ? `מועד ${x.moed}'` : `Moed ${x.moed}`}</span>
+                {x.university && <span className="text-zinc-500">{x.university}</span>}
+                {x.notes && <span className="text-xs text-zinc-400">{x.notes}</span>}
+                <span className="ms-auto flex gap-3">
+                  {x.fileName && <a href={`/api/past-exams/${x.id}`} target="_blank" rel="noopener noreferrer" className="text-emerald-700 dark:text-emerald-400 hover:underline">{he ? "מבחן (PDF)" : "Exam (PDF)"}</a>}
+                  {x.url && <a href={x.url} target="_blank" rel="noopener noreferrer" className="text-emerald-700 dark:text-emerald-400 hover:underline">{he ? "מבחן" : "Exam"} ↗</a>}
+                  {x.solutionUrl && <a href={x.solutionUrl} target="_blank" rel="noopener noreferrer" className="text-emerald-700 dark:text-emerald-400 hover:underline">{he ? "פתרון" : "Solution"} ↗</a>}
+                </span>
+              </li>
+            ))}
+          </ul>
+        )}
       </section>
 
       <section className="mb-10">
