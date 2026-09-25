@@ -52,6 +52,14 @@ export default async function AdminPage({ params }: PageProps<"/[lang]/admin">) 
       descEn: "Generate MCQ and true/false questions with AI per subtopic",
     },
     {
+      href: `/${lang}/admin/courses`,
+      icon: "🎓",
+      titleHe: "מסלול הקורסים",
+      titleEn: "Course Track",
+      descHe: "העברת קורסים בין שנים וסמסטרים ויחידות בין קורסים",
+      descEn: "Move courses between years/semesters and units between courses",
+    },
+    {
       href: `/${lang}/admin/exams`,
       icon: "📄",
       titleHe: "מבחני עבר",

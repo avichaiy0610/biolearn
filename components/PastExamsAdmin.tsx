@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { COURSES } from "@/content/courses";
 
 export type Exam = {
   id: string; courseSlug: string; year: number; moed: string; university: string | null;
@@ -10,7 +9,7 @@ export type Exam = {
 
 const MOEDS = ["א", "ב", "ג", "מיוחד"];
 
-export default function PastExamsAdmin({ initialExams }: { initialExams: Exam[] }) {
+export default function PastExamsAdmin({ initialExams, courses }: { initialExams: Exam[]; courses: { slug: string; nameHe: string }[] }) {
   const [exams, setExams] = useState<Exam[]>(initialExams);
   const [saving, setSaving] = useState(false);
   const [msg, setMsg] = useState<{ ok: boolean; text: string } | null>(null);
@@ -40,14 +39,14 @@ export default function PastExamsAdmin({ initialExams }: { initialExams: Exam[] 
   }
 
   const field = "w-full h-10 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-3 text-sm";
-  const courseName = (slug: string) => COURSES.find((c) => c.slug === slug)?.nameHe ?? slug;
+  const courseName = (slug: string) => courses.find((c) => c.slug === slug)?.nameHe ?? slug;
 
   return (
     <div className="space-y-8">
       <form onSubmit={submit} className="rounded-2xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 p-5 grid gap-4 sm:grid-cols-2">
         <label className="text-sm">קורס
           <select name="courseSlug" required className={field}>
-            {COURSES.map((c) => <option key={c.slug} value={c.slug}>{c.nameHe}</option>)}
+            {courses.map((c) => <option key={c.slug} value={c.slug}>{c.nameHe}</option>)}
           </select>
         </label>
         <div className="grid grid-cols-2 gap-3">

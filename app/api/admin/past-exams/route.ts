@@ -1,6 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { isAdmin } from "@/lib/supabase/server";
-import { courseBySlug } from "@/content/courses";
+import { getCourse } from "@/lib/courses-db";
 
 const MAX_BYTES = 4 * 1024 * 1024; // Vercel rejects request bodies over ~4.5 MB
 const MOEDS = new Set(["א", "ב", "ג", "מיוחד"]);
@@ -25,7 +25,7 @@ export async function POST(req: Request) {
   const solutionUrl = String(form.get("solutionUrl") ?? "").trim() || null;
   const file = form.get("file");
 
-  if (!courseBySlug(courseSlug)) return Response.json({ error: "קורס לא מוכר." }, { status: 400 });
+  if (!(await getCourse(courseSlug))) return Response.json({ error: "קורס לא מוכר." }, { status: 400 });
   if (!Number.isInteger(year) || year < 1990 || year > 2100) return Response.json({ error: "שנה לא תקינה." }, { status: 400 });
   if (!MOEDS.has(moed)) return Response.json({ error: "מועד לא תקין." }, { status: 400 });
   if (form.get("rights") !== "on") return Response.json({ error: "יש לאשר שיש זכות לפרסם את המבחן." }, { status: 400 });

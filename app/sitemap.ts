@@ -2,12 +2,13 @@ import type { MetadataRoute } from "next";
 import { prisma } from "@/lib/prisma";
 import { SITE_URL } from "@/lib/site";
 import { isComingSoon } from "@/lib/topics";
-import { COURSES } from "@/content/courses";
+import { getCourses } from "@/lib/courses-db";
 
 export const revalidate = 3600;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const staticPaths = ["", "/topics", "/courses", ...COURSES.map((c) => `/courses/${c.slug}`), "/proteins", "/research"];
+  const courses = await getCourses();
+  const staticPaths = ["", "/topics", "/courses", ...courses.map((c) => `/courses/${c.slug}`), "/proteins", "/research"];
   const topics = await prisma.topic
     .findMany({
       select: {

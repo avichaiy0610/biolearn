@@ -1,6 +1,7 @@
 import Link from "next/link";
 import PastExamsAdmin from "@/components/PastExamsAdmin";
 import { prisma } from "@/lib/prisma";
+import { getCourses } from "@/lib/courses-db";
 
 export const dynamic = "force-dynamic";
 
@@ -17,7 +18,7 @@ export default async function AdminExamsPage({ params }: PageProps<"/[lang]/admi
       <p className="text-sm text-zinc-500 mb-6">
         מבחנים שמועלים כאן מוצגים בדף הקורס. יש להעלות רק מבחנים שיש זכות לפרסם.
       </p>
-      <PastExamsAdmin initialExams={exams} />
+      <PastExamsAdmin initialExams={exams} courses={(await getCourses()).map((c) => ({ slug: c.slug, nameHe: c.nameHe }))} />
     </div>
   );
 }

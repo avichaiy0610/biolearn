@@ -2,7 +2,10 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { hasLocale } from "@/lib/dictionaries";
-import { COURSES, SEMESTER_LABEL, YEAR_LABEL } from "@/content/courses";
+import { SEMESTER_LABEL, YEAR_LABEL } from "@/content/courses";
+import { getCourses } from "@/lib/courses-db";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "קורסים",
@@ -14,6 +17,7 @@ export default async function CoursesPage({ params }: PageProps<"/[lang]/courses
   if (!hasLocale(lang)) notFound();
   const he = lang === "he";
   const L = he ? "he" : "en";
+  const courses = await getCourses();
 
   return (
     <div className="max-w-5xl mx-auto px-4 py-10">
@@ -24,8 +28,8 @@ export default async function CoursesPage({ params }: PageProps<"/[lang]/courses
           : "The same content, organized by typical B.Sc. biology courses. Names and semesters vary slightly between universities."}
       </p>
 
-      {([1, 2, 3] as const).map((year) => {
-        const inYear = COURSES.filter((c) => c.year === year);
+      {([1, 2, 3, 4] as const).map((year) => {
+        const inYear = courses.filter((c) => c.year === year);
         if (inYear.length === 0) return null;
         return (
           <section key={year} className="mb-10">

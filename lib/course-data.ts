@@ -1,6 +1,6 @@
 import "server-only";
 import { prisma } from "@/lib/prisma";
-import type { Course } from "@/content/courses";
+import type { CourseUnit } from "@/content/courses";
 
 export type ResolvedUnit = {
   key: string;
@@ -13,7 +13,7 @@ export type ResolvedUnit = {
 };
 
 // Resolves a course's units against the DB (live names, skips hidden/missing).
-export async function resolveCourseUnits(course: Course, lang: string): Promise<ResolvedUnit[]> {
+export async function resolveCourseUnits(course: { units: CourseUnit[] }, lang: string): Promise<ResolvedUnit[]> {
   const subIds = course.units.flatMap((u) => (u.kind === "subtopic" ? [u.id] : []));
   const procSlugs = course.units.flatMap((u) => (u.kind === "process" ? [u.slug] : []));
   const [subs, procs] = await Promise.all([

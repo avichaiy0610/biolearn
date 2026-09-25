@@ -4,13 +4,14 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { hasLocale } from "@/lib/dictionaries";
-import { courseBySlug, SEMESTER_LABEL, YEAR_LABEL } from "@/content/courses";
+import { SEMESTER_LABEL, YEAR_LABEL } from "@/content/courses";
+import { getCourse, courseTopics } from "@/lib/courses-db";
 import { resolveCourseUnits } from "@/lib/course-data";
 import { prisma } from "@/lib/prisma";
 
 export async function generateMetadata({ params }: PageProps<"/[lang]/courses/[course]">): Promise<Metadata> {
   const { lang, course: slug } = await params;
-  const c = courseBySlug(slug);
+  const c = await getCourse(slug);
   if (!c) return {};
   return { title: lang === "he" ? c.nameHe : c.nameEn, description: lang === "he" ? c.descHe : c.descEn };
 }
@@ -18,14 +19,14 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/courses/[c
 export default async function CoursePage({ params }: PageProps<"/[lang]/courses/[course]">) {
   const { lang, course: slug } = await params;
   if (!hasLocale(lang)) notFound();
-  const course = courseBySlug(slug);
+  const course = await getCourse(slug);
   if (!course) notFound();
   const he = lang === "he";
   const L = he ? "he" : "en";
 
   const [units, topics, exams] = await Promise.all([
     resolveCourseUnits(course, lang),
-    prisma.topic.findMany({ where: { slug: { in: course.topics } }, select: { slug: true, nameHe: true, nameEn: true, icon: true } }),
+    prisma.topic.findMany({ where: { slug: { in: courseTopics(course) } }, select: { slug: true, nameHe: true, nameEn: true, icon: true } }),
     prisma.pastExam
       .findMany({
         where: { courseSlug: course.slug },

@@ -235,3 +235,17 @@ model StudyDay {
 
   @@unique([userId, day])
 }
+
+// Course track (editable in /admin/courses). Seeded from content/courses.ts.
+model Course {
+  slug      String    @id
+  nameHe    String
+  nameEn    String
+  year      Int       // 1..4
+  semester  String    // "A" | "B"
+  descHe    String
+  descEn    String
+  units     String    // JSON: CourseUnit[] in display order
+  position  Int       @default(0) // order within its year/semester
+  updatedAt DateTime? @updatedAt
+}

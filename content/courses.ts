@@ -1,4 +1,8 @@
-/* Course-track view: the site's content organized as a generic Israeli B.Sc.
+/* Seed for the course track. The live structure is in the DB (Course table,
+   edited in /admin/courses); this file seeds it via
+   scripts/create-course-table.ts and is the fallback if the table is empty.
+
+   Course-track view: the site's content organized as a generic Israeli B.Sc.
    biology program (year / semester / course). Course names and placement are
    the common ones across universities, not any single institution's catalog.
    Units reference existing content by id (subtopics) or slug (processes), so
@@ -12,7 +16,7 @@ export type Course = {
   slug: string;
   nameHe: string;
   nameEn: string;
-  year: 1 | 2 | 3;
+  year: 1 | 2 | 3 | 4;
   semester: "A" | "B";
   descHe: string;
   descEn: string;
@@ -184,6 +188,6 @@ export const SEMESTER_LABEL = {
 } as const;
 
 export const YEAR_LABEL = {
-  he: { 1: "שנה א'", 2: "שנה ב'", 3: "שנה ג'" },
-  en: { 1: "Year 1", 2: "Year 2", 3: "Year 3" },
+  he: { 1: "שנה א'", 2: "שנה ב'", 3: "שנה ג'", 4: "שנה ד'" },
+  en: { 1: "Year 1", 2: "Year 2", 3: "Year 3", 4: "Year 4" },
 } as const;
