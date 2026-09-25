@@ -6,13 +6,15 @@ import type { Locale } from "@/lib/dictionaries";
 import AIExplainPanel from "../AIExplainPanel";
 import FeedbackButton from "../FeedbackButton";
 import YouTubeSupplement from "./YouTubeSupplement";
-import type { LottieScene, SceneLabel } from "./scenes";
+import type { LegendItem, LottieScene, SceneLabel } from "./scenes";
+import { isolatePrimes } from "@/lib/text";
 
 type Step = { id: string; order: number; titleHe: string; titleEn: string; descHe: string; descEn: string };
 
 const SCALE = 1.6;          // canvas backing pixels per composition unit (800×480 → 1280×768)
 const DWELL_MS = 2600;      // pause on each step during auto-play
-const MIN_LABEL_CSS_PX = 13; // labels never render smaller than this on screen
+const MIN_LABEL_CSS_PX = 14; // labels never render smaller than this on screen
+const SHORT_LABEL_FONT = 26; // above this (narrow screens) use the short label text
 
 export default function LottieProcessPlayer({
   scene, steps, lang, processName, topicSlug, processSlug, dict,
@@ -56,37 +58,59 @@ export default function LottieProcessPlayer({
     ctx.setTransform(SCALE, 0, 0, SCALE, 0, 0);
     const font = recordingRef.current ? 22 : labelFontRef.current;
     const family = getComputedStyle(document.body).fontFamily || "system-ui, sans-serif";
+    ctx.textBaseline = "middle";
+    ctx.globalAlpha = 1;
 
-    // strand-end labels etc.
+    // strand-end labels (5' / 3') — always left-to-right
     ctx.font = `700 ${Math.round(font * 0.9)}px ${family}`;
     ctx.textAlign = "center";
-    ctx.textBaseline = "middle";
-    ctx.fillStyle = "#334155";
-    ctx.direction = "ltr"; // strand ends like 5' / 3'
+    ctx.fillStyle = "#1e293b";
+    ctx.direction = "ltr";
     for (const l of scene.fixed ?? []) ctx.fillText(he ? l.he : l.en, l.x, l.y);
 
-    // step labels appear halfway through the step's motion
-    const local = frame - s * F;
-    if (local >= F * 0.33) {
-      const alpha = Math.min(1, (local - F * 0.33) / (F * 0.2));
-      for (const l of scene.labels[s] ?? []) drawLabel(ctx, l, he, font, family, alpha, W, H);
-    }
-
-    // step chip (also ends up in the exported video)
-    const chip = `${s + 1}/${total} · ${title}`;
-    ctx.globalAlpha = 1;
+    // step chip (top corner on the reading side) + "not to scale" note (other corner)
+    // title from the step being drawn (not React state): with reduced motion only
+    // one frame is drawn, before the re-render that would update `title`
+    const st = steps[s];
+    const chipText = `${s + 1}/${total} · ${st ? (he ? st.titleHe : st.titleEn) : ""}`;
     ctx.font = `600 ${Math.round(font * 0.8)}px ${family}`;
     ctx.direction = he ? "rtl" : "ltr";
-    const w = ctx.measureText(chip).width + 20;
-    const x = he ? W - 10 - w : 10;
-    roundRect(ctx, x, 10, w, font * 1.3, 8);
+    const chipW = ctx.measureText(chipText).width + 20, chipH = font * 1.3;
+    const chip = { x: he ? W - 10 - chipW : 10, y: 10, w: chipW, h: chipH };
+    roundRect(ctx, chip.x, chip.y, chip.w, chip.h, 8);
     ctx.fillStyle = "rgba(5,150,105,0.92)";
     ctx.fill();
     ctx.fillStyle = "#fff";
     ctx.textAlign = "center";
-    ctx.fillText(chip, x + w / 2, 10 + font * 0.66);
+    ctx.fillText(chipText, chip.x + chip.w / 2, chip.y + chip.h / 2 + 1);
+
+    const noteText = he ? scene.note.he : scene.note.en;
+    const noteFont = Math.max(13, Math.round(font * 0.58));
+    ctx.font = `500 ${noteFont}px ${family}`;
+    const noteW = ctx.measureText(noteText).width;
+    const note = { x: he ? 10 : W - 10 - noteW, y: 12, w: noteW, h: noteFont * 1.3 };
+    ctx.fillStyle = "#64748b";
+    ctx.textAlign = "left";
+    ctx.fillText(noteText, note.x, note.y + note.h / 2);
+
+    // step labels fade in once the step's motion is a third done
+    const local = frame - s * F;
+    if (local >= F * 0.33) {
+      const alpha = Math.min(1, (local - F * 0.33) / (F * 0.2));
+      const all = scene.labels[s] ?? [];
+      ctx.globalAlpha = alpha;
+      // small tags (5' ends of new strands): plain text, no pill
+      ctx.font = `700 ${Math.round(font * 0.72)}px ${family}`;
+      ctx.direction = "ltr";
+      ctx.textAlign = "center";
+      ctx.fillStyle = "#14532d";
+      for (const l of all.filter((x) => x.tag)) ctx.fillText(he ? l.he : l.en, l.x, l.y - font * 0.55);
+      const pills = layoutLabels(ctx, all.filter((x) => !x.tag), he, font, family, W, H, [chip, note]);
+      for (const p of pills) drawLeader(ctx, p);
+      for (const p of pills) drawPill(ctx, p, he, font, family);
+    }
     ctx.restore();
-  }, [F, H, W, he, scene, title, total]);
+  }, [F, H, W, he, scene, steps, total]);
 
   const segmentDoneRef = useRef<() => void>(() => {});
   const stopRecordingRef = useRef<(() => void) | null>(null);
@@ -264,14 +288,17 @@ export default function LottieProcessPlayer({
       </div>
 
       {scene.legend && (
-        <ul className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-zinc-600 dark:text-zinc-400 -mt-1">
-          {scene.legend.map((l) => (
-            <li key={l.color} className="inline-flex items-center gap-1.5">
-              <span className="inline-block w-4 h-1.5 rounded-full" style={{ background: l.color }} />
-              {he ? l.he : l.en}
-            </li>
-          ))}
-        </ul>
+        <div className="-mt-1">
+          <ul className="flex flex-wrap gap-x-4 gap-y-1.5 text-xs text-zinc-700 dark:text-zinc-300" aria-label={he ? "מקרא" : "Legend"}>
+            {scene.legend.map((l) => (
+              <li key={l.he} className="inline-flex items-center gap-1.5">
+                <Swatch item={l} />
+                {isolatePrimes(he ? l.he : l.en)}
+              </li>
+            ))}
+          </ul>
+          <p className="mt-1.5 text-xs text-zinc-500 dark:text-zinc-400">{he ? scene.note.he : scene.note.en}</p>
+        </div>
       )}
 
       {/* step text */}
@@ -344,39 +371,89 @@ function roundRect(ctx: CanvasRenderingContext2D, x: number, y: number, w: numbe
   ctx.roundRect(x, y, w, h, r);
 }
 
-function drawLabel(ctx: CanvasRenderingContext2D, l: SceneLabel, he: boolean, font: number, family: string, alpha: number, W: number, H: number) {
-  const text = he ? l.he : l.en;
-  ctx.globalAlpha = alpha;
+type Rect = { x: number; y: number; w: number; h: number };
+type PlacedLabel = { text: string; cx: number; cy: number; w: number; h: number; to?: [number, number] };
+
+const overlaps = (a: Rect, b: Rect, m = 6) => a.x < b.x + b.w + m && b.x < a.x + a.w + m && a.y < b.y + b.h + m && b.y < a.y + a.h + m;
+
+// Places label pills near their preferred spot without overlapping the step chip,
+// the note, each other, or any label's target point (so a pill never hides what
+// another label points at). Tries the nearest free offsets first.
+function layoutLabels(ctx: CanvasRenderingContext2D, labels: SceneLabel[], he: boolean, font: number, family: string, W: number, H: number, fixed: Rect[]): PlacedLabel[] {
   ctx.font = `600 ${font}px ${family}`;
   ctx.direction = he ? "rtl" : "ltr";
-  const padX = font * 0.55, h = font * 1.5;
-  const w = ctx.measureText(text).width + padX * 2;
-  // keep the pill on the canvas
-  const cx = Math.min(W - w / 2 - 4, Math.max(w / 2 + 4, l.x));
-  const cy = Math.min(H - h / 2 - 4, Math.max(h / 2 + 4, l.y));
-
-  if (l.to) {
-    const [tx, ty] = l.to;
-    const ey = ty > cy ? cy + h / 2 : cy - h / 2;
-    ctx.strokeStyle = "#0f172a";
-    ctx.lineWidth = 1.6;
-    ctx.beginPath();
-    ctx.moveTo(Math.min(cx + w / 2 - 6, Math.max(cx - w / 2 + 6, tx)), ey);
-    ctx.lineTo(tx, ty);
-    ctx.stroke();
-    ctx.fillStyle = "#0f172a";
-    ctx.beginPath();
-    ctx.arc(tx, ty, 3.2, 0, Math.PI * 2);
-    ctx.fill();
+  const short = font >= SHORT_LABEL_FONT;
+  const targets: Rect[] = labels.filter((l) => l.to).map((l) => ({ x: l.to![0] - 5, y: l.to![1] - 5, w: 10, h: 10 }));
+  const taken: Rect[] = [...fixed];
+  const offsets: [number, number][] = [[0, 0]];
+  for (let r = 1; r <= 14; r++) {
+    for (const [dx, dy] of [[r * 18, 0], [-r * 18, 0], [0, r * 14], [0, -r * 14], [r * 18, r * 14], [-r * 18, r * 14], [r * 18, -r * 14], [-r * 18, -r * 14]]) offsets.push([dx, dy]);
   }
-  roundRect(ctx, cx - w / 2, cy - h / 2, w, h, h / 2);
-  ctx.fillStyle = "rgba(255,255,255,0.95)";
+  return labels.map((l) => {
+    const raw = he ? (short && l.heShort) || l.he : (short && l.enShort) || l.en;
+    const text = isolatePrimes(raw);
+    const w = ctx.measureText(text).width + font * 1.1, h = font * 1.5;
+    const clamp = (cx: number, cy: number) => [Math.min(W - w / 2 - 4, Math.max(w / 2 + 4, cx)), Math.min(H - h / 2 - 4, Math.max(h / 2 + 4, cy))];
+    let best = clamp(l.x, l.y);
+    for (const [dx, dy] of offsets) {
+      const [cx, cy] = clamp(l.x + dx, l.y + dy);
+      const r = { x: cx - w / 2, y: cy - h / 2, w, h };
+      if (!taken.some((t) => overlaps(r, t)) && !targets.some((t) => overlaps(r, t, 2))) { best = [cx, cy]; break; }
+    }
+    const placed = { text, cx: best[0], cy: best[1], w, h, to: l.to };
+    taken.push({ x: placed.cx - w / 2, y: placed.cy - h / 2, w, h });
+    return placed;
+  });
+}
+
+function drawLeader(ctx: CanvasRenderingContext2D, p: PlacedLabel) {
+  if (!p.to) return;
+  const [tx, ty] = p.to;
+  // leave the pill from the edge nearest the target
+  const ex = Math.min(p.cx + p.w / 2 - 8, Math.max(p.cx - p.w / 2 + 8, tx));
+  const ey = ty > p.cy + p.h / 2 ? p.cy + p.h / 2 : ty < p.cy - p.h / 2 ? p.cy - p.h / 2 : p.cy;
+  const sx = ey === p.cy ? (tx > p.cx ? p.cx + p.w / 2 : p.cx - p.w / 2) : ex;
+  ctx.strokeStyle = "#0f172a";
+  ctx.lineWidth = 1.6;
+  ctx.beginPath();
+  ctx.moveTo(sx, ey);
+  ctx.lineTo(tx, ty);
+  ctx.stroke();
+  ctx.fillStyle = "#0f172a";
+  ctx.beginPath();
+  ctx.arc(tx, ty, 3.2, 0, Math.PI * 2);
+  ctx.fill();
+}
+
+function drawPill(ctx: CanvasRenderingContext2D, p: PlacedLabel, he: boolean, font: number, family: string) {
+  roundRect(ctx, p.cx - p.w / 2, p.cy - p.h / 2, p.w, p.h, p.h / 2);
+  ctx.fillStyle = "rgba(255,255,255,0.96)";
   ctx.fill();
   ctx.strokeStyle = "#059669";
   ctx.lineWidth = 1.5;
   ctx.stroke();
+  ctx.font = `600 ${font}px ${family}`;
+  ctx.direction = he ? "rtl" : "ltr";
   ctx.fillStyle = "#0f172a";
   ctx.textAlign = "center";
   ctx.textBaseline = "middle";
-  ctx.fillText(text, cx, cy + 1);
+  ctx.fillText(p.text, p.cx, p.cy + 1);
+}
+
+// Legend swatch drawn in the same visual language as the scene.
+function Swatch({ item }: { item: LegendItem }) {
+  const c = item.color;
+  const box = "inline-block shrink-0";
+  switch (item.swatch) {
+    case "dot": return <span aria-hidden className={`${box} w-3 h-3 rounded-full`} style={{ background: c }} />;
+    case "ring": return <span aria-hidden className={`${box} w-3 h-3 rounded-full border-2`} style={{ borderColor: c }} />;
+    case "dash": return <span aria-hidden className={`${box} w-5 h-0 border-t-2 border-dashed`} style={{ borderColor: c }} />;
+    case "arrow": return (
+      <svg aria-hidden width="22" height="10" viewBox="0 0 22 10" className={box}>
+        <line x1="0" y1="5" x2="14" y2="5" stroke={c} strokeWidth="3" />
+        <polygon points="22,5 13,0 13,10" fill={c} />
+      </svg>
+    );
+    default: return <span aria-hidden className={`${box} w-5 h-1.5 rounded-full`} style={{ background: c }} />;
+  }
 }

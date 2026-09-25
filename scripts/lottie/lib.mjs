@@ -39,6 +39,18 @@ export function bez(points, { closed = false, smooth = false, tension = 0.5 } = 
   return { i, o, v: points, c: closed };
 }
 
+/** Open smooth path along an ellipse arc (angles in degrees, 0° = +x, clockwise on screen). */
+export function arc(cx, cy, rx, ry, a0, a1, n = 5) {
+  const pts = Array.from({ length: n }, (_, k) => {
+    const a = ((a0 + ((a1 - a0) * k) / (n - 1)) * Math.PI) / 180;
+    return [cx + rx * Math.cos(a), cy + ry * Math.sin(a)];
+  });
+  return bez(pts, { smooth: true });
+}
+
+/** Closed straight-edged polygon. */
+export const poly = (points) => bez(points, { closed: true });
+
 /** Path shape; `keys` is a single bezier or [[frame, bezier], ...]. */
 export function path(keys) {
   if (Array.isArray(keys)) {

@@ -2,7 +2,7 @@
    scripts/lottie/build.mjs into public/lottie/<file>.json; the labels below are
    drawn by LottieProcessPlayer on top of the animation, in composition
    coordinates (800×480), so they stay in Hebrew, scale with the canvas, and are
-   included in the .webm export.
+   included in the .webm export. Label targets match the geometry in build.mjs.
 
    TODO (long-term): protein structures already get real 3D via Mol* on the
    protein page; for key processes (e.g. the replisome, the mitotic spindle)
@@ -11,23 +11,31 @@
 export type SceneLabel = {
   he: string;
   en: string;
-  x: number; // label center
+  // shorter text used when labels are drawn large (narrow screens)
+  heShort?: string;
+  enShort?: string;
+  x: number; // preferred label center
   y: number;
   to?: [number, number]; // leader-line target
+  tag?: boolean; // small plain text (e.g. 5' / 3'), no pill, no leader
 };
+
+export type LegendSwatch = "line" | "dash" | "dot" | "ring" | "arrow";
+export type LegendItem = { he: string; en: string; color: string; swatch: LegendSwatch };
 
 export type LottieScene = {
   file: string;
   frameCount: number; // per step
   width: number;
   height: number;
-  // labels per step (index = step)
-  labels: SceneLabel[][];
-  // always-visible small labels (e.g. strand ends)
-  fixed?: SceneLabel[];
-  legend?: { he: string; en: string; color: string }[];
+  labels: SceneLabel[][]; // per step
+  fixed?: SceneLabel[];   // always-visible small labels (e.g. strand ends)
+  legend?: LegendItem[];
+  note: { he: string; en: string }; // "schematic / not to scale" disclaimer
   video: { id: string; title: string; source: string };
 };
+
+const P5 = "5'", P3 = "3'";
 
 export const LOTTIE_SCENES: Record<string, LottieScene> = {
   mitosis: {
@@ -36,40 +44,62 @@ export const LOTTIE_SCENES: Record<string, LottieScene> = {
     width: 800,
     height: 480,
     labels: [
+      // 1 · prophase (end state): envelope intact, chromosomes condensed, centrosomes at the poles
       [
-        { he: "כרומוזום = 2 כרומטידות אחיות", en: "Chromosome = 2 sister chromatids", x: 590, y: 70, to: [447, 205] },
-        { he: "מעטפת הגרעין", en: "Nuclear envelope", x: 250, y: 70, to: [340, 160] },
-        { he: "צנטרוזום", en: "Centrosome", x: 110, y: 400, to: [190, 262] },
+        { he: "כרומוזום = 2 כרומטידות אחיות", heShort: "2 כרומטידות אחיות", en: "Chromosome = 2 sister chromatids", enShort: "Sister chromatids", x: 610, y: 78, to: [456, 196] },
+        { he: "מעטפת הגרעין (שלמה)", heShort: "מעטפת הגרעין", en: "Nuclear envelope (intact)", enShort: "Nuclear envelope", x: 205, y: 78, to: [312, 176] },
+        { he: "צנטרוזום: זוג צנטריולים", heShort: "צנטרוזום", en: "Centrosome: a pair of centrioles", enShort: "Centrosome", x: 150, y: 420, to: [186, 252] },
       ],
+      // 2 · prometaphase: envelope fragments, kinetochore microtubules capture kinetochores
       [
-        { he: "מעטפת הגרעין מתפרקת", en: "Nuclear envelope breaks down", x: 230, y: 60, to: [300, 150] },
-        { he: "קינטוכור", en: "Kinetochore", x: 560, y: 60, to: [433, 228] },
-        { he: "מיקרוטובולים של הציר", en: "Spindle microtubules", x: 220, y: 430, to: [290, 262] },
+        { he: "שברי מעטפת הגרעין", heShort: "שברי המעטפת", en: "Nuclear envelope fragments", enShort: "Envelope fragments", x: 175, y: 92, to: [254, 222] },
+        { he: "קינטוכור", en: "Kinetochore", x: 640, y: 92, to: [441, 226] },
+        { he: "מיקרוטובולי קינטוכור", heShort: "מיקרוטובולי קינטוכור", en: "Kinetochore microtubules", enShort: "Kinetochore MTs", x: 640, y: 420, to: [525, 238] },
+        { he: "מיקרוטובולים אסטרליים", en: "Astral microtubules", enShort: "Astral MTs", x: 150, y: 420, to: [156, 276] },
       ],
+      // 3 · metaphase: chromosomes on the plate, cohesin still holds the sisters
       [
-        { he: "לוח המטאפאזה", en: "Metaphase plate", x: 400, y: 50, to: [400, 125] },
-        { he: "קינטוכור", en: "Kinetochore", x: 600, y: 80, to: [413, 168] },
-        { he: "קוטב הציר", en: "Spindle pole", x: 680, y: 430, to: [610, 262] },
+        { he: "לוח המטאפאזה", en: "Metaphase plate", x: 400, y: 62, to: [400, 132] },
+        { he: "קינטוכור", en: "Kinetochore", x: 610, y: 92, to: [414, 168] },
+        { he: "קוהזין מחזיק את האחיות", heShort: "קוהזין", en: "Cohesin holds the sisters", enShort: "Cohesin", x: 400, y: 428, to: [400, 316] },
+        { he: "קוטב הציר (צנטרוזום)", heShort: "קוטב הציר", en: "Spindle pole (centrosome)", enShort: "Spindle pole", x: 690, y: 400, to: [612, 256] },
       ],
+      // 4 · anaphase: cohesin gone, sisters pulled apart, poles pushed apart
       [
-        { he: "כרומטידות נמשכות לקטבים", en: "Chromatids pulled to the poles", x: 210, y: 55, to: [210, 190] },
-        { he: "מיקרוטובולים פולריים", en: "Polar microtubules", x: 400, y: 440, to: [400, 262] },
+        { he: "הכרומטידות נמשכות לקטבים", heShort: "כרומטידות לקטבים", en: "Chromatids pulled to the poles", enShort: "Pulled to poles", x: 215, y: 70, to: [210, 176] },
+        { he: "מיקרוטובולי קינטוכור מתקצרים", heShort: "מיקרוטובולי קינטוכור", en: "Kinetochore MTs shorten", enShort: "Kinetochore MTs", x: 180, y: 425, to: [182, 226] },
+        { he: "מיקרוטובולים פולריים מתארכים", heShort: "מיקרוטובולים פולריים", en: "Polar MTs lengthen", enShort: "Polar MTs", x: 570, y: 425, to: [420, 276] },
       ],
+      // 5 · telophase: envelopes and nucleoli reform, furrow begins
       [
-        { he: "חריץ חלוקה (טבעת אקטין-מיוזין)", en: "Cleavage furrow (actin–myosin ring)", x: 400, y: 50, to: [400, 176] },
-        { he: "מעטפת גרעין חדשה", en: "New nuclear envelope", x: 190, y: 440, to: [212, 318] },
-        { he: "הכרומטין מתרופף", en: "Chromatin decondenses", x: 610, y: 440, to: [590, 270] },
+        { he: "חריץ חלוקה (טבעת אקטין-מיוזין)", heShort: "חריץ חלוקה", en: "Cleavage furrow (actin–myosin ring)", enShort: "Cleavage furrow", x: 400, y: 70, to: [400, 180] },
+        { he: "מעטפת גרעין נבנית מחדש", heShort: "מעטפת חדשה", en: "Nuclear envelope reforms", enShort: "New envelope", x: 200, y: 425, to: [232, 310] },
+        { he: "גרעינון", en: "Nucleolus", x: 600, y: 425, to: [538, 283] },
       ],
+      // 6 · cytokinesis
       [
-        { he: "שני תאי בת זהים גנטית", en: "Two genetically identical daughter cells", x: 400, y: 50 },
-        { he: "תא בת", en: "Daughter cell", x: 205, y: 440, to: [205, 395] },
-        { he: "תא בת", en: "Daughter cell", x: 595, y: 440, to: [595, 395] },
+        { he: "שני תאי בת זהים גנטית", en: "Two genetically identical daughter cells", enShort: "Two identical daughter cells", x: 400, y: 70 },
+        { he: "תא בת", en: "Daughter cell", x: 205, y: 440, to: [205, 396] },
+        { he: "תא בת", en: "Daughter cell", x: 595, y: 440, to: [595, 396] },
       ],
     ],
     legend: [
-      { he: "כרומוזום מהאם", en: "Maternal chromosome", color: "#dc2626" },
-      { he: "כרומוזום מהאב", en: "Paternal chromosome", color: "#2563eb" },
+      { he: "כרומוזום מהאם", en: "Maternal chromosome", color: "#dc2626", swatch: "line" },
+      { he: "כרומוזום מהאב", en: "Paternal chromosome", color: "#2563eb", swatch: "line" },
+      { he: "קוהזין", en: "Cohesin", color: "#f59e0b", swatch: "dot" },
+      { he: "קינטוכור", en: "Kinetochore", color: "#7c3aed", swatch: "dot" },
+      { he: "מיקרוטובולי קינטוכור", en: "Kinetochore microtubules", color: "#0d9488", swatch: "line" },
+      { he: "מיקרוטובולים פולריים", en: "Polar microtubules", color: "#94a3b8", swatch: "line" },
+      { he: "מיקרוטובולים אסטרליים", en: "Astral microtubules", color: "#a8a29e", swatch: "line" },
+      { he: "צנטרוזום (זוג צנטריולים)", en: "Centrosome (centriole pair)", color: "#fbbf24", swatch: "dot" },
+      { he: "מעטפת הגרעין (ממברנה כפולה)", en: "Nuclear envelope (double membrane)", color: "#b45309", swatch: "dash" },
+      { he: "טבעת אקטין-מיוזין", en: "Actin–myosin ring", color: "#e11d48", swatch: "dot" },
+      { he: "מיטוכונדריה", en: "Mitochondrion", color: "#ea580c", swatch: "ring" },
     ],
+    note: {
+      he: "סכמטי, לא בקנה מידה · 2n=4 לשם פשטות",
+      en: "Schematic, not to scale · 2n = 4 for simplicity",
+    },
     video: { id: "IvJrDsRuWxQ", title: "Kinetochore and Mitosis — Drew Berry", source: "WEHI" },
   },
 
@@ -79,43 +109,69 @@ export const LOTTIE_SCENES: Record<string, LottieScene> = {
     width: 800,
     height: 480,
     labels: [
+      // 1 · unwinding (fork at x=430)
       [
-        { he: "הליקאז (מזלג השכפול)", en: "Helicase (replication fork)", x: 430, y: 60, to: [434, 222] },
-        { he: "טופואיזומראז", en: "Topoisomerase", x: 650, y: 120, to: [550, 228] },
-        { he: "חלבוני SSB", en: "SSB proteins", x: 300, y: 430, to: [398, 300] },
+        { he: "הליקאז (טבעת) פותח את הסליל", heShort: "הליקאז", en: "Helicase (ring) unwinds DNA", enShort: "Helicase", x: 420, y: 78, to: [436, 234] },
+        { he: "טופואיזומראז לפני המזלג", heShort: "טופואיזומראז", en: "Topoisomerase ahead of the fork", enShort: "Topoisomerase", x: 660, y: 150, to: [550, 226] },
+        { he: "חלבוני SSB על הגדיל הבודד", heShort: "חלבוני SSB", en: "SSB on single strands", enShort: "SSB proteins", x: 300, y: 430, to: [400, 292] },
       ],
+      // 2 · priming
       [
-        { he: "פריימר RNA", en: "RNA primer", x: 170, y: 250, to: [262, 176] },
-        { he: "פריימאז", en: "Primase", x: 330, y: 430, to: [340, 318] },
+        { he: "פריימר RNA", en: "RNA primer", x: 150, y: 250, to: [262, 176] },
+        { he: "פריימאז", en: "Primase", x: 330, y: 430, to: [340, 312] },
       ],
+      // 3 · leading strand (fork at 540)
       [
-        { he: "DNA פולימראז III", en: "DNA polymerase III", x: 470, y: 60, to: [464, 160] },
-        { he: "גדיל מוביל — רציף", en: "Leading strand — continuous", x: 250, y: 250, to: [380, 176] },
+        { he: "DNA פולימראז III על מהדק מחליק", heShort: "DNA פולימראז III", en: "DNA pol III on a sliding clamp", enShort: "DNA pol III", x: 430, y: 72, to: [456, 152] },
+        { he: "גדיל מוביל: רציף, 5'→3'", heShort: "גדיל מוביל (רציף)", en: "Leading strand: continuous, 5'→3'", enShort: "Leading strand", x: 190, y: 250, to: [380, 176] },
+        { he: P5, en: P5, x: 234, y: 173, tag: true },
       ],
+      // 4 · lagging strand (fork at 640)
       [
         { he: "מקטעי אוקזאקי", en: "Okazaki fragments", x: 470, y: 430, to: [420, 332] },
-        { he: "גדיל מפגר", en: "Lagging strand", x: 170, y: 430, to: [260, 332] },
-        { he: "המזלג מתקדם", en: "Fork moves on", x: 690, y: 140, to: [644, 236] },
+        { he: "גדיל מפגר: במקטעים", heShort: "גדיל מפגר", en: "Lagging strand: in pieces", enShort: "Lagging strand", x: 170, y: 430, to: [262, 332] },
+        { he: "המזלג מתקדם", en: "Fork moves on", x: 700, y: 150, to: [646, 236] },
+        { he: P5, en: P5, x: 234, y: 173, tag: true },
+        { he: P5, en: P5, x: 360, y: 311, tag: true },
+        { he: P5, en: P5, x: 480, y: 311, tag: true },
+        { he: P5, en: P5, x: 580, y: 311, tag: true },
       ],
+      // 5 · primer replacement
       [
-        { he: "DNA פולימראז I מחליף פריימרים", en: "DNA pol I replaces primers", x: 360, y: 430, to: [330, 312] },
+        { he: "DNA פולימראז I מחליף פריימרים", heShort: "DNA פולימראז I", en: "DNA pol I replaces primers", enShort: "DNA pol I", x: 320, y: 430, to: [330, 312] },
+        { he: "חריץ (nick)", en: "Nick", x: 600, y: 430, to: [472, 330] },
+        { he: P5, en: P5, x: 234, y: 173, tag: true },
       ],
+      // 6 · ligation → two semi-conservative duplexes
       [
-        { he: "DNA ליגאז סוגר את החריצים", en: "DNA ligase seals the nicks", x: 420, y: 430, to: [410, 318] },
-        { he: "כל מולקולה: גדיל ישן + גדיל חדש", en: "Each molecule: one old + one new strand", x: 330, y: 60 },
+        { he: "DNA ליגאז סוגר את החריצים", heShort: "DNA ליגאז", en: "DNA ligase seals the nicks", enShort: "DNA ligase", x: 400, y: 430, to: [412, 316] },
+        { he: "כל מולקולה: גדיל ישן + גדיל חדש", heShort: "גדיל ישן + חדש", en: "Each molecule: one old + one new strand", enShort: "One old + one new strand", x: 330, y: 70 },
+        { he: P5, en: P5, x: 234, y: 173, tag: true },
       ],
     ],
     fixed: [
-      { he: "3'", en: "3'", x: 24, y: 128 },
-      { he: "5'", en: "5'", x: 24, y: 372 },
-      { he: "5'", en: "5'", x: 780, y: 214 },
-      { he: "3'", en: "3'", x: 780, y: 286 },
+      { he: P3, en: P3, x: 24, y: 128 },
+      { he: P5, en: P5, x: 24, y: 372 },
+      { he: P5, en: P5, x: 780, y: 214 },
+      { he: P3, en: P3, x: 780, y: 286 },
     ],
     legend: [
-      { he: "גדיל תבנית (ישן)", en: "Template (old) strand", color: "#1e3a8a" },
-      { he: "DNA חדש", en: "New DNA", color: "#16a34a" },
-      { he: "פריימר RNA", en: "RNA primer", color: "#f97316" },
+      { he: "גדיל תבנית (ישן)", en: "Template (old) strand", color: "#1e3a8a", swatch: "line" },
+      { he: "DNA חדש", en: "New DNA", color: "#16a34a", swatch: "line" },
+      { he: "חץ = קצה 3' מתארך (סינתזה 5'→3')", en: "Arrow = growing 3' end (5'→3' synthesis)", color: "#15803d", swatch: "arrow" },
+      { he: "פריימר RNA", en: "RNA primer", color: "#f97316", swatch: "line" },
+      { he: "הליקאז", en: "Helicase", color: "#7c3aed", swatch: "dot" },
+      { he: "טופואיזומראז", en: "Topoisomerase", color: "#f59e0b", swatch: "dot" },
+      { he: "חלבוני SSB", en: "SSB proteins", color: "#0ea5e9", swatch: "dot" },
+      { he: "פריימאז", en: "Primase", color: "#14b8a6", swatch: "dot" },
+      { he: "DNA פולימראז III", en: "DNA polymerase III", color: "#2563eb", swatch: "dot" },
+      { he: "DNA פולימראז I", en: "DNA polymerase I", color: "#db2777", swatch: "dot" },
+      { he: "DNA ליגאז", en: "DNA ligase", color: "#65a30d", swatch: "ring" },
     ],
+    note: {
+      he: "סכמטי, לא בקנה מידה · צורות החלבונים סמליות",
+      en: "Schematic, not to scale · protein shapes are symbolic",
+    },
     video: { id: "TNKWgcFPHqw", title: "DNA replication - 3D", source: "yourgenome (Wellcome Genome Campus)" },
   },
 };
