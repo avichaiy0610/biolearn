@@ -93,6 +93,8 @@ model User {
   createdAt      DateTime       @default(now())
   progress       UserProgress[]
   quizResults    QuizResult[]
+  reviews        FlashcardReview[]
+  studyDays      StudyDay[]
 }
 
 model UserProgress {
@@ -185,4 +187,51 @@ model Article {
   source       String   @default("pubmed") // "pubmed" | "upload"
   hidden       Boolean  @default(true) // requires admin approval before publishing
   createdAt    DateTime @default(now())
+}
+
+// Past exams uploaded by admins (with permission to publish). The PDF is kept
+// in the DB as base64 (≤4 MB, Vercel's request limit) or linked by URL.
+model PastExam {
+  id          String   @id @default(cuid())
+  courseSlug  String   // content/courses.ts slug
+  year        Int
+  moed        String   // "א" | "ב" | "ג" | "מיוחד"
+  university  String?
+  notes       String?
+  fileName    String?
+  fileData    String?  // base64 PDF
+  fileSize    Int?
+  url         String?
+  solutionUrl String?
+  createdAt   DateTime @default(now())
+
+  @@index([courseSlug])
+}
+
+// Spaced-repetition state per user and glossary card (SM-2 style).
+model FlashcardReview {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  cardId    String   // content/glossary.ts termId(): "<topic>:<en-slug>"
+  ease      Float    @default(2.5)
+  interval  Int      @default(0)   // days
+  reps      Int      @default(0)
+  lapses    Int      @default(0)
+  due       DateTime
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, cardId])
+  @@index([userId, due])
+}
+
+// One row per user per day with any study activity (streaks).
+model StudyDay {
+  id      String @id @default(cuid())
+  userId  String
+  user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  day     String // YYYY-MM-DD in Asia/Jerusalem
+  actions Int    @default(1)
+
+  @@unique([userId, day])
 }

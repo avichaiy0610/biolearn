@@ -1,6 +1,7 @@
 import { NextRequest } from "next/server";
 import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
+import { recordStudyDay } from "@/lib/study-day";
 
 async function getUserId(): Promise<string | null> {
   const session = await auth();
@@ -62,6 +63,7 @@ export async function POST(req: NextRequest) {
       create: { id: crypto.randomUUID(), userId, subtopicId, visited: true },
       update: { visited: true },
     });
+    await recordStudyDay(userId);
     return Response.json({ ok: true });
   }
 
@@ -79,6 +81,7 @@ export async function POST(req: NextRequest) {
         type: type ?? "official",
       },
     });
+    await recordStudyDay(userId);
     return Response.json({ ok: true });
   }
 

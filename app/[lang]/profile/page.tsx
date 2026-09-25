@@ -5,6 +5,7 @@ import { hasLocale } from "@/lib/dictionaries";
 import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
+import { progressSummary } from "@/lib/progress-summary";
 
 export default async function ProfilePage({ params }: PageProps<"/[lang]">) {
   const { lang } = await params;
@@ -47,39 +48,13 @@ export default async function ProfilePage({ params }: PageProps<"/[lang]">) {
     }
   }
 
-  // Progress per topic
-  const topicProgress: Record<string, { slug: string; name: string; visited: number; total: number }> = {};
-  for (const p of user.progress) {
-    const slug = p.subtopic.topic.slug;
-    if (!topicProgress[slug]) {
-      topicProgress[slug] = {
-        slug,
-        name: isHe ? p.subtopic.topic.nameHe : p.subtopic.topic.nameEn,
-        visited: 0,
-        total: 0,
-      };
-    }
-    if (p.visited) topicProgress[slug].visited++;
-  }
-
-  // Get total subtopics per topic for % calculation
-  const topicSlugs = Object.keys(topicProgress);
-  if (topicSlugs.length > 0) {
-    const topics = await prisma.topic.findMany({
-      where: { slug: { in: topicSlugs } },
-      include: { _count: { select: { subtopics: { where: { hidden: false } } } } },
-    });
-    for (const t of topics) {
-      if (topicProgress[t.slug]) topicProgress[t.slug].total = t._count.subtopics;
-    }
-  }
-
-  const topicList = Object.values(topicProgress).sort((a, b) => b.visited - a.visited);
   const scoreList = Object.values(bestScores).sort((a, b) => b.score - a.score);
   const avgScore = scoreList.length > 0
     ? Math.round(scoreList.reduce((sum, s) => sum + s.score, 0) / scoreList.length)
     : null;
   const totalVisited = user.progress.filter((p) => p.visited).length;
+  const summary = await progressSummary(user.id);
+  const overallPct = summary.totalSubs ? Math.round((summary.totalVisited / summary.totalSubs) * 100) : 0;
   const recentQuizzes = user.quizResults.slice(0, 8);
 
   return (
@@ -100,57 +75,116 @@ export default async function ProfilePage({ params }: PageProps<"/[lang]">) {
         </div>
       </div>
 
-      {/* Stats strip */}
-      <div className="grid grid-cols-3 gap-3 mb-8">
+      {/* Streak + key numbers */}
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
         {[
-          { icon: "📚", value: totalVisited, label: isHe ? "נושאים שנלמדו" : "Subtopics studied" },
-          { icon: "❓", value: user.quizResults.length, label: isHe ? "בחנים שהושלמו" : "Quizzes completed" },
+          { icon: "🔥", value: summary.streak.current, label: isHe ? "ימים ברצף" : "Day streak" },
+          { icon: "📈", value: `${overallPct}%`, label: isHe ? "כיסוי החומר" : "Coverage" },
           { icon: "🏆", value: avgScore !== null ? `${avgScore}%` : "—", label: isHe ? "ממוצע בחנים" : "Avg quiz score" },
+          { icon: "🔁", value: summary.dueReviews, label: isHe ? "כרטיסים לחזרה" : "Cards due" },
         ].map((s) => (
           <div key={s.label} className="rounded-2xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 p-4 text-center">
-            <div className="text-2xl mb-1">{s.icon}</div>
+            <div className="text-2xl mb-1" aria-hidden>{s.icon}</div>
             <div className="text-xl font-bold text-zinc-900 dark:text-zinc-50">{s.value}</div>
             <div className="text-xs text-zinc-400 mt-0.5">{s.label}</div>
           </div>
         ))}
       </div>
 
-      {/* Topic progress */}
-      {topicList.length > 0 && (
-        <section className="mb-8">
-          <h2 className="text-lg font-semibold text-zinc-800 dark:text-zinc-200 mb-4">
-            {isHe ? "📚 התקדמות לפי נושא" : "📚 Progress by Topic"}
+      <section className="mb-8 rounded-2xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 p-4" aria-labelledby="streak-title">
+        <div className="flex items-center justify-between flex-wrap gap-2 mb-3">
+          <h2 id="streak-title" className="text-sm font-semibold text-zinc-800 dark:text-zinc-200">
+            {isHe ? "14 הימים האחרונים" : "Last 14 days"}
           </h2>
-          <div className="space-y-3">
-            {topicList.map((t) => {
-              const pct = t.total > 0 ? Math.round((t.visited / t.total) * 100) : 0;
-              return (
-                <Link
-                  key={t.slug}
-                  href={`/${lang}/topics/${t.slug}`}
-                  className="flex items-center gap-4 p-4 rounded-xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 hover:border-emerald-400 transition-colors group"
-                >
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center justify-between mb-1.5">
-                      <span className="text-sm font-medium text-zinc-900 dark:text-zinc-50 group-hover:text-emerald-700 dark:group-hover:text-emerald-400">
-                        {t.name}
-                      </span>
-                      <span className="text-xs text-zinc-400 shrink-0 ms-2">{t.visited}/{t.total}</span>
-                    </div>
-                    <div className="h-1.5 rounded-full bg-zinc-100 dark:bg-zinc-700">
-                      <div
-                        className={`h-1.5 rounded-full transition-all ${pct === 100 ? "bg-emerald-500" : "bg-blue-500"}`}
-                        style={{ width: `${pct}%` }}
-                      />
-                    </div>
-                  </div>
-                  <span className="text-xs text-zinc-400 shrink-0 font-medium">{pct}%</span>
-                </Link>
-              );
-            })}
+          <span className="text-xs text-zinc-500">
+            {isHe ? `הרצף הארוך ביותר: ${summary.streak.longest} ימים` : `Longest streak: ${summary.streak.longest} days`}
+            {!summary.studiedToday && summary.streak.current > 0 && (isHe ? " · למדו משהו היום כדי לשמור על הרצף" : " · study today to keep it")}
+          </span>
+        </div>
+        <ol className="flex gap-1.5 justify-between">
+          {summary.last14.map((d) => (
+            <li key={d.day} title={d.day} aria-label={`${d.day}: ${d.active ? (isHe ? "למדת" : "studied") : (isHe ? "לא למדת" : "no activity")}`}
+              className={`h-7 flex-1 rounded-md ${d.active ? "bg-emerald-500" : "bg-zinc-100 dark:bg-zinc-700"}`} />
+          ))}
+        </ol>
+      </section>
+
+      {/* Weak spots */}
+      <section className="mb-8" aria-labelledby="weak-title">
+        <h2 id="weak-title" className="text-lg font-semibold text-zinc-800 dark:text-zinc-200 mb-3">
+          🎯 {isHe ? "נקודות לחיזוק" : "Weak spots"}
+        </h2>
+        {summary.weakSubtopics.length === 0 && summary.weakTerms.length === 0 ? (
+          <p className="text-sm text-zinc-500 rounded-xl border border-dashed border-zinc-300 dark:border-zinc-600 p-4">
+            {user.quizResults.length === 0
+              ? (isHe ? "פתרו כמה בחנים ותרגולים — כאן יופיעו הנושאים שכדאי לחזור עליהם." : "Take a few quizzes — subtopics worth revisiting will show up here.")
+              : (isHe ? "אין כרגע נקודות חלשות בולטות. יפה!" : "No clear weak spots right now. Nice!")}
+          </p>
+        ) : (
+          <div className="space-y-4">
+            {summary.weakSubtopics.length > 0 && (
+              <ul className="space-y-2">
+                {summary.weakSubtopics.map((w) => (
+                  <li key={w.id}>
+                    <Link href={`/${lang}/topics/${w.topicSlug}#sub-${w.id}`}
+                      className="flex items-center gap-3 p-3 rounded-xl border border-red-200 dark:border-red-900 bg-red-50/50 dark:bg-red-950/20 hover:border-red-400 transition-colors">
+                      <span className="text-sm font-bold w-12 text-center shrink-0 px-2 py-0.5 rounded-lg bg-red-100 dark:bg-red-900/40 text-red-700 dark:text-red-300">{w.avg}%</span>
+                      <span className="flex-1 min-w-0 text-sm text-zinc-800 dark:text-zinc-200">{isHe ? w.nameHe : w.nameEn}</span>
+                      <span className="text-xs text-zinc-500 shrink-0">{isHe ? "לחזור על החומר" : "Revisit"}</span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            )}
+            {summary.weakTerms.length > 0 && (
+              <div>
+                <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-2">{isHe ? "מונחים שנשכחו שוב ושוב:" : "Terms you keep forgetting:"}</p>
+                <div className="flex flex-wrap gap-2">
+                  {summary.weakTerms.map((t) => (
+                    <Link key={t.cardId} href={`/${lang}/review?topic=${t.topicSlug}`}
+                      className="text-xs px-2.5 py-1 rounded-full border border-amber-300 dark:border-amber-700 text-amber-800 dark:text-amber-300 hover:bg-amber-50 dark:hover:bg-amber-900/20">
+                      {t.he} · <bdi dir="ltr">{t.en}</bdi>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
-        </section>
-      )}
+        )}
+        {summary.dueReviews > 0 && (
+          <Link href={`/${lang}/review`} className="mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-medium">
+            🔁 {isHe ? `${summary.dueReviews} כרטיסים מחכים לחזרה` : `${summary.dueReviews} cards due`}
+          </Link>
+        )}
+      </section>
+
+      {/* Coverage per topic (all active topics) */}
+      <section className="mb-8" aria-labelledby="coverage-title">
+        <h2 id="coverage-title" className="text-lg font-semibold text-zinc-800 dark:text-zinc-200 mb-1">
+          📚 {isHe ? "כיסוי החומר לפי נושא" : "Coverage by topic"}
+        </h2>
+        <p className="text-xs text-zinc-500 mb-4">
+          {isHe ? `קראתם ${summary.totalVisited} מתוך ${summary.totalSubs} תתי-נושאים` : `${summary.totalVisited} of ${summary.totalSubs} subtopics read`}
+        </p>
+        <div className="space-y-2">
+          {summary.coverage.map((t) => (
+            <Link key={t.slug} href={`/${lang}/topics/${t.slug}`}
+              className="flex items-center gap-3 p-3 rounded-xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 hover:border-emerald-400 transition-colors group">
+              <span aria-hidden className="text-xl">{t.icon}</span>
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center justify-between mb-1.5">
+                  <span className="text-sm font-medium text-zinc-900 dark:text-zinc-50 group-hover:text-emerald-700 dark:group-hover:text-emerald-400">{isHe ? t.nameHe : t.nameEn}</span>
+                  <span className="text-xs text-zinc-400 shrink-0 ms-2"><bdi dir="ltr">{t.visited}/{t.total}</bdi></span>
+                </div>
+                <div className="h-1.5 rounded-full bg-zinc-100 dark:bg-zinc-700">
+                  <div className={`h-1.5 rounded-full ${t.pct === 100 ? "bg-emerald-500" : "bg-blue-500"}`} style={{ width: `${t.pct}%` }} />
+                </div>
+              </div>
+              <span className="text-xs text-zinc-500 shrink-0 font-medium w-10 text-end">{t.pct}%</span>
+            </Link>
+          ))}
+        </div>
+      </section>
 
       {/* Quiz history */}
       {recentQuizzes.length > 0 && (
@@ -178,7 +212,7 @@ export default async function ProfilePage({ params }: PageProps<"/[lang]">) {
                   <div className="flex-1 min-w-0">
                     <p className="text-sm text-zinc-700 dark:text-zinc-300 truncate">{subName}</p>
                     <p className="text-xs text-zinc-400">
-                      {r.correct}/{r.total} · {r.type === "official" ? (isHe ? "רשמי" : "official") : (isHe ? "AI" : "AI")} ·{" "}
+                      {r.correct}/{r.total} · {r.type === "official" ? (isHe ? "מבחן רשמי" : "official") : r.type === "bank" ? (isHe ? "מאגר שאלות" : "bank") : "AI"} ·{" "}
                       {new Date(r.createdAt).toLocaleDateString(isHe ? "he-IL" : "en-US")}
                     </p>
                   </div>

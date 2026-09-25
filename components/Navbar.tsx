@@ -9,7 +9,7 @@ import LanguageSwitcher from "./LanguageSwitcher";
 import SearchBar from "./SearchBar";
 
 type Dict = {
-  nav: { home: string; topics: string; courses: string; search: string; research: string; proteins: string; admin: string; login: string; logout: string };
+  nav: { home: string; topics: string; courses: string; review: string; search: string; research: string; proteins: string; admin: string; login: string; logout: string };
   home: { searchPlaceholder: string };
 };
 
@@ -31,6 +31,7 @@ export default function Navbar({
     { href: `/${lang}`, label: dict.nav.home },
     { href: `/${lang}/topics`, label: dict.nav.topics },
     { href: `/${lang}/courses`, label: dict.nav.courses },
+    { href: `/${lang}/review`, label: dict.nav.review },
     { href: `/${lang}/research`, label: dict.nav.research },
     { href: `/${lang}/proteins`, label: dict.nav.proteins },
     ...(isAdmin ? [{ href: `/${lang}/admin`, label: dict.nav.admin }] : []),

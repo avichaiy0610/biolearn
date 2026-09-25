@@ -1,11 +1,12 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Link from "next/link";
 import type { GlossaryTerm } from "@/content/glossary";
 import { isolatePrimes } from "@/lib/text";
 
 // Hebrew–English glossary with a filter that matches either language.
-export default function Glossary({ terms, lang }: { terms: GlossaryTerm[]; lang: string }) {
+export default function Glossary({ terms, lang, topicSlug }: { terms: GlossaryTerm[]; lang: string; topicSlug?: string }) {
   const he = lang === "he";
   const [q, setQ] = useState("");
   const shown = useMemo(() => {
@@ -21,6 +22,11 @@ export default function Glossary({ terms, lang }: { terms: GlossaryTerm[]; lang:
           📖 {he ? "מילון מונחים עברית–אנגלית" : "Hebrew–English glossary"}
           <span className="ms-2 text-xs font-normal text-zinc-400">{terms.length}</span>
         </h2>
+        {topicSlug && (
+          <Link href={`/${lang}/review?topic=${topicSlug}`} className="text-sm text-emerald-700 dark:text-emerald-400 hover:underline">
+            🔁 {he ? "חזרה מרווחת על המונחים" : "Review these terms"}
+          </Link>
+        )}
         <input
           type="search"
           value={q}
