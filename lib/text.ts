@@ -11,3 +11,10 @@ export function decodeEntities(s: string): string {
     return NAMED[code.toLowerCase()] ?? m;
   });
 }
+
+// In RTL text a prime after a digit renders on the wrong side ("3'" shows as
+// "'3") and "5'→3'" scrambles. Wrap such runs in Unicode isolates (LRI … PDI).
+const LRI = String.fromCharCode(0x2066), PDI = String.fromCharCode(0x2069);
+export function isolatePrimes(he: string): string {
+  return he.replace(/\u2066?(\d'(?:\s*[→←]\s*\d')?)\u2069?/g, `${LRI}$1${PDI}`);
+}

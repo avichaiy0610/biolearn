@@ -74,6 +74,19 @@ export default function TopicPageClient({
   const { data, loaded, markVisited, saveQuizScore } = useTopicProgress(topicSlug);
   const [openId, setOpenId] = useState<string | null>(null);
 
+  // Deep links from the course track (#sub-<id>) open that subtopic
+  useEffect(() => {
+    const open = () => {
+      const id = decodeURIComponent(location.hash.replace(/^#sub-/, ""));
+      if (!id || !subtopics.some((s) => s.id === id)) return;
+      setOpenId(id);
+      requestAnimationFrame(() => document.getElementById(`sub-${id}`)?.scrollIntoView({ block: "start" }));
+    };
+    open();
+    window.addEventListener("hashchange", open);
+    return () => window.removeEventListener("hashchange", open);
+  }, [subtopics]);
+
   function toggleSubtopic(id: string) {
     if (openId === id) {
       setOpenId(null);
@@ -105,7 +118,8 @@ export default function TopicPageClient({
           return (
             <div
               key={sub.id}
-              className="rounded-xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 overflow-hidden"
+              id={`sub-${sub.id}`}
+              className="scroll-mt-36 rounded-xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 overflow-hidden"
             >
               <button
                 onClick={() => toggleSubtopic(sub.id)}

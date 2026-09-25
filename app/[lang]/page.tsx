@@ -86,6 +86,12 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
             {dict.home.exploreTopics}
           </Link>
           <Link
+            href={`/${lang}/courses`}
+            className="border border-emerald-300 dark:border-emerald-700 hover:border-emerald-500 text-emerald-700 dark:text-emerald-300 font-semibold px-6 py-3 rounded-xl transition-colors"
+          >
+            🎓 {isHe ? "מסלול קורסים" : "Course track"}
+          </Link>
+          <Link
             href={`/${lang}/proteins`}
             className="border border-zinc-300 dark:border-zinc-600 hover:border-emerald-400 text-zinc-700 dark:text-zinc-300 font-medium px-6 py-3 rounded-xl transition-colors text-sm"
           >

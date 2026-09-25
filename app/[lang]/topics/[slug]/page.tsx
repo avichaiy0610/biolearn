@@ -9,6 +9,10 @@ import ExamCreator from "@/components/ExamCreator";
 import TopicPageClient from "@/components/TopicPageClient";
 import ReactomePathwayCard from "@/components/ReactomePathwayCard";
 import AiContentNote from "@/components/AiContentNote";
+import TopicGuide from "@/components/TopicGuide";
+import Glossary from "@/components/Glossary";
+import { TOPIC_GUIDES } from "@/content/topic-guides";
+import { GLOSSARY } from "@/content/glossary";
 import { isComingSoon } from "@/lib/topics";
 import type { Metadata } from "next";
 
@@ -143,6 +147,8 @@ export default async function TopicPage({
         )}
       </div>
 
+      {TOPIC_GUIDES[topic.slug] && <TopicGuide guide={TOPIC_GUIDES[topic.slug]} lang={lang} />}
+
       {/* Processes */}
       {topic.processes.length > 0 && (
         <section className="mb-10">
@@ -220,6 +226,8 @@ export default async function TopicPage({
           />
         </section>
       )}
+
+      {GLOSSARY[topic.slug] && <Glossary terms={GLOSSARY[topic.slug]} lang={lang} />}
 
       {/* Exam mode */}
       {topic.subtopics.length > 0 && (
