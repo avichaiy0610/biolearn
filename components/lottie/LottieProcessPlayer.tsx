@@ -6,7 +6,8 @@ import type { Locale } from "@/lib/dictionaries";
 import AIExplainPanel from "../AIExplainPanel";
 import FeedbackButton from "../FeedbackButton";
 import YouTubeSupplement from "./YouTubeSupplement";
-import type { LegendItem, LottieScene, SceneLabel } from "./scenes";
+import type { LottieScene, SceneLabel } from "./scenes";
+import Swatch from "@/components/LegendSwatch";
 import { isolatePrimes } from "@/lib/text";
 
 type Step = { id: string; order: number; titleHe: string; titleEn: string; descHe: string; descEn: string };
@@ -438,22 +439,4 @@ function drawPill(ctx: CanvasRenderingContext2D, p: PlacedLabel, he: boolean, fo
   ctx.textAlign = "center";
   ctx.textBaseline = "middle";
   ctx.fillText(p.text, p.cx, p.cy + 1);
-}
-
-// Legend swatch drawn in the same visual language as the scene.
-function Swatch({ item }: { item: LegendItem }) {
-  const c = item.color;
-  const box = "inline-block shrink-0";
-  switch (item.swatch) {
-    case "dot": return <span aria-hidden className={`${box} w-3 h-3 rounded-full`} style={{ background: c }} />;
-    case "ring": return <span aria-hidden className={`${box} w-3 h-3 rounded-full border-2`} style={{ borderColor: c }} />;
-    case "dash": return <span aria-hidden className={`${box} w-5 h-0 border-t-2 border-dashed`} style={{ borderColor: c }} />;
-    case "arrow": return (
-      <svg aria-hidden width="22" height="10" viewBox="0 0 22 10" className={box}>
-        <line x1="0" y1="5" x2="14" y2="5" stroke={c} strokeWidth="3" />
-        <polygon points="22,5 13,0 13,10" fill={c} />
-      </svg>
-    );
-    default: return <span aria-hidden className={`${box} w-5 h-1.5 rounded-full`} style={{ background: c }} />;
-  }
 }

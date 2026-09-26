@@ -1,9 +1,13 @@
 "use client";
 
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useEffect, useRef, useState, useCallback, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import type { Locale } from "@/lib/dictionaries";
-import { svgLabel, MIN_SVG_LABEL_SIZE } from "@/lib/svg-labels-he";
+import { MIN_SVG_LABEL_SIZE } from "@/lib/svg-labels-he";
+import {
+  parseSvgData, allElementIds, elementAtStep, labelText, fontSizeOf, leaderStart, textAnchorFor,
+  type SceneData,
+} from "@/lib/svg-scene";
 
 type Step = {
   id: string;
@@ -15,196 +19,172 @@ type Step = {
   svgData: string;
 };
 
-type SvgElement = {
-  id: string;
-  type: "circle" | "rect" | "path" | "text" | "line" | "ellipse";
-  cx?: number; cy?: number; r?: number;
-  rx?: number; ry?: number;
-  x?: number; y?: number; width?: number; height?: number;
-  x1?: number; y1?: number; x2?: number; y2?: number;
-  d?: string;
-  label?: string;
-  color?: string;
-  stroke?: string;
-  strokeWidth?: number;
-  textColor?: string;
-  fontSize?: number;
-  opacity?: number;
-};
-
-function parseSvgData(raw: string): { elements: SvgElement[]; highlight?: string[] } {
-  try {
-    const parsed = JSON.parse(raw);
-    return { elements: Array.isArray(parsed?.elements) ? parsed.elements : [], highlight: parsed?.highlight };
-  } catch {
-    return { elements: [] };
-  }
-}
-
-function getAllElementIds(steps: Step[]): string[] {
-  const ids = new Set<string>();
-  for (const step of steps) {
-    for (const el of parseSvgData(step.svgData).elements) ids.add(el.id);
-  }
-  return [...ids];
-}
-
-function getElementForStep(id: string, stepIndex: number, steps: Step[]): SvgElement | null {
-  const { elements } = parseSvgData(steps[stepIndex].svgData);
-  const found = elements.find((e) => e.id === id);
-  if (found) return found;
-  for (let i = stepIndex - 1; i >= 0; i--) {
-    const { elements: prev } = parseSvgData(steps[i].svgData);
-    const prevEl = prev.find((e) => e.id === id);
-    if (prevEl) return { ...prevEl, opacity: 0 };
-  }
-  return null;
-}
-
 /* ── Draw a single frame of the animation onto a canvas ─────────────────── */
+// The scene is authored in a 400x300 viewBox; it is scaled uniformly and
+// centred (no stretching) so shapes keep their proportions in the 16:9 video.
 function drawFrame(
   ctx: CanvasRenderingContext2D,
-  steps: Step[],
+  scenes: SceneData[],
   stepIndex: number,
   width: number,
   height: number,
   lang: string
 ) {
-  const scaleX = width / 400;
-  const scaleY = height / 300;
+  const v2 = scenes.every((sc) => (sc.v ?? 1) >= 2);
+  // v2 scenes keep clear of the title band at the bottom (OVERLAY_H)
+  const availH = v2 ? height - OVERLAY_H : height;
+  const k = Math.min(width / 400, availH / 300);
+  const ox = (width - 400 * k) / 2, oy = (availH - 300 * k) / 2;
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
   ctx.clearRect(0, 0, width, height);
 
-  // Background
-  ctx.fillStyle = "#18181b";
+  // Background (v2 scenes are drawn for a light page, like the step view)
+  ctx.fillStyle = v2 ? "#ffffff" : "#18181b";
   ctx.fillRect(0, 0, width, height);
+  ctx.setTransform(k, 0, 0, k, ox, oy);
 
   // Dot grid
-  ctx.fillStyle = "rgba(148,163,184,0.18)";
+  ctx.fillStyle = v2 ? "rgba(148,163,184,0.35)" : "rgba(148,163,184,0.18)";
   for (let gx = 0; gx < 400; gx += 20) {
     for (let gy = 0; gy < 300; gy += 20) {
       ctx.beginPath();
-      ctx.arc(gx * scaleX, gy * scaleY, 1.2, 0, Math.PI * 2);
+      ctx.arc(gx, gy, 0.9, 0, Math.PI * 2);
       ctx.fill();
     }
   }
 
-  const allIds = getAllElementIds(steps);
-  const { highlight } = parseSvgData(steps[stepIndex].svgData);
+  const { highlight } = scenes[stepIndex];
 
-  for (const id of allIds) {
-    const el = getElementForStep(id, stepIndex, steps);
+  for (const id of allElementIds(scenes)) {
+    const el = elementAtStep(id, stepIndex, scenes);
     if (!el) continue;
 
-    const isHighlighted = !highlight || highlight.includes(id);
+    const isHighlighted = !highlight || highlight.length === 0 || highlight.includes(id);
     const baseOpacity = el.opacity ?? 1;
-    const effectiveOpacity = isHighlighted ? baseOpacity : baseOpacity * 0.25;
+    const effectiveOpacity = isHighlighted || (v2 && el.type === "text") ? baseOpacity : baseOpacity * (v2 ? 0.4 : 0.25);
+    if (effectiveOpacity <= 0) continue;
 
     ctx.globalAlpha = effectiveOpacity;
+    const noFill = el.color === "none";
     const fill = el.color ?? (isHighlighted ? "#059669" : "#94a3b8");
-    const strokeColor = el.stroke ?? (isHighlighted ? (el.color ?? "#047857") : "#64748b");
+    const strokeColor = el.stroke ?? (v2 ? "#334155" : isHighlighted ? (el.color ?? "#047857") : "#64748b");
+    ctx.setLineDash(el.dash ? el.dash.split(/[\s,]+/).map(Number) : []);
+    ctx.lineCap = "round";
+    ctx.lineJoin = "round";
 
-    // Glow for highlighted elements
-    if (isHighlighted && el.type !== "text") {
-      ctx.shadowColor = fill;
-      ctx.shadowBlur = 8;
-    } else {
-      ctx.shadowBlur = 0;
-    }
+    // Glow for highlighted elements (legacy look only)
+    ctx.shadowBlur = !v2 && isHighlighted && el.type !== "text" ? 8 : 0;
+    ctx.shadowColor = fill;
+
+    const paint = (path: Path2D | null, defaultStrokeW: number) => {
+      if (!noFill && (el.type !== "path" || el.color)) {
+        ctx.globalAlpha = effectiveOpacity * (el.fillOpacity ?? 1);
+        ctx.fillStyle = fill;
+        if (path) ctx.fill(path); else ctx.fill();
+        ctx.globalAlpha = effectiveOpacity;
+      }
+      const sw = el.strokeWidth ?? (el.stroke ? defaultStrokeW : 0);
+      if (sw > 0 && (el.stroke || el.type === "path")) {
+        ctx.strokeStyle = el.type === "path" && !el.stroke && !v2 ? (isHighlighted ? "#059669" : "#64748b") : strokeColor;
+        ctx.lineWidth = sw;
+        if (path) ctx.stroke(path); else ctx.stroke();
+      }
+    };
 
     switch (el.type) {
-      case "circle": {
-        const cx = (el.cx ?? 0) * scaleX;
-        const cy = (el.cy ?? 0) * scaleY;
-        const r = (el.r ?? 10) * Math.min(scaleX, scaleY);
+      case "circle":
         ctx.beginPath();
-        ctx.arc(cx, cy, r, 0, Math.PI * 2);
-        ctx.fillStyle = fill;
-        ctx.fill();
-        if (el.stroke) {
-          ctx.strokeStyle = strokeColor;
-          ctx.lineWidth = (el.strokeWidth ?? 2) * Math.min(scaleX, scaleY);
-          ctx.stroke();
-        }
+        ctx.arc(el.cx ?? 0, el.cy ?? 0, el.r ?? 10, 0, Math.PI * 2);
+        paint(null, 2);
         break;
-      }
-      case "ellipse": {
-        const cx = (el.cx ?? 0) * scaleX;
-        const cy = (el.cy ?? 0) * scaleY;
-        const rx = (el.rx ?? 20) * scaleX;
-        const ry = (el.ry ?? 15) * scaleY;
+      case "ellipse":
         ctx.beginPath();
-        ctx.ellipse(cx, cy, rx, ry, 0, 0, Math.PI * 2);
-        ctx.fillStyle = fill;
-        ctx.fill();
-        if (el.stroke) {
-          ctx.strokeStyle = strokeColor;
-          ctx.lineWidth = (el.strokeWidth ?? 2) * Math.min(scaleX, scaleY);
-          ctx.stroke();
-        }
+        ctx.ellipse(el.cx ?? 0, el.cy ?? 0, el.rx ?? 20, el.ry ?? 15, 0, 0, Math.PI * 2);
+        paint(null, 2);
         break;
-      }
-      case "rect": {
-        const x = (el.x ?? 0) * scaleX;
-        const y = (el.y ?? 0) * scaleY;
-        const w = (el.width ?? 40) * scaleX;
-        const h = (el.height ?? 30) * scaleY;
+      case "rect":
         ctx.beginPath();
-        ctx.roundRect(x, y, w, h, 6);
-        ctx.fillStyle = fill;
-        ctx.fill();
-        if (el.stroke) {
-          ctx.strokeStyle = strokeColor;
-          ctx.lineWidth = (el.strokeWidth ?? 2) * Math.min(scaleX, scaleY);
-          ctx.stroke();
-        }
+        ctx.roundRect(el.x ?? 0, el.y ?? 0, el.width ?? 40, el.height ?? 30, el.rx ?? 6);
+        paint(null, 2);
+        break;
+      case "path": {
+        if (!el.d) break;
+        const path2d = new Path2D(el.d);
+        const filled = !!el.color && !noFill;
+        paint(path2d, filled ? 1.5 : 2);
+        if (v2 && el.arrow) arrowAtPathEnd(ctx, el.d, el.stroke ?? "#334155");
         break;
       }
       case "line": {
         ctx.shadowBlur = 0;
+        const x1 = el.x1 ?? 0, y1 = el.y1 ?? 0, x2 = el.x2 ?? 0, y2 = el.y2 ?? 0;
+        const col = v2 ? (el.stroke ?? el.color ?? "#334155") : strokeColor;
         ctx.beginPath();
-        ctx.moveTo((el.x1 ?? 0) * scaleX, (el.y1 ?? 0) * scaleY);
-        ctx.lineTo((el.x2 ?? 0) * scaleX, (el.y2 ?? 0) * scaleY);
-        ctx.strokeStyle = strokeColor;
-        ctx.lineWidth = (el.strokeWidth ?? 2.5) * Math.min(scaleX, scaleY);
-        ctx.lineCap = "round";
+        ctx.moveTo(x1, y1);
+        ctx.lineTo(x2, y2);
+        ctx.strokeStyle = col;
+        ctx.lineWidth = el.strokeWidth ?? 2.5;
         ctx.stroke();
-        // Arrowhead
-        const angle = Math.atan2(
-          ((el.y2 ?? 0) - (el.y1 ?? 0)) * scaleY,
-          ((el.x2 ?? 0) - (el.x1 ?? 0)) * scaleX
-        );
-        const ax = (el.x2 ?? 0) * scaleX;
-        const ay = (el.y2 ?? 0) * scaleY;
-        ctx.beginPath();
-        ctx.moveTo(ax, ay);
-        ctx.lineTo(ax - 10 * Math.cos(angle - 0.4), ay - 10 * Math.sin(angle - 0.4));
-        ctx.lineTo(ax - 10 * Math.cos(angle + 0.4), ay - 10 * Math.sin(angle + 0.4));
-        ctx.closePath();
-        ctx.fillStyle = strokeColor;
-        ctx.fill();
+        if (!v2 || el.arrow) arrowHead(ctx, x1, y1, x2, y2, col, v2 ? 12 : 5.5);
         break;
       }
       case "text": {
         ctx.shadowBlur = 0;
-        ctx.globalAlpha = el.opacity ?? 1;
-        const fontSize = Math.max(MIN_SVG_LABEL_SIZE, el.fontSize ?? 11) * Math.min(scaleX, scaleY) * 1.1;
-        ctx.font = `600 ${fontSize}px system-ui, sans-serif`;
-        ctx.direction = lang === "he" ? "rtl" : "ltr";
-        ctx.textAlign = "center";
-        ctx.textBaseline = "middle";
-        // White outline for readability
-        ctx.strokeStyle = "rgba(255,255,255,0.9)";
-        ctx.lineWidth = 3;
-        ctx.lineJoin = "round";
-        ctx.strokeText(svgLabel(el.label ?? "", lang), (el.x ?? 0) * scaleX, (el.y ?? 0) * scaleY);
-        ctx.fillStyle = el.textColor ?? (isHighlighted ? "#f1f5f9" : "#64748b");
-        ctx.fillText(svgLabel(el.label ?? "", lang), (el.x ?? 0) * scaleX, (el.y ?? 0) * scaleY);
+        ctx.setLineDash([]);
+        const size = v2 ? fontSizeOf(el, true, MIN_SVG_LABEL_SIZE) : Math.max(MIN_SVG_LABEL_SIZE, el.fontSize ?? 11) * 1.1;
+        const text = labelText(el, lang);
+        const rtl = lang === "he" && !el.ltr;
+        if (v2 && el.to) {
+          const [sx, sy] = leaderStart(el, text, size);
+          ctx.strokeStyle = "#0f172a";
+          ctx.lineWidth = 1.3;
+          ctx.beginPath();
+          ctx.moveTo(sx, sy);
+          ctx.lineTo(el.to[0], el.to[1]);
+          ctx.stroke();
+          ctx.fillStyle = "#0f172a";
+          ctx.beginPath();
+          ctx.arc(el.to[0], el.to[1], 2.6, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        ctx.font = `${el.weight ?? 600} ${size}px system-ui, sans-serif`;
+        ctx.direction = rtl ? "rtl" : "ltr";
+        const anchor = v2 ? textAnchorFor(el, rtl) : "middle";
+        ctx.textAlign = anchor === "middle" ? "center" : anchor;
+        ctx.textBaseline = "alphabetic";
+        ctx.strokeStyle = "rgba(255,255,255,0.95)";
+        ctx.lineWidth = v2 ? 4 : 3;
+        const x = el.x ?? 0, y = (el.y ?? 0) + (v2 ? 0 : size * 0.35);
+        if (el.halo !== false) ctx.strokeText(text, x, y);
+        ctx.fillStyle = el.textColor ?? (v2 ? "#1e293b" : isHighlighted ? "#f1f5f9" : "#64748b");
+        ctx.fillText(text, x, y);
         break;
       }
     }
     ctx.globalAlpha = 1;
     ctx.shadowBlur = 0;
+    ctx.setLineDash([]);
   }
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+}
+
+function arrowHead(ctx: CanvasRenderingContext2D, x1: number, y1: number, x2: number, y2: number, color: string, size: number) {
+  const angle = Math.atan2(y2 - y1, x2 - x1);
+  ctx.beginPath();
+  ctx.moveTo(x2 + Math.cos(angle) * size * 0.3, y2 + Math.sin(angle) * size * 0.3);
+  ctx.lineTo(x2 - size * Math.cos(angle - 0.45), y2 - size * Math.sin(angle - 0.45));
+  ctx.lineTo(x2 - size * Math.cos(angle + 0.45), y2 - size * Math.sin(angle + 0.45));
+  ctx.closePath();
+  ctx.fillStyle = color;
+  ctx.fill();
+}
+
+// Arrowhead oriented along the last segment of an SVG path (uses its final two points).
+function arrowAtPathEnd(ctx: CanvasRenderingContext2D, d: string, color: string) {
+  const nums = d.match(/-?\d*\.?\d+(?:e-?\d+)?/gi)?.map(Number) ?? [];
+  if (nums.length < 4) return;
+  const [x1, y1, x2, y2] = nums.slice(-4);
+  arrowHead(ctx, x1, y1, x2, y2, color, 12);
 }
 
 /* ── Step title overlay ──────────────────────────────────────────────────── */
@@ -214,7 +194,8 @@ function drawOverlay(
   stepNum: number,
   totalSteps: number,
   width: number,
-  height: number
+  height: number,
+  rtl: boolean
 ) {
   // Bottom gradient overlay
   const grad = ctx.createLinearGradient(0, height - 60, 0, height);
@@ -226,16 +207,19 @@ function drawOverlay(
   // Step indicator
   ctx.font = `bold ${Math.round(width * 0.028)}px system-ui, sans-serif`;
   ctx.fillStyle = "#34d399";
-  ctx.textAlign = "left";
+  const x = rtl ? width - 12 : 12;
+  ctx.direction = "ltr";
+  ctx.textAlign = rtl ? "right" : "left";
   ctx.textBaseline = "bottom";
-  ctx.fillText(`${stepNum + 1} / ${totalSteps}`, 12, height - 36);
+  ctx.fillText(`${stepNum + 1} / ${totalSteps}`, x, height - 36);
 
   // Title
   ctx.font = `600 ${Math.round(width * 0.035)}px system-ui, sans-serif`;
   ctx.fillStyle = "#f8fafc";
-  ctx.textAlign = "left";
+  ctx.direction = rtl ? "rtl" : "ltr";
+  ctx.textAlign = rtl ? "right" : "left";
   ctx.textBaseline = "bottom";
-  ctx.fillText(title, 12, height - 10);
+  ctx.fillText(title, x, height - 10);
 }
 
 /* ── Progress bar ────────────────────────────────────────────────────────── */
@@ -252,6 +236,7 @@ function drawProgressBar(
 }
 
 const STEP_DURATION = 6000;
+const OVERLAY_H = 62;
 const CANVAS_W = 720;
 const CANVAS_H = 405;
 
@@ -262,7 +247,7 @@ export default function ProcessInlineVideo({
 }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const animFrameRef = useRef<number | null>(null);
-  const stepStartRef = useRef<number>(performance.now());
+  const stepStartRef = useRef<number>(0); // set on mount by the currentStep effect
 
   const [currentStep, setCurrentStep] = useState(0);
   const [playing, setPlaying] = useState(true);
@@ -272,6 +257,7 @@ export default function ProcessInlineVideo({
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const chunksRef = useRef<Blob[]>([]);
 
+  const scenes = useMemo(() => steps.map((st) => parseSvgData(st.svgData)), [steps]);
   const step = steps[currentStep] ?? null;
   const title = step ? (lang === "he" ? step.titleHe : step.titleEn) : "";
   const desc = step ? (lang === "he" ? step.descHe : step.descEn) : "";
@@ -295,10 +281,10 @@ export default function ProcessInlineVideo({
 
     function render(now: number) {
       if (!localPlaying) {
-        drawFrame(ctx!, steps, localStep, CANVAS_W, CANVAS_H, lang);
+        drawFrame(ctx!, scenes, localStep, CANVAS_W, CANVAS_H, lang);
         const t = steps[localStep];
         const ttl = t ? (lang === "he" ? t.titleHe : t.titleEn) : "";
-        drawOverlay(ctx!, ttl, localStep, steps.length, CANVAS_W, CANVAS_H);
+        drawOverlay(ctx!, ttl, localStep, steps.length, CANVAS_W, CANVAS_H, lang === "he");
         drawProgressBar(ctx!, progress, CANVAS_W, CANVAS_H);
         animFrameRef.current = requestAnimationFrame(render);
         return;
@@ -309,10 +295,10 @@ export default function ProcessInlineVideo({
 
       setProgress(p);
 
-      drawFrame(ctx!, steps, localStep, CANVAS_W, CANVAS_H, lang);
+      drawFrame(ctx!, scenes, localStep, CANVAS_W, CANVAS_H, lang);
       const t = steps[localStep];
       const ttl = t ? (lang === "he" ? t.titleHe : t.titleEn) : "";
-      drawOverlay(ctx!, ttl, localStep, steps.length, CANVAS_W, CANVAS_H);
+      drawOverlay(ctx!, ttl, localStep, steps.length, CANVAS_W, CANVAS_H, lang === "he");
       drawProgressBar(ctx!, p, CANVAS_W, CANVAS_H);
 
       if (p >= 1) {
@@ -335,7 +321,7 @@ export default function ProcessInlineVideo({
       if (animFrameRef.current) cancelAnimationFrame(animFrameRef.current);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [steps, playing, lang]);
+  }, [steps, scenes, playing, lang]);
 
   // Sync local vars when step/playing changes from outside
   useEffect(() => {

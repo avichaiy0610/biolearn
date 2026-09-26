@@ -40,9 +40,12 @@ const BEAD_DUR = 4.6;
 const CAPTIONS: { he: string; en: string }[] = [
   { he: "1 · RNA פולימראז נקשר ל-DNA ופותח בועת שעתוק", en: "1 · RNA polymerase binds the DNA and opens a transcription bubble" },
   { he: "2 · הפולימראז עצמו מפריד את הגדילים — בשעתוק אין צורך בהליקאז נפרד", en: "2 · The polymerase itself separates the strands — no separate helicase in transcription" },
-  { he: "3 · הגדיל התבניתי נקרא 3′→5′ ונוקלאוטידים משלימים נוספים ל-mRNA", en: "3 · The template strand is read 3′→5′ and complementary nucleotides join the mRNA" },
+  { he: "3 · הגדיל התבניתי נקרא 3′→5′, וה-RNA נבנה 5′→3′ מנוקלאוטידים משלימים", en: "3 · The template strand is read 3′→5′ and the RNA is built 5′→3′ from complementary nucleotides" },
   { he: "4 · ה-mRNA משתחרר, והגדילים נסגרים מחדש מאחורי הפולימראז", en: "4 · The mRNA is released and the strands rewind behind the polymerase" },
 ];
+
+// keep "3′→5′" left-to-right inside Hebrew captions (Unicode isolates)
+const ltrPrimes = (t: string) => t.replace(/\d′(?:→\d′)?/g, (m) => `\u2066${m}\u2069`);
 
 export default function TranscriptionScene({
   lang = "he",
@@ -76,6 +79,9 @@ export default function TranscriptionScene({
       <div className="p-4 bg-gradient-to-b from-white to-zinc-50 dark:from-zinc-900 dark:to-zinc-900/60">
         <svg viewBox="0 0 480 300" className="w-full h-72 md:h-96" xmlns="http://www.w3.org/2000/svg">
           <defs>
+            <marker id="tsArrow" markerWidth="12" markerHeight="12" refX="8" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+              <path d="M0,0.5 L12,6 L0,11.5 z" fill="#1d4ed8" />
+            </marker>
             <radialGradient id="polGrad" cx="42%" cy="35%" r="70%">
               <stop offset="0%" stopColor="#dbeafe" />
               <stop offset="70%" stopColor="#93c5fd" />
@@ -104,11 +110,28 @@ export default function TranscriptionScene({
               transition={{ duration: BEAD_DUR, repeat: Infinity, ease: "linear", delay: (i * BEAD_DUR) / 5 }} />
           ))}
 
-          {/* unwind / rewind fork markers */}
-          <text x={318} y={110} textAnchor="middle" fontSize={11} fontWeight={700} fill="#0f766e"
-            paintOrder="stroke" stroke="#ffffff" strokeWidth={3} strokeLinejoin="round">↺</text>
-          <text x={142} y={110} textAnchor="middle" fontSize={11} fontWeight={700} fill="#0f766e"
-            paintOrder="stroke" stroke="#ffffff" strokeWidth={3} strokeLinejoin="round">↻</text>
+          {/* strand polarity: coding 5'→3' on top, template 3'→5' below; RNA 5' end is the free end */}
+          {[
+            { x: 14, y: CY - 16, t: "5′" }, { x: 466, y: CY - 16, t: "3′" },
+            { x: 14, y: CY + 28, t: "3′" }, { x: 466, y: CY + 28, t: "5′" },
+            { x: 104, y: 290, t: "5′" },
+          ].map((l, i) => (
+            <text key={i} x={l.x} y={l.y} direction="ltr" textAnchor="middle" fontSize={16} fontWeight={700} fill="#1e293b"
+              paintOrder="stroke" stroke="#ffffff" strokeWidth={4} strokeLinejoin="round">{l.t}</text>
+          ))}
+
+          {/* direction the polymerase moves along the template */}
+          <line x1={190} y1={34} x2={270} y2={34} stroke="#1d4ed8" strokeWidth={2.5} markerEnd="url(#tsArrow)" />
+          <text x={230} y={24} textAnchor="middle" fontSize={15} fontWeight={600} fill="#1d4ed8"
+            paintOrder="stroke" stroke="#ffffff" strokeWidth={4} strokeLinejoin="round">
+            {he ? "כיוון התקדמות הפולימראז" : "polymerase moves this way"}
+          </text>
+
+          {/* unwind ahead / rewind behind */}
+          <text x={318} y={112} textAnchor="middle" fontSize={16} fontWeight={700} fill="#0f766e"
+            paintOrder="stroke" stroke="#ffffff" strokeWidth={4} strokeLinejoin="round">↺</text>
+          <text x={142} y={112} textAnchor="middle" fontSize={16} fontWeight={700} fill="#0f766e"
+            paintOrder="stroke" stroke="#ffffff" strokeWidth={4} strokeLinejoin="round">↻</text>
 
           {/* small, semi-transparent RNA polymerase over the bubble */}
           <motion.g
@@ -118,9 +141,9 @@ export default function TranscriptionScene({
           >
             <ellipse cx={230} cy={150} rx={70} ry={58} fill="url(#polGrad)" fillOpacity={0.8} stroke="#2563eb" strokeWidth={2.5} />
             <text x={230} y={126} textAnchor="middle" fontFamily="system-ui, sans-serif"
-              fontSize={13} fontWeight={700} fill="#1e3a8a"
+              fontSize={16} fontWeight={700} fill="#1e3a8a"
               paintOrder="stroke" stroke="#ffffff" strokeWidth={3} strokeLinejoin="round">
-              {he ? "RNA פולימראז" : "RNA Pol"}
+              {he ? "RNA פולימראז II" : "RNA polymerase II"}
             </text>
           </motion.g>
 
@@ -138,17 +161,18 @@ export default function TranscriptionScene({
 
         {/* Legend (HTML — RTL-safe) */}
         <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 mt-3 text-xs font-medium text-zinc-600 dark:text-zinc-300">
-          <span className="inline-flex items-center gap-1.5"><span className="w-3 h-3 rounded-full" style={{ background: "#f472b6" }} />{he ? "גדיל מקודד" : "Coding strand"}</span>
-          <span className="inline-flex items-center gap-1.5"><span className="w-3 h-3 rounded-full" style={{ background: "#60a5fa" }} />{he ? "גדיל תבנית" : "Template strand"}</span>
-          <span className="inline-flex items-center gap-1.5"><span className="w-3 h-3 rounded-full" style={{ background: "#10b981" }} />{he ? "תעתיק mRNA" : "mRNA transcript"}</span>
+          <span className="inline-flex items-center gap-1.5"><span className="w-3 h-3 rounded-full" style={{ background: "#f472b6" }} />{he ? "גדיל מקודד \u2066(5′→3′)\u2069" : "Coding strand (5′→3′)"}</span>
+          <span className="inline-flex items-center gap-1.5"><span className="w-3 h-3 rounded-full" style={{ background: "#60a5fa" }} />{he ? "גדיל תבנית \u2066(3′→5′)\u2069" : "Template strand (3′→5′)"}</span>
+          <span className="inline-flex items-center gap-1.5"><span className="w-3 h-3 rounded-full" style={{ background: "#10b981" }} />{he ? "תעתיק RNA" : "RNA transcript"}</span>
         </div>
+        <p className="mt-1.5 text-center text-xs text-zinc-500 dark:text-zinc-400">{he ? "סכמטי — לא בקנה מידה" : "Schematic — not to scale"}</p>
 
         {/* Rotating explanation */}
         <div className="mt-3 min-h-[2.75rem] flex items-center justify-center">
           <AnimatePresence mode="wait">
             <motion.p key={ci} initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} transition={{ duration: 0.35 }}
               className="text-sm text-zinc-700 dark:text-zinc-300 text-center leading-relaxed px-2">
-              {he ? CAPTIONS[ci].he : CAPTIONS[ci].en}
+              {he ? ltrPrimes(CAPTIONS[ci].he) : CAPTIONS[ci].en}
             </motion.p>
           </AnimatePresence>
         </div>

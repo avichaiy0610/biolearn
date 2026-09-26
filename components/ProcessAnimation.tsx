@@ -7,7 +7,13 @@ import AIExplainPanel from "./AIExplainPanel";
 import AnimationControls from "./AnimationControls";
 import ProcessInlineVideo from "./ProcessInlineVideo";
 import FeedbackButton from "./FeedbackButton";
-import { svgLabel, MIN_SVG_LABEL_SIZE } from "@/lib/svg-labels-he";
+import { MIN_SVG_LABEL_SIZE } from "@/lib/svg-labels-he";
+import Swatch from "./LegendSwatch";
+import { isolatePrimes } from "@/lib/text";
+import {
+  parseSvgData, allElementIds as collectIds, elementAtStep, labelText, fontSizeOf, leaderStart, textAnchorFor,
+  type SceneData, type SvgElement,
+} from "@/lib/svg-scene";
 
 type Step = {
   id: string;
@@ -18,55 +24,6 @@ type Step = {
   descEn: string;
   svgData: string;
 };
-
-type SvgElement = {
-  id: string;
-  type: "circle" | "rect" | "path" | "text" | "line" | "ellipse";
-  x?: number; y?: number;
-  cx?: number; cy?: number;
-  r?: number; rx?: number; ry?: number;
-  width?: number; height?: number;
-  x1?: number; y1?: number; x2?: number; y2?: number;
-  d?: string;
-  label?: string;
-  color?: string;
-  stroke?: string;
-  strokeWidth?: number;
-  textColor?: string;
-  fontSize?: number;
-  opacity?: number;
-};
-
-function parseSvgData(raw: string): { elements: SvgElement[]; highlight?: string[] } {
-  try {
-    const parsed = JSON.parse(raw);
-    return { elements: Array.isArray(parsed?.elements) ? parsed.elements : [], highlight: parsed?.highlight };
-  } catch {
-    return { elements: [] };
-  }
-}
-
-function getAllElementIds(steps: Step[]): string[] {
-  const seen = new Set<string>();
-  const ids: string[] = [];
-  for (const step of steps) {
-    for (const el of parseSvgData(step.svgData).elements) {
-      if (!seen.has(el.id)) { seen.add(el.id); ids.push(el.id); }
-    }
-  }
-  return ids;
-}
-
-function getElementAtStep(id: string, stepIndex: number, steps: Step[]): SvgElement | null {
-  const { elements } = parseSvgData(steps[stepIndex].svgData);
-  const found = elements.find((e) => e.id === id);
-  if (found) return found;
-  for (let i = stepIndex - 1; i >= 0; i--) {
-    const prev = parseSvgData(steps[i].svgData).elements.find((e) => e.id === id);
-    if (prev) return { ...prev, opacity: 0 };
-  }
-  return null;
-}
 
 /* ─── Chromosome path builder (anatomically accurate shape) ────────────── */
 function r(n: number) { return Math.round(n * 10) / 10; }
@@ -109,15 +66,16 @@ function isLegacyChromosome(el: SvgElement): boolean {
 
 /* ─── Professional SVG element renderer ─────────────────────────────────── */
 function AnimatedSvgElement({
-  id, stepIndex, steps, isHighlighted, lang,
+  id, stepIndex, scenes, isHighlighted, lang, v2,
 }: {
-  id: string; stepIndex: number; steps: Step[]; isHighlighted: boolean; lang: string;
+  id: string; stepIndex: number; scenes: SceneData[]; isHighlighted: boolean; lang: string; v2: boolean;
 }) {
-  const el = getElementAtStep(id, stepIndex, steps);
+  const el = elementAtStep(id, stepIndex, scenes);
   if (!el) return null;
 
   const baseOpacity = el.opacity ?? 1;
-  const effectiveOpacity = isHighlighted ? baseOpacity : baseOpacity * 0.55;
+  // v2 labels stay fully legible; shapes outside the step's focus are dimmed
+  const effectiveOpacity = isHighlighted || (v2 && el.type === "text") ? baseOpacity : baseOpacity * (v2 ? 0.4 : 0.55);
 
   // Use element's own color; fall back to palette based on highlight state
   const fill = el.color ?? (isHighlighted ? "#059669" : "#94a3b8");
@@ -125,14 +83,14 @@ function AnimatedSvgElement({
   const strokeW = el.strokeWidth ?? (el.stroke ? 2 : 0);
 
   // Enhanced filter: glow on highlighted, subtle shadow otherwise
-  const filterRef = isHighlighted ? "url(#glow)" : "url(#shadow)";
+  const filterRef = v2 ? "url(#shadow)" : isHighlighted ? "url(#glow)" : "url(#shadow)";
 
   const t = { duration: 0.9, ease: [0.4, 0, 0.2, 1] as [number, number, number, number] };
 
   // ── Composite shape: 26S proteasome (classic banded barrel + 19S cap) ──────
   // The model only emits a placeholder rect id="proteasome"; we draw the real
   // structure here (same idea as makeChromosomePath for chromosomes).
-  if (/^proteasome/i.test(el.id)) {
+  if (!v2 && /^proteasome/i.test(el.id)) {
     const x = el.x ?? 270, y = el.y ?? 70, w = el.width ?? 74, h = el.height ?? 150;
     const capH = h * 0.28;
     const by = y + capH;          // barrel top
@@ -163,10 +121,12 @@ function AnimatedSvgElement({
         <motion.circle
           key={id}
           filter={filterRef}
+          strokeDasharray={el.dash}
           initial={{ cx: el.cx, cy: el.cy, r: el.r, opacity: 0 }}
           animate={{
             cx: el.cx, cy: el.cy, r: el.r,
-            fill: el.color ? `${fill}` : fill,
+            fill: el.color === "none" ? "rgba(0,0,0,0)" : fill,
+            fillOpacity: el.fillOpacity ?? 1,
             stroke: strokeColor, strokeWidth: strokeW,
             opacity: effectiveOpacity,
           }}
@@ -174,7 +134,7 @@ function AnimatedSvgElement({
         />
       );
     case "ellipse": {
-      if (isLegacyChromosome(el)) {
+      if (!v2 && isLegacyChromosome(el)) {
         const cx = el.cx!, cy = el.cy!;
         const rx = el.rx ?? 6, ry = el.ry ?? 20;
         // Two sister chromatids side by side (like ChromosomeDiagram)
@@ -213,10 +173,12 @@ function AnimatedSvgElement({
         <motion.ellipse
           key={id}
           filter={filterRef}
+          strokeDasharray={el.dash}
           initial={{ cx: el.cx, cy: el.cy, rx: el.rx, ry: el.ry, opacity: 0 }}
           animate={{
             cx: el.cx, cy: el.cy, rx: el.rx, ry: el.ry,
-            fill, stroke: strokeColor, strokeWidth: strokeW,
+            fill: el.color === "none" ? "rgba(0,0,0,0)" : fill, fillOpacity: el.fillOpacity ?? 1,
+            stroke: strokeColor, strokeWidth: strokeW,
             opacity: effectiveOpacity,
           }}
           transition={t}
@@ -229,10 +191,12 @@ function AnimatedSvgElement({
           key={id}
           rx={el.rx ?? 6}
           filter={filterRef}
+          strokeDasharray={el.dash}
           initial={{ x: el.x, y: el.y, width: el.width, height: el.height, opacity: 0 }}
           animate={{
             x: el.x, y: el.y, width: el.width, height: el.height,
-            fill, stroke: strokeColor, strokeWidth: strokeW,
+            fill: el.color === "none" ? "rgba(0,0,0,0)" : fill, fillOpacity: el.fillOpacity ?? 1,
+            stroke: strokeColor, strokeWidth: strokeW,
             opacity: effectiveOpacity,
           }}
           transition={t}
@@ -242,12 +206,13 @@ function AnimatedSvgElement({
       return (
         <motion.line
           key={id}
-          markerEnd="url(#arrowhead)"
+          markerEnd={v2 ? (el.arrow ? "url(#arrowV2)" : undefined) : "url(#arrowhead)"}
           strokeLinecap="round"
+          strokeDasharray={el.dash}
           initial={{ x1: el.x1, y1: el.y1, x2: el.x2, y2: el.y2, opacity: 0 }}
           animate={{
             x1: el.x1, y1: el.y1, x2: el.x2, y2: el.y2,
-            stroke: isHighlighted ? (el.stroke ?? "#059669") : "#64748b",
+            stroke: v2 ? (el.stroke ?? el.color ?? "#334155") : isHighlighted ? (el.stroke ?? "#059669") : "#64748b",
             strokeWidth: el.strokeWidth ?? 2.5,
             opacity: effectiveOpacity,
           }}
@@ -256,18 +221,24 @@ function AnimatedSvgElement({
       );
     case "path": {
       // Filled path (Golgi, vesicle buds, etc.) vs stroke-only (DNA, mRNA, cristae)
-      const isFilled = !!el.color;
+      const isFilled = !!el.color && el.color !== "none";
+      const pathStroke = v2
+        ? (el.stroke ?? (isFilled ? "rgba(0,0,0,0)" : "#334155"))
+        : isHighlighted ? (el.stroke ?? (isFilled ? fill : "#059669")) : "#64748b";
       return (
         <motion.path
           key={id}
-          d={el.d ?? ""}
           strokeLinecap="round"
           strokeLinejoin="round"
+          strokeDasharray={el.dash}
+          markerEnd={v2 && el.arrow ? "url(#arrowV2)" : undefined}
           filter={isFilled ? filterRef : undefined}
-          initial={{ opacity: 0 }}
+          initial={{ d: el.d ?? "", opacity: 0 }}
           animate={{
-            fill: isFilled ? fill : "none",
-            stroke: isHighlighted ? (el.stroke ?? (isFilled ? fill : "#059669")) : "#64748b",
+            d: el.d ?? "",
+            fill: isFilled ? fill : "rgba(0,0,0,0)",
+            fillOpacity: el.fillOpacity ?? 1,
+            stroke: pathStroke,
             strokeWidth: el.strokeWidth ?? (isFilled ? 1.5 : 2),
             opacity: effectiveOpacity,
           }}
@@ -275,30 +246,50 @@ function AnimatedSvgElement({
         />
       );
     }
-    case "text":
+    case "text": {
+      const size = v2 ? fontSizeOf(el, true, MIN_SVG_LABEL_SIZE) : Math.max(MIN_SVG_LABEL_SIZE, el.fontSize ?? 11);
+      const rtl = lang === "he" && !el.ltr;
+      const full = labelText(el, lang);
+      const short = v2 && (lang === "he" ? el.shortHe : el.short) ? labelText(el, lang, true) : null;
+      const color = el.textColor ?? (isHighlighted || v2 ? "#1e293b" : "#64748b");
+      const common = {
+        fontSize: size,
+        direction: rtl ? "rtl" : "ltr",
+        fontFamily: "system-ui, sans-serif",
+        fontWeight: el.weight ?? 600,
+        textAnchor: v2 ? textAnchorFor(el, rtl) : "middle",
+        paintOrder: "stroke",
+        strokeLinejoin: "round",
+        stroke: el.halo === false ? "none" : "rgba(255,255,255,0.95)",
+        strokeWidth: v2 ? 4 : 3.5,
+        initial: { x: el.x, y: el.y, opacity: 0 },
+        animate: { x: el.x, y: el.y, fill: color, opacity: effectiveOpacity },
+        transition: t,
+      } as const;
+      const leaderFor = (txt: string) => {
+        if (!v2 || !el.to) return null;
+        const [sx, sy] = leaderStart(el, txt, size);
+        return { x1: sx, y1: sy, x2: el.to[0], y2: el.to[1] };
+      };
+      const leaders = [
+        { l: leaderFor(full), cls: short ? "max-sm:hidden" : undefined },
+        ...(short ? [{ l: leaderFor(short), cls: "sm:hidden" }] : []),
+      ];
       return (
-        <motion.text
-          key={id}
-          fontSize={Math.max(MIN_SVG_LABEL_SIZE, el.fontSize ?? 11)}
-          direction={lang === "he" ? "rtl" : "ltr"}
-          fontFamily="system-ui, sans-serif"
-          fontWeight="600"
-          textAnchor="middle"
-          paintOrder="stroke"
-          strokeLinejoin="round"
-          stroke="rgba(255,255,255,0.95)"
-          strokeWidth={3.5}
-          initial={{ x: el.x, y: el.y, opacity: 0 }}
-          animate={{
-            x: el.x, y: el.y,
-            fill: el.textColor ?? (isHighlighted ? "#1e293b" : "#64748b"),
-            opacity: effectiveOpacity,
-          }}
-          transition={t}
-        >
-          {svgLabel(el.label ?? "", lang)}
-        </motion.text>
+        <g key={id}>
+          {leaders.map(({ l, cls }, i) => l && (
+            <g key={i} className={cls}>
+              <motion.line initial={{ ...l, opacity: 0 }} animate={{ ...l, opacity: effectiveOpacity * 0.85 }} transition={t}
+                stroke="#0f172a" strokeWidth={1.3} strokeLinecap="round" />
+              <motion.circle initial={{ cx: l.x2, cy: l.y2, opacity: 0 }} animate={{ cx: l.x2, cy: l.y2, opacity: effectiveOpacity }} transition={t}
+                r={2.6} fill="#0f172a" stroke="#fff" strokeWidth={1} />
+            </g>
+          ))}
+          <motion.text {...common} className={short ? "max-sm:hidden" : undefined}>{full}</motion.text>
+          {short && <motion.text {...common} className="sm:hidden">{short}</motion.text>}
+        </g>
       );
+    }
     default:
       return null;
   }
@@ -330,6 +321,11 @@ function SvgDefs() {
         orient="auto"
       >
         <polygon points="0 0, 8 3, 0 6" fill="#059669" opacity="0.85" />
+      </marker>
+
+      {/* Arrowhead for v2 scenes: takes the line's own colour */}
+      <marker id="arrowV2" markerWidth="12" markerHeight="12" refX="8" refY="6" orient="auto" markerUnits="userSpaceOnUse">
+        <path d="M0,0.5 L12,6 L0,11.5 z" fill="context-stroke" />
       </marker>
 
       {/* Subtle dot-grid background pattern */}
@@ -388,7 +384,7 @@ function StepDots({ total, current, onGo }: { total: number; current: number; on
 
 /* ─── Main component ─────────────────────────────────────────────────────── */
 export default function ProcessAnimation({
-  steps, lang, dict, processName, topicSlug, processSlug,
+  steps, lang, dict, processName, topicSlug, processSlug, initialStep = 0,
 }: {
   steps: Step[];
   lang: Locale;
@@ -396,16 +392,21 @@ export default function ProcessAnimation({
   processName: string;
   topicSlug?: string;
   processSlug?: string;
+  initialStep?: number;
 }) {
-  const [currentStep, setCurrentStep] = useState(0);
+  const [currentStep, setCurrentStep] = useState(initialStep);
   const [videoMode, setVideoMode] = useState(false);
 
   const step = steps[currentStep] ?? null;
   const title = step ? (lang === "he" ? step.titleHe : step.titleEn) : "";
   const desc = step ? (lang === "he" ? step.descHe : step.descEn) : "";
-  const { highlight } = step ? parseSvgData(step.svgData) : { highlight: undefined };
+  const scenes = useMemo(() => steps.map((s) => parseSvgData(s.svgData)), [steps]);
+  const highlight = scenes[currentStep]?.highlight;
+  const v2 = scenes.length > 0 && scenes.every((s) => (s.v ?? 1) >= 2);
+  const legend = scenes[currentStep]?.legend ?? scenes[0]?.legend;
+  const note = scenes[currentStep]?.note ?? scenes[0]?.note;
 
-  const allElementIds = useMemo(() => getAllElementIds(steps), [steps]);
+  const allElementIds = useMemo(() => collectIds(scenes), [scenes]);
 
   const goNext = useCallback(() => setCurrentStep((i) => Math.min(i + 1, steps.length - 1)), [steps.length]);
   const goPrev = useCallback(() => setCurrentStep((i) => Math.max(i - 1, 0)), []);
@@ -450,11 +451,13 @@ export default function ProcessAnimation({
           <span className="ms-auto" />
         </div>
 
-        <div className="p-4">
+        <div className={v2 ? "p-1 sm:p-4" : "p-4"}>
           {hasElements ? (
             <svg
               viewBox="0 0 400 300"
-              className="w-full h-64 md:h-80"
+              className={v2 ? "w-full h-auto aspect-[4/3] md:h-80 md:aspect-auto" : "w-full h-64 md:h-80"}
+              role="img"
+              aria-label={title}
               xmlns="http://www.w3.org/2000/svg"
             >
               <SvgDefs />
@@ -468,17 +471,18 @@ export default function ProcessAnimation({
                     key={id}
                     id={id}
                     stepIndex={currentStep}
-                    steps={steps}
+                    scenes={scenes}
                     isHighlighted={isHighlighted}
                     lang={lang}
+                    v2={v2}
                   />
                 );
               })}
               {/* Auto-centromere overlays for chromosome-shaped ellipses */}
-              {allElementIds
+              {!v2 && allElementIds
                 .filter((id) => !id.endsWith("_c") && !id.endsWith("_b") && !NON_CHROM_IDS.test(id))
                 .map((id) => {
-                  const el = getElementAtStep(id, currentStep, steps);
+                  const el = elementAtStep(id, currentStep, scenes);
                   if (!el || !isLegacyChromosome(el)) return null;
                   const baseOpacity = el.opacity ?? 1;
                   const isHighlighted = !highlight || highlight.length === 0 || highlight.includes(id);
@@ -501,6 +505,21 @@ export default function ProcessAnimation({
           ) : (
             <div className="w-full h-64 md:h-80 flex items-center justify-center">
               <div className="text-6xl opacity-20">🔬</div>
+            </div>
+          )}
+          {(legend || note) && (
+            <div className="px-3 pb-2 pt-1 sm:px-0 sm:pb-0">
+              {legend && (
+                <ul className="flex flex-wrap gap-x-4 gap-y-1.5 text-xs text-zinc-700 dark:text-zinc-300" aria-label={lang === "he" ? "מקרא" : "Legend"}>
+                  {legend.map((l) => (
+                    <li key={l.he} className="inline-flex items-center gap-1.5">
+                      <Swatch item={l} />
+                      {lang === "he" ? isolatePrimes(l.he) : l.en}
+                    </li>
+                  ))}
+                </ul>
+              )}
+              {note && <p className="mt-1.5 text-xs text-zinc-500 dark:text-zinc-400">{lang === "he" ? note.he : note.en}</p>}
             </div>
           )}
         </div>
