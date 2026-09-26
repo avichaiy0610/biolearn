@@ -6,6 +6,12 @@ import { prisma } from "@/lib/prisma";
 import TopicGrid from "@/components/TopicGrid";
 import Link from "next/link";
 import { isComingSoon } from "@/lib/topics";
+import { GLOSSARY } from "@/content/glossary";
+import { QUESTION_BANK } from "@/content/question-bank";
+
+// Practice items come from the same sources as the quizzes and /review: the
+// curated question bank, spaced-repetition flashcards, and approved DB questions.
+const FLASHCARD_COUNT = Object.values(GLOSSARY).reduce((n, terms) => n + terms.length, 0);
 
 export default async function HomePage({ params }: PageProps<"/[lang]">) {
   const { lang } = await params;
@@ -20,8 +26,9 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
       orderBy: { nameEn: "asc" },
     }),
     prisma.article.count({ where: { hidden: false } }),
-    prisma.question.count({ where: { approved: true } }),
+    prisma.question.count({ where: { approved: true } }).catch(() => 0),
   ]);
+  const practiceCount = QUESTION_BANK.length + FLASHCARD_COUNT + questionCount;
 
   const activeTopics = topics.filter((t) => !isComingSoon(t));
   const subtopicCount = activeTopics.reduce((n, t) => n + t._count.subtopics, 0);
@@ -106,7 +113,7 @@ export default async function HomePage({ params }: PageProps<"/[lang]">) {
           { value: activeTopics.length, label: isHe ? "נושאים" : "Topics" },
           { value: subtopicCount, label: isHe ? "תת-נושאים" : "Subtopics" },
           { value: articleCount, label: isHe ? "מאמרים" : "Articles" },
-          { value: questionCount, label: isHe ? "שאלות תרגול" : "Practice Q's" },
+          { value: practiceCount, label: isHe ? "שאלות וכרטיסיות" : "Questions & cards" },
         ].map((s) => (
           <div key={s.label} className="text-center">
             <div className="text-3xl font-bold text-zinc-900 dark:text-zinc-50"><bdi dir="ltr">{s.value}+</bdi></div>
