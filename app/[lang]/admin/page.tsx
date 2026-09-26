@@ -20,6 +20,14 @@ export default async function AdminPage({ params }: PageProps<"/[lang]/admin">) 
       descEn: "Create and edit topics, subtopics and processes directly",
     },
     {
+      href: `/${lang}/admin/drafts`,
+      icon: "🎬",
+      titleHe: "טיוטות אנימציה",
+      titleEn: "Animation Drafts",
+      descHe: "אנימציות שה-AI יצר — ממתינות לליטוש ובדיקה ויזואלית לפני פרסום",
+      descEn: "AI-generated animations awaiting polish and a visual check before publishing",
+    },
+    {
       href: `/${lang}/admin/upload`,
       icon: "📄",
       titleHe: "העלאת סילבוס (AI)",

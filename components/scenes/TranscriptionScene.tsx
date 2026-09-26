@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 
 /* Hand-crafted, continuously-animated transcription scene (RNA Polymerase).
    The DNA visibly OPENS into a transcription bubble in the middle; a small,
@@ -56,10 +56,14 @@ export default function TranscriptionScene({
 }) {
   const he = lang !== "en";
   const [ci, setCi] = useState(0);
+  // reduced motion: freeze the looping motion; captions advance only on click
+  const reduce = useReducedMotion();
+  const loop = reduce ? 0 : Infinity;
   useEffect(() => {
+    if (reduce) return;
     const t = setInterval(() => setCi((c) => (c + 1) % CAPTIONS.length), 3600);
     return () => clearInterval(t);
-  }, []);
+  }, [reduce]);
 
   return (
     <div className="rounded-2xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 overflow-hidden shadow-sm">
@@ -102,12 +106,12 @@ export default function TranscriptionScene({
           {[0, 1, 2, 3, 4].map((i) => (
             <motion.circle key={`t${i}`} r={3.5} fill="#ec4899"
               animate={{ cx: CX, cy: CY_TOP }}
-              transition={{ duration: BEAD_DUR, repeat: Infinity, ease: "linear", delay: (i * BEAD_DUR) / 5 }} />
+              transition={{ duration: BEAD_DUR, repeat: loop, ease: "linear", delay: (i * BEAD_DUR) / 5 }} />
           ))}
           {[0, 1, 2, 3, 4].map((i) => (
             <motion.circle key={`b${i}`} r={3.5} fill="#3b82f6"
               animate={{ cx: CX, cy: CY_BOT }}
-              transition={{ duration: BEAD_DUR, repeat: Infinity, ease: "linear", delay: (i * BEAD_DUR) / 5 }} />
+              transition={{ duration: BEAD_DUR, repeat: loop, ease: "linear", delay: (i * BEAD_DUR) / 5 }} />
           ))}
 
           {/* strand polarity: coding 5'→3' on top, template 3'→5' below; RNA 5' end is the free end */}
@@ -136,7 +140,7 @@ export default function TranscriptionScene({
           {/* small, semi-transparent RNA polymerase over the bubble */}
           <motion.g
             animate={{ scale: [1, 1.03, 1] }}
-            transition={{ duration: 3.2, repeat: Infinity, ease: "easeInOut" }}
+            transition={{ duration: 3.2, repeat: loop, ease: "easeInOut" }}
             style={{ transformBox: "fill-box", transformOrigin: "center" }}
           >
             <ellipse cx={230} cy={150} rx={70} ry={58} fill="url(#polGrad)" fillOpacity={0.8} stroke="#2563eb" strokeWidth={2.5} />
@@ -150,12 +154,12 @@ export default function TranscriptionScene({
           {/* active-site spark + mRNA transcript streaming out */}
           <motion.circle cx={214} cy={172} fill="#fde047"
             animate={{ opacity: [0.35, 1, 0.35], r: [5, 8, 5] }}
-            transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }} />
+            transition={{ duration: 1.2, repeat: loop, ease: "easeInOut" }} />
           <path d="M 214 172 Q 180 232 120 288" fill="none" stroke="#10b981" strokeWidth={4} strokeLinecap="round" opacity={0.9} />
           {[0, 1, 2, 3, 4].map((i) => (
             <motion.circle key={`m${i}`} r={4.5} fill="#059669"
               animate={{ cx: [214, 180, 120], cy: [172, 232, 288], opacity: [0, 1, 1, 0] }}
-              transition={{ duration: 2.6, repeat: Infinity, delay: i * 0.52, ease: "linear" }} />
+              transition={{ duration: 2.6, repeat: loop, delay: i * 0.52, ease: "linear" }} />
           ))}
         </svg>
 

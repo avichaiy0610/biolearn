@@ -52,3 +52,7 @@ next-env.d.ts
 
 # local DB backups written by scripts/content-fix-*.ts
 /.backups/
+
+# animation screenshots from scripts/scene-shots.mjs
+/.shots/
+/.test-drafts.db*

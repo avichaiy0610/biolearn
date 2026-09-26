@@ -132,7 +132,7 @@ export default function SyllabusUploader({
         if (!data.animationCreated) {
           alert(
             lang === "he"
-              ? "תת-הנושא נוסף, אך לא נוצרה אנימציה. ניתן להוסיף אנימציה ידנית."
+              ? "תת-הנושא נוסף, אך לא נוצרה טיוטת אנימציה. ניתן ליצור אותה ידנית."
               : "Subtopic added, but no animation was created. You can add an animation manually."
           );
         }

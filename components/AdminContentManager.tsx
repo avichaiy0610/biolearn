@@ -346,10 +346,10 @@ function SubtopicRow({ subtopic, topic, allTopics, lang, onDeleted, onMoved, onA
     });
     const data = await res.json();
     if (res.ok) {
-      onAnimationGenerated({ ...subtopic, relatedProcessSlug: data.processSlug });
+      // Drafts go live only after polish + visual check (see "Animation drafts").
       alert(isHe
-        ? `✅ האנימציה נוצרה! (${data.stepsCreated} שלבים)`
-        : `✅ Animation created! (${data.stepsCreated} steps)`);
+        ? `✅ נוצרה טיוטת אנימציה (${data.stepsCreated} שלבים). היא תפורסם אחרי ליטוש ובדיקה ויזואלית — ראו "טיוטות אנימציה".`
+        : `✅ Animation draft created (${data.stepsCreated} steps). It goes live after polish and a visual check — see "Animation drafts".`);
     } else {
       alert(data.error ?? (isHe ? "שגיאה ביצירת אנימציה" : "Animation generation failed"));
     }
@@ -996,18 +996,9 @@ function AISuggestPanel({ topicSlug, lang, onAddSubtopic, onProcessAdded, onClos
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error ?? "Failed");
-      const newProcess: Process = {
-        id: data.processSlug,
-        slug: data.processSlug,
-        nameHe: p.nameHe,
-        nameEn: p.nameEn,
-        descHe: `אנימציה: ${p.nameHe}`,
-        descEn: `Animation: ${p.nameEn}`,
-        steps: Array.from({ length: data.stepsCreated ?? 0 }, (_, i) => ({
-          id: `step-${i}`, order: i + 1, titleHe: "", titleEn: "", descHe: "", descEn: "",
-        })),
-      };
-      onProcessAdded(newProcess);
+      alert(isHe
+        ? `✅ נוצרה טיוטת אנימציה (${data.stepsCreated} שלבים). היא תפורסם אחרי ליטוש ובדיקה ויזואלית — ראו "טיוטות אנימציה".`
+        : `✅ Animation draft created (${data.stepsCreated} steps). It goes live after polish and a visual check — see "Animation drafts".`);
       setProcesses((prev) => prev.filter((x) => x.slug !== p.slug));
     } catch (e) {
       alert(e instanceof Error ? e.message : (isHe ? "שגיאה ביצירת אנימציה" : "Failed to generate animation"));

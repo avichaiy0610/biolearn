@@ -249,3 +249,23 @@ model Course {
   position  Int       @default(0) // order within its year/semester
   updatedAt DateTime? @updatedAt
 }
+
+// AI-generated animation drafts from the admin panel. They never appear on the
+// public site: a draft is polished to the animation standard (CLAUDE.md), checked
+// visually, and only then published into Process/ProcessStep by
+// scripts/animation-drafts.ts publish.
+model ProcessDraft {
+  id           String    @id @default(cuid())
+  topicId      String
+  subtopicId   String?   // subtopic to link when the draft is published
+  targetSlug   String?   // existing process this draft would replace (regenerate); live one stays untouched
+  proposedSlug String    // slug for a new process
+  nameHe       String
+  nameEn       String
+  feedback     String?   // admin's improvement instructions
+  steps        String    // JSON: [{ titleHe, titleEn, descHe, descEn, svgData }]
+  issues       String?   // JSON: standard-check findings on the raw draft
+  status       String    @default("pending") // pending | published | discarded
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime? @updatedAt
+}

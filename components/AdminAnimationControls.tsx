@@ -121,7 +121,7 @@ export default function AdminAnimationControls({ topicSlug, processSlug, lang = 
           {state === "done" ? (
             <p className="text-sm text-emerald-600 dark:text-emerald-400 text-center py-2">
               {mode === "rebuild"
-                ? (isHe ? `✓ נוצרו ${stepCount} שלבים חדשים — טוען...` : `✓ ${stepCount} new steps created — loading…`)
+                ? (isHe ? `✓ נוצרה טיוטה (${stepCount} שלבים). האנימציה החיה לא השתנתה — הטיוטה תחליף אותה אחרי ליטוש ובדיקה.` : `✓ Draft created (${stepCount} steps). The live animation is unchanged until the draft is polished and checked.`)
                 : (isHe ? "✓ ההערה נשמרה!" : "✓ Note saved!")}
             </p>
           ) : (

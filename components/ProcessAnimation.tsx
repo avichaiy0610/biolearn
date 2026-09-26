@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useCallback, useMemo } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState, useCallback, useMemo, useEffect } from "react";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import type { Locale } from "@/lib/dictionaries";
 import AIExplainPanel from "./AIExplainPanel";
 import AnimationControls from "./AnimationControls";
@@ -66,9 +66,9 @@ function isLegacyChromosome(el: SvgElement): boolean {
 
 /* ─── Professional SVG element renderer ─────────────────────────────────── */
 function AnimatedSvgElement({
-  id, stepIndex, scenes, isHighlighted, lang, v2,
+  id, stepIndex, scenes, isHighlighted, lang, v2, instant,
 }: {
-  id: string; stepIndex: number; scenes: SceneData[]; isHighlighted: boolean; lang: string; v2: boolean;
+  id: string; stepIndex: number; scenes: SceneData[]; isHighlighted: boolean; lang: string; v2: boolean; instant: boolean;
 }) {
   const el = elementAtStep(id, stepIndex, scenes);
   if (!el) return null;
@@ -85,7 +85,8 @@ function AnimatedSvgElement({
   // Enhanced filter: glow on highlighted, subtle shadow otherwise
   const filterRef = v2 ? "url(#shadow)" : isHighlighted ? "url(#glow)" : "url(#shadow)";
 
-  const t = { duration: 0.9, ease: [0.4, 0, 0.2, 1] as [number, number, number, number] };
+  // reduced motion: jump to the step's pose instead of tweening
+  const t = instant ? { duration: 0 } : { duration: 0.9, ease: [0.4, 0, 0.2, 1] as [number, number, number, number] };
 
   // ── Composite shape: 26S proteasome (classic banded barrel + 19S cap) ──────
   // The model only emits a placeholder rect id="proteasome"; we draw the real
@@ -382,6 +383,8 @@ function StepDots({ total, current, onGo }: { total: number; current: number; on
   );
 }
 
+const AUTOPLAY_MS = 4500;
+
 /* ─── Main component ─────────────────────────────────────────────────────── */
 export default function ProcessAnimation({
   steps, lang, dict, processName, topicSlug, processSlug, initialStep = 0,
@@ -411,6 +414,22 @@ export default function ProcessAnimation({
   const goNext = useCallback(() => setCurrentStep((i) => Math.min(i + 1, steps.length - 1)), [steps.length]);
   const goPrev = useCallback(() => setCurrentStep((i) => Math.max(i - 1, 0)), []);
 
+  // Autoplay: advance one step every AUTOPLAY_MS until the last step; manual
+  // navigation keeps working and the button pauses. Reduced motion → no tweening.
+  const reduceMotion = useReducedMotion();
+  const [playRequested, setPlayRequested] = useState(false);
+  const playing = playRequested && currentStep < steps.length - 1; // stops by itself on the last step
+  useEffect(() => {
+    if (!playing) return;
+    const timer = setTimeout(() => setCurrentStep((i) => Math.min(i + 1, steps.length - 1)), AUTOPLAY_MS);
+    return () => clearTimeout(timer);
+  }, [playing, currentStep, steps.length]);
+  const togglePlay = useCallback(() => {
+    if (playing) { setPlayRequested(false); return; }
+    if (currentStep >= steps.length - 1) setCurrentStep(0); // replay from the start
+    setPlayRequested(true);
+  }, [playing, currentStep, steps.length]);
+
   if (steps.length === 0) {
     return (
       <div className="rounded-2xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 p-10 text-center text-zinc-400 dark:text-zinc-500">
@@ -431,6 +450,15 @@ export default function ProcessAnimation({
       {/* Toolbar */}
       <div className="flex items-center justify-between">
         <StepDots total={steps.length} current={currentStep} onGo={setCurrentStep} />
+        <div className="flex items-center gap-2">
+        <button
+          onClick={togglePlay}
+          aria-pressed={playing}
+          className="flex items-center gap-2 px-4 py-2 rounded-xl border border-emerald-500/60 text-emerald-700 dark:text-emerald-300 text-sm font-medium hover:bg-emerald-50 dark:hover:bg-emerald-900/30 transition-colors"
+        >
+          <span aria-hidden>{playing ? "⏸" : "▶"}</span>
+          {playing ? dict.process.pauseAnimation : dict.process.playAnimation}
+        </button>
         <button
           onClick={() => setVideoMode(true)}
           className="flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-zinc-800 to-zinc-700 dark:from-zinc-700 dark:to-zinc-600 text-white text-sm font-medium hover:from-zinc-700 hover:to-zinc-600 dark:hover:from-zinc-600 dark:hover:to-zinc-500 shadow transition-all"
@@ -438,6 +466,7 @@ export default function ProcessAnimation({
           <span>▶</span>
           {lang === "he" ? "הפעל סרטון" : "Play Video"}
         </button>
+        </div>
       </div>
 
       {/* Professional SVG canvas */}
@@ -475,6 +504,7 @@ export default function ProcessAnimation({
                     isHighlighted={isHighlighted}
                     lang={lang}
                     v2={v2}
+                    instant={!!reduceMotion}
                   />
                 );
               })}

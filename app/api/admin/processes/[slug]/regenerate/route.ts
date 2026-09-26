@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import { isAdmin } from "@/lib/supabase/server";
 import { generateAnimationSteps } from "@/lib/generate-animation-steps";
+import { saveDraft } from "@/lib/animation-draft";
 
 export const maxDuration = 60;
 
@@ -16,10 +17,7 @@ export async function POST(
   // Find the process with its topic
   const proc = await prisma.process.findFirst({
     where: { slug },
-    include: {
-      topic: true,
-      steps: { select: { id: true } },
-    },
+    include: { topic: true },
   });
   if (!proc) return Response.json({ error: "Process not found" }, { status: 404 });
 
@@ -33,44 +31,25 @@ export async function POST(
   const contentEn = subtopic?.contentEn ?? proc.descEn;
 
   // Generate new steps (surface real AI errors; tolerate truncated JSON)
-  let steps: object[];
+  let raw: Awaited<ReturnType<typeof generateAnimationSteps>>;
   try {
-    steps = await generateAnimationSteps(nameEn, nameHe, contentEn, feedback);
+    raw = await generateAnimationSteps(nameEn, nameHe, contentEn, feedback);
   } catch (e) {
     return Response.json({ error: e instanceof Error ? e.message : String(e) }, { status: 502 });
   }
-  if (steps.length === 0) {
+  if (raw.steps.length === 0) {
     return Response.json(
       { error: "AI returned no usable steps (possibly truncated or rate-limited). Try again." },
       { status: 502 }
     );
   }
 
-  // The libSQL (Turso) adapter does NOT reliably support createMany, so mirror
-  // the working generate-animation route and use a nested `create` instead.
-  try {
-    await prisma.processStep.deleteMany({ where: { processId: proc.id } });
-    await prisma.process.update({
-      where: { id: proc.id },
-      data: {
-        steps: {
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          create: steps.map((s: any, i: number) => ({
-            order: i + 1,
-            titleHe: String(s.titleHe ?? ""),
-            titleEn: String(s.titleEn ?? ""),
-            descHe: String(s.descHe ?? ""),
-            descEn: String(s.descEn ?? ""),
-            svgData: JSON.stringify({ elements: s.elements ?? [], highlight: s.highlight ?? [] }),
-          })),
-        },
-      },
-    });
-  } catch (e) {
-    const msg = e instanceof Error ? e.message : String(e);
-    console.error("[regenerate] DB write failed:", msg);
-    return Response.json({ error: `Failed to save animation: ${msg}` }, { status: 500 });
-  }
+  // The live animation is NOT touched: the rebuild becomes a draft that replaces it
+  // only after it is polished and checked (scripts/animation-drafts.ts publish).
+  const draft = await saveDraft({
+    topicId: proc.topicId, subtopicId: subtopic?.id ?? null, targetSlug: slug, proposedSlug: slug,
+    nameHe, nameEn, feedback: feedback ?? null, raw,
+  });
 
-  return Response.json({ stepsCreated: steps.length });
+  return Response.json({ draftId: draft.id, draft: true, stepsCreated: raw.steps.length });
 }
