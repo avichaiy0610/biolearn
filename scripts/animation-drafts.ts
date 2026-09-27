@@ -7,6 +7,7 @@
  *   npx tsx scripts/animation-drafts.ts check <slug>|--all      # check published animations against the standard
  *   npx tsx scripts/animation-drafts.ts publish <draftId> [slug] # publish the POLISHED scene for this draft (backup first);
  *                                                                 [slug] overrides the draft's proposed slug for a new animation
+ *   npx tsx scripts/animation-drafts.ts publish-scene <slug...> # publish scenes authored directly (uses scene.meta)
  *   npx tsx scripts/animation-drafts.ts discard <draftId>
  *   npx tsx scripts/animation-drafts.ts --rollback .backups/draft-publish-<ts>.json
  *
@@ -117,6 +118,58 @@ async function publish(id: string, slugOverride?: string) {
   console.log(`published ${slug} (${steps.length} steps)`);
 }
 
+// Publish (create or update) an animation authored directly in content/process-scenes,
+// using the scene's `meta`; same checks, backup and rollback format as `publish`.
+async function publishScene(slug: string) {
+  const scene = PROCESS_SCENES.find((s) => s.slug === slug);
+  if (!scene) throw new Error(`no scene "${slug}" in content/process-scenes`);
+  if (!scene.meta) throw new Error(`scene "${slug}" has no meta (topic, names) — add it or publish via a draft`);
+  const m = scene.meta;
+  const steps: StepLike[] = scene.steps.map((st) => ({ ...st, svgData: stepSvgData(scene, st) }));
+  const findings = checkAnimation(steps);
+  console.log(formatFindings(findings));
+  if (hasErrors(findings)) throw new Error("standard check failed — fix the errors above before publishing");
+  const topic = (await db.execute({ sql: `SELECT "id" FROM "Topic" WHERE "slug"=?`, args: [m.topic] })).rows[0];
+  if (!topic) throw new Error(`topic not found: ${m.topic}`);
+
+  const existing = (await db.execute({ sql: `SELECT * FROM "Process" WHERE "slug"=?`, args: [slug] })).rows[0];
+  const backup: Record<string, unknown> = { draftId: null, slug, createdProcess: !existing };
+  const stmts: InStatement[] = [];
+  let processId: string;
+  if (existing) {
+    processId = String(existing.id);
+    backup.process = { ...existing };
+    backup.steps = (await db.execute({ sql: `SELECT * FROM "ProcessStep" WHERE "processId"=?`, args: [processId] })).rows;
+    stmts.push({ sql: `DELETE FROM "ProcessStep" WHERE "processId"=?`, args: [processId] });
+    stmts.push({ sql: `UPDATE "Process" SET "nameHe"=?, "nameEn"=?, "descHe"=?, "descEn"=?, "updatedAt"=?, "reviewedAt"=? WHERE "id"=?`, args: [m.nameHe, m.nameEn, m.descHe, m.descEn, NOW, NOW, processId] });
+  } else {
+    processId = cuid();
+    stmts.push({
+      sql: `INSERT INTO "Process" ("id","topicId","slug","nameHe","nameEn","descHe","descEn","updatedAt","reviewedAt") VALUES (?,?,?,?,?,?,?,?,?)`,
+      args: [processId, String(topic.id), slug, m.nameHe, m.nameEn, m.descHe, m.descEn, NOW, NOW],
+    });
+  }
+  if (m.subtopic) {
+    const sub = (await db.execute({ sql: `SELECT "id","relatedProcessSlug" FROM "Subtopic" WHERE "slug"=? AND "topicId"=? AND "hidden"=0`, args: [m.subtopic, String(topic.id)] })).rows[0];
+    if (!sub) console.log(`! subtopic ${m.subtopic} not found (visible) — not linked`);
+    else if (sub.relatedProcessSlug && sub.relatedProcessSlug !== slug) console.log(`! subtopic ${m.subtopic} already links ${sub.relatedProcessSlug} — left as is`);
+    else if (!sub.relatedProcessSlug) {
+      backup.subtopic = { ...sub };
+      stmts.push({ sql: `UPDATE "Subtopic" SET "relatedProcessSlug"=? WHERE "id"=?`, args: [slug, String(sub.id)] });
+    }
+  }
+  steps.forEach((st, i) => stmts.push({
+    sql: `INSERT INTO "ProcessStep" ("id","processId","order","titleHe","titleEn","descHe","descEn","svgData") VALUES (?,?,?,?,?,?,?,?)`,
+    args: [cuid(), processId, i + 1, st.titleHe, st.titleEn, st.descHe, st.descEn, st.svgData],
+  }));
+  fs.mkdirSync(".backups", { recursive: true });
+  const file = path.join(".backups", `scene-publish-${slug}-${NOW.replace(/[:.]/g, "-")}.json`);
+  fs.writeFileSync(file, JSON.stringify(backup, null, 1));
+  console.log(`backup → ${file}`);
+  await db.batch(stmts, "write");
+  console.log(`${existing ? "updated" : "published"} ${m.topic}/${slug} (${steps.length} steps)`);
+}
+
 async function rollback(file: string) {
   const b = JSON.parse(fs.readFileSync(file, "utf8"));
   const stmts: InStatement[] = [];
@@ -132,7 +185,8 @@ async function rollback(file: string) {
     });
     stmts.push({ sql: `UPDATE "Process" SET "updatedAt"=?, "reviewedAt"=? WHERE "id"=?`, args: [b.process.updatedAt, b.process.reviewedAt, b.process.id] });
   }
-  stmts.push({ sql: `UPDATE "ProcessDraft" SET "status"='pending' WHERE "id"=?`, args: [b.draftId] });
+  if (!b.createdProcess && b.subtopic) stmts.push({ sql: `UPDATE "Subtopic" SET "relatedProcessSlug"=? WHERE "id"=?`, args: [b.subtopic.relatedProcessSlug, b.subtopic.id] });
+  if (b.draftId) stmts.push({ sql: `UPDATE "ProcessDraft" SET "status"='pending' WHERE "id"=?`, args: [b.draftId] });
   await db.batch(stmts, "write");
   console.log(`rolled back ${b.slug}`);
 }
@@ -143,10 +197,11 @@ const run: Record<string, () => Promise<void>> = {
   show: () => show(arg, arg2),
   check: () => check(arg ?? "--all"),
   publish: () => publish(arg, arg2),
+  "publish-scene": async () => { for (const slug of process.argv.slice(3)) await publishScene(slug); },
   discard: async () => { await db.execute({ sql: `UPDATE "ProcessDraft" SET "status"='discarded', "updatedAt"=? WHERE "id"=?`, args: [NOW, arg] }); console.log("discarded"); },
   "--rollback": () => rollback(arg),
 };
-(run[cmd] ?? (async () => console.log("commands: list | show <id> [out] | check <slug>|--all | publish <id> [slug] | discard <id> | --rollback <file>")))().catch((e) => {
+(run[cmd] ?? (async () => console.log("commands: list | show <id> [out] | check <slug>|--all | publish <id> [slug] | publish-scene <slug...> | discard <id> | --rollback <file>")))().catch((e) => {
   console.error(e instanceof Error ? e.message : e);
   process.exit(1);
 });

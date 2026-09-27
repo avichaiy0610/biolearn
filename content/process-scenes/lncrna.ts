@@ -156,7 +156,7 @@ const d1: El[] = [
   label("l_hsc", 14, 250, "Blood stem cell", "תא גזע של הדם", [70, 196], { anchor: "start" }),
   label("l_ery", 262, 80, "Red cells", "תאי דם אדומים", [272, 124], { anchor: "start", shortHe: "תאי דם אדומים", short: "Red cells" }),
   label("l_mk", 310, 280, "Platelets", "טסיות", [300, 234], { anchor: "start" }),
-  text("l_scl", 200, 28, "lncRNA → SCL (TAL1): blood master regulator", "lncRNA ← SCL: המווסת הראשי של יצירת הדם", { weight: 700, textColor: GENE, short: "lncRNA → SCL", shortHe: "lncRNA ← SCL" }),
+  text("l_scl", 200, 28, "lncRNA → SCL (TAL1): blood master regulator", "lncRNA מפעיל את SCL — המווסת הראשי של יצירת הדם", { weight: 700, textColor: GENE, short: "lncRNA → SCL", shortHe: "lncRNA מפעיל את SCL" }),
 ];
 const epi = (i: number, x: number, y: number): El[] => [
   rect(`ep${i}`, x, y, 34, 40, "#fed7aa", { rx: 3, stroke: "#c2410c", strokeWidth: 1.5 }),
@@ -206,6 +206,12 @@ const d4: El[] = [
 
 export const lncDevelopment: ProcessScene = {
   slug: "lncrna-development-differentiation",
+  meta: {
+    topic: "molecular-biology",
+    nameHe: "תפקיד lncRNA בהתפתחות והבדלה תאים", nameEn: "lncRNA Role in Development and Cell Differentiation",
+    descHe: "אנימציה: תפקיד lncRNA בהתפתחות והבדלה תאים", descEn: "Animation: lncRNA Role in Development and Cell Differentiation",
+    source: "Ørom et al., Cell 2010",
+  },
   legend: [
     { color: LNC, he: "lncRNA", en: "lncRNA", swatch: "line" },
     { color: GENE, he: "גן מטרה (SCL / Snai1)", en: "Target gene (SCL / Snai1)", swatch: "line" },

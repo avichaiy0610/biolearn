@@ -575,8 +575,8 @@ export default function ProcessAnimation({
                   {dict.process.step} {currentStep + 1} {dict.process.of} {steps.length}
                 </p>
               </div>
-              <h3 className="text-lg font-semibold text-zinc-900 dark:text-zinc-50 mb-2">{title}</h3>
-              <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">{desc}</p>
+              <h3 className="text-lg font-semibold text-zinc-900 dark:text-zinc-50 mb-2">{lang === "he" ? isolatePrimes(title) : title}</h3>
+              <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">{lang === "he" ? isolatePrimes(desc) : desc}</p>
             </div>
           </div>
         </motion.div>

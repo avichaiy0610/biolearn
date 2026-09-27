@@ -18,6 +18,14 @@ export type ProcessScene = {
   slug: string;
   legend: LegendItem[];
   steps: StepDef[];
+  /** For animations authored directly (not from an admin draft): where and how to publish them. */
+  meta?: {
+    topic: string;               // topic slug the process belongs to
+    nameHe: string; nameEn: string;
+    descHe: string; descEn: string;
+    subtopic?: string;           // subtopic slug (in that topic) to link, if it has no animation yet
+    source: string;              // textbook chapters the content was checked against
+  };
 };
 
 export const NOTE = { he: "סכמטי — לא בקנה מידה", en: "Schematic — not to scale" };

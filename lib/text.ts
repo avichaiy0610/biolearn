@@ -13,8 +13,12 @@ export function decodeEntities(s: string): string {
 }
 
 // In RTL text a prime after a digit renders on the wrong side ("3'" shows as
-// "'3") and "5'→3'" scrambles. Wrap such runs in Unicode isolates (LRI … PDI).
+// "'3") and "5'→3'" scrambles; a trailing charge sign jumps too ("Na⁺" shows as
+// "⁺Na", "Ca²⁺" as "⁺Ca²"). Wrap such runs in Unicode isolates (LRI … PDI).
+// Idempotent: an existing isolate around a run is replaced, not doubled.
 const LRI = String.fromCharCode(0x2066), PDI = String.fromCharCode(0x2069);
+const PRIME = /\u2066?(\d['′](?:\s*[→←]\s*\d['′])?)\u2069?/g;
+const ION = /\u2066?([A-Za-z][A-Za-z0-9₀-₉²³]*[⁺⁻](?:\/[A-Za-z][A-Za-z0-9₀-₉²³]*[⁺⁻])*)\u2069?/g;
 export function isolatePrimes(he: string): string {
-  return he.replace(/\u2066?(\d'(?:\s*[→←]\s*\d')?)\u2069?/g, `${LRI}$1${PDI}`);
+  return he.replace(PRIME, `${LRI}$1${PDI}`).replace(ION, `${LRI}$1${PDI}`);
 }

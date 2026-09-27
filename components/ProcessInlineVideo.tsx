@@ -4,6 +4,7 @@ import { useEffect, useRef, useState, useCallback, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import type { Locale } from "@/lib/dictionaries";
 import { MIN_SVG_LABEL_SIZE } from "@/lib/svg-labels-he";
+import { isolatePrimes } from "@/lib/text";
 import {
   parseSvgData, allElementIds, elementAtStep, labelText, fontSizeOf, leaderStart, textAnchorFor,
   type SceneData,
@@ -219,7 +220,7 @@ function drawOverlay(
   ctx.direction = rtl ? "rtl" : "ltr";
   ctx.textAlign = rtl ? "right" : "left";
   ctx.textBaseline = "bottom";
-  ctx.fillText(title, x, height - 10);
+  ctx.fillText(rtl ? isolatePrimes(title) : title, x, height - 10);
 }
 
 /* ── Progress bar ────────────────────────────────────────────────────────── */
@@ -415,9 +416,9 @@ export default function ProcessInlineVideo({
             <span className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-300 text-xs font-bold shrink-0">
               {currentStep + 1}
             </span>
-            <h3 className="font-semibold text-zinc-900 dark:text-zinc-50 text-sm">{title}</h3>
+            <h3 className="font-semibold text-zinc-900 dark:text-zinc-50 text-sm">{lang === "he" ? isolatePrimes(title) : title}</h3>
           </div>
-          <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed ms-7">{desc}</p>
+          <p className="text-xs text-zinc-500 dark:text-zinc-400 leading-relaxed ms-7">{lang === "he" ? isolatePrimes(desc) : desc}</p>
         </motion.div>
       </AnimatePresence>
 
