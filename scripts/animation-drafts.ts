@@ -5,7 +5,8 @@
  *   npx tsx scripts/animation-drafts.ts list                    # pending drafts + automated findings
  *   npx tsx scripts/animation-drafts.ts show <draftId> [out]    # dump a draft (texts, elements, findings) to JSON
  *   npx tsx scripts/animation-drafts.ts check <slug>|--all      # check published animations against the standard
- *   npx tsx scripts/animation-drafts.ts publish <draftId>       # publish the POLISHED scene for this draft (backup first)
+ *   npx tsx scripts/animation-drafts.ts publish <draftId> [slug] # publish the POLISHED scene for this draft (backup first);
+ *                                                                 [slug] overrides the draft's proposed slug for a new animation
  *   npx tsx scripts/animation-drafts.ts discard <draftId>
  *   npx tsx scripts/animation-drafts.ts --rollback .backups/draft-publish-<ts>.json
  *
@@ -68,10 +69,12 @@ async function check(target: string) {
   }
 }
 
-async function publish(id: string) {
+async function publish(id: string, slugOverride?: string) {
   const d = await draft(id);
   if (d.status !== "pending") throw new Error(`draft is ${d.status}`);
-  const slug = String(d.targetSlug ?? d.proposedSlug);
+  if (slugOverride && d.targetSlug) throw new Error("a rebuild keeps its target slug");
+  if (slugOverride && !/^[a-z0-9]+(-[a-z0-9]+)*$/.test(slugOverride)) throw new Error("slug must be lowercase-kebab-case");
+  const slug = String(slugOverride ?? d.targetSlug ?? d.proposedSlug);
   const scene = PROCESS_SCENES.find((s) => s.slug === slug);
   if (!scene) throw new Error(`no polished scene for "${slug}" in content/process-scenes — polish the draft first`);
   const steps: StepLike[] = scene.steps.map((st) => ({ ...st, svgData: stepSvgData(scene, st) }));
@@ -139,11 +142,11 @@ const run: Record<string, () => Promise<void>> = {
   list,
   show: () => show(arg, arg2),
   check: () => check(arg ?? "--all"),
-  publish: () => publish(arg),
+  publish: () => publish(arg, arg2),
   discard: async () => { await db.execute({ sql: `UPDATE "ProcessDraft" SET "status"='discarded', "updatedAt"=? WHERE "id"=?`, args: [NOW, arg] }); console.log("discarded"); },
   "--rollback": () => rollback(arg),
 };
-(run[cmd] ?? (async () => console.log("commands: list | show <id> [out] | check <slug>|--all | publish <id> | discard <id> | --rollback <file>")))().catch((e) => {
+(run[cmd] ?? (async () => console.log("commands: list | show <id> [out] | check <slug>|--all | publish <id> [slug] | discard <id> | --rollback <file>")))().catch((e) => {
   console.error(e instanceof Error ? e.message : e);
   process.exit(1);
 });

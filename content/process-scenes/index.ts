@@ -15,9 +15,14 @@ import { mitoInheritance } from "./mito-inheritance";
 import { bacteria } from "./bacteria";
 import { recognition, riboswitch } from "./rna-switches";
 import { cardio } from "./cardio";
+// published from admin-panel drafts (scripts/animation-drafts.ts)
+import { imprinting } from "./imprinting";
+import { innate, adaptive } from "./immunity";
+import { lncEnhancer, lncDevelopment, gencode, lncConservation } from "./lncrna";
 
 export const PROCESS_SCENES: ProcessScene[] = [translation, transcription, glycolysis, respiration, meiosis, pcr, ups, mendelian, nonMendelian,
-  mitoInheritance, bacteria, recognition, riboswitch, cardio];
+  mitoInheritance, bacteria, recognition, riboswitch, cardio,
+  imprinting, innate, adaptive, lncEnhancer, lncDevelopment, gencode, lncConservation];
 
 /** One element per id: a later definition replaces an earlier one but keeps its paint order. */
 function mergeById(els: El[]): El[] {
