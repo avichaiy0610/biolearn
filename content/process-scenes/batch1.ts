@@ -232,7 +232,7 @@ const pka = (active: boolean): El[] => [
   ellipse("c2", active ? 368 : 330, active ? 262 : 250, 14, 10, "#93c5fd", { stroke: "#1d4ed8", strokeWidth: 1.5 }),
 ];
 const CAMP: Pt[] = [[230, 196], [252, 206], [270, 188], [246, 180], [280, 212], [262, 226]];
-const gBase = (): El[] => [...bilayer("mem", 0, 400, GY2, { th: 26 }), text("out", 392, 30, "outside", "חוץ התא", { anchor: "end", weight: 700, textColor: C.muted })];
+const gBase = (): El[] => [...bilayer("mem", 0, 400, GY2, { th: 26 }), text("out", 392, 86, "outside", "חוץ התא", { anchor: "end", weight: 700, textColor: C.muted })];
 const g1: El[] = [
   ...gBase(), gpcr(110, false), ligand(110, 52), ...gProtein(96, 150, 128, false), ac(false), ...pka(false),
   arrow("lig_in", 110, 64, 110, 82, "#9f1239", 2),

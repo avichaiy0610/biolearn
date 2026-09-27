@@ -22,11 +22,13 @@ import { lncEnhancer, lncDevelopment, gencode, lncConservation } from "./lncrna"
 // authored directly from the textbook gap analysis (published with `publish-scene`)
 import { actionPotential } from "./action-potential";
 import { enzymeKinetics, membraneTransport, gpcrSignaling, apoptosis, viralLifeCycle } from "./batch1";
+import { synapse, muscle, hemoglobin, lacOperon, vesicular, nephron, dnaRepair } from "./batch2";
 
 export const PROCESS_SCENES: ProcessScene[] = [translation, transcription, glycolysis, respiration, meiosis, pcr, ups, mendelian, nonMendelian,
   mitoInheritance, bacteria, recognition, riboswitch, cardio,
   imprinting, innate, adaptive, lncEnhancer, lncDevelopment, gencode, lncConservation,
-  actionPotential, enzymeKinetics, membraneTransport, gpcrSignaling, apoptosis, viralLifeCycle];
+  actionPotential, enzymeKinetics, membraneTransport, gpcrSignaling, apoptosis, viralLifeCycle,
+  synapse, muscle, hemoglobin, lacOperon, vesicular, nephron, dnaRepair];
 
 /** One element per id: a later definition replaces an earlier one but keeps its paint order. */
 function mergeById(els: El[]): El[] {
