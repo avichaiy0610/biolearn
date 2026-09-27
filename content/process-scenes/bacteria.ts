@@ -93,6 +93,7 @@ const b4: El[] = [
 
 export const bacteria: ProcessScene = {
   slug: "bacteria-structure-animation-1780781194821",
+  source: "Campbell 12e ch. 27",
   legend: [
     { color: "#15803d", he: "דופן התא (פפטידוגליקן)", en: "Cell wall (peptidoglycan)", swatch: "line" },
     { color: C.membrane, he: "ממברנה", en: "Membrane", swatch: "dot" },

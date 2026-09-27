@@ -10,12 +10,14 @@ export default function AiContentNote({
   processSlug,
   updatedAt,
   reviewed,
+  source,
 }: {
   lang: string;
   topicSlug: string;
   processSlug?: string;
   updatedAt: Date | string | null;
   reviewed: boolean;
+  source?: string | null; // textbook chapters this page was checked against
 }) {
   const he = lang !== "en";
   const [open, setOpen] = useState(false);
@@ -55,7 +57,9 @@ export default function AiContentNote({
         <span>
           ·{" "}
           {reviewed
-            ? he ? "✓ נבדק מול ספר לימוד (Campbell, Alberts)" : "✓ Checked against a textbook (Campbell, Alberts)"
+            ? source
+              ? <>{he ? "✓ נבדק מול: " : "✓ Checked against: "}<bdi dir="ltr">{source}</bdi></>
+              : he ? "✓ מבוסס על ספרי הלימוד" : "✓ Based on standard textbooks"
             : he ? "חלק מהתוכן טרם נבדק מול ספר לימוד" : "Parts of this content have not yet been textbook-checked"}
         </span>
         <button

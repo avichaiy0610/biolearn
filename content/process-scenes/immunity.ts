@@ -125,6 +125,12 @@ const i5: El[] = [
 
 export const innate: ProcessScene = {
   slug: "innate-immunity",
+  meta: {
+    topic: "immunology", subtopic: "innate-immunity",
+    nameHe: "חיסוניות מולדת", nameEn: "Innate Immunity",
+    descHe: "אנימציה: חיסוניות מולדת", descEn: "Animation: Innate Immunity",
+    source: "Campbell 12e ch. 43; Janeway ch. 3",
+  },
   legend: [
     { color: "#15803d", he: "חיידק", en: "Bacterium", swatch: "dot" },
     { color: "#b45309", he: "מקרופאג", en: "Macrophage", swatch: "ring" },
@@ -147,7 +153,7 @@ export const innate: ProcessScene = {
     },
     {
       titleHe: "דלקת וגיוס נויטרופילים", titleEn: "Inflammation and Neutrophil Recruitment",
-      descHe: "המקרופאג המופעל מפריש ציטוקינים וכימוקינים. כלי הדם הסמוכים מתרחבים ונעשים חדירים יותר (אודם, חום, נפיחות), ונויטרופילים — התאים הראשונים המגיעים בכמות — נצמדים לדופן הנים, יוצאים ממנו לרקמה ונעים לעבר מקור הכימוקינים (כימוטקסיס).",
+      descHe: "המקרופאג המופעל מפריש ציטוקינים וכימוקינים. כלי הדם הסמוכים מתרחבים ונעשים חדירים יותר (אודם, חום, נפיחות), ונויטרופילים — התאים הראשונים המגיעים בכמות — נצמדים לדופן הנימים, יוצאים מהם לרקמה ונעים לעבר מקור הכימוקינים (כימוטקסיס).",
       descEn: "The activated macrophage secretes cytokines and chemokines. Nearby vessels dilate and become leaky (redness, heat, swelling), and neutrophils — the first cells to arrive in numbers — stick to the capillary wall, squeeze out into the tissue and move towards the chemokines (chemotaxis).",
       elements: i3,
     },
@@ -238,6 +244,7 @@ const a5: El[] = [
 
 export const adaptive: ProcessScene = {
   slug: "adaptive-immunity",
+  source: "Campbell 12e ch. 43; Janeway ch. 6, 10",
   legend: [
     { color: "#7e22ce", he: "תא מציג אנטיגן / MHC II", en: "Antigen-presenting cell / MHC II", swatch: "ring" },
     { color: "#0369a1", he: "תא T עוזר", en: "Helper T cell", swatch: "ring" },

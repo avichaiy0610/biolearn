@@ -16,6 +16,8 @@ export type StepDef = {
 
 export type ProcessScene = {
   slug: string;
+  /** Textbook chapters checked against (scenes with `meta` keep it in meta.source). */
+  source?: string;
   legend: LegendItem[];
   steps: StepDef[];
   /** For animations authored directly (not from an admin draft): where and how to publish them. */

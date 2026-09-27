@@ -95,6 +95,7 @@ const e5: El[] = [
 
 export const lncEnhancer: ProcessScene = {
   slug: "lncrna-enhancer-function",
+  source: "Ørom et al., Cell 2010; Lai et al., Nature 2013",
   legend: [
     { color: LNC, he: "גן ה-lncRNA ותעתיקו", en: "lncRNA gene and transcript", swatch: "line" },
     { color: GENE, he: "גן שכן המקודד חלבון", en: "Neighbouring protein-coding gene", swatch: "line" },
@@ -310,6 +311,7 @@ const g4: El[] = [
 
 export const gencode: ProcessScene = {
   slug: "gencode-lncrna-discovery",
+  source: "Ørom et al., Cell 2010",
   legend: [
     { color: GENE, he: "גן מקודד חלבון", en: "Protein-coding gene", swatch: "line" },
     { color: LNC, he: "תעתיק לא-מקודד מועמד", en: "Candidate noncoding transcript", swatch: "line" },
@@ -395,6 +397,7 @@ const c4: El[] = [
 
 export const lncConservation: ProcessScene = {
   slug: "lncrna-conservation-genomic-context",
+  source: "Ørom et al., Cell 2010",
   legend: [
     { color: "#16a34a", he: "שימור ברצף (phastCons)", en: "Sequence conservation (phastCons)", swatch: "dot" },
     { color: GENE, he: "גן מקודד חלבון", en: "Protein-coding gene", swatch: "line" },

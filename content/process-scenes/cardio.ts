@@ -68,6 +68,7 @@ const h4: El[] = [
 
 export const cardio: ProcessScene = {
   slug: "cardiovascular-animation-1780821487918",
+  source: "Campbell 12e ch. 42",
   legend: [
     { color: D, he: "דם דל חמצן", en: "Deoxygenated blood", swatch: "line" },
     { color: O, he: "דם מחומצן", en: "Oxygenated blood", swatch: "line" },

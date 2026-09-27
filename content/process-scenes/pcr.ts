@@ -65,6 +65,7 @@ const step3: El[] = [
 
 export const pcr: ProcessScene = {
   slug: "pcr",
+  source: "Campbell 12e ch. 20; Alberts 7e ch. 8",
   legend: [
     { color: C.dnaB, he: "גדיל עליון (5'→3')", en: "Top strand (5'→3')", swatch: "line" },
     { color: C.dnaA, he: "גדיל תחתון (3'→5')", en: "Bottom strand (3'→5')", swatch: "line" },

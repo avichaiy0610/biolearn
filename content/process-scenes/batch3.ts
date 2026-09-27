@@ -15,7 +15,13 @@ const mitoWall = (x: number): El[] => [
 ];
 
 /* ══ β-OXIDATION (Lehninger 8e ch. 17) ═════════════════════════════ */
+// matrix context: inner membrane (with ETF/Q path) framing the matrix
+const matrixBg = (): El[] => [
+  rect("mx", 6, 28, 388, 266, "#fff7ed", { rx: 26, stroke: "#ea580c", strokeWidth: 2.5, dash: "7 4" }),
+  text("mx_t", 18, 50, "matrix", "מטריצה", { anchor: "start", weight: 700, textColor: "#9a3412", fontSize: 16.5 }),
+];
 const b1: El[] = [
+  ...matrixBg().map((e) => ({ ...e, opacity: 0 })), // paints under the chain in later steps
   ...mitoWall(200),
   chain("fa", 150, 80, 8), ...coa("coa1", 176, 80),
   path("cpt", smooth([[196, 150], [204, 136], [218, 140], [222, 160], [206, 166]], true), { color: "#fde68a", stroke: "#b45309", strokeWidth: 1.6 }),
@@ -27,15 +33,39 @@ const b1: El[] = [
   text("cyt", 100, 290, "cytosol", "ציטוזול", { weight: 700, textColor: C.muted }),
   text("mat", 300, 290, "matrix", "מטריצה", { weight: 700, textColor: "#9a3412" }),
 ];
+// one station of the β-oxidation round: C4 of the acyl chain (Cβ highlighted) + CoA, with the change at Cβ
+const station = (p: string, x: number, y: number, mod: "none" | "double" | "oh" | "keto" | "split"): El[] => {
+  const pts: Pt[] = [[x - 48, y + 6], [x - 34, y - 6], [x - 20, y + 6], [x - 6, y - 6]]; // ω … Cβ(x-20) Cα(x-6)
+  const els: El[] = [
+    path(`${p}_ch`, poly(mod === "split" ? pts.slice(0, 2) : pts, false), { stroke: "#78350f", strokeWidth: 3.2 }),
+    circle(`${p}_cb`, x - 20, y + 6, 4.5, "#f97316", { stroke: "#fff", strokeWidth: 1 }),
+    ...coa(`${p}_coa`, x + 20, y - 4),
+  ];
+  if (mod === "double") els.push(line(`${p}_db`, x - 19, y + 1, x - 8, y - 9, "#78350f", 2.2));
+  if (mod === "oh") els.push(text(`${p}_oh`, x - 20, y + 30, "OH", "OH", { ltr: true, weight: 800, fontSize: 16.5, textColor: "#0369a1" }));
+  if (mod === "keto") els.push(line(`${p}_o1`, x - 22, y + 10, x - 22, y + 20, "#b91c1c", 2), line(`${p}_o2`, x - 18, y + 10, x - 18, y + 20, "#b91c1c", 2), text(`${p}_o`, x - 20, y + 36, "O", "O", { ltr: true, weight: 800, fontSize: 16.5, textColor: "#b91c1c" }));
+  if (mod === "split") els.push(path(`${p}_ac`, `M ${x - 20} ${y + 6} L ${x - 6} ${y - 6}`, { stroke: "#78350f", strokeWidth: 3.2 }), line(`${p}_cut`, x - 28, y - 10, x - 24, y + 14, "#dc2626", 2.4));
+  return els;
+};
+const ST: [number, number][] = [[112, 96], [300, 96], [300, 206], [112, 206]];
 const b2: El[] = [
-  chain("fa2", 200, 110, 8), ...coa("coa2", 226, 110),
-  ...[["ox1", "FAD → FADH₂", 60, NADH], ["hyd", "+ H₂O", 150, "#0ea5e9"], ["ox2", "NAD⁺ → NADH", 240, NADH], ["thi", "+ CoA", 330, "#be123c"]].flatMap(([id, t, x, c]) => badge(String(id), Number(x), 200, String(t), String(c), { w: String(t).length * 9 + 12 })),
-  ...[0, 1, 2].map((i) => arrow(`r${i}`, 60 + i * 90 + 36, 200, 60 + (i + 1) * 90 - 40, 200, C.line, 1.8)),
-  line("cut", 108, 96, 124, 124, "#dc2626", 2.5),
-  label("l_round", 14, 40, "One round: 4 reactions", "סבב אחד: 4 תגובות", [120, 110], { anchor: "start" }),
-  text("l_out", 200, 270, "→ acetyl-CoA + chain shorter by 2 C", "← אצטיל-CoA ושרשרת קצרה ב-2 פחמנים", { weight: 700, short: "acetyl-CoA + (n−2)", shortHe: "אצטיל-CoA + (n−2)" }),
+  ...matrixBg(),
+  ...station("s1", ...ST[0], "double"), ...station("s2", ...ST[1], "oh"), ...station("s3", ...ST[2], "keto"), ...station("s4", ...ST[3], "split"),
+  arrow("r12", 170, 90, 236, 90, C.line, 2.2), arrow("r23", 300, 132, 300, 172, C.line, 2.2),
+  arrow("r34", 236, 212, 170, 212, C.line, 2.2), arrow("r41", 80, 180, 80, 132, C.line, 2.2),
+  text("n1", 112, 72, "1 oxidation", "1 · חמצון", { weight: 800, fontSize: 16.5 }),
+  text("n2", 300, 72, "2 hydration", "2 · הוספת מים", { weight: 800, fontSize: 16.5 }),
+  text("n3", 300, 256, "3 oxidation", "3 · חמצון", { weight: 800, fontSize: 16.5 }),
+  text("n4", 112, 256, "4 thiolysis", "4 · תיאוליזה", { weight: 800, fontSize: 16.5 }),
+  ...badge("ox1", 200, 116, "FADH₂", NADH), ...badge("hyd", 356, 152, "H₂O", "#0ea5e9"),
+  ...badge("ox2", 200, 236, "NADH", NADH), ...badge("thi", 40, 152, "CoA", "#be123c"),
+  circle("etf", 200, 40, 9, "#ccfbf1", { stroke: "#0f766e", strokeWidth: 1.5 }),
+  arrow("to_etf", 200, 102, 200, 54, NADH, 2),
+  text("etf_t", 216, 46, "ETF → Q", "ETF → Q", { anchor: "start", ltr: true, fontSize: 16.5, weight: 700, textColor: "#0f766e" }),
+  text("l_out", 112, 284, "acetyl-CoA + acyl-CoA (n−2)", "אצטיל-CoA + שרשרת קצרה ב-2", { weight: 700, textColor: "#be123c", short: "acetyl-CoA", shortHe: "אצטיל-CoA" }),
 ];
 const b3: El[] = [
+  ...matrixBg(),
   chain("fa2", 130, 70, 4), ...coa("coa2", 156, 70),
   ...[0, 1, 2, 3, 4, 5, 6, 7].map((i) => { const x = 50 + (i % 4) * 90, y = 140 + Math.floor(i / 4) * 56; return path(`ac${i}`, `M ${x - 10} ${y + 5} L ${x} ${y - 5}`, { stroke: "#78350f", strokeWidth: 3.5 }); }),
   ...[0, 1, 2, 3, 4, 5, 6, 7].flatMap((i) => { const x = 50 + (i % 4) * 90, y = 140 + Math.floor(i / 4) * 56; return coa(`ca${i}`, x + 26, y); }),
@@ -43,15 +73,18 @@ const b3: El[] = [
   ...badge("n_ac", 100, 272, "8 acetyl-CoA", "#be123c", { w: 116 }), ...badge("n_fad", 220, 272, "7 FADH₂", NADH, { w: 84 }), ...badge("n_nad", 320, 272, "7 NADH", NADH, { w: 80 }),
 ];
 const b4: El[] = [
+  ...matrixBg(),
+  ...bilayer("imb", 12, 388, 262, { th: 14 }),
   ...coa("ca0", 70, 90),
   arrow("tca", 96, 90, 160, 90, C.line, 2.2),
   path("cyc", "M 200 60 A 36 36 0 1 1 199.9 60", { stroke: "#be123c", strokeWidth: 3 }),
   text("cyc_t", 200, 102, "TCA", "TCA", { ltr: true, weight: 800, textColor: "#be123c" }),
   ...badge("fad", 90, 190, "FADH₂", NADH), ...badge("nad", 170, 190, "NADH", NADH),
   arrow("etc", 210, 190, 270, 190, NADH, 2.2),
+  arrow("etc_down", 170, 206, 170, 250, NADH, 2),
   ...badge("atpy", 326, 190, "≈106 ATP", ATPC, { w: 96 }),
   label("l_tca", 250, 60, "Acetyl-CoA → citric acid cycle", "אצטיל-CoA נכנס למעגל קרבס", [236, 96], { anchor: "start", shortHe: "מעגל קרבס", short: "TCA cycle" }),
-  label("l_etc", 14, 270, "Electrons → respiratory chain", "האלקטרונים לשרשרת הנשימה", [240, 190], { anchor: "start", shortHe: "שרשרת הנשימה", short: "Resp. chain" }),
+  label("l_etc", 196, 240, "Electrons → respiratory chain", "האלקטרונים לשרשרת הנשימה", [170, 258], { anchor: "start", shortHe: "שרשרת הנשימה", short: "Resp. chain" }),
 ];
 export const betaOxidation: ProcessScene = {
   slug: "fatty-acid-beta-oxidation",
@@ -67,7 +100,8 @@ export const betaOxidation: ProcessScene = {
     { color: "#be123c", he: "קואנזים A / מעגל קרבס", en: "Coenzyme A / citric acid cycle", swatch: "ring" },
     { color: NADH, he: "FADH₂ / NADH", en: "FADH₂ / NADH", swatch: "ring" },
     { color: ATPC, he: "ATP", en: "ATP", swatch: "ring" },
-    { color: "#c2410c", he: "ממברנות המיטוכונדריה", en: "Mitochondrial membranes", swatch: "line" },
+    { color: "#c2410c", he: "ממברנות המיטוכונדריה / מטריצה", en: "Mitochondrial membranes / matrix", swatch: "dash" },
+    { color: "#f97316", he: "פחמן β", en: "β carbon", swatch: "dot" },
   ],
   steps: [
     {
@@ -207,12 +241,13 @@ const u2: El[] = [
 ];
 const u3: El[] = [
   ...ucBase(),
-  text("asp", 360, 150, "Aspartate", "אספרטט", { anchor: "end", weight: 700, textColor: "#7c3aed" }),
-  arrow("asp_in", 330, 158, 296, 190, "#7c3aed", 2),
+  text("asp", 392, 128, "Aspartate", "אספרטט", { anchor: "end", weight: 700, textColor: "#7c3aed" }),
+  text("asp2", 392, 150, "brings", "מביא את", { anchor: "end", fontSize: 16.5, textColor: "#7c3aed" }),
+  text("asp3", 392, 170, "the 2nd N", "החנקן השני", { anchor: "end", fontSize: 16.5, textColor: "#7c3aed" }),
+  arrow("asp_in", 336, 182, 302, 204, "#7c3aed", 2),
   text("fum", 360, 280, "Fumarate", "פומרט", { anchor: "end", weight: 700, textColor: "#be123c" }),
   arrow("fum_out", 300, 236, 330, 262, "#be123c", 2),
   ...badge("atp", 220, 160, "ATP → AMP", ATPC, { w: 104 }),
-  label("l_asp", 180, 36, "Aspartate brings the 2nd N", "אספרטט מביא את החנקן השני", [330, 150], { anchor: "start", shortHe: "החנקן השני", short: "2nd nitrogen" }),
 ];
 const u4: El[] = [
   ...ucBase(),
@@ -276,7 +311,7 @@ const PY = 150;
 const thyl = (): El[] => [
   ...bilayer("tm", 0, 400, PY, { th: 26, head: "#15803d", tail: "#bbf7d0" }),
   text("str", 390, 40, "stroma", "סטרומה", { anchor: "end", weight: 700, textColor: "#166534" }),
-  text("lum", 390, 280, "lumen (H⁺ high)", "חלל התילקואיד (H⁺ גבוה)", { anchor: "end", weight: 700, textColor: "#b91c1c", short: "lumen", shortHe: "חלל" }),
+  text("lum", 384, 286, "lumen (H⁺ high)", "חלל התילקואיד (H⁺ גבוה)", { anchor: "end", weight: 700, textColor: "#b91c1c" }),
 ];
 const cx2 = (id: string, x: number, w: number, color: string, labelTxt: string): El[] => [
   rect(id, x - w / 2, PY - 26, w, 52, color, { rx: 10, stroke: "#334155", strokeWidth: 1.5 }),
@@ -293,9 +328,9 @@ const ph2: El[] = [
   ...cx2("psii", 70, 60, "#bbf7d0", "PSII"), ...cx2("b6f", 170, 44, "#fde68a", "b₆f"), ...cx2("psi", 260, 60, "#a7f3d0", "PSI"),
   ...[0, 1, 2].map((i) => line(`light${i}`, 40 + i * 14, 40, 56 + i * 14, 86, "#facc15", 3)),
   path("e_path", `M 70 ${PY + 20} C 110 ${PY + 50} 140 ${PY + 40} 170 ${PY + 10} C 200 ${PY - 30} 230 ${PY + 40} 260 ${PY + 10} C 290 ${PY - 30} 320 ${PY - 50} 340 ${PY - 70}`, { stroke: "#0f766e", strokeWidth: 2.2, dash: "5 4", arrow: true }),
-  text("h2o", 70, 240, "2 H₂O → O₂ + 4 H⁺", "2 H₂O → O₂ + 4 H⁺", { ltr: true, weight: 700, textColor: "#0369a1", fontSize: 16.5 }),
+  text("h2o", 116, 222, "2 H₂O → O₂ + 4 H⁺", "2 H₂O → O₂ + 4 H⁺", { ltr: true, weight: 700, textColor: "#0369a1", fontSize: 16.5 }),
   text("nadph", 350, 64, "NADPH", "NADPH", { ltr: true, weight: 800, textColor: NADH }),
-  label("l_ps", 90, 40, "Light excites PSII and PSI", "האור מעורר את PSII ו-PSI", [70, PY - 26], { anchor: "start", shortHe: "עירור באור", short: "Light" }),
+  label("l_ps", 90, 40, "Light excites PSII and PSI", "האור מעורר את \u2066PSII\u2069 ו-\u2066PSI\u2069", [70, PY - 26], { anchor: "start", shortHe: "עירור באור", short: "Light" }),
 ];
 const ph3: El[] = [
   ...thyl(),

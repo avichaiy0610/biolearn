@@ -118,6 +118,7 @@ const step7: El[] = [
 
 export const ups: ProcessScene = {
   slug: SLUG,
+  source: "Alberts 7e ch. 6",
   legend: [
     { color: C.protein, he: "חלבון המטרה", en: "Target protein", swatch: "line" },
     { color: "#a16207", he: "אוביקוויטין (Ub)", en: "Ubiquitin (Ub)", swatch: "ring" },

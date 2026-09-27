@@ -107,6 +107,7 @@ const step4: El[] = [
 
 export const respiration: ProcessScene = {
   slug: "cellular-respiration",
+  source: "Campbell 12e ch. 9; Lehninger 8e ch. 16, 19",
   legend: [
     { color: "#c2410c", he: "ממברנות המיטוכונדריה", en: "Mitochondrial membranes", swatch: "ring" },
     { color: C.energy, he: "ATP", en: "ATP", swatch: "ring" },

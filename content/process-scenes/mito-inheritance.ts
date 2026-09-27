@@ -90,6 +90,7 @@ const s5: El[] = [
 
 export const mitoInheritance: ProcessScene = {
   slug: "mitochondrial-inheritance-animation-1780786394329",
+  source: "Campbell 12e ch. 15; Alberts 7e ch. 14",
   legend: [
     { color: MTS, he: "מיטוכונדריה", en: "Mitochondrion", swatch: "ring" },
     { color: "#1d4ed8", he: "mtDNA מעגלי", en: "Circular mtDNA", swatch: "ring" },

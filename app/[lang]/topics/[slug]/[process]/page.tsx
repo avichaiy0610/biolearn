@@ -12,6 +12,7 @@ import { hasProcessVideo, videoUrlFor } from "@/lib/video-storage";
 import LottieProcessPlayer from "@/components/lottie/LottieProcessPlayer";
 import { LOTTIE_SCENES } from "@/components/lottie/scenes";
 import AiContentNote from "@/components/AiContentNote";
+import { processSource } from "@/content/process-scenes";
 import type { Metadata } from "next";
 
 export async function generateMetadata({ params }: PageProps<"/[lang]/topics/[slug]/[process]">): Promise<Metadata> {
@@ -133,6 +134,7 @@ export default async function ProcessPage({
         processSlug={processSlug}
         updatedAt={proc.updatedAt}
         reviewed={!!proc.reviewedAt}
+        source={processSource(processSlug)}
       />
     </div>
   );

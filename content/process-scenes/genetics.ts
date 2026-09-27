@@ -89,6 +89,7 @@ const m5: El[] = [
 
 export const mendelian: ProcessScene = {
   slug: "mendelian-genetics-animation-1780786392025",
+  source: "Campbell 12e ch. 14",
   legend: [
     { color: C.maternal, he: "כרומוזום מהאם", en: "Maternal chromosome", swatch: "line" },
     { color: C.paternal, he: "כרומוזום מהאב", en: "Paternal chromosome", swatch: "line" },
@@ -198,6 +199,7 @@ const n4: El[] = [
 
 export const nonMendelian: ProcessScene = {
   slug: "non-mendelian-inheritance-animation-1780786393174",
+  source: "Campbell 12e ch. 14",
   legend: [
     { color: "#be185d", he: "צבע פרח / פנוטיפ", en: "Flower colour / phenotype", swatch: "dot" },
     { color: "#16a34a", he: "אנטיגן A", en: "A antigen", swatch: "dot" },

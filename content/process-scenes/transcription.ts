@@ -158,6 +158,7 @@ const step5: El[] = [
 
 export const transcription: ProcessScene = {
   slug: "transcription",
+  source: "Campbell 12e ch. 17; Alberts 7e ch. 6",
   legend: [
     { color: C.dnaB, he: "גדיל מקודד (5'→3')", en: "Coding strand (5'→3')", swatch: "line" },
     { color: C.dnaA, he: "גדיל תבנית (3'→5')", en: "Template strand (3'→5')", swatch: "line" },

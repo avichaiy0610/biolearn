@@ -48,6 +48,7 @@ const r3: El[] = [
 
 export const recognition: ProcessScene = {
   slug: "molecular-recognition-animation",
+  source: "Alberts 7e ch. 3, 7",
   legend: [
     { color: C.rna, he: "RNA (שלד ובסיסים)", en: "RNA (backbone and bases)", swatch: "line" },
     { color: "#b45309", he: "ליגנד", en: "Ligand", swatch: "ring" },
@@ -152,6 +153,7 @@ const w6: El[] = [
 
 export const riboswitch: ProcessScene = {
   slug: "riboswitches-animation-1780833787341",
+  source: "Alberts 7e ch. 7",
   legend: [
     { color: "#0d9488", he: "תחום אפטמר", en: "Aptamer domain", swatch: "line" },
     { color: "#2563eb", he: "אנטי-טרמינטור", en: "Anti-terminator", swatch: "line" },

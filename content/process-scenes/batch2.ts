@@ -126,19 +126,29 @@ const myosinHead = (x: number, state: "cocked" | "bound" | "stroke" | "detached"
   const tip: Pt = state === "cocked" ? [x + 14, AY + 32] : state === "bound" ? [x + 14, AY + 14] : state === "stroke" ? [x - 26, AY + 16] : [x - 16, AY + 40];
   return [
     path("mneck", `M ${neck[0]} ${neck[1]} Q ${neck[0] - 4} ${(neck[1] + tip[1]) / 2 + 10} ${tip[0]} ${tip[1] + 10}`, { stroke: "#1d4ed8", strokeWidth: 5 }),
+    ellipse("mhead2", tip[0] - 8, tip[1] + 12, 11, 8, "#bfdbfe", { stroke: "#1d4ed8", strokeWidth: 1.5 }),
     ellipse("mhead", tip[0], tip[1] + 4, 13, 9, "#93c5fd", { stroke: "#1d4ed8", strokeWidth: 1.8 }),
     text("m_atp", tip[0] + 32, tip[1] + 10, withATP ? "ATP" : withADP ? "ADP+Pᵢ" : "", withATP ? "ATP" : withADP ? "ADP+Pᵢ" : "", { ltr: true, fontSize: 16.5, weight: 700, textColor: "#b45309", opacity: withATP || withADP ? 1 : 0 }),
   ];
 };
+// thick filament: myosin tails packed into a bundle, two-headed myosin molecules projecting
+// along its length (heads point away from the M line, toward the Z line)
+const MYO_X = [90, 130, 170, 240, 280, 320];
 const thick = (): El[] => [
-  rect("myo", 60, MYO - 16, 320, 32, "#dbeafe", { rx: 14, stroke: "#1d4ed8", strokeWidth: 2 }),
+  path("myo", [MYO - 10, MYO - 4, MYO + 2, MYO + 8].map((y) => `M 60 ${y} L 380 ${y}`).join(" "), { stroke: "#1d4ed8", strokeWidth: 3 }),
+  ...MYO_X.flatMap((x, i) => [
+    path(`mn${i}`, `M ${x} ${MYO - 10} Q ${x - 2} ${MYO - 26} ${x - 12} ${MYO - 34}`, { stroke: "#1d4ed8", strokeWidth: 3 }),
+    ellipse(`mh${i}a`, x - 16, MYO - 38, 9, 6, "#93c5fd", { stroke: "#1d4ed8", strokeWidth: 1.3 }),
+    ellipse(`mh${i}b`, x - 6, MYO - 42, 9, 6, "#bfdbfe", { stroke: "#1d4ed8", strokeWidth: 1.3 }),
+    path(`mnb${i}`, `M ${x} ${MYO + 8} Q ${x - 2} ${MYO + 22} ${x - 12} ${MYO + 30}`, { stroke: "#1d4ed8", strokeWidth: 3, opacity: 0.55 }),
+  ]),
   line("mline", 380, MYO - 30, 380, MYO + 30, "#475569", 5),
 ];
 const mc1: El[] = [
   ...actin(0), tropo(0, true), ...thick(), ...myosinHead(200, "cocked", false, true),
   label("l_act", 14, 40, "Thin filament: actin", "חוט דק: אקטין", [118, AY - 8], { anchor: "start" }),
   label("l_tro", 230, 40, "Tropomyosin blocks sites", "טרופומיוזין חוסם", [260, AY], { anchor: "start" }),
-  label("l_myo", 14, 270, "Thick filament: myosin", "חוט עבה: מיוזין", [120, MYO + 10], { anchor: "start" }),
+  label("l_myo", 14, 270, "Thick filament: two-headed myosins", "חוט עבה: מולקולות מיוזין דו-ראשיות", [130, MYO + 4], { anchor: "start", shortHe: "חוט עבה: מיוזין", short: "Thick filament" }),
 ];
 const mc2: El[] = [
   ...actin(0), tropo(0, false), ...thick(), ...myosinHead(200, "cocked", false, true),
@@ -375,12 +385,27 @@ export const lacOperon: ProcessScene = {
 };
 
 /* ══ VESICULAR TRANSPORT: the secretory pathway (Alberts 7e ch. 12–13) ══ */
-const nucleusV = (): El[] => [circle("vnuc", 60, 170, 50, "#e0e7ff", { stroke: "#4338ca", strokeWidth: 2 })];
+// nucleus: double envelope with pores and a nucleolus, named in every step
+const nucleusV = (): El[] => [
+  circle("vnuc", 58, 170, 48, "#e0e7ff", { stroke: "#4338ca", strokeWidth: 2 }),
+  circle("vnuc_in", 58, 170, 43, "none", { stroke: "#6366f1", strokeWidth: 1.2 }),
+  ...[30, 90, 150, 210, 270, 330].map((a, i) => circle(`vpore${i}`, 58 + 45.5 * Math.cos((a * Math.PI) / 180), 170 + 45.5 * Math.sin((a * Math.PI) / 180), 2.6, "#ffffff", { stroke: "#3730a3", strokeWidth: 1 })),
+  circle("vnucleolus", 46, 160, 12, "#a5b4fc", { stroke: "#4338ca", strokeWidth: 1 }),
+  text("l_nuc", 58, 200, "nucleus", "גרעין", { textColor: "#3730a3", weight: 700, fontSize: 16.5 }),
+];
 const rer = (): El[] => [
   path("rer", "M 112 120 C 150 106 150 150 118 150 C 150 150 154 190 116 196 C 150 196 150 236 114 230", { stroke: "#a16207", strokeWidth: 4 }),
   ...[[132, 116], [142, 132], [140, 164], [146, 182], [136, 214]].map(([x, y], i) => circle(`rb${i}`, x, y, 3, "#1d4ed8")),
 ];
-const golgiV = (): El[] => [0, 1, 2, 3].map((i) => path(`gc${i}`, `M ${226 + i * 14} ${120 + i * 2} Q ${236 + i * 14} 170 ${226 + i * 14} ${220 - i * 2}`, { stroke: "#059669", strokeWidth: 5 }));
+// Golgi stack: curved, flattened cisternae (convex cis face toward the ER), dilated rims
+const golgiV = (): El[] => [0, 1, 2, 3, 4].flatMap((i) => {
+  const x = 222 + i * 13, top = 118 + i * 5, bot = 222 - i * 5, bow = 26 - i * 3;
+  return [
+    path(`gc${i}`, `M ${x} ${top} Q ${x - bow} 170 ${x} ${bot} L ${x + 7} ${bot} Q ${x + 7 - bow} 170 ${x + 7} ${top} Z`, { color: "#bbf7d0", stroke: "#059669", strokeWidth: 1.6 }),
+    circle(`gcr${i}a`, x + 3.5, top - 2, 4.5, "#bbf7d0", { stroke: "#059669", strokeWidth: 1.2 }),
+    circle(`gcr${i}b`, x + 3.5, bot + 2, 4.5, "#bbf7d0", { stroke: "#059669", strokeWidth: 1.2 }),
+  ];
+});
 const pmV = (): El[] => bilayer("pmv", 370, 390, 160, { th: 10 }).map((e) => e);
 const cargo = (id: string, x: number, y: number, color = "#dc2626") => circle(id, x, y, 3.2, color);
 const vesicle = (id: string, x: number, y: number, coat: string, cargoColor = "#dc2626"): El[] => [
@@ -393,7 +418,6 @@ const vt1: El[] = [
   ...[[124, 128], [130, 176], [124, 214]].map(([x, y], i) => cargo(`cg${i}`, x, y)),
   label("l_rer", 14, 40, "Rough ER: proteins made into the lumen", "RER: חלבונים מיוצרים לתוך החלל", [140, 132], { anchor: "start", shortHe: "RER", short: "Rough ER" }),
   label("l_sig", 14, 280, "Signal peptide + SRP", "פפטיד אות ו-SRP", [142, 182], { anchor: "start" }),
-  text("l_nuc", 60, 176, "nucleus", "גרעין", { textColor: "#3730a3", weight: 700 }),
 ];
 const vt2: El[] = [
   ...nucleusV(), ...rer(), ...golgiV(), ...pm(),
@@ -407,7 +431,7 @@ const vt3: El[] = [
   ...[[240, 150], [254, 176], [268, 196]].map(([x, y], i) => cargo(`gcg${i}`, x, y, "#7c3aed")),
   ...[[244, 144], [258, 170], [272, 190]].map(([x, y], i) => path(`sug${i}`, `M ${x} ${y} l 4 -6 l 4 6`, { stroke: "#16a34a", strokeWidth: 2 })),
   label("l_mod", 14, 40, "Glycosylation and sorting", "גליקוזילציה ומיון", [258, 170], { anchor: "start" }),
-  label("l_trans", 250, 280, "trans face ships out", "הצד ה-trans שולח", [272, 206], { anchor: "start" }),
+  label("l_trans", 150, 286, "trans face ships out", "הצד ה-trans שולח", [280, 214], { anchor: "start" }),
 ];
 const vt4: El[] = [
   ...nucleusV(), ...rer(), ...golgiV(), ...pm(),
@@ -569,8 +593,14 @@ const r2: El[] = [
 const r3: El[] = [
   ...duplex("dr", 150, 290), ...mism(200, false),
   rect("mm_t2", 196, DY - 8, 8, 8, "#475569"),
+  path("muts", smooth([[184, DY - 10], [188, DY - 32], [212, DY - 32], [216, DY - 10], [200, DY - 4]], true), { color: "#c4b5fd", stroke: "#6d28d9", strokeWidth: 1.8, opacity: 0.55 }),
+  path("mutl", smooth([[228, DY - 10], [232, DY - 30], [254, DY - 30], [258, DY - 10], [244, DY - 4]], true), { color: "#fbcfe8", stroke: "#be185d", strokeWidth: 1.8, opacity: 0.55 }),
+  ...[166, 192, 218, 244, 270].map((x, i) => ellipse(`rpa${i}`, x, DY + 12, 11, 6, "#e2e8f0", { stroke: "#475569", strokeWidth: 1.3 })),
   path("exo", smooth([[284, DY + 10], [292, DY + 30], [310, DY + 32], [314, DY + 12]], true), { color: "#fde68a", stroke: "#b45309", strokeWidth: 1.8 }),
-  label("l_exo", 14, 260, "Exonuclease removes a stretch", "אקסונוקלאז מסיר קטע", [220, DY + 7], { anchor: "start", shortHe: "הסרת קטע", short: "Stretch removed" }),
+  ...[[322, DY + 46], [338, DY + 58], [314, DY + 64], [348, DY + 40], [330, DY + 76]].map(([x, y], i) => circle(`dnmp${i}`, x, y, 3.2, "#16a34a")),
+  label("l_exo", 14, 260, "Exonuclease removes a stretch", "אקסונוקלאז מסיר קטע", [300, DY + 22], { anchor: "start", shortHe: "הסרת קטע", short: "Stretch removed" }),
+  label("l_rpa", 14, 60, "RPA protects the single strand", "RPA מגן על הגדיל הבודד", [218, DY + 12], { anchor: "start", shortHe: "RPA", short: "RPA" }),
+  label("l_nt", 230, 286, "Released nucleotides", "נוקלאוטידים משתחררים", [330, DY + 76], { anchor: "start", shortHe: "נוקלאוטידים", short: "Nucleotides" }),
 ];
 const r4: El[] = [
   ...duplex("dr"), ...mism(200, false),
@@ -595,6 +625,7 @@ export const dnaRepair: ProcessScene = {
     { color: "#dc2626", he: "בסיס שגוי", en: "Wrong base", swatch: "dot" },
     { color: "#6d28d9", he: "MutS / MutL", en: "MutS / MutL", swatch: "ring" },
     { color: "#1d4ed8", he: "DNA פולימראז", en: "DNA polymerase", swatch: "ring" },
+    { color: "#475569", he: "RPA (חלבון קושר גדיל בודד)", en: "RPA (single-strand binding)", swatch: "ring" },
   ],
   steps: [
     {

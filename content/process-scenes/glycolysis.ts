@@ -76,6 +76,7 @@ const step3: El[] = [
 
 export const glycolysis: ProcessScene = {
   slug: "glycolysis",
+  source: "Campbell 12e ch. 9; Lehninger 8e ch. 14",
   legend: [
     { color: "#b45309", he: "טבעת סוכר (6 או 5 אטומים)", en: "Sugar ring (6- or 5-membered)", swatch: "ring" },
     { color: PH, he: "קבוצת זרחה (P)", en: "Phosphate group (P)", swatch: "dot" },

@@ -116,6 +116,7 @@ const s5: El[] = [
 
 export const imprinting: ProcessScene = {
   slug: "genomic-imprinting",
+  source: "Campbell 12e ch. 15; Alberts 7e ch. 7",
   legend: [
     { color: M, he: "כרומוזום מהאם", en: "Maternal chromosome", swatch: "line" },
     { color: P, he: "כרומוזום מהאב", en: "Paternal chromosome", swatch: "line" },

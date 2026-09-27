@@ -43,6 +43,18 @@ function mergeById(els: El[]): El[] {
   return out;
 }
 
+// Lottie-player animations are not in PROCESS_SCENES.
+const LOTTIE_SOURCES: Record<string, string> = {
+  mitosis: "Campbell 12e ch. 12; Alberts 7e ch. 17",
+  "dna-replication": "Campbell 12e ch. 16; Alberts 7e ch. 5",
+};
+
+/** Textbook source of a published animation, for the page's review badge. */
+export function processSource(slug: string): string | null {
+  const scene = PROCESS_SCENES.find((s) => s.slug === slug);
+  return scene?.meta?.source ?? scene?.source ?? LOTTIE_SOURCES[slug] ?? null;
+}
+
 export function stepSvgData(scene: ProcessScene, step: StepDef): string {
   return JSON.stringify({ v: 2, elements: mergeById(step.elements), highlight: step.highlight, legend: scene.legend, note: NOTE });
 }

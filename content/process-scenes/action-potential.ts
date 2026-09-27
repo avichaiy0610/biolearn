@@ -25,12 +25,12 @@ function kChannel(x: number, open: boolean): El[] {
   ];
 }
 const pump = (): El[] => [
-  path("pump", `M 322 ${MY - 16} C 322 ${MY - 26} 358 ${MY - 26} 358 ${MY - 16} L 358 ${MY + 16} C 358 ${MY + 26} 322 ${MY + 26} 322 ${MY + 16} Z`, { color: "#bbf7d0", stroke: "#15803d", strokeWidth: 1.5 }),
-  text("pump_t", 340, MY + 6, "ATP", "ATP", { ltr: true, fontSize: 16.5, weight: 700, halo: false, textColor: "#15803d" }),
+  path("pump", `M 282 ${MY - 16} C 282 ${MY - 26} 318 ${MY - 26} 318 ${MY - 16} L 318 ${MY + 16} C 318 ${MY + 26} 282 ${MY + 26} 282 ${MY + 16} Z`, { color: "#bbf7d0", stroke: "#15803d", strokeWidth: 1.5 }),
+  text("pump_t", 300, MY + 6, "ATP", "ATP", { ltr: true, fontSize: 16.5, weight: 700, halo: false, textColor: "#15803d" }),
 ];
 const ions = (id: string, pts: Pt[], color: string) => pts.map(([x, y], i) => circle(`${id}${i}`, x, y, 4.5, color, { stroke: "#fff", strokeWidth: 1 }));
-const NA_OUT: Pt[] = [[40, 58], [70, 70], [100, 54], [150, 62], [180, 72], [230, 56], [290, 66], [300, 40]];
-const K_IN: Pt[] = [[40, 142], [80, 150], [150, 146], [190, 138], [236, 150], [300, 142], [330, 160]];
+const NA_OUT: Pt[] = [[40, 58], [70, 70], [100, 54], [150, 62], [180, 72], [230, 56], [266, 60], [360, 44]];
+const K_IN: Pt[] = [[40, 142], [80, 150], [150, 146], [190, 138], [236, 150], [270, 150], [350, 162]];
 
 // membrane-potential trace (bottom panel): x = time, y = mV; −70 → y 270, +30 → y 205
 const V = (mv: number) => 270 - ((mv + 70) / 100) * 65;
@@ -55,11 +55,11 @@ const s1: El[] = [
   ...ions("na", NA_OUT, NA), ...ions("k", K_IN, K),
   ...graph([90, V(-70)]),
   label("l_na", 14, 30, "Voltage-gated Na⁺ (closed)", "תעלת Na⁺ תלוית מתח — סגורה", [120, 88], { anchor: "start", shortHe: "Na⁺ סגורה", short: "Na⁺ closed" }),
-  label("l_pump", 250, 196, "Na⁺/K⁺ pump keeps gradients", "משאבת Na⁺/K⁺ שומרת על המפל", [340, 116], { anchor: "start", shortHe: "משאבת Na⁺/K⁺", short: "Na⁺/K⁺ pump" }),
+  label("l_pump", 250, 196, "Na⁺/K⁺ pump keeps gradients", "משאבת Na⁺/K⁺ שומרת על המפל", [300, 116], { anchor: "start", shortHe: "משאבת Na⁺/K⁺", short: "Na⁺/K⁺ pump" }),
 ];
 const s2: El[] = [
   ...base(), ...naChannel(120, true, false), ...kChannel(240, false),
-  ...ions("na", [[40, 58], [70, 70], [120, 80], [150, 62], [180, 72], [230, 56], [290, 66], [124, 128]], NA), ...ions("k", K_IN, K),
+  ...ions("na", [[40, 58], [70, 70], [120, 80], [150, 62], [180, 72], [230, 56], [266, 60], [124, 128]], NA), ...ions("k", K_IN, K),
   ...graph([142, V(-55)]),
   label("l_thr", 250, 196, "Threshold ≈ −55 mV", `סף ≈ ${iso("−55 mV")}`, [300, V(-55)], { anchor: "start" }),
   label("l_act", 14, 30, "Activation gates open", "שער ההפעלה נפתח", [110, 114], { anchor: "start" }),
@@ -74,7 +74,7 @@ const s3: El[] = [
 const s4: El[] = [
   ...base(), ...naChannel(120, true, true), ...kChannel(240, true),
   ...ions("na", [[112, 76], [150, 62], [128, 118], [110, 132], [140, 140], [100, 146], [160, 128], [124, 150]], NA),
-  ...ions("k", [[40, 142], [80, 150], [236, 110], [240, 84], [248, 60], [300, 142], [330, 160]], K),
+  ...ions("k", [[40, 142], [80, 150], [236, 110], [240, 84], [248, 60], [270, 150], [350, 162]], K),
   ...graph([204, V(-45)]),
   label("l_inact", 14, 30, "Na⁺ channels inactivate", "תעלות Na⁺ מושבתות", [120, MY + 20], { anchor: "start", shortHe: "Na⁺ מושבתות", short: "Na⁺ inactivated" }),
   label("l_kout", 270, 30, "K⁺ flows out", "K⁺ יוצא", [248, 60], { anchor: "start" }),

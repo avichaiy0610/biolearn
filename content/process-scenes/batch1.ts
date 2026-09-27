@@ -18,9 +18,9 @@ const mm = (id: string, vmax: number, km: number, color: string, o: Partial<El> 
   return path(id, smooth(pts), { stroke: color, strokeWidth: 3, ...o });
 };
 const axes = (): El[] => [
-  line("ax_y", GX, GY, GX, 44, C.line, 1.8, { arrow: true }),
+  line("ax_y", GX, GY, GX, 66, C.line, 1.8, { arrow: true }),
   line("ax_x", GX, GY, 392, GY, C.line, 1.8, { arrow: true }),
-  text("ax_yl", GX + 6, 40, "V₀", "V₀", { anchor: "start", ltr: true, weight: 700 }),
+  text("ax_yl", GX + 8, 72, "V₀", "V₀", { anchor: "start", ltr: true, weight: 700 }),
   text("ax_xl", 392, GY + 22, "[S]", "[S]", { anchor: "end", ltr: true, weight: 700 }),
   line("vmax", GX, 90, 392, 90, "#64748b", 1.3, { dash: "5 4" }),
   text("vmax_t", 390, 82, "Vmax", "Vmax", { anchor: "end", ltr: true, weight: 700, textColor: "#475569" }),
@@ -52,7 +52,7 @@ const k2: El[] = [
   mm("c0", 1, 2, "#4338ca"),
   ...kmMark("km0", 2, 0.5, "#4338ca"),
   text("km0_t", GX + 2 * SX, GY + 22, "Km", "Km", { ltr: true, weight: 700, textColor: "#4338ca" }),
-  label("l_half", 290, 150, "½Vmax at [S] = Km", "Km (חצי Vmax)", [GX + 2 * SX, GY - 80], { anchor: "start", shortHe: "Km", short: "Km" }),
+  label("l_half", 262, 36, "½Vmax at [S] = Km", "Km (חצי Vmax)", [GX + 2 * SX, GY - 80], { anchor: "start", shortHe: "Km", short: "Km" }),
   label("l_sat", 14, 40, "Saturation: all E busy", "רוויה: כל האנזימים תפוסים", [90, 146], { anchor: "start", shortHe: "רוויה", short: "Saturation" }),
 ];
 const k3: El[] = [
@@ -64,7 +64,7 @@ const k3: El[] = [
   ...kmMark("km1", 6, 0.5, "#dc2626"),
   text("km1_t", GX + 6 * SX, GY + 22, "Km(app)", "Km(app)", { ltr: true, weight: 700, textColor: "#dc2626" }),
   label("l_ci", 14, 40, "Competitive inhibitor", "מעכב תחרותי", [90, 138], { anchor: "start" }),
-  label("l_ce", 250, 200, "Km ↑, Vmax same", "Km עולה, Vmax זהה", [300, 160], { anchor: "start" }),
+  label("l_ce", 250, 36, "Km ↑, Vmax same", "Km עולה, Vmax זהה", [GX + 6 * SX, GY - 80], { anchor: "start" }),
 ];
 const k4: El[] = [
   enzymeShape("enz", 90, 176, 46, "#c7d2fe", 0.35),
@@ -76,7 +76,7 @@ const k4: El[] = [
   ...kmMark("km2", 2, 0.25, "#7c3aed"),
   line("vmax2", GX, 170, 392, 170, "#7c3aed", 1.3, { dash: "5 4" }),
   label("l_ni", 14, 290, "Inhibitor at another site", "מעכב באתר אחר", [90, 226], { anchor: "start" }),
-  label("l_ne", 250, 130, "Vmax ↓, Km same", "Vmax יורד, Km זהה", [340, 170], { anchor: "start" }),
+  label("l_ne", 250, 36, "Vmax ↓, Km same", "Vmax יורד, Km זהה", [340, 170], { anchor: "start" }),
   label("l_sh", 14, 40, "Active site distorted", "האתר הפעיל משתנה", [90, 140], { anchor: "start" }),
 ];
 export const enzymeKinetics: ProcessScene = {
@@ -232,7 +232,18 @@ const pka = (active: boolean): El[] => [
   ellipse("c2", active ? 368 : 330, active ? 262 : 250, 14, 10, "#93c5fd", { stroke: "#1d4ed8", strokeWidth: 1.5 }),
 ];
 const CAMP: Pt[] = [[230, 196], [252, 206], [270, 188], [246, 180], [280, 212], [262, 226]];
-const gBase = (): El[] => [...bilayer("mem", 0, 400, GY2, { th: 26 }), text("out", 392, 86, "outside", "חוץ התא", { anchor: "end", weight: 700, textColor: C.muted })];
+const glycocalyx = (x: number): El[] => [
+  path(`gx${x}`, `M ${x} ${GY2 - 13} L ${x} ${GY2 - 24} M ${x} ${GY2 - 20} L ${x - 7} ${GY2 - 30} M ${x} ${GY2 - 20} L ${x + 7} ${GY2 - 30}`, { stroke: "#16a34a", strokeWidth: 1.8 }),
+  ...[[x, GY2 - 26], [x - 8, GY2 - 33], [x + 8, GY2 - 33]].map(([cx, cy], i) => circle(`gx${x}_${i}`, cx, cy, 2.6, "#86efac", { stroke: "#15803d", strokeWidth: 0.8 })),
+];
+// glycogen granule: a cluster of glucose-polymer particles (liver cell — the classic adrenaline/glucagon target)
+const glycogen = (id: string, cx: number, cy: number): El[] =>
+  [[0, 0], [9, -4], [-8, -5], [4, 8], [-6, 7], [12, 6], [-13, 2], [1, -11]].map(([dx, dy], i) => circle(`${id}${i}`, cx + dx, cy + dy, 4, "#fde68a", { stroke: "#b45309", strokeWidth: 0.9 }));
+const gBase = (): El[] => [
+  ...bilayer("mem", 0, 400, GY2, { th: 26 }), text("out", 392, 86, "outside", "חוץ התא", { anchor: "end", weight: 700, textColor: C.muted }),
+  ...[30, 62, 176, 214, 290].flatMap(glycocalyx),
+  ...glycogen("gly_a", 318, 152), ...glycogen("gly_b", 276, 164),
+];
 const g1: El[] = [
   ...gBase(), gpcr(110, false), ligand(110, 52), ...gProtein(96, 150, 128, false), ac(false), ...pka(false),
   arrow("lig_in", 110, 64, 110, 82, "#9f1239", 2),
@@ -257,7 +268,7 @@ const g4: El[] = [
   ...CAMP.map(([x, y], i) => circle(`cmp${i}`, i < 4 ? 294 + (i % 2) * 18 : x, i < 4 ? 216 + Math.floor(i / 2) * 44 : y, 5, "#0ea5e9", { stroke: "#fff", strokeWidth: 1 })),
   ...[[372, 176], [382, 244]].flatMap(([x, y], i) => [circle(`ph${i}`, x, y, 7, "#f97316", { stroke: "#fff", strokeWidth: 1 }), text(`ph${i}_t`, x, y + 5, "P", "P", { ltr: true, weight: 800, fontSize: 16.5, halo: false, textColor: "#fff" })]),
   label("l_pka", 14, 250, "cAMP frees PKA catalytic subunits", "cAMP משחרר את יחידות PKA הקטליטיות", [300, 230], { anchor: "start", shortHe: "PKA מופעל", short: "PKA active" }),
-  label("l_ph", 250, 44, "Target proteins phosphorylated", "חלבוני מטרה מזורחנים", [372, 176], { anchor: "start", shortHe: "זרחון", short: "Phosphorylation" }),
+  label("l_ph", 230, 44, "Target proteins phosphorylated", "חלבוני מטרה מזורחנים", [372, 176], { anchor: "start", shortHe: "זרחון", short: "Phosphorylation" }),
 ];
 const g5: El[] = [
   ...gBase(), gpcr(110, false), ...gProtein(96, 150, 128, false), ac(false), ...pka(false),
@@ -284,6 +295,8 @@ export const gpcrSignaling: ProcessScene = {
     { color: "#047857", he: "אדנילט ציקלאז", en: "Adenylyl cyclase", swatch: "ring" },
     { color: "#0ea5e9", he: "cAMP", en: "cAMP", swatch: "dot" },
     { color: "#1d4ed8", he: "PKA (יחידות קטליטיות)", en: "PKA (catalytic subunits)", swatch: "ring" },
+    { color: "#d97706", he: "גרגרי גליקוגן (תא כבד)", en: "Glycogen granules (liver cell)", swatch: "dot" },
+    { color: "#16a34a", he: "גליקוקליקס (סוכרים על פני התא)", en: "Glycocalyx (surface sugars)", swatch: "line" },
   ],
   steps: [
     {
@@ -335,7 +348,11 @@ const mito = (cx: number, cy: number, o: Partial<El> = {}): El[] => [
 const nucleus = (frag: boolean): El[] => frag
   ? [[-18, -10], [8, -16], [16, 8], [-10, 14]].map(([dx, dy], i) => circle(`nf${i}`, 110 + dx, 170 + dy, 11, "#6366f1", { stroke: "#3730a3", strokeWidth: 1.5 }))
   : [circle("nf0", 110, 170, 40, "#e0e7ff", { stroke: "#4338ca", strokeWidth: 2 }), circle("nf1", 110, 170, 0.1, "#6366f1"), circle("nf2", 110, 170, 0.1, "#6366f1"), circle("nf3", 110, 170, 0.1, "#6366f1")];
-const casp = (id: string, x: number, y: number, color: string) => path(id, `M ${x - 10} ${y - 8} L ${x + 10} ${y + 8} M ${x - 10} ${y + 8} L ${x + 10} ${y - 8}`, { stroke: color, strokeWidth: 3.5 });
+// caspase: a protease dimer drawn as two lobes with the active-site cleft between them; number inside
+const casp = (id: string, x: number, y: number, color: string, n: string, o: Partial<El> = {}): El[] => [
+  path(id, `M ${x} ${y - 2} C ${x - 4} ${y - 14} ${x - 20} ${y - 14} ${x - 20} ${y} C ${x - 20} ${y + 12} ${x - 4} ${y + 12} ${x} ${y + 2} C ${x + 4} ${y + 12} ${x + 20} ${y + 12} ${x + 20} ${y} C ${x + 20} ${y - 14} ${x + 4} ${y - 14} ${x} ${y - 2} Z`, { color, stroke: "#450a0a", strokeWidth: 1.4, ...o }),
+  text(`${id}_n`, x, y + 6, n, n, { ltr: true, weight: 800, halo: false, textColor: "#ffffff", fontSize: 16.5, ...o }),
+];
 const CYTC: Pt[] = [[244, 118], [262, 110], [282, 118], [300, 128]];
 const a1: El[] = [
   cellOutline(0), ...nucleus(false), ...mito(270, 160),
@@ -353,32 +370,42 @@ const a2: El[] = [
   label("l_bax", 150, 290, "Bax/Bak pores", "נקבוביות Bax/Bak", [248, 136], { anchor: "start" }),
   label("l_cc", 280, 44, "Cytochrome c released", "ציטוכרום c משתחרר", [282, 118], { anchor: "start", shortHe: "ציטוכרום c", short: "Cytochrome c" }),
 ];
+// apoptosome: seven Apaf-1 arms around a central CARD hub, cytochrome c bound near each arm's tip
 const wheel = (cx: number, cy: number): El[] => [
-  ...[0, 1, 2, 3, 4, 5, 6].map((i) => { const a = (i * 2 * Math.PI) / 7; return line(`sp${i}`, cx, cy, cx + 20 * Math.cos(a), cy + 20 * Math.sin(a), "#0f766e", 3); }),
-  circle("hub", cx, cy, 7, "#14b8a6", { stroke: "#0f766e", strokeWidth: 1.5 }),
+  ...[0, 1, 2, 3, 4, 5, 6].flatMap((i) => {
+    const a = (i * 2 * Math.PI) / 7 - Math.PI / 2, c = Math.cos(a), s = Math.sin(a);
+    const P = (r: number, w: number): [number, number] => [cx + r * c - w * s, cy + r * s + w * c];
+    const arm = smooth([P(8, -4), P(24, -7), P(34, -5), P(36, 0), P(34, 5), P(24, 7), P(8, 4)], true, 0.6);
+    const [tx, ty] = P(30, 0);
+    return [
+      path(`apaf${i}`, arm, { color: "#99f6e4", stroke: "#0f766e", strokeWidth: 1.3 }),
+      circle(`apcc${i}`, tx, ty, 3.6, "#e11d48", { stroke: "#fff", strokeWidth: 0.8 }),
+    ];
+  }),
+  circle("hub", cx, cy, 9, "#14b8a6", { stroke: "#0f766e", strokeWidth: 1.5 }),
 ];
 const a3: El[] = [
   cellOutline(0), ...nucleus(false), ...mito(270, 160, { opacity: 0.6 }),
   ...CYTC.map(([x, y], i) => circle(`cc${i}`, 200 + (i % 2) * 20, 104 + Math.floor(i / 2) * 14, 4.5, "#e11d48", { stroke: "#fff", strokeWidth: 1 })),
   ...wheel(214, 150),
-  casp("c9", 214, 200, "#7c3aed"), casp("c3a", 180, 232, "#dc2626"), casp("c3b", 246, 238, "#dc2626"),
-  arrow("c9to3", 214, 212, 196, 226, C.line, 1.8),
-  label("l_apo", 250, 44, "Apoptosome (Apaf-1 + cyt c)", "אפופטוזום (Apaf-1 + ציטוכרום c)", [230, 142], { anchor: "start", shortHe: "אפופטוזום", short: "Apoptosome" }),
-  label("l_c9", 14, 290, "Caspase-9 → caspase-3", "קספאז 9 מפעיל קספאז 3", [180, 232], { anchor: "start" }),
+  ...casp("c9", 214, 208, "#7c3aed", "9"), ...casp("c3a", 168, 244, "#dc2626", "3"), ...casp("c3b", 256, 246, "#dc2626", "3"),
+  arrow("c9to3", 200, 220, 182, 232, C.line, 1.8), arrow("c9to3b", 228, 220, 244, 234, C.line, 1.8),
+  label("l_apo", 250, 44, "Apoptosome: 7 × Apaf-1 + cyt c", "אפופטוזום: 7 יחידות Apaf-1", [238, 126], { anchor: "start", shortHe: "אפופטוזום", short: "Apoptosome" }),
+  label("l_c9", 14, 290, "Caspase-9 → caspase-3", "קספאז 9 מפעיל קספאז 3", [168, 250], { anchor: "start" }),
 ];
 const a4: El[] = [
   cellOutline(0), ...nucleus(false), ...mito(270, 180, { opacity: 0.6 }),
   path("tc", smooth([[300, 10], [360, 12], [392, 40], [376, 58], [320, 56]], true), { color: "#e0f2fe", stroke: "#0369a1", strokeWidth: 2 }),
   path("fasl", "M 340 56 L 340 70", { stroke: "#0369a1", strokeWidth: 4 }),
   path("fas", "M 336 72 L 336 96 M 344 72 L 344 96", { stroke: "#be185d", strokeWidth: 4 }),
-  casp("c8", 330, 120, "#db2777"), casp("c3a", 290, 118, "#dc2626"), casp("c3b", 270, 96, "#dc2626"),
-  arrow("c8to3", 322, 120, 302, 120, C.line, 1.8),
+  ...casp("c8", 318, 126, "#db2777", "8"), ...casp("c3a", 262, 132, "#dc2626", "3"), ...casp("c3b", 250, 100, "#dc2626", "3"),
+  arrow("c8to3", 296, 128, 284, 130, C.line, 1.8),
   label("l_tc", 60, 40, "Killer lymphocyte: Fas ligand", "לימפוציט הורג: ליגנד Fas", [340, 58], { anchor: "start", shortHe: "ליגנד Fas", short: "Fas ligand" }),
   label("l_fas", 14, 290, "Death receptor Fas → caspase-8", "קולטן Fas מפעיל קספאז 8", [336, 94], { anchor: "start", shortHe: "Fas מפעיל קספאז 8", short: "Fas → casp-8" }),
 ];
 const a5: El[] = [
   cellOutline(10, 20), ...nucleus(true), ...mito(262, 170, { opacity: 0.4 }),
-  casp("c3a", 180, 150, "#dc2626"), casp("c3b", 230, 210, "#dc2626"),
+  ...casp("c3a", 184, 150, "#dc2626", "3"), ...casp("c3b", 226, 214, "#dc2626", "3"),
   ...[[82, 60], [300, 250]].map(([x, y], i) => circle(`bod${i}`, x, y, 14, "#dcfce7", { stroke: "#16a34a", strokeWidth: 2 })),
   label("l_frag", 14, 290, "Chromatin condenses, DNA fragments", "הכרומטין מתעבה וה-DNA נחתך", [110, 186], { anchor: "start", shortHe: "ה-DNA נחתך", short: "DNA cut" }),
   label("l_bleb", 250, 44, "Blebs → apoptotic bodies", "בועיות וגופיפים אפופטוטיים", [300, 250], { anchor: "start", shortHe: "גופיפים", short: "Bodies" }),
@@ -396,7 +423,7 @@ export const apoptosis: ProcessScene = {
     { color: "#c2410c", he: "מיטוכונדריה", en: "Mitochondrion", swatch: "ring" },
     { color: "#e11d48", he: "ציטוכרום c", en: "Cytochrome c", swatch: "dot" },
     { color: "#0f766e", he: "אפופטוזום", en: "Apoptosome", swatch: "ring" },
-    { color: "#dc2626", he: "קספאזות מבצעות", en: "Executioner caspases", swatch: "line" },
+    { color: "#dc2626", he: "קספאזות: יוזמות (8, 9) ומבצעות (3)", en: "Caspases: initiator (8, 9) and executioner (3)", swatch: "dot" },
     { color: "#16a34a", he: "Bcl-2 / קרום התא", en: "Bcl-2 / plasma membrane", swatch: "dot" },
   ],
   steps: [

@@ -97,6 +97,7 @@ const hidden: El[] = gone([
 
 export const translation: ProcessScene = {
   slug: "translation",
+  source: "Campbell 12e ch. 17; Alberts 7e ch. 6",
   legend: [
     { color: C.rna, he: "mRNA (קודונים)", en: "mRNA (codons)", swatch: "line" },
     { color: "#b45309", he: "tRNA (אנטי-קודון למטה)", en: "tRNA (anticodon at bottom)", swatch: "ring" },

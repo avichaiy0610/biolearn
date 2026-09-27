@@ -97,6 +97,7 @@ const step3: El[] = [
 
 export const meiosis: ProcessScene = {
   slug: "meiosis",
+  source: "Campbell 12e ch. 13",
   legend: [
     { color: M, he: "כרומוזום מהאם", en: "Maternal chromosome", swatch: "line" },
     { color: P, he: "כרומוזום מהאב", en: "Paternal chromosome", swatch: "line" },
