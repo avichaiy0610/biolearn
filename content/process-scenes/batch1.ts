@@ -391,7 +391,7 @@ const a3: El[] = [
   ...casp("c9", 214, 208, "#7c3aed", "9"), ...casp("c3a", 168, 244, "#dc2626", "3"), ...casp("c3b", 256, 246, "#dc2626", "3"),
   arrow("c9to3", 200, 220, 182, 232, C.line, 1.8), arrow("c9to3b", 228, 220, 244, 234, C.line, 1.8),
   label("l_apo", 250, 44, "Apoptosome: 7 × Apaf-1 + cyt c", "אפופטוזום: 7 יחידות Apaf-1", [238, 126], { anchor: "start", shortHe: "אפופטוזום", short: "Apoptosome" }),
-  label("l_c9", 14, 290, "Caspase-9 → caspase-3", "קספאז 9 מפעיל קספאז 3", [168, 250], { anchor: "start" }),
+  label("l_c9", 14, 290, "Caspase-9 → caspase-3", "קספאז 9 מפעיל קספאז 3", [168, 256], { anchor: "start", shortHe: "הפעלת קספאז 3", short: "Caspase-3 on" }),
 ];
 const a4: El[] = [
   cellOutline(0), ...nucleus(false), ...mito(270, 180, { opacity: 0.6 }),

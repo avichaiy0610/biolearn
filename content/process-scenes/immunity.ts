@@ -73,7 +73,7 @@ const i1: El[] = [
   label("l_skin", 250, 130, "Skin: physical barrier", "עור — מחסום פיזי", [300, 90], { anchor: "start", shortHe: "עור — מחסום", short: "Skin barrier" }),
   label("l_cut", 20, 150, "Wound lets microbes in", "פצע — חיידקים חודרים", [196, 90], { anchor: "start", shortHe: "פצע", short: "Wound" }),
   label("l_bac", 250, 30, "Bacteria", "חיידקים", [212, 38], { anchor: "start" }),
-  text("l_vs", 200, 294, "capillary", "נים דם", { textColor: "#b91c1c", halo: false }),
+  text("l_vs", 200, 280, "capillary", "נימי דם", { textColor: "#b91c1c", halo: false }),
 ];
 const i2: El[] = [
   ...vessel(false), ...epithelium(true),
@@ -95,7 +95,7 @@ const i3: El[] = [
   arrow("chemo", 270, 206, 244, 168, "#be185d", 2.4),
   label("l_cyt", 14, 130, "Cytokines & chemokines", "ציטוקינים וכימוקינים", [168, 232], { anchor: "start", shortHe: "ציטוקינים", short: "Cytokines" }),
   label("l_neu", 300, 150, "Neutrophil leaves the blood", "נויטרופיל יוצא מכלי הדם", [296, 222], { anchor: "start", shortHe: "נויטרופיל", short: "Neutrophil" }),
-  text("l_vs", 200, 294, "vessel dilates", "כלי הדם מתרחב", { textColor: "#b91c1c", halo: false }),
+  text("l_vs", 200, 278, "vessel dilates", "כלי הדם מתרחב", { textColor: "#b91c1c", halo: false }),
 ];
 const i4: El[] = [
   ...vessel(true), ...epithelium(true),

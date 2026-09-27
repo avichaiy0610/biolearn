@@ -320,7 +320,7 @@ const cx2 = (id: string, x: number, w: number, color: string, labelTxt: string):
 const ph1: El[] = [
   ...chloroplast(),
   label("l_gr", 14, 40, "Thylakoids (grana)", "תילקואידים (גרנה)", [110, 138], { anchor: "start" }),
-  label("l_st", 250, 290, "Stroma: Calvin cycle", "סטרומה: מחזור קלווין", [300, 220], { anchor: "start" }),
+  label("l_st", 176, 290, "Stroma: Calvin cycle", "סטרומה: מחזור קלווין", [300, 220], { anchor: "start" }),
   label("l_lr", 230, 40, "Membranes: light reactions", "בממברנות: תגובות האור", [212, 124], { anchor: "start", shortHe: "תגובות האור", short: "Light reactions" }),
 ];
 const ph2: El[] = [
@@ -330,7 +330,7 @@ const ph2: El[] = [
   path("e_path", `M 70 ${PY + 20} C 110 ${PY + 50} 140 ${PY + 40} 170 ${PY + 10} C 200 ${PY - 30} 230 ${PY + 40} 260 ${PY + 10} C 290 ${PY - 30} 320 ${PY - 50} 340 ${PY - 70}`, { stroke: "#0f766e", strokeWidth: 2.2, dash: "5 4", arrow: true }),
   text("h2o", 116, 222, "2 H₂O → O₂ + 4 H⁺", "2 H₂O → O₂ + 4 H⁺", { ltr: true, weight: 700, textColor: "#0369a1", fontSize: 16.5 }),
   text("nadph", 350, 64, "NADPH", "NADPH", { ltr: true, weight: 800, textColor: NADH }),
-  label("l_ps", 90, 40, "Light excites PSII and PSI", "האור מעורר את \u2066PSII\u2069 ו-\u2066PSI\u2069", [70, PY - 26], { anchor: "start", shortHe: "עירור באור", short: "Light" }),
+  label("l_ps", 90, 40, "Light excites PSII and PSI", "האור מעורר את \u2066PSII\u2069 ואת \u2066PSI\u2069", [70, PY - 26], { anchor: "start", shortHe: "עירור באור", short: "Light" }),
 ];
 const ph3: El[] = [
   ...thyl(),
@@ -339,7 +339,7 @@ const ph3: El[] = [
   circle("f1", 342, PY - 40, 18, "#fdba74", { stroke: "#9a3412", strokeWidth: 1.6 }),
   arrow("hflow", 342, PY + 60, 342, PY + 18, "#dc2626", 2.4),
   ...[[100, 220], [140, 232], [180, 216], [220, 234], [300, 222]].map(([x, y], i) => text(`hp${i}`, x, y, "H⁺", "H⁺", { ltr: true, weight: 800, textColor: "#dc2626" })),
-  text("atp", 342, PY - 70, "ADP + Pᵢ → ATP", "ADP + Pᵢ → ATP", { ltr: true, weight: 700, textColor: ATPC, fontSize: 16.5 }),
+  text("atp", 296, PY - 70, "ADP + Pᵢ → ATP", "ADP + Pᵢ → ATP", { ltr: true, weight: 700, textColor: ATPC, fontSize: 16.5 }),
   label("l_syn", 14, 40, "ATP synthase: H⁺ back to stroma", "ATP סינתאז: H⁺ חוזר לסטרומה", [342, PY - 40], { anchor: "start", shortHe: "ATP סינתאז", short: "ATP synthase" }),
 ];
 const CAL: Pt[] = [[200, 70], [310, 200], [90, 200]];
