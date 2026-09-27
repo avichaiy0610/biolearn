@@ -41,6 +41,8 @@ export const COURSES: Course[] = [
       sub("cell-biology", "cmq0ts5q9000u8s4mhr69ttz9"), // membrane & transport
       sub("cell-biology", "cmq3j1poq000004leyncbwyr9"), // cytoskeleton
       sub("cell-biology", "cmq3j1ur7000404lemmc573ip"), // eukaryotic cell evolution
+      proc("cell-biology", "membrane-transport"),
+      proc("cell-biology", "secretory-pathway"),
     ],
   },
   {
@@ -60,6 +62,8 @@ export const COURSES: Course[] = [
       sub("cell-biology", "cmq6nl6eu000004jr4qri9jh2"), // UPS
       proc("cell-biology", "protein-degradation-and-ubiquitin-proteasome-system-animation-1780958699914"),
       sub("cell-biology", "cmq508lsi000304l5a0q3757b"), // protein QC
+      proc("cell-biology", "gpcr-camp-signaling"),
+      proc("cell-biology", "apoptosis"),
     ],
   },
   {
@@ -82,6 +86,7 @@ export const COURSES: Course[] = [
       sub("genetics", "cmq2y4zcn000j04i9dzzev2af"), // mitochondrial
       sub("genetics", "cmq2y4ufe000h04i9ruo77nn6"), // imprinting
       sub("genetics", "cmq0ts4lp00038s4mthsjzur8"), // mutations
+      proc("genetics", "genomic-imprinting"),
     ],
   },
   {
@@ -102,6 +107,8 @@ export const COURSES: Course[] = [
       sub("molecular-biology", "cmq3elpug000604joulufrbkk"), // riboswitches
       sub("molecular-biology", "cmq0ts51u000b8s4md085rv0s"), // PCR
       proc("molecular-biology", "pcr"),
+      proc("molecular-biology", "lac-operon"),
+      proc("molecular-biology", "dna-mismatch-repair"),
     ],
   },
   {
@@ -119,6 +126,8 @@ export const COURSES: Course[] = [
       proc("biochemistry", "glycolysis"),
       proc("biochemistry", "cellular-respiration"),
       sub("cell-biology", "cmq3j1twn000304leyzpaw2t7"), // cellular metabolism
+      proc("biochemistry", "enzyme-kinetics"),
+      proc("biochemistry", "hemoglobin-oxygen-binding"),
     ],
   },
   {
@@ -133,6 +142,10 @@ export const COURSES: Course[] = [
       sub("biochemistry", "cmq4zr0l2000204jsi5a0iyg2"), // lipids & membranes
       sub("biochemistry", "cmq4e1clo000004l27xv2ks2q"), // nucleic acids
       sub("biochemistry", "cmq4dps4u000204l2eqafip01"), // metabolic regulation
+      proc("biochemistry", "gluconeogenesis"),
+      proc("biochemistry", "fatty-acid-beta-oxidation"),
+      proc("biochemistry", "urea-cycle"),
+      proc("biochemistry", "photosynthesis"),
     ],
   },
   {
@@ -148,6 +161,7 @@ export const COURSES: Course[] = [
       proc("microbiology", "bacteria-structure-animation-1780781194821"),
       sub("microbiology", "cmq0ts6jb001a8s4mer6pjk5p"), // viruses
       sub("microbiology", "cmq0ts6jb001b8s4miy0j9s78"), // immune system
+      proc("microbiology", "viral-life-cycle"),
     ],
   },
   {
@@ -155,13 +169,17 @@ export const COURSES: Course[] = [
     nameHe: "פיזיולוגיה של האדם",
     nameEn: "Human Physiology",
     year: 2, semester: "B",
-    descHe: "העברת אותות בתאי עצב ופוטנציאל פעולה, ומערכת הלב וכלי הדם.",
-    descEn: "Neuronal signaling and the action potential, and the cardiovascular system.",
+    descHe: "פוטנציאל פעולה והעברה סינפטית, כיווץ שריר, מערכת הלב וכלי הדם והכליה.",
+    descEn: "The action potential and synaptic transmission, muscle contraction, the cardiovascular system and the kidney.",
     topics: ["physiology"],
     units: [
       sub("physiology", "cmq0ts6uc001d8s4m2v0hpxxj"), // action potential
       sub("physiology", "cmq0ts6uc001e8s4mm56w2k4t"), // cardiovascular
       proc("physiology", "cardiovascular-animation-1780821487918"),
+      proc("physiology", "action-potential"),
+      proc("physiology", "synaptic-transmission"),
+      proc("physiology", "muscle-contraction"),
+      proc("physiology", "nephron-urine-formation"),
     ],
   },
   {
@@ -176,6 +194,35 @@ export const COURSES: Course[] = [
       sub("immunology", "cmq3icr9l000104l5ijpw3sio"), // innate
       sub("immunology", "cmq3icr9l000204l50pd57zwb"), // adaptive
       sub("microbiology", "cmq0ts6jb001b8s4miy0j9s78"), // immune system overview
+      proc("immunology", "innate-immunity"),
+      proc("immunology", "adaptive-immunity"),
+    ],
+  },
+  {
+    slug: "neurobiology",
+    nameHe: "נוירוביולוגיה",
+    nameEn: "Neurobiology",
+    year: 3, semester: "A",
+    descHe: "איך תאי עצב מייצרים ומעבירים אותות: פוטנציאל פעולה, העברה סינפטית והפעלת שריר.",
+    descEn: "How neurons generate and pass on signals: the action potential, synaptic transmission and muscle activation.",
+    topics: ["physiology"],
+    units: [
+      proc("physiology", "action-potential"),
+      proc("physiology", "synaptic-transmission"),
+      proc("physiology", "muscle-contraction"),
+    ],
+  },
+  {
+    slug: "endocrinology",
+    nameHe: "אנדוקרינולוגיה",
+    nameEn: "Endocrinology",
+    year: 3, semester: "B",
+    descHe: "הורמונים ואיתות תוך-תאי: קולטנים מצומדי חלבון G, שליחים שניים ובקרת רמת הסוכר בדם.",
+    descEn: "Hormones and intracellular signalling: G-protein-coupled receptors, second messengers and blood-glucose control.",
+    topics: ["physiology", "cell-biology"],
+    units: [
+      proc("cell-biology", "gpcr-camp-signaling"),
+      proc("physiology", "blood-glucose-regulation"),
     ],
   },
 ];
