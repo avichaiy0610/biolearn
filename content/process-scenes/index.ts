@@ -23,12 +23,14 @@ import { lncEnhancer, lncDevelopment, gencode, lncConservation } from "./lncrna"
 import { actionPotential } from "./action-potential";
 import { enzymeKinetics, membraneTransport, gpcrSignaling, apoptosis, viralLifeCycle } from "./batch1";
 import { synapse, muscle, hemoglobin, lacOperon, vesicular, nephron, dnaRepair } from "./batch2";
+import { betaOxidation, gluconeogenesis, ureaCycle, photosynthesis, bloodGlucose } from "./batch3";
 
 export const PROCESS_SCENES: ProcessScene[] = [translation, transcription, glycolysis, respiration, meiosis, pcr, ups, mendelian, nonMendelian,
   mitoInheritance, bacteria, recognition, riboswitch, cardio,
   imprinting, innate, adaptive, lncEnhancer, lncDevelopment, gencode, lncConservation,
   actionPotential, enzymeKinetics, membraneTransport, gpcrSignaling, apoptosis, viralLifeCycle,
-  synapse, muscle, hemoglobin, lacOperon, vesicular, nephron, dnaRepair];
+  synapse, muscle, hemoglobin, lacOperon, vesicular, nephron, dnaRepair,
+  betaOxidation, gluconeogenesis, ureaCycle, photosynthesis, bloodGlucose];
 
 /** One element per id: a later definition replaces an earlier one but keeps its paint order. */
 function mergeById(els: El[]): El[] {
