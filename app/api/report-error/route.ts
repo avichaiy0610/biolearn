@@ -1,7 +1,8 @@
 import { prisma } from "@/lib/prisma";
 import { randomBytes } from "crypto";
 
-// Public "דווח על טעות" endpoint. Reports land in ContentFeedback, which admins
+// Public "דווח על טעות" endpoint (content errors, and "the order is different at our
+// university" reports on course pages — courseSlug). Reports land in ContentFeedback, which admins
 // already triage at /admin/feedback. Light abuse protection: size limits, a
 // honeypot field and a per-IP rate limit (per server instance).
 const recent = new Map<string, number[]>();
@@ -10,7 +11,7 @@ const MAX_PER_WINDOW = 5;
 
 export async function POST(req: Request) {
   const body = await req.json().catch(() => ({}));
-  const { topicSlug, processSlug, subtopicId, comment, website } = body as Record<string, unknown>;
+  const { topicSlug, processSlug, subtopicId, courseSlug, comment, website } = body as Record<string, unknown>;
 
   if (website) return Response.json({ ok: true }); // honeypot: bots fill every field
   if (typeof topicSlug !== "string" || !topicSlug || typeof comment !== "string" || comment.trim().length < 5) {
@@ -37,8 +38,10 @@ export async function POST(req: Request) {
       topicSlug,
       processSlug: typeof processSlug === "string" ? processSlug : null,
       subtopicId: typeof subtopicId === "string" ? subtopicId : null,
-      targetType: typeof processSlug === "string" ? "animation" : "description",
-      comment: `[דיווח משתמש] ${comment.trim()}`,
+      targetType: typeof courseSlug === "string" ? "course-plan" : typeof processSlug === "string" ? "animation" : "description",
+      comment: typeof courseSlug === "string"
+        ? `[סדר הקורס ${courseSlug.slice(0, 80)}] ${comment.trim()}`
+        : `[דיווח משתמש] ${comment.trim()}`,
       status: "open",
     },
   });

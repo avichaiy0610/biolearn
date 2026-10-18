@@ -12,6 +12,7 @@ const TYPE_LABEL: Record<string, { he: string; en: string }> = {
   animation:   { he: "אנימציה",   en: "Animation" },
   description: { he: "תיאור",     en: "Description" },
   diagram:     { he: "דיאגרמה",   en: "Diagram" },
+  "course-plan": { he: "סדר הקורס", en: "Course order" },
 };
 
 export default async function FeedbackPage({

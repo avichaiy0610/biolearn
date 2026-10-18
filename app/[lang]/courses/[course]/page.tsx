@@ -11,6 +11,9 @@ import { prisma } from "@/lib/prisma";
 import { planForCourse } from "@/content/course-plans";
 import { resolvePlan } from "@/lib/course-plan";
 import CoursePlanView, { type PlanView } from "@/components/CoursePlanView";
+import SyllabusPanel from "@/components/SyllabusPanel";
+import CourseOrderReport from "@/components/CourseOrderReport";
+import { SYLLABI } from "@/content/syllabi/data.generated";
 import { COURSE_KIND_LABEL, GENERAL_UNIVERSITY, universityBySlug } from "@/content/universities";
 
 export async function generateMetadata({ params }: PageProps<"/[lang]/courses/[course]">): Promise<Metadata> {
@@ -60,6 +63,12 @@ export default async function CoursePage({ params, searchParams }: PageProps<"/[
       </p>
       <h1 className="text-3xl font-bold text-zinc-900 dark:text-zinc-50 mb-2">{he ? course.nameHe : course.nameEn}</h1>
       <p className="text-zinc-500 dark:text-zinc-400 mb-8">{he ? course.descHe : course.descEn}</p>
+
+      {SYLLABI[course.slug] && (
+        <SyllabusPanel s={SYLLABI[course.slug]}>
+          {course.units[0] && <CourseOrderReport courseSlug={course.slug} topicSlug={course.units[0].topic} />}
+        </SyllabusPanel>
+      )}
 
       {plan && planGroups ? (
         <CoursePlanView lang={lang} courseSlug={course.slug} view={view} groups={planGroups} scheduleNoteHe={plan.scheduleNoteHe} suggested={plan.schedule === "suggested"} />
