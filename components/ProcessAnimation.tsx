@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useMemo, useEffect } from "react";
+import { useState, useCallback, useMemo, useEffect, useSyncExternalStore } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import type { Locale } from "@/lib/dictionaries";
 import AIExplainPanel from "./AIExplainPanel";
@@ -24,6 +24,40 @@ type Step = {
   descEn: string;
   svgData: string;
 };
+
+/* ─── Labels that stay inside the frame ───────────────────────────────── */
+// Scene data places a label by one x for every language; a long Hebrew or English
+// text can then run past the 400-wide viewBox (cut off). After mount we measure each
+// rendered string (canvas, same font) and shift it just enough to fit — per language
+// and per variant (full / short), so Hebrew is moved only by its own overflow.
+const LABEL_MARGIN = 4;
+let measureCtx: CanvasRenderingContext2D | null = null;
+function textWidth(text: string, size: number, weight: number | string): number {
+  if (typeof document === "undefined") return 0;
+  measureCtx ??= document.createElement("canvas").getContext("2d");
+  if (!measureCtx) return 0;
+  measureCtx.font = `${weight} ${size}px system-ui, sans-serif`;
+  return measureCtx.measureText(text).width + 4; // + halo stroke
+}
+function fitShift(x: number, anchor: SvgElement["anchor"], w: number): number {
+  const [x0, x1] = anchor === "start" ? [x, x + w] : anchor === "end" ? [x - w, x] : [x - w / 2, x + w / 2];
+  if (w > 400 - 2 * LABEL_MARGIN) return 0; // cannot fit at all: leave as authored (the standard check flags it)
+  if (x0 < LABEL_MARGIN) return LABEL_MARGIN - x0;
+  if (x1 > 400 - LABEL_MARGIN) return 400 - LABEL_MARGIN - x1;
+  return 0;
+}
+const noopSubscribe = () => () => {};
+function useLabelShift(el: SvgElement, texts: (string | null)[], size: number, enabled: boolean): number[] {
+  // Server render and hydration use 0 (no canvas); the client then re-renders with real widths.
+  const client = useSyncExternalStore(noopSubscribe, () => true, () => false);
+  const x = el.x ?? 0, anchor = el.anchor ?? "middle", weight = el.weight ?? 600;
+  const key = texts.join("");
+  return useMemo(
+    () => texts.map((t) => (client && enabled && t ? fitShift(x, anchor, textWidth(t, size, weight)) : 0)),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [client, enabled, key, x, anchor, weight, size],
+  );
+}
 
 /* ─── Chromosome path builder (anatomically accurate shape) ────────────── */
 function r(n: number) { return Math.round(n * 10) / 10; }
@@ -65,6 +99,54 @@ function isLegacyChromosome(el: SvgElement): boolean {
 }
 
 /* ─── Professional SVG element renderer ─────────────────────────────────── */
+function FittedLabel({ el, lang, v2, isHighlighted, effectiveOpacity, t }: {
+  el: SvgElement; lang: string; v2: boolean; isHighlighted: boolean; effectiveOpacity: number; t: object;
+}) {
+  const size = v2 ? fontSizeOf(el, true, MIN_SVG_LABEL_SIZE) : Math.max(MIN_SVG_LABEL_SIZE, el.fontSize ?? 11);
+  const rtl = lang === "he" && !el.ltr;
+  const full = labelText(el, lang);
+  const short = v2 && (lang === "he" ? el.shortHe : el.short) ? labelText(el, lang, true) : null;
+  const [dxFull, dxShort] = useLabelShift(el, [full, short], size, v2);
+  const color = el.textColor ?? (isHighlighted || v2 ? "#1e293b" : "#64748b");
+  const common = (dx: number) => ({
+    fontSize: size,
+    direction: rtl ? "rtl" : "ltr",
+    fontFamily: "system-ui, sans-serif",
+    fontWeight: el.weight ?? 600,
+    textAnchor: v2 ? textAnchorFor(el, rtl) : "middle",
+    paintOrder: "stroke",
+    strokeLinejoin: "round",
+    stroke: el.halo === false ? "none" : "rgba(255,255,255,0.95)",
+    strokeWidth: v2 ? 4 : 3.5,
+    initial: { x: (el.x ?? 0) + dx, y: el.y, opacity: 0 },
+    animate: { x: (el.x ?? 0) + dx, y: el.y, fill: color, opacity: effectiveOpacity },
+    transition: t,
+  }) as const;
+  const leaderFor = (txt: string, dx: number) => {
+    if (!v2 || !el.to) return null;
+    const [sx, sy] = leaderStart({ ...el, x: (el.x ?? 0) + dx }, txt, size);
+    return { x1: sx, y1: sy, x2: el.to[0], y2: el.to[1] };
+  };
+  const leaders = [
+    { l: leaderFor(full, dxFull), cls: short ? "max-sm:hidden" : undefined },
+    ...(short ? [{ l: leaderFor(short, dxShort), cls: "sm:hidden" }] : []),
+  ];
+  return (
+    <g>
+      {leaders.map(({ l, cls }, i) => l && (
+        <g key={i} className={cls}>
+          <motion.line initial={{ ...l, opacity: 0 }} animate={{ ...l, opacity: effectiveOpacity * 0.85 }} transition={t}
+            stroke="#0f172a" strokeWidth={1.3} strokeLinecap="round" />
+          <motion.circle initial={{ cx: l.x2, cy: l.y2, opacity: 0 }} animate={{ cx: l.x2, cy: l.y2, opacity: effectiveOpacity }} transition={t}
+            r={2.6} fill="#0f172a" stroke="#fff" strokeWidth={1} />
+        </g>
+      ))}
+      <motion.text {...common(dxFull)} className={short ? "max-sm:hidden" : undefined}>{full}</motion.text>
+      {short && <motion.text {...common(dxShort)} className="sm:hidden">{short}</motion.text>}
+    </g>
+  );
+}
+
 function AnimatedSvgElement({
   id, stepIndex, scenes, isHighlighted, lang, v2, instant,
 }: {
@@ -247,50 +329,8 @@ function AnimatedSvgElement({
         />
       );
     }
-    case "text": {
-      const size = v2 ? fontSizeOf(el, true, MIN_SVG_LABEL_SIZE) : Math.max(MIN_SVG_LABEL_SIZE, el.fontSize ?? 11);
-      const rtl = lang === "he" && !el.ltr;
-      const full = labelText(el, lang);
-      const short = v2 && (lang === "he" ? el.shortHe : el.short) ? labelText(el, lang, true) : null;
-      const color = el.textColor ?? (isHighlighted || v2 ? "#1e293b" : "#64748b");
-      const common = {
-        fontSize: size,
-        direction: rtl ? "rtl" : "ltr",
-        fontFamily: "system-ui, sans-serif",
-        fontWeight: el.weight ?? 600,
-        textAnchor: v2 ? textAnchorFor(el, rtl) : "middle",
-        paintOrder: "stroke",
-        strokeLinejoin: "round",
-        stroke: el.halo === false ? "none" : "rgba(255,255,255,0.95)",
-        strokeWidth: v2 ? 4 : 3.5,
-        initial: { x: el.x, y: el.y, opacity: 0 },
-        animate: { x: el.x, y: el.y, fill: color, opacity: effectiveOpacity },
-        transition: t,
-      } as const;
-      const leaderFor = (txt: string) => {
-        if (!v2 || !el.to) return null;
-        const [sx, sy] = leaderStart(el, txt, size);
-        return { x1: sx, y1: sy, x2: el.to[0], y2: el.to[1] };
-      };
-      const leaders = [
-        { l: leaderFor(full), cls: short ? "max-sm:hidden" : undefined },
-        ...(short ? [{ l: leaderFor(short), cls: "sm:hidden" }] : []),
-      ];
-      return (
-        <g key={id}>
-          {leaders.map(({ l, cls }, i) => l && (
-            <g key={i} className={cls}>
-              <motion.line initial={{ ...l, opacity: 0 }} animate={{ ...l, opacity: effectiveOpacity * 0.85 }} transition={t}
-                stroke="#0f172a" strokeWidth={1.3} strokeLinecap="round" />
-              <motion.circle initial={{ cx: l.x2, cy: l.y2, opacity: 0 }} animate={{ cx: l.x2, cy: l.y2, opacity: effectiveOpacity }} transition={t}
-                r={2.6} fill="#0f172a" stroke="#fff" strokeWidth={1} />
-            </g>
-          ))}
-          <motion.text {...common} className={short ? "max-sm:hidden" : undefined}>{full}</motion.text>
-          {short && <motion.text {...common} className="sm:hidden">{short}</motion.text>}
-        </g>
-      );
-    }
+    case "text":
+      return <FittedLabel key={id} el={el} lang={lang} v2={v2} isHighlighted={isHighlighted} effectiveOpacity={effectiveOpacity} t={t} />;
     default:
       return null;
   }
