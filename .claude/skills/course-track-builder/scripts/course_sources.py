@@ -12,6 +12,8 @@ Commands
   extract   — download a page/PDF (browser fallback for bot walls), text + weekly-schedule candidates
   order     — validate a curated order file (sources, identity checks, confidence) → Markdown report
   coverage  — plan ↔ lessons check for a course: unresolved items, placeholders, drafts, empty topics
+  scope     — is each lesson section part of the course? --suggest from the course's own documents
+              (syllabus / reading / exams / staff material), --check validates content/course-scope/<course>.ts
 """
 from __future__ import annotations
 
@@ -385,6 +387,106 @@ console.log(JSON.stringify(out));
         sys.exit(1)
 
 
+# ---------- scope ----------
+KW_FILE = Path(__file__).resolve().parent.parent / "references" / "section-keywords.json"
+EVIDENCE_RANK = ["exam", "reading", "staff-material", "syllabus-named", "syllabus-heading", "none"]
+
+
+def _norm(t: str) -> str:
+    t = re.sub(r"[֑-ׇ]", "", t)              # niqqud
+    t = t.replace("־", " ").replace("-", " ").replace("–", " ")
+    return " " + re.sub(r"\s+", " ", t.lower()) + " "
+
+
+def _hit(text: str, kw: str) -> bool:
+    k = _norm(kw).strip()
+    if re.search(r"[א-ת]", k):  # Hebrew: allow one-letter prefixes
+        return re.search(r"(?:^|[\s\"'(;,.:])[הובלשמכ]{0,2}" + re.escape(k), text) is not None
+    return re.search(r"(?<![a-z])" + re.escape(k) + r"(?:s|es)?(?![a-z])", text) is not None  # plural ok
+
+
+def cmd_scope(a) -> None:
+    if a.check:
+        ts = f"""
+import {{ scopeForCourse }} from "./content/course-scope";
+import {{ LEVEL_FOR_EVIDENCE }} from "./content/course-scope/types";
+import {{ planForCourse }} from "./content/course-plans";
+import {{ lessonBySlug }} from "./content/lessons";
+import {{ parseBody }} from "./content/lessons/parse";
+const c: any = scopeForCourse({json.dumps(a.course)}); const plan: any = planForCourse({json.dumps(a.course)});
+const out: any = {{ found: !!c, missing: [], wrongLevel: [], emptyNote: [], counts: {{}} }};
+if (c && plan) {{
+  const slugs = new Set<string>();
+  for (const g of [...plan.topics, ...plan.lectures, ...plan.tutorials]) for (const it of g.items) if (it.kind === "lesson") slugs.add(it.slug);
+  for (const slug of slugs) for (const s of parseBody(lessonBySlug(slug)!.bodyHe)) {{
+    const e = c.sections[slug]?.[s.id];
+    if (!e) {{ out.missing.push(`${{slug}}#${{s.id}}`); continue; }}
+    if (LEVEL_FOR_EVIDENCE[e.evidence] !== e.level) out.wrongLevel.push(`${{slug}}#${{s.id}}: ${{e.evidence}} → must be ${{LEVEL_FOR_EVIDENCE[e.evidence]}}, is ${{e.level}}`);
+    if (!e.noteHe?.trim()) out.emptyNote.push(`${{slug}}#${{s.id}}`);
+    out.counts[e.level] = (out.counts[e.level] ?? 0) + 1;
+  }}
+}}
+console.log(JSON.stringify(out));
+"""
+        helper = REPO / ".ctb-scope.ts"
+        helper.write_text(ts, encoding="utf-8")
+        try:
+            r = subprocess.run(["npx", "tsx", str(helper)], capture_output=True, text=True, timeout=300, shell=os.name == "nt", encoding="utf-8")
+        finally:
+            helper.unlink(missing_ok=True)
+        if r.returncode != 0:
+            sys.exit(f"error: scope check failed:\n{r.stderr[-2000:]}")
+        data = json.loads(r.stdout.strip().splitlines()[-1])
+        write(a.output, data)
+        if not data["found"] or data["missing"] or data["wrongLevel"] or data["emptyNote"]:
+            sys.exit(1)
+        return
+
+    kw = json.loads(KW_FILE.read_text(encoding="utf-8"))
+    rec = load_syllabi().get(a.course, {})
+    docs: list[tuple[str, str, str]] = []  # (evidence kind, label, normalized text)
+    if rec:
+        docs.append(("syllabus-named", f"official syllabus ({rec.get('sourceUrl')})",
+                     _norm((rec.get("contentHe") or "") + " " + " ".join(rec.get("topicsHe") or []))))
+    for spec in a.evidence or []:
+        kind, _, path = spec.partition("=")
+        if kind not in ("exam", "reading", "staff-material", "syllabus-named"):
+            sys.exit(f"error: evidence kind must be exam|reading|staff-material|syllabus-named, got '{kind}'")
+        txt = Path(path).read_text(encoding="utf-8", errors="replace")
+        if path.endswith(".json"):
+            try:
+                txt = json.loads(txt).get("text", txt)
+            except Exception:
+                pass
+        docs.append((kind, path, _norm(txt)))
+    if not docs:
+        sys.exit("error: no documents — the course has no synced syllabus and no --evidence was given")
+    rows, by_lesson = [], {}
+    for lesson, secs in kw.items():
+        if lesson.startswith("_"):
+            continue
+        head = secs.get("_heading")
+        if head and any(_hit(t, w) for _, _, t in docs for w in (head.get("he") or []) + (head.get("en") or [])):
+            by_lesson.setdefault(lesson, []).append("_heading")
+        for sec, k in secs.items():
+            if sec.startswith("_"):
+                continue
+            words = (k.get("he") or []) + (k.get("en") or [])
+            hits = [(kind, label, w) for kind, label, text in docs for w in words if _hit(text, w)]
+            best = min((EVIDENCE_RANK.index(h[0]) for h in hits), default=None)
+            ev = EVIDENCE_RANK[best] if best is not None else None
+            rows.append({"lesson": lesson, "section": sec, "evidence": ev, "matches": sorted({f"{h[0]}: {h[2]}" for h in hits})})
+    for r_ in rows:  # no own hit: 'likely' only if a broader syllabus heading of this lesson (_heading) matched
+        if r_["evidence"] is None:
+            r_["evidence"] = "syllabus-heading" if by_lesson.get(r_["lesson"]) else "none"
+    level = {"exam": "core", "reading": "core", "staff-material": "core", "syllabus-named": "core", "syllabus-heading": "likely", "none": "extension"}
+    for r_ in rows:
+        r_["level"] = level[r_["evidence"]]
+    counts = {lv: sum(1 for r_ in rows if r_["level"] == lv) for lv in ("core", "likely", "extension")}
+    write(a.output, {"course": a.course, "documents": [d[1] for d in docs], "counts": counts, "sections": rows,
+                     "note": "Suggestions only: review each row (keyword hits can be false positives), then write content/course-scope/<course>.ts and run `scope --check`."})
+
+
 def main() -> None:
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = p.add_subparsers(dest="cmd", required=True)
@@ -399,10 +501,13 @@ def main() -> None:
     s = sub.add_parser("extract"); s.add_argument("--url", required=True); s.add_argument("--workdir", required=True); s.add_argument("--output", required=True)
     s = sub.add_parser("order"); s.add_argument("--input", required=True); s.add_argument("--output", required=True)
     s = sub.add_parser("coverage"); s.add_argument("--course", required=True); s.add_argument("--output", required=True)
+    s = sub.add_parser("scope"); s.add_argument("--course", required=True); s.add_argument("--output", required=True)
+    g = s.add_mutually_exclusive_group(required=True); g.add_argument("--suggest", action="store_true"); g.add_argument("--check", action="store_true")
+    s.add_argument("--evidence", nargs="*", help="kind=path, kind ∈ exam|reading|staff-material|syllabus-named (text or extract JSON)")
     a = p.parse_args()
     try:
         {"syllabus": cmd_syllabus, "related": cmd_related, "staff": cmd_staff, "discover": cmd_discover,
-         "extract": cmd_extract, "order": cmd_order, "coverage": cmd_coverage}[a.cmd](a)
+         "extract": cmd_extract, "order": cmd_order, "coverage": cmd_coverage, "scope": cmd_scope}[a.cmd](a)
     except RateLimitError as e:
         sys.exit(f"rate limited: {e}")
 

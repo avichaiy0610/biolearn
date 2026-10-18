@@ -1,3 +1,5 @@
+import { sectionScope } from "@/content/course-scope";
+import type { ScopeLevel } from "@/content/course-scope/types";
 import "server-only";
 import { unitCatalog } from "@/lib/course-data";
 import { lessonBySlug } from "@/content/lessons";
@@ -9,6 +11,7 @@ export type PlanEntry = {
   titleHe: string;
   context?: string; // e.g. the lesson a section belongs to
   kind: "lesson" | "section" | "problem" | "reading" | "animation" | "soon";
+  scope?: ScopeLevel; // for sections: is it part of this course (content/course-scope)
   href?: string;
   draft?: boolean;
 };
@@ -28,7 +31,7 @@ export async function resolvePlan(plan: CoursePlan, lang: string) {
         }
         if (it.section) {
           const s = parseBody(l.bodyHe).find((x) => x.id === it.section);
-          return s ? { key: `${l.slug}#${s.id}`, titleHe: s.title, context: l.titleHe, kind: "section", href: `${base}#${s.id}`, draft } : null;
+          return s ? { key: `${l.slug}#${s.id}`, titleHe: s.title, context: l.titleHe, kind: "section", href: `${base}#${s.id}`, draft, scope: sectionScope(plan.courseSlug, l.slug, s.id)?.level } : null;
         }
         return { key: l.slug, titleHe: l.titleHe, kind: "lesson", href: base, draft };
       }

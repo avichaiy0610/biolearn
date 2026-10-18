@@ -52,6 +52,7 @@ uv run $S coverage --course tau-genetics --output $O/cov.json
 | `extract --url --workdir` | Downloads page/PDF (real-browser fallback for bot walls), extracts text, lists weekly-row candidates, flags `needsVisualRead` when Hebrew did not extract. |
 | `order --input` | Validates the curated order file: confidence names, **identity checks** (a different course can never be official), tutorials without a source. Writes a Markdown report. |
 | `coverage --course` | Plan ↔ lessons: unresolved sections/problems, "soon" placeholders, topics with no full unit, drafts. |
+| `scope --course (--suggest [--evidence kind=path ...] \| --check)` | Is each lesson section part of the course? `--suggest` matches `references/section-keywords.json` against the course's own documents (synced syllabus + `exam`/`reading`/`staff-material` files) → core / likely / extension with the matched words. `--check` validates `content/course-scope/<course>.ts` (every plan section has an entry; level matches evidence). |
 
 ## Workflow
 
@@ -102,6 +103,21 @@ Expand every syllabus topic into subtopics from the course's own textbooks
 cross-checked with the same course at other universities. Every subtopic needs real content.
 Run `coverage`; zero unresolved, zero placeholders, zero topics without a unit before calling
 a course done. Mark material beyond the syllabus as extension — hide, never delete.
+
+### 5b. Scope of every section — from documents only
+Nobody's word is evidence: not a student's, not Avichai's (his answers about 134020 are used only
+to *calibrate* the rule), not student reports. Evidence, strongest first: past exams of the course,
+its assigned reading (pages/sections), the staff's own material, the syllabus naming the topic
+(or a topic the section is part of **by definition**), a broader syllabus heading. Levels:
+**core** (any of the first four) · **likely** (heading only — `_heading` keywords) · **extension**
+(nothing; e.g. textbook only). Run `scope --suggest`, review every row, write
+`content/course-scope/<course>.ts`, run `scope --check`. The site shows the level and its evidence
+under every section heading and in the plan.
+**Honest limit (calibration, Technion 134020, 2026-10-18):** with only an 8-heading topic list the
+rule cannot tell transposons/sex ratio/gametogenesis/position effect (not taught) from fragile X
+(taught) — all come out "likely". Only detailed documents (reading, exams) separate them, so
+finding those documents is the real work. Never *add* new content at "likely" just because the
+textbook has it.
 
 ### 6. Write the plan and units
 `content/course-plans/<course>.ts`: set `lectureOrder` / `tutorialOrder` (`OrderSource` with

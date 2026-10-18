@@ -1,0 +1,928 @@
+{
+ "_doc": "Keywords per lesson section, used by `course_sources.py scope --suggest` to look for a section's topic in a course's documents (syllabus text, reading list, past exams). Hebrew keywords are matched after stripping one-letter prefixes (ה ו ב ל ש מ כ). Add an entry whenever a lesson section is added. A lesson's \"_heading\" keywords are the broader syllabus headings that cover it (a hit there → sections without their own hit become 'likely'). Keywords that are a syllabus heading itself mean the section is part of that topic BY DEFINITION (→ core).",
+ "mendel-probability": {
+  "method": {
+   "he": [
+    "מנדל",
+    "חוקי התורשה המנדליים",
+    "חוקי מנדל"
+   ],
+   "en": [
+    "Mendel",
+    "Mendel's laws"
+   ]
+  },
+  "segregation": {
+   "he": [
+    "היפרדות",
+    "חוקי מנדל",
+    "מונוהיבריד",
+    "חוקי התורשה המנדליים",
+    "חוקי מנדל"
+   ],
+   "en": [
+    "segregation",
+    "monohybrid",
+    "single-gene inheritance",
+    "Mendelian",
+    "Mendel's laws"
+   ]
+  },
+  "testcross": {
+   "he": [
+    "הצלבת מבחן",
+    "הכלאת מבחן",
+    "חוקי התורשה המנדליים",
+    "חוקי מנדל"
+   ],
+   "en": [
+    "testcross",
+    "test cross",
+    "Mendel's laws"
+   ]
+  },
+  "assortment": {
+   "he": [
+    "מיון בלתי תלוי",
+    "דיהיבריד",
+    "חוקי התורשה המנדליים",
+    "חוקי מנדל"
+   ],
+   "en": [
+    "independent assortment",
+    "dihybrid",
+    "Mendel's laws"
+   ]
+  },
+  "probability": {
+   "he": [
+    "הסתברות",
+    "בינומי"
+   ],
+   "en": [
+    "probability",
+    "binomial"
+   ]
+  },
+  "chi-square": {
+   "he": [
+    "חי בריבוע",
+    "χ²",
+    "מבחן חי"
+   ],
+   "en": [
+    "chi-square",
+    "chi square",
+    "χ²",
+    "goodness of fit"
+   ]
+  },
+  "_heading": {
+   "he": [
+    "חוקי התורשה המנדליים",
+    "חוקי מנדל"
+   ],
+   "en": [
+    "Mendelian",
+    "single-gene inheritance"
+   ]
+  }
+ },
+ "dominance-alleles": {
+  "dominance": {
+   "he": [
+    "דומיננטיות ורצסיביות",
+    "האפלו",
+    "דומיננטי שלילי"
+   ],
+   "en": [
+    "dominance/recessiveness",
+    "haploinsufficiency",
+    "dominant negative",
+    "gain of function"
+   ]
+  },
+  "incomplete": {
+   "he": [
+    "דומיננטיות חלקית",
+    "דומיננטיות לא מלאה"
+   ],
+   "en": [
+    "incomplete dominance",
+    "partial dominance"
+   ]
+  },
+  "codominance": {
+   "he": [
+    "קו-דומיננטיות",
+    "קודומיננטיות"
+   ],
+   "en": [
+    "co-dominance",
+    "codominance"
+   ]
+  },
+  "multiple": {
+   "he": [
+    "אללים מרובים",
+    "ABO",
+    "סוגי דם"
+   ],
+   "en": [
+    "multiple alleles",
+    "ABO",
+    "blood type"
+   ]
+  },
+  "lethal": {
+   "he": [
+    "אללים קטלניים",
+    "אלל קטלני"
+   ],
+   "en": [
+    "lethal allele",
+    "lethal"
+   ]
+  },
+  "pleiotropy": {
+   "he": [
+    "פליאוטרופיה",
+    "פלייוטרופיה"
+   ],
+   "en": [
+    "pleiotropy",
+    "pleiotropic"
+   ]
+  },
+  "sex-environment": {
+   "he": [
+    "מושפעת מין",
+    "מוגבלת מין",
+    "השפעות סביבה"
+   ],
+   "en": [
+    "sex-influenced",
+    "sex-limited",
+    "environment"
+   ]
+  },
+  "_heading": {
+   "he": [
+    "חוקי התורשה המנדליים",
+    "הרחבות לחוקי מנדל",
+    "מנדל והרחבתם"
+   ],
+   "en": [
+    "Extensions of Mendelian",
+    "Mendelian"
+   ]
+  }
+ },
+ "pedigrees": {
+  "symbols": {
+   "he": [
+    "שושלות",
+    "עצי משפחה",
+    "ניתוח שושלות"
+   ],
+   "en": [
+    "pedigree",
+    "family tree"
+   ]
+  },
+  "patterns": {
+   "he": [
+    "שושלות",
+    "דפוסי תורשה"
+   ],
+   "en": [
+    "pedigree",
+    "inheritance pattern"
+   ]
+  },
+  "deduction": {
+   "he": [
+    "ניתוח שושלות"
+   ],
+   "en": [
+    "pedigree analysis"
+   ]
+  },
+  "risk": {
+   "he": [
+    "סיכון",
+    "בייס"
+   ],
+   "en": [
+    "risk",
+    "Bayes"
+   ]
+  },
+  "penetrance": {
+   "he": [
+    "חדירות",
+    "ביטוי משתנה"
+   ],
+   "en": [
+    "penetrance",
+    "expressivity"
+   ]
+  },
+  "_heading": {
+   "he": [
+    "שושלות",
+    "עצי משפחה"
+   ],
+   "en": [
+    "pedigree",
+    "family tree"
+   ]
+  }
+ },
+ "chromosomal-theory": {
+  "terms": {
+   "he": [
+    "כרומטידות",
+    "הומולוגים",
+    "התיאוריה הכרומוזומלית"
+   ],
+   "en": [
+    "homolog",
+    "sister chromatid",
+    "chromosomal theory",
+    "chromosome theory"
+   ]
+  },
+  "meiosis": {
+   "he": [
+    "מיוזה",
+    "התיאוריה הכרומוזומלית"
+   ],
+   "en": [
+    "meiosis",
+    "chromosomal theory",
+    "chromosome theory"
+   ]
+  },
+  "mendel": {
+   "he": [
+    "התיאוריה הכרומוזומלית",
+    "התיאוריה הכרומוזומלית"
+   ],
+   "en": [
+    "chromosome theory",
+    "chromosomal theory",
+    "chromosomal theory",
+    "chromosome theory"
+   ]
+  },
+  "proof": {
+   "he": [
+    "מורגן",
+    "ברידג'ס",
+    "אי-היפרדות",
+    "התיאוריה הכרומוזומלית"
+   ],
+   "en": [
+    "Morgan",
+    "Bridges",
+    "nondisjunction",
+    "chromosomal theory",
+    "chromosome theory"
+   ]
+  },
+  "_heading": {
+   "he": [
+    "התיאוריה הכרומוזומלית"
+   ],
+   "en": [
+    "chromosome theory",
+    "chromosomal theory"
+   ]
+  }
+ },
+ "sex-determination": {
+  "systems": {
+   "he": [
+    "קביעת מין"
+   ],
+   "en": [
+    "sex determination"
+   ]
+  },
+  "human-vs-fly": {
+   "he": [
+    "קביעת מין",
+    "SRY"
+   ],
+   "en": [
+    "sex determination",
+    "SRY",
+    "X:A"
+   ]
+  },
+  "sex-linkage": {
+   "he": [
+    "תאחיזה למין",
+    "תאוחזת X"
+   ],
+   "en": [
+    "sex linkage",
+    "sex-linked",
+    "X-linked"
+   ]
+  },
+  "dosage": {
+   "he": [
+    "פיצוי מינון",
+    "אינאקטיבציה של X",
+    "גופיף בר"
+   ],
+   "en": [
+    "dosage compensation",
+    "X inactivation",
+    "Barr body"
+   ]
+  },
+  "_heading": {
+   "he": [
+    "קביעת מין"
+   ],
+   "en": [
+    "sex determination"
+   ]
+  }
+ },
+ "linkage-mapping": {
+  "intro": {
+   "he": [
+    "תאחיזה"
+   ],
+   "en": [
+    "linkage",
+    "linked genes"
+   ]
+  },
+  "gametes": {
+   "he": [
+    "רקומבינציה",
+    "רקומביננטים",
+    "תאחיזה, שחלוף"
+   ],
+   "en": [
+    "recombination",
+    "recombinant",
+    "linkage"
+   ]
+  },
+  "crossover": {
+   "he": [
+    "שחלוף"
+   ],
+   "en": [
+    "crossing over",
+    "crossover"
+   ]
+  },
+  "rf": {
+   "he": [
+    "מיפוי",
+    "תדירות רקומבינציה"
+   ],
+   "en": [
+    "mapping",
+    "recombination frequency",
+    "map unit",
+    "centimorgan"
+   ]
+  },
+  "three-point": {
+   "he": [
+    "תלת-נקודתית",
+    "תלת נקודתית",
+    "שיטות למיפוי גנים"
+   ],
+   "en": [
+    "three-point",
+    "three point",
+    "mapping"
+   ]
+  },
+  "interference": {
+   "he": [
+    "אינטרפרנציה"
+   ],
+   "en": [
+    "interference",
+    "coincidence"
+   ]
+  },
+  "map-vs-physical": {
+   "he": [
+    "מפה פיזית"
+   ],
+   "en": [
+    "physical map"
+   ]
+  },
+  "human": {
+   "he": [
+    "מיפוי גנים באדם",
+    "LOD"
+   ],
+   "en": [
+    "human mapping",
+    "lod score",
+    "somatic cell hybrid"
+   ]
+  },
+  "tetrads": {
+   "he": [
+    "טטרדות",
+    "פטריות"
+   ],
+   "en": [
+    "tetrad",
+    "fungi",
+    "Neurospora"
+   ]
+  },
+  "_heading": {
+   "he": [
+    "תאחיזה",
+    "מיפוי"
+   ],
+   "en": [
+    "linkage",
+    "mapping"
+   ]
+  }
+ },
+ "mutations": {
+  "definition": {
+   "he": [
+    "מוטציות",
+    "מוטציות"
+   ],
+   "en": [
+    "mutation",
+    "mutations"
+   ]
+  },
+  "point": {
+   "he": [
+    "מוטציות נקודתיות",
+    "שינוי מסגרת",
+    "מוטציות"
+   ],
+   "en": [
+    "point mutation",
+    "frameshift",
+    "missense",
+    "nonsense",
+    "mutations"
+   ]
+  },
+  "spontaneous": {
+   "he": [
+    "מוטציות ספונטניות",
+    "מוטציות"
+   ],
+   "en": [
+    "spontaneous mutation",
+    "origin of mutations",
+    "mutations"
+   ]
+  },
+  "mutagens": {
+   "he": [
+    "מוטגנים",
+    "חומרים מוטגניים",
+    "מוטציות"
+   ],
+   "en": [
+    "mutagen",
+    "induced mutation",
+    "mutations"
+   ]
+  },
+  "reversion": {
+   "he": [
+    "רוורסיה",
+    "סופרסיה"
+   ],
+   "en": [
+    "reversion",
+    "suppressor"
+   ]
+  },
+  "ames": {
+   "he": [
+    "איימס"
+   ],
+   "en": [
+    "Ames"
+   ]
+  },
+  "repair": {
+   "he": [
+    "תיקון"
+   ],
+   "en": [
+    "DNA repair",
+    "repair"
+   ]
+  },
+  "_heading": {
+   "he": [
+    "מוטציות"
+   ],
+   "en": [
+    "mutation"
+   ]
+  }
+ },
+ "chromosome-structure": {
+  "overview": {
+   "he": [
+    "מבנה הכרומוזומים",
+    "שינויים במבנה",
+    "שינויים במבנה הכרומוזומים"
+   ],
+   "en": [
+    "chromosomal rearrangement",
+    "chromosome structure",
+    "large-scale chromosomal",
+    "chromosomal rearrangements"
+   ]
+  },
+  "deletion": {
+   "he": [
+    "חסרים",
+    "חסר",
+    "שינויים במבנה הכרומוזומים"
+   ],
+   "en": [
+    "deletion",
+    "chromosomal rearrangements"
+   ]
+  },
+  "duplication": {
+   "he": [
+    "הכפלות",
+    "הכפלה",
+    "שינויים במבנה הכרומוזומים"
+   ],
+   "en": [
+    "duplication",
+    "chromosomal rearrangements"
+   ]
+  },
+  "inversion": {
+   "he": [
+    "אינברסיות",
+    "אינברסיה",
+    "שינויים במבנה הכרומוזומים"
+   ],
+   "en": [
+    "inversion",
+    "chromosomal rearrangements"
+   ]
+  },
+  "translocation": {
+   "he": [
+    "טרנסלוקציות",
+    "טרנסלוקציה",
+    "שינויים במבנה הכרומוזומים"
+   ],
+   "en": [
+    "translocation",
+    "chromosomal rearrangements"
+   ]
+  },
+  "fragile": {
+   "he": [
+    "אתרים שבירים",
+    "X השביר"
+   ],
+   "en": [
+    "fragile site",
+    "fragile X"
+   ]
+  },
+  "_heading": {
+   "he": [
+    "שינויים במבנה הכרומוזומים",
+    "מבנה הכרומוזומים"
+   ],
+   "en": [
+    "chromosomal rearrangement",
+    "chromosome structure"
+   ]
+  }
+ },
+ "chromosome-number": {
+  "terms": {
+   "he": [
+    "מספר הכרומוזומים",
+    "במספרם",
+    "ובמספרם",
+    "שינויים במספר הכרומוזומים"
+   ],
+   "en": [
+    "chromosome number",
+    "ploidy",
+    "variation in chromosome number"
+   ]
+  },
+  "nondisjunction": {
+   "he": [
+    "אי-היפרדות",
+    "ובמספרם",
+    "שינויים במספר הכרומוזומים"
+   ],
+   "en": [
+    "nondisjunction",
+    "variation in chromosome number"
+   ]
+  },
+  "human": {
+   "he": [
+    "אנאופלואידיה",
+    "טריזומיה",
+    "תסמונת דאון",
+    "ובמספרם",
+    "שינויים במספר הכרומוזומים"
+   ],
+   "en": [
+    "aneuploidy",
+    "trisomy",
+    "Down syndrome",
+    "variation in chromosome number"
+   ]
+  },
+  "polyploidy": {
+   "he": [
+    "פוליפלואידיה",
+    "ובמספרם",
+    "שינויים במספר הכרומוזומים"
+   ],
+   "en": [
+    "polyploidy",
+    "variation in chromosome number"
+   ]
+  },
+  "_heading": {
+   "he": [
+    "במספרם",
+    "מספר הכרומוזומים"
+   ],
+   "en": [
+    "chromosome number"
+   ]
+  }
+ },
+ "nature-of-gene": {
+  "dna": {
+   "he": [
+    "החומר התורשתי",
+    "טרנספורמציה",
+    "הרשי"
+   ],
+   "en": [
+    "genetic material",
+    "transformation",
+    "Hershey"
+   ]
+  },
+  "function": {
+   "he": [
+    "מהות הגן",
+    "טבע הגן"
+   ],
+   "en": [
+    "what is a gene",
+    "nature of the gene",
+    "genotype-to-phenotype",
+    "co-linearity",
+    "colinearity"
+   ]
+  },
+  "complementation": {
+   "he": [
+    "קומפלמנטציה",
+    "מבחן השלמה"
+   ],
+   "en": [
+    "complementation"
+   ]
+  },
+  "benzer": {
+   "he": [
+    "בנזר",
+    "מבנה עדין"
+   ],
+   "en": [
+    "Benzer",
+    "fine structure",
+    "T4"
+   ]
+  },
+  "definition": {
+   "he": [
+    "מהות הגן",
+    "טבע הגן"
+   ],
+   "en": [
+    "what is a gene",
+    "concept of the gene"
+   ]
+  },
+  "_heading": {
+   "he": [
+    "מהות הגן",
+    "טבע הגן"
+   ],
+   "en": [
+    "what is a gene",
+    "nature of the gene"
+   ]
+  }
+ },
+ "gene-interaction": {
+  "one-gene-one-enzyme": {
+   "he": [
+    "גן אחד אנזים אחד",
+    "בידל",
+    "מסלולים מטבוליים"
+   ],
+   "en": [
+    "one gene-one enzyme",
+    "one gene one enzyme",
+    "Beadle",
+    "Tatum",
+    "biochemical pathway"
+   ]
+  },
+  "ordering": {
+   "he": [
+    "מסלולים מטבוליים",
+    "מסלול ביוסינתטי"
+   ],
+   "en": [
+    "biochemical pathway",
+    "pathway"
+   ]
+  },
+  "epistasis": {
+   "he": [
+    "אפיסטזיס",
+    "אינטראקציה בין גנים",
+    "אינטראקציה בין גנים"
+   ],
+   "en": [
+    "epistasis",
+    "gene interaction",
+    "gene interaction"
+   ]
+  },
+  "complementary": {
+   "he": [
+    "9:7",
+    "גנים משלימים",
+    "אינטראקציה בין גנים"
+   ],
+   "en": [
+    "9:7",
+    "complementary genes",
+    "gene interaction"
+   ]
+  },
+  "recessive": {
+   "he": [
+    "אפיסטזיס רצסיבי",
+    "9:3:4",
+    "אינטראקציה בין גנים"
+   ],
+   "en": [
+    "recessive epistasis",
+    "9:3:4",
+    "gene interaction"
+   ]
+  },
+  "dominant": {
+   "he": [
+    "אפיסטזיס דומיננטי",
+    "12:3:1",
+    "אינטראקציה בין גנים"
+   ],
+   "en": [
+    "dominant epistasis",
+    "12:3:1",
+    "gene interaction"
+   ]
+  },
+  "duplicate": {
+   "he": [
+    "גנים כפולים",
+    "15:1",
+    "אינטראקציה בין גנים"
+   ],
+   "en": [
+    "duplicate genes",
+    "15:1",
+    "gene interaction"
+   ]
+  },
+  "suppression": {
+   "he": [
+    "סופרסיה",
+    "13:3",
+    "אינטראקציה בין גנים"
+   ],
+   "en": [
+    "suppression",
+    "suppressor",
+    "13:3",
+    "gene interaction"
+   ]
+  },
+  "analysis": {
+   "he": [
+    "יחסים מותאמים",
+    "אינטראקציה בין גנים",
+    "אינטראקציה בין גנים"
+   ],
+   "en": [
+    "modified ratio",
+    "gene interaction",
+    "gene interaction"
+   ]
+  },
+  "_heading": {
+   "he": [
+    "אינטראקציה בין גנים",
+    "מהות הגן"
+   ],
+   "en": [
+    "gene interaction"
+   ]
+  }
+ },
+ "non-mendelian": {
+  "overview": {
+   "he": [
+    "לא מנדליים",
+    "לא-מנדלית",
+    "הלא מנדליים",
+    "לא מנדליים"
+   ],
+   "en": [
+    "non-Mendelian",
+    "non-Mendelian"
+   ]
+  },
+  "maternal-effect": {
+   "he": [
+    "השפעה אימהית"
+   ],
+   "en": [
+    "maternal effect"
+   ]
+  },
+  "organelles": {
+   "he": [
+    "הורשה אימהית",
+    "מיטוכונדריאלית",
+    "מחוץ לגרעין",
+    "ציטופלסמית"
+   ],
+   "en": [
+    "maternal inheritance",
+    "mitochondrial",
+    "extranuclear",
+    "cytoplasmic",
+    "organelle"
+   ]
+  },
+  "imprinting": {
+   "he": [
+    "החתמה",
+    "הטבעה"
+   ],
+   "en": [
+    "imprinting",
+    "epigenetic"
+   ]
+  },
+  "_heading": {
+   "he": [
+    "לא מנדליים",
+    "לא-מנדלית"
+   ],
+   "en": [
+    "non-Mendelian"
+   ]
+  }
+ }
+}

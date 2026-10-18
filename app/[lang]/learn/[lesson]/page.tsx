@@ -11,6 +11,8 @@ import LessonFigure from "@/components/lesson/LessonFigure";
 import FieldIcon from "@/components/FieldIcon";
 import { SceneStill } from "@/components/ProcessAnimation";
 import LessonPractice from "@/components/lesson/LessonPractice";
+import ScopeBadge from "@/components/lesson/ScopeBadge";
+import { scopeForCourse, sectionScope } from "@/content/course-scope";
 
 export const dynamic = "force-dynamic";
 
@@ -47,6 +49,7 @@ export default async function LessonPage({ params }: PageProps<"/[lang]/learn/[l
   if (!lesson) notFound();
 
   const sections = parseBody(lesson.bodyHe);
+  const courseScope = scopeForCourse(lesson.course.slug);
   const animSlugs = sections.flatMap((s) => s.segments.flatMap((g) => (g.kind === "animation" ? [g.slug] : [])));
   const procs = animSlugs.length
     ? await prisma.process.findMany({
@@ -121,6 +124,10 @@ export default async function LessonPage({ params }: PageProps<"/[lang]/learn/[l
           {sections.map((s) => (
             <section key={s.id} id={s.id} className="scroll-mt-24 pt-8">
               <h2 className="text-[24px] font-black leading-snug tracking-tight">{s.title}</h2>
+              {courseScope && (() => {
+                const e = sectionScope(lesson.course.slug, lesson.slug, s.id);
+                return e ? <ScopeBadge entry={e} courseHe={lesson.course.nameHe} fallbackSource={courseScope.defaultSource} /> : null;
+              })()}
               {s.segments.map((g, i) => {
                 if (g.kind === "md") return <ReactMarkdown key={i} components={md}>{g.text}</ReactMarkdown>;
                 if (g.kind === "figure") return <LessonFigure key={i} id={g.id} />;
