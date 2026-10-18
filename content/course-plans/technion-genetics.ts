@@ -65,7 +65,7 @@ export const technionGeneticsPlan: CoursePlan = {
   tutorials: [
     { n: 1, titleHe: "מונוהיבריד, דיהיבריד והצלבת מבחן", items: [mpWp("testcross"), mpWp("trihybrid")] },
     { n: 2, titleHe: "הסתברות ומבחן χ²", items: [mpWp("binomial"), mpWp("chi-dihybrid")] },
-    { n: 3, titleHe: "ניתוח שושלות", items: [pdWp("mode"), pdWp("cf-risk"), pdWp("hemophilia"), pdWp("penetrance")] },
+    { n: 3, titleHe: "ניתוח שושלות", items: [pdWp("mode"), pdWp("cf-risk"), pdWp("hemophilia"), pdWp("penetrance"), pdWp("onset"), pdWp("bayes")] },
     { n: 4, titleHe: "מיוזה ומעקב אחר כרומוזומים", items: [soon("תרגילים פתורים: מיוזה")] },
     { n: 5, titleHe: "תורשה תאוחזת-מין", items: [soon("תרגילים פתורים: תאחיזה למין")] },
     { n: 6, titleHe: "מיפוי דו-נקודתי וזיהוי פאזה", items: [lmWp("phase")] },

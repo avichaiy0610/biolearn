@@ -215,10 +215,10 @@ function PedigreeXR() {
   const g1: Person = { x: 250, y: 40, sex: "m", label: "I-1" }, g2: Person = { x: 330, y: 40, sex: "f", state: "carrier", label: "I-2" };
   const kids: Person[] = [
     { x: 150, y: 130, sex: "m", state: "affected", label: "II-1" }, { x: 250, y: 130, sex: "f", state: "carrier", label: "II-2" },
-    { x: 410, y: 130, sex: "f", label: "II-3" },
+    { x: 410, y: 130, sex: "f", label: "II-4" },
   ];
-  const spouse: Person = { x: 330, y: 130, sex: "m", label: "II-4" };
-  // II-2 and her husband II-4 sit side by side; their children below.
+  const spouse: Person = { x: 330, y: 130, sex: "m", label: "II-3" };
+  // II-2 and her husband II-3 sit side by side; their children below.
   const grand: Person[] = [
     { x: 210, y: 220, sex: "m", state: "affected", proband: true, label: "III-1" }, { x: 290, y: 220, sex: "f", label: "III-2" },
     { x: 370, y: 220, sex: "m", label: "III-3" },
