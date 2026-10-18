@@ -8,6 +8,9 @@ import { SEMESTER_LABEL, YEAR_LABEL } from "@/content/courses";
 import { getCourse, courseTopics } from "@/lib/courses-db";
 import { resolveCourseUnits } from "@/lib/course-data";
 import { prisma } from "@/lib/prisma";
+import { planForCourse } from "@/content/course-plans";
+import { resolvePlan } from "@/lib/course-plan";
+import CoursePlanView, { type PlanView } from "@/components/CoursePlanView";
 import { COURSE_KIND_LABEL, GENERAL_UNIVERSITY, universityBySlug } from "@/content/universities";
 
 export async function generateMetadata({ params }: PageProps<"/[lang]/courses/[course]">): Promise<Metadata> {
@@ -17,14 +20,18 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/courses/[c
   return { title: lang === "he" ? c.nameHe : c.nameEn, description: lang === "he" ? c.descHe : c.descEn };
 }
 
-export default async function CoursePage({ params }: PageProps<"/[lang]/courses/[course]">) {
+export default async function CoursePage({ params, searchParams }: PageProps<"/[lang]/courses/[course]">) {
   const { lang, course: slug } = await params;
+  const viewParam = (await searchParams).view;
   if (!hasLocale(lang)) notFound();
   const course = await getCourse(slug);
   if (!course) notFound();
   const he = lang === "he";
   const L = he ? "he" : "en";
   const uni = universityBySlug(course.university);
+  const plan = planForCourse(course.slug);
+  const view: PlanView = viewParam === "lectures" || viewParam === "tutorials" ? viewParam : "topics";
+  const planGroups = plan ? (await resolvePlan(plan, lang))[view] : null;
 
   const [units, topics, exams] = await Promise.all([
     resolveCourseUnits(course, lang),
@@ -54,6 +61,9 @@ export default async function CoursePage({ params }: PageProps<"/[lang]/courses/
       <h1 className="text-3xl font-bold text-zinc-900 dark:text-zinc-50 mb-2">{he ? course.nameHe : course.nameEn}</h1>
       <p className="text-zinc-500 dark:text-zinc-400 mb-8">{he ? course.descHe : course.descEn}</p>
 
+      {plan && planGroups ? (
+        <CoursePlanView lang={lang} courseSlug={course.slug} view={view} groups={planGroups} scheduleNoteHe={plan.scheduleNoteHe} suggested={plan.schedule === "suggested"} />
+      ) : (
       <section className="mb-10">
         <h2 className="text-xl font-semibold text-zinc-800 dark:text-zinc-200 mb-4">{he ? "יחידות הלימוד לפי הסדר" : "Units in order"}</h2>
         {units.length === 0 && (
@@ -82,6 +92,7 @@ export default async function CoursePage({ params }: PageProps<"/[lang]/courses/
           ))}
         </ol>
       </section>
+      )}
 
       <section className="mb-10" aria-labelledby="exams-title">
         <h2 id="exams-title" className="text-xl font-semibold text-zinc-800 dark:text-zinc-200 mb-3">📄 {he ? "מבחני עבר" : "Past exams"}</h2>

@@ -21,6 +21,9 @@ export type LessonQuestion = {
   correct: number;
 };
 
+// Tutorial-style problem: statement + step-by-step solution (Markdown, Hebrew).
+export type WorkedProblem = { id: string; titleHe: string; problemHe: string; solutionHe: string; answerHe: string };
+
 export type Lesson = {
   slug: string;
   status: "draft" | "published";
@@ -35,6 +38,7 @@ export type Lesson = {
   experiment: { titleHe: string; bodyHe: string }; // "how we know"
   trapsHe: string[]; // common exam mistakes
   terms: { he: string; en: string }[];
+  workedProblems?: WorkedProblem[]; // tutorial material — linked from the course's "tutorials" view
   questions: LessonQuestion[];
   refs: LessonRef[];
   review: { writtenBy: string; writtenAt: string; aiCheckedBy?: string; reviewedBy?: string; reviewedAt?: string };

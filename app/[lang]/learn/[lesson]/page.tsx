@@ -6,6 +6,7 @@ import { hasLocale, type Locale } from "@/lib/dictionaries";
 import { prisma } from "@/lib/prisma";
 import { parseSvgData } from "@/lib/svg-scene";
 import { lessonBySlug, lessonQuizQuestions } from "@/content/lessons";
+import { parseBody } from "@/content/lessons/parse";
 import LessonFigure from "@/components/lesson/LessonFigure";
 import FieldIcon from "@/components/FieldIcon";
 import { SceneStill } from "@/components/ProcessAnimation";
@@ -32,32 +33,12 @@ const md: Components = {
   code: ({ children }) => {
     const text = String(children);
     return (
-      <bdi dir={HEBREW.test(text) ? "rtl" : "ltr"} className={`rounded bg-surface-2 px-1.5 py-0.5 text-[0.93em] font-semibold text-brand ${text.length > 18 ? "[box-decoration-break:clone]" : "whitespace-nowrap"}`}>
+      <bdi dir={HEBREW.test(text) ? "rtl" : "ltr"} className={`rounded bg-surface-2 px-1.5 py-0.5 text-[0.93em] font-semibold text-brand whitespace-nowrap ${text.length > 18 ? "inline-block max-w-full overflow-x-auto align-middle" : ""}`}>
         {text}
       </bdi>
     );
   },
 };
-
-type Segment = { kind: "md"; text: string } | { kind: "figure"; id: string } | { kind: "animation"; slug: string };
-type Section = { id: string; title: string; segments: Segment[] };
-
-// "## " splits sections (for the table of contents); [[figure:x]] / [[animation:x]] lines become blocks.
-function parseBody(body: string): Section[] {
-  const sections: Section[] = [];
-  let cur: Section | null = null;
-  let buf: string[] = [];
-  const flush = () => { if (cur && buf.join("").trim()) cur.segments.push({ kind: "md", text: buf.join("\n") }); buf = []; };
-  for (const line of body.split("\n")) {
-    const h = /^## (.+)$/.exec(line);
-    const d = /^\[\[(figure|animation):([\w-]+)\]\]$/.exec(line.trim());
-    if (h) { flush(); cur = { id: `s${sections.length + 1}`, title: h[1].trim(), segments: [] }; sections.push(cur); }
-    else if (d && cur) { flush(); cur.segments.push(d[1] === "figure" ? { kind: "figure", id: d[2] } : { kind: "animation", slug: d[2] }); }
-    else buf.push(line);
-  }
-  flush();
-  return sections;
-}
 
 export default async function LessonPage({ params }: PageProps<"/[lang]/learn/[lesson]">) {
   const { lang, lesson: slug } = await params;
@@ -81,6 +62,7 @@ export default async function LessonPage({ params }: PageProps<"/[lang]/learn/[l
     ...sections.map((s) => ({ id: s.id, title: s.title })),
     { id: "experiment", title: "איך אנחנו יודעים" },
     { id: "traps", title: "מלכודות במבחן" },
+    ...(lesson.workedProblems?.length ? [{ id: "worked", title: "תרגילים פתורים" }] : []),
     { id: "practice", title: "תרגול" },
     { id: "sources", title: "מקורות" },
   ];
@@ -189,6 +171,27 @@ export default async function LessonPage({ params }: PageProps<"/[lang]/learn/[l
               ))}
             </dl>
           </section>
+
+          {lesson.workedProblems?.length ? (
+            <section id="worked" className="mt-10 scroll-mt-24">
+              <h2 className="text-[24px] font-black">תרגילים פתורים</h2>
+              <p className="mt-1 text-sm text-muted">בסגנון התרגול: נסו לפתור לבד, ורק אז פתחו את הפתרון המלא.</p>
+              <ol className="mt-4 space-y-4">
+                {lesson.workedProblems.map((w, i) => (
+                  <li key={w.id} id={`wp-${w.id}`} className={`scroll-mt-24 ${box}`}>
+                    <p className="text-xs font-bold text-brand">תרגיל {i + 1}</p>
+                    <h3 className="mt-1 text-lg font-black">{w.titleHe}</h3>
+                    <ReactMarkdown components={md}>{w.problemHe}</ReactMarkdown>
+                    <details className="group mt-2 rounded-xl border border-line bg-surface-2 px-4 py-3">
+                      <summary className="cursor-pointer text-sm font-bold text-brand">הצגת הפתרון</summary>
+                      <ReactMarkdown components={md}>{w.solutionHe}</ReactMarkdown>
+                      <div className="mt-2 rounded-lg bg-tint px-3 py-2 text-sm [&_p]:my-0 [&_p]:text-sm"><ReactMarkdown components={md}>{`**תשובה:** ${w.answerHe}`}</ReactMarkdown></div>
+                    </details>
+                  </li>
+                ))}
+              </ol>
+            </section>
+          ) : null}
 
           <section id="practice" className="mt-10 scroll-mt-24">
             <h2 className="text-[24px] font-black">תרגול</h2>
