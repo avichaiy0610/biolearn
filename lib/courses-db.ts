@@ -1,8 +1,9 @@
 import "server-only";
 import { prisma } from "@/lib/prisma";
 import { COURSES, type Course, type CourseUnit } from "@/content/courses";
+import { GENERAL_UNIVERSITY, type CourseKind } from "@/content/universities";
 
-export type CourseRecord = Omit<Course, "topics"> & { position: number };
+export type CourseRecord = Omit<Course, "topics"> & { position: number; university: string; kind: CourseKind };
 
 function parseUnits(raw: string): CourseUnit[] {
   try {
@@ -13,16 +14,22 @@ function parseUnits(raw: string): CourseUnit[] {
   }
 }
 
-// Courses as edited in /admin/courses. Falls back to the seed in
-// content/courses.ts if the table is empty or unreachable, so the page never breaks.
-export async function getCourses(): Promise<CourseRecord[]> {
+const KINDS = new Set<string>(["required", "choice", "elective"]);
+
+// Courses as edited in /admin/courses — all universities, or one track when
+// `university` is given. Falls back to the seed in content/courses.ts (the
+// general track) if the table is empty or unreachable, so the page never breaks.
+export async function getCourses(university?: string): Promise<CourseRecord[]> {
   const rows = await prisma.course.findMany({ orderBy: [{ year: "asc" }, { semester: "asc" }, { position: "asc" }] }).catch(() => []);
-  if (rows.length === 0) return COURSES.map((c, i) => ({ ...c, position: i }));
-  return rows.map((r) => ({
-    slug: r.slug, nameHe: r.nameHe, nameEn: r.nameEn,
-    year: r.year as Course["year"], semester: r.semester as Course["semester"],
-    descHe: r.descHe, descEn: r.descEn, units: parseUnits(r.units), position: r.position,
-  }));
+  const all: CourseRecord[] = rows.length === 0
+    ? COURSES.map((c, i) => ({ ...c, position: i, university: GENERAL_UNIVERSITY, kind: "required" as const }))
+    : rows.map((r) => ({
+        slug: r.slug, nameHe: r.nameHe, nameEn: r.nameEn,
+        year: r.year as Course["year"], semester: r.semester as Course["semester"],
+        descHe: r.descHe, descEn: r.descEn, units: parseUnits(r.units), position: r.position,
+        university: r.university || GENERAL_UNIVERSITY, kind: (KINDS.has(r.kind) ? r.kind : "required") as CourseKind,
+      }));
+  return university ? all.filter((c) => c.university === university) : all;
 }
 
 export async function getCourse(slug: string) {

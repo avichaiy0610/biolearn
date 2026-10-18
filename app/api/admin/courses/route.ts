@@ -2,25 +2,29 @@ import { prisma } from "@/lib/prisma";
 import { isAdmin } from "@/lib/supabase/server";
 import { getCourses, courseCatalog as catalog } from "@/lib/courses-db";
 import type { CourseUnit } from "@/content/courses";
+import { GENERAL_UNIVERSITY, universityBySlug } from "@/content/universities";
 
-export async function GET() {
+export async function GET(req: Request) {
   if (!(await isAdmin())) return Response.json({ error: "Unauthorized" }, { status: 403 });
-  const [courses, cat] = await Promise.all([getCourses(), catalog()]);
+  const university = universityBySlug(new URL(req.url).searchParams.get("university"))?.slug ?? GENERAL_UNIVERSITY;
+  const [courses, cat] = await Promise.all([getCourses(university), catalog()]);
   return Response.json({ courses, catalog: cat });
 }
 
 type IncomingCourse = {
   slug: string; nameHe: string; nameEn: string; year: number; semester: string;
-  descHe: string; descEn: string; units: CourseUnit[];
+  descHe: string; descEn: string; units: CourseUnit[]; kind?: string;
 };
 
-// Saves the whole course structure at once (so moving a unit between two
-// courses is a single atomic change).
+// Saves one university's whole course track at once (so moving a unit between
+// two courses is a single atomic change). Other universities' tracks are untouched.
 export async function PUT(req: Request) {
   if (!(await isAdmin())) return Response.json({ error: "Unauthorized" }, { status: 403 });
   const body = await req.json().catch(() => null);
   const list: IncomingCourse[] | null = Array.isArray(body?.courses) ? body.courses : null;
   if (!list) return Response.json({ error: "בקשה לא תקינה." }, { status: 400 });
+  const university = universityBySlug(body?.university)?.slug;
+  if (!university) return Response.json({ error: "אוניברסיטה לא מוכרת." }, { status: 400 });
 
   const cat = await catalog();
   const validUnit = new Set(cat.flatMap((t) => t.units.map((u) => (u.kind === "subtopic" ? `s:${u.topic}:${u.id}` : `p:${u.topic}:${u.slug}`))));
@@ -32,7 +36,7 @@ export async function PUT(req: Request) {
     slugs.add(c.slug);
     if (!c.nameHe?.trim()) return Response.json({ error: `לקורס "${c.slug}" חסר שם בעברית.` }, { status: 400 });
     if (![1, 2, 3, 4].includes(c.year)) return Response.json({ error: `שנה לא תקינה בקורס "${name}".` }, { status: 400 });
-    if (!["A", "B"].includes(c.semester)) return Response.json({ error: `סמסטר לא תקין בקורס "${name}".` }, { status: 400 });
+    if (!["A", "B", "Y"].includes(c.semester)) return Response.json({ error: `סמסטר לא תקין בקורס "${name}".` }, { status: 400 });
     if (!Array.isArray(c.units)) return Response.json({ error: `יחידות לא תקינות בקורס "${name}".` }, { status: 400 });
     for (const u of c.units) {
       const key = u?.kind === "subtopic" ? `s:${u.topic}:${u.id}` : u?.kind === "process" ? `p:${u.topic}:${u.slug}` : "";
@@ -41,8 +45,10 @@ export async function PUT(req: Request) {
   }
 
   // Don't orphan past exams: a course with exams can't be deleted.
-  const existing = await prisma.course.findMany({ select: { slug: true, nameHe: true } });
-  const removed = existing.filter((e) => !slugs.has(e.slug));
+  const existing = await prisma.course.findMany({ select: { slug: true, nameHe: true, university: true } });
+  const taken = existing.find((e) => e.university !== university && slugs.has(e.slug));
+  if (taken) return Response.json({ error: `המזהה "${taken.slug}" כבר תפוס במסלול של אוניברסיטה אחרת.` }, { status: 400 });
+  const removed = existing.filter((e) => e.university === university && !slugs.has(e.slug));
   if (removed.length) {
     const withExams = await prisma.pastExam.groupBy({ by: ["courseSlug"], where: { courseSlug: { in: removed.map((r) => r.slug) } }, _count: true });
     if (withExams.length) {
@@ -64,11 +70,12 @@ export async function PUT(req: Request) {
         year: c.year, semester: c.semester,
         descHe: (c.descHe ?? "").trim(), descEn: (c.descEn ?? "").trim(),
         units: JSON.stringify(c.units.map((u) => (u.kind === "subtopic" ? { kind: u.kind, topic: u.topic, id: u.id } : { kind: u.kind, topic: u.topic, slug: u.slug }))),
-        position,
+        position, university,
+        kind: ["required", "choice", "elective"].includes(c.kind ?? "") ? c.kind! : "required",
       };
       return prisma.course.upsert({ where: { slug: c.slug }, create: { slug: c.slug, ...data }, update: data });
     }),
   ];
   await prisma.$transaction(ops);
-  return Response.json({ ok: true, courses: await getCourses() });
+  return Response.json({ ok: true, courses: await getCourses(university) });
 }

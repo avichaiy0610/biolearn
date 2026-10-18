@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { GENERAL_UNIVERSITY, universityBySlug } from "@/content/universities";
 import PastExamsAdmin from "@/components/PastExamsAdmin";
 import { prisma } from "@/lib/prisma";
 import { getCourses } from "@/lib/courses-db";
@@ -18,7 +19,7 @@ export default async function AdminExamsPage({ params }: PageProps<"/[lang]/admi
       <p className="text-sm text-zinc-500 mb-6">
         מבחנים שמועלים כאן מוצגים בדף הקורס. יש להעלות רק מבחנים שיש זכות לפרסם.
       </p>
-      <PastExamsAdmin initialExams={exams} courses={(await getCourses()).map((c) => ({ slug: c.slug, nameHe: c.nameHe }))} />
+      <PastExamsAdmin initialExams={exams} courses={(await getCourses()).map((c) => ({ slug: c.slug, nameHe: c.university === GENERAL_UNIVERSITY ? c.nameHe : `${c.nameHe} (${universityBySlug(c.university)?.shortHe ?? c.university})` }))} />
     </div>
   );
 }

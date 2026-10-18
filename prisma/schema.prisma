@@ -242,11 +242,13 @@ model Course {
   nameHe    String
   nameEn    String
   year      Int       // 1..4
-  semester  String    // "A" | "B"
+  semester  String    // "A" | "B" | "Y" (year-long / not specified by the catalog)
   descHe    String
   descEn    String
   units     String    // JSON: CourseUnit[] in display order
   position  Int       @default(0) // order within its year/semester
+  university String   @default("general") // content/universities.ts slug; one track per university
+  kind      String    @default("required") // "required" | "choice" | "elective"
   updatedAt DateTime? @updatedAt
 }
 

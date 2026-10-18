@@ -3,16 +3,19 @@
 import { useEffect, useMemo, useState } from "react";
 
 type Unit = { kind: "subtopic"; topic: string; id: string } | { kind: "process"; topic: string; slug: string };
-type Course = { slug: string; nameHe: string; nameEn: string; year: number; semester: "A" | "B"; descHe: string; descEn: string; units: Unit[] };
+type Semester = "A" | "B" | "Y";
+type Kind = "required" | "choice" | "elective";
+type Course = { slug: string; nameHe: string; nameEn: string; year: number; semester: Semester; kind: Kind; descHe: string; descEn: string; units: Unit[] };
 type CatalogUnit = Unit & { nameHe: string };
 type CatalogTopic = { slug: string; nameHe: string; units: CatalogUnit[] };
 
 const YEARS = [1, 2, 3, 4];
 const YEAR_HE: Record<number, string> = { 1: "שנה א'", 2: "שנה ב'", 3: "שנה ג'", 4: "שנה ד'" };
-const SEM_HE = { A: "סמסטר א'", B: "סמסטר ב'" } as const;
+const SEM_HE = { A: "סמסטר א'", B: "סמסטר ב'", Y: "שנתי / לא צוין" } as const;
+const KIND_HE = { required: "חובה", choice: "חובת בחירה", elective: "בחירה" } as const;
 const unitKey = (u: Unit) => (u.kind === "subtopic" ? `s:${u.topic}:${u.id}` : `p:${u.topic}:${u.slug}`);
 
-export default function CoursesAdmin({ initialCourses, catalog }: { initialCourses: Course[]; catalog: CatalogTopic[] }) {
+export default function CoursesAdmin({ initialCourses, catalog, university }: { initialCourses: Course[]; catalog: CatalogTopic[]; university: string }) {
   const [courses, setCourses] = useState<Course[]>(initialCourses);
   const [dirty, setDirty] = useState(false);
   const [saving, setSaving] = useState(false);
@@ -85,7 +88,7 @@ export default function CoursesAdmin({ initialCourses, catalog }: { initialCours
     if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) { setMsg({ ok: false, text: "מזהה: אותיות אנגליות קטנות, ספרות ומקפים (למשל genetics-b)." }); return; }
     if (courses.some((c) => c.slug === slug)) { setMsg({ ok: false, text: "כבר יש קורס עם המזהה הזה." }); return; }
     if (!newCourse.nameHe.trim()) { setMsg({ ok: false, text: "חסר שם לקורס." }); return; }
-    update((l) => [...l, { slug, nameHe: newCourse.nameHe.trim(), nameEn: "", year: 1, semester: "A", descHe: "", descEn: "", units: [] }]);
+    update((l) => [...l, { slug, nameHe: newCourse.nameHe.trim(), nameEn: "", year: 1, semester: "A", kind: "required", descHe: "", descEn: "", units: [] }]);
     setNewCourse({ slug: "", nameHe: "" });
     setOpen(slug);
   }
@@ -94,7 +97,7 @@ export default function CoursesAdmin({ initialCourses, catalog }: { initialCours
     setSaving(true);
     setMsg(null);
     try {
-      const res = await fetch("/api/admin/courses", { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ courses }) });
+      const res = await fetch("/api/admin/courses", { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ university, courses }) });
       const body = await res.json().catch(() => ({}));
       if (!res.ok) throw new Error(body.error ?? "השמירה נכשלה.");
       setCourses(body.courses);
@@ -111,7 +114,7 @@ export default function CoursesAdmin({ initialCourses, catalog }: { initialCours
 
   return (
     <div className="pb-24">
-      {YEARS.map((year) => (["A", "B"] as const).map((sem) => {
+      {YEARS.map((year) => (["A", "B", "Y"] as const).map((sem) => {
         const group = courses.filter((c) => c.year === year && c.semester === sem);
         if (group.length === 0) return null;
         return (
@@ -131,10 +134,13 @@ export default function CoursesAdmin({ initialCourses, catalog }: { initialCours
                       </select>
                     </label>
                     <label className="text-xs flex items-center gap-1">סמסטר
-                      <select value={c.semester} onChange={(e) => patch(c.slug, { semester: e.target.value as "A" | "B" })} className="h-8 rounded-md border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 text-xs">
-                        <option value="A">{"א'"}</option><option value="B">{"ב'"}</option>
+                      <select value={c.semester} onChange={(e) => patch(c.slug, { semester: e.target.value as Semester })} className="h-8 rounded-md border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 text-xs">
+                        <option value="A">{"א'"}</option><option value="B">{"ב'"}</option><option value="Y">שנתי</option>
                       </select>
                     </label>
+                    <select value={c.kind} onChange={(e) => patch(c.slug, { kind: e.target.value as Kind })} aria-label="סוג הקורס" className="h-8 rounded-md border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 text-xs">
+                      {(Object.keys(KIND_HE) as Kind[]).map((k) => <option key={k} value={k}>{KIND_HE[k]}</option>)}
+                    </select>
                     <button className={small} disabled={gi === 0} onClick={() => moveCourse(c.slug, -1)} aria-label="הזז למעלה">↑</button>
                     <button className={small} disabled={gi === group.length - 1} onClick={() => moveCourse(c.slug, 1)} aria-label="הזז למטה">↓</button>
                     {confirmDelete === c.slug ? (

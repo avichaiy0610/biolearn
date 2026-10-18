@@ -17,6 +17,9 @@ import { bankForSubtopic, bankForTopic } from "@/content/question-bank";
 import TopicPractice from "@/components/TopicPractice";
 import { isComingSoon } from "@/lib/topics";
 import type { Metadata } from "next";
+import { getCourses } from "@/lib/courses-db";
+import { selectedUniversity } from "@/lib/university";
+import { SEMESTER_LABEL, YEAR_LABEL } from "@/content/courses";
 
 type ReactomePathway = { id: string; name: string; summary: string | null; url: string };
 
@@ -135,6 +138,11 @@ export default async function TopicPage({
     (max, s) => (s.updatedAt && (!max || s.updatedAt > max) ? s.updatedAt : max), null);
   const reviewed = topic.subtopics.length > 0 && topic.subtopics.every((s) => s.reviewedAt);
 
+  // Where this topic is taught in the visitor's university track.
+  const uni = await selectedUniversity();
+  const L = lang === "he" ? "he" : "en";
+  const inCourses = (await getCourses(uni.slug)).filter((c) => c.units.some((u) => u.topic === topic.slug));
+
   return (
     <div className="max-w-4xl mx-auto px-4 py-10">
       {/* Header */}
@@ -146,6 +154,21 @@ export default async function TopicPage({
           <p className="mt-4 inline-block rounded-lg border border-dashed border-zinc-300 dark:border-zinc-600 px-3 py-2 text-sm text-zinc-500 dark:text-zinc-400">
             🚧 {lang === "he" ? "הנושא בפיתוח — התוכן כאן עדיין חלקי." : "This topic is in development — content is still partial."}
           </p>
+        )}
+        {inCourses.length > 0 && (
+          <div className="mt-4 flex flex-wrap items-center gap-2 text-sm">
+            <span className="text-zinc-500 dark:text-zinc-400">
+              {lang === "he" ? `נלמד ב${uni.slug === "general" ? "קורסים" : uni.nameHe}:` : `Taught at ${uni.slug === "general" ? "these courses" : uni.nameEn}:`}
+            </span>
+            {inCourses.map((c) => (
+              <Link key={c.slug} href={`/${lang}/courses/${c.slug}`}
+                className="inline-flex items-center gap-1.5 rounded-full border border-emerald-200 dark:border-emerald-800 bg-emerald-50 dark:bg-emerald-900/20 px-3 py-1 text-emerald-800 dark:text-emerald-300 hover:border-emerald-400">
+                {lang === "he" ? c.nameHe : c.nameEn}
+                <span className="text-xs text-emerald-600/80 dark:text-emerald-400/70">{YEAR_LABEL[L][c.year]}{c.semester !== "Y" ? `, ${SEMESTER_LABEL[L][c.semester]}` : ""}</span>
+              </Link>
+            ))}
+            <Link href={`/${lang}/courses`} className="text-xs text-zinc-400 hover:text-emerald-600">{lang === "he" ? "החלפת אוניברסיטה" : "Change university"}</Link>
+          </div>
         )}
       </div>
 

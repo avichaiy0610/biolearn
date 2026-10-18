@@ -18,10 +18,13 @@ export default function ChatPanel({ lang, topicName, topicSlug, subtopics, dict 
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
-  const bottomRef = useRef<HTMLDivElement>(null);
+  const listRef = useRef<HTMLDivElement>(null);
 
+  // Keep the newest message in view by scrolling the message list itself —
+  // scrollIntoView would also scroll the page, jumping to the chat on load.
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+    const el = listRef.current;
+    if (el && messages.length) el.scrollTo({ top: el.scrollHeight, behavior: "smooth" });
   }, [messages]);
 
   async function send() {
@@ -64,7 +67,7 @@ export default function ChatPanel({ lang, topicName, topicSlug, subtopics, dict 
       </div>
 
       {/* Messages */}
-      <div className="flex flex-col gap-3 px-5 py-4 min-h-[120px] max-h-[400px] overflow-y-auto">
+      <div ref={listRef} className="flex flex-col gap-3 px-5 py-4 min-h-[120px] max-h-[400px] overflow-y-auto">
         {messages.length === 0 && (
           <p className="text-sm text-zinc-400 dark:text-zinc-500 text-center mt-4">
             {dict.placeholder}
@@ -96,7 +99,6 @@ export default function ChatPanel({ lang, topicName, topicSlug, subtopics, dict 
             </div>
           </div>
         ))}
-        <div ref={bottomRef} />
       </div>
 
       {/* Input */}

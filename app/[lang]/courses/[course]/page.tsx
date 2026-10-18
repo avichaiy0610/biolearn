@@ -8,6 +8,7 @@ import { SEMESTER_LABEL, YEAR_LABEL } from "@/content/courses";
 import { getCourse, courseTopics } from "@/lib/courses-db";
 import { resolveCourseUnits } from "@/lib/course-data";
 import { prisma } from "@/lib/prisma";
+import { COURSE_KIND_LABEL, GENERAL_UNIVERSITY, universityBySlug } from "@/content/universities";
 
 export async function generateMetadata({ params }: PageProps<"/[lang]/courses/[course]">): Promise<Metadata> {
   const { lang, course: slug } = await params;
@@ -23,6 +24,7 @@ export default async function CoursePage({ params }: PageProps<"/[lang]/courses/
   if (!course) notFound();
   const he = lang === "he";
   const L = he ? "he" : "en";
+  const uni = universityBySlug(course.university);
 
   const [units, topics, exams] = await Promise.all([
     resolveCourseUnits(course, lang),
@@ -45,13 +47,22 @@ export default async function CoursePage({ params }: PageProps<"/[lang]/courses/
       </nav>
 
       <p className="text-sm font-medium text-emerald-700 dark:text-emerald-400 mb-1">
+        {uni && course.university !== GENERAL_UNIVERSITY && <>{he ? uni.nameHe : uni.nameEn} · </>}
         {YEAR_LABEL[L][course.year]} · {SEMESTER_LABEL[L][course.semester]}
+        {course.kind !== "required" && <> · {COURSE_KIND_LABEL[L][course.kind]}</>}
       </p>
       <h1 className="text-3xl font-bold text-zinc-900 dark:text-zinc-50 mb-2">{he ? course.nameHe : course.nameEn}</h1>
       <p className="text-zinc-500 dark:text-zinc-400 mb-8">{he ? course.descHe : course.descEn}</p>
 
       <section className="mb-10">
         <h2 className="text-xl font-semibold text-zinc-800 dark:text-zinc-200 mb-4">{he ? "יחידות הלימוד לפי הסדר" : "Units in order"}</h2>
+        {units.length === 0 && (
+          <p className="text-sm text-zinc-500 dark:text-zinc-400 rounded-xl border border-dashed border-zinc-300 dark:border-zinc-600 p-4">
+            {he
+              ? "החומר לקורס הזה עוד בכתיבה. בינתיים אפשר לעבור על הנושאים הקרובים בדף הנושאים."
+              : "Material for this course is still being written. Meanwhile, browse the related topics."}
+          </p>
+        )}
         <ol className="space-y-2">
           {units.map((u, i) => (
             <li key={u.key}>
@@ -99,7 +110,14 @@ export default async function CoursePage({ params }: PageProps<"/[lang]/courses/
         )}
       </section>
 
-      <section className="mb-10">
+      {uni?.sourceUrl && (
+        <p className="mb-8 text-xs text-zinc-400">
+          {he ? "מבנה הקורס לפי" : "Course placement per"} {he ? uni.programHe : uni.programEn} ·{" "}
+          <a href={uni.sourceUrl} target="_blank" rel="noopener noreferrer" className="text-emerald-700 dark:text-emerald-400 hover:underline">{he ? "המקור הרשמי" : "official source"} ↗</a>
+        </p>
+      )}
+
+      {topics.length > 0 && <section className="mb-10">
         <h2 className="text-lg font-semibold text-zinc-800 dark:text-zinc-200 mb-3">{he ? "נושאים בקורס" : "Topics in this course"}</h2>
         <div className="flex flex-wrap gap-2">
           {topics.map((t) => (
@@ -109,7 +127,7 @@ export default async function CoursePage({ params }: PageProps<"/[lang]/courses/
             </Link>
           ))}
         </div>
-      </section>
+      </section>}
     </div>
   );
 }

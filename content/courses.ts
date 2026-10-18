@@ -17,7 +17,7 @@ export type Course = {
   nameHe: string;
   nameEn: string;
   year: 1 | 2 | 3 | 4;
-  semester: "A" | "B";
+  semester: "A" | "B" | "Y";
   descHe: string;
   descEn: string;
   topics: string[]; // topic slugs whose guides / glossary / question bank apply
@@ -230,8 +230,8 @@ export const COURSES: Course[] = [
 export const courseBySlug = (slug: string) => COURSES.find((c) => c.slug === slug);
 
 export const SEMESTER_LABEL = {
-  he: { A: "סמסטר א'", B: "סמסטר ב'" },
-  en: { A: "Semester A", B: "Semester B" },
+  he: { A: "סמסטר א'", B: "סמסטר ב'", Y: "שנתי / סמסטר לא צוין" },
+  en: { A: "Semester A", B: "Semester B", Y: "Year-long / semester not specified" },
 } as const;
 
 export const YEAR_LABEL = {
