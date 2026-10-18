@@ -6,6 +6,7 @@ import { resolveCourseUnits, type ResolvedUnit } from "@/lib/course-data";
 import { selectedTerm, selectedUniversity } from "@/lib/university";
 import { GLOSSARY } from "@/content/glossary";
 import { bankForSubtopic } from "@/content/question-bank";
+import { parseSvgData } from "@/lib/svg-scene";
 
 export type HomeCourse = {
   course: CourseRecord;
@@ -93,14 +94,16 @@ export async function homeData(lang: string, courseParam?: string) {
     const index = selected.units.findIndex((u) => u.key === unit.key);
     // The unit's own animation; otherwise the course's next animation (labelled as such on the page).
     const ownProcess = unit.kind === "process" ? unit.key : sub?.relatedProcessSlug ?? null;
-    const courseProcess = [...selected.units.slice(index), ...selected.units.slice(0, index)].find((u) => u.kind === "process")?.key ?? null;
-    const processSlug = ownProcess ?? courseProcess;
-    const process = processSlug
-      ? await prisma.process.findFirst({
-          where: { slug: processSlug },
+    // Only v2 scenes can be drawn as a still (legacy/Lottie animations need their player).
+    const candidates = [...new Set([ownProcess, ...[...selected.units.slice(index), ...selected.units.slice(0, index)].filter((u) => u.kind === "process").map((u) => u.key)].filter(Boolean) as string[])];
+    const found = candidates.length
+      ? await prisma.process.findMany({
+          where: { slug: { in: candidates } },
           select: { slug: true, nameHe: true, nameEn: true, topic: { select: { slug: true } }, steps: { orderBy: { order: "asc" }, select: { id: true, order: true, titleHe: true, titleEn: true, descHe: true, descEn: true, svgData: true } } },
         })
-      : null;
+      : [];
+    const drawable = (p: (typeof found)[number]) => p.steps.length > 0 && p.steps.every((st) => (parseSvgData(st.svgData).v ?? 1) >= 2);
+    const process = candidates.map((slug) => found.find((p) => p.slug === slug)).find((p) => p && drawable(p)) ?? null;
     const terms = (GLOSSARY[unit.topicSlug] ?? []).filter((t) => text.includes(t.he) || text.toLowerCase().includes(t.en.toLowerCase().split(" (")[0])).slice(0, 4);
     open = {
       course: selected,
@@ -109,7 +112,7 @@ export async function homeData(lang: string, courseParam?: string) {
       excerpt: excerptOf(text),
       terms: terms.map((t) => ({ he: t.he, en: t.en })),
       questions: unit.subtopicId ? bankForSubtopic(unit.subtopicId).length : 0,
-      figure: process && process.steps.length
+      figure: process
         ? { own: process.slug === ownProcess, processSlug: process.slug, topicSlug: process.topic.slug, nameHe: process.nameHe, nameEn: process.nameEn, steps: process.steps, step: Math.floor((process.steps.length - 1) / 2) }
         : null,
       after: selected.units[index + 1] ?? null,
