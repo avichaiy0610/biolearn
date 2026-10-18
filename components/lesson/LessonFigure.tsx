@@ -150,6 +150,194 @@ function DominanceTypes() {
   );
 }
 
+// Two-step pathway (sweet pea): each gene encodes one enzyme; a block at either step → white.
+function Pathway() {
+  const PURPLE = "#7c3aed", LT = { fontFamily: "Arial, sans-serif" };
+  const box = (cx: number, label: string, fill: string, stroke: string) => (
+    <g>
+      <rect x={cx - 70} y={60} width={140} height={56} rx={12} fill={fill} stroke={stroke} strokeWidth={2} />
+      <text x={cx} y={94} textAnchor="middle" fontSize="14" fontWeight="700" fill={fill === PURPLE ? "#ffffff" : INK} style={T}>{label}</text>
+    </g>
+  );
+  const step = (x1: number, x2: number, gene: string, block: string) => (
+    <g>
+      <line x1={x1} x2={x2} y1={88} y2={88} stroke={INK} strokeWidth={2.5} markerEnd="url(#pw-arrow)" />
+      <text x={(x1 + x2) / 2} y={50} textAnchor="middle" fontSize="13" fill={BLUE} fontWeight="700" style={T}>{`אנזים ${gene}`}</text>
+      <text x={(x1 + x2) / 2} y={140} textAnchor="middle" fontSize="12" fill={MUTED} style={T}>מקודד בגן</text>
+      <text x={(x1 + x2) / 2} y={158} textAnchor="middle" fontSize="15" fontWeight="700" fill={BLUE} style={LT}>{gene}</text>
+      <text x={(x1 + x2) / 2} y={190} textAnchor="middle" fontSize="12" fill={ORANGE} style={T}>{`${block} — חסום כאן`}</text>
+    </g>
+  );
+  return (
+    <svg viewBox="0 0 640 215" className="w-full h-auto" role="img" aria-label="מסלול בשני שלבים: חומר לבן הופך בעזרת אנזים C לתוצר ביניים לבן, שהופך בעזרת אנזים P לפיגמנט סגול. חסימה באחד השלבים נותנת פרח לבן">
+      <defs>
+        <marker id="pw-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10z" fill={INK} /></marker>
+      </defs>
+      {box(550, "חומר מוצא חסר צבע", "#ffffff", MUTED)}
+      {box(320, "תוצר ביניים חסר צבע", "#ffffff", MUTED)}
+      {box(90, "פיגמנט סגול", PURPLE, PURPLE)}
+      {step(478, 394, "C", "cc")}
+      {step(248, 164, "P", "pp")}
+    </svg>
+  );
+}
+
+// Normal order vs paracentric and pericentric inversions; the inverted segment is orange.
+function InversionTypes() {
+  const LT = { fontFamily: "Arial, sans-serif" };
+  const genes = ["A", "B", "C", "D", "E", "F", "G"];
+  const CEN = 2.5; // centromere between C and D
+  const row = (y: number, order: string[], inv: [number, number] | null, label: string) => {
+    const x0 = 70, dx = 70;
+    return (
+      <g>
+        <text x={620} y={y - 22} textAnchor="start" direction="rtl" fontSize="14" fontWeight="700" fill={INK} style={T}>{label}</text>
+        <g direction="ltr">
+          {inv && <rect x={x0 + inv[0] * dx - 30} y={y - 16} width={(inv[1] - inv[0]) * dx + 60} height={32} rx={8} fill="#fff7ed" stroke={ORANGE} strokeWidth={1.5} />}
+          <line x1={x0 - 30} x2={x0 + 6 * dx + 30} y1={y} y2={y} stroke={MUTED} strokeWidth={6} strokeLinecap="round" />
+          <circle cx={x0 + CEN * dx} cy={y} r={9} fill={INK} />
+          {order.map((g, i) => {
+            const inside = inv && i >= inv[0] && i <= inv[1];
+            return <text key={i} x={x0 + i * dx} y={y + 36} textAnchor="middle" fontSize="17" fontWeight="700" fill={inside ? ORANGE : BLUE} style={LT}>{g}</text>;
+          })}
+          {order.map((_, i) => <line key={`t${i}`} x1={x0 + i * dx} x2={x0 + i * dx} y1={y - 8} y2={y + 8} stroke={INK} strokeWidth={2} />)}
+        </g>
+      </g>
+    );
+  };
+  return (
+    <svg viewBox="0 0 640 330" className="w-full h-auto" role="img" aria-label="כרומוזום תקין A B C, צנטרומר, D E F G; אינברסיה פאראצנטרית שבה E F הפוכים; אינברסיה פריצנטרית שבה הקטע B עד E, כולל הצנטרומר, הפוך">
+      {row(70, genes, null, "תקין")}
+      {row(170, ["A", "B", "C", "D", "F", "E", "G"], [4, 5], "פאראצנטרית — בלי הצנטרומר")}
+      {row(270, ["A", "E", "D", "C", "B", "F", "G"], [1, 4], "פריצנטרית — כולל הצנטרומר")}
+    </svg>
+  );
+}
+
+// Nondisjunction of one chromosome pair in meiosis I vs II; blue/orange = the two homologs.
+function Nondisjunction() {
+  const chrom = (x: number, y: number, color: string) => <rect x={x - 3} y={y - 14} width={6} height={28} rx={3} fill={color} />;
+  // joined: kids come in sister pairs (0-1, 2-3) held at a centromere
+  const cell = (cx: number, cy: number, r: number, kids: string[], label?: string, bad = false, joined = false) => (
+    <g>
+      <circle cx={cx} cy={cy} r={r} fill={bad ? "#fff7ed" : "#ffffff"} stroke={bad ? ORANGE : MUTED} strokeWidth={1.5} />
+      {joined
+        ? Array.from({ length: kids.length / 2 }, (_, k) => {
+            const px = cx + (k - (kids.length / 2 - 1) / 2) * 18;
+            return (
+              <g key={k}>
+                {chrom(px - 3.5, cy, kids[2 * k])}{chrom(px + 3.5, cy, kids[2 * k + 1])}
+                <circle cx={px} cy={cy} r={3.5} fill={INK} />
+              </g>
+            );
+          })
+        : kids.map((c, i) => <g key={i}>{chrom(cx + (i - (kids.length - 1) / 2) * 10, cy, c)}</g>)}
+      {label && <text x={cx} y={cy + r + 16} textAnchor="middle" fontSize="12" fontWeight="700" fill={bad ? ORANGE : INK} style={{ fontFamily: "Arial, sans-serif" }}>{label}</text>}
+    </g>
+  );
+  const line = (x1: number, y1: number, x2: number, y2: number) => <line x1={x1} y1={y1} x2={x2} y2={y2} stroke={MUTED} strokeWidth={1.5} />;
+  const panel = (ox: number, title: string, mi: boolean) => {
+    const c1 = mi ? [BLUE, BLUE, ORANGE, ORANGE] : [BLUE, BLUE];
+    const c2 = mi ? [] : [ORANGE, ORANGE];
+    const g = mi
+      ? [[BLUE, ORANGE], [BLUE, ORANGE], [], []]
+      : [[BLUE, BLUE], [], [ORANGE], [ORANGE]];
+    const lab = (k: string[]) => (k.length === 2 ? "n+1" : k.length === 0 ? "n−1" : "n");
+    return (
+      <g>
+        <text x={ox + 140} y={22} textAnchor="middle" fontSize="14" fontWeight="700" fill={INK} style={T}>{title}</text>
+        {line(ox + 140, 70, ox + 70, 125)}{line(ox + 140, 70, ox + 210, 125)}
+        {cell(ox + 140, 60, 26, [BLUE, BLUE, ORANGE, ORANGE], undefined, false, true)}
+        {line(ox + 70, 140, ox + 35, 200)}{line(ox + 70, 140, ox + 105, 200)}
+        {line(ox + 210, 140, ox + 175, 200)}{line(ox + 210, 140, ox + 245, 200)}
+        {cell(ox + 70, 135, 24, c1, undefined, mi, true)}
+        {cell(ox + 210, 135, 24, c2, undefined, mi, true)}
+        {g.map((k, i) => <g key={i}>{cell(ox + 35 + i * 70, 215, 20, k, lab(k), k.length !== 1)}</g>)}
+      </g>
+    );
+  };
+  return (
+    <svg viewBox="0 0 640 270" className="w-full h-auto" role="img" aria-label="אי-היפרדות במיוזה I: שני ההומולוגים עוברים יחד, ונוצרות שתי גמטות n+1 עם הומולוגים שונים ושתי גמטות n−1. אי-היפרדות במיוזה II: כרומטידות אחיות לא נפרדות; גמטה n+1 עם שתי כרומטידות אחיות של אותו הומולוג, גמטה n−1 ושתי גמטות תקינות">
+      {panel(330, "אי-היפרדות במיוזה I", true)}
+      {panel(10, "אי-היפרדות במיוזה II", false)}
+      <line x1={320} x2={320} y1={10} y2={255} stroke="#e2e8f0" strokeWidth={1.5} />
+    </svg>
+  );
+}
+
+// X inactivation: early embryo (random choice per cell) → clonal patches in the adult tissue.
+function XInactivation() {
+  // Early embryo: 8 cells, each silences one X (the small dark "Barr body" is the silenced X's colour).
+  const early: ("m" | "p")[] = ["m", "p", "p", "m", "p", "m", "m", "p"];
+  const col = (k: "m" | "p") => (k === "m" ? BLUE : ORANGE);
+  const other = (k: "m" | "p") => (k === "m" ? ORANGE : BLUE);
+  // Adult tissue: 8×6 grid of patches; each patch descends from one early cell.
+  const patch = [
+    "mmmppppm", "mmpppppm", "mmmpmmmm", "pmmpmmpp", "ppmmmppp", "pppmmppm",
+  ];
+  return (
+    <svg viewBox="0 0 640 250" className="w-full h-auto" role="img" aria-label="אינאקטיבציה של X: בעובר המוקדם כל תא משתיק באקראי את ה-X מהאם או את ה-X מהאב, וההחלטה עוברת לכל תאי הבת — ולכן ברקמה הבוגרת נוצרים כתמים">
+      <text x={500} y={24} textAnchor="middle" fontSize="14" fontWeight="700" fill={INK} style={T}>עובר מוקדם: בחירה אקראית בכל תא</text>
+      {early.map((k, i) => {
+        const cx = 410 + (i % 4) * 60, cy = 75 + Math.floor(i / 4) * 70;
+        return (
+          <g key={i}>
+            <circle cx={cx} cy={cy} r={26} fill="#ffffff" stroke={MUTED} strokeWidth={1.5} />
+            <rect x={cx - 12} y={cy - 12} width={6} height={24} rx={3} fill={col(k)} />
+            <circle cx={cx + 9} cy={cy} r={6} fill={other(k)} opacity={0.9} />
+          </g>
+        );
+      })}
+      <path d="M375 110 H 330" stroke={INK} strokeWidth={2} markerEnd="url(#xi-arrow)" />
+      <defs><marker id="xi-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10z" fill={INK} /></marker></defs>
+      <text x={160} y={24} textAnchor="middle" fontSize="14" fontWeight="700" fill={INK} style={T}>רקמה בוגרת: כתמים</text>
+      {patch.map((rowS, r) => rowS.split("").map((k, c) => (
+        <rect key={`${r}${c}`} x={40 + c * 30} y={45 + r * 28} width={28} height={26} rx={4} fill={k === "m" ? "#dbeafe" : "#ffedd5"} stroke={k === "m" ? BLUE : ORANGE} strokeWidth={1} />
+      )))}
+      <text x={320} y={232} textAnchor="middle" fontSize="12" fill={MUTED} style={T}>מוט = ה-X הפעיל · עיגול קטן = ה-X המושתק (גופיף בר) · כחול = X מהאם · כתום = X מהאב</text>
+    </svg>
+  );
+}
+
+// Complementation test in trans: mutations in different genes complement, in the same gene they don't.
+function Complementation() {
+  const LT = { fontFamily: "Arial, sans-serif" };
+  const RED = "#dc2626", GREEN = "#15803d";
+  // One homolog: two genes (boxes) A and B; `bad` marks the mutated gene with an X.
+  const homolog = (x: number, y: number, bad: "A" | "B" | "A1" | "A2" | null) => (
+    <g>
+      <line x1={x} x2={x + 220} y1={y} y2={y} stroke={MUTED} strokeWidth={5} strokeLinecap="round" />
+      {(["A", "B"] as const).map((g, i) => {
+        const gx = x + 30 + i * 110;
+        const hit = bad === g || (g === "A" && (bad === "A1" || bad === "A2"));
+        return (
+          <g key={g}>
+            <rect x={gx} y={y - 13} width={70} height={26} rx={5} fill={hit ? "#fee2e2" : "#dcfce7"} stroke={hit ? RED : GREEN} strokeWidth={1.5} />
+            <text x={gx + 35} y={y + 5} textAnchor="middle" fontSize="14" fontWeight="700" fill={INK} style={LT}>{g}</text>
+            {hit && <text x={gx + (bad === "A2" ? 58 : bad === "A1" ? 12 : 58)} y={y + 6} textAnchor="middle" fontSize="16" fontWeight="700" fill={RED} style={LT}>×</text>}
+          </g>
+        );
+      })}
+    </g>
+  );
+  const panel = (x: number, title: string, b1: "A" | "A1", b2: "B" | "A2", ok: boolean) => (
+    <g>
+      <text x={x + 110} y={26} textAnchor="middle" fontSize="14" fontWeight="700" fill={INK} style={T}>{title}</text>
+      {homolog(x, 70, b1)}
+      {homolog(x, 115, b2)}
+      <text x={x + 110} y={160} textAnchor="middle" fontSize="12" fill={MUTED} style={T}>{ok ? "לכל גן יש עותק תקין אחד" : "לגן A אין אף עותק תקין"}</text>
+      <text x={x + 110} y={190} textAnchor="middle" fontSize="15" fontWeight="700" fill={ok ? GREEN : RED} style={T}>{ok ? "פנוטיפ תקין — השלמה" : "פנוטיפ מוטנטי — אין השלמה"}</text>
+    </g>
+  );
+  return (
+    <svg viewBox="0 0 640 210" className="w-full h-auto" role="img" aria-label="מבחן קומפלמנטציה: כשהמוטציות בשני גנים שונים, לכל גן יש עותק תקין והפנוטיפ תקין. כשהמוטציות בשני מקומות באותו גן, אין עותק תקין של הגן והפנוטיפ מוטנטי">
+      {panel(390, "מוטציות בגנים שונים", "A", "B", true)}
+      {panel(20, "מוטציות באותו גן", "A1", "A2", false)}
+      <line x1={320} x2={320} y1={10} y2={200} stroke="#e2e8f0" strokeWidth={1.5} />
+    </svg>
+  );
+}
+
 // Dihybrid YyRr × YyRr as two independent 3:1 splits → 9:3:3:1.
 function ForkedLine() {
   const LT = { fontFamily: "Arial, sans-serif" };
@@ -279,6 +467,11 @@ const FIGURES: Record<string, { el: () => React.ReactElement; captionHe: string 
   "pedigree-ar": { el: PedigreeAR, captionHe: "שושלת של מחלה אוטוזומלית רצסיבית. שני ההורים בריאים ונשאים (I-1, I-2); בתם II-2 חולה (החץ מסמן את הפרובנד). לכל ילד בריא שלהם סיכוי של 2/3 להיות נשא." },
   "pedigree-xr": { el: PedigreeXR, captionHe: "שושלת של מחלה תאוחזת X רצסיבית. הסבתא I-2 נשאית: בנה II-1 חולה, ובתה II-2 נשאית שמעבירה את המחלה לנכד III-1. החולים כולם זכרים, ואין העברה מאב לבן." },
   "dominance-types": { el: DominanceTypes, captionHe: "השוואה סכמטית של שלושה יחסי דומיננטיות, כל אחד בדוגמה נפרדת (פרחים; אנטיגנים על תאי דם). בכל עמודה משווים את ההטרוזיגוט לשני ההומוזיגוטים של אותה דוגמה: בדומיננטיות מלאה הוא כמו AA, בחלקית הוא בין השניים (ורוד), ובקו-דומיננטיות אפשר לזהות את התוצר של כל אחד מהאללים — אנטיגן M וגם N על אותו תא. לכן רק בדומיננטיות מלאה מתקבל ב-F2 יחס 3 : 1. הסימון AA/Aa/aa כללי; במערכת MN הסימון הוא LᴹLᴹ/LᴹLᴺ/LᴺLᴺ." },
+  pathway: { el: Pathway, captionHe: "מודל של שני שלבים שדרושים ליצירת פיגמנט סגול — ההסבר המקובל ליחס 9:7 באפון ריחני. כל שלב תלוי בגן אחר; פרט הומוזיגוטי רצסיבי באחד הגנים (cc או pp) חסום באותו שלב ולכן פרחיו לבנים, גם אם הגן השני תקין. במוטנטים של מיקרואורגניזמים, הוספה למצע של חומר שנמצא אחרי החסימה עוקפת אותה. סכמטי." },
+  "inversion-types": { el: InversionTypes, captionHe: "שני סוגי אינברסיה. העיגול השחור הוא הצנטרומר, והקטע ההפוך מסומן בכתום. בפאראצנטרית הקטע ההפוך כולו בזרוע אחת; בפריצנטרית הוא כולל את הצנטרומר. כמות החומר הגנטי לא משתנה — רק הסדר. סכמטי." },
+  nondisjunction: { el: Nondisjunction, captionHe: "אי-היפרדות של זוג כרומוזומים אחד, במודל בלי שחלוף. כחול וכתום = שני ההומולוגים; לפני ההפרדה כל כרומוזום משוכפל בנוי משתי כרומטידות אחיות שמחוברות בצנטרומר (נקודה שחורה). מימין — במיוזה I ההומולוגים עוברים יחד: כל ארבעת התוצרים לא מאוזנים, ושני תוצרי n+1 נושאים הומולוגים שונים. משמאל — במיוזה II כרומטידות אחיות לא נפרדות באחד התאים: מחצית מהתוצרים תקינים, ותוצר n+1 נושא שתי כרומטידות אחיות של אותו הומולוג. (באואוגנזה רק תוצר אחד הופך לביצית.) סכמטי." },
+  "x-inactivation": { el: XInactivation, captionHe: "אינאקטיבציה אקראית של X אצל נקבת יונק שליה. מוקדם בעובר כל תא משתיק באקראי את ה-X שקיבל מהאם (כחול) או מהאב (כתום); ה-X המושתק נדחס לגופיף בר. ההחלטה עוברת לכל תאי הבת, ולכן ברקמה הבוגרת נוצרים כתמים — הצבע מציין איזה X פעיל. בנקבה הטרוזיגוטית זה נראה לעין, למשל בכתמים הכתומים והשחורים של חתולה בדגם שריון-צב. סכמטי." },
+  complementation: { el: Complementation, captionHe: "מבחן קומפלמנטציה בצאצא שקיבל מוטציה רצסיבית אחת מכל הורה (מצב trans). מימין — המוטציות בשני גנים שונים: כל הומולוג מספק עותק תקין של הגן שפגום בהומולוג השני, ולכן הפנוטיפ תקין. משמאל — שתי המוטציות באותו גן, במקומות שונים: אין אף עותק תקין של הגן, ולכן הפנוטיפ מוטנטי. סכמטי." },
   map: { el: GeneMap, captionHe: "איור 2 — המפה מהדוגמה התלת-נקודתית: A–C–B. בהזנחת שחלופים מרובים שלא זוהו, המרחקים הם 10 ו-20 cM וסכומם 30 cM. תדירות הרקומבינציה הנמדדת ישירות בין A ל-B היא רק 28%." },
 };
 

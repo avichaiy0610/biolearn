@@ -1,10 +1,18 @@
 import type { Lesson, LessonQuestion } from "./types";
+import { sexDetermination } from "./technion-genetics/sex-determination";
+import { chromosomalTheory } from "./technion-genetics/chromosomal-theory";
+import { chromosomeNumber } from "./technion-genetics/chromosome-number";
+import { chromosomeStructure } from "./technion-genetics/chromosome-structure";
 import { dominanceAlleles } from "./technion-genetics/dominance-alleles";
+import { geneInteraction } from "./technion-genetics/gene-interaction";
 import { linkageMapping } from "./technion-genetics/linkage-mapping";
 import { mendelProbability } from "./technion-genetics/mendel-probability";
+import { mutations } from "./technion-genetics/mutations";
+import { natureOfGene } from "./technion-genetics/nature-of-gene";
+import { nonMendelian } from "./technion-genetics/non-mendelian";
 import { pedigrees } from "./technion-genetics/pedigrees";
 
-export const LESSONS: Lesson[] = [mendelProbability, dominanceAlleles, pedigrees, linkageMapping];
+export const LESSONS: Lesson[] = [mendelProbability, dominanceAlleles, pedigrees, chromosomalTheory, sexDetermination, linkageMapping, mutations, chromosomeStructure, chromosomeNumber, natureOfGene, geneInteraction, nonMendelian];
 
 export const lessonBySlug = (slug: string) => LESSONS.find((l) => l.slug === slug);
 
