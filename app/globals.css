@@ -1,26 +1,104 @@
 @import "tailwindcss";
 
+/* Dark mode follows the system unless the visitor picked a theme with the
+   toggle (data-theme on <html>, set before paint by the script in the layout). */
+@custom-variant dark {
+  &:where([data-theme="dark"], [data-theme="dark"] *) {
+    @slot;
+  }
+  @media (prefers-color-scheme: dark) {
+    &:where(:root:not([data-theme="light"]), :root:not([data-theme="light"]) *) {
+      @slot;
+    }
+  }
+}
+
+/* Design tokens — "course reader" look: cool white, deep evergreen, restrained amber. */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: light;
+  --bg: #f3f6f5;
+  --surface: #ffffff;
+  --surface-2: #eaf1ee;
+  --ink: #152d27;
+  --muted: #536a62;
+  --line: #ccd9d2;
+  --brand: #14664d;
+  --brand-hover: #0b503b;
+  --tint: #e0eee6;
+  --amber: #a65014;
+  --amber-tint: #fcf0e4;
+  --hero: #123d30;
+  --hero-ink: #f3faf6;
+  --hero-muted: #bdd8ca;
+  --background: var(--bg);
+  --foreground: var(--ink);
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #101b17;
+  --surface: #172820;
+  --surface-2: #20352b;
+  --ink: #edf5ef;
+  --muted: #b1c6b9;
+  --line: #3b5346;
+  --brand: #91dbb2;
+  --brand-hover: #b3efcc;
+  --tint: #244333;
+  --amber: #f3b77f;
+  --amber-tint: #3c2d21;
+  --hero: #183f31;
+  --hero-ink: #f3faf6;
+  --hero-muted: #bdd8ca;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #101b17;
+    --surface: #172820;
+    --surface-2: #20352b;
+    --ink: #edf5ef;
+    --muted: #b1c6b9;
+    --line: #3b5346;
+    --brand: #91dbb2;
+    --brand-hover: #b3efcc;
+    --tint: #244333;
+    --amber: #f3b77f;
+    --amber-tint: #3c2d21;
+    --hero: #183f31;
+    --hero-ink: #f3faf6;
+    --hero-muted: #bdd8ca;
+  }
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-brand: var(--brand);
+  --color-brand-hover: var(--brand-hover);
+  --color-tint: var(--tint);
+  --color-amber: var(--amber);
+  --color-amber-tint: var(--amber-tint);
+  --color-hero: var(--hero);
+  --color-hero-ink: var(--hero-ink);
+  --color-hero-muted: var(--hero-muted);
+  --font-sans: var(--font-hebrew), var(--font-geist), Arial, sans-serif;
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-hebrew), var(--font-geist), Arial, sans-serif;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+bdi {
+  unicode-bidi: isolate;
 }

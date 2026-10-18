@@ -55,6 +55,7 @@ export const UNIVERSITIES: University[] = [
 ];
 
 export const UNIVERSITY_COOKIE = "bl_uni";
+export const TERM_COOKIE = "bl_term"; // e.g. "2A" = year 2, semester A
 
 export const universityBySlug = (slug: string | undefined | null) => UNIVERSITIES.find((u) => u.slug === slug);
 

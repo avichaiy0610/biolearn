@@ -602,3 +602,33 @@ export default function ProcessAnimation({
     </div>
   );
 }
+
+/* ─── Still frame ─────────────────────────────────────────────────────────── */
+// One step of a v2 animation drawn without controls — used as a lesson figure
+// (homepage "open unit"). Same renderer as the animation, so the figure is
+// exactly what the student sees on the process page. Returns null for legacy
+// (v1) scenes, which need the full player.
+export function SceneStill({ steps, step, lang, label }: { steps: Step[]; step: number; lang: Locale; label: string }) {
+  const scenes = useMemo(() => steps.map((s) => parseSvgData(s.svgData)), [steps]);
+  const ids = useMemo(() => collectIds(scenes), [scenes]);
+  if (scenes.length === 0 || !scenes.every((s) => (s.v ?? 1) >= 2) || ids.length === 0) return null;
+  const i = Math.min(Math.max(step, 0), scenes.length - 1);
+  const highlight = scenes[i]?.highlight;
+  return (
+    <svg viewBox="0 0 400 300" className="w-full h-auto" role="img" aria-label={label} xmlns="http://www.w3.org/2000/svg">
+      <SvgDefs />
+      {ids.map((id) => (
+        <AnimatedSvgElement
+          key={id}
+          id={id}
+          stepIndex={i}
+          scenes={scenes}
+          isHighlighted={!highlight || highlight.length === 0 || highlight.includes(id)}
+          lang={lang}
+          v2
+          instant
+        />
+      ))}
+    </svg>
+  );
+}
