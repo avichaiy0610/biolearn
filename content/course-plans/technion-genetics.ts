@@ -13,6 +13,8 @@ const proc = (slug: string, topic = G): PlanItem => ({ kind: "process", topic, s
 const soon = (titleHe: string): PlanItem => ({ kind: "soon", titleHe });
 const lm = (section?: string): PlanItem => ({ kind: "lesson", slug: "linkage-mapping", section });
 const lmWp = (problem: string): PlanItem => ({ kind: "lesson", slug: "linkage-mapping", problem });
+const mp = (section?: string): PlanItem => ({ kind: "lesson", slug: "mendel-probability", section });
+const mpWp = (problem: string): PlanItem => ({ kind: "lesson", slug: "mendel-probability", problem });
 
 const S = {
   mendel: "cmq0ts4lp00018s4midich93z",
@@ -34,7 +36,7 @@ export const technionGeneticsPlan: CoursePlan = {
   schedule: "suggested",
   scheduleNoteHe: "הנושאים לפי הסילבוס העדכני של הקורס בפורטל הטכניון (הוא מפרט נושאים, לא שבועות). סדר ההרצאות משוחזר ממבנה הקורס בשנים קודמות ונבדק מול סטודנט בקורס; נושאים שלא מופיעים בסילבוס העדכני הוצאו.",
   topics: [
-    { titleHe: "חוקי התורשה המנדליים והלא-מנדליים", items: [sub(S.mendel), proc(MENDEL_ANIM), soon("יחידה מלאה: חוקי מנדל, הסתברות ומבחן χ²"), sub(S.nonMendel), proc(NON_MENDEL_ANIM), sub(S.mito), proc(MITO_ANIM), sub(S.imprinting), proc("genomic-imprinting")] },
+    { titleHe: "חוקי התורשה המנדליים והלא-מנדליים", items: [mp(), proc(MENDEL_ANIM), sub(S.nonMendel), proc(NON_MENDEL_ANIM), sub(S.mito), proc(MITO_ANIM), sub(S.imprinting), proc("genomic-imprinting")] },
     { titleHe: "מהות הגן", items: [soon("יחידה מלאה: גן אחד–אנזים אחד וקומפלמנטציה")] },
     { titleHe: "ניתוח שושלות", items: [sub(S.patterns), soon("יחידה מלאה: ניתוח שושלות")] },
     { titleHe: "התיאוריה הכרומוזומלית של התורשה", items: [proc("meiosis"), soon("יחידה מלאה: מיוזה וחוקי מנדל; ניסויי מורגן")] },
@@ -44,8 +46,8 @@ export const technionGeneticsPlan: CoursePlan = {
     { titleHe: "אינטראקציה בין גנים", items: [sub(S.codominance), sub(S.polygenic), soon("יחידה מלאה: אפיסטזיס, יחסים מותאמים וסופרסיה")] },
   ],
   lectures: [
-    { n: 1, titleHe: "חוקי מנדל: היפרדות, מיון בלתי תלוי והצלבת מבחן", items: [sub(S.mendel), proc(MENDEL_ANIM)] },
-    { n: 2, titleHe: "הסתברות ותורשה מנדלית באדם", items: [sub(S.mendel), soon("יחידה מלאה: חוקי מנדל, הסתברות ומבחן χ²")] },
+    { n: 1, titleHe: "חוקי מנדל: היפרדות, מיון בלתי תלוי והצלבת מבחן", items: [mp("method"), mp("segregation"), mp("testcross"), mp("assortment"), proc(MENDEL_ANIM)] },
+    { n: 2, titleHe: "הסתברות ומבחן χ²", items: [mp("probability"), mp("chi-square")] },
     { n: 3, titleHe: "ניתוח שושלות", items: [sub(S.patterns), soon("יחידה מלאה: ניתוח שושלות")] },
     { n: 4, titleHe: "כרומוזומים, מיוזה והתיאוריה הכרומוזומלית", items: [proc("meiosis"), soon("יחידה מלאה: מיוזה וחוקי מנדל; ניסויי מורגן")] },
     { n: 5, titleHe: "תאחיזה למין וקביעת מין", items: [sub(S.sexLinked), soon("יחידה מלאה: תאחיזה למין, קביעת מין ואינאקטיבציה של X")] },
@@ -59,8 +61,8 @@ export const technionGeneticsPlan: CoursePlan = {
     { n: 13, titleHe: "תורשה לא-מנדלית", items: [sub(S.nonMendel), sub(S.mito), sub(S.imprinting)] },
   ],
   tutorials: [
-    { n: 1, titleHe: "מונוהיבריד, דיהיבריד והצלבת מבחן", items: [soon("תרגילים פתורים: חוקי מנדל")] },
-    { n: 2, titleHe: "הסתברות ומבחן χ²", items: [soon("תרגילים פתורים: הסתברות ו-χ²")] },
+    { n: 1, titleHe: "מונוהיבריד, דיהיבריד והצלבת מבחן", items: [mpWp("testcross"), mpWp("trihybrid")] },
+    { n: 2, titleHe: "הסתברות ומבחן χ²", items: [mpWp("binomial"), mpWp("chi-dihybrid")] },
     { n: 3, titleHe: "ניתוח שושלות", items: [soon("תרגילים פתורים: שושלות")] },
     { n: 4, titleHe: "מיוזה ומעקב אחר כרומוזומים", items: [soon("תרגילים פתורים: מיוזה")] },
     { n: 5, titleHe: "תורשה תאוחזת-מין", items: [soon("תרגילים פתורים: תאחיזה למין")] },

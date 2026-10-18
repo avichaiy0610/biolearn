@@ -1,7 +1,8 @@
 import type { Lesson, LessonQuestion } from "./types";
 import { linkageMapping } from "./technion-genetics/linkage-mapping";
+import { mendelProbability } from "./technion-genetics/mendel-probability";
 
-export const LESSONS: Lesson[] = [linkageMapping];
+export const LESSONS: Lesson[] = [mendelProbability, linkageMapping];
 
 export const lessonBySlug = (slug: string) => LESSONS.find((l) => l.slug === slug);
 

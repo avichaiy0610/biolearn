@@ -81,8 +81,71 @@ function GeneMap() {
   );
 }
 
+
+// Monohybrid Aa × Aa: gametes on the edges, offspring in the cells, phenotype by color.
+function Punnett() {
+  const PURPLE = "#7c3aed", WHITE = "#f8fafc", LT = { fontFamily: "Arial, sans-serif" };
+  const cell = (x: number, y: number, g: string) => {
+    const dom = g.includes("A");
+    return (
+      <g key={`${x}${y}`}>
+        <rect x={x} y={y} width={110} height={80} fill={dom ? "#ede9fe" : WHITE} stroke={INK} strokeWidth={1.5} />
+        <circle cx={x + 30} cy={y + 40} r={16} fill={dom ? PURPLE : WHITE} stroke={dom ? PURPLE : MUTED} strokeWidth={2} />
+        <text x={x + 72} y={y + 46} textAnchor="middle" fontSize="20" fontWeight="700" fill={INK} style={LT}>{g}</text>
+      </g>
+    );
+  };
+  return (
+    <svg viewBox="0 0 420 300" className="w-full h-auto" role="img" aria-label="ריבוע פאנט להצלבה Aa כפול Aa: AA, Aa, Aa ו-aa; שלושה סגולים ואחד לבן">
+      <g direction="ltr">
+        <text x={245} y={30} textAnchor="middle" direction="rtl" fontSize="13" fill={MUTED} style={T}>גמטות מההורה Aa</text>
+        <text x={190} y={58} textAnchor="middle" fontSize="20" fontWeight="700" fill={BLUE} style={LT}>A</text>
+        <text x={300} y={58} textAnchor="middle" fontSize="20" fontWeight="700" fill={ORANGE} style={LT}>a</text>
+        <text x={115} y={115} textAnchor="middle" fontSize="20" fontWeight="700" fill={BLUE} style={LT}>A</text>
+        <text x={115} y={195} textAnchor="middle" fontSize="20" fontWeight="700" fill={ORANGE} style={LT}>a</text>
+        {cell(135, 70, "AA")}{cell(245, 70, "Aa")}{cell(135, 150, "Aa")}{cell(245, 150, "aa")}
+      </g>
+      <text x={60} y={160} textAnchor="middle" direction="rtl" fontSize="13" fill={MUTED} style={T} transform="rotate(-90 60 160)">גמטות מההורה Aa</text>
+      <text x={245} y={262} textAnchor="middle" fontSize="14" fontWeight="700" fill={INK} style={T}>גנוטיפים 1 : 2 : 1 · פנוטיפים 3 סגול : 1 לבן</text>
+      <text x={245} y={286} textAnchor="middle" fontSize="12" fill={MUTED} style={T}>כל גמטה בהסתברות ½, ולכן כל משבצת בהסתברות ¼</text>
+    </svg>
+  );
+}
+
+// Dihybrid YyRr × YyRr as two independent 3:1 splits → 9:3:3:1.
+function ForkedLine() {
+  const LT = { fontFamily: "Arial, sans-serif" };
+  const row = (y: number, b: string, p: string, label: string) => (
+    <g key={y}>
+      <line x1={150} y1={y} x2={205} y2={y} stroke={MUTED} strokeWidth={1.5} />
+      <text x={215} y={y + 5} fontSize="15" fill={INK} style={LT}>{b}</text>
+      <text x={330} y={y + 5} fontSize="15" fontWeight="700" fill={BLUE} style={LT}>{p}</text>
+      <text x={400} y={y + 5} fontSize="13" fill={MUTED} style={T}>{label}</text>
+    </g>
+  );
+  return (
+    <svg viewBox="0 0 520 260" className="w-full h-auto" role="img" aria-label="תרשים ענפים: 3/4 צהוב כפול 3/4 חלק נותן 9/16, וכך מתקבל 9:3:3:1">
+      <g direction="ltr">
+        <text x={20} y={22} fontSize="12" fill={MUTED} style={T}>צבע</text>
+        <text x={215} y={22} fontSize="12" fill={MUTED} style={T}>צורה</text>
+        <text x={330} y={22} fontSize="12" fill={MUTED} style={T}>הסתברות</text>
+        <text x={20} y={80} fontSize="15" fontWeight="700" fill={INK} style={LT}>¾ Y_</text>
+        <text x={20} y={190} fontSize="15" fontWeight="700" fill={INK} style={LT}>¼ yy</text>
+        <path d="M80 75 L150 55 M80 75 L150 105 M80 185 L150 165 M80 185 L150 215" stroke={MUTED} strokeWidth={1.5} fill="none" />
+        {row(55, "¾ R_", "9/16", "צהוב, חלק")}
+        {row(105, "¼ rr", "3/16", "צהוב, מקומט")}
+        {row(165, "¾ R_", "3/16", "ירוק, חלק")}
+        {row(215, "¼ rr", "1/16", "ירוק, מקומט")}
+      </g>
+      <text x={260} y={250} textAnchor="middle" fontSize="13" fontWeight="700" fill={INK} style={T}>כל ענף: מכפלת ההסתברויות לאורכו (כלל הכפל)</text>
+    </svg>
+  );
+}
+
 const FIGURES: Record<string, { el: () => React.ReactElement; captionHe: string }> = {
   crossover: { el: Crossover, captionHe: "איור 1 — שחלוף יחיד בין שני גנים בתאחיזה במצב cis. השחלוף מערב רק שתיים מארבע הכרומטידות, ולכן מתוך מיוזה כזו רק מחצית מהתוצרים רקומביננטיים. כחול וכתום מציינים את מקור המקטעים בשני ההומולוגים; הסימון המקווקו מציין את אתר ההחלפה. סכמטי, לא בקנה מידה." },
+  punnett: { el: Punnett, captionHe: "ריבוע פאנט להצלבה Aa × Aa. כל הורה יוצר שני סוגי גמטות בהסתברות שווה; שלוש מתוך ארבע המשבצות נושאות לפחות אלל A אחד — ולכן 3 סגולים : 1 לבן." },
+  "forked-line": { el: ForkedLine, captionHe: "תרשים ענפים להצלבה YyRr × YyRr, בהנחת מיון בלתי תלוי ודומיננטיות מלאה בשתי התכונות. בכל תכונה יחס הפנוטיפים הצפוי הוא 3 : 1; מכפלת ההסתברויות לאורך הענפים נותנת 9 : 3 : 3 : 1 — בלי לצייר ריבוע של 16 משבצות." },
   map: { el: GeneMap, captionHe: "איור 2 — המפה מהדוגמה התלת-נקודתית: A–C–B. בהזנחת שחלופים מרובים שלא זוהו, המרחקים הם 10 ו-20 cM וסכומם 30 cM. תדירות הרקומבינציה הנמדדת ישירות בין A ל-B היא רק 28%." },
 };
 

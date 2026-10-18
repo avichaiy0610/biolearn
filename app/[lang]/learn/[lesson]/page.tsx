@@ -14,8 +14,6 @@ import LessonPractice from "@/components/lesson/LessonPractice";
 
 export const dynamic = "force-dynamic";
 
-const HEBREW = /[֐-׿]/;
-
 export async function generateMetadata({ params }: PageProps<"/[lang]/learn/[lesson]">): Promise<Metadata> {
   const { lesson: slug } = await params;
   const l = lessonBySlug(slug);
@@ -24,6 +22,8 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/learn/[les
 }
 
 // Inline code = symbols, genotypes and formulas: isolated, so Hebrew prose keeps its order.
+// Direction follows the first letter (Latin/Greek → LTR, Hebrew → RTL): "P(Aa | סגול) = …" and
+// "χ² = Σ …" read LTR, "מרחק = ½ × …" reads RTL.
 const md: Components = {
   h2: () => null, // headings are rendered by the section wrapper
   p: ({ children }) => <p className="my-4 text-[16.5px] leading-8 text-ink">{children}</p>,
@@ -33,7 +33,7 @@ const md: Components = {
   code: ({ children }) => {
     const text = String(children);
     return (
-      <bdi dir={HEBREW.test(text) ? "rtl" : "ltr"} className={`rounded bg-surface-2 px-1.5 py-0.5 text-[0.93em] font-semibold text-brand whitespace-nowrap ${text.length > 18 ? "inline-block max-w-full overflow-x-auto align-middle" : ""}`}>
+      <bdi dir={/^[^A-Za-zͰ-Ͽ֐-׿]*[֐-׿]/.test(text) ? "rtl" : "ltr"} className={`rounded bg-surface-2 px-1.5 py-0.5 text-[0.93em] font-semibold text-brand whitespace-nowrap ${text.length > 18 ? "inline-block max-w-full overflow-x-auto align-middle" : ""}`}>
         {text}
       </bdi>
     );
