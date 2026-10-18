@@ -71,7 +71,7 @@ export default async function CoursePage({ params, searchParams }: PageProps<"/[
       )}
 
       {plan && planGroups ? (
-        <CoursePlanView lang={lang} courseSlug={course.slug} view={view} groups={planGroups} scheduleNoteHe={plan.scheduleNoteHe} suggested={plan.schedule === "suggested"} />
+        <CoursePlanView lang={lang} courseSlug={course.slug} view={view} groups={planGroups} scheduleNoteHe={plan.scheduleNoteHe} suggested={plan.schedule === "suggested"} lectureOrder={plan.lectureOrder} tutorialOrder={plan.tutorialOrder} />
       ) : (
       <section className="mb-10">
         <h2 className="text-xl font-semibold text-zinc-800 dark:text-zinc-200 mb-4">{he ? "יחידות הלימוד לפי הסדר" : "Units in order"}</h2>

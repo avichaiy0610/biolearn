@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { PlanEntry } from "@/lib/course-plan";
+import type { OrderConfidence, OrderSource } from "@/content/course-plans/types";
 
 type Group = { titleHe: string; n?: number; entries: PlanEntry[] };
 export type PlanView = "topics" | "lectures" | "tutorials";
@@ -13,6 +14,17 @@ const KIND_HE: Record<PlanEntry["kind"], string> = {
   soon: "בכתיבה",
 };
 
+export const CONFIDENCE_HE: Record<OrderConfidence, string> = {
+  official: "רשמי",
+  "official-past": "רשמי, משנה קודמת",
+  students: "נבדק מול סטודנטים",
+  parallel: "לפי קורס מקביל",
+  consensus: "לפי הסכמה בין אוניברסיטאות",
+  textbook: "לפי סדר ספר הקורס",
+};
+
+const NO_TUTORIAL_SOURCE = "סדר התרגולים בקורס לא פורסם, ולא מצאנו לו מקור. התרגילים כאן מסודרים לפי ההרצאות: כל תרגול מתרגל את החומר של ההרצאה באותו מספר.";
+
 const TABS: { id: PlanView; he: string }[] = [
   { id: "topics", he: "לפי נושאים" },
   { id: "lectures", he: "לפי הרצאות" },
@@ -20,9 +32,13 @@ const TABS: { id: PlanView; he: string }[] = [
 ];
 
 // The same course material by syllabus topic, by lecture or by tutorial.
-export default function CoursePlanView({ lang, courseSlug, view, groups, scheduleNoteHe, suggested }: {
+export default function CoursePlanView({ lang, courseSlug, view, groups, scheduleNoteHe, suggested, lectureOrder, tutorialOrder }: {
   lang: string; courseSlug: string; view: PlanView; groups: Group[]; scheduleNoteHe: string; suggested: boolean;
+  lectureOrder?: OrderSource; tutorialOrder?: OrderSource | null;
 }) {
+  // Provenance shown above the list; tutorials without a source are labelled per lecture.
+  const tutorialsByLecture = view === "tutorials" && tutorialOrder === null;
+  const source = view === "lectures" ? lectureOrder : view === "tutorials" ? tutorialOrder ?? undefined : undefined;
   return (
     <section aria-labelledby="plan-title" className="mb-10">
       <h2 id="plan-title" className="sr-only">חומר הקורס</h2>
@@ -34,7 +50,22 @@ export default function CoursePlanView({ lang, courseSlug, view, groups, schedul
           </Link>
         ))}
       </div>
-      {view !== "topics" && suggested && (
+      {source ? (
+        <div className="mt-3 rounded-lg border border-amber/40 bg-amber-tint px-3 py-2 text-xs leading-6 text-ink">
+          <strong className="text-amber">מקור הסדר: {CONFIDENCE_HE[source.confidence]}.</strong> {source.noteHe}
+          {source.links && source.links.length > 0 && (
+            <span className="block">
+              {source.links.map((l, i) => (
+                <a key={l.url} href={l.url} target="_blank" rel="noopener noreferrer" className="font-semibold text-brand underline underline-offset-2">{i > 0 ? " · " : ""}{l.labelHe}</a>
+              ))}
+            </span>
+          )}
+        </div>
+      ) : tutorialsByLecture ? (
+        <p className="mt-3 rounded-lg border border-amber/40 bg-amber-tint px-3 py-2 text-xs leading-6 text-ink">
+          <strong className="text-amber">מקור הסדר:</strong> {NO_TUTORIAL_SOURCE}
+        </p>
+      ) : view !== "topics" && suggested && (
         <p className="mt-3 rounded-lg border border-amber/40 bg-amber-tint px-3 py-2 text-xs leading-6 text-ink">
           <strong className="text-amber">מקור הסדר:</strong> {scheduleNoteHe}
         </p>
@@ -45,7 +76,7 @@ export default function CoursePlanView({ lang, courseSlug, view, groups, schedul
           <li key={`${g.titleHe}-${gi}`} className="overflow-hidden rounded-[18px] border border-line bg-surface">
             <div className="flex items-baseline gap-3 border-b border-line bg-surface-2 px-4 py-3">
               <span className="text-xs font-bold text-brand">
-                {view === "lectures" ? `הרצאה ${g.n}` : view === "tutorials" ? `תרגול ${g.n}` : `נושא ${gi + 1}`}
+                {view === "lectures" ? `הרצאה ${g.n}` : view === "tutorials" ? (tutorialsByLecture ? `תרגול על הרצאה ${g.n}` : `תרגול ${g.n}`) : `נושא ${gi + 1}`}
               </span>
               <h3 className="font-bold">{g.titleHe}</h3>
             </div>

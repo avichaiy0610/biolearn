@@ -47,6 +47,12 @@ const MITO_ANIM = "mitochondrial-inheritance-animation-1780786394329";
 
 export const technionGeneticsPlan: CoursePlan = {
   courseSlug: "technion-genetics",
+  lectureOrder: {
+    confidence: "students",
+    noteHe: "אין לוח הרצאות ציבורי לקורס (אתר הקורס במודל סגור). הסדר שוחזר ממבנה הקורס בשנים קודמות ונבדק מול סטודנט שלמד בקורס; היחידות מכסות את כל נושאי הסילבוס העדכני.",
+    links: [{ labelHe: "הסילבוס בפורטל הטכניון", url: "https://students.technion.ac.il/local/technionsearch/course/134020" }],
+  },
+  tutorialOrder: null,
   schedule: "suggested",
   scheduleNoteHe: "הנושאים לפי הסילבוס העדכני של הקורס בפורטל הטכניון (הוא מפרט נושאים, לא שבועות). הפירוט לתת-נושאים לפי ספרי הקורס (Klug, Griffiths); סדר ההרצאות משוחזר ממבנה הקורס בשנים קודמות ונבדק מול סטודנט בקורס.",
   topics: [
