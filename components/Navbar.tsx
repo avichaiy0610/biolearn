@@ -8,6 +8,7 @@ import type { Locale } from "@/lib/dictionaries";
 import LanguageSwitcher from "./LanguageSwitcher";
 import SearchBar from "./SearchBar";
 import ThemeToggle from "./ThemeToggle";
+import PendingHint from "./PendingHint";
 
 type Dict = {
   nav: { home: string; topics: string; courses: string; review: string; search: string; research: string; proteins: string; admin: string; login: string; logout: string };
@@ -56,13 +57,14 @@ export default function Navbar({
             <Link
               key={link.href}
               href={link.href}
-              className={`px-3 py-1.5 rounded-md text-sm font-semibold transition-colors ${
+              className={`relative px-3 py-1.5 rounded-md text-sm font-semibold transition-colors ${
                 pathname === link.href || pathname.startsWith(`${link.href}/`)
                   ? "text-brand"
                   : "text-muted hover:text-ink"
               }`}
             >
               {link.label}
+              <PendingHint />
             </Link>
           ))}
         </nav>
@@ -132,13 +134,14 @@ export default function Navbar({
               key={link.href}
               href={link.href}
               onClick={() => setMenuOpen(false)}
-              className={`px-3 py-2 rounded-md text-sm font-semibold transition-colors ${
+              className={`relative px-3 py-2 rounded-md text-sm font-semibold transition-colors ${
                 pathname === link.href || pathname.startsWith(`${link.href}/`)
                   ? "text-brand"
                   : "text-muted hover:text-ink"
               }`}
             >
               {link.label}
+              <PendingHint />
             </Link>
           ))}
           <div className="sm:hidden flex items-center gap-3 px-3 pt-2 text-sm text-muted">

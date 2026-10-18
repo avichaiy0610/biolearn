@@ -1,3 +1,4 @@
+import { revalidateTag } from "next/cache";
 import { prisma } from "@/lib/prisma";
 import { isAdmin } from "@/lib/supabase/server";
 import { getCourses, courseCatalog as catalog } from "@/lib/courses-db";
@@ -77,5 +78,6 @@ export async function PUT(req: Request) {
     }),
   ];
   await prisma.$transaction(ops);
+  revalidateTag("courses", { expire: 0 });
   return Response.json({ ok: true, courses: await getCourses(university) });
 }

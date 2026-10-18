@@ -8,6 +8,7 @@ import { GENERAL_UNIVERSITY } from "@/content/universities";
 import { GLOSSARY } from "@/content/glossary";
 import FieldIcon from "@/components/FieldIcon";
 import TrackPicker from "@/components/TrackPicker";
+import PendingHint from "@/components/PendingHint";
 import { SceneStill } from "@/components/ProcessAnimation";
 
 const FLASHCARD_COUNT = Object.values(GLOSSARY).reduce((n, terms) => n + terms.length, 0);
@@ -103,6 +104,7 @@ export default async function HomePage({ params, searchParams }: PageProps<"/[la
                         </small>
                       </span>
                       <FieldIcon topic={c.icon} size={28} className={empty ? "text-muted" : "text-brand"} />
+                      <PendingHint />
                     </Link>
                   </li>
                 );

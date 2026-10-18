@@ -2,7 +2,7 @@ import "server-only";
 import { auth } from "@/auth";
 import { prisma } from "@/lib/prisma";
 import { getCourses, type CourseRecord } from "@/lib/courses-db";
-import { resolveCourseUnits, type ResolvedUnit } from "@/lib/course-data";
+import { resolveUnitsWith, unitCatalog, type ResolvedUnit } from "@/lib/course-data";
 import { selectedTerm, selectedUniversity } from "@/lib/university";
 import { GLOSSARY } from "@/content/glossary";
 import { bankForSubtopic } from "@/content/question-bank";
@@ -41,7 +41,17 @@ function excerptOf(text: string, max = 260) {
 
 export async function homeData(lang: string, courseParam?: string) {
   const [uni, term, session] = await Promise.all([selectedUniversity(), selectedTerm(), auth().catch(() => null)]);
-  const all = await getCourses(uni.slug);
+  // One round trip for everything that doesn't depend on the term: the cached
+  // course table and unit catalog, plus the student's own progress.
+  const email = session?.user?.email;
+  const [all, catalog, visits, dueReviews] = await Promise.all([
+    getCourses(uni.slug),
+    unitCatalog(),
+    email
+      ? prisma.userProgress.findMany({ where: { user: { email }, visited: true }, select: { subtopicId: true, updatedAt: true }, orderBy: { updatedAt: "desc" } })
+      : Promise.resolve([] as { subtopicId: string; updatedAt: Date }[]),
+    email ? prisma.flashcardReview.count({ where: { user: { email }, due: { lte: new Date() } } }) : Promise.resolve(0),
+  ]);
 
   // Courses of the chosen term (plus year-long ones); fall back to the year, then the first year with courses.
   let year = term.year;
@@ -50,19 +60,10 @@ export async function homeData(lang: string, courseParam?: string) {
   if (!list.length) list = all.filter((c) => c.year === year);
   if (!list.length && all.length) { year = all[0].year; list = all.filter((c) => c.year === year); }
 
-  const email = session?.user?.email;
-  const user = email ? await prisma.user.findUnique({ where: { email }, select: { id: true } }) : null;
-  const [visits, dueReviews] = user
-    ? await Promise.all([
-        prisma.userProgress.findMany({ where: { userId: user.id, visited: true }, select: { subtopicId: true, updatedAt: true }, orderBy: { updatedAt: "desc" } }),
-        prisma.flashcardReview.count({ where: { userId: user.id, due: { lte: new Date() } } }),
-      ])
-    : [[], 0];
   const visited = new Set(visits.map((v) => v.subtopicId));
 
-  const courses: HomeCourse[] = await Promise.all(
-    list.map(async (course) => {
-      const units = await resolveCourseUnits(course, lang);
+  const courses: HomeCourse[] = list.map((course) => {
+      const units = resolveUnitsWith(catalog, course, lang);
       const readings = units.filter((u) => u.kind === "subtopic");
       return {
         course,
@@ -72,8 +73,7 @@ export async function homeData(lang: string, courseParam?: string) {
         read: readings.filter((u) => visited.has(u.subtopicId!)).length,
         next: readings.find((u) => !visited.has(u.subtopicId!)) ?? readings[0] ?? units[0] ?? null,
       };
-    }),
-  );
+    });
 
   // Resume: the most recently read subtopic that belongs to one of this term's courses.
   const lastId = visits.find((v) => courses.some((c) => c.units.some((u) => u.subtopicId === v.subtopicId)))?.subtopicId;
@@ -85,23 +85,26 @@ export async function homeData(lang: string, courseParam?: string) {
     [...courses].sort((a, b) => b.units.length - a.units.length)[0];
 
   let open: OpenUnit | null = null;
+  let exams = 0;
   if (selected?.next) {
     const unit = selected.next;
-    const sub = unit.subtopicId
-      ? await prisma.subtopic.findUnique({ where: { id: unit.subtopicId }, select: { contentHe: true, contentEn: true, relatedProcessSlug: true } })
-      : null;
-    const text = sub ? (lang === "he" ? sub.contentHe : sub.contentEn) : "";
     const index = selected.units.findIndex((u) => u.key === unit.key);
     // The unit's own animation; otherwise the course's next animation (labelled as such on the page).
-    const ownProcess = unit.kind === "process" ? unit.key : sub?.relatedProcessSlug ?? null;
+    const ownProcess = unit.kind === "process" ? unit.key : unit.relatedProcessSlug ?? null;
+    const candidates = [...new Set([ownProcess, ...[...selected.units.slice(index), ...selected.units.slice(0, index)].filter((u) => u.kind === "process").map((u) => u.key)].filter(Boolean) as string[])].slice(0, 4);
+    const [sub, found, examCount] = await Promise.all([
+      unit.subtopicId ? prisma.subtopic.findUnique({ where: { id: unit.subtopicId }, select: { contentHe: true, contentEn: true } }) : Promise.resolve(null),
+      candidates.length
+        ? prisma.process.findMany({
+            where: { slug: { in: candidates } },
+            select: { slug: true, nameHe: true, nameEn: true, topic: { select: { slug: true } }, steps: { orderBy: { order: "asc" }, select: { id: true, order: true, titleHe: true, titleEn: true, descHe: true, descEn: true, svgData: true } } },
+          })
+        : Promise.resolve([]),
+      prisma.pastExam.count({ where: { courseSlug: selected.course.slug } }).catch(() => 0),
+    ]);
+    exams = examCount;
+    const text = sub ? (lang === "he" ? sub.contentHe : sub.contentEn) : "";
     // Only v2 scenes can be drawn as a still (legacy/Lottie animations need their player).
-    const candidates = [...new Set([ownProcess, ...[...selected.units.slice(index), ...selected.units.slice(0, index)].filter((u) => u.kind === "process").map((u) => u.key)].filter(Boolean) as string[])];
-    const found = candidates.length
-      ? await prisma.process.findMany({
-          where: { slug: { in: candidates } },
-          select: { slug: true, nameHe: true, nameEn: true, topic: { select: { slug: true } }, steps: { orderBy: { order: "asc" }, select: { id: true, order: true, titleHe: true, titleEn: true, descHe: true, descEn: true, svgData: true } } },
-        })
-      : [];
     const drawable = (p: (typeof found)[number]) => p.steps.length > 0 && p.steps.every((st) => (parseSvgData(st.svgData).v ?? 1) >= 2);
     const process = candidates.map((slug) => found.find((p) => p.slug === slug)).find((p) => p && drawable(p)) ?? null;
     const terms = (GLOSSARY[unit.topicSlug] ?? []).filter((t) => text.includes(t.he) || text.toLowerCase().includes(t.en.toLowerCase().split(" (")[0])).slice(0, 4);
@@ -123,7 +126,5 @@ export async function homeData(lang: string, courseParam?: string) {
     ? { course: resumeCourse, unit: resumeCourse.units.find((u) => u.subtopicId === lastId)! }
     : null;
 
-  const exams = selected ? await prisma.pastExam.count({ where: { courseSlug: selected.course.slug } }).catch(() => 0) : 0;
-
-  return { uni, term, year, courses, selected, open, resume, loggedIn: !!user, dueReviews, exams };
+  return { uni, term, year, courses, selected, open, resume, loggedIn: !!email, dueReviews, exams };
 }
