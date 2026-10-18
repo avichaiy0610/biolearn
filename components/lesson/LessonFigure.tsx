@@ -112,6 +112,44 @@ function Punnett() {
   );
 }
 
+// Three dominance relations side by side: the heterozygote (middle row) is what differs.
+function DominanceTypes() {
+  const RED = "#dc2626", PINK = "#f9a8d4", LT = { fontFamily: "Arial, sans-serif" };
+  const rows = [{ y: 95, g: "AA" }, { y: 175, g: "Aa" }, { y: 255, g: "aa" }];
+  const flower = (cx: number, cy: number, fill: string) => <circle cx={cx} cy={cy} r={24} fill={fill} stroke={fill === "#ffffff" ? MUTED : fill} strokeWidth={2} />;
+  // Codominance: a cell carrying antigen M (blue) and/or N (orange) on its surface.
+  const cell = (cx: number, cy: number, m: boolean, n: boolean) => {
+    const dots = Array.from({ length: 10 }, (_, i) => {
+      const a = (i / 10) * Math.PI * 2;
+      const color = m && n ? (i % 2 ? ORANGE : BLUE) : m ? BLUE : ORANGE;
+      return <circle key={i} cx={cx + Math.cos(a) * 26} cy={cy + Math.sin(a) * 26} r={4.5} fill={color} />;
+    });
+    return <g><circle cx={cx} cy={cy} r={22} fill="#fef2f2" stroke={MUTED} strokeWidth={1.5} />{dots}</g>;
+  };
+  const cols = [
+    { x: 520, title: "דומיננטיות מלאה", note: "3 : 1", f: (y: number, g: string) => flower(520, y, g === "aa" ? "#ffffff" : RED) },
+    { x: 320, title: "דומיננטיות חלקית", note: "1 : 2 : 1", f: (y: number, g: string) => flower(320, y, g === "AA" ? RED : g === "Aa" ? PINK : "#ffffff") },
+    { x: 120, title: "קו-דומיננטיות", note: "1 : 2 : 1", f: (y: number, g: string) => cell(120, y, g !== "aa", g !== "AA") },
+  ];
+  return (
+    <svg viewBox="0 0 640 345" className="w-full h-auto" role="img" aria-label="שלושה סוגי יחסי דומיננטיות: במלאה ההטרוזיגוט אדום כמו AA; בחלקית ההטרוזיגוט ורוד; בקו-דומיננטיות ההטרוזיגוט נושא את שני האנטיגנים">
+      {cols.map((c) => (
+        <g key={c.x}>
+          <text x={c.x} y={30} textAnchor="middle" fontSize="15" fontWeight="700" fill={INK} style={T}>{c.title}</text>
+          {rows.map((r) => <g key={r.g}>{c.f(r.y, r.g)}</g>)}
+          <text x={c.x} y={318} textAnchor="middle" fontSize="13" fill={MUTED} style={T}>{`F2: ${c.note}`}</text>
+        </g>
+      ))}
+      {rows.map((r) => (
+        <text key={r.g} x={612} y={r.y + 6} textAnchor="middle" fontSize="16" fontWeight="700" fill={r.g === "Aa" ? ORANGE : INK} style={LT}>{r.g}</text>
+      ))}
+      <rect x={20} y={142} width={560} height={66} rx={10} fill="none" stroke={ORANGE} strokeWidth={1.5} strokeDasharray="5 4" />
+      <text x={320} y={60} textAnchor="middle" fontSize="12" fill={MUTED} style={T}>בכל דוגמה משווים את ההטרוזיגוט (מקווקו) לשני ההומוזיגוטים</text>
+      <text x={120} y={338} textAnchor="middle" fontSize="11" fill={MUTED} style={T}>כחול = אנטיגן M · כתום = אנטיגן N</text>
+    </svg>
+  );
+}
+
 // Dihybrid YyRr × YyRr as two independent 3:1 splits → 9:3:3:1.
 function ForkedLine() {
   const LT = { fontFamily: "Arial, sans-serif" };
@@ -240,6 +278,7 @@ const FIGURES: Record<string, { el: () => React.ReactElement; captionHe: string 
   "forked-line": { el: ForkedLine, captionHe: "תרשים ענפים להצלבה YyRr × YyRr, בהנחת מיון בלתי תלוי ודומיננטיות מלאה בשתי התכונות. בכל תכונה יחס הפנוטיפים הצפוי הוא 3 : 1; מכפלת ההסתברויות לאורך הענפים נותנת 9 : 3 : 3 : 1 — בלי לצייר ריבוע של 16 משבצות." },
   "pedigree-ar": { el: PedigreeAR, captionHe: "שושלת של מחלה אוטוזומלית רצסיבית. שני ההורים בריאים ונשאים (I-1, I-2); בתם II-2 חולה (החץ מסמן את הפרובנד). לכל ילד בריא שלהם סיכוי של 2/3 להיות נשא." },
   "pedigree-xr": { el: PedigreeXR, captionHe: "שושלת של מחלה תאוחזת X רצסיבית. הסבתא I-2 נשאית: בנה II-1 חולה, ובתה II-2 נשאית שמעבירה את המחלה לנכד III-1. החולים כולם זכרים, ואין העברה מאב לבן." },
+  "dominance-types": { el: DominanceTypes, captionHe: "השוואה סכמטית של שלושה יחסי דומיננטיות, כל אחד בדוגמה נפרדת (פרחים; אנטיגנים על תאי דם). בכל עמודה משווים את ההטרוזיגוט לשני ההומוזיגוטים של אותה דוגמה: בדומיננטיות מלאה הוא כמו AA, בחלקית הוא בין השניים (ורוד), ובקו-דומיננטיות אפשר לזהות את התוצר של כל אחד מהאללים — אנטיגן M וגם N על אותו תא. לכן רק בדומיננטיות מלאה מתקבל ב-F2 יחס 3 : 1. הסימון AA/Aa/aa כללי; במערכת MN הסימון הוא LᴹLᴹ/LᴹLᴺ/LᴺLᴺ." },
   map: { el: GeneMap, captionHe: "איור 2 — המפה מהדוגמה התלת-נקודתית: A–C–B. בהזנחת שחלופים מרובים שלא זוהו, המרחקים הם 10 ו-20 cM וסכומם 30 cM. תדירות הרקומבינציה הנמדדת ישירות בין A ל-B היא רק 28%." },
 };
 

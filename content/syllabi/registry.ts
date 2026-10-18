@@ -31,6 +31,11 @@ export const SYLLABUS_TARGETS: SyllabusTarget[] = [
     ["technion-micro-viro", "134121"], ["technion-bioinformatics", "136158"], ["technion-developmental", "134069"],
     ["technion-endocrinology", "134155"], ["technion-immunology", "276413"], ["technion-neurobiology", "134157"],
     ["technion-ecology", "134153"], ["technion-virology", "134039"],
+    // year-3 electives (catalog 2025/26, general track)
+    ["technion-biophysics", "134156"], ["technion-ubiquitin", "134140"], ["technion-computational", "134141"],
+    ["technion-metabolic-disease", "134147"], ["technion-human-genetics", "136088"], ["technion-pathogens", "066418"],
+    ["technion-cancer", "134129"], ["technion-stem-cells", "134137"], ["technion-rna", "134151"],
+    ["technion-systems", "136037"], ["technion-drugs", "136014"],
   ]),
   // Bar-Ilan — 5-digit codes (2026/27 timetable); syllabi are PDFs on the faculty site
   ...t("biu", [
