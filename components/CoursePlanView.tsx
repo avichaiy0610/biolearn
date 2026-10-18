@@ -36,7 +36,7 @@ export default function CoursePlanView({ lang, courseSlug, view, groups, schedul
       </div>
       {view !== "topics" && suggested && (
         <p className="mt-3 rounded-lg border border-amber/40 bg-amber-tint px-3 py-2 text-xs leading-6 text-ink">
-          <strong className="text-amber">סדר מוצע.</strong> {scheduleNoteHe}
+          <strong className="text-amber">מקור הסדר:</strong> {scheduleNoteHe}
         </p>
       )}
 
