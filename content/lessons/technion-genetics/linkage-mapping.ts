@@ -390,7 +390,7 @@ export const linkageMapping: Lesson = {
   ],
   refs: [
     { kind: "book", text: "Griffiths A.J.F. et al. Introduction to Genetic Analysis, 12th ed. Chapter 4: Mapping Eukaryote Chromosomes by Recombination." },
-    { kind: "book", text: "Klug W.S. et al. Concepts of Genetics, 12th ed. Chapter 5 (Global Edition: chapter 7): Chromosome Mapping in Eukaryotes." },
+    { kind: "book", text: "Klug W.S. et al. Concepts of Genetics, 12th ed. Chapter 7: Chromosome Mapping in Eukaryotes." },
     { kind: "book", text: "Alberts B. et al. Molecular Biology of the Cell, 7th ed. Chapter 5 (Homologous Recombination Is Crucial for Meiosis) and chapter 17 (Meiosis)." },
     { kind: "paper", text: "Sturtevant A.H. (1913). The linear arrangement of six sex-linked factors in Drosophila, as shown by their mode of association. J. Exp. Zool. 14: 43–59." },
     { kind: "paper", text: "Creighton H.B., McClintock B. (1931). A correlation of cytological and genetical crossing-over in Zea mays. PNAS 17: 492–497." },

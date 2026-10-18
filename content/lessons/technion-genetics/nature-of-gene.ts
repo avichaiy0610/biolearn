@@ -271,7 +271,7 @@ export const natureOfGene: Lesson = {
     },
   ],
   refs: [
-    { kind: "book", text: "Klug W.S. et al. Concepts of Genetics, 12th ed. Chapter 10: DNA Structure and Analysis; Chapter 14: Translation and Proteins." },
+    { kind: "book", text: "Klug W.S. et al. Concepts of Genetics, 12th ed. 4.9 Complementation Analysis; Chapter 10: DNA Structure and Analysis; Chapter 14: Translation and Proteins." },
     { kind: "book", text: "Griffiths A.J.F. et al. Introduction to Genetic Analysis, 12th ed. Chapter 6 (complementation in bacteria and phage); Chapter 7: DNA: Structure and Replication." },
     { kind: "paper", text: "Avery O.T., MacLeod C.M., McCarty M. (1944). Studies on the chemical nature of the substance inducing transformation of pneumococcal types. J. Exp. Med. 79: 137–158." },
     { kind: "paper", text: "Hershey A.D., Chase M. (1952). Independent functions of viral protein and nucleic acid in growth of bacteriophage. J. Gen. Physiol. 36: 39–56." },

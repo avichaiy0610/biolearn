@@ -93,6 +93,10 @@ Order file:
 ```
 
 ### 5. Coverage
+**The syllabus sets the scope; the textbook does not.** A course textbook covers far more than
+the course — never add a topic just because it is in the book (a whole book section ≠ course
+material). Use the book only to detail and fact-check topics the syllabus names; when unsure
+whether a subtopic is taught, ask Avichai or mark it as extension.
 Expand every syllabus topic into subtopics from the course's own textbooks
 (`Project One/textbooks` when the PDF is there; otherwise the publisher's table of contents),
 cross-checked with the same course at other universities. Every subtopic needs real content.

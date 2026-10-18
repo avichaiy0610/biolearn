@@ -274,8 +274,8 @@ export const sexDetermination: Lesson = {
     },
   ],
   refs: [
-    { kind: "book", text: "Klug W.S. et al. Concepts of Genetics, 12th ed. Chapter 7: Sex Determination and Sex Chromosomes." },
-    { kind: "book", text: "Griffiths A.J.F. et al. Introduction to Genetic Analysis, 12th ed. Chapter 2: Single-Gene Inheritance (sex-linked inheritance)." },
+    { kind: "book", text: "Klug W.S. et al. Concepts of Genetics, 12th ed. Chapter 5: Sex Determination and Sex Chromosomes; 4.11 X-Linkage." },
+    { kind: "book", text: "Griffiths A.J.F. et al. Introduction to Genetic Analysis, 12th ed. 2.5 Sex-Linked Single-Gene Inheritance Patterns." },
     { kind: "paper", text: "Morgan T.H. (1910). Sex limited inheritance in Drosophila. Science 32: 120–122." },
     { kind: "paper", text: "Lyon M.F. (1961). Gene action in the X-chromosome of the mouse (Mus musculus L.). Nature 190: 372–373." },
     { kind: "paper", text: "Davidson R.G., Nitowsky H.M., Childs B. (1963). Demonstration of two populations of cells in the human female heterozygous for glucose-6-phosphate dehydrogenase variants. PNAS 50: 481–485." },

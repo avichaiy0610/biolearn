@@ -276,7 +276,7 @@ export const chromosomeStructure: Lesson = {
     },
   ],
   refs: [
-    { kind: "book", text: "Klug W.S. et al. Concepts of Genetics, 12th ed. Chapter 8: Chromosome Mutations: Variation in Number and Arrangement." },
+    { kind: "book", text: "Klug W.S. et al. Concepts of Genetics, 12th ed. Chapter 6: Chromosomal Mutations: Variation in Number and Arrangement (6.4–6.9)." },
     { kind: "book", text: "Griffiths A.J.F. et al. Introduction to Genetic Analysis, 12th ed. Chapter 17: Large-Scale Chromosomal Changes." },
     { kind: "paper", text: "Sturtevant A.H. (1925). The effects of unequal crossing over at the Bar locus in Drosophila. Genetics 10: 117–147." },
     { kind: "paper", text: "Bridges C.B. (1936). The Bar \"gene\" a duplication. Science 83: 210–211." },

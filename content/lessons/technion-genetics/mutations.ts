@@ -304,7 +304,7 @@ Met-Ala-Ser-Tyr-His-עצירה. בין שתי המוטציות שלושה קוד
     },
   ],
   refs: [
-    { kind: "book", text: "Klug W.S. et al. Concepts of Genetics, 12th ed. Chapter 15: Gene Mutation, DNA Repair, and Transposons." },
+    { kind: "book", text: "Klug W.S. et al. Concepts of Genetics, 12th ed. Chapter 15: Gene Mutation, DNA Repair, and Transposition." },
     { kind: "book", text: "Griffiths A.J.F. et al. Introduction to Genetic Analysis, 12th ed. Chapter 15: DNA Damage, Repair, and Mutation." },
     { kind: "paper", text: "Luria S.E., Delbrück M. (1943). Mutations of bacteria from virus sensitivity to virus resistance. Genetics 28: 491–511." },
     { kind: "paper", text: "Ames B.N. et al. (1973). Carcinogens are mutagens: a simple test system combining liver homogenates for activation and bacteria for detection. PNAS 70: 2281–2285." },

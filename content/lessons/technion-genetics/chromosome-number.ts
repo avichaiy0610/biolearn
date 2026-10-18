@@ -270,7 +270,7 @@ export const chromosomeNumber: Lesson = {
     },
   ],
   refs: [
-    { kind: "book", text: "Klug W.S. et al. Concepts of Genetics, 12th ed. Chapter 8: Chromosome Mutations: Variation in Number and Arrangement." },
+    { kind: "book", text: "Klug W.S. et al. Concepts of Genetics, 12th ed. Chapter 6: Chromosomal Mutations: Variation in Number and Arrangement (6.1–6.3)." },
     { kind: "book", text: "Griffiths A.J.F. et al. Introduction to Genetic Analysis, 12th ed. Chapter 17: Large-Scale Chromosomal Changes." },
     { kind: "paper", text: "Lejeune J., Gautier M., Turpin R. (1959). Étude des chromosomes somatiques de neuf enfants mongoliens. C. R. Acad. Sci. 248: 1721–1722." },
     { kind: "paper", text: "Tjio J.H., Levan A. (1956). The chromosome number of man. Hereditas 42: 1–6." },

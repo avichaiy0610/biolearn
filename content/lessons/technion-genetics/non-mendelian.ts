@@ -260,8 +260,8 @@ export const nonMendelian: Lesson = {
     },
   ],
   refs: [
-    { kind: "book", text: "Klug W.S. et al. Concepts of Genetics, 12th ed. Chapter 9: Extranuclear Inheritance; Chapter 19: Epigenetics (including genomic imprinting)." },
-    { kind: "book", text: "Griffiths A.J.F. et al. Introduction to Genetic Analysis, 12th ed. Chapter 3 (cytoplasmic inheritance); Chapter 12 (epigenetics, imprinting)." },
+    { kind: "book", text: "Klug W.S. et al. Concepts of Genetics, 12th ed. Chapter 9: Extranuclear Inheritance; Chapter 19: Epigenetic Regulation of Gene Expression (imprinting)." },
+    { kind: "book", text: "Griffiths A.J.F. et al. Introduction to Genetic Analysis, 12th ed. 3.5 Organelle Genes: Inheritance Independent of the Nucleus; 12.4 Chromatin in Epigenetic Regulation." },
     { kind: "paper", text: "McGrath J., Solter D. (1984). Completion of mouse embryogenesis requires both the maternal and paternal genomes. Cell 37: 179–183." },
     { kind: "paper", text: "Surani M.A.H., Barton S.C., Norris M.L. (1984). Development of reconstituted mouse eggs suggests imprinting of the genome during gametogenesis. Nature 308: 548–550." },
     { kind: "paper", text: "Sturtevant A.H. (1923). Inheritance of direction of coiling in Limnaea. Science 58: 269–270." },
