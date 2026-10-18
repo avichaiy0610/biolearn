@@ -142,10 +142,104 @@ function ForkedLine() {
   );
 }
 
+// ── Pedigree drawing kit ──────────────────────────────────────────────────
+type Person = { x: number; y: number; sex: "m" | "f"; state?: "affected" | "carrier"; proband?: boolean; label?: string };
+const R = 15;
+function PersonMark({ p }: { p: Person }) {
+  const fill = p.state === "affected" ? INK : "#fff";
+  const shape = p.sex === "m"
+    ? <rect x={p.x - R} y={p.y - R} width={2 * R} height={2 * R} fill={fill} stroke={INK} strokeWidth={2} />
+    : <circle cx={p.x} cy={p.y} r={R} fill={fill} stroke={INK} strokeWidth={2} />;
+  return (
+    <g>
+      {shape}
+      {p.state === "carrier" && <circle cx={p.x} cy={p.y} r={4.5} fill={INK} />}
+      {p.proband && <path d={`M${p.x - 34} ${p.y + 26} L${p.x - 18} ${p.y + 12}`} stroke={ORANGE} strokeWidth={2.5} markerEnd="url(#pd-arrow)" />}
+      {p.label && <text x={p.x} y={p.y + R + 16} textAnchor="middle" fontSize="11" fill={MUTED} style={{ fontFamily: "Arial, sans-serif" }}>{p.label}</text>}
+    </g>
+  );
+}
+// Couple line + drop line to a sibship bar over the children.
+function Family({ a, b, kids }: { a: Person; b: Person; kids: Person[] }) {
+  const midX = (a.x + b.x) / 2, barY = kids[0].y - R - 18;
+  const xs = kids.map((k) => k.x);
+  return (
+    <g stroke={INK} strokeWidth={1.8} fill="none">
+      <line x1={a.x + R} y1={a.y} x2={b.x - R} y2={b.y} />
+      <line x1={midX} y1={a.y} x2={midX} y2={barY} />
+      <line x1={Math.min(...xs)} y1={barY} x2={Math.max(...xs)} y2={barY} />
+      {kids.map((k) => <line key={k.x} x1={k.x} y1={barY} x2={k.x} y2={k.y - R} />)}
+    </g>
+  );
+}
+function Legend({ y }: { y: number }) {
+  const items: [Person, string][] = [
+    [{ x: 0, y: 0, sex: "m" }, "זכר"], [{ x: 0, y: 0, sex: "f" }, "נקבה"],
+    [{ x: 0, y: 0, sex: "m", state: "affected" }, "חולה"], [{ x: 0, y: 0, sex: "f", state: "carrier" }, "נשא/ית"],
+  ];
+  return (
+    <g>
+      {items.map(([p, t], i) => (
+        <g key={t} transform={`translate(${470 - i * 110} ${y}) scale(0.7)`}>
+          <PersonMark p={p} />
+          <text x={-26} y={6} textAnchor="start" direction="rtl" fontSize="17" fill={INK} style={T}>{t}</text>
+        </g>
+      ))}
+    </g>
+  );
+}
+const PdDefs = () => (
+  <defs><marker id="pd-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0 L10 5 L0 10z" fill={ORANGE} /></marker></defs>
+);
+const Gen = ({ y, n }: { y: number; n: string }) => <text x={540} y={y + 5} textAnchor="end" direction="ltr" fontSize="14" fontWeight="700" fill={MUTED} style={{ fontFamily: "Georgia, serif" }}>{n}</text>;
+
+// Autosomal recessive: two carrier parents, one affected child (the proband).
+function PedigreeAR() {
+  const f1: Person = { x: 220, y: 50, sex: "m", state: "carrier", label: "I-1" }, m1: Person = { x: 320, y: 50, sex: "f", state: "carrier", label: "I-2" };
+  const kids: Person[] = [
+    { x: 150, y: 150, sex: "m", label: "II-1" }, { x: 230, y: 150, sex: "f", state: "affected", proband: true, label: "II-2" },
+    { x: 310, y: 150, sex: "m", label: "II-3" }, { x: 390, y: 150, sex: "f", label: "II-4" },
+  ];
+  return (
+    <svg viewBox="0 0 560 250" className="w-full h-auto" role="img" aria-label="שושלת של מחלה אוטוזומלית רצסיבית: שני הורים נשאים, בת חולה ושלושה אחים בריאים">
+      <PdDefs /><Gen y={50} n="I" /><Gen y={150} n="II" />
+      <Family a={f1} b={m1} kids={kids} />
+      {[f1, m1, ...kids].map((p) => <PersonMark key={p.label} p={p} />)}
+      <Legend y={225} />
+    </svg>
+  );
+}
+
+// X-linked recessive: carrier grandmother → affected son and carrier daughter → affected grandson.
+function PedigreeXR() {
+  const g1: Person = { x: 250, y: 40, sex: "m", label: "I-1" }, g2: Person = { x: 330, y: 40, sex: "f", state: "carrier", label: "I-2" };
+  const kids: Person[] = [
+    { x: 150, y: 130, sex: "m", state: "affected", label: "II-1" }, { x: 250, y: 130, sex: "f", state: "carrier", label: "II-2" },
+    { x: 410, y: 130, sex: "f", label: "II-3" },
+  ];
+  const spouse: Person = { x: 330, y: 130, sex: "m", label: "II-4" };
+  // II-2 and her husband II-4 sit side by side; their children below.
+  const grand: Person[] = [
+    { x: 210, y: 220, sex: "m", state: "affected", proband: true, label: "III-1" }, { x: 290, y: 220, sex: "f", label: "III-2" },
+    { x: 370, y: 220, sex: "m", label: "III-3" },
+  ];
+  return (
+    <svg viewBox="0 0 560 320" className="w-full h-auto" role="img" aria-label="שושלת של מחלה תאוחזת X רצסיבית: סבתא נשאית, בן חולה, בת נשאית ונכד חולה; אין חולות">
+      <PdDefs /><Gen y={40} n="I" /><Gen y={130} n="II" /><Gen y={220} n="III" />
+      <Family a={g1} b={g2} kids={[kids[0], kids[1], kids[2]]} />
+      <Family a={kids[1]} b={spouse} kids={grand} />
+      {[g1, g2, ...kids, spouse, ...grand].map((p) => <PersonMark key={p.label} p={p} />)}
+      <Legend y={295} />
+    </svg>
+  );
+}
+
 const FIGURES: Record<string, { el: () => React.ReactElement; captionHe: string }> = {
   crossover: { el: Crossover, captionHe: "איור 1 — שחלוף יחיד בין שני גנים בתאחיזה במצב cis. השחלוף מערב רק שתיים מארבע הכרומטידות, ולכן מתוך מיוזה כזו רק מחצית מהתוצרים רקומביננטיים. כחול וכתום מציינים את מקור המקטעים בשני ההומולוגים; הסימון המקווקו מציין את אתר ההחלפה. סכמטי, לא בקנה מידה." },
   punnett: { el: Punnett, captionHe: "ריבוע פאנט להצלבה Aa × Aa. כל הורה יוצר שני סוגי גמטות בהסתברות שווה; שלוש מתוך ארבע המשבצות נושאות לפחות אלל A אחד — ולכן 3 סגולים : 1 לבן." },
   "forked-line": { el: ForkedLine, captionHe: "תרשים ענפים להצלבה YyRr × YyRr, בהנחת מיון בלתי תלוי ודומיננטיות מלאה בשתי התכונות. בכל תכונה יחס הפנוטיפים הצפוי הוא 3 : 1; מכפלת ההסתברויות לאורך הענפים נותנת 9 : 3 : 3 : 1 — בלי לצייר ריבוע של 16 משבצות." },
+  "pedigree-ar": { el: PedigreeAR, captionHe: "שושלת של מחלה אוטוזומלית רצסיבית. שני ההורים בריאים ונשאים (I-1, I-2); בתם II-2 חולה (החץ מסמן את הפרובנד). לכל ילד בריא שלהם סיכוי של 2/3 להיות נשא." },
+  "pedigree-xr": { el: PedigreeXR, captionHe: "שושלת של מחלה תאוחזת X רצסיבית. הסבתא I-2 נשאית: בנה II-1 חולה, ובתה II-2 נשאית שמעבירה את המחלה לנכד III-1. החולים כולם זכרים, ואין העברה מאב לבן." },
   map: { el: GeneMap, captionHe: "איור 2 — המפה מהדוגמה התלת-נקודתית: A–C–B. בהזנחת שחלופים מרובים שלא זוהו, המרחקים הם 10 ו-20 cM וסכומם 30 cM. תדירות הרקומבינציה הנמדדת ישירות בין A ל-B היא רק 28%." },
 };
 

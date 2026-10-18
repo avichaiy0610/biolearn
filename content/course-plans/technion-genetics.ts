@@ -15,6 +15,8 @@ const lm = (section?: string): PlanItem => ({ kind: "lesson", slug: "linkage-map
 const lmWp = (problem: string): PlanItem => ({ kind: "lesson", slug: "linkage-mapping", problem });
 const mp = (section?: string): PlanItem => ({ kind: "lesson", slug: "mendel-probability", section });
 const mpWp = (problem: string): PlanItem => ({ kind: "lesson", slug: "mendel-probability", problem });
+const pd = (section?: string): PlanItem => ({ kind: "lesson", slug: "pedigrees", section });
+const pdWp = (problem: string): PlanItem => ({ kind: "lesson", slug: "pedigrees", problem });
 
 const S = {
   mendel: "cmq0ts4lp00018s4midich93z",
@@ -38,7 +40,7 @@ export const technionGeneticsPlan: CoursePlan = {
   topics: [
     { titleHe: "חוקי התורשה המנדליים והלא-מנדליים", items: [mp(), proc(MENDEL_ANIM), sub(S.nonMendel), proc(NON_MENDEL_ANIM), sub(S.mito), proc(MITO_ANIM), sub(S.imprinting), proc("genomic-imprinting")] },
     { titleHe: "מהות הגן", items: [soon("יחידה מלאה: גן אחד–אנזים אחד וקומפלמנטציה")] },
-    { titleHe: "ניתוח שושלות", items: [sub(S.patterns), soon("יחידה מלאה: ניתוח שושלות")] },
+    { titleHe: "ניתוח שושלות", items: [pd(), sub(S.patterns)] },
     { titleHe: "התיאוריה הכרומוזומלית של התורשה", items: [proc("meiosis"), soon("יחידה מלאה: מיוזה וחוקי מנדל; ניסויי מורגן")] },
     { titleHe: "קביעת מין", items: [sub(S.sexLinked), soon("יחידה מלאה: תאחיזה למין, קביעת מין ואינאקטיבציה של X")] },
     { titleHe: "תאחיזה, שחלוף ומיפוי גנים", items: [lm()] },
@@ -48,7 +50,7 @@ export const technionGeneticsPlan: CoursePlan = {
   lectures: [
     { n: 1, titleHe: "חוקי מנדל: היפרדות, מיון בלתי תלוי והצלבת מבחן", items: [mp("method"), mp("segregation"), mp("testcross"), mp("assortment"), proc(MENDEL_ANIM)] },
     { n: 2, titleHe: "הסתברות ומבחן χ²", items: [mp("probability"), mp("chi-square")] },
-    { n: 3, titleHe: "ניתוח שושלות", items: [sub(S.patterns), soon("יחידה מלאה: ניתוח שושלות")] },
+    { n: 3, titleHe: "ניתוח שושלות", items: [pd("symbols"), pd("patterns"), pd("deduction"), pd("risk"), pd("penetrance")] },
     { n: 4, titleHe: "כרומוזומים, מיוזה והתיאוריה הכרומוזומלית", items: [proc("meiosis"), soon("יחידה מלאה: מיוזה וחוקי מנדל; ניסויי מורגן")] },
     { n: 5, titleHe: "תאחיזה למין וקביעת מין", items: [sub(S.sexLinked), soon("יחידה מלאה: תאחיזה למין, קביעת מין ואינאקטיבציה של X")] },
     { n: 6, titleHe: "תאחיזה ושחלוף; הצלבה דו-נקודתית", items: [lm("intro"), lm("gametes"), lm("crossover"), lm("rf")] },
@@ -63,7 +65,7 @@ export const technionGeneticsPlan: CoursePlan = {
   tutorials: [
     { n: 1, titleHe: "מונוהיבריד, דיהיבריד והצלבת מבחן", items: [mpWp("testcross"), mpWp("trihybrid")] },
     { n: 2, titleHe: "הסתברות ומבחן χ²", items: [mpWp("binomial"), mpWp("chi-dihybrid")] },
-    { n: 3, titleHe: "ניתוח שושלות", items: [soon("תרגילים פתורים: שושלות")] },
+    { n: 3, titleHe: "ניתוח שושלות", items: [pdWp("mode"), pdWp("cf-risk"), pdWp("hemophilia"), pdWp("penetrance")] },
     { n: 4, titleHe: "מיוזה ומעקב אחר כרומוזומים", items: [soon("תרגילים פתורים: מיוזה")] },
     { n: 5, titleHe: "תורשה תאוחזת-מין", items: [soon("תרגילים פתורים: תאחיזה למין")] },
     { n: 6, titleHe: "מיפוי דו-נקודתי וזיהוי פאזה", items: [lmWp("phase")] },

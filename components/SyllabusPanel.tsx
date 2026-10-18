@@ -5,6 +5,8 @@ const SOURCE_HE: Record<SyllabusRecord["source"], string> = {
   "tau-ims": "מערכת הסילבוסים של אוניברסיטת תל אביב",
   "technion-portal": "פורטל הסטודנטים של הטכניון",
   "biu-pdf": "סילבוס הפקולטה למדעי החיים, בר-אילן",
+  "bgu-catalog": "שנתון הקורסים של אוניברסיטת בן-גוריון",
+  "haifa-pdf": "סילבוס החוג לביולוגיה, אוניברסיטת חיפה",
 };
 
 const fmtDate = (s?: string) => {

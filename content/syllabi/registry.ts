@@ -2,9 +2,11 @@
    Codes come from each university's catalog (sources in content/universities.ts).
    The fetcher checks the course name the source returns against ours and
    reports mismatches, so a stale code is caught rather than trusted.
-   Ben-Gurion and Haifa: no public per-course syllabus source found yet (Oct 2026). */
+   Ben-Gurion: the annual course catalog (bgu4u) — code "205.1.1611".
+   Haifa: no course codes needed — the biology department's course-list page
+   links a PDF syllabus per course; the "code" is the link's course name. */
 
-export type SyllabusTarget = { courseSlug: string; university: "huji" | "tau" | "technion" | "biu"; code: string };
+export type SyllabusTarget = { courseSlug: string; university: "huji" | "tau" | "technion" | "biu" | "bgu" | "haifa"; code: string };
 
 const t = (university: SyllabusTarget["university"], pairs: [string, string][]): SyllabusTarget[] =>
   pairs.map(([courseSlug, code]) => ({ courseSlug, university, code }));
@@ -38,8 +40,23 @@ export const SYLLABUS_TARGETS: SyllabusTarget[] = [
     ["biu-systems-physiology", "80214"], ["biu-plant-physiology", "80223"], ["biu-molecular-a", "80242"],
     ["biu-molecular-b", "80377"], ["biu-cell-function", "80548"], ["biu-bioinformatics", "80513"],
   ]),
+  // Ben-Gurion — department.degree.course (shnaton 2025/26 tables)
+  ...t("bgu", [
+    ["bgu-organisms", "205.1.1821"], ["bgu-cell", "205.1.9011"], ["bgu-plant-sciences", "205.1.1221"],
+    ["bgu-microbiology", "205.1.1071"], ["bgu-genetics", "205.1.1611"], ["bgu-ecology", "205.1.3111"],
+    ["bgu-molecular", "205.1.3491"], ["bgu-biochem-a", "205.1.9171"], ["bgu-plant-physiology", "205.1.1121"],
+    ["bgu-animal-physiology", "205.1.9161"], ["bgu-biochem-b", "205.1.9181"], ["bgu-genetic-engineering", "205.1.9191"],
+    ["bgu-evolution", "205.1.3171"], ["bgu-bioinformatics", "205.1.9531"],
+  ]),
+  // Haifa — course name as linked on the department's course list
+  ...t("haifa", [
+    ["haifa-cell-b", "ביולוגיה של התא ב"], ["haifa-ecology-evolution", "מבוא לאקולוגיה ואבולוציה"],
+    ["haifa-biochem-a", "ביוכימיה א"], ["haifa-biochem-b", "ביוכימיה ב"], ["haifa-molecular", "ביולוגיה מולקולארית"],
+    ["haifa-genetics", "גנטיקה כללית"], ["haifa-microbiology", "מיקרוביולוגיה כללית"], ["haifa-neurobiology", "מבוא לנוירוביולוגיה"],
+  ]),
   // TAU — 8-digit codes (yedion); the IMS syllabus page takes code + group "01"
   ...t("tau", [
+    ["tau-bio-intro-a", "04551512"], ["tau-bio-intro-b", "04551513"], ["tau-bio-intro-c", "04551514"],
     ["tau-genetics", "04552526"], ["tau-evolution", "04552536"], ["tau-ecology", "04551809"],
     ["tau-bioinformatics", "04553066"], ["tau-microbiology", "04552580"], ["tau-neurobiology", "04553237"],
   ]),

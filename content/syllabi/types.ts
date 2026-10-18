@@ -6,7 +6,7 @@
      "lectures" — topics tied to lecture numbers or ranges (e.g. Bar-Ilan)
      "topics"   — an official topic list without weeks (HUJI, TAU, Technion) */
 
-export type SyllabusSource = "huji-api" | "tau-ims" | "technion-portal" | "biu-pdf";
+export type SyllabusSource = "huji-api" | "tau-ims" | "technion-portal" | "biu-pdf" | "bgu-catalog" | "haifa-pdf";
 
 export type SyllabusRecord = {
   courseSlug: string; // our course

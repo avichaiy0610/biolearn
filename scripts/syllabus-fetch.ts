@@ -9,11 +9,13 @@
  *   npx tsx scripts/syllabus-fetch.ts huji technion   # some
  *
  * Sources: HUJI syllabus API · TAU IMS syllabus page · Technion students portal ·
- * Bar-Ilan faculty PDF syllabi (needs `pdftotext` on PATH).
+ * Bar-Ilan faculty PDF syllabi · Ben-Gurion annual course catalog (headless browser) ·
+ * Haifa biology department PDF syllabi. Needs `pdftotext` on PATH and Playwright's Chromium.
  */
 import "dotenv/config";
 import { createClient } from "@libsql/client";
 import { execFileSync } from "child_process";
+import { chromium, type Browser } from "playwright";
 import fs from "fs";
 import os from "os";
 import path from "path";
@@ -25,7 +27,8 @@ const NOW = new Date().toISOString().slice(0, 10);
 const UA = { "User-Agent": "Mozilla/5.0 (BioLearn syllabus sync; contact via biolearn-neon.vercel.app)" };
 
 const BIDI = /[‎‏‪-‮⁦-⁩]/g;
-const clean = (s: string) => s.replace(BIDI, "").replace(/\s+/g, " ").trim();
+// Some sources serve the Hebrew gershayim (דנ״א) as "?" — restore it between Hebrew letters.
+const clean = (s: string) => s.replace(BIDI, "").replace(/([֐-׿])\?([֐-׿])/g, "$1״$2").replace(/\s+/g, " ").trim();
 const stripTags = (html: string) =>
   html.replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>/g, " ").replace(/<br\s*\/?>/gi, "\n").replace(/<[^>]+>/g, "\n")
     .replace(/&nbsp;/g, " ").replace(/&quot;/g, '"').replace(/&amp;/g, "&").replace(/&#(\d+);/g, (_, n) => String.fromCharCode(Number(n)));
@@ -64,7 +67,7 @@ async function huji(t: SyllabusTarget): Promise<SyllabusRecord> {
 // ── TAU: IMS syllabus page (public part: name + topics) ───────────────────
 async function tau(t: SyllabusTarget): Promise<SyllabusRecord> {
   const year = new Date().getMonth() >= 8 ? new Date().getFullYear() : new Date().getFullYear() - 1; // TAU year = the autumn year
-  for (const y of [year + 1, year]) {
+  for (const y of [year + 1, year, year - 1]) {
     const url = `https://www.ims.tau.ac.il/Tal/Syllabus/Syllabus_L.aspx?course=${t.code}01&year=${y}`;
     const html = await (await get(url)).text().catch(() => "");
     const lines = stripTags(html).split("\n").map(clean).filter(Boolean);
@@ -77,7 +80,8 @@ async function tau(t: SyllabusTarget): Promise<SyllabusRecord> {
     const list = /בין השאר[:,]?\s*([\s\S]+)/.exec(content)?.[1] ?? content;
     return {
       courseSlug: t.courseSlug, university: "tau", code: t.code, nameHe: name, year: y, fetchedAt: NOW, source: "tau-ims",
-      sourceUrl: url, level: "topics", contentHe: content, topicsHe: splitTopics(list),
+      // Inline bullets: " - " and "•" (which IMS sometimes serves as "?").
+      sourceUrl: url, level: "topics", contentHe: content, topicsHe: splitTopics(list.replace(/\s+[-•?]\s+/g, "; ")),
     };
   }
   throw new Error("no public syllabus for this or last year");
@@ -156,7 +160,104 @@ async function biu(t: SyllabusTarget): Promise<SyllabusRecord> {
   };
 }
 
-const ADAPTERS = { huji, tau, technion, biu } as const;
+// ── Shared headless browser (BGU's catalog is a 2006 frame app; Haifa renders links with JS) ──
+let browser: Browser | null = null;
+const page = async () => (browser ??= await chromium.launch()).newPage();
+
+// Text of a page laid out as "value \n :label" (BGU details table, RTL).
+function labelled(text: string) {
+  const out: Record<string, string> = {};
+  let buf: string[] = [];
+  for (const raw of text.split("\n")) {
+    const l = clean(raw);
+    const m = /^:(.+)$/.exec(l);
+    if (m) { out[m[1].trim()] = clean(buf.join(" ")); buf = []; }
+    else if (l) buf.push(l);
+  }
+  return out;
+}
+
+// ── Ben-Gurion: annual course catalog (bgu4u) ─────────────────────────────
+async function bgu(t: SyllabusTarget): Promise<SyllabusRecord> {
+  const [dept, degree, course] = t.code.split(".");
+  const p = await page();
+  try {
+    await p.goto("https://bgu4u.bgu.ac.il/pls/scwp/!sc.AnnualCoursesAdv", { waitUntil: "networkidle", timeout: 90000 });
+    const current = Number(await p.$eval("select[name=on_year] option[selected]", (o) => (o as HTMLOptionElement).value));
+    let call: string | undefined;
+    let year = current;
+    for (const y of [current, current - 1]) {
+      if (y !== current) await p.goto("https://bgu4u.bgu.ac.il/pls/scwp/!sc.AnnualCoursesAdv", { waitUntil: "networkidle", timeout: 90000 });
+      await p.fill("#on_course_department", dept);
+      await p.fill("#on_course_degree_level", degree);
+      await p.fill("#on_course", course);
+      await p.selectOption("select[name=on_year]", String(y));
+      await p.evaluate(() => { for (const f of Array.from(document.forms)) f.target = "_self"; });
+      await Promise.all([
+        p.waitForNavigation({ timeout: 60000 }).catch(() => null),
+        p.evaluate("mainValidation3('searchForm', '!sc.AnnualCoursesAdv', CHECK_INPUT_COUNT)"),
+      ]);
+      call = await p.$$eval("a", (as) => as.map((a) => a.getAttribute("href") ?? "").find((h) => h.includes("goCourseDetails")));
+      if (call) { year = y; break; }
+    }
+    if (!call) throw new Error("course not in the catalog this year or last");
+    // The details form targets another frame by default — keep it in this page.
+    await p.evaluate(() => { for (const f of Array.from(document.forms)) f.target = "_self"; });
+    await Promise.all([p.waitForNavigation({ timeout: 60000 }).catch(() => null), p.evaluate(call.replace(/^javascript:/, ""))]);
+    await p.waitForTimeout(1500);
+    const f = labelled(await p.evaluate(() => document.body.innerText));
+    // The block before ":תקציר" also holds the semester/campus lines and the "course details" link text.
+    const content = clean((f["תקציר"] ?? "").replace(/^[\s\S]*\(שעות, בחינות, סילבוס ועוד\)/, ""));
+    if (!content) throw new Error("no course description");
+    return {
+      courseSlug: t.courseSlug, university: "bgu", code: t.code, nameHe: f["שם קורס"] ?? "", year,
+      updatedHe: f["עדכון אחרון בשנת"] ? `תיאור הקורס עודכן לאחרונה ב-${f["עדכון אחרון בשנת"]}` : undefined,
+      fetchedAt: NOW, source: "bgu-catalog", sourceUrl: "https://bgu4u.bgu.ac.il/html/annual/", level: "topics",
+      contentHe: content, topicsHe: splitTopics(content.replace(/:\s*/g, ";")),
+      books: f["ביבליוגרפיה"] ? [f["ביבליוגרפיה"].replace(/^ספרות מומלצת:\s*/, "").slice(0, 300)] : undefined,
+    };
+  } finally { await p.close(); }
+}
+
+// ── Haifa: biology department course list → PDF syllabus per course ──────
+let haifaLinks: { name: string; url: string }[] | null = null;
+async function haifaIndex() {
+  if (haifaLinks) return haifaLinks;
+  const p = await page();
+  try {
+    await p.goto("https://sciences.haifa.ac.il/units/school-of-life-sciences/biology-department/%d7%a8%d7%a9%d7%99%d7%9e%d7%aa-%d7%a7%d7%95%d7%a8%d7%a1%d7%99%d7%9d-%d7%93%d7%95-%d7%97%d7%95%d7%92%d7%99-%d7%91%d7%99%d7%95%d7%9c%d7%95%d7%92%d7%99%d7%94/",
+      { waitUntil: "networkidle", timeout: 90000 });
+    haifaLinks = await p.$$eval("a", (as) => as.map((a) => ({ name: (a.textContent ?? "").trim(), url: (a as HTMLAnchorElement).href })).filter((x) => /\.pdf$/i.test(x.url) && /biology\.haifa/.test(x.url)));
+  } finally { await p.close(); }
+  return haifaLinks;
+}
+async function haifa(t: SyllabusTarget): Promise<SyllabusRecord> {
+  const key = norm(t.code);
+  const link = (await haifaIndex()).find((l) => norm(l.name).replace(/[’`]/g, "").startsWith(key));
+  if (!link) throw new Error("no PDF on the department course list");
+  const tmp = path.join(os.tmpdir(), `haifa-${t.courseSlug}.pdf`);
+  fs.writeFileSync(tmp, Buffer.from(await (await get(link.url)).arrayBuffer()));
+  const lines = execFileSync("pdftotext", ["-layout", "-enc", "UTF-8", tmp, "-"], { encoding: "utf8" }).split("\n").map(clean).filter(Boolean);
+  // Topics usually follow a "נושאי הקורס / תוכן הקורס / תכנית" heading; else keep the start of the document.
+  const start = lines.findIndex((l) => /נושאי (?:הקורס|השיעורים)|תוכן הקורס|תכנית הקורס|תוכנית הקורס|פירוט/.test(l));
+  const unglue = (l: string) => l.replace(/([A-Za-z])([֐-׿])/g, "$1 $2").replace(/([֐-׿])([A-Za-z])/g, "$1 $2");
+  const body = (start >= 0 ? lines.slice(start + 1, start + 45) : lines.slice(0, 45)).filter((l) => !/^\d+$/.test(l)).map(unglue);
+  const stop = body.findIndex((l) => /ספרות|ביבליוגרפיה|מטלות|דרישות|הרכב הציון/.test(l));
+  const topicLines = stop > 0 ? body.slice(0, stop) : body;
+  // A running paragraph ("נושא, נושא, נושא…") rather than one topic per line.
+  const paragraph = topicLines.filter((l) => (l.match(/,/g) ?? []).length >= 2).length >= topicLines.length / 2;
+  const topics = paragraph
+    ? topicLines.join(" ").split(/\s*,\s*|\.\s+/).map(clean).filter((x) => x.length > 2)
+    : topicLines.map((l) => l.replace(/^[\d.\-•*]+\s*/, "")).filter((l) => l.length > 3);
+  const uploaded = /uploads\/(\d{4})\/(\d{2})\//.exec(link.url);
+  return {
+    courseSlug: t.courseSlug, university: "haifa", code: t.code, nameHe: link.name, fetchedAt: NOW, source: "haifa-pdf",
+    sourceUrl: link.url, updatedHe: uploaded ? `הסילבוס הועלה לאתר ב-${uploaded[2]}/${uploaded[1]}` : undefined,
+    level: "topics", contentHe: topicLines.join("\n"), topicsHe: topics.slice(0, 30),
+  };
+}
+
+const ADAPTERS = { huji, tau, technion, biu, bgu, haifa } as const;
 
 async function main() {
   const only = process.argv.slice(2);
@@ -187,6 +288,7 @@ async function main() {
     await new Promise((r) => setTimeout(r, 400)); // be polite to university servers
   }
 
+  await browser?.close();
   const body = JSON.stringify(Object.fromEntries(Object.entries(next).sort(([a], [b]) => a.localeCompare(b))), null, 1);
   fs.writeFileSync(OUT, `// Generated by scripts/syllabus-fetch.ts — do not edit by hand.\nimport type { SyllabusRecord } from "./types";\n\nexport const SYLLABI: Record<string, SyllabusRecord> = ${body};\n`);
   console.log(report.join("\n"));
