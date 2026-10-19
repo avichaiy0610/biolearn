@@ -1,7 +1,8 @@
 import type { CourseScope, ScopeEntry } from "./types";
 import { technionGeneticsScope } from "./technion-genetics";
+import { tauGeneticsScope } from "./tau-genetics";
 
-export const COURSE_SCOPES: CourseScope[] = [technionGeneticsScope];
+export const COURSE_SCOPES: CourseScope[] = [technionGeneticsScope, tauGeneticsScope];
 
 export const scopeForCourse = (courseSlug: string) => COURSE_SCOPES.find((s) => s.courseSlug === courseSlug);
 
