@@ -51,7 +51,7 @@ export default function TrackPicker({ lang, uni, year, semester, openInitially =
       </button>
       {open && (
         <div role="dialog" aria-label={he ? "בחירת מסלול" : "Choose your track"}
-          className="absolute z-30 mt-2 end-0 w-[min(20rem,calc(100vw-2rem))] rounded-xl border border-line bg-surface p-4 shadow-xl space-y-3">
+          className="absolute z-30 mt-2 start-0 w-[min(20rem,calc(100vw-2rem))] rounded-xl border border-line bg-surface p-4 shadow-xl space-y-3">
           <label className="block text-xs font-semibold text-muted">
             {he ? "אוניברסיטה" : "University"}
             <select value={u} onChange={(e) => setU(e.target.value)} className={`${field} mt-1`}>
