@@ -23,8 +23,21 @@ import { catalyticMechanisms } from "./technion-biochem/catalytic-mechanisms";
 import { allostericRegulation } from "./technion-biochem/allosteric-regulation";
 import { covalentRegulation } from "./technion-biochem/covalent-regulation";
 import { carbsLipids } from "./technion-biochem/carbs-lipids";
+import { metConcepts } from "./technion-metabolic/met-concepts";
+import { metGlycolysis } from "./technion-metabolic/met-glycolysis";
+import { metGluconeogenesis } from "./technion-metabolic/met-gluconeogenesis";
+import { metCitricAcid } from "./technion-metabolic/met-citric-acid";
+import { metOxphos } from "./technion-metabolic/met-oxphos";
+import { metPhotosynthesis } from "./technion-metabolic/met-photosynthesis";
+import { metPentose } from "./technion-metabolic/met-pentose";
+import { metGlycogen } from "./technion-metabolic/met-glycogen";
+import { metFattyAcids } from "./technion-metabolic/met-fatty-acids";
+import { metIntegration } from "./technion-metabolic/met-integration";
+import { metLipidsCholesterol } from "./technion-metabolic/met-lipids-cholesterol";
+import { metAminoAcids } from "./technion-metabolic/met-amino-acids";
+import { metNucleotides } from "./technion-metabolic/met-nucleotides";
 
-export const LESSONS: Lesson[] = [mendelProbability, dominanceAlleles, pedigrees, chromosomalTheory, sexDetermination, linkageMapping, mutations, chromosomeStructure, chromosomeNumber, natureOfGene, geneInteraction, nonMendelian, aminoAcids, proteinStructure, proteinFolding, fibrousMembrane, proteinMethods, hemoglobin, enzymePrinciples, enzymeKinetics, catalyticMechanisms, allostericRegulation, covalentRegulation, carbsLipids];
+export const LESSONS: Lesson[] = [mendelProbability, dominanceAlleles, pedigrees, chromosomalTheory, sexDetermination, linkageMapping, mutations, chromosomeStructure, chromosomeNumber, natureOfGene, geneInteraction, nonMendelian, aminoAcids, proteinStructure, proteinFolding, fibrousMembrane, proteinMethods, hemoglobin, enzymePrinciples, enzymeKinetics, catalyticMechanisms, allostericRegulation, covalentRegulation, carbsLipids, metConcepts, metGlycolysis, metGluconeogenesis, metCitricAcid, metOxphos, metPhotosynthesis, metPentose, metGlycogen, metFattyAcids, metIntegration, metLipidsCholesterol, metAminoAcids, metNucleotides];
 
 export const lessonBySlug = (slug: string) => LESSONS.find((l) => l.slug === slug);
 

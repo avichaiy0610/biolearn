@@ -1651,5 +1651,721 @@
     "carbohydrates and lipids"
    ]
   }
+ },
+ "met-concepts": {
+  "overview": {
+   "he": [
+    "קטבולים",
+    "אנבוליזם",
+    "המסלול המטבולי"
+   ],
+   "en": [
+    "catabolism",
+    "anabolism"
+   ]
+  },
+  "atp": {
+   "he": [
+    "מטבע אנרגיה"
+   ],
+   "en": [
+    "ATP currency"
+   ]
+  },
+  "carriers": {
+   "he": [
+    "נשאים מופעלים"
+   ],
+   "en": [
+    "activated carrier"
+   ]
+  },
+  "regulation": {
+   "he": [
+    "מנגנוני בקרה"
+   ],
+   "en": [
+    "regulation"
+   ]
+  },
+  "_heading": {
+   "he": [
+    "המסלול המטבולי",
+    "קטבולים"
+   ],
+   "en": [
+    "metabolism"
+   ]
+  }
+ },
+ "met-glycolysis": {
+  "overview": {
+   "he": [
+    "גליקוליזה"
+   ],
+   "en": [
+    "glycolysis"
+   ]
+  },
+  "investment": {
+   "he": [
+    "גליקוליזה"
+   ],
+   "en": [
+    "glycolysis"
+   ]
+  },
+  "payoff": {
+   "he": [
+    "גליקוליזה"
+   ],
+   "en": [
+    "glycolysis"
+   ]
+  },
+  "regulation": {
+   "he": [
+    "גליקוליזה"
+   ],
+   "en": [
+    "glycolysis"
+   ]
+  },
+  "pyruvate-fates": {
+   "he": [
+    "גליקוליזה"
+   ],
+   "en": [
+    "glycolysis"
+   ]
+  },
+  "other-sugars": {
+   "he": [
+    "גלקטוזמיה"
+   ],
+   "en": [
+    "galactosemia"
+   ]
+  },
+  "_heading": {
+   "he": [
+    "גליקוליזה"
+   ],
+   "en": [
+    "glycolysis"
+   ]
+  }
+ },
+ "met-gluconeogenesis": {
+  "why": {
+   "he": [
+    "גלוקונאוגנזה"
+   ],
+   "en": [
+    "gluconeogenesis"
+   ]
+  },
+  "bypasses": {
+   "he": [
+    "גלוקונאוגנזה"
+   ],
+   "en": [
+    "gluconeogenesis"
+   ]
+  },
+  "cost": {
+   "he": [
+    "גלוקונאוגנזה"
+   ],
+   "en": [
+    "gluconeogenesis"
+   ]
+  },
+  "reciprocal": {
+   "he": [
+    "גלוקונאוגנזה"
+   ],
+   "en": [
+    "gluconeogenesis"
+   ]
+  },
+  "cori": {
+   "he": [
+    "מעגל קורי"
+   ],
+   "en": [
+    "Cori cycle"
+   ]
+  },
+  "_heading": {
+   "he": [
+    "גלוקונאוגנזה"
+   ],
+   "en": [
+    "gluconeogenesis"
+   ]
+  }
+ },
+ "met-citric-acid": {
+  "pdh": {
+   "he": [
+    "פירובט דהידרוגנאז"
+   ],
+   "en": [
+    "pyruvate dehydrogenase"
+   ]
+  },
+  "cycle": {
+   "he": [
+    "מעגל החומצה הציטרית"
+   ],
+   "en": [
+    "citric acid cycle"
+   ]
+  },
+  "yield": {
+   "he": [
+    "מעגל החומצה הציטרית"
+   ],
+   "en": [
+    "citric acid cycle"
+   ]
+  },
+  "regulation": {
+   "he": [
+    "מעגל החומצה הציטרית"
+   ],
+   "en": [
+    "citric acid cycle"
+   ]
+  },
+  "anaplerotic": {
+   "he": [
+    "אנאפלרוטי"
+   ],
+   "en": [
+    "anaplerotic"
+   ]
+  },
+  "glyoxylate": {
+   "he": [
+    "גליאוקסילט"
+   ],
+   "en": [
+    "glyoxylate"
+   ]
+  },
+  "_heading": {
+   "he": [
+    "מעגל החומצה הציטרית"
+   ],
+   "en": [
+    "citric acid cycle"
+   ]
+  }
+ },
+ "met-oxphos": {
+  "overview": {
+   "he": [
+    "זירחון חימצוני"
+   ],
+   "en": [
+    "oxidative phosphorylation"
+   ]
+  },
+  "chain": {
+   "he": [
+    "זירחון חימצוני"
+   ],
+   "en": [
+    "oxidative phosphorylation"
+   ]
+  },
+  "atp-synthase": {
+   "he": [
+    "זירחון חימצוני"
+   ],
+   "en": [
+    "oxidative phosphorylation"
+   ]
+  },
+  "yield": {
+   "he": [
+    "זירחון חימצוני"
+   ],
+   "en": [
+    "oxidative phosphorylation"
+   ]
+  },
+  "control": {
+   "he": [
+    "זירחון חימצוני"
+   ],
+   "en": [
+    "oxidative phosphorylation"
+   ]
+  },
+  "_heading": {
+   "he": [
+    "זירחון חימצוני"
+   ],
+   "en": [
+    "oxidative phosphorylation"
+   ]
+  }
+ },
+ "met-photosynthesis": {
+  "overview": {
+   "he": [
+    "פוטוסינטזה"
+   ],
+   "en": [
+    "photosynthesis"
+   ]
+  },
+  "light": {
+   "he": [
+    "פוטוסינטזה"
+   ],
+   "en": [
+    "photosynthesis"
+   ]
+  },
+  "z-scheme": {
+   "he": [
+    "פוטוסינטזה"
+   ],
+   "en": [
+    "photosynthesis"
+   ]
+  },
+  "calvin": {
+   "he": [
+    "פוטוסינטזה"
+   ],
+   "en": [
+    "photosynthesis"
+   ]
+  },
+  "photorespiration": {
+   "he": [
+    "נשימה אורית"
+   ],
+   "en": [
+    "photorespiration"
+   ]
+  },
+  "_heading": {
+   "he": [
+    "פוטוסינטזה"
+   ],
+   "en": [
+    "photosynthesis"
+   ]
+  }
+ },
+ "met-pentose": {
+  "overview": {
+   "he": [
+    "פנטוז פוספאט"
+   ],
+   "en": [
+    "pentose phosphate"
+   ]
+  },
+  "nadph": {
+   "he": [
+    "פנטוז פוספאט"
+   ],
+   "en": [
+    "pentose phosphate"
+   ]
+  },
+  "modes": {
+   "he": [
+    "פנטוז פוספאט"
+   ],
+   "en": [
+    "pentose phosphate"
+   ]
+  },
+  "regulation": {
+   "he": [
+    "פנטוז פוספאט"
+   ],
+   "en": [
+    "pentose phosphate"
+   ]
+  },
+  "g6pd-deficiency": {
+   "he": [
+    "פוויזם"
+   ],
+   "en": [
+    "favism"
+   ]
+  },
+  "_heading": {
+   "he": [
+    "פנטוז פוספאט"
+   ],
+   "en": [
+    "pentose phosphate"
+   ]
+  }
+ },
+ "met-glycogen": {
+  "structure": {
+   "he": [
+    "גליקוגן"
+   ],
+   "en": [
+    "glycogen"
+   ]
+  },
+  "breakdown": {
+   "he": [
+    "גליקוגן"
+   ],
+   "en": [
+    "glycogen"
+   ]
+  },
+  "synthesis": {
+   "he": [
+    "גליקוגן"
+   ],
+   "en": [
+    "glycogen"
+   ]
+  },
+  "allosteric": {
+   "he": [
+    "גליקוגן"
+   ],
+   "en": [
+    "glycogen"
+   ]
+  },
+  "hormones": {
+   "he": [
+    "גליקוגן",
+    "הבקרה ההורמונלית"
+   ],
+   "en": [
+    "glycogen",
+    "hormonal"
+   ]
+  },
+  "diseases": {
+   "he": [
+    "מחלות אגירת גליקוגן"
+   ],
+   "en": [
+    "glycogen storage disease"
+   ]
+  },
+  "_heading": {
+   "he": [
+    "גליקוגן"
+   ],
+   "en": [
+    "glycogen"
+   ]
+  }
+ },
+ "met-fatty-acids": {
+  "storage": {
+   "he": [
+    "חומצות שומן"
+   ],
+   "en": [
+    "fatty acid"
+   ]
+  },
+  "activation": {
+   "he": [
+    "חומצות שומן"
+   ],
+   "en": [
+    "fatty acid"
+   ]
+  },
+  "beta-oxidation": {
+   "he": [
+    "חומצות שומן"
+   ],
+   "en": [
+    "fatty acid"
+   ]
+  },
+  "synthesis": {
+   "he": [
+    "חומצות שומן"
+   ],
+   "en": [
+    "fatty acid"
+   ]
+  },
+  "regulation": {
+   "he": [
+    "חומצות שומן",
+    "הבקרה ההורמונלית"
+   ],
+   "en": [
+    "fatty acid",
+    "hormonal"
+   ]
+  },
+  "ketone-bodies": {
+   "he": [
+    "גופי קטון"
+   ],
+   "en": [
+    "ketone bodies"
+   ]
+  },
+  "_heading": {
+   "he": [
+    "חומצות שומן"
+   ],
+   "en": [
+    "fatty acid"
+   ]
+  }
+ },
+ "met-integration": {
+  "organs": {
+   "he": [
+    "אינטגרציה של המטבוליזם"
+   ],
+   "en": [
+    "integration of metabolism"
+   ]
+  },
+  "hormones": {
+   "he": [
+    "אינטגרציה של המטבוליזם"
+   ],
+   "en": [
+    "integration of metabolism"
+   ]
+  },
+  "fed-fasted": {
+   "he": [
+    "אינטגרציה של המטבוליזם"
+   ],
+   "en": [
+    "integration of metabolism"
+   ]
+  },
+  "starvation": {
+   "he": [
+    "רעב"
+   ],
+   "en": [
+    "starvation"
+   ]
+  },
+  "diabetes": {
+   "he": [
+    "הסוכרת"
+   ],
+   "en": [
+    "diabetes"
+   ]
+  },
+  "exercise": {
+   "he": [
+    "פעילות גופנית"
+   ],
+   "en": [
+    "exercise"
+   ]
+  },
+  "ethanol": {
+   "he": [
+    "אתנול"
+   ],
+   "en": [
+    "ethanol"
+   ]
+  },
+  "_heading": {
+   "he": [
+    "אינטגרציה של המטבוליזם",
+    "מצבי עקה"
+   ],
+   "en": [
+    "integration"
+   ]
+  }
+ },
+ "met-lipids-cholesterol": {
+  "phosphatidate": {
+   "he": [
+    "פוספוליפידים"
+   ],
+   "en": [
+    "phospholipid"
+   ]
+  },
+  "synthesis": {
+   "he": [
+    "כולסטרול"
+   ],
+   "en": [
+    "cholesterol"
+   ]
+  },
+  "regulation": {
+   "he": [
+    "כולסטרול"
+   ],
+   "en": [
+    "cholesterol"
+   ]
+  },
+  "lipoproteins": {
+   "he": [
+    "כולסטרול"
+   ],
+   "en": [
+    "cholesterol"
+   ]
+  },
+  "derivatives": {
+   "he": [
+    "הורמונים סטרואידים"
+   ],
+   "en": [
+    "steroid hormones"
+   ]
+  },
+  "_heading": {
+   "he": [
+    "כולסטרול",
+    "פוספוליפידים"
+   ],
+   "en": [
+    "cholesterol"
+   ]
+  }
+ },
+ "met-amino-acids": {
+  "turnover": {
+   "he": [
+    "יוביקוויטין"
+   ],
+   "en": [
+    "ubiquitin"
+   ]
+  },
+  "nitrogen": {
+   "he": [
+    "חומצות אמינו"
+   ],
+   "en": [
+    "amino acid"
+   ]
+  },
+  "urea-cycle": {
+   "he": [
+    "חומצות אמינו"
+   ],
+   "en": [
+    "amino acid"
+   ]
+  },
+  "carbon-fates": {
+   "he": [
+    "חומצות אמינו"
+   ],
+   "en": [
+    "amino acid"
+   ]
+  },
+  "biosynthesis": {
+   "he": [
+    "חומצות אמינו"
+   ],
+   "en": [
+    "amino acid"
+   ]
+  },
+  "pku": {
+   "he": [
+    "פנילקטונוריה"
+   ],
+   "en": [
+    "phenylketonuria"
+   ]
+  },
+  "_heading": {
+   "he": [
+    "חומצות אמינו"
+   ],
+   "en": [
+    "amino acid"
+   ]
+  }
+ },
+ "met-nucleotides": {
+  "overview": {
+   "he": [
+    "נוקלאוטידים"
+   ],
+   "en": [
+    "nucleotide"
+   ]
+  },
+  "pyrimidines": {
+   "he": [
+    "נוקלאוטידים"
+   ],
+   "en": [
+    "nucleotide"
+   ]
+  },
+  "purines": {
+   "he": [
+    "נוקלאוטידים"
+   ],
+   "en": [
+    "nucleotide"
+   ]
+  },
+  "deoxy": {
+   "he": [
+    "נוקלאוטידים"
+   ],
+   "en": [
+    "nucleotide"
+   ]
+  },
+  "regulation": {
+   "he": [
+    "נוקלאוטידים"
+   ],
+   "en": [
+    "nucleotide"
+   ]
+  },
+  "degradation": {
+   "he": [
+    "נוקלאוטידים"
+   ],
+   "en": [
+    "nucleotide"
+   ]
+  },
+  "_heading": {
+   "he": [
+    "נוקלאוטידים"
+   ],
+   "en": [
+    "nucleotide"
+   ]
+  }
  }
 }

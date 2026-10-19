@@ -3,14 +3,14 @@
    in their captions. Referenced from lesson bodies as [[figure:<id>]]. */
 import type React from "react";
 
-const BLUE = "#1d4ed8", ORANGE = "#c2410c", GREEN = "#15803d", INK = "#1f2937", MUTED = "#64748b", LINE = "#cbd5e1";
+export const BLUE = "#1d4ed8", ORANGE = "#c2410c", GREEN = "#15803d", INK = "#1f2937", MUTED = "#64748b", LINE = "#cbd5e1";
 const HE = { fontFamily: "var(--font-hebrew), Arial, sans-serif" };
 const LAT = { fontFamily: "Arial, sans-serif" };
 
 type TxProps = { x: number; y: number; children: React.ReactNode; size?: number; anchor?: "start" | "middle" | "end"; color?: string; bold?: boolean; rotate?: number };
 // Hebrew (or mixed) label. Use anchor "middle" unless the text is short and clearly placed.
 // `anchor` uses left-to-right meaning (start = text begins at x and runs right); flipped here for RTL text.
-function He({ x, y, children, size = 15, anchor = "middle", color = INK, bold, rotate }: TxProps) {
+export function He({ x, y, children, size = 15, anchor = "middle", color = INK, bold, rotate }: TxProps) {
   const a = anchor === "start" ? "end" : anchor === "end" ? "start" : "middle";
   return (
     <text x={x} y={y} fontSize={size} textAnchor={a} direction="rtl" fill={color} fontWeight={bold ? 700 : 400} style={HE}
@@ -18,18 +18,18 @@ function He({ x, y, children, size = 15, anchor = "middle", color = INK, bold, r
   );
 }
 // Latin / formula label.
-function La({ x, y, children, size = 15, anchor = "middle", color = INK, bold }: TxProps) {
+export function La({ x, y, children, size = 15, anchor = "middle", color = INK, bold }: TxProps) {
   return <text x={x} y={y} fontSize={size} textAnchor={anchor} direction="ltr" fill={color} fontWeight={bold ? 700 : 400} style={LAT}>{children}</text>;
 }
 
 type Scale = { sx: (v: number) => number; sy: (v: number) => number };
-function scale(x0: number, x1: number, y0: number, y1: number, xmin: number, xmax: number, ymin: number, ymax: number): Scale {
+export function scale(x0: number, x1: number, y0: number, y1: number, xmin: number, xmax: number, ymin: number, ymax: number): Scale {
   return {
     sx: (v) => x0 + ((v - xmin) / (xmax - xmin)) * (x1 - x0),
     sy: (v) => y0 - ((v - ymin) / (ymax - ymin)) * (y0 - y1),
   };
 }
-function curve(f: (x: number) => number, a: number, b: number, s: Scale, n = 160) {
+export function curve(f: (x: number) => number, a: number, b: number, s: Scale, n = 160) {
   let d = "";
   for (let i = 0; i <= n; i++) {
     const x = a + ((b - a) * i) / n;
@@ -37,7 +37,7 @@ function curve(f: (x: number) => number, a: number, b: number, s: Scale, n = 160
   }
   return d;
 }
-function Axes({ x0, y0, x1, y1, xLabel, yLabel, ox }: { x0: number; y0: number; x1: number; y1: number; xLabel: React.ReactNode; yLabel: React.ReactNode; ox?: number }) {
+export function Axes({ x0, y0, x1, y1, xLabel, yLabel, ox }: { x0: number; y0: number; x1: number; y1: number; xLabel: React.ReactNode; yLabel: React.ReactNode; ox?: number }) {
   const ax = ox ?? x0; // where the y axis crosses (for plots with a negative x range)
   return (
     <g>
@@ -49,9 +49,12 @@ function Axes({ x0, y0, x1, y1, xLabel, yLabel, ox }: { x0: number; y0: number; 
     </g>
   );
 }
-const dash = { strokeDasharray: "5 4" };
-const ArrowDefs = () => (
-  <defs><marker id="bfArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill={INK} /></marker></defs>
+export const dash = { strokeDasharray: "5 4" };
+export const ArrowDefs = () => (
+  <defs>
+    <marker id="bfArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill={INK} /></marker>
+    <marker id="bfArrowS" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill={INK} /></marker>
+  </defs>
 );
 
 // ── Amino acids ──────────────────────────────────────────────────────────────
