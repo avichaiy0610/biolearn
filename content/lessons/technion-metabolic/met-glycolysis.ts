@@ -218,7 +218,7 @@ export const metGlycolysis: Lesson = {
     {
       id: "gl-6",
       difficulty: "medium",
-      question: "באיזו תגובה נוצר NADH בגליקוליזה?",
+      question: "איזה אנזים מייצר NADH בגליקוליזה?",
       options: [
         { text: "הקסוקינאז", why: "אין שם חמצון." },
         { text: "גליצראלדהיד-3-פוספט דהידרוגנאז", why: "נכון." },

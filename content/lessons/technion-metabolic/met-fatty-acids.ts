@@ -232,7 +232,7 @@ export const metFattyAcids: Lesson = {
     {
       id: "fa-3",
       difficulty: "medium",
-      question: "מה עושה AMPK ל-אצטיל-CoA קרבוקסילאז?",
+      question: "מה עושה AMPK לאצטיל-CoA קרבוקסילאז?",
       options: [
         { text: "מזרחן ומפעיל", why: "הזרחון משבית." },
         { text: "מזרחן ומשבית — כשחסרה אנרגיה, לא בונים שומן", why: "נכון." },

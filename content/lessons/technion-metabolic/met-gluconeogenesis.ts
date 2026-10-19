@@ -168,7 +168,7 @@ export const metGluconeogenesis: Lesson = {
     {
       id: "gn-1",
       difficulty: "easy",
-      question: "איזו תגובה מתרחשת במיטוכונדריה בגלוקונאוגנזה?",
+      question: "איזה אנזים של הגלוקונאוגנזה פועל במיטוכונדריה?",
       options: [
         { text: "גלוקוז-6-פוספטאז", why: "הוא ברטיקולום האנדופלסמטי." },
         { text: "פירובט קרבוקסילאז", why: "נכון." },
