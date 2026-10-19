@@ -11,8 +11,20 @@ import { mutations } from "./technion-genetics/mutations";
 import { natureOfGene } from "./technion-genetics/nature-of-gene";
 import { nonMendelian } from "./technion-genetics/non-mendelian";
 import { pedigrees } from "./technion-genetics/pedigrees";
+import { aminoAcids } from "./technion-biochem/amino-acids";
+import { proteinStructure } from "./technion-biochem/protein-structure";
+import { proteinFolding } from "./technion-biochem/protein-folding";
+import { fibrousMembrane } from "./technion-biochem/fibrous-membrane";
+import { proteinMethods } from "./technion-biochem/protein-methods";
+import { hemoglobin } from "./technion-biochem/hemoglobin";
+import { enzymePrinciples } from "./technion-biochem/enzyme-principles";
+import { enzymeKinetics } from "./technion-biochem/enzyme-kinetics";
+import { catalyticMechanisms } from "./technion-biochem/catalytic-mechanisms";
+import { allostericRegulation } from "./technion-biochem/allosteric-regulation";
+import { covalentRegulation } from "./technion-biochem/covalent-regulation";
+import { carbsLipids } from "./technion-biochem/carbs-lipids";
 
-export const LESSONS: Lesson[] = [mendelProbability, dominanceAlleles, pedigrees, chromosomalTheory, sexDetermination, linkageMapping, mutations, chromosomeStructure, chromosomeNumber, natureOfGene, geneInteraction, nonMendelian];
+export const LESSONS: Lesson[] = [mendelProbability, dominanceAlleles, pedigrees, chromosomalTheory, sexDetermination, linkageMapping, mutations, chromosomeStructure, chromosomeNumber, natureOfGene, geneInteraction, nonMendelian, aminoAcids, proteinStructure, proteinFolding, fibrousMembrane, proteinMethods, hemoglobin, enzymePrinciples, enzymeKinetics, catalyticMechanisms, allostericRegulation, covalentRegulation, carbsLipids];
 
 export const lessonBySlug = (slug: string) => LESSONS.find((l) => l.slug === slug);
 

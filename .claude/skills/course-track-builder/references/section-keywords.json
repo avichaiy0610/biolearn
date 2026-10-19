@@ -924,5 +924,732 @@
     "non-Mendelian"
    ]
   }
+ },
+ "amino-acids": {
+  "structure": {
+   "he": [
+    "חומצות אמינו",
+    "חומצת אמינו"
+   ],
+   "en": [
+    "amino acid"
+   ]
+  },
+  "ionization": {
+   "he": [
+    "חומצות אמינו",
+    "יון דו-קוטבי",
+    "pKa"
+   ],
+   "en": [
+    "amino acid",
+    "zwitterion",
+    "pKa"
+   ]
+  },
+  "groups": {
+   "he": [
+    "חומצות אמינו",
+    "שרשרת צד"
+   ],
+   "en": [
+    "amino acid",
+    "side chain"
+   ]
+  },
+  "charge": {
+   "he": [
+    "חומצות אמינו",
+    "נקודה איזואלקטרית"
+   ],
+   "en": [
+    "amino acid",
+    "isoelectric point"
+   ]
+  },
+  "peptide": {
+   "he": [
+    "פפטידים",
+    "קשר פפטידי"
+   ],
+   "en": [
+    "peptide",
+    "peptide bond"
+   ]
+  },
+  "_heading": {
+   "he": [
+    "חומצות אמינו"
+   ],
+   "en": [
+    "amino acid"
+   ]
+  }
+ },
+ "protein-structure": {
+  "levels": {
+   "he": [
+    "מבנה ראשוני",
+    "שניוני",
+    "שלישוני"
+   ],
+   "en": [
+    "primary structure",
+    "secondary structure",
+    "tertiary structure"
+   ]
+  },
+  "backbone": {
+   "he": [
+    "פפטידים",
+    "רמצ'נדרן"
+   ],
+   "en": [
+    "peptide",
+    "Ramachandran"
+   ]
+  },
+  "secondary": {
+   "he": [
+    "שניוני",
+    "סליל α",
+    "משטח β"
+   ],
+   "en": [
+    "secondary structure",
+    "alpha helix",
+    "beta sheet"
+   ]
+  },
+  "tertiary": {
+   "he": [
+    "שלישוני"
+   ],
+   "en": [
+    "tertiary structure"
+   ]
+  },
+  "quaternary": {
+   "he": [
+    "מבנה רביעוני"
+   ],
+   "en": [
+    "quaternary structure"
+   ]
+  },
+  "_heading": {
+   "he": [
+    "פפטידים וחלבונים",
+    "מבנה ראשוני"
+   ],
+   "en": [
+    "protein structure"
+   ]
+  }
+ },
+ "protein-folding": {
+  "anfinsen": {
+   "he": [
+    "קיפול",
+    "אנפינסן"
+   ],
+   "en": [
+    "folding",
+    "Anfinsen"
+   ]
+  },
+  "cooperative": {
+   "he": [
+    "קיפול",
+    "דנטורציה"
+   ],
+   "en": [
+    "folding",
+    "denaturation"
+   ]
+  },
+  "pathway": {
+   "he": [
+    "קיפול",
+    "לוינטל"
+   ],
+   "en": [
+    "folding",
+    "Levinthal"
+   ]
+  },
+  "chaperones": {
+   "he": [
+    "שפרונים",
+    "שפרון"
+   ],
+   "en": [
+    "chaperone"
+   ]
+  },
+  "misfolding": {
+   "he": [
+    "עמילואיד",
+    "פריון",
+    "קיפול שגוי"
+   ],
+   "en": [
+    "amyloid",
+    "prion",
+    "misfolding"
+   ]
+  },
+  "_heading": {
+   "he": [
+    "קיפול"
+   ],
+   "en": [
+    "folding"
+   ]
+  }
+ },
+ "fibrous-membrane": {
+  "fibrous": {
+   "he": [
+    "סיביים",
+    "חלבונים סיביים"
+   ],
+   "en": [
+    "fibrous protein"
+   ]
+  },
+  "keratin": {
+   "he": [
+    "סיביים",
+    "קרטין"
+   ],
+   "en": [
+    "fibrous protein",
+    "keratin"
+   ]
+  },
+  "collagen": {
+   "he": [
+    "סיביים",
+    "קולגן"
+   ],
+   "en": [
+    "fibrous protein",
+    "collagen"
+   ]
+  },
+  "membrane": {
+   "he": [
+    "ממברנאלים",
+    "ממברנליים",
+    "חלבוני ממברנה"
+   ],
+   "en": [
+    "membrane protein"
+   ]
+  },
+  "hydropathy": {
+   "he": [
+    "הידרופתיה"
+   ],
+   "en": [
+    "hydropathy"
+   ]
+  },
+  "_heading": {
+   "he": [
+    "ממברנאלים",
+    "סיביים"
+   ],
+   "en": [
+    "membrane protein",
+    "fibrous protein"
+   ]
+  }
+ },
+ "protein-methods": {
+  "assay": {
+   "he": [
+    "בידוד",
+    "טיהור"
+   ],
+   "en": [
+    "purification",
+    "isolation"
+   ]
+  },
+  "solubility": {
+   "he": [
+    "בידוד",
+    "הפרדה",
+    "המלחה"
+   ],
+   "en": [
+    "purification",
+    "salting out"
+   ]
+  },
+  "chromatography": {
+   "he": [
+    "הפרדה",
+    "כרומטוגרפיה"
+   ],
+   "en": [
+    "separation",
+    "chromatography"
+   ]
+  },
+  "electrophoresis": {
+   "he": [
+    "הפרדה",
+    "אלקטרופורזה"
+   ],
+   "en": [
+    "separation",
+    "electrophoresis"
+   ]
+  },
+  "evaluation": {
+   "he": [
+    "בידוד",
+    "טיהור"
+   ],
+   "en": [
+    "purification"
+   ]
+  },
+  "mass": {
+   "he": [
+    "הפרדה",
+    "צנטריפוגה"
+   ],
+   "en": [
+    "separation",
+    "centrifugation"
+   ]
+  },
+  "_heading": {
+   "he": [
+    "בידוד והפרדה"
+   ],
+   "en": [
+    "protein purification"
+   ]
+  }
+ },
+ "hemoglobin": {
+  "myoglobin": {
+   "he": [
+    "מיוגלובין"
+   ],
+   "en": [
+    "myoglobin"
+   ]
+  },
+  "heme": {
+   "he": [
+    "המוגלובין"
+   ],
+   "en": [
+    "hemoglobin"
+   ]
+  },
+  "cooperativity": {
+   "he": [
+    "קואופרטיביות",
+    "המוגלובין"
+   ],
+   "en": [
+    "cooperativity",
+    "hemoglobin"
+   ]
+  },
+  "models": {
+   "he": [
+    "קואופרטיביות"
+   ],
+   "en": [
+    "cooperativity"
+   ]
+  },
+  "effectors": {
+   "he": [
+    "המוגלובין"
+   ],
+   "en": [
+    "hemoglobin"
+   ]
+  },
+  "sickle": {
+   "he": [
+    "אנמיה חרמשית"
+   ],
+   "en": [
+    "sickle-cell"
+   ]
+  },
+  "_heading": {
+   "he": [
+    "המוגלובין",
+    "מבנה רביעוני"
+   ],
+   "en": [
+    "hemoglobin"
+   ]
+  }
+ },
+ "enzyme-principles": {
+  "catalysis": {
+   "he": [
+    "עקרונות הקטליזה",
+    "אנזימים"
+   ],
+   "en": [
+    "enzyme",
+    "catalysis"
+   ]
+  },
+  "cofactors": {
+   "he": [
+    "קואנזימים",
+    "קופקטורים"
+   ],
+   "en": [
+    "coenzyme",
+    "cofactor"
+   ]
+  },
+  "thermo": {
+   "he": [
+    "עקרונות הקטליזה"
+   ],
+   "en": [
+    "catalysis"
+   ]
+  },
+  "transition": {
+   "he": [
+    "עקרונות הקטליזה"
+   ],
+   "en": [
+    "catalysis"
+   ]
+  },
+  "active-site": {
+   "he": [
+    "האתר הפעיל"
+   ],
+   "en": [
+    "active site"
+   ]
+  },
+  "_heading": {
+   "he": [
+    "אנזימים"
+   ],
+   "en": [
+    "enzyme"
+   ]
+  }
+ },
+ "enzyme-kinetics": {
+  "rates": {
+   "he": [
+    "קינטיקה"
+   ],
+   "en": [
+    "kinetics"
+   ]
+  },
+  "michaelis": {
+   "he": [
+    "קינטיקה"
+   ],
+   "en": [
+    "kinetics",
+    "Michaelis"
+   ]
+  },
+  "parameters": {
+   "he": [
+    "קינטיקה"
+   ],
+   "en": [
+    "kinetics"
+   ]
+  },
+  "lineweaver": {
+   "he": [
+    "קינטיקה"
+   ],
+   "en": [
+    "kinetics",
+    "Lineweaver"
+   ]
+  },
+  "reversible": {
+   "he": [
+    "עיכוב"
+   ],
+   "en": [
+    "inhibition"
+   ]
+  },
+  "irreversible": {
+   "he": [
+    "עיכוב"
+   ],
+   "en": [
+    "inhibition"
+   ]
+  },
+  "_heading": {
+   "he": [
+    "קינטיקה",
+    "עיכוב"
+   ],
+   "en": [
+    "kinetics",
+    "inhibition"
+   ]
+  }
+ },
+ "catalytic-mechanisms": {
+  "strategies": {
+   "he": [
+    "מנגנוני קטליזה"
+   ],
+   "en": [
+    "catalytic mechanism"
+   ]
+  },
+  "chymotrypsin": {
+   "he": [
+    "מנגנוני קטליזה"
+   ],
+   "en": [
+    "catalytic mechanism",
+    "chymotrypsin"
+   ]
+  },
+  "specificity": {
+   "he": [
+    "מנגנוני קטליזה"
+   ],
+   "en": [
+    "catalytic mechanism"
+   ]
+  },
+  "carbonic-anhydrase": {
+   "he": [
+    "מנגנוני קטליזה"
+   ],
+   "en": [
+    "catalytic mechanism",
+    "carbonic anhydrase"
+   ]
+  },
+  "restriction": {
+   "he": [
+    "אנזים הגבלה"
+   ],
+   "en": [
+    "restriction enzyme"
+   ]
+  },
+  "_heading": {
+   "he": [
+    "האתר הפעיל",
+    "מנגנוני קטליזה"
+   ],
+   "en": [
+    "active site"
+   ]
+  }
+ },
+ "allosteric-regulation": {
+  "feedback": {
+   "he": [
+    "בקרת פעולתם של אנזימים"
+   ],
+   "en": [
+    "enzyme regulation"
+   ]
+  },
+  "structure": {
+   "he": [
+    "בקרת פעולתם של אנזימים"
+   ],
+   "en": [
+    "enzyme regulation",
+    "allosteric"
+   ]
+  },
+  "sigmoid": {
+   "he": [
+    "בקרת פעולתם של אנזימים"
+   ],
+   "en": [
+    "allosteric"
+   ]
+  },
+  "effectors": {
+   "he": [
+    "בקרת פעולתם של אנזימים"
+   ],
+   "en": [
+    "allosteric"
+   ]
+  },
+  "isozymes": {
+   "he": [
+    "איזואנזימים"
+   ],
+   "en": [
+    "isozyme"
+   ]
+  },
+  "_heading": {
+   "he": [
+    "בקרת פעולתם של אנזימים"
+   ],
+   "en": [
+    "enzyme regulation"
+   ]
+  }
+ },
+ "covalent-regulation": {
+  "covalent": {
+   "he": [
+    "מודיפיקציות אחר-תרגומיות"
+   ],
+   "en": [
+    "posttranslational modification"
+   ]
+  },
+  "phosphorylation": {
+   "he": [
+    "מודיפיקציות אחר-תרגומיות"
+   ],
+   "en": [
+    "posttranslational modification",
+    "phosphorylation"
+   ]
+  },
+  "pka": {
+   "he": [
+    "מודיפיקציות אחר-תרגומיות"
+   ],
+   "en": [
+    "posttranslational modification"
+   ]
+  },
+  "zymogens": {
+   "he": [
+    "מודיפיקציות אחר-תרגומיות"
+   ],
+   "en": [
+    "posttranslational modification",
+    "zymogen"
+   ]
+  },
+  "digestion": {
+   "he": [
+    "אנטרופפטידאז",
+    "סרפין"
+   ],
+   "en": [
+    "enteropeptidase",
+    "serpin"
+   ]
+  },
+  "clotting": {
+   "he": [
+    "קרישה"
+   ],
+   "en": [
+    "blood clotting"
+   ]
+  },
+  "_heading": {
+   "he": [
+    "מודיפיקציות אחר-תרגומיות"
+   ],
+   "en": [
+    "posttranslational modification"
+   ]
+  }
+ },
+ "carbs-lipids": {
+  "monosaccharides": {
+   "he": [
+    "סוכרים"
+   ],
+   "en": [
+    "carbohydrate",
+    "sugar"
+   ]
+  },
+  "rings": {
+   "he": [
+    "סוכרים"
+   ],
+   "en": [
+    "carbohydrate",
+    "sugar"
+   ]
+  },
+  "reducing": {
+   "he": [
+    "סוכרים"
+   ],
+   "en": [
+    "carbohydrate",
+    "sugar"
+   ]
+  },
+  "glycosidic": {
+   "he": [
+    "סוכרים"
+   ],
+   "en": [
+    "carbohydrate",
+    "sugar"
+   ]
+  },
+  "fatty-acids": {
+   "he": [
+    "ליפידים"
+   ],
+   "en": [
+    "lipid",
+    "fatty acid"
+   ]
+  },
+  "membrane-lipids": {
+   "he": [
+    "ליפידים"
+   ],
+   "en": [
+    "lipid"
+   ]
+  },
+  "bilayer": {
+   "he": [
+    "ליפידים"
+   ],
+   "en": [
+    "lipid",
+    "bilayer"
+   ]
+  },
+  "_heading": {
+   "he": [
+    "סוכרים וליפידים"
+   ],
+   "en": [
+    "carbohydrates and lipids"
+   ]
+  }
  }
 }
