@@ -217,7 +217,7 @@ function O2Binding() {
   return (
     <svg viewBox="0 0 480 310" className="w-full h-auto" role="img" aria-label="עקומות קישור חמצן: מיוגלובין היפרבולית עם P50 של 2 טור, המוגלובין סיגמואידית עם P50 של 26 טור; בין 100 ל-20 טור המוגלובין מוסר כ-65 אחוז ומיוגלובין רק 7">
       <Axes x0={60} y0={250} x1={460} y1={40}
-        xLabel={<He x={260} y={296} size={14}>pO₂ (torr)</He>}
+        xLabel={<La x={260} y={296} size={14}>pO₂ (torr)</La>}
         yLabel={<He x={64} y={26} anchor="start" size={14}>רוויה (Y)</He>} />
       {[0, 20, 40, 60, 80, 100, 120].map((v) => <La key={v} x={s.sx(v)} y={268} size={13} color={MUTED}>{v}</La>)}
       {[0, 0.5, 1].map((v) => <La key={v} x={52} y={s.sy(v) + 5} anchor="end" size={13} color={MUTED}>{v}</La>)}
@@ -228,7 +228,7 @@ function O2Binding() {
       <path d={curve(hb, 0, 120, s)} fill="none" stroke={ORANGE} strokeWidth={3} />
       <line x1={xa} y1={s.sy(hb(20))} x2={xa} y2={s.sy(hb(100))} stroke={ORANGE} strokeWidth={2} markerStart="url(#bfArrow)" markerEnd="url(#bfArrow)" />
       <line x1={s.sx(20)} y1={s.sy(hb(20))} x2={xa} y2={s.sy(hb(20))} stroke={ORANGE} strokeWidth={1} {...dash} />
-      <He x={xa - 34} y={s.sy(0.62)} size={13} color={ORANGE} bold>≈65%</He>
+      <La x={xa - 34} y={s.sy(0.62)} size={13} color={ORANGE} bold>≈65%</La>
       <He x={xa - 34} y={s.sy(0.62) + 17} size={12} color={ORANGE}>נמסר</He>
       <He x={s.sx(24)} y={s.sy(0.8)} size={13} color={BLUE} bold anchor="start">מיוגלובין</He>
       <He x={s.sx(55)} y={s.sy(0.62)} size={13} color={ORANGE} bold>המוגלובין</He>
@@ -241,15 +241,15 @@ function BohrShift() {
   return (
     <svg viewBox="0 0 480 310" className="w-full h-auto" role="img" aria-label="הזזה של עקומת המוגלובין: שמאלה כשהזיקה עולה, ימינה כשה-pH יורד או כשיש יותר CO2 או 2,3-BPG">
       <Axes x0={60} y0={250} x1={460} y1={40}
-        xLabel={<He x={260} y={296} size={14}>pO₂ (torr)</He>}
+        xLabel={<La x={260} y={296} size={14}>pO₂ (torr)</La>}
         yLabel={<He x={64} y={26} anchor="start" size={14}>רוויה (Y)</He>} />
       {[0, 20, 40, 60, 80, 100].map((v) => <La key={v} x={s.sx(v)} y={268} size={13} color={MUTED}>{v}</La>)}
       <path d={curve((p) => hill(p, 18, 2.8), 0, 100, s)} fill="none" stroke={GREEN} strokeWidth={3} />
       <path d={curve((p) => hill(p, 26, 2.8), 0, 100, s)} fill="none" stroke={INK} strokeWidth={3} />
       <path d={curve((p) => hill(p, 36, 2.8), 0, 100, s)} fill="none" stroke={ORANGE} strokeWidth={3} />
-      <He x={s.sx(12)} y={s.sy(0.86)} size={13} color={GREEN} bold>זיקה גבוהה</He>
+      <He x={s.sx(12)} y={s.sy(0.86)} size={13} color={GREEN} bold>זיקה גבוהה לחמצן</He>
       <He x={s.sx(12)} y={s.sy(0.86) + 16} size={12} color={GREEN}>(עוברי)</He>
-      <He x={s.sx(78)} y={s.sy(0.42)} size={13} color={ORANGE} bold>זיקה נמוכה</He>
+      <He x={s.sx(78)} y={s.sy(0.42)} size={13} color={ORANGE} bold>זיקה נמוכה לחמצן</He>
       <La x={s.sx(78)} y={s.sy(0.42) + 16} size={12} color={ORANGE}>pH↓  CO₂↑  2,3-BPG↑</La>
       <line x1={s.sx(30)} y1={s.sy(0.5)} x2={s.sx(42)} y2={s.sy(0.5)} stroke={ORANGE} strokeWidth={2} markerEnd="url(#bfArrow)" />
     </svg>
@@ -292,7 +292,7 @@ function MichaelisMenten() {
   return (
     <svg viewBox="0 0 480 310" className="w-full h-auto" role="img" aria-label="עקומת מיכאליס-מנטן: המהירות ההתחלתית עולה עם ריכוז המצע ומתקרבת ל-Vmax; בריכוז השווה ל-Km המהירות היא חצי מ-Vmax">
       <Axes x0={60} y0={250} x1={460} y1={40}
-        xLabel={<He x={260} y={296} size={14}>[S] (ביחידות של Kₘ)</He>}
+        xLabel={<He x={260} y={296} size={14}>ריכוז המצע, ביחידות של Kₘ</He>}
         yLabel={<La x={64} y={26} anchor="start" size={15} bold>V₀</La>} />
       {[0, 2, 4, 6, 8, 10].map((x) => <La key={x} x={s.sx(x)} y={268} size={13} color={MUTED}>{x}</La>)}
       <line x1={60} y1={s.sy(1)} x2={460} y2={s.sy(1)} stroke={ORANGE} {...dash} />
@@ -400,12 +400,12 @@ function AllostericCurves() {
       <path d={curve((a) => mwc(a, 70), 0, 12, s)} fill="none" stroke={GREEN} strokeWidth={3} />
       <path d={curve((a) => mwc(a, 200), 0, 12, s)} fill="none" stroke={INK} strokeWidth={3} />
       <path d={curve((a) => mwc(a, 1250), 0, 12, s)} fill="none" stroke={ORANGE} strokeWidth={3} />
-      <He x={s.sx(1.0)} y={s.sy(0.62)} size={13} color={GREEN} bold>+ATP</He>
-      <He x={s.sx(1.0)} y={s.sy(0.62) + 16} size={12} color={GREEN}>(L = 70)</He>
+      <La x={s.sx(1.0)} y={s.sy(0.62)} size={13} color={GREEN} bold>+ATP</La>
+      <La x={s.sx(1.0)} y={s.sy(0.62) + 16} size={12} color={GREEN}>(L = 70)</La>
       <He x={s.sx(3.6)} y={s.sy(0.42)} size={13} bold>בלי אפקטור</He>
-      <He x={s.sx(3.6)} y={s.sy(0.42) + 16} size={12}>(L = 200)</He>
-      <He x={s.sx(5.6)} y={s.sy(0.3)} size={13} color={ORANGE} bold>+CTP</He>
-      <He x={s.sx(5.6)} y={s.sy(0.3) + 16} size={12} color={ORANGE}>(L = 1250)</He>
+      <La x={s.sx(3.6)} y={s.sy(0.42) + 16} size={12}>(L = 200)</La>
+      <La x={s.sx(5.6)} y={s.sy(0.3)} size={13} color={ORANGE} bold>+CTP</La>
+      <La x={s.sx(5.6)} y={s.sy(0.3) + 16} size={12} color={ORANGE}>(L = 1250)</La>
     </svg>
   );
 }
