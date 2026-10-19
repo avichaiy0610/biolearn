@@ -88,6 +88,39 @@ async function tau(t: SyllabusTarget): Promise<SyllabusRecord> {
 }
 
 // ── Technion: students portal course page ─────────────────────────────────
+// The portal lists every library record of the course books: the same book several times (editions, a short
+// "Title - Author" line, a long catalog line "Title / authors… - Author"). Keep one line per title.
+function technionBooks(lines: string[]): string[] | undefined {
+  const byTitle = new Map<string, { title: string; author: string }>();
+  for (const raw of lines) {
+    const l = raw.replace(/&#0?39;/g, "'").replace(/&amp;/g, "&");
+    const dash = l.lastIndexOf(" - ");
+    const author = dash > 0 ? l.slice(dash + 3).replace(/[.,]+$/, "").trim() : "";
+    const title = (dash > 0 ? l.slice(0, dash) : l).split(" / ")[0].replace(/[\s.:,]+$/, "").trim();
+    if (!title || title.length > 140) continue;
+    const key = title.toLowerCase().replace(/[^\p{L}\p{N}]+/gu, " ").trim();
+    const prev = byTitle.get(key);
+    if (!prev || (!prev.author && author)) byTitle.set(key, { title: prev?.title ?? title, author: author || prev?.author || "" });
+  }
+  const out = [...byTitle.values()].map((x) => (x.author ? `${x.title} - ${x.author}` : x.title));
+  return out.length ? out : undefined;
+}
+
+// Bibliography of a PDF syllabus: the lines after a "ספרות / ביבליוגרפיה / Bibliography" heading.
+function pdfBooks(lines: string[]): string[] | undefined {
+  const h = lines.findIndex((l) => l.length < 60 && /(?:^|\s|:)(?:ספרות|ביבליוגרפיה|ספרי (?:לימוד|הקורס)|רשימת קריאה|Bibliography|Reading list|Textbooks?)(?:\s|:|$)/i.test(l));
+  if (h < 0) return undefined;
+  const out: string[] = [];
+  for (const l of lines.slice(h + 1, h + 20)) {
+    // Next section, or the page footer (Haifa letterhead).
+    if (/מטלות|דרישות|הרכב הציון|ציון|הערכ|נוכחות|שעות קבלה|מבנה הקורס|לוח זמנים|מטרות|תוצרי|Mount Carmel|הר הכרמל|E-mail|Faculty|החוג ל|הפקולטה/.test(l)) break;
+    // Library shelf marks ("שמור סוציולוגיה …") and headings like "ספר הקורס:".
+    if (/^\d+$/.test(l) || l.length < 6 || /שמור |בספרי[יה]ת|^ספר(?:י)? הקורס:?$/.test(l)) continue;
+    out.push(l.replace(/^[\d.\-•*)]+\s*/, ""));
+  }
+  return out.length ? out.slice(0, 12) : undefined;
+}
+
 async function technion(t: SyllabusTarget): Promise<SyllabusRecord> {
   const url = `https://students.technion.ac.il/local/technionsearch/course/${t.code}`;
   const html = await (await get(url)).text();
@@ -99,8 +132,8 @@ async function technion(t: SyllabusTarget): Promise<SyllabusRecord> {
   const desc = clean(text.slice(i + 1, text.findIndex((l, k) => k > i && /^פקולטה:/.test(l))).join(" "));
   const topics = /נושאי הקורס:?\s*([\s\S]+?)(?:\.\s*הערה|$)/.exec(desc)?.[1] ?? desc;
   const b = text.indexOf("ספרי המקצוע");
-  // The portal lists each book twice (short "Title - Author" and a long catalog line); keep the short form.
-  const books = b >= 0 ? [...new Set(text.slice(b + 1, b + 14).filter((l) => / - [A-Z]/.test(l) && l.length < 90))].slice(0, 4) : undefined;
+  const e = text.findIndex((l, k) => k > b && /^מידע סמסטריאלי/.test(l));
+  const books = b >= 0 ? technionBooks(text.slice(b + 1, e > b ? e : b + 40)) : undefined;
   // "תאחיזה, שחלוף ושיטות…" is one topic: a one-word item belongs with the next one.
   const parts = topics.split(/,\s*|\.\s+/).map(clean).filter(Boolean);
   const merged: string[] = [];
@@ -157,6 +190,7 @@ async function biu(t: SyllabusTarget): Promise<SyllabusRecord> {
     fetchedAt: NOW, source: "biu-pdf", sourceUrl: pick, level: sessions.length ? "lectures" : "topics",
     contentHe: content, topicsHe: sessions.length ? sessions.flatMap((s) => s.topicsHe) : splitTopics(content),
     sessions: sessions.length ? sessions : undefined, notTaughtHe: notTaught.length ? notTaught : undefined,
+    books: pdfBooks(lines),
   };
 }
 
@@ -253,7 +287,7 @@ async function haifa(t: SyllabusTarget): Promise<SyllabusRecord> {
   return {
     courseSlug: t.courseSlug, university: "haifa", code: t.code, nameHe: link.name, fetchedAt: NOW, source: "haifa-pdf",
     sourceUrl: link.url, updatedHe: uploaded ? `הסילבוס הועלה לאתר ב-${uploaded[2]}/${uploaded[1]}` : undefined,
-    level: "topics", contentHe: topicLines.join("\n"), topicsHe: topics.slice(0, 30),
+    level: "topics", contentHe: topicLines.join("\n"), topicsHe: topics.slice(0, 30), books: pdfBooks(lines),
   };
 }
 

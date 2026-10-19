@@ -301,7 +301,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "code": "80206",
   "nameHe": "מבוא לפיזיולוגיה של החי",
   "year": 2025,
-  "fetchedAt": "2026-10-18",
+  "fetchedAt": "2026-10-19",
   "source": "biu-pdf",
   "sourceUrl": "https://life-sciences.biu.ac.il/sites/life-sciences/files/shared/Med%20Mechina/Sylabi25/%D7%A1%D7%99%D7%9C%D7%91%D7%95%D7%A1-%D7%9E%D7%91%D7%95%D7%90-%D7%9C%D7%A4%D7%99%D7%96%D7%99%D7%95%D7%9C%D7%95%D7%92%D7%99%D7%94-%D7%A9%D7%9C-%D7%94%D7%97%D7%99-80206-%D7%AA%D7%A9%D7%A4%D7%94.pdf",
   "level": "topics",
@@ -311,6 +311,10 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
    "יום ושעה יום א' ) 16:00-17:00בתיאום מראש( yoav.paas@biu.ac.il שעת קבלה: מייל מרצה: https://lemida.biu.ac.il/course/view.php?id=93705 קישור לאתר למדה: 1 תיאור הקורס ומטרות למידה תקציר הקורס עקרונות נוירו-פיזיולוגיים תוך מיקוד על תקשורת בין-תאית במערכת העצבים המרכזית ומערכת העצבים הפריפריאלית ,וזאת ברמה המולקולרית ,התאית והמערכתית ,תוך מתן דוגמאות להשפעת מערכת העצבים על תפקוד האורגניזם המלא )האדם(",
    "מטרות/תוצרי הלמידה ידע .1הלומדים ידעו ויוכלו לתאר כיצד תאי עצב מוליכים אותות חשמליים לאורך שלוחת האקסון, וכיצד הם מפעילים תגובות אצל תאי עצב אחרים בעזרת מנגנונים סינפטיים. .2הלומדים ידעו ויוכלו לתאר כיצד תאי עצב מוטוריים מפעילים שרירי שלד ,ומהו מנגנון הכיווץ של שריר השלד. .3הלומדים ידעו ויוכלו לתאר תגובות רפלקס סומטיות ,וכיצד פועלים חוש המישוש ,חוש הריח, חוש הטעם ,חוש השמע וחוש הראיה אצל האדם",
    "מיומנויות .1הלומדים ינתחו התנהגות של מעגלים חשמליים המורכבים ממקור מתח ,קבל ונגד ויחשבו טעינה ופריקה של הקבל בתלות עם הזמן. .2הלומדים יחשבו וינתחו את התנהגות הממברנה הביולוגית כקבל וכנגד והתנהגות הזרמים והשטפים היוניים על פי מודל המוליכויות המקבילות ,תוך שימוש בנוסחת הזרם היוני שכוללת חישובים של כוחות אלקטרו מניעים עבור יונים שונים. .3הלומדים יחשבו וינתחו ,שינויים במתח ומוליכות הממברנה הביולוגית עקב הפעלה של תעלות יונים ומשאבות נתרן-אשלגן. 2 למידה פעילה -תכנון מהלך השיעורים: הערכה *קריאה/ למידה פעילה נושא השיעור מס'"
+  ],
+  "books": [
+   "\"Principles of Neural Science\" 5th Edition, Eric R. Kandel, James H. Schwartz, Thomas M. Jessell,",
+   "Steven A. Siegelbaum & A. J. Hudspeth"
   ]
  },
  "biu-biochem-a": {
@@ -318,7 +322,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "university": "biu",
   "code": "80201",
   "nameHe": "ביוכימיה א'",
-  "fetchedAt": "2026-10-18",
+  "fetchedAt": "2026-10-19",
   "source": "biu-pdf",
   "sourceUrl": "https://life-sciences.biu.ac.il/sites/life-sciences/files/shared/Med%20BSc/%D7%91%D7%99%D7%95%D7%9B%D7%99%D7%9E%D7%99%D7%94-%D7%90'-80201.pdf",
   "level": "topics",
@@ -333,7 +337,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "university": "biu",
   "code": "80202",
   "nameHe": "ביוכימיה ב'",
-  "fetchedAt": "2026-10-18",
+  "fetchedAt": "2026-10-19",
   "source": "biu-pdf",
   "sourceUrl": "https://life-sciences.biu.ac.il/sites/life-sciences/files/shared/Med%20BSc/%D7%91%D7%99%D7%95%D7%9B%D7%99%D7%9E%D7%99%D7%94-%D7%91'-80202.pdf",
   "level": "topics",
@@ -351,7 +355,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "code": "80150",
   "nameHe": "ביוסטטיסטיקה",
   "year": 2024,
-  "fetchedAt": "2026-10-18",
+  "fetchedAt": "2026-10-19",
   "source": "biu-pdf",
   "sourceUrl": "https://life-sciences.biu.ac.il/sites/life-sciences/files/shared/Med%20Mechina/Sylabi24/%D7%91%D7%99%D7%95%D7%A1%D7%98%D7%98%D7%99%D7%A1%D7%98%D7%99%D7%A7%D7%94-80-150-30-1).pdf",
   "level": "topics",
@@ -367,6 +371,19 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
    "במהלך הקורס יידרש הסטודנט לפתור תרגילים בסטטיסטיקה ולהבין פלטים המופקים בתוכנת ה.SPSS חובות הקורס: .1הגשת ארבעה תרגילים. .2הרכב ציון: א .תרגילי בית (.)10% ב .מבחן מסכם (.)85% 1 תרגילי בית תאריך תרגול תאריך נושא ההרצאה שבוע הרצאה שבוע 1 תהליך המחקר המדעי - תרגיל מס' - 1 מאפיינים ועקרונות .מהי שבוע 2 סטטיסטיקה תיאורית ,מדדי מרכז הסטטיסטיקה -תיאור שבוע 3 ומדדי פיזור והסקה",
    "הגדרת משתנים .משתנה בדיד ומשתנה רציף",
    "רמות מדידה של משתנים "
+  ],
+  "books": [
+   "אייזנבך רונית \" ,סטטיסטיקה ללא סטטיסטיקאים \" ,הוצאת אקדמון .",
+   "מבוא לסטטיסטיקה של האוניברסיטה הפתוחה ,כרך ראשון – סטטיסטיקה תיאורית :",
+   "יחידות . 1-5",
+   "רות בייט -מרום \" :מבוא לסטטיסטיקה \" ,הוצאת עם עובד ,ספריה אוניברסיטאית .",
+   "סטטיסטיקה והסתברות של בני גורן או אספיס ( לתרגול ) .",
+   "בספרית המכון הפדגוגי 519.07אספ.סט ()189361",
+   "דרום אפרים \" ,סטטיסטיקה עם דוגמאות מתחומי החינוך והפסיכולוגיה \" ,הוצאת",
+   "רגרסיה לינארית ,ד\"ר אפרים דרום ,בי\"ס לחינוך ומרכז המחשבים ,אונ' בר -אילן .",
+   "ישראלית שולה ,סטטיסטיקה הלכה למעשה ,לוגיק מערכות יעוץ והדרכה .",
+   "שפיגל \" :סטטיסטיקה \" ,הוצאת שאום ,סטימצקי ( לתרגול ) .",
+   "שיטות מחקר במדעי החברה מאת דוד נחמיאס וחוה נחמיאס ,עם עובד ."
   ]
  },
  "biu-cell": {
@@ -375,7 +392,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "code": "80103",
   "nameHe": "",
   "year": 2025,
-  "fetchedAt": "2026-10-18",
+  "fetchedAt": "2026-10-19",
   "source": "biu-pdf",
   "sourceUrl": "https://life-sciences.biu.ac.il/sites/life-sciences/files/shared/Med%20Mechina/Sylabi25/80103-%D7%A1%D7%99%D7%9C%D7%91%D7%95%D7%A1-%D7%A2%D7%93%D7%9B%D7%A0%D7%99-%D7%AA%D7%A9%D7%A4%D7%94.pdf",
   "level": "topics",
@@ -385,6 +402,20 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
    "Achia.urbach@biu.ac.il",
    "sivankorenblit@gmail.com leah.armon@biu.ac.il ___ 1 תיאור הקורס ומטרות למידה )תקציר הקורס (להרחבה The aim of this course is to familiarize students with basic biological terms while providing the students with the basic concepts about the structure and function of the animal cell and some of its fundamental processes. )תוצרי הלמידה (להרחבה/מטרות The students will acquire a biology vocabulary and gain basic knowledge about the structure and function of the animal cells",
    "מיומנויות The knowledge acquired in this course will lay the ground for more advanced courses that the students will take during the undergraduate studies. ) (להרחבה: תכנון מהלך השיעורים- למידה פעילה :ניתן לתכנן תהליך למידה פעיל לכל הקורס או לפרט עבור כל שיעור פעילות של למידה פעילה בטבלה הבאה הערכה /קריאה למידה פעילה 'מס מעצבת/תהליכית צפיה נושא השיעור השיעור נדרשת )(להרחבה General introduction 1 Cell membrane – structures and function 2 Cell membrane – carriers and transporters 3"
+  ],
+  "books": [
+   "Molecular Biology of the Cell / Alberts et al.",
+   "Ch1 Universal features of cells on earth",
+   "Ch2 Chemical components of the cell p58-68",
+   "Ch4 DNA and chromosomes - almost all the chapter",
+   "Ch6 From DNA to protein - almost all the chapter (excluding RNA as the",
+   "origin of life)",
+   "Ch7 some sections that parrallel the lesson",
+   "Ch10 Internal organiztion of the cell, mainly the lipid bilayer",
+   "Ch11 Principles of membranr transport",
+   "Ch12 Protein sorting",
+   "Ch13 Intracellular vesicular traffic",
+   "Ch15 General principles of cell communication"
   ]
  },
  "biu-cell-function": {
@@ -393,7 +424,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "code": "80548",
   "nameHe": "התא מבנה ותפקוד",
   "year": 2024,
-  "fetchedAt": "2026-10-18",
+  "fetchedAt": "2026-10-19",
   "source": "biu-pdf",
   "sourceUrl": "https://life-sciences.biu.ac.il/sites/life-sciences/files/shared/Med%20Mechina/Sylabi24/11.2023-80-548-30-%D7%A1%D7%99%D7%9C%D7%91%D7%95%D7%A1-%D7%A7%D7%95%D7%A8%D7%A1-%D7%94%D7%AA%D7%90-%D7%9E%D7%91%D7%A0%D7%94-%D7%95%D7%AA%D7%A4%D7%A7%D7%95%D7%93.pdf",
   "level": "topics",
@@ -411,7 +442,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "code": "80208",
   "nameHe": "גנטיקה",
   "year": 2024,
-  "fetchedAt": "2026-10-18",
+  "fetchedAt": "2026-10-19",
   "source": "biu-pdf",
   "sourceUrl": "https://life-sciences.biu.ac.il/sites/life-sciences/files/shared/Med%20Mechina/Sylabi24/80-208-30-%D7%92%D7%A0%D7%98%D7%99%D7%A7%D7%94-%D7%AA%D7%A9%D7%A4%D7%93.pdf",
   "level": "lectures",
@@ -624,6 +655,10 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
    "Molecular genetics:",
    "The experiments proving that DNA (and not proteins) is the genetic material.",
    "Mutagens and their mechanism of action."
+  ],
+  "books": [
+   "An Introduction to Genetic Analysis -12th Edition,, Griffiths, A.J.F., Wessler, S.R., Carroll,",
+   "S.B., Doebley, J."
   ]
  },
  "biu-microbiology": {
@@ -632,7 +667,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "code": "80203",
   "nameHe": "מיקרוביולוגיה כללית",
   "year": 2023,
-  "fetchedAt": "2026-10-18",
+  "fetchedAt": "2026-10-19",
   "source": "biu-pdf",
   "sourceUrl": "https://life-sciences.biu.ac.il/sites/life-sciences/files/shared/Med%20Mechina/Sylabi23/80-203-%D7%9E%D7%99%D7%A7%D7%A8%D7%95%D7%91%D7%99%D7%95%D7%9C%D7%95%D7%92%D7%99%D7%94-%D7%9B%D7%9C%D7%9C%D7%99%D7%AA.pdf",
   "level": "topics",
@@ -655,7 +690,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "code": "80242",
   "nameHe": "מולקולרית",
   "year": 2025,
-  "fetchedAt": "2026-10-18",
+  "fetchedAt": "2026-10-19",
   "source": "biu-pdf",
   "sourceUrl": "https://life-sciences.biu.ac.il/sites/life-sciences/files/shared/Med%20Mechina/Sylabi25/%D7%A1%D7%99%D7%9C%D7%91%D7%95%D7%A1-%D7%92%D7%A8%D7%A1%D7%94-%D7%97%D7%93%D7%A9%D7%94-2025-%D7%9E%D7%95%D7%9C%D7%A7%D7%95%D7%9C%D7%A8%D7%99%D7%AA-242-30.pdf",
   "level": "topics",
@@ -663,6 +698,9 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "topicsHe": [
    "תאריך2.25 : סילבוס -תוכנית הוראה לקורס ביולוגיה מולקולרית והנדסה גנטית א׳ פרופ' ירון שב-טל | הפקולטה למדעי החיים Molecular Biology and Genetic Engineering | 80-242-30 שיעור סוג הקורס: 2 היקף נ\"ז: מכינה לרפואה שנת לימודים: ב סמסטר: יום ושעה שלישי 16:00 שעת קבלה: Yaron.Shav-Tal@biu.ac.il מייל מרצה: קישור לאתר מודל: תיאור הקורס ותוצרי למידה תקציר הקורס הכרות עם הטכניקות המקובלות בעבודה בביולוגיה מולקולרית וישומן בביולוגיה המודרנית .הקורס סוקר את הטכניקות והמתודולוגיות הבסיסיות המשמשות חוקרים בתחום הביולוגיה המולקולרית",
    "תוצרי הלמידה א .ידע היכרות עם עובדות ,תכנים ,מושגים ,סוגיות ורעיונות מרכזיים בתחום הדעת .פעלים לדוגמה: .1הלומדים יתארו את שיטות הריצוף השונות .2הלומדים יתארו את שיטות הצביעה השונות .3הלומדים יתארו את שיטות הפרדת המולקולות – חומצות גרעין וחלבונים ב .מיומנויות .1הלומדים יוכלו להשוות בין השיטות השונות ולהסביר את היתרונות ,החסרונות ,ומה לא ניתן לעשות עם כל שיטה. .2הלומדים יוכלו להעריך אילו בעיות היו בשיטה שגרמו לכשלון הניסוי למידה פעילה -תכנון מהלך השיעורים: קריאה/ למידה פעילה נושא השיעור מס' צפיה נדרשת השיעור מבוא ,חזרה על הדוגמה המרכזית של הביולוגיה המולקולרית 1 דנ״א -אנזימי רסטריקציה ,הפרדת מולקולות דנ״א בג׳ל 2 שיבוט ,פלסמידים ,וקטורי ביטוי 3 ספריה southern,סימון דנ״א ,היברידיזציה ,אנליזת 4 ,גנומית 5 Spectral karyotyping & DNA in situ hybridization 6 קביעת רצף דנ״א – משיטות בסיסיות ועד לשיטות"
+  ],
+  "books": [
+   "חובה -פרק 8בספר \"ביולוגיה מולקולרית של התא\" -מהדורה 6"
   ]
  },
  "biu-molecular-b": {
@@ -671,7 +709,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "code": "80377",
   "nameHe": "ביולוגיה מולקולרית והנדסה גנטית ב",
   "year": 2024,
-  "fetchedAt": "2026-10-18",
+  "fetchedAt": "2026-10-19",
   "source": "biu-pdf",
   "sourceUrl": "https://life-sciences.biu.ac.il/sites/life-sciences/files/shared/Med%20Mechina/Sylabi24/80-377-30%D7%91%D7%99%D7%95%D7%9C%D7%95%D7%92%D7%99%D7%94-%D7%9E%D7%95%D7%9C%D7%A7%D7%95%D7%9C%D7%A8%D7%99%D7%AA-%D7%95%D7%94%D7%A0%D7%93%D7%A1%D7%94-%D7%92%D7%A0%D7%98%D7%99%D7%AA-%D7%91_0.pdf",
   "level": "topics",
@@ -684,6 +722,9 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
    "נושאים שקוצצו: \"דנ\"א ,כרומוזומים ,גנום ואפיגנטיקה\" \"בקרה של ביטוי גנים\" ״סוגים שונים של סקרין מערכתי כלל גנומי ()genome wide screens״ ״בקרה על רמות חלבונים בתא״ בשנים קודמות כללו כל אחד מהנושאים האלו שני שיעורים .השנה ילמד שיעור אחד .היקף החומר לא ישתנה אבל יינתנו פחות דוגמאות לשימושים בטכנולוגיה במחקר",
    "דרישות קדם: ביולוגיה מולקולרית והנדסה גנטית א'",
    "חובות /דרישות /מטלות**: מבחן מרכיב הציון הסופי :בבחינה חובה לציין פרונטלי/מקוון"
+  ],
+  "books": [
+   "Molecular Biology of the Cell , Alberts et al. Sixth Edition"
   ]
  },
  "biu-systems-physiology": {
@@ -692,7 +733,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "code": "80214",
   "nameHe": "פיזיולוגיה של מערכות",
   "year": 2025,
-  "fetchedAt": "2026-10-18",
+  "fetchedAt": "2026-10-19",
   "source": "biu-pdf",
   "sourceUrl": "https://life-sciences.biu.ac.il/sites/life-sciences/files/shared/Med%20Mechina/Sylabi25/%D7%A1%D7%99%D7%9C%D7%91%D7%95%D7%A1-%D7%A4%D7%99%D7%96%D7%99%D7%95%D7%9C%D7%95%D7%92%D7%99%D7%94-%D7%A9%D7%9C-%D7%9E%D7%A2%D7%A8%D7%9B%D7%95%D7%AA-80214-%D7%AA%D7%A9%D7%A4%D7%94.pdf",
   "level": "lectures",
@@ -814,6 +855,12 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
      "צפייה בסרטונים שיועלו ללמדה ,ובסרטונים אשר להם יש הפנייה לאתר אינטרנט בגוף מצגות הקורס."
     ]
    }
+  ],
+  "books": [
+   "Principles of ANATOMY & PHYSIOLOGY, Gerard J. Tortora & Bryan Derrickson",
+   "th Edition, 2017, John Wiley & Sons, Inc., USA .",
+   "תמלול מצגות הקורס.",
+   "צפייה בסרטונים שיועלו ללמדה ,ובסרטונים אשר להם יש הפנייה לאתר אינטרנט בגוף מצגות הקורס."
   ]
  },
  "biu-virology": {
@@ -822,7 +869,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "code": "80204",
   "nameHe": "מבוא לוירולוגיה",
   "year": 2023,
-  "fetchedAt": "2026-10-18",
+  "fetchedAt": "2026-10-19",
   "source": "biu-pdf",
   "sourceUrl": "https://life-sciences.biu.ac.il/sites/life-sciences/files/shared/Med%20Mechina/Sylabi23/80204-%D7%9E%D7%91%D7%95%D7%90-%D7%9C%D7%95%D7%99%D7%A8%D7%95%D7%9C%D7%95%D7%92%D7%99%D7%94.pdf",
   "level": "topics",
@@ -847,6 +894,14 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
    "ניסוי גידול חד שלביMO - וIPFU ,אמצעים לכימות נגיפים נגיפים וסרטן",
    "נגיפים וריפוי גני",
    "דיון ביחסי הגומלין בין הנגיפים לבין התאים 7 .המאכסנים :דרישות קדם אין : דרישות/ חובות עמידה בבחינה מסכמת :מרכיבי ציון מבחן"
+  ],
+  "books": [
+   "האוניברסיטה הפתוחה- עולם הנגיפים",
+   "Wagner EK, Hewlett MJ. (2004) Basic Virology, Second Edition. Blackwell Publishing.",
+   "Flint, S.J. Enquist, L.W. et al. (2009/2014). Principles of Virology. Molecular Biology,",
+   "Pathogenesis, and Control of Animal Viruses. ASM Press, Washington, D.C.",
+   "Leonard C. Norkin. 2010. Virology, Molecular Biology and Pathogenesis. ASM Press,",
+   "Washington, D.C."
   ]
  },
  "haifa-biochem-a": {
@@ -854,7 +909,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "university": "haifa",
   "code": "ביוכימיה א",
   "nameHe": "ביוכימיה א׳",
-  "fetchedAt": "2026-10-18",
+  "fetchedAt": "2026-10-19",
   "source": "haifa-pdf",
   "sourceUrl": "https://biology.haifa.ac.il/wp-content/uploads/2021/03/%D7%A1%D7%99%D7%9C%D7%91%D7%95%D7%A1-%D7%91%D7%99%D7%95%D7%9B%D7%99%D7%9E%D7%99%D7%94-%D7%90.pdf",
   "updatedHe": "הסילבוס הועלה לאתר ב-03/2021",
@@ -882,7 +937,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "university": "haifa",
   "code": "ביוכימיה ב",
   "nameHe": "ביוכימיה ב׳",
-  "fetchedAt": "2026-10-18",
+  "fetchedAt": "2026-10-19",
   "source": "haifa-pdf",
   "sourceUrl": "https://biology.haifa.ac.il/wp-content/uploads/2021/03/%D7%A1%D7%99%D7%9C%D7%91%D7%95%D7%A1-%D7%91%D7%99%D7%95%D7%9B%D7%99%D7%9E%D7%99%D7%94-%D7%91.pdf",
   "updatedHe": "הסילבוס הועלה לאתר ב-03/2021",
@@ -912,7 +967,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "university": "haifa",
   "code": "ביולוגיה של התא ב",
   "nameHe": "ביולוגיה של התא ב’",
-  "fetchedAt": "2026-10-18",
+  "fetchedAt": "2026-10-19",
   "source": "haifa-pdf",
   "sourceUrl": "https://biology.haifa.ac.il/wp-content/uploads/2021/03/%D7%91%D7%99%D7%95%D7%9C%D7%95%D7%92%D7%99%D7%94-%D7%A9%D7%9C-%D7%94%D7%AA%D7%90.pdf",
   "updatedHe": "הסילבוס הועלה לאתר ב-03/2021",
@@ -945,6 +1000,12 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
    "חובה",
    "Mount Carmel, Haifa 31905 , Israel, Phone: 04-8288764 :' טל31905 חיפה,הר הכרמל",
    "Website:/http://eeb.haifa.ac.il : אתר אינטרנט Fax: 04- 8288763 : פקס E-mail: azilber1@univ.haifa.ac.il :דוא\"ל"
+  ],
+  "books": [
+   "Essential cell biology 5th edition- Alberts, Hopkin, Johnson, Morgan, Raff,",
+   "Roberts, Walter.",
+   "Molecular biology of the cell 5th Edition- Alberts, Johnson, Lewis, Raff,",
+   "Roberts, Walter."
   ]
  },
  "haifa-ecology-evolution": {
@@ -952,7 +1013,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "university": "haifa",
   "code": "מבוא לאקולוגיה ואבולוציה",
   "nameHe": "מבוא לאקולוגיה ואבולוציה",
-  "fetchedAt": "2026-10-18",
+  "fetchedAt": "2026-10-19",
   "source": "haifa-pdf",
   "sourceUrl": "https://biology.haifa.ac.il/wp-content/uploads/2021/03/%D7%9E%D7%91%D7%95%D7%90-%D7%9C%D7%90%D7%A7%D7%95%D7%9C%D7%95%D7%92%D7%99%D7%94-%D7%95%D7%90%D7%91%D7%95%D7%9C%D7%95%D7%A6%D7%99%D7%94.pdf",
   "updatedHe": "הסילבוס הועלה לאתר ב-03/2021",
@@ -970,6 +1031,10 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
    "להקנות בסיס רחב בתחומי האקולוגיה ,האבולוציה והקשר ביניהן.",
    "מבנה הקורס:",
    "שיעורים"
+  ],
+  "books": [
+   "Ecology / William D. Bowman, Sally D. Hacker, and Michael L.",
+   "Evolutionary Analysis / Jon C. Herron, Scott Freeman"
   ]
  },
  "haifa-genetics": {
@@ -977,7 +1042,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "university": "haifa",
   "code": "גנטיקה כללית",
   "nameHe": "גנטיקה כללית",
-  "fetchedAt": "2026-10-18",
+  "fetchedAt": "2026-10-19",
   "source": "haifa-pdf",
   "sourceUrl": "https://biology.haifa.ac.il/wp-content/uploads/2021/03/%D7%92%D7%A0%D7%98%D7%99%D7%A7%D7%94-%D7%9B%D7%9C%D7%9C%D7%99%D7%AA.pdf",
   "updatedHe": "הסילבוס הועלה לאתר ב-03/2021",
@@ -1001,6 +1066,10 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
    "המעבדה תתמקד בהפקת PCR",
    "DNA וגילוי מוטציות באמצעות אנזימי רסטריקציה",
    "תאחיזה למין ורקומבינציה בזבובים."
+  ],
+  "books": [
+   "Benjamin Lewin 2014, Genes XI, Oxford University Press.",
+   "Peter J. Russell, Genetics, a Molecular Approach, 3rd Edition, 2011."
   ]
  },
  "haifa-microbiology": {
@@ -1008,7 +1077,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "university": "haifa",
   "code": "מיקרוביולוגיה כללית",
   "nameHe": "מיקרוביולוגיה כללית",
-  "fetchedAt": "2026-10-18",
+  "fetchedAt": "2026-10-19",
   "source": "haifa-pdf",
   "sourceUrl": "https://biology.haifa.ac.il/wp-content/uploads/2021/03/%D7%9E%D7%99%D7%A7%D7%A8%D7%95%D7%91%D7%99%D7%95%D7%9C%D7%95%D7%92%D7%99%D7%94.pdf",
   "updatedHe": "הסילבוס הועלה לאתר ב-03/2021",
@@ -1052,7 +1121,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "university": "haifa",
   "code": "ביולוגיה מולקולארית",
   "nameHe": "ביולוגיה מולקולארית",
-  "fetchedAt": "2026-10-18",
+  "fetchedAt": "2026-10-19",
   "source": "haifa-pdf",
   "sourceUrl": "https://biology.haifa.ac.il/wp-content/uploads/2021/03/%D7%A1%D7%99%D7%9C%D7%91%D7%95%D7%A1-%D7%91%D7%99%D7%95%D7%9C%D7%95%D7%92%D7%99%D7%94-%D7%9E%D7%95%D7%9C%D7%A7%D7%95%D7%9C%D7%A8%D7%99%D7%AA.pdf",
   "updatedHe": "הסילבוס הועלה לאתר ב-03/2021",
@@ -1088,7 +1157,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "university": "haifa",
   "code": "מבוא לנוירוביולוגיה",
   "nameHe": "מבוא לנוירוביולוגיה",
-  "fetchedAt": "2026-10-18",
+  "fetchedAt": "2026-10-19",
   "source": "haifa-pdf",
   "sourceUrl": "https://biology.haifa.ac.il/wp-content/uploads/2021/03/%D7%9E%D7%91%D7%95%D7%90-%D7%9C%D7%A0%D7%95%D7%99%D7%A8%D7%95%D7%91%D7%99%D7%95%D7%9C%D7%95%D7%92%D7%99%D7%94-%D7%9E%D7%A2%D7%A8%D7%9B%D7%AA%D7%99%D7%AA.pdf",
   "updatedHe": "הסילבוס הועלה לאתר ב-03/2021",
@@ -1888,7 +1957,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "university": "technion",
   "code": "134019",
   "nameHe": "מבוא לביוכימיה ואנזימולוגיה",
-  "fetchedAt": "2026-10-18",
+  "fetchedAt": "2026-10-19",
   "source": "technion-portal",
   "sourceUrl": "https://students.technion.ac.il/local/technionsearch/course/134019",
   "level": "topics",
@@ -1916,10 +1985,12 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
    "מבוא למבנה ותפקוד של סוכרים וליפידים"
   ],
   "books": [
-   "Biochemistry - Berg, Jeremy M.",
-   "Biochemistry / Donald Voet, Judith G. Voet. - Voet, Donald",
-   "Introduction to proteins : structure, function, and motion - Kessel, Amit.",
-   "Introduction to proteins structure, function, and motion - Kessel, Amit."
+   "Biochemistry - Berg, Jeremy M",
+   "Fundamentals of biochemistry - Voet, Donald",
+   "Introduction to proteins : structure, function, and motion - Kessel, Amit",
+   "Lehninger principles of biochemistry - Nelson, David L",
+   "Principles of biochemistry - Voet, Donald",
+   "Textbook of biochemistry with clinical correlations"
   ]
  },
  "technion-bioinformatics": {
@@ -1927,7 +1998,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "university": "technion",
   "code": "136158",
   "nameHe": "שיטות בביואינפורמטיקה למדעי החיים",
-  "fetchedAt": "2026-10-18",
+  "fetchedAt": "2026-10-19",
   "source": "technion-portal",
   "sourceUrl": "https://students.technion.ac.il/local/technionsearch/course/136158",
   "level": "topics",
@@ -1952,7 +2023,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "university": "technion",
   "code": "134058",
   "nameHe": "ביולוגיה 1",
-  "fetchedAt": "2026-10-18",
+  "fetchedAt": "2026-10-19",
   "source": "technion-portal",
   "sourceUrl": "https://students.technion.ac.il/local/technionsearch/course/134058",
   "level": "topics",
@@ -1984,10 +2055,12 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
    "יסודות האבולוציה"
   ],
   "books": [
-   "Biology : the unity and diversity of life / Starr, Taggart, Evers, Starr. - Starr, Cecie",
-   "Life : the science of biology - Hillis, David M.",
-   "Life : the science of biology - Sadava, David E.",
-   "Molecular cell biology / Harvey Lodish and seven others. - Lodish, Harvey F."
+   "Biology : the unity and diversity of life - Starr, Cecie",
+   "Life : the science of biology - Hillis, David M",
+   "Molecular biology of the cell - Alberts, Bruce",
+   "Molecular biology of the cell, sixth edition : the problems book - Wilson, John H",
+   "Molecular cell biology - Lodish, Harvey F",
+   "ביולוגיה : האחידות והמגוון של החיים - סטאר, ססי"
   ]
  },
  "technion-biophysics": {
@@ -1995,7 +2068,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "university": "technion",
   "code": "134156",
   "nameHe": "ביופיסיקה מולקולרית",
-  "fetchedAt": "2026-10-18",
+  "fetchedAt": "2026-10-19",
   "source": "technion-portal",
   "sourceUrl": "https://students.technion.ac.il/local/technionsearch/course/134156",
   "level": "topics",
@@ -2012,9 +2085,13 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   ],
   "books": [
    "A guide to first-passage processes - Redner, Sidney",
-   "Mechanics of motor proteins and the cytoskeleton / Jonathon Howard. - Howard, Jonathon",
+   "Biological physics : energy, information, life - Nelson, Philip Charles",
+   "Mechanics of motor proteins and the cytoskeleton - Howard, Jonathon",
+   "Nonlinear dynamics and chaos : with applications to physics, biology, chemistry, and engineering - Strogatz, Steven H",
+   "Physical biology of the cell - Phillips, Rob",
    "Physical models of living systems - Nelson, Philip Charles",
-   "Random walks in biology / Howard C. Berg. - Berg, Howard C."
+   "Random walks in biology - Berg, Howard C",
+   "Stochastic processes in physics and chemistry - Kampen, N. G. van"
   ]
  },
  "technion-biostatistics": {
@@ -2022,7 +2099,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "university": "technion",
   "code": "134154",
   "nameHe": "ביוסטטיסטיקה לביולוגים",
-  "fetchedAt": "2026-10-18",
+  "fetchedAt": "2026-10-19",
   "source": "technion-portal",
   "sourceUrl": "https://students.technion.ac.il/local/technionsearch/course/134154",
   "level": "topics",
@@ -2043,7 +2120,10 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   ],
   "books": [
    "An introduction to medical statistics - Bland, Martin",
-   "Biostatistical analysis - Zar, Jerrold H."
+   "Biostatistical analysis - Zar, Jerrold H",
+   "מבוא להסתברות וסטטיסטיקה - לויתן, תלמה",
+   "מבוא לסטטיסטיקה ולהסתברות למדעים",
+   "שיטות בסיסיות בסטטיסטיקה ויישומיהן - כהן, אילה"
   ]
  },
  "technion-cancer": {
@@ -2051,7 +2131,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "university": "technion",
   "code": "134129",
   "nameHe": "הביולוגיה של מחלת הסרטן",
-  "fetchedAt": "2026-10-18",
+  "fetchedAt": "2026-10-19",
   "source": "technion-portal",
   "sourceUrl": "https://students.technion.ac.il/local/technionsearch/course/134129",
   "level": "topics",
@@ -2070,7 +2150,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
    "אפיגנטיקה של הסרטן"
   ],
   "books": [
-   "The biology of cancer / Robert A. Weinberg. - Weinberg, Robert A."
+   "The biology of cancer - Weinberg, Robert A"
   ]
  },
  "technion-cell": {
@@ -2078,7 +2158,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "university": "technion",
   "code": "134128",
   "nameHe": "ביולוגיה של התא",
-  "fetchedAt": "2026-10-18",
+  "fetchedAt": "2026-10-19",
   "source": "technion-portal",
   "sourceUrl": "https://students.technion.ac.il/local/technionsearch/course/134128",
   "level": "topics",
@@ -2100,8 +2180,8 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   ],
   "books": [
    "Molecular biology of the cell - Alberts, Bruce",
-   "Molecular biology of the cell, sixth edition : the problems book - Wilson, John H.",
-   "Molecular cell biology - Lodish, Harvey F."
+   "Molecular biology of the cell, sixth edition : the problems book - Wilson, John H",
+   "Molecular cell biology - Lodish, Harvey F"
   ]
  },
  "technion-computational": {
@@ -2109,7 +2189,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "university": "technion",
   "code": "134141",
   "nameHe": "ביולוגיה חישובית",
-  "fetchedAt": "2026-10-18",
+  "fetchedAt": "2026-10-19",
   "source": "technion-portal",
   "sourceUrl": "https://students.technion.ac.il/local/technionsearch/course/134141",
   "level": "topics",
@@ -2129,7 +2209,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "university": "technion",
   "code": "134069",
   "nameHe": "ביולוגיה של ההתפתחות",
-  "fetchedAt": "2026-10-18",
+  "fetchedAt": "2026-10-19",
   "source": "technion-portal",
   "sourceUrl": "https://students.technion.ac.il/local/technionsearch/course/134069",
   "level": "topics",
@@ -2158,8 +2238,8 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
    "שינויים אבולוציוניים בגנים התפתחותיים ובבקרה על ביטוי גנים"
   ],
   "books": [
-   "Developmental biology - Gilbert, Scott F.",
-   "Principles of development - Wolpert, L."
+   "Developmental biology - Gilbert, Scott F",
+   "Principles of development - Wolpert, L"
   ]
  },
  "technion-drugs": {
@@ -2167,7 +2247,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "university": "technion",
   "code": "136014",
   "nameHe": "פיתוח תרופות ביולוגיות חדשניות",
-  "fetchedAt": "2026-10-18",
+  "fetchedAt": "2026-10-19",
   "source": "technion-portal",
   "sourceUrl": "https://students.technion.ac.il/local/technionsearch/course/136014",
   "level": "topics",
@@ -2187,7 +2267,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "university": "technion",
   "code": "134153",
   "nameHe": "אקולוגיה",
-  "fetchedAt": "2026-10-18",
+  "fetchedAt": "2026-10-19",
   "source": "technion-portal",
   "sourceUrl": "https://students.technion.ac.il/local/technionsearch/course/134153",
   "level": "topics",
@@ -2204,9 +2284,10 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
    "השפעת האדם ומעורבותו במערכת האקולוגית"
   ],
   "books": [
-   "Ecology - Ricklefs, Robert E.",
+   "Ecology - Ricklefs, Robert E",
    "Ecology : individuals, populations and communities - Begon, Michael",
-   "Essentials of ecology - Begon, Michael"
+   "Essentials of ecology - Begon, Michael",
+   "אקולוגיה : התיאוריה והמציאות הישראלית - פרבולוצקי, אבי"
   ]
  },
  "technion-endocrinology": {
@@ -2214,7 +2295,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "university": "technion",
   "code": "134155",
   "nameHe": "אנדוקרינולוגיה",
-  "fetchedAt": "2026-10-18",
+  "fetchedAt": "2026-10-19",
   "source": "technion-portal",
   "sourceUrl": "https://students.technion.ac.il/local/technionsearch/course/134155",
   "level": "topics",
@@ -2232,7 +2313,12 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
    "הלבלב וסוכרת"
   ],
   "books": [
-   "Essential reproduction / Martin H. Johnson. - Johnson, M. H."
+   "Essential endocrinology and diabetes - Holt, Richard I. G",
+   "Essential reproduction - Johnson, M. H",
+   "Greenspan's basic & clinical endocrinology [electronic resource]",
+   "Greenspan's basic & clinical endocrinology",
+   "Harrison's endocrinology",
+   "Williams textbook of endocrinology"
   ]
  },
  "technion-evolution": {
@@ -2240,7 +2326,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "university": "technion",
   "code": "134133",
   "nameHe": "אבולוציה",
-  "fetchedAt": "2026-10-18",
+  "fetchedAt": "2026-10-19",
   "source": "technion-portal",
   "sourceUrl": "https://students.technion.ac.il/local/technionsearch/course/134133",
   "level": "topics",
@@ -2256,14 +2342,16 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
    "אבולוציה של אורגניזמים רב תאיים התפתחות",
    "מערכות גנטיות חדשות"
   ],
-  "books": []
+  "books": [
+   "Evolution"
+  ]
  },
  "technion-gene-expression": {
   "courseSlug": "technion-gene-expression",
   "university": "technion",
   "code": "134119",
   "nameHe": "בקרת הביטוי הגנטי",
-  "fetchedAt": "2026-10-18",
+  "fetchedAt": "2026-10-19",
   "source": "technion-portal",
   "sourceUrl": "https://students.technion.ac.il/local/technionsearch/course/134119",
   "level": "topics",
@@ -2282,10 +2370,14 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
    "אינטגרציה בין מערכות בקרה והמשמעות הפנוטיפית שלה"
   ],
   "books": [
-   "Genomes 3 - Brown, T. A.",
-   "Genomes 4 - Brown, T. A.",
+   "Genomes 3 - Brown, T. A",
+   "Genomes 4 - Brown, T. A",
    "Lewin's genes X - Lewin, Benjamin",
-   "Lewin's genes XII - Krebs, Jocelyn E."
+   "Lewin's genes XI",
+   "Lewin's genes XII - Krebs, Jocelyn E",
+   "Molecular biology of the cell - Alberts, Bruce",
+   "Molecular biology of the cell, sixth edition : the problems book - Wilson, John H",
+   "Molecular cell biology - Lodish, Harvey F"
   ]
  },
  "technion-genetics": {
@@ -2293,7 +2385,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "university": "technion",
   "code": "134020",
   "nameHe": "גנטיקה כללית",
-  "fetchedAt": "2026-10-18",
+  "fetchedAt": "2026-10-19",
   "source": "technion-portal",
   "sourceUrl": "https://students.technion.ac.il/local/technionsearch/course/134020",
   "level": "topics",
@@ -2309,8 +2401,12 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
    "אינטראקציה בין גנים"
   ],
   "books": [
-   "Concepts of genetics - Klug, William S.",
-   "Introduction to genetic analysis - Griffiths, Anthony J. F."
+   "Concepts of genetics - Klug, William S",
+   "Essentials of genetics - Klug, William S",
+   "Genetics : from genes to genomes - Hartwell, Leland H",
+   "Introduction to genetic analysis - Griffiths, Anthony J. F",
+   "Thompson & Thompson genetics in medicine - Nussbaum, Robert L",
+   "מבוא לאנליזה גנטית"
   ]
  },
  "technion-human-genetics": {
@@ -2318,7 +2414,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "university": "technion",
   "code": "136088",
   "nameHe": "גנטיקה מולקולרית של האדם",
-  "fetchedAt": "2026-10-18",
+  "fetchedAt": "2026-10-19",
   "source": "technion-portal",
   "sourceUrl": "https://students.technion.ac.il/local/technionsearch/course/136088",
   "level": "topics",
@@ -2336,9 +2432,8 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
    "קביעת מין וטכניקות מולקולריות למיפוי ולשיבוט גנים ואיבחון מחלות גנטיות"
   ],
   "books": [
-   "Human molecular genetics - Strachan, T.",
-   "Human molecular genetics / Tom Strachan and Andrew P. Read. - Strachan, T.",
-   "Human molecular genetics / Tom Strachan and Andrew Read. - Strachan, T."
+   "Human molecular genetics - Strachan, T",
+   "Thompson & Thompson genetics in medicine - Nussbaum, Robert L"
   ]
  },
  "technion-immunology": {
@@ -2346,7 +2441,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "university": "technion",
   "code": "276413",
   "nameHe": "אימונולוגיה בסיסית",
-  "fetchedAt": "2026-10-18",
+  "fetchedAt": "2026-10-19",
   "source": "technion-portal",
   "sourceUrl": "https://students.technion.ac.il/local/technionsearch/course/276413",
   "level": "topics",
@@ -2389,7 +2484,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "university": "technion",
   "code": "134113",
   "nameHe": "מסלולים מטבולים",
-  "fetchedAt": "2026-10-18",
+  "fetchedAt": "2026-10-19",
   "source": "technion-portal",
   "sourceUrl": "https://students.technion.ac.il/local/technionsearch/course/134113",
   "level": "topics",
@@ -2409,8 +2504,10 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
    "אינטגרציה של המטבוליזם התאי"
   ],
   "books": [
-   "Biochemistry - Berg, Jeremy M.",
-   "Biochemistry / Donald Voet, Judith G. Voet. - Voet, Donald"
+   "Biochemistry - Berg, Jeremy M",
+   "Fundamentals of biochemistry : life at the molecular level - Voet, Donald",
+   "Lehninger principles of biochemistry - Nelson, David L",
+   "Principles of biochemistry - Voet, Donald"
   ]
  },
  "technion-metabolic-disease": {
@@ -2418,7 +2515,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "university": "technion",
   "code": "134147",
   "nameHe": "מטבוליזם ומחלות באדם",
-  "fetchedAt": "2026-10-18",
+  "fetchedAt": "2026-10-19",
   "source": "technion-portal",
   "sourceUrl": "https://students.technion.ac.il/local/technionsearch/course/134147",
   "level": "topics",
@@ -2440,7 +2537,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "university": "technion",
   "code": "134121",
   "nameHe": "מיקרוביולוגיה ווירולוגיה",
-  "fetchedAt": "2026-10-18",
+  "fetchedAt": "2026-10-19",
   "source": "technion-portal",
   "sourceUrl": "https://students.technion.ac.il/local/technionsearch/course/134121",
   "level": "topics",
@@ -2461,7 +2558,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
    "מבוא למיקרוביולוגיה קלינית"
   ],
   "books": [
-   "Brock biology of microorganisms - Madigan, Michael T.,"
+   "Brock biology of microorganisms - Madigan, Michael T"
   ]
  },
  "technion-molecular": {
@@ -2469,7 +2566,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "university": "technion",
   "code": "134082",
   "nameHe": "ביולוגיה מולקולרית",
-  "fetchedAt": "2026-10-18",
+  "fetchedAt": "2026-10-19",
   "source": "technion-portal",
   "sourceUrl": "https://students.technion.ac.il/local/technionsearch/course/134082",
   "level": "topics",
@@ -2489,9 +2586,13 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
    "הארכת החלבון וסיום"
   ],
   "books": [
-   "Genomes 4 - Brown, T. A.",
-   "Lewin's genes XII - Krebs, Jocelyn E.",
-   "Molecular cell biology / Harvey Lodish and seven others. - Lodish, Harvey F."
+   "Genomes 4 - Brown, T. A",
+   "Lewin's genes X - Lewin, Benjamin",
+   "Lewin's genes XI",
+   "Lewin's genes XII - Krebs, Jocelyn E",
+   "Molecular biology of the cell - Alberts, Bruce",
+   "Molecular biology of the cell, sixth edition : the problems book - Wilson, John H",
+   "Molecular cell biology - Lodish, Harvey F"
   ]
  },
  "technion-neurobiology": {
@@ -2499,7 +2600,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "university": "technion",
   "code": "134157",
   "nameHe": "מבוא לנוירוביולוגיה",
-  "fetchedAt": "2026-10-18",
+  "fetchedAt": "2026-10-19",
   "source": "technion-portal",
   "sourceUrl": "https://students.technion.ac.il/local/technionsearch/course/134157",
   "level": "topics",
@@ -2514,7 +2615,8 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
    "כמו-כן, הסטודנט ייחשף לשיטות מחקר מתקדמות בחקר המח"
   ],
   "books": [
-   "Neuroscience : exploring the brain - Bear, Mark F."
+   "Neuroscience : exploring the brain - Bear, Mark F",
+   "Principles of neural science"
   ]
  },
  "technion-pathogens": {
@@ -2522,7 +2624,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "university": "technion",
   "code": "066418",
   "nameHe": "מקרוביולוגיה של פתוגנים",
-  "fetchedAt": "2026-10-18",
+  "fetchedAt": "2026-10-19",
   "source": "technion-portal",
   "sourceUrl": "https://students.technion.ac.il/local/technionsearch/course/066418",
   "level": "topics",
@@ -2545,7 +2647,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "university": "technion",
   "code": "134117",
   "nameHe": "פיזיולוגיה",
-  "fetchedAt": "2026-10-18",
+  "fetchedAt": "2026-10-19",
   "source": "technion-portal",
   "sourceUrl": "https://students.technion.ac.il/local/technionsearch/course/134117",
   "level": "topics",
@@ -2567,10 +2669,15 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
    "בקרת התכווצות של שריר חלק ושל שריר הלב"
   ],
   "books": [
-   "Channels, carriers, and pumps : an introduction to membrane transport - Stein, Wilfred D.",
-   "Grant's atlas of anatomy - Agur, A. M. R.",
-   "Nerve cells and nervous systems : an introduction to neuroscience - Brown, A. G.",
-   "Nerve, muscle, and synapse - Katz, Bernard,"
+   "Berne & Levy physiology",
+   "Berne & Levy principles of physiology",
+   "Channels, carriers, and pumps : an introduction to membrane transport - Stein, Wilfred D",
+   "Grant's atlas of anatomy - Agur, A. M. R",
+   "Nerve cells and nervous systems : an introduction to neuroscience - Brown, A. G",
+   "Nerve, muscle, and synapse - Katz, Bernard",
+   "Neurobiology : molecules, cells, and systems - Matthews, Gary G",
+   "The physiology of excitable cells - Aidley, David J",
+   "עצב, שריר, סינפסה : תרגם : ח' גינזבורג ; ערך : מ' רוזן - כץ, ברנרד"
   ]
  },
  "technion-plant-physiology": {
@@ -2578,7 +2685,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "university": "technion",
   "code": "134040",
   "nameHe": "פיזיולוגיה מוליקולרית של הצמח",
-  "fetchedAt": "2026-10-18",
+  "fetchedAt": "2026-10-19",
   "source": "technion-portal",
   "sourceUrl": "https://students.technion.ac.il/local/technionsearch/course/134040",
   "level": "topics",
@@ -2600,8 +2707,10 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
    "פריחה, תגובת הצמח לעקות ביוטית"
   ],
   "books": [
-   "Essential plant pathology - Schumann, Gail L.",
-   "Plant physiology - Taiz, Lincoln"
+   "Essential plant pathology - Schumann, Gail L",
+   "Plant physiology - Taiz, Lincoln",
+   "Plant physiology and development",
+   "פיזיולוגיה של הצמח - טיז, לינקולן"
   ]
  },
  "technion-rna": {
@@ -2609,7 +2718,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "university": "technion",
   "code": "134151",
   "nameHe": "העולם המודרני של הרנ&quot;א",
-  "fetchedAt": "2026-10-18",
+  "fetchedAt": "2026-10-19",
   "source": "technion-portal",
   "sourceUrl": "https://students.technion.ac.il/local/technionsearch/course/134151",
   "level": "topics",
@@ -2630,7 +2739,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "university": "technion",
   "code": "134137",
   "nameHe": "תאי גזע",
-  "fetchedAt": "2026-10-18",
+  "fetchedAt": "2026-10-19",
   "source": "technion-portal",
   "sourceUrl": "https://students.technion.ac.il/local/technionsearch/course/134137",
   "level": "topics",
@@ -2648,7 +2757,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "university": "technion",
   "code": "136037",
   "nameHe": "ביולוגיה מערכתית",
-  "fetchedAt": "2026-10-18",
+  "fetchedAt": "2026-10-19",
   "source": "technion-portal",
   "sourceUrl": "https://students.technion.ac.il/local/technionsearch/course/136037",
   "level": "topics",
@@ -2707,7 +2816,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "university": "technion",
   "code": "134140",
   "nameHe": "יוביקוויטין ומחזור חלבונים",
-  "fetchedAt": "2026-10-18",
+  "fetchedAt": "2026-10-19",
   "source": "technion-portal",
   "sourceUrl": "https://students.technion.ac.il/local/technionsearch/course/134140",
   "level": "topics",
@@ -2732,7 +2841,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "university": "technion",
   "code": "134039",
   "nameHe": "וירולוגיה מולקולרית",
-  "fetchedAt": "2026-10-18",
+  "fetchedAt": "2026-10-19",
   "source": "technion-portal",
   "sourceUrl": "https://students.technion.ac.il/local/technionsearch/course/134039",
   "level": "topics",
@@ -2749,9 +2858,13 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
    "נשתמש בדוגמאות מוירוסים אנימליים ווירוסים המדביקים חיידקים (בקטריופג'ים) בעלי גנומים של DNA ו- RNA"
   ],
   "books": [
-   "Bacterial and bacteriophage genetics - Birge, Edward A.",
-   "Brock biology of microorganisms - Madigan, Michael T.,",
-   "Principles of virology - Flint, S. J."
+   "Bacterial and bacteriophage genetics - Birge, Edward A",
+   "Bacteriophages : biology and applications",
+   "Brock biology of microorganisms - Madigan, Michael T",
+   "Fields virology",
+   "Molecular genetics of bacteria",
+   "Principles of virology - Flint, S. J",
+   "The bacteriophages"
   ]
  },
  "technion-zoology": {
@@ -2759,7 +2872,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "university": "technion",
   "code": "134111",
   "nameHe": "זואולוגיה",
-  "fetchedAt": "2026-10-18",
+  "fetchedAt": "2026-10-19",
   "source": "technion-portal",
   "sourceUrl": "https://students.technion.ac.il/local/technionsearch/course/134111",
   "level": "topics",
@@ -2786,10 +2899,26 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
    "שערות ונוצות"
   ],
   "books": [
-   "Across the bridge : understanding the origin of the vertebrates - Gee, Henry,",
-   "Biology : the unity and diversity of life / Starr, Taggart, Evers, Starr. - Starr, Cecie",
-   "Ecological and environmental physiology of mammals - Withers, Philip C.",
-   "How vertebrates left the water / Michel Laurin. - Laurin, Michel"
+   "Across the bridge : understanding the origin of the vertebrates - Gee, Henry",
+   "An introduction to the invertebrates - Moore, J",
+   "Behavior of lizards : evolutionary and mechanistic perspectives",
+   "Biology : the unity and diversity of life - Starr, Cecie",
+   "Ecological and environmental physiology of mammals - Withers, Philip C",
+   "Histology : an illustrated colour text - Mitchell, B. S",
+   "How vertebrates left the water - Laurin, Michel",
+   "Integrated principles of zoology - Hickman, Cleveland P",
+   "Invertebrate zoology : a functional evolutionary approach - Ruppert, Edward E",
+   "Invertebrates - Brusca, Richard C",
+   "Land snails of the land of Israel : natural history and a field guide - Heller, Joseph",
+   "Ornithology : foundation, analysis, and application",
+   "Reptile life in the land of Israel : with comments on adjacent regions - Werner, Yehuda L",
+   "The vertebrate body - Romer, Alfred Sherwood",
+   "Wheater's functional histology : a text and colour atlas - Young, Barbara",
+   "ביולוגיה : האחידות והמגוון של החיים - סטאר, ססי",
+   "ביולוגיה של חולייתנים יבשתיים במבט ישראלי - יום-טוב, יורם",
+   "גוף החוליתן : אלפרד ש' רומר ; תרגם משה רוזן - רומר, אלפרד ש",
+   "החולייתנים",
+   "החרקים - קוסטא, מיכאל"
   ]
  }
 };

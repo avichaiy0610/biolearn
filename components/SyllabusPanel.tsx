@@ -53,7 +53,10 @@ export default function SyllabusPanel({ s, children }: { s: SyllabusRecord; chil
             </div>
           ) : null}
           {s.books?.length ? (
-            <p className="mt-3 text-xs text-muted">ספרי הקורס: <bdi dir="ltr">{s.books.slice(0, 3).join(" · ")}</bdi></p>
+            <div className="mt-3 text-xs text-muted">
+              <p className="font-semibold">ספרי הקורס, לפי המקור הרשמי:</p>
+              <ul className="mt-1 list-disc space-y-0.5 ps-5">{s.books.map((b, i) => <li key={i}><bdi>{b}</bdi></li>)}</ul>
+            </div>
           ) : null}
           <p className="mt-3 text-xs text-muted">
             <a href={s.sourceUrl} target="_blank" rel="noopener noreferrer" className="font-semibold text-brand hover:underline">למקור הרשמי ↗</a>
