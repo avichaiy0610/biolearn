@@ -46,6 +46,7 @@ by how invested the visuals look: flowcharts, abstract shapes or crowded frames 
 - Long labels (>18 chars) get `short`/`shortHe` variants for 390px mobile.
 - Specific wording, 2–3 words: "זיקה גבוהה לחמצן", not "זיקה גבוהה".
 - Pure Latin text (5'/3', codons, dNTPs, °C) is `ltr`; Hebrew labels need real Hebrew (`labelHe`).
+- Hebrew text at weight 800 renders badly; use 700 at most.
 
 **5. The frame**
 - A legend of at least 2 items, covering every color that carries meaning.
@@ -65,12 +66,19 @@ by how invested the visuals look: flowcharts, abstract shapes or crowded frames 
    in `content/process-scenes/index.ts`.
 3. Look at it. Run `npx next dev -p 3200`, then
    `node scripts/scene-shots.mjs <slug> he 900`, `... he 390`, `... en 900`, and look at
-   **every** montage (Read the PNGs in `.shots/`). Fix overlaps, labels on the drawing, empty
+   **every** montage (Read the PNGs in `.shots/`). The montage is downscaled — Hebrew can look
+   mirrored or garbled there; confirm on the single-step shots (`sc_<slug>_..._N.png`) before
+   "fixing" text. Fix overlaps, labels on the drawing, empty
    or crowded steps. Compare side by side with the meiosis/PCR shots.
 4. Run the checks:
    - `node scripts/label-clipping.mjs http://localhost:3200 900` (and `390`) → must be 0.
-   - `npx tsx scripts/animation-drafts.ts check <slug>` → no errors (`lib/animation-standards.ts`
-     catches only the mechanical part; the biology and the look are your job).
+   - The automated standard (`lib/animation-standards.ts`) runs on your code at `publish-scene`
+     and refuses on errors; fix its warnings too. (`animation-drafts.ts check <slug>` checks the
+     version already **in the DB**, not your code.) It catches only the mechanical part; the
+     biology and the look are your job.
+   - If `next dev` says another dev server is running (another chat), use its port
+     (pass it as the last argument to `scene-shots.mjs` / first to `label-clipping.mjs`) —
+     don't kill it.
 5. Publish: the live site reads from the DB, not from the code.
    `npx tsx scripts/animation-drafts.ts publish-scene <slug>` (a backup goes to `.backups/`).
    For an admin draft, follow "Animation drafts workflow" in `CLAUDE.md` (`publish <id>`).
@@ -86,5 +94,5 @@ critique of the montages against the reference before publishing.
 - [ ] One idea per step, few labels, empty space, nothing faint left over?
 - [ ] Every label has a leader, sits off the drawing, reads at 390px, and is specific?
 - [ ] Legend, note, he+en texts, source in `meta`?
-- [ ] 0 clipped labels, `check` with no errors, montages viewed at he 900 / he 390 / en 900?
+- [ ] 0 clipped labels, standard check with no errors or warnings, montages viewed at he 900 / he 390 / en 900?
 - [ ] Published with `publish-scene` and verified on the live site?
