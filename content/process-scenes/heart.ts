@@ -90,7 +90,13 @@ const h4: El[] = [
 
 export const heartScene: ProcessScene = {
   slug: "cardiovascular-animation-1780821487918",
-  source: "Campbell 12e ch. 42; Berne & Levy 8e ch. 16",
+  meta: {
+    topic: "physiology",
+    nameHe: "מערכת הלב וכלי הדם", nameEn: "Cardiovascular System",
+    descHe: "ארבעת חללי הלב והמסתמים, מחזור הדם הריאתי ומחזור הדם הגדול",
+    descEn: "The four chambers and valves of the heart, the pulmonary circuit and the systemic circuit",
+    source: "Campbell 12e ch. 42; Berne & Levy 8e ch. 16",
+  },
   legend: [
     { color: D, he: "דם דל חמצן", en: "Deoxygenated blood", swatch: "line" },
     { color: O, he: "דם מחומצן", en: "Oxygenated blood", swatch: "line" },

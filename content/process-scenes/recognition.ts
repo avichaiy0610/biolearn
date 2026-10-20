@@ -79,7 +79,13 @@ const s4: El[] = [
 
 export const recognitionScene: ProcessScene = {
   slug: "molecular-recognition-animation",
-  source: "Alberts 7e ch. 3, 6–7; Jenison et al., Science 1994",
+  meta: {
+    topic: "molecular-biology",
+    nameHe: "זיהוי מולקולרי", nameEn: "Molecular Recognition",
+    descHe: "אפטמר RNA ותאופילין: צורה משלימה, קשרים חלשים, התאמה מושרית — וקבוצת מתיל אחת שמבדילה מקפאין",
+    descEn: "An RNA aptamer and theophylline: complementary shape, weak bonds, induced fit — and the one methyl group that tells it from caffeine",
+    source: "Alberts 7e ch. 3, 6–7; Jenison et al., Science 1994",
+  },
   legend: [
     { color: RNA, he: "שלד ה-RNA", en: "RNA backbone", swatch: "line" },
     { color: "#a7f3d0", he: "זוגות בסיסים (גבעולים)", en: "Base pairs (stems)", swatch: "line" },
