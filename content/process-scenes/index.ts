@@ -13,15 +13,17 @@ import { ups } from "./ups";
 import { mendelian, nonMendelian } from "./genetics";
 import { mitoInheritance } from "./mito-inheritance";
 import { bacteria } from "./bacteria";
-import { recognition, riboswitch } from "./rna-switches";
-import { cardio } from "./cardio";
+import { riboswitch } from "./rna-switches";
+import { recognitionScene as recognition } from "./recognition";
+import { heartScene as cardio } from "./heart";
 // published from admin-panel drafts (scripts/animation-drafts.ts)
 import { imprinting } from "./imprinting";
 import { innate, adaptive } from "./immunity";
 import { lncEnhancer, lncDevelopment, gencode, lncConservation } from "./lncrna";
 // authored directly from the textbook gap analysis (published with `publish-scene`)
 import { actionPotential } from "./action-potential";
-import { enzymeKinetics, membraneTransport, gpcrSignaling, apoptosis, viralLifeCycle } from "./batch1";
+import { enzymeKinetics, membraneTransport, gpcrSignaling, apoptosis } from "./batch1";
+import { viralScene as viralLifeCycle } from "./viral";
 import { synapse, muscle, hemoglobin, lacOperon, vesicular, dnaRepair } from "./batch2";
 import { nephronScene as nephron } from "./nephron";
 import { betaOxidation, photosynthesis, bloodGlucose } from "./batch3";
