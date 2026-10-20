@@ -29,7 +29,8 @@ import { synapse, muscle, hemoglobin, vesicular } from "./batch2";
 import { lacScene as lacOperon } from "./lac";
 import { mmrScene as dnaRepair } from "./mmr";
 import { nephronScene as nephron } from "./nephron";
-import { betaOxidation, photosynthesis, bloodGlucose } from "./batch3";
+import { betaOxidation, bloodGlucose } from "./batch3";
+import { photoScene as photosynthesis } from "./photo";
 import { gngScene as gluconeogenesis } from "./gng";
 import { ureaScene as ureaCycle } from "./urea";
 
