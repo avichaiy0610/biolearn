@@ -13,9 +13,9 @@ const mol = (id: string, cx: number, cy: number, en: string, he: string, color: 
   text(`${id}_tx`, cx, cy + 6, en, he, { weight: 700, fontSize: 15, textColor: color, opacity: on ? (dim ? 0.55 : 1) : 0 }),
 ];
 const enz = (id: string, x: number, y: number, s: string, he: string, on: boolean, dim = false): El =>
-  text(id, x, y, s, he, { fontSize: 13, weight: 700, textColor: ENZ, ltr: s === he, opacity: on ? (dim ? 0.5 : 1) : 0 });
+  text(id, x, y, s, he, { fontSize: 13, weight: 700, textColor: ENZ, ltr: s === he, opacity: on && !dim ? 1 : 0 });
 const flow = (id: string, pts: Pt[], color: string, on: boolean, dim = false): El =>
-  path(id, smooth(pts), { stroke: color, strokeWidth: 2.6, arrow: true, opacity: on ? (dim ? 0.45 : 1) : 0 });
+  path(id, smooth(pts), { stroke: color, strokeWidth: 2.6, arrow: true, opacity: on ? (dim ? 0.3 : 1) : 0 });
 
 // transporter in the inner membrane (a small channel)
 const porter = (id: string, x: number, y: number): El[] => [
@@ -37,11 +37,11 @@ function scene(step: St): El[] {
   return [
     ...cell(),
     // 1 — CPS I in the matrix
-    text("in1", 104, 62, "NH₄⁺ + HCO₃⁻", "NH₄⁺ + HCO₃⁻", { ltr: true, weight: 700, fontSize: 14, textColor: N1, opacity: on(1) ? (dim(1) ? 0.55 : 1) : 0 }),
+    text("in1", 104, 62, "NH₄⁺ + HCO₃⁻", "NH₄⁺ + HCO₃⁻", { ltr: true, weight: 700, fontSize: 14, textColor: N1, opacity: on(1) && !dim(1) ? 1 : 0 }),
     flow("f_cps", [[104, 70], [104, 86]], N1, on(1), dim(1)),
     enz("e_cps", 140, 84, "CPS I", "CPS I", on(1), dim(1)),
     ...mol("cp", 104, 104, "Carbamoyl-P", "קרבמואיל-P", N1, 104, on(1), dim(1)),
-    text("atp1", 62, 84, "2 ATP", "2 ATP", { ltr: true, weight: 700, fontSize: 13, textColor: C.energy, opacity: on(1) ? (dim(1) ? 0.5 : 1) : 0 }),
+    text("atp1", 62, 84, "2 ATP", "2 ATP", { ltr: true, weight: 700, fontSize: 13, textColor: C.energy, opacity: on(1) && !dim(1) ? 1 : 0 }),
     // ornithine (matrix) is there from the start: the cycle's carrier
     ...mol("orn_m", 82, 236, "Ornithine", "אורניתין", CYC, 84, true, step === 1),
     // 2 — OTC: ornithine + carbamoyl-P → citrulline, exported
@@ -52,14 +52,14 @@ function scene(step: St): El[] {
     flow("f_exp", [[160, 168], [190, 124], [214, 104]], CYC, on(2), dim(2)),
     ...mol("cit_c", 262, 92, "Citrulline", "ציטרולין", CYC, 80, on(2), dim(2)),
     // 3 — ASS + aspartate → argininosuccinate; ASL → arginine + fumarate
-    text("asp", 330, 52, "Aspartate (2nd N)", "אספרטט — N שני", { weight: 700, fontSize: 14, textColor: N2, opacity: on(3) ? (dim(3) ? 0.55 : 1) : 0 }),
+    text("asp", 330, 52, "Aspartate (2nd N)", "אספרטט — N שני", { weight: 700, fontSize: 14, textColor: N2, opacity: on(3) && !dim(3) ? 1 : 0 }),
     flow("f_asp", [[322, 60], [314, 80], [300, 100]], N2, on(3), dim(3)),
     flow("f_ass", [[300, 96], [326, 118], [330, 136]], CYC, on(3), dim(3)),
     enz("e_ass", 360, 104, "ATP→AMP", "ATP→AMP", on(3), dim(3)),
     ...mol("asa", 316, 154, "Argininosuccinate", "ארגינינוסוקצינט", CYC, 132, on(3), dim(3)),
     flow("f_asl", [[296, 168], [276, 186], [262, 200]], CYC, on(3), dim(3)),
     flow("f_fum", [[362, 168], [368, 178]], "#be123c", on(3), dim(3)),
-    text("fum", 388, 194, "Fumarate → TCA", "פומרט ← לקרבס", { anchor: "end", weight: 700, fontSize: 13, textColor: "#be123c", opacity: on(3) ? (dim(3) ? 0.5 : 1) : 0 }),
+    text("fum", 388, 194, "Fumarate → TCA", "פומרט ← לקרבס", { anchor: "end", weight: 700, fontSize: 13, textColor: "#be123c", opacity: on(3) && !dim(3) ? 1 : 0 }),
     ...mol("arg", 246, 214, "Arginine", "ארגינין", CYC, 72, on(3), dim(3)),
     // 4 — arginase: urea out, ornithine back into the matrix
     flow("f_arg", [[246, 228], [254, 250]], UREA, on(4)),
