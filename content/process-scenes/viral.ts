@@ -75,20 +75,26 @@ const s2: El[] = [
 ];
 const s3: El[] = [
   ...host(),
-  genome("v_rna", 88, 136, 134),
-  genome("rna_c", 88, 136, 150, RNA2),
-  rect("rdrp", 100, 128, 24, 28, "#fde68a", { stroke: "#b45309", strokeWidth: 1.6, rx: 8 }),
+  genome("v_rna", 96, 144, 136),
+  genome("rna_c", 96, 144, 154, RNA2),
+  rect("rdrp", 108, 130, 24, 30, "#fde68a", { stroke: "#b45309", strokeWidth: 1.6, rx: 8 }),
   // free ribosomes translating capsid proteins
-  ...[[178, 132], [200, 146], [222, 132]].map(([x, y], i) => circle(`rib${i}`, x, y, 6, "#93c5fd", { stroke: CAP, strokeWidth: 1.2 })),
-  ...[[184, 166], [212, 176], [236, 164]].flatMap(([x, y], i) => capsid(`cp${i}`, x, y, 5)),
-  // glycoproteins made on the ER, through the Golgi, vesicle to the membrane
+  ...[[190, 138], [214, 152], [238, 138]].map(([x, y], i) => circle(`rib${i}`, x, y, 7, "#93c5fd", { stroke: CAP, strokeWidth: 1.2 })),
+  ...[[196, 178], [224, 188], [250, 176]].flatMap(([x, y], i) => capsid(`cp${i}`, x, y, 6)),
+  label("l_rdrp", 14, 214, "Viral RNA polymerase copies the genome", "פולימראז RNA נגיפי משכפל את הגנום", [120, 160], { anchor: "start", shortHe: "שכפול הגנום", short: "Genome copied" }),
+  label("l_rib", 160, 240, "Free ribosomes: capsid proteins", "ריבוזומים חופשיים: חלבוני קפסיד", [214, 160], { anchor: "start", shortHe: "חלבוני קפסיד", short: "Capsid proteins" }),
+];
+// glycoproteins: made on the rough ER, through the Golgi, in a vesicle to the membrane
+const s3b: El[] = [
+  ...host(),
   ...[[272, 228], [306, 232], [342, 226]].flatMap(([x, y], i) => spike(`gp${i}`, x, y, -Math.PI / 2, 7)),
+  circle("ves1", 314, 198, 8, "#ecfdf5", { stroke: "#059669", strokeWidth: 1.8 }),
+  arrow("ves1_ar", 314, 222, 314, 208, "#059669", 2),
   circle("ves", 346, 118, 9, "#ecfdf5", { stroke: "#059669", strokeWidth: 1.8 }),
   ...spike("ves_sp", 346, 109, -Math.PI / 2, 5),
-  arrow("ves_ar", 334, 160, 342, 132, "#059669", 2),
-  label("l_rdrp", 14, 200, "Viral RNA polymerase copies the genome", "פולימראז RNA נגיפי משכפל את הגנום", [112, 156], { anchor: "start", shortHe: "שכפול הגנום", short: "Genome copied" }),
-  label("l_rib", 14, 232, "Free ribosomes: capsid proteins", "ריבוזומים חופשיים: חלבוני קפסיד", [200, 150], { anchor: "start", shortHe: "חלבוני קפסיד", short: "Capsid proteins" }),
-  label("l_gp", 14, 40, "ER → Golgi → membrane: glycoproteins", "גליקופרוטאינים: ER ← גולג'י ← ממברנה", [346, 112], { anchor: "start", shortHe: "גליקופרוטאינים", short: "Glycoproteins" }),
+  arrow("ves_ar", 336, 146, 342, 130, "#059669", 2),
+  label("l_gp", 14, 236, "On the rough ER: viral glycoproteins", "על ה-ER הגבשושי: גליקופרוטאינים נגיפיים", [272, 222], { anchor: "start", shortHe: "גליקופרוטאינים ב-ER", short: "Glycoproteins on ER" }),
+  label("l_ves", 14, 150, "Golgi → vesicle → membrane", "גולג'י ← שלפוחית ← ממברנה", [338, 116], { anchor: "start", shortHe: "שלפוחית לממברנה", short: "To the membrane" }),
 ];
 const s4: El[] = [
   ...host(),
@@ -145,10 +151,16 @@ export const viralScene: ProcessScene = {
       elements: s2,
     },
     {
-      titleHe: "שכפול וסינתזת חלבונים", titleEn: "Replication and Protein Synthesis",
-      descHe: "פולימראז RNA תלוי-RNA — אנזים שהנגיף מקודד ושאין בתא — מכין עותקים משלימים, ומהם גנומים חדשים ו-mRNA. ריבוזומים חופשיים של התא מייצרים חלבוני קפסיד, וריבוזומים על ה-ER הגבשושי מייצרים את הגליקופרוטאינים, שעוברים דרך הגולג'י ומגיעים בשלפוחיות לממברנת התא.",
-      descEn: "An RNA-dependent RNA polymerase — an enzyme the virus encodes and the cell lacks — makes complementary copies, and from them new genomes and mRNA. The host's free ribosomes make capsid proteins, while ribosomes on the rough ER make the glycoproteins, which pass through the Golgi and reach the plasma membrane in vesicles.",
+      titleHe: "שכפול הגנום וחלבוני הקפסיד", titleEn: "Copying the Genome and Making Capsid Proteins",
+      descHe: "פולימראז RNA תלוי-RNA — אנזים שהנגיף מקודד ושאין בתא — מכין עותקים משלימים, ומהם גנומים חדשים ו-mRNA נגיפי. ריבוזומים חופשיים של התא מתרגמים את ה-mRNA לחלבוני קפסיד. הנגיף לא מביא ריבוזומים משלו — הוא משתמש במכונות של התא.",
+      descEn: "An RNA-dependent RNA polymerase — an enzyme the virus encodes and the cell lacks — makes complementary copies, and from them new genomes and viral mRNA. The host's free ribosomes translate the mRNA into capsid proteins. The virus brings no ribosomes of its own — it uses the cell's machinery.",
       elements: s3,
+    },
+    {
+      titleHe: "הגליקופרוטאינים: ER, גולג'י וממברנה", titleEn: "Glycoproteins: ER, Golgi and Membrane",
+      descHe: "את חלבוני המעטפת מייצרים ריבוזומים שעל ה-ER הגבשושי, והם מוחדרים לממברנה שלו. משם הם עוברים בשלפוחיות לגולג'י, שם מתווספות להם שרשראות סוכר, ובשלפוחיות נוספות מגיעים לממברנת התא — במסלול ההפרשה הרגיל של התא.",
+      descEn: "Envelope proteins are made by ribosomes on the rough ER and inserted into its membrane. From there they travel in vesicles to the Golgi, where sugar chains are added, and in further vesicles reach the plasma membrane — along the cell's ordinary secretory pathway.",
+      elements: s3b,
     },
     {
       titleHe: "הרכבה", titleEn: "Assembly",
