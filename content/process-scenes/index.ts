@@ -24,7 +24,8 @@ import { lncEnhancer, lncDevelopment, gencode, lncConservation } from "./lncrna"
 import { actionPotential } from "./action-potential";
 import { enzymeKinetics, membraneTransport, gpcrSignaling, apoptosis } from "./batch1";
 import { viralScene as viralLifeCycle } from "./viral";
-import { synapse, muscle, hemoglobin, lacOperon, vesicular, dnaRepair } from "./batch2";
+import { synapse, muscle, hemoglobin, lacOperon, vesicular } from "./batch2";
+import { mmrScene as dnaRepair } from "./mmr";
 import { nephronScene as nephron } from "./nephron";
 import { betaOxidation, photosynthesis, bloodGlucose } from "./batch3";
 import { gngScene as gluconeogenesis } from "./gng";
