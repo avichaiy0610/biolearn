@@ -42,35 +42,40 @@ const station = (p: string, x: number, y: number, mod: "none" | "double" | "oh" 
     ...coa(`${p}_coa`, x + 20, y - 4),
   ];
   if (mod === "double") els.push(line(`${p}_db`, x - 19, y + 1, x - 8, y - 9, "#78350f", 2.2));
-  if (mod === "oh") els.push(text(`${p}_oh`, x - 20, y + 30, "OH", "OH", { ltr: true, weight: 800, fontSize: 16.5, textColor: "#0369a1" }));
-  if (mod === "keto") els.push(line(`${p}_o1`, x - 22, y + 10, x - 22, y + 20, "#b91c1c", 2), line(`${p}_o2`, x - 18, y + 10, x - 18, y + 20, "#b91c1c", 2), text(`${p}_o`, x - 20, y + 36, "O", "O", { ltr: true, weight: 800, fontSize: 16.5, textColor: "#b91c1c" }));
+  if (mod === "oh") els.push(text(`${p}_oh`, x - 20, y + 30, "OH", "OH", { ltr: true, weight: 700, fontSize: 16.5, textColor: "#0369a1" }));
+  if (mod === "keto") els.push(line(`${p}_o1`, x - 22, y + 10, x - 22, y + 20, "#b91c1c", 2), line(`${p}_o2`, x - 18, y + 10, x - 18, y + 20, "#b91c1c", 2), text(`${p}_o`, x - 20, y + 36, "O", "O", { ltr: true, weight: 700, fontSize: 16.5, textColor: "#b91c1c" }));
   if (mod === "split") els.push(path(`${p}_ac`, `M ${x - 20} ${y + 6} L ${x - 6} ${y - 6}`, { stroke: "#78350f", strokeWidth: 3.2 }), line(`${p}_cut`, x - 28, y - 10, x - 24, y + 14, "#dc2626", 2.4));
   return els;
 };
 const ST: [number, number][] = [[112, 96], [300, 96], [300, 206], [112, 206]];
 const b2: El[] = [
   ...matrixBg(),
-  ...station("s1", ...ST[0], "double"), ...station("s2", ...ST[1], "oh"), ...station("s3", ...ST[2], "keto"), ...station("s4", ...ST[3], "split"),
-  arrow("r12", 170, 90, 236, 90, C.line, 2.2), arrow("r23", 300, 132, 300, 172, C.line, 2.2),
-  arrow("r34", 236, 212, 170, 212, C.line, 2.2), arrow("r41", 80, 180, 80, 132, C.line, 2.2),
-  text("n1", 112, 72, "1 oxidation", "1 · חמצון", { weight: 800, fontSize: 16.5 }),
-  text("n2", 300, 72, "2 hydration", "2 · הוספת מים", { weight: 800, fontSize: 16.5 }),
-  text("n3", 300, 256, "3 oxidation", "3 · חמצון", { weight: 800, fontSize: 16.5 }),
-  text("n4", 112, 256, "4 thiolysis", "4 · תיאוליזה", { weight: 800, fontSize: 16.5 }),
-  ...badge("ox1", 200, 116, "FADH₂", NADH), ...badge("hyd", 356, 152, "H₂O", "#0ea5e9"),
-  ...badge("ox2", 200, 236, "NADH", NADH), ...badge("thi", 40, 152, "CoA", "#be123c"),
+  ...station("s1", ...ST[0], "double"), ...station("s2", ...ST[1], "oh"),
+  arrow("r12", 170, 90, 236, 90, C.line, 2.2),
+  text("n1", 112, 72, "1 oxidation", "1 · חמצון", { weight: 700, fontSize: 16.5 }),
+  text("n2", 300, 72, "2 hydration", "2 · הוספת מים", { weight: 700, fontSize: 16.5 }),
+  ...badge("ox1", 200, 116, "FADH₂", NADH), ...badge("hyd", 300, 150, "H₂O", "#0ea5e9"),
   circle("etf", 200, 40, 9, "#ccfbf1", { stroke: "#0f766e", strokeWidth: 1.5 }),
   arrow("to_etf", 200, 102, 200, 54, NADH, 2),
   text("etf_t", 216, 46, "ETF → Q", "ETF → Q", { anchor: "start", ltr: true, fontSize: 16.5, weight: 700, textColor: "#0f766e" }),
-  text("l_out", 112, 284, "acetyl-CoA + acyl-CoA (n−2)", "אצטיל-CoA + שרשרת קצרה ב-2", { weight: 700, textColor: "#be123c", short: "acetyl-CoA", shortHe: "אצטיל-CoA" }),
+  label("l_cb", 40, 250, "Cβ is oxidised (hence β-oxidation)", "פחמן β מחומצן — ומכאן השם", [92, 102], { anchor: "start", shortHe: "פחמן β", short: "Cβ" }),
+];
+const b2b: El[] = [
+  ...matrixBg(),
+  ...station("s3", ...ST[2], "keto"), ...station("s4", ...ST[3], "split"),
+  arrow("r34", 236, 212, 170, 212, C.line, 2.2),
+  text("n3", 300, 256, "3 oxidation", "3 · חמצון", { weight: 700, fontSize: 16.5 }),
+  text("n4", 112, 256, "4 thiolysis", "4 · תיאוליזה", { weight: 700, fontSize: 16.5 }),
+  ...badge("ox2", 200, 236, "NADH", NADH), ...badge("thi", 112, 160, "+ CoA", "#be123c", { w: 70 }),
+  label("l_out", 150, 80, "Released: acetyl-CoA (2 C)", "משתחרר אצטיל-CoA (2 פחמנים)", [ST[3][0] - 12, ST[3][1]], { anchor: "start", textColor: "#be123c", shortHe: "אצטיל-CoA", short: "acetyl-CoA" }),
 ];
 const b3: El[] = [
   ...matrixBg(),
   chain("fa2", 130, 70, 4), ...coa("coa2", 156, 70),
   ...[0, 1, 2, 3, 4, 5, 6, 7].map((i) => { const x = 50 + (i % 4) * 90, y = 140 + Math.floor(i / 4) * 56; return path(`ac${i}`, `M ${x - 10} ${y + 5} L ${x} ${y - 5}`, { stroke: "#78350f", strokeWidth: 3.5 }); }),
   ...[0, 1, 2, 3, 4, 5, 6, 7].flatMap((i) => { const x = 50 + (i % 4) * 90, y = 140 + Math.floor(i / 4) * 56; return coa(`ca${i}`, x + 26, y); }),
-  label("l_pal", 190, 40, "Palmitoyl-CoA (C16): 7 rounds", "פלמיטויל-CoA: 7 סבבים", [120, 70], { anchor: "start", shortHe: "7 סבבים", short: "C16: 7 rounds" }),
-  ...badge("n_ac", 100, 272, "8 acetyl-CoA", "#be123c", { w: 116 }), ...badge("n_fad", 220, 272, "7 FADH₂", NADH, { w: 84 }), ...badge("n_nad", 320, 272, "7 NADH", NADH, { w: 80 }),
+  label("l_pal", 190, 26, "Palmitoyl-CoA (C16): 7 rounds", "פלמיטויל-CoA: 7 סבבים", [120, 70], { anchor: "start", shortHe: "7 סבבים", short: "C16: 7 rounds" }),
+  ...badge("n_ac", 100, 272, "8 acetyl-CoA", "#be123c", { w: 116, he: "8 אצטיל-CoA" }), ...badge("n_fad", 220, 272, "7 FADH₂", NADH, { w: 84 }), ...badge("n_nad", 320, 272, "7 NADH", NADH, { w: 80 }),
 ];
 const b4: El[] = [
   ...matrixBg(),
@@ -78,7 +83,7 @@ const b4: El[] = [
   ...coa("ca0", 70, 90),
   arrow("tca", 96, 90, 160, 90, C.line, 2.2),
   path("cyc", "M 200 60 A 36 36 0 1 1 199.9 60", { stroke: "#be123c", strokeWidth: 3 }),
-  text("cyc_t", 200, 102, "TCA", "TCA", { ltr: true, weight: 800, textColor: "#be123c" }),
+  text("cyc_t", 200, 102, "TCA", "TCA", { ltr: true, weight: 700, textColor: "#be123c" }),
   ...badge("fad", 90, 190, "FADH₂", NADH), ...badge("nad", 170, 190, "NADH", NADH),
   arrow("etc", 210, 190, 270, 190, NADH, 2.2),
   arrow("etc_down", 170, 206, 170, 250, NADH, 2),
@@ -111,10 +116,16 @@ export const betaOxidation: ProcessScene = {
       elements: b1,
     },
     {
-      titleHe: "סבב אחד: ארבע תגובות", titleEn: "One Round: Four Reactions",
-      descHe: "בכל סבב: (1) חמצון ביצירת קשר כפול ו-FADH₂ (אציל-CoA דהידרוגנאז); (2) הוספת מים; (3) חמצון שני ו-NADH; (4) תיאוליזה בעזרת CoA חדש — משתחרר אצטיל-CoA (2 פחמנים), והשרשרת קצרה ב-2 פחמנים.",
-      descEn: "Each round: (1) oxidation forming a double bond and FADH₂ (acyl-CoA dehydrogenase); (2) addition of water; (3) a second oxidation making NADH; (4) thiolysis by a new CoA — releasing acetyl-CoA (2 carbons) and leaving a chain 2 carbons shorter.",
+      titleHe: "סבב אחד, חלק א: חמצון והוספת מים", titleEn: "One Round, Part 1: Oxidation and Hydration",
+      descHe: "(1) אציל-CoA דהידרוגנאז מחמצן את השרשרת ויוצר קשר כפול בין פחמן α לפחמן β; האלקטרונים עוברים ל-FAD (FADH₂), ומשם דרך ETF לקואנזים Q בשרשרת הנשימה. (2) מוספות מים לקשר הכפול, ועל פחמן β נוצרת קבוצת OH.",
+      descEn: "(1) Acyl-CoA dehydrogenase oxidises the chain, making a double bond between the α and β carbons; the electrons go to FAD (FADH₂), and on through ETF to coenzyme Q in the respiratory chain. (2) Water is added across the double bond, leaving an OH group on the β carbon.",
       elements: b2,
+    },
+    {
+      titleHe: "סבב אחד, חלק ב: חמצון ותיאוליזה", titleEn: "One Round, Part 2: Oxidation and Thiolysis",
+      descHe: "(3) חמצון שני הופך את ה-OH על פחמן β לקבוצת קטו, ונוצר NADH. (4) תיאוליזה: CoA חדש חותך בין פחמן α לפחמן β — משתחרר אצטיל-CoA (2 פחמנים), והשרשרת שנשארת קצרה ב-2 פחמנים וכבר קשורה ל-CoA, מוכנה לסבב הבא.",
+      descEn: "(3) A second oxidation turns the OH on the β carbon into a keto group, making NADH. (4) Thiolysis: a new CoA cuts between the α and β carbons — releasing acetyl-CoA (2 carbons), and the remaining chain, 2 carbons shorter and already bound to CoA, is ready for the next round.",
+      elements: b2b,
     },
     {
       titleHe: "חזרה עד הסוף", titleEn: "Repeating to the End",
