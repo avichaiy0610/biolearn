@@ -65,8 +65,8 @@ const s4: El[] = [
   circle("nuc", 70, 150, 50, "#e0e7ff", { stroke: "#4338ca", strokeWidth: 2.5 }),
   text("nuc_t", 70, 156, "Nucleus", "גרעין", { weight: 700, textColor: "#3730a3" }),
   arrow("imp", 124, 140, 176, 118, "#4338ca", 2.4), arrow("imp2", 124, 166, 216, 200, "#4338ca", 2.4),
-  label("l_imp", 8, 262, "~1,000+ nuclear-encoded proteins imported", "רוב החלבונים מקודדים בגרעין ומיובאים", [150, 128], { anchor: "start", shortHe: "יבוא חלבונים", short: "Protein import" }),
-  label("l_fis", 200, 290, "Divides by fission", "מתחלקת בביקוע", [270, 160], { anchor: "start" }),
+  label("l_imp", 8, 240, "~1,000+ nuclear-encoded proteins imported", "רוב החלבונים מקודדים בגרעין ומיובאים", [150, 128], { anchor: "start", shortHe: "יבוא חלבונים", short: "Protein import" }),
+  label("l_fis", 230, 290, "Divides by fission", "מתחלקת בביקוע", [270, 160], { anchor: "start" }),
   label("l_own", 300, 40, "Own DNA", "DNA עצמי", [246, 104], { anchor: "start" }),
 ];
 
@@ -90,7 +90,13 @@ const s5: El[] = [
 
 export const mitoInheritance: ProcessScene = {
   slug: "mitochondrial-inheritance-animation-1780786394329",
-  source: "Campbell 12e ch. 15; Alberts 7e ch. 14",
+  meta: {
+    topic: "genetics",
+    nameHe: "תורשה מיטוכונדריאלית", nameEn: "Mitochondrial Inheritance",
+    descHe: "ה-DNA של המיטוכונדריה, תורשה מהאם בלבד, יבוא חלבונים מהגרעין, והטרופלסמיה",
+    descEn: "Mitochondrial DNA, inheritance from the mother only, import of nuclear-encoded proteins, and heteroplasmy",
+    source: "Campbell 12e ch. 15; Alberts 7e ch. 14",
+  },
   legend: [
     { color: MTS, he: "מיטוכונדריה", en: "Mitochondrion", swatch: "ring" },
     { color: "#1d4ed8", he: "mtDNA מעגלי", en: "Circular mtDNA", swatch: "ring" },
