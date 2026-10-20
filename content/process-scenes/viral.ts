@@ -42,15 +42,15 @@ const ER_LINES = [0, 1, 2].map((k) => smooth([[244, 252 + k * 14], [280, 238 + k
 const host = (): El[] => [
   rect("cyto", 0, MEM, 400, 300 - MEM, "#f0fdf4"),
   ...bilayer("pm", 0, 400, MEM, { th: 14 }),
-  text("t_out", 392, 82, "Outside", "מחוץ לתא", { anchor: "end", fontSize: 13, weight: 700, textColor: C.muted }),
+  text("t_out", 392, 82, "Outside", "מחוץ לתא", { anchor: "end", weight: 700, textColor: C.muted }),
   circle("nuc_o", 26, 318, 66, "#ede9fe", { stroke: "#7c3aed", strokeWidth: 2 }),
   circle("nuc_i", 26, 318, 58, "#f5f3ff", { stroke: "#a78bfa", strokeWidth: 1 }),
-  text("t_nuc", 36, 290, "nucleus", "גרעין", { fontSize: 13, weight: 700, textColor: "#6d28d9" }),
+  text("t_nuc", 36, 290, "nucleus", "גרעין", { weight: 700, textColor: "#6d28d9" }),
   ...ER_LINES.map((d, k) => path(`er${k}`, d, { stroke: "#a16207", strokeWidth: 3 })),
   ...ER_LINES.flatMap((_, k) => [256, 290, 326, 362].map((x, i) => circle(`erb${k}_${i}`, x, 236 + k * 14 + (i % 2 ? 4 : 0), 2.4, "#1e3a8a"))),
   ...[0, 1, 2, 3].map((k) => path(`gol${k}`, `M ${300 + k * 3} ${150 + k * 11} q ${36 - k * 3} -12 ${72 - k * 6} 0`, { stroke: "#059669", strokeWidth: 3.2 })),
-  text("t_er", 372, 296, "rough ER", "ER גבשושי", { anchor: "end", fontSize: 12, weight: 700, textColor: "#a16207" }),
-  text("t_gol", 392, 140, "Golgi", "גולג'י", { anchor: "end", fontSize: 12, weight: 700, textColor: "#059669" }),
+  text("t_er", 372, 296, "rough ER", "ER גבשושי", { anchor: "end", weight: 700, textColor: "#a16207" }),
+  text("t_gol", 392, 140, "Golgi", "גולג'י", { anchor: "end", weight: 700, textColor: "#059669" }),
 ];
 // receptors on the cell surface
 const receptors = (): El[] => [128, 172, 254].map((x, i) => path(`rec${i}`, `M ${x} ${MEM - 7} L ${x} ${MEM - 17} M ${x - 5} ${MEM - 22} L ${x} ${MEM - 17} L ${x + 5} ${MEM - 22}`, { stroke: "#0f766e", strokeWidth: 2.6 }));
