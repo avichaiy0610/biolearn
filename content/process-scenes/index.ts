@@ -22,7 +22,8 @@ import { innate, adaptive } from "./immunity";
 import { lncEnhancer, lncDevelopment, gencode, lncConservation } from "./lncrna";
 // authored directly from the textbook gap analysis (published with `publish-scene`)
 import { actionPotential } from "./action-potential";
-import { enzymeKinetics, membraneTransport, gpcrSignaling, apoptosis } from "./batch1";
+import { enzymeKinetics, gpcrSignaling, apoptosis } from "./batch1";
+import { transportScene as membraneTransport } from "./transport";
 import { viralScene as viralLifeCycle } from "./viral";
 import { synapse, muscle, hemoglobin, vesicular } from "./batch2";
 import { lacScene as lacOperon } from "./lac";
