@@ -255,7 +255,10 @@ const islet = (): El[] => [
 const vessel = (): El[] => [rect("bv", 0, 150, 400, 40, "#fee2e2", { rx: 20, stroke: "#dc2626", strokeWidth: 2 })];
 const liver = (): El => path("liv", smooth([[290, 60], [340, 40], [390, 60], [380, 110], [320, 118], [284, 96]], true), { color: "#fecaca", stroke: "#9f1239", strokeWidth: 2 });
 const muscleCell = (): El => rect("mus", 200, 220, 170, 60, "#fde2e2", { rx: 20, stroke: "#b91c1c", strokeWidth: 2 });
-const gBase = (): El[] => [...islet(), ...vessel(), liver(), muscleCell(),
+const glut = (atMembrane: boolean): El[] => [0, 1, 2].map((i) => rect(`glut${i}`, 226 + i * 50, atMembrane ? 216 : 248 + (i % 2) * 8, 10, 10, "#1d4ed8", { rx: 2 }));
+// glycogen: a rosette of granules in the liver
+const glycogen = (op: number): El[] => [[330, 76], [346, 70], [356, 84], [342, 92], [328, 90], [343, 81]].map(([x, y], i) => circle(`gy${i}`, x, y, 4, "#fbbf24", { stroke: "#b45309", strokeWidth: 1, opacity: op }));
+const gBase = (gl = false, gy = 0): El[] => [...islet(), ...vessel(), liver(), muscleCell(), ...glut(gl), ...glycogen(gy),
   text("t_panc", 70, 146, "pancreatic islet", "איון בלבלב", { fontSize: 16.5, textColor: "#a16207", weight: 700 }),
   text("t_liv", 336, 136, "liver", "כבד", { fontSize: 16.5, textColor: "#9f1239", weight: 700 }),
   text("t_mus", 285, 298, "muscle / fat", "שריר / שומן", { fontSize: 16.5, textColor: "#b91c1c", weight: 700 }),
@@ -266,31 +269,29 @@ const bg1: El[] = [
   ...gBase(), ...GLC_HI.map(([x, y], i) => glc(`g${i}`, x, y)),
   ...[[120, 110], [134, 124]].map(([x, y], i) => circle(`ins${i}`, x, y, 4, "#1d4ed8")),
   arrow("ins_out", 110, 100, 160, 140, "#1d4ed8", 2.2),
-  label("l_hi", 160, 40, "After a meal: glucose ↑", "אחרי ארוחה: הגלוקוז עולה", [190, 172], { anchor: "start", shortHe: "גלוקוז עולה", short: "Glucose ↑" }),
-  label("l_beta", 14, 290, "β cells release insulin", "תאי β מפרישים אינסולין", [80, 72], { anchor: "start", shortHe: "תאי β: אינסולין", short: "β cells: insulin" }),
+  label("l_hi", 150, 240, "After a meal: glucose ↑", "אחרי ארוחה: הגלוקוז עולה", [190, 176], { anchor: "end", shortHe: "גלוקוז עולה", short: "Glucose ↑" }),
+  label("l_beta", 130, 30, "β cells release insulin", "תאי β מפרישים אינסולין", [84, 70], { anchor: "start", shortHe: "תאי β: אינסולין", short: "β cells: insulin" }),
 ];
 const bg2: El[] = [
-  ...gBase(), ...GLC_LO.map(([x, y], i) => glc(`g${i}`, x, y)),
+  ...gBase(true, 1), ...GLC_LO.map(([x, y], i) => glc(`g${i}`, x, y)),
   ...[[240, 238], [270, 244], [300, 236]].map(([x, y], i) => glc(`gm${i}`, x, y)),
-  ...[[330, 70], [350, 90]].map(([x, y], i) => glc(`gl${i}`, x, y)),
-  ...[0, 1, 2].map((i) => rect(`glut${i}`, 226 + i * 50, 216, 10, 10, "#1d4ed8", { rx: 2 })),
   arrow("up_m", 270, 196, 270, 224, "#1d4ed8", 2.2), arrow("up_l", 320, 150, 326, 116, "#1d4ed8", 2.2),
-  label("l_glut", 14, 250, "GLUT4 moves to the membrane", "GLUT4 עובר לממברנה", [236, 221], { anchor: "start", shortHe: "GLUT4", short: "GLUT4" }),
-  label("l_gly", 150, 40, "Liver stores glycogen", "הכבד אוגר גליקוגן", [340, 80], { anchor: "start" }),
+  label("l_glut", 14, 270, "Insulin: GLUT4 moves to the membrane", "אינסולין: GLUT4 עובר לממברנה", [231, 221], { anchor: "start", shortHe: "GLUT4 לממברנה", short: "GLUT4 to membrane" }),
+  label("l_gly", 150, 40, "Liver stores glycogen", "הכבד אוגר גליקוגן", [330, 76], { anchor: "start" }),
 ];
 const bg3: El[] = [
   ...gBase(), ...GLC_LO.slice(0, 2).map(([x, y], i) => glc(`g${i}`, x, y)),
   ...[[120, 110], [134, 124]].map(([x, y], i) => circle(`gcg${i}`, x, y, 4, "#b91c1c")),
   arrow("gcg_out", 110, 110, 160, 140, "#b91c1c", 2.2),
-  label("l_lo", 160, 40, "Fasting: glucose ↓", "בצום: הגלוקוז יורד", [230, 170], { anchor: "start" }),
-  label("l_alpha", 14, 290, "α cells release glucagon", "תאי α מפרישים גלוקגון", [94, 84], { anchor: "start", shortHe: "תאי α: גלוקגון", short: "α cells: glucagon" }),
+  label("l_lo", 150, 240, "Fasting: glucose ↓", "בצום: הגלוקוז יורד", [230, 176], { anchor: "end" }),
+  label("l_alpha", 130, 30, "α cells release glucagon", "תאי α מפרישים גלוקגון", [96, 84], { anchor: "start", shortHe: "תאי α: גלוקגון", short: "α cells: glucagon" }),
 ];
 const bg4: El[] = [
   ...gBase(), ...GLC_HI.slice(3).map(([x, y], i) => glc(`g${i + 3}`, x, y)),
   ...[[330, 70], [350, 90]].map(([x, y], i) => glc(`gl${i}`, x, y)),
   arrow("out_l", 326, 118, 318, 150, "#b45309", 2.4),
   label("l_liv", 14, 40, "Liver: glycogenolysis + gluconeogenesis", "הכבד: פירוק גליקוגן וגלוקונאוגנזה", [330, 80], { anchor: "start", shortHe: "הכבד משחרר גלוקוז", short: "Liver releases glucose" }),
-  text("l_fb", 96, 236, "negative feedback", "משוב שלילי", { weight: 800, textColor: "#15803d" }),
+  text("l_fb", 96, 236, "negative feedback", "משוב שלילי", { weight: 700, textColor: "#15803d" }),
   text("l_fb2", 96, 262, "keeps ~5 mM", "שומר על כ-5 מילימולר", { weight: 700, textColor: "#15803d", fontSize: 16.5 }),
 ];
 export const bloodGlucose: ProcessScene = {
