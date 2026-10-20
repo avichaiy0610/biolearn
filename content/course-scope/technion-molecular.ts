@@ -51,6 +51,7 @@ export const technionMolecularScope: CourseScope = {
       "replisome": named(REP),
       "fidelity": named(REP),
       "eukaryotes": named(REP),
+      "pcr": heading(REP, "PCR — שכפול DNA במבחנה"),
     },
     "mol-replication-origins": {
       "replicon": named(REP),

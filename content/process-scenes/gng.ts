@@ -1,4 +1,4 @@
-import { C, arrow, line, mitochondrion, path, rect, smooth, text, type El, type ProcessScene } from "./kit";
+import { C, arrow, label, line, mitochondrion, path, rect, smooth, text, type El, type ProcessScene } from "./kit";
 
 /* ══ GLUCONEOGENESIS in a hepatocyte (Lehninger 8e ch. 14; Berg 10e ch. 16) ══════
    A liver cell: mitochondrion bottom-left, ER top-right. The pathway is drawn as a ladder in the cytosol:
@@ -18,7 +18,7 @@ const enz = (id: string, x: number, y: number, s: string, he: string, color = EN
 
 const cell = (): El[] => [
   rect("cell", 6, 6, 388, 288, "#f8fafc", { stroke: "#15803d", strokeWidth: 2.5, rx: 26 }),
-  ...mitochondrion("mito", 326, 238, 64, 48, {}, 0.14, 4),
+  ...mitochondrion("mito", 316, 222, 80, 62, {}, 0.12, 4),
   path("er", smooth([[296, 30], [336, 22], [382, 32], [386, 66], [380, 100], [338, 108], [300, 98], [290, 64]], true), { color: "#fce7f3", stroke: "#be185d", strokeWidth: 2 }),
   text("t_er", 310, 44, "ER", "ER", { ltr: true, weight: 700, fontSize: 13, textColor: "#be185d" }),
   text("t_mt", 326, 300, "mitochondrion", "מיטוכונדריה", { weight: 700, fontSize: 12, textColor: "#9a3412", opacity: 0 }),
@@ -57,13 +57,20 @@ function scene(step: St): El[] {
     text("t_irr2", 78, 50, "→ need bypasses", "← צריך מעקפים", { fontSize: 14, textColor: IRR, opacity: only(1) }),
     arrow("gl0", 290, 46, X + 32, Y.g6p, IRR, 2.4, { opacity: only(1) }),
     enz("e_hk", 234, 24, "hexokinase", "הקסוקינאז", IRR, only(1)),
-    // bypass 1: pyruvate → mitochondrion → OAA (pyruvate carboxylase) → back out → PEP (PEPCK)
-    path("b1a", smooth([[X + 40, Y.pyr], [252, 262], [282, 256]]), { stroke: GNG, strokeWidth: 2.6, arrow: true, opacity: hot(2) }),
-    ...node("oaa_m", 248, "OAA", "OAA", 52, 330, GNG, hot(2)),
-    enz("e_pc", 330, 272, "PC + ATP", "PC + ATP", ENZ, hot(2)),
-    text("acoa", 338, 218, "acetyl-CoA +", "אצטיל-CoA +", { fontSize: 12, weight: 700, textColor: "#7c3aed", opacity: hot(2) }),
-    path("b1b", smooth([[300, 236], [268, 214], [X + 32, Y.pep]]), { stroke: GNG, strokeWidth: 2.6, arrow: true, opacity: hot(2) }),
-    enz("e_pepck", 236, 184, "PEPCK + GTP", "PEPCK + GTP", ENZ, hot(2)),
+    // bypass 1: pyruvate → mitochondrion → OAA (pyruvate carboxylase); then two routes to PEP:
+    //   PEPCK-M inside the mitochondrion (PEP exported), or OAA → malate out → OAA → PEPCK-C in the cytosol
+    path("b1a", smooth([[X + 38, Y.pyr], [256, 268], [274, 260]]), { stroke: GNG, strokeWidth: 2.6, arrow: true, opacity: hot(2) }),
+    ...node("oaa_m", 252, "OAA", "OAA", 52, 302, GNG, hot(2)),
+    enz("e_pc", 332, 278, "PC + ATP", "PC + ATP", ENZ, hot(2)),
+    // route 1: mitochondrial PEPCK, PEP leaves
+    arrow("b1m", 302, 238, 302, 204, GNG, 2.4, { opacity: hot(2) }),
+    ...node("pep_m", 190, "PEP", "PEP", 46, 302, GNG, hot(2)),
+    enz("e_pepckm", 312, 222, "PEPCK-M", "PEPCK-M", ENZ, hot(2)),
+    enz("e_gtp", 312, 240, "+ GTP", "+ GTP", ENZ, hot(2)),
+    path("b1b", smooth([[278, 190], [254, 196], [X + 32, Y.pep]]), { stroke: GNG, strokeWidth: 2.6, arrow: true, opacity: hot(2) }),
+    // route 2: as malate to the cytosol, back to OAA, cytosolic PEPCK
+    path("b1c", smooth([[276, 256], [252, 244], [X + 30, Y.pep + 12]]), { stroke: GNG, strokeWidth: 2.2, arrow: true, dash: "5 3", opacity: hot(2) }),
+    label("e_mal", 110, 287, "or: as malate → PEPCK-C", "או: כמאלאט ← PEPCK-C", [250, 242], { anchor: "start", fontSize: 13, textColor: ENZ, opacity: hot(2) }),
     // shared steps back up
     arrow("up_mid", X + 34, Y.pep - 12, X + 34, Y.fbp + 12, GNG, 2.2, { opacity: step >= 3 ? 1 : 0, dash: "5 4" }),
     // bypass 2: FBPase-1
@@ -111,8 +118,8 @@ export const gngScene: ProcessScene = {
     },
     {
       titleHe: "מעקף 1: מפירובט ל-PEP", titleEn: "Bypass 1: Pyruvate to PEP",
-      descHe: "פירובט נכנס למיטוכונדריה, ושם פירובט קרבוקסילאז (עם ביוטין ו-ATP; מופעל על ידי אצטיל-CoA) הופך אותו לאוקסלואצטט (OAA). ה-OAA יוצא לציטוזול (כמאלאט, שמחומצן חזרה ל-OAA), ו-PEP קרבוקסיקינאז (PEPCK) הופך אותו ל-PEP תוך שימוש ב-GTP. שני צעדים ושני קשרים עתירי אנרגיה — במקום הצעד האחד של פירובט קינאז.",
-      descEn: "Pyruvate enters the mitochondrion, where pyruvate carboxylase (with biotin and ATP; activated by acetyl-CoA) turns it into oxaloacetate (OAA). OAA leaves for the cytosol (as malate, re-oxidised to OAA), and PEP carboxykinase (PEPCK) converts it to PEP using GTP. Two steps and two high-energy bonds — instead of pyruvate kinase's single step.",
+      descHe: "פירובט נכנס למיטוכונדריה, ושם פירובט קרבוקסילאז (עם ביוטין ו-ATP; מופעל על ידי אצטיל-CoA) הופך אותו לאוקסלואצטט (OAA). מה-OAA יש שתי דרכים ל-PEP, ושתיהן בעזרת PEP קרבוקסיקינאז ו-GTP: PEPCK מיטוכונדריאלי (PEPCK-M) יוצר PEP במיטוכונדריה, וה-PEP יוצא לציטוזול; או שה-OAA יוצא כמאלאט (OAA עצמו לא עובר את הממברנה הפנימית), מחומצן חזרה ל-OAA בציטוזול — ומספק גם NADH שנדרש בהמשך — ו-PEPCK ציטוזולי (PEPCK-C) הופך אותו ל-PEP. כשהמקור הוא לקטט, NADH כבר נוצר בציטוזול, והדרך המיטוכונדריאלית מתאימה. שני צעדים ושני קשרים עתירי אנרגיה — במקום הצעד האחד של פירובט קינאז.",
+      descEn: "Pyruvate enters the mitochondrion, where pyruvate carboxylase (with biotin and ATP; activated by acetyl-CoA) turns it into oxaloacetate (OAA). From OAA there are two routes to PEP, both using PEP carboxykinase and GTP: mitochondrial PEPCK (PEPCK-M) makes PEP inside the mitochondrion and PEP is exported; or OAA leaves as malate (OAA itself cannot cross the inner membrane), is re-oxidised to OAA in the cytosol — also supplying NADH needed later — and cytosolic PEPCK (PEPCK-C) converts it to PEP. When the source is lactate, NADH is already made in the cytosol and the mitochondrial route fits. Two steps and two high-energy bonds — instead of pyruvate kinase's single step.",
       elements: scene(2),
     },
     {
