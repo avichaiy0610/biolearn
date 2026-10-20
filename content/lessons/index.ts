@@ -36,8 +36,20 @@ import { metIntegration } from "./technion-metabolic/met-integration";
 import { metLipidsCholesterol } from "./technion-metabolic/met-lipids-cholesterol";
 import { metAminoAcids } from "./technion-metabolic/met-amino-acids";
 import { metNucleotides } from "./technion-metabolic/met-nucleotides";
+import { molNucleicAcids } from "./technion-molecular/mol-nucleic-acids";
+import { molChromatin } from "./technion-molecular/mol-chromatin";
+import { molReplicationFork } from "./technion-molecular/mol-replication-fork";
+import { molReplicationOrigins } from "./technion-molecular/mol-replication-origins";
+import { molRepair } from "./technion-molecular/mol-repair";
+import { molRecombination } from "./technion-molecular/mol-recombination";
+import { molTranscriptionProk } from "./technion-molecular/mol-transcription-prok";
+import { molTranscriptionEuk } from "./technion-molecular/mol-transcription-euk";
+import { molRnaProcessing } from "./technion-molecular/mol-rna-processing";
+import { molGeneticCode } from "./technion-molecular/mol-genetic-code";
+import { molRibosomeInitiation } from "./technion-molecular/mol-ribosome-initiation";
+import { molTranslationElongation } from "./technion-molecular/mol-translation-elongation";
 
-export const LESSONS: Lesson[] = [mendelProbability, dominanceAlleles, pedigrees, chromosomalTheory, sexDetermination, linkageMapping, mutations, chromosomeStructure, chromosomeNumber, natureOfGene, geneInteraction, nonMendelian, aminoAcids, proteinStructure, proteinFolding, fibrousMembrane, proteinMethods, hemoglobin, enzymePrinciples, enzymeKinetics, catalyticMechanisms, allostericRegulation, covalentRegulation, carbsLipids, metConcepts, metGlycolysis, metGluconeogenesis, metCitricAcid, metOxphos, metPhotosynthesis, metPentose, metGlycogen, metFattyAcids, metIntegration, metLipidsCholesterol, metAminoAcids, metNucleotides];
+export const LESSONS: Lesson[] = [mendelProbability, dominanceAlleles, pedigrees, chromosomalTheory, sexDetermination, linkageMapping, mutations, chromosomeStructure, chromosomeNumber, natureOfGene, geneInteraction, nonMendelian, aminoAcids, proteinStructure, proteinFolding, fibrousMembrane, proteinMethods, hemoglobin, enzymePrinciples, enzymeKinetics, catalyticMechanisms, allostericRegulation, covalentRegulation, carbsLipids, metConcepts, metGlycolysis, metGluconeogenesis, metCitricAcid, metOxphos, metPhotosynthesis, metPentose, metGlycogen, metFattyAcids, metIntegration, metLipidsCholesterol, metAminoAcids, metNucleotides, molNucleicAcids, molChromatin, molReplicationFork, molReplicationOrigins, molRepair, molRecombination, molTranscriptionProk, molTranscriptionEuk, molRnaProcessing, molGeneticCode, molRibosomeInitiation, molTranslationElongation];
 
 export const lessonBySlug = (slug: string) => LESSONS.find((l) => l.slug === slug);
 

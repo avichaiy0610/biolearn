@@ -8,7 +8,7 @@ const PURPLE = "#7c3aed";
 
 // ── Generic layouts ──────────────────────────────────────────────────────────
 // A metabolite box, label centered.
-function Box({ x, y, w, h = 30, label, color = BLUE, fill = "#eff6ff", size = 14, bold = false }: { x: number; y: number; w: number; h?: number; label: React.ReactNode; color?: string; fill?: string; size?: number; bold?: boolean }) {
+export function Box({ x, y, w, h = 30, label, color = BLUE, fill = "#eff6ff", size = 14, bold = false }: { x: number; y: number; w: number; h?: number; label: React.ReactNode; color?: string; fill?: string; size?: number; bold?: boolean }) {
   return (
     <g>
       <rect x={x - w / 2} y={y} width={w} height={h} rx={8} fill={fill} stroke={color} strokeWidth={1.8} />
@@ -16,13 +16,13 @@ function Box({ x, y, w, h = 30, label, color = BLUE, fill = "#eff6ff", size = 14
     </g>
   );
 }
-function Arrow({ x1, y1, x2, y2, color = INK, width = 1.8, dashed = false }: { x1: number; y1: number; x2: number; y2: number; color?: string; width?: number; dashed?: boolean }) {
+export function Arrow({ x1, y1, x2, y2, color = INK, width = 1.8, dashed = false }: { x1: number; y1: number; x2: number; y2: number; color?: string; width?: number; dashed?: boolean }) {
   return <line x1={x1} y1={y1} x2={x2} y2={y2} stroke={color} strokeWidth={width} markerEnd={width > 2.2 ? "url(#bfArrowS)" : "url(#bfArrow)"} {...(dashed ? dash : {})} />;
 }
 
-type Step = { m: string; e?: string; s?: string; key?: boolean };
+export type Step = { m: string; e?: string; s?: string; key?: boolean };
 // Vertical chain: box for each metabolite; the arrow under step i carries its enzyme (right) and cofactors (left).
-function Chain({ x, y, w, steps, pitch = 64, size = 13 }: { x: number; y: number; w: number; steps: Step[]; pitch?: number; size?: number }) {
+export function Chain({ x, y, w, steps, pitch = 64, size = 13 }: { x: number; y: number; w: number; steps: Step[]; pitch?: number; size?: number }) {
   return (
     <g>
       {steps.map((st, i) => {
@@ -45,9 +45,9 @@ function Chain({ x, y, w, steps, pitch = 64, size = 13 }: { x: number; y: number
   );
 }
 
-type Edge = { inner?: string; outer?: string; key?: boolean };
+export type Edge = { inner?: string; outer?: string; key?: boolean };
 // Cycle: nodes on a circle (clockwise from the top); edge i goes node i → node i+1.
-function Cycle({ cx, cy, r, nodes, edges, w = 104, size = 12.5, innerR = 0.55, outerR = 1.32, rot = 0, ry }: { cx: number; cy: number; r: number; ry?: number; nodes: string[]; edges: Edge[]; w?: number; size?: number; innerR?: number; outerR?: number; rot?: number }) {
+export function Cycle({ cx, cy, r, nodes, edges, w = 104, size = 12.5, innerR = 0.55, outerR = 1.32, rot = 0, ry }: { cx: number; cy: number; r: number; ry?: number; nodes: string[]; edges: Edge[]; w?: number; size?: number; innerR?: number; outerR?: number; rot?: number }) {
   const n = nodes.length;
   const k = (ry ?? r) / r; // vertical stretch (ellipse)
   const pos = (i: number, rr = r) => { const a = (-90 + rot + (i * 360) / n) * Math.PI / 180; return [cx + rr * Math.cos(a), cy + k * rr * Math.sin(a)]; };

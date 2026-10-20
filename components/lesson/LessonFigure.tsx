@@ -3,6 +3,7 @@
 
 import { BIOCHEM_FIGURES } from "./biochemFigures";
 import { METABOLIC_FIGURES } from "./metabolicFigures";
+import { MOLECULAR_FIGURES } from "./molecularFigures";
 
 const BLUE = "#1d4ed8", ORANGE = "#c2410c", INK = "#1f2937", MUTED = "#64748b";
 const T = { fontFamily: "var(--font-hebrew), Arial, sans-serif" };
@@ -477,6 +478,7 @@ const FIGURES: Record<string, { el: () => React.ReactElement; captionHe: string 
   complementation: { el: Complementation, captionHe: "מבחן קומפלמנטציה בצאצא שקיבל מוטציה רצסיבית אחת מכל הורה (מצב trans). כל קו הוא הומולוג; ירוק = עותק תקין של הגן, אדום עם × = עותק מוטנטי. מימין — המוטציות בשני גנים שונים: לכל גן יש עותק תקין, ולכן הפנוטיפ תקין. משמאל — שתי המוטציות באותו גן, במקומות שונים: אין עותק תקין של הגן, ולכן הפנוטיפ מוטנטי. (במודל הפשוט, בלי חריגים.) סכמטי." },
   ...BIOCHEM_FIGURES,
   ...METABOLIC_FIGURES,
+  ...MOLECULAR_FIGURES,
   map: { el: GeneMap, captionHe: "איור 2 — המפה מהדוגמה התלת-נקודתית: A–C–B. בהזנחת שחלופים מרובים שלא זוהו, המרחקים הם 10 ו-20 cM וסכומם 30 cM. תדירות הרקומבינציה הנמדדת ישירות בין A ל-B היא רק 28%." },
 };
 
