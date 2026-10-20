@@ -258,14 +258,14 @@ const h1: El[] = [
 ];
 const h2: El[] = [
   ...hb(4, true), ...hAxes(), curve("c1", 26, "#dc2626"),
-  label("l_r", 14, 280, "R state: high affinity", "מצב R: זיקה גבוהה", [110, 176], { anchor: "start" }),
+  label("l_r", 14, 280, "R state: high O₂ affinity", "מצב R: זיקה גבוהה לחמצן", [110, 176], { anchor: "start" }),
   label("l_sig", 250, 40, "Sigmoid: cooperativity", "עקומה סיגמואידית: שיתופיות", [300, 170], { anchor: "start", shortHe: "שיתופיות", short: "Cooperative" }),
 ];
 const h3: El[] = [
   ...hb(2, false), ...hAxes(), curve("c1", 26, "#dc2626", { opacity: 0.4 }), curve("c2", 38, "#7c3aed"),
   ...[[40, 84], [70, 76], [40, 226]].map(([x, y], i) => text(`hp${i}`, x, y, "H⁺", "H⁺", { ltr: true, weight: 800, textColor: "#7c3aed" })),
   text("co2", 100, 226, "CO₂", "CO₂", { ltr: true, weight: 800, textColor: "#475569" }),
-  label("l_bohr", 14, 36, "Bohr effect: H⁺, CO₂ → O₂ released", "אפקט בוהר: H⁺ ו-CO₂ משחררים O₂", [110, 176], { anchor: "start", shortHe: "אפקט בוהר", short: "Bohr effect" }),
+  label("l_bohr", 14, 290, "Bohr effect: H⁺, CO₂ → O₂ released", "אפקט בוהר: H⁺ ו-CO₂ משחררים O₂", [110, 176], { anchor: "start", shortHe: "אפקט בוהר", short: "Bohr effect" }),
   label("l_right", 250, 18, "Curve shifts right", "העקומה זזה ימינה", [300, 180], { anchor: "start" }),
 ];
 export const hemoglobin: ProcessScene = {

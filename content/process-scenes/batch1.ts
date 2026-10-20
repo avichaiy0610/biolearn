@@ -39,7 +39,7 @@ const k1: El[] = [
   enzymeShape("enz2", 300, 214, 40, "#c7d2fe"),
   arrow("cat", 150, 170, 244, 190, C.line, 2.4),
   text("eq", 200, 40, "E + S ⇌ ES → E + P", "E + S ⇌ ES → E + P", { ltr: true, weight: 800, textColor: "#4338ca" }),
-  text("k", 196, 172, "k_cat", "k_cat", { ltr: true, fontSize: 16.5, textColor: "#4338ca" }),
+  text("k", 196, 172, "kcat", "kcat", { ltr: true, fontSize: 16.5, textColor: "#4338ca" }),
   label("l_as", 150, 90, "Active site", "אתר פעיל", [90, 146], { anchor: "start" }),
   label("l_sub", 14, 290, "Substrate (S)", "מצע (S)", [60, 84], { anchor: "start" }),
   label("l_p", 300, 110, "Products (P)", "תוצרים (P)", [284, 140], { anchor: "start" }),
