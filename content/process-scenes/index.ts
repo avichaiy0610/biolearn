@@ -22,8 +22,11 @@ import { lncEnhancer, lncDevelopment, gencode, lncConservation } from "./lncrna"
 // authored directly from the textbook gap analysis (published with `publish-scene`)
 import { actionPotential } from "./action-potential";
 import { enzymeKinetics, membraneTransport, gpcrSignaling, apoptosis, viralLifeCycle } from "./batch1";
-import { synapse, muscle, hemoglobin, lacOperon, vesicular, nephron, dnaRepair } from "./batch2";
-import { betaOxidation, gluconeogenesis, ureaCycle, photosynthesis, bloodGlucose } from "./batch3";
+import { synapse, muscle, hemoglobin, lacOperon, vesicular, dnaRepair } from "./batch2";
+import { nephronScene as nephron } from "./nephron";
+import { betaOxidation, photosynthesis, bloodGlucose } from "./batch3";
+import { gngScene as gluconeogenesis } from "./gng";
+import { ureaScene as ureaCycle } from "./urea";
 
 export const PROCESS_SCENES: ProcessScene[] = [translation, transcription, glycolysis, respiration, meiosis, pcr, ups, mendelian, nonMendelian,
   mitoInheritance, bacteria, recognition, riboswitch, cardio,
