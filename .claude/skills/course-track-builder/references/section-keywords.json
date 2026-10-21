@@ -3833,5 +3833,870 @@
     "checkpoint"
    ]
   }
+ },
+ "gx-operons": {
+  "_heading": {
+   "he": [
+    "פרוקריוט",
+    "בקרת תעתוק"
+   ],
+   "en": [
+    "prokaryotic regulation"
+   ]
+  },
+  "operon": {
+   "he": [
+    "אופרון"
+   ],
+   "en": [
+    "operon"
+   ]
+  },
+  "lac": {
+   "he": [
+    "לקטוז",
+    "lac"
+   ],
+   "en": [
+    "lac operon"
+   ]
+  },
+  "mutants": {
+   "he": [
+    "דיפלואיד חלקי",
+    "ציס",
+    "טרנס"
+   ],
+   "en": [
+    "cis",
+    "trans",
+    "merodiploid"
+   ]
+  },
+  "cap": {
+   "he": [
+    "דיכוי קטבוליטי",
+    "CAP"
+   ],
+   "en": [
+    "catabolite repression",
+    "CAP"
+   ]
+  },
+  "trp": {
+   "he": [
+    "טריפטופן",
+    "אטנואציה"
+   ],
+   "en": [
+    "trp operon",
+    "attenuation"
+   ]
+  },
+  "more": {
+   "he": [
+    "התגובה המחמירה"
+   ],
+   "en": [
+    "stringent response",
+    "ppGpp"
+   ]
+  }
+ },
+ "gx-cis-elements": {
+  "_heading": {
+   "he": [
+    "אלמנטים רגולטורים",
+    "בציס"
+   ],
+   "en": [
+    "cis-regulatory"
+   ]
+  },
+  "layout": {
+   "he": [
+    "פרומוטור"
+   ],
+   "en": [
+    "promoter"
+   ]
+  },
+  "enhancers": {
+   "he": [
+    "מגביר",
+    "אנהנסר"
+   ],
+   "en": [
+    "enhancer"
+   ]
+  },
+  "insulators": {
+   "he": [
+    "מבודד",
+    "אינסולטור"
+   ],
+   "en": [
+    "insulator"
+   ]
+  },
+  "response-elements": {
+   "he": [
+    "אלמנט תגובה"
+   ],
+   "en": [
+    "response element"
+   ]
+  },
+  "methods": {
+   "he": [
+    "גן מדווח",
+    "DNase"
+   ],
+   "en": [
+    "reporter",
+    "ChIP"
+   ]
+  }
+ },
+ "gx-transcription-factors": {
+  "_heading": {
+   "he": [
+    "פקטורי תעתוק",
+    "גורמי שעתוק"
+   ],
+   "en": [
+    "transcription factor"
+   ]
+  },
+  "modular": {
+   "he": [
+    "אזור הפעלה"
+   ],
+   "en": [
+    "activation domain",
+    "DNA-binding domain"
+   ]
+  },
+  "motifs": {
+   "he": [
+    "אצבע אבץ",
+    "רוכסן לאוצין"
+   ],
+   "en": [
+    "zinc finger",
+    "leucine zipper",
+    "homeodomain",
+    "helix-turn-helix"
+   ]
+  },
+  "combinatorial": {
+   "he": [
+    "דימר"
+   ],
+   "en": [
+    "dimer",
+    "combinatorial"
+   ]
+  },
+  "activators": {
+   "he": [
+    "מפעיל",
+    "קו-אקטיבטור"
+   ],
+   "en": [
+    "coactivator",
+    "Mediator"
+   ]
+  },
+  "repressors": {
+   "he": [
+    "מדכא",
+    "קו-מדכא"
+   ],
+   "en": [
+    "corepressor"
+   ]
+  },
+  "regulation": {
+   "he": [],
+   "en": [
+    "NF-kB",
+    "CREB"
+   ]
+  },
+  "gal": {
+   "he": [
+    "GAL"
+   ],
+   "en": [
+    "Gal4",
+    "GAL"
+   ]
+  }
+ },
+ "gx-chromatin-modifications": {
+  "_heading": {
+   "he": [
+    "מודיפיקציות בכרומטין",
+    "כרומטין"
+   ],
+   "en": [
+    "chromatin modification"
+   ]
+  },
+  "barrier": {
+   "he": [
+    "נוקלאוזום"
+   ],
+   "en": [
+    "nucleosome"
+   ]
+  },
+  "remodeling": {
+   "he": [
+    "עיצוב כרומטין"
+   ],
+   "en": [
+    "remodeling",
+    "SWI/SNF"
+   ]
+  },
+  "marks": {
+   "he": [
+    "אצטילציה",
+    "מתילציה של היסטונים"
+   ],
+   "en": [
+    "histone acetylation",
+    "histone methylation"
+   ]
+  },
+  "readers": {
+   "he": [
+    "ברומודומיין",
+    "כרומודומיין"
+   ],
+   "en": [
+    "bromodomain",
+    "chromodomain",
+    "histone code"
+   ]
+  },
+  "dna-methylation": {
+   "he": [
+    "מתילציה של DNA",
+    "מתילציית דנ\"א",
+    "CpG"
+   ],
+   "en": [
+    "DNA methylation",
+    "CpG"
+   ]
+  },
+  "crosstalk": {
+   "he": [],
+   "en": [
+    "DNMT"
+   ]
+  }
+ },
+ "gx-epigenetics": {
+  "_heading": {
+   "he": [
+    "אפיגנטיקה",
+    "אפיגנטי"
+   ],
+   "en": [
+    "epigenetic"
+   ]
+  },
+  "definition": {
+   "he": [
+    "אפיגנטיקה"
+   ],
+   "en": [
+    "epigenetics"
+   ]
+  },
+  "heterochromatin": {
+   "he": [
+    "הטרוכרומטין"
+   ],
+   "en": [
+    "heterochromatin",
+    "position effect"
+   ]
+  },
+  "polycomb": {
+   "he": [
+    "פוליקומב"
+   ],
+   "en": [
+    "Polycomb",
+    "Trithorax"
+   ]
+  },
+  "inheritance": {
+   "he": [
+    "תורשה אפיגנטית"
+   ],
+   "en": [
+    "epigenetic inheritance"
+   ]
+  },
+  "x-inactivation": {
+   "he": [
+    "השבתת X",
+    "אינאקטיבציה"
+   ],
+   "en": [
+    "X inactivation",
+    "Xist"
+   ]
+  },
+  "imprinting": {
+   "he": [
+    "החתמה"
+   ],
+   "en": [
+    "imprinting"
+   ]
+  }
+ },
+ "gx-alternative-splicing": {
+  "_heading": {
+   "he": [
+    "שחבור חלופי",
+    "שיחבור חליפי"
+   ],
+   "en": [
+    "alternative splicing"
+   ]
+  },
+  "types": {
+   "he": [
+    "שחבור חלופי"
+   ],
+   "en": [
+    "alternative splicing"
+   ]
+  },
+  "regulation": {
+   "he": [
+    "SR"
+   ],
+   "en": [
+    "SR protein",
+    "hnRNP",
+    "splicing enhancer"
+   ]
+  },
+  "drosophila": {
+   "he": [
+    "קביעת מין"
+   ],
+   "en": [
+    "Sex-lethal",
+    "doublesex"
+   ]
+  },
+  "examples": {
+   "he": [],
+   "en": [
+    "Dscam",
+    "CGRP"
+   ]
+  },
+  "nmd-disease": {
+   "he": [
+    "NMD"
+   ],
+   "en": [
+    "nonsense-mediated decay"
+   ]
+  },
+  "editing": {
+   "he": [
+    "עריכת RNA"
+   ],
+   "en": [
+    "RNA editing"
+   ]
+  }
+ },
+ "gx-translation-control": {
+  "_heading": {
+   "he": [
+    "בקרת תרגום"
+   ],
+   "en": [
+    "translational control"
+   ]
+  },
+  "why": {
+   "he": [
+    "בקרת תרגום"
+   ],
+   "en": [
+    "translational control"
+   ]
+  },
+  "global": {
+   "he": [
+    "eIF2",
+    "eIF4E"
+   ],
+   "en": [
+    "eIF2",
+    "eIF4E",
+    "mTOR"
+   ]
+  },
+  "uorf": {
+   "he": [
+    "uORF"
+   ],
+   "en": [
+    "uORF",
+    "GCN4"
+   ]
+  },
+  "iron": {
+   "he": [
+    "פריטין",
+    "IRE"
+   ],
+   "en": [
+    "ferritin",
+    "IRE",
+    "IRP"
+   ]
+  },
+  "ires": {
+   "he": [
+    "IRES"
+   ],
+   "en": [
+    "IRES"
+   ]
+  },
+  "decay": {
+   "he": [
+    "יציבות mRNA",
+    "פירוק mRNA"
+   ],
+   "en": [
+    "mRNA decay",
+    "deadenylation"
+   ]
+  },
+  "localization": {
+   "he": [
+    "מיקום mRNA"
+   ],
+   "en": [
+    "mRNA localization"
+   ]
+  }
+ },
+ "gx-ncrna": {
+  "_heading": {
+   "he": [
+    "רנ\"א לא מקודד",
+    "RNA לא מקודד"
+   ],
+   "en": [
+    "noncoding RNA"
+   ]
+  },
+  "classes": {
+   "he": [
+    "רנ\"א לא מקודד"
+   ],
+   "en": [
+    "ncRNA"
+   ]
+  },
+  "riboswitches": {
+   "he": [
+    "ריבוסוויץ'"
+   ],
+   "en": [
+    "riboswitch"
+   ]
+  },
+  "bacteria": {
+   "he": [
+    "CRISPR"
+   ],
+   "en": [
+    "sRNA",
+    "CRISPR",
+    "Hfq"
+   ]
+  },
+  "mirna": {
+   "he": [
+    "מיקרו-RNA",
+    "miRNA"
+   ],
+   "en": [
+    "microRNA",
+    "miRNA"
+   ]
+  },
+  "sirna": {
+   "he": [
+    "siRNA",
+    "RNAi"
+   ],
+   "en": [
+    "siRNA",
+    "RNA interference"
+   ]
+  },
+  "rnai-heterochromatin": {
+   "he": [],
+   "en": [
+    "RITS"
+   ]
+  },
+  "lncrna": {
+   "he": [
+    "lncRNA"
+   ],
+   "en": [
+    "lncRNA",
+    "long noncoding"
+   ]
+  }
+ },
+ "gx-genome-structure": {
+  "_heading": {
+   "he": [
+    "מבנה הגנום"
+   ],
+   "en": [
+    "genome structure"
+   ]
+  },
+  "size": {
+   "he": [
+    "גודל הגנום",
+    "ערך C"
+   ],
+   "en": [
+    "C-value",
+    "genome size"
+   ]
+  },
+  "composition": {
+   "he": [
+    "הגנום האנושי"
+   ],
+   "en": [
+    "human genome"
+   ]
+  },
+  "cot": {
+   "he": [
+    "ריאסוציאציה"
+   ],
+   "en": [
+    "Cot",
+    "reassociation"
+   ]
+  },
+  "genes": {
+   "he": [
+    "פסאודוגן"
+   ],
+   "en": [
+    "pseudogene",
+    "gene family"
+   ]
+  },
+  "prokaryotes": {
+   "he": [
+    "גנום חיידקי"
+   ],
+   "en": [
+    "bacterial genome",
+    "plasmid"
+   ]
+  },
+  "organelles": {
+   "he": [
+    "גנום מיטוכונדריאלי"
+   ],
+   "en": [
+    "mitochondrial genome",
+    "chloroplast genome"
+   ]
+  }
+ },
+ "gx-gene-families": {
+  "_heading": {
+   "he": [
+    "משפחות גנים",
+    "ביטוי מתואם"
+   ],
+   "en": [
+    "gene family",
+    "coordinated expression"
+   ]
+  },
+  "origin": {
+   "he": [
+    "שחלוף לא שווה"
+   ],
+   "en": [
+    "unequal crossing-over"
+   ]
+  },
+  "globin": {
+   "he": [
+    "גלובין"
+   ],
+   "en": [
+    "globin",
+    "LCR"
+   ]
+  },
+  "tandem": {
+   "he": [
+    "rRNA",
+    "היסטונים"
+   ],
+   "en": [
+    "tandem repeat",
+    "rRNA genes"
+   ]
+  },
+  "hox": {
+   "he": [
+    "Hox"
+   ],
+   "en": [
+    "Hox",
+    "colinearity"
+   ]
+  },
+  "unlinked": {
+   "he": [
+    "גני משק בית"
+   ],
+   "en": [
+    "housekeeping",
+    "heat shock"
+   ]
+  },
+  "eukaryotic-operons": {
+   "he": [
+    "שחבור טרנס"
+   ],
+   "en": [
+    "trans-splicing"
+   ]
+  }
+ },
+ "gx-repeats-mobile": {
+  "_heading": {
+   "he": [
+    "רצפים חוזרים",
+    "רצפים ניידים"
+   ],
+   "en": [
+    "repetitive DNA",
+    "transposable element"
+   ]
+  },
+  "tandem": {
+   "he": [
+    "סטליט"
+   ],
+   "en": [
+    "satellite",
+    "microsatellite",
+    "minisatellite"
+   ]
+  },
+  "overview": {
+   "he": [
+    "טרנספוזון",
+    "רצפים ניידים"
+   ],
+   "en": [
+    "transposon"
+   ]
+  },
+  "dna-transposons": {
+   "he": [
+    "טרנספוזאזה"
+   ],
+   "en": [
+    "transposase",
+    "insertion sequence"
+   ]
+  },
+  "retro": {
+   "he": [
+    "רטרוטרנספוזון"
+   ],
+   "en": [
+    "retrotransposon",
+    "LINE",
+    "SINE",
+    "Alu"
+   ]
+  },
+  "regulation": {
+   "he": [],
+   "en": [
+    "exonization",
+    "LTR"
+   ]
+  },
+  "silencing": {
+   "he": [],
+   "en": [
+    "KRAB",
+    "piRNA"
+   ]
+  },
+  "domestication": {
+   "he": [],
+   "en": [
+    "RAG",
+    "syncytin"
+   ]
+  }
+ },
+ "gx-genome-wide": {
+  "_heading": {
+   "he": [
+    "בקרה כלל-גנומית",
+    "כלל גנומית"
+   ],
+   "en": [
+    "genome-wide"
+   ]
+  },
+  "nucleus": {
+   "he": [
+    "ארגון הגרעין"
+   ],
+   "en": [
+    "chromosome territory",
+    "lamina"
+   ]
+  },
+  "tads": {
+   "he": [
+    "TAD"
+   ],
+   "en": [
+    "TAD",
+    "CTCF",
+    "cohesin",
+    "Hi-C"
+   ]
+  },
+  "dosage": {
+   "he": [
+    "פיצוי מינון"
+   ],
+   "en": [
+    "dosage compensation"
+   ]
+  },
+  "mitosis": {
+   "he": [],
+   "en": [
+    "condensin",
+    "bookmarking"
+   ]
+  },
+  "methods": {
+   "he": [],
+   "en": [
+    "RNA-seq",
+    "ChIP-seq",
+    "ATAC-seq"
+   ]
+  },
+  "transcriptome": {
+   "he": [
+    "טרנסקריפטום"
+   ],
+   "en": [
+    "transcriptome"
+   ]
+  }
+ },
+ "gx-integration": {
+  "_heading": {
+   "he": [
+    "אינטגרציה בין מערכות בקרה"
+   ],
+   "en": [
+    "integration"
+   ]
+  },
+  "lambda": {
+   "he": [
+    "למבדא",
+    "ליזוגניה"
+   ],
+   "en": [
+    "lambda",
+    "lysogeny"
+   ]
+  },
+  "yeast": {
+   "he": [
+    "סוג זוויג"
+   ],
+   "en": [
+    "mating type"
+   ]
+  },
+  "drosophila": {
+   "he": [
+    "התפתחות"
+   ],
+   "en": [
+    "bicoid",
+    "pair-rule",
+    "gap genes"
+   ]
+  },
+  "circuits": {
+   "he": [
+    "משוב"
+   ],
+   "en": [
+    "feedback",
+    "circadian"
+   ]
+  },
+  "noise": {
+   "he": [
+    "רעש"
+   ],
+   "en": [
+    "noise",
+    "bistability"
+   ]
+  },
+  "phenotype": {
+   "he": [
+    "המשמעות הפנוטיפית",
+    "פנוטיפ"
+   ],
+   "en": [
+    "phenotype"
+   ]
+  }
  }
 }

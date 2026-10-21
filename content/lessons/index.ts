@@ -62,8 +62,21 @@ import { cellSignalingPrinciples } from "./technion-cell/cell-signaling-principl
 import { cellGpcr } from "./technion-cell/cell-gpcr";
 import { cellRtk } from "./technion-cell/cell-rtk";
 import { cellCycleControl } from "./technion-cell/cell-cycle-control";
+import { gxOperons } from "./technion-gene-expression/gx-operons";
+import { gxCisElements } from "./technion-gene-expression/gx-cis-elements";
+import { gxTranscriptionFactors } from "./technion-gene-expression/gx-transcription-factors";
+import { gxChromatinModifications } from "./technion-gene-expression/gx-chromatin-modifications";
+import { gxEpigenetics } from "./technion-gene-expression/gx-epigenetics";
+import { gxAlternativeSplicing } from "./technion-gene-expression/gx-alternative-splicing";
+import { gxTranslationControl } from "./technion-gene-expression/gx-translation-control";
+import { gxNcrna } from "./technion-gene-expression/gx-ncrna";
+import { gxGenomeStructure } from "./technion-gene-expression/gx-genome-structure";
+import { gxGeneFamilies } from "./technion-gene-expression/gx-gene-families";
+import { gxRepeatsMobile } from "./technion-gene-expression/gx-repeats-mobile";
+import { gxGenomeWide } from "./technion-gene-expression/gx-genome-wide";
+import { gxIntegration } from "./technion-gene-expression/gx-integration";
 
-export const LESSONS: Lesson[] = [mendelProbability, dominanceAlleles, pedigrees, chromosomalTheory, sexDetermination, linkageMapping, mutations, chromosomeStructure, chromosomeNumber, natureOfGene, geneInteraction, nonMendelian, aminoAcids, proteinStructure, proteinFolding, fibrousMembrane, proteinMethods, hemoglobin, enzymePrinciples, enzymeKinetics, catalyticMechanisms, allostericRegulation, covalentRegulation, carbsLipids, metConcepts, metGlycolysis, metGluconeogenesis, metCitricAcid, metOxphos, metPhotosynthesis, metPentose, metGlycogen, metFattyAcids, metIntegration, metLipidsCholesterol, metAminoAcids, metNucleotides, molNucleicAcids, molChromatin, molReplicationFork, molReplicationOrigins, molRepair, molRecombination, molTranscriptionProk, molTranscriptionEuk, molRnaProcessing, molGeneticCode, molRibosomeInitiation, molTranslationElongation, cellMembranes, cellEr, cellQualityControl, cellGolgiEndosomes, cellVesicleTransport, cellNuclearMitoImport, cellCytoskeleton, cellMotorsPolarity, cellJunctions, cellEcm, cellSignalingPrinciples, cellGpcr, cellRtk, cellCycleControl];
+export const LESSONS: Lesson[] = [mendelProbability, dominanceAlleles, pedigrees, chromosomalTheory, sexDetermination, linkageMapping, mutations, chromosomeStructure, chromosomeNumber, natureOfGene, geneInteraction, nonMendelian, aminoAcids, proteinStructure, proteinFolding, fibrousMembrane, proteinMethods, hemoglobin, enzymePrinciples, enzymeKinetics, catalyticMechanisms, allostericRegulation, covalentRegulation, carbsLipids, metConcepts, metGlycolysis, metGluconeogenesis, metCitricAcid, metOxphos, metPhotosynthesis, metPentose, metGlycogen, metFattyAcids, metIntegration, metLipidsCholesterol, metAminoAcids, metNucleotides, molNucleicAcids, molChromatin, molReplicationFork, molReplicationOrigins, molRepair, molRecombination, molTranscriptionProk, molTranscriptionEuk, molRnaProcessing, molGeneticCode, molRibosomeInitiation, molTranslationElongation, cellMembranes, cellEr, cellQualityControl, cellGolgiEndosomes, cellVesicleTransport, cellNuclearMitoImport, cellCytoskeleton, cellMotorsPolarity, cellJunctions, cellEcm, cellSignalingPrinciples, cellGpcr, cellRtk, cellCycleControl, gxOperons, gxCisElements, gxTranscriptionFactors, gxChromatinModifications, gxEpigenetics, gxAlternativeSplicing, gxTranslationControl, gxNcrna, gxGenomeStructure, gxGeneFamilies, gxRepeatsMobile, gxGenomeWide, gxIntegration];
 
 export const lessonBySlug = (slug: string) => LESSONS.find((l) => l.slug === slug);
 
