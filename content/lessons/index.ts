@@ -48,8 +48,22 @@ import { molRnaProcessing } from "./technion-molecular/mol-rna-processing";
 import { molGeneticCode } from "./technion-molecular/mol-genetic-code";
 import { molRibosomeInitiation } from "./technion-molecular/mol-ribosome-initiation";
 import { molTranslationElongation } from "./technion-molecular/mol-translation-elongation";
+import { cellMembranes } from "./technion-cell/cell-membranes";
+import { cellEr } from "./technion-cell/cell-er";
+import { cellQualityControl } from "./technion-cell/cell-quality-control";
+import { cellGolgiEndosomes } from "./technion-cell/cell-golgi-endosomes";
+import { cellVesicleTransport } from "./technion-cell/cell-vesicle-transport";
+import { cellNuclearMitoImport } from "./technion-cell/cell-nuclear-mito-import";
+import { cellCytoskeleton } from "./technion-cell/cell-cytoskeleton";
+import { cellMotorsPolarity } from "./technion-cell/cell-motors-polarity";
+import { cellJunctions } from "./technion-cell/cell-junctions";
+import { cellEcm } from "./technion-cell/cell-ecm";
+import { cellSignalingPrinciples } from "./technion-cell/cell-signaling-principles";
+import { cellGpcr } from "./technion-cell/cell-gpcr";
+import { cellRtk } from "./technion-cell/cell-rtk";
+import { cellCycleControl } from "./technion-cell/cell-cycle-control";
 
-export const LESSONS: Lesson[] = [mendelProbability, dominanceAlleles, pedigrees, chromosomalTheory, sexDetermination, linkageMapping, mutations, chromosomeStructure, chromosomeNumber, natureOfGene, geneInteraction, nonMendelian, aminoAcids, proteinStructure, proteinFolding, fibrousMembrane, proteinMethods, hemoglobin, enzymePrinciples, enzymeKinetics, catalyticMechanisms, allostericRegulation, covalentRegulation, carbsLipids, metConcepts, metGlycolysis, metGluconeogenesis, metCitricAcid, metOxphos, metPhotosynthesis, metPentose, metGlycogen, metFattyAcids, metIntegration, metLipidsCholesterol, metAminoAcids, metNucleotides, molNucleicAcids, molChromatin, molReplicationFork, molReplicationOrigins, molRepair, molRecombination, molTranscriptionProk, molTranscriptionEuk, molRnaProcessing, molGeneticCode, molRibosomeInitiation, molTranslationElongation];
+export const LESSONS: Lesson[] = [mendelProbability, dominanceAlleles, pedigrees, chromosomalTheory, sexDetermination, linkageMapping, mutations, chromosomeStructure, chromosomeNumber, natureOfGene, geneInteraction, nonMendelian, aminoAcids, proteinStructure, proteinFolding, fibrousMembrane, proteinMethods, hemoglobin, enzymePrinciples, enzymeKinetics, catalyticMechanisms, allostericRegulation, covalentRegulation, carbsLipids, metConcepts, metGlycolysis, metGluconeogenesis, metCitricAcid, metOxphos, metPhotosynthesis, metPentose, metGlycogen, metFattyAcids, metIntegration, metLipidsCholesterol, metAminoAcids, metNucleotides, molNucleicAcids, molChromatin, molReplicationFork, molReplicationOrigins, molRepair, molRecombination, molTranscriptionProk, molTranscriptionEuk, molRnaProcessing, molGeneticCode, molRibosomeInitiation, molTranslationElongation, cellMembranes, cellEr, cellQualityControl, cellGolgiEndosomes, cellVesicleTransport, cellNuclearMitoImport, cellCytoskeleton, cellMotorsPolarity, cellJunctions, cellEcm, cellSignalingPrinciples, cellGpcr, cellRtk, cellCycleControl];
 
 export const lessonBySlug = (slug: string) => LESSONS.find((l) => l.slug === slug);
 

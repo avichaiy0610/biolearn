@@ -4,6 +4,7 @@
 import { BIOCHEM_FIGURES } from "./biochemFigures";
 import { METABOLIC_FIGURES } from "./metabolicFigures";
 import { MOLECULAR_FIGURES } from "./molecularFigures";
+import { CELL_FIGURES } from "./cellFigures";
 
 const BLUE = "#1d4ed8", ORANGE = "#c2410c", INK = "#1f2937", MUTED = "#64748b";
 const T = { fontFamily: "var(--font-hebrew), Arial, sans-serif" };
@@ -479,6 +480,7 @@ const FIGURES: Record<string, { el: () => React.ReactElement; captionHe: string 
   ...BIOCHEM_FIGURES,
   ...METABOLIC_FIGURES,
   ...MOLECULAR_FIGURES,
+  ...CELL_FIGURES,
   map: { el: GeneMap, captionHe: "איור 2 — המפה מהדוגמה התלת-נקודתית: A–C–B. בהזנחת שחלופים מרובים שלא זוהו, המרחקים הם 10 ו-20 cM וסכומם 30 cM. תדירות הרקומבינציה הנמדדת ישירות בין A ל-B היא רק 28%." },
 };
 

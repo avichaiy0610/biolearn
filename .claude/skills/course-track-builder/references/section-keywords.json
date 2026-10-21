@@ -2905,5 +2905,933 @@
    ],
    "en": []
   }
+ },
+ "cell-membranes": {
+  "_heading": {
+   "he": [
+    "ממברנ"
+   ],
+   "en": [
+    "membrane"
+   ]
+  },
+  "bilayer": {
+   "he": [
+    "דו-שכבה",
+    "דו שכבה"
+   ],
+   "en": [
+    "bilayer"
+   ]
+  },
+  "lipids": {
+   "he": [
+    "פוספוליפיד",
+    "כולסטרול",
+    "שומני"
+   ],
+   "en": [
+    "phospholipid",
+    "cholesterol"
+   ]
+  },
+  "fluidity": {
+   "he": [
+    "נזילות"
+   ],
+   "en": [
+    "fluidity",
+    "FRAP"
+   ]
+  },
+  "asymmetry": {
+   "he": [
+    "אסימטרי"
+   ],
+   "en": [
+    "asymmetry",
+    "flippase"
+   ]
+  },
+  "proteins": {
+   "he": [
+    "חלבוני ממברנה"
+   ],
+   "en": [
+    "membrane protein",
+    "transmembrane"
+   ]
+  },
+  "functions": {
+   "he": [
+    "תפקוד הממברנה"
+   ],
+   "en": []
+  }
+ },
+ "cell-er": {
+  "_heading": {
+   "he": [
+    "רטיקולום",
+    "טרנסלוקציה"
+   ],
+   "en": [
+    "endoplasmic reticulum"
+   ]
+  },
+  "organelles": {
+   "he": [
+    "איברונים",
+    "אברונים"
+   ],
+   "en": [
+    "organelle"
+   ]
+  },
+  "signals": {
+   "he": [
+    "רצף אות",
+    "אות מיון"
+   ],
+   "en": [
+    "signal sequence",
+    "signal peptide"
+   ]
+  },
+  "srp": {
+   "he": [
+    "SRP"
+   ],
+   "en": [
+    "SRP",
+    "signal recognition particle"
+   ]
+  },
+  "sec61": {
+   "he": [
+    "טרנסלוקון"
+   ],
+   "en": [
+    "Sec61",
+    "translocon"
+   ]
+  },
+  "membrane-proteins": {
+   "he": [
+    "טופולוגיה"
+   ],
+   "en": [
+    "topology",
+    "stop-transfer"
+   ]
+  },
+  "er-functions": {
+   "he": [
+    "ER חלק"
+   ],
+   "en": [
+    "smooth ER"
+   ]
+  }
+ },
+ "cell-quality-control": {
+  "_heading": {
+   "he": [
+    "בקרת איכות",
+    "יוביקואיטין",
+    "יוביקוויטין"
+   ],
+   "en": [
+    "quality control",
+    "ubiquitin"
+   ]
+  },
+  "folding": {
+   "he": [
+    "קיפול",
+    "שפרונ"
+   ],
+   "en": [
+    "chaperone",
+    "folding"
+   ]
+  },
+  "calnexin": {
+   "he": [
+    "קלנקסין"
+   ],
+   "en": [
+    "calnexin",
+    "calreticulin"
+   ]
+  },
+  "erad": {
+   "he": [
+    "ERAD"
+   ],
+   "en": [
+    "ERAD"
+   ]
+  },
+  "upr": {
+   "he": [
+    "UPR"
+   ],
+   "en": [
+    "unfolded protein response"
+   ]
+  },
+  "ups": {
+   "he": [
+    "פרוטאזום",
+    "יוביקואיטין",
+    "יוביקוויטין"
+   ],
+   "en": [
+    "proteasome",
+    "ubiquitin"
+   ]
+  },
+  "regulated": {
+   "he": [
+    "פירוק מווסת"
+   ],
+   "en": [
+    "degron"
+   ]
+  }
+ },
+ "cell-golgi-endosomes": {
+  "_heading": {
+   "he": [
+    "גולג'י",
+    "אנדוזומ"
+   ],
+   "en": [
+    "Golgi",
+    "endosome"
+   ]
+  },
+  "structure": {
+   "he": [
+    "גולג'י"
+   ],
+   "en": [
+    "cis",
+    "trans Golgi"
+   ]
+  },
+  "glycosylation": {
+   "he": [
+    "גליקוזילציה"
+   ],
+   "en": [
+    "glycosylation"
+   ]
+  },
+  "maturation": {
+   "he": [
+    "הבשלת הבורות"
+   ],
+   "en": [
+    "cisternal maturation"
+   ]
+  },
+  "lysosome-sorting": {
+   "he": [
+    "ליזוזום",
+    "מנוז-6-פוספט"
+   ],
+   "en": [
+    "mannose 6-phosphate",
+    "lysosome"
+   ]
+  },
+  "endocytosis": {
+   "he": [
+    "אנדוציטוזה"
+   ],
+   "en": [
+    "endocytosis",
+    "LDL"
+   ]
+  },
+  "endosomes": {
+   "he": [
+    "אנדוזומ"
+   ],
+   "en": [
+    "endosome",
+    "multivesicular"
+   ]
+  },
+  "autophagy": {
+   "he": [
+    "אוטופגיה"
+   ],
+   "en": [
+    "autophagy"
+   ]
+  }
+ },
+ "cell-vesicle-transport": {
+  "_heading": {
+   "he": [
+    "טרנספורט וסיקולרי",
+    "שלפוחיות"
+   ],
+   "en": [
+    "vesicular transport",
+    "vesicle"
+   ]
+  },
+  "cycle": {
+   "he": [
+    "שלפוחית"
+   ],
+   "en": [
+    "vesicle"
+   ]
+  },
+  "coats": {
+   "he": [
+    "קלתרין",
+    "COPII",
+    "COPI"
+   ],
+   "en": [
+    "clathrin",
+    "COPII",
+    "COPI",
+    "coat"
+   ]
+  },
+  "dynamin": {
+   "he": [
+    "דינמין"
+   ],
+   "en": [
+    "dynamin"
+   ]
+  },
+  "rab": {
+   "he": [
+    "Rab"
+   ],
+   "en": [
+    "Rab"
+   ]
+  },
+  "snares": {
+   "he": [
+    "SNARE"
+   ],
+   "en": [
+    "SNARE"
+   ]
+  },
+  "retrieval": {
+   "he": [
+    "KDEL"
+   ],
+   "en": [
+    "KDEL",
+    "retrieval"
+   ]
+  },
+  "secretion": {
+   "he": [
+    "הפרשה",
+    "אקסוציטוזה"
+   ],
+   "en": [
+    "exocytosis",
+    "secretion"
+   ]
+  }
+ },
+ "cell-nuclear-mito-import": {
+  "_heading": {
+   "he": [
+    "טרנספורט אחר-תרגומי",
+    "גרעין",
+    "מיטוכונדריה"
+   ],
+   "en": [
+    "nuclear import",
+    "mitochondrial import"
+   ]
+  },
+  "pore": {
+   "he": [
+    "נקבובית"
+   ],
+   "en": [
+    "nuclear pore"
+   ]
+  },
+  "nls": {
+   "he": [
+    "NLS"
+   ],
+   "en": [
+    "NLS",
+    "nuclear localization"
+   ]
+  },
+  "ran": {
+   "he": [
+    "Ran"
+   ],
+   "en": [
+    "Ran",
+    "importin"
+   ]
+  },
+  "control": {
+   "he": [],
+   "en": [
+    "nuclear export"
+   ]
+  },
+  "mitochondria": {
+   "he": [
+    "TOM",
+    "TIM"
+   ],
+   "en": [
+    "TOM",
+    "TIM"
+   ]
+  }
+ },
+ "cell-cytoskeleton": {
+  "_heading": {
+   "he": [
+    "שלד התא"
+   ],
+   "en": [
+    "cytoskeleton"
+   ]
+  },
+  "types": {
+   "he": [
+    "שלד התא"
+   ],
+   "en": [
+    "cytoskeleton"
+   ]
+  },
+  "actin": {
+   "he": [
+    "אקטין"
+   ],
+   "en": [
+    "actin"
+   ]
+  },
+  "abps": {
+   "he": [
+    "חלבונים קושרי אקטין"
+   ],
+   "en": [
+    "actin-binding",
+    "Arp2/3",
+    "formin"
+   ]
+  },
+  "mt-structure": {
+   "he": [
+    "מיקרוטובול",
+    "טובולין"
+   ],
+   "en": [
+    "microtubule",
+    "tubulin"
+   ]
+  },
+  "dynamic-instability": {
+   "he": [
+    "אי-יציבות דינמית"
+   ],
+   "en": [
+    "dynamic instability"
+   ]
+  },
+  "intermediate": {
+   "he": [
+    "סיבי ביניים"
+   ],
+   "en": [
+    "intermediate filament",
+    "keratin"
+   ]
+  }
+ },
+ "cell-motors-polarity": {
+  "_heading": {
+   "he": [
+    "חלבונים מוטוריים",
+    "קוטבי"
+   ],
+   "en": [
+    "motor protein",
+    "polarity"
+   ]
+  },
+  "motors": {
+   "he": [
+    "מיוזין",
+    "דיינאין",
+    "מוטורי"
+   ],
+   "en": [
+    "myosin",
+    "dynein",
+    "motor"
+   ]
+  },
+  "kinesin": {
+   "he": [
+    "קינזין"
+   ],
+   "en": [
+    "kinesin"
+   ]
+  },
+  "cilia": {
+   "he": [
+    "ריסים",
+    "שוטון"
+   ],
+   "en": [
+    "cilia",
+    "flagella"
+   ]
+  },
+  "migration": {
+   "he": [
+    "נדידת תאים"
+   ],
+   "en": [
+    "cell migration",
+    "lamellipodia"
+   ]
+  },
+  "polarity": {
+   "he": [
+    "תאים קוטביים",
+    "קוטביות"
+   ],
+   "en": [
+    "polarity",
+    "Par"
+   ]
+  }
+ },
+ "cell-junctions": {
+  "_heading": {
+   "he": [
+    "צמתים בין תאים",
+    "תאחיזה"
+   ],
+   "en": [
+    "cell junction",
+    "adhesion"
+   ]
+  },
+  "roles": {
+   "he": [
+    "צמתים"
+   ],
+   "en": [
+    "junction"
+   ]
+  },
+  "tight": {
+   "he": [
+    "קשר הדוק",
+    "קשרים הדוקים"
+   ],
+   "en": [
+    "tight junction",
+    "claudin"
+   ]
+  },
+  "adherens": {
+   "he": [
+    "קדהרין",
+    "צמת נצמד"
+   ],
+   "en": [
+    "cadherin",
+    "adherens"
+   ]
+  },
+  "desmosomes": {
+   "he": [
+    "דסמוזום"
+   ],
+   "en": [
+    "desmosome"
+   ]
+  },
+  "hemidesmosomes": {
+   "he": [
+    "המי-דסמוזום"
+   ],
+   "en": [
+    "hemidesmosome"
+   ]
+  },
+  "gap": {
+   "he": [
+    "צמת פער",
+    "צמתי פער"
+   ],
+   "en": [
+    "gap junction",
+    "connexin"
+   ]
+  }
+ },
+ "cell-ecm": {
+  "_heading": {
+   "he": [
+    "מטריקס חוץ-תאי",
+    "המטריקס החוץ-תאי"
+   ],
+   "en": [
+    "extracellular matrix"
+   ]
+  },
+  "components": {
+   "he": [
+    "מטריקס"
+   ],
+   "en": [
+    "matrix"
+   ]
+  },
+  "proteoglycans": {
+   "he": [
+    "פרוטאוגליקן",
+    "גליקוזאמינוגליקן"
+   ],
+   "en": [
+    "proteoglycan",
+    "GAG"
+   ]
+  },
+  "collagen": {
+   "he": [
+    "קולגן"
+   ],
+   "en": [
+    "collagen"
+   ]
+  },
+  "elastin": {
+   "he": [
+    "אלסטין"
+   ],
+   "en": [
+    "elastin"
+   ]
+  },
+  "fibronectin": {
+   "he": [
+    "פיברונקטין",
+    "למינה בזלית",
+    "למינין"
+   ],
+   "en": [
+    "fibronectin",
+    "basal lamina",
+    "laminin"
+   ]
+  },
+  "integrins": {
+   "he": [
+    "אינטגרין"
+   ],
+   "en": [
+    "integrin"
+   ]
+  },
+  "focal-adhesions": {
+   "he": [
+    "מגעי היצמדות"
+   ],
+   "en": [
+    "focal adhesion",
+    "FAK"
+   ]
+  }
+ },
+ "cell-signaling-principles": {
+  "_heading": {
+   "he": [
+    "העברת אותות",
+    "תקשורת בין תאים"
+   ],
+   "en": [
+    "signal transduction",
+    "cell signaling"
+   ]
+  },
+  "types": {
+   "he": [
+    "פרקריני",
+    "אנדוקריני"
+   ],
+   "en": [
+    "paracrine",
+    "endocrine"
+   ]
+  },
+  "receptors": {
+   "he": [
+    "קולטנים"
+   ],
+   "en": [
+    "receptor"
+   ]
+  },
+  "switches": {
+   "he": [
+    "מתג מולקולרי"
+   ],
+   "en": [
+    "molecular switch",
+    "GEF",
+    "GAP"
+   ]
+  },
+  "second-messengers": {
+   "he": [
+    "שליח משני",
+    "שליחים משניים"
+   ],
+   "en": [
+    "second messenger"
+   ]
+  },
+  "processing": {
+   "he": [
+    "הסתגלות",
+    "משוב"
+   ],
+   "en": [
+    "adaptation",
+    "feedback"
+   ]
+  }
+ },
+ "cell-gpcr": {
+  "_heading": {
+   "he": [
+    "GPCR",
+    "חלבון G"
+   ],
+   "en": [
+    "GPCR",
+    "G protein"
+   ]
+  },
+  "cycle": {
+   "he": [
+    "חלבון G"
+   ],
+   "en": [
+    "G protein",
+    "heterotrimeric"
+   ]
+  },
+  "camp": {
+   "he": [
+    "cAMP",
+    "PKA"
+   ],
+   "en": [
+    "cAMP",
+    "PKA",
+    "adenylyl cyclase"
+   ]
+  },
+  "calcium": {
+   "he": [
+    "IP3",
+    "סידן",
+    "קלמודולין"
+   ],
+   "en": [
+    "IP3",
+    "calcium",
+    "calmodulin",
+    "PKC"
+   ]
+  },
+  "vision": {
+   "he": [
+    "רודופסין"
+   ],
+   "en": [
+    "rhodopsin"
+   ]
+  },
+  "desensitization": {
+   "he": [
+    "ארסטין"
+   ],
+   "en": [
+    "arrestin",
+    "GRK"
+   ]
+  }
+ },
+ "cell-rtk": {
+  "_heading": {
+   "he": [
+    "RTK",
+    "טירוזין קינאז",
+    "טירוזין-קינאז"
+   ],
+   "en": [
+    "RTK",
+    "receptor tyrosine kinase"
+   ]
+  },
+  "activation": {
+   "he": [
+    "דימריזציה"
+   ],
+   "en": [
+    "dimerization",
+    "autophosphorylation"
+   ]
+  },
+  "sh2": {
+   "he": [
+    "SH2"
+   ],
+   "en": [
+    "SH2"
+   ]
+  },
+  "ras": {
+   "he": [
+    "Ras",
+    "MAPK"
+   ],
+   "en": [
+    "Ras",
+    "MAPK"
+   ]
+  },
+  "pi3k": {
+   "he": [
+    "PI3K",
+    "Akt"
+   ],
+   "en": [
+    "PI3K",
+    "Akt"
+   ]
+  },
+  "jak-stat": {
+   "he": [
+    "JAK",
+    "STAT"
+   ],
+   "en": [
+    "JAK",
+    "STAT"
+   ]
+  },
+  "drugs": {
+   "he": [],
+   "en": [
+    "imatinib"
+   ]
+  }
+ },
+ "cell-cycle-control": {
+  "_heading": {
+   "he": [
+    "מחזור התא"
+   ],
+   "en": [
+    "cell cycle"
+   ]
+  },
+  "phases": {
+   "he": [
+    "מחזור התא"
+   ],
+   "en": [
+    "cell cycle"
+   ]
+  },
+  "cdk": {
+   "he": [
+    "ציקלין",
+    "Cdk"
+   ],
+   "en": [
+    "cyclin",
+    "Cdk"
+   ]
+  },
+  "ubiquitin": {
+   "he": [
+    "APC/C",
+    "SCF"
+   ],
+   "en": [
+    "APC/C",
+    "SCF"
+   ]
+  },
+  "licensing": {
+   "he": [
+    "ראשית שכפול"
+   ],
+   "en": [
+    "licensing",
+    "Mcm"
+   ]
+  },
+  "mitosis": {
+   "he": [
+    "מיטוזה",
+    "קוהזין"
+   ],
+   "en": [
+    "mitosis",
+    "cohesin",
+    "separase"
+   ]
+  },
+  "g1": {
+   "he": [
+    "Rb",
+    "E2F"
+   ],
+   "en": [
+    "Rb",
+    "E2F",
+    "restriction point"
+   ]
+  },
+  "p53": {
+   "he": [
+    "p53"
+   ],
+   "en": [
+    "p53",
+    "checkpoint"
+   ]
+  }
  }
 }

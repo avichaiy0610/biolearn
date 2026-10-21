@@ -21,6 +21,7 @@ export const CONFIDENCE_HE: Record<OrderConfidence, string> = {
   students: "נבדק מול סטודנטים",
   parallel: "לפי קורס מקביל",
   consensus: "לפי הסכמה בין אוניברסיטאות",
+  syllabus: "לפי סדר הנושאים בסילבוס",
   textbook: "לפי סדר ספר הקורס",
 };
 
