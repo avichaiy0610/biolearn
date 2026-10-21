@@ -100,7 +100,7 @@ export async function homeData(lang: string, courseParam?: string) {
             select: { slug: true, nameHe: true, nameEn: true, topic: { select: { slug: true } }, steps: { orderBy: { order: "asc" }, select: { id: true, order: true, titleHe: true, titleEn: true, descHe: true, descEn: true, svgData: true } } },
           })
         : Promise.resolve([]),
-      prisma.pastExam.count({ where: { courseSlug: selected.course.slug } }).catch(() => 0),
+      prisma.pastExam.count({ where: { courseSlug: selected.course.slug, status: "approved" } }).catch(() => 0),
     ]);
     exams = examCount;
     const text = sub ? (lang === "he" ? sub.contentHe : sub.contentEn) : "";

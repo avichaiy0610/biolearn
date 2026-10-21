@@ -204,8 +204,14 @@ model PastExam {
   url         String?
   solutionUrl String?
   createdAt   DateTime @default(now())
+  // Student uploads wait for an admin: "pending" → "approved" (shown on the course page) or "rejected".
+  status        String    @default("approved")
+  uploaderId    String?
+  uploaderEmail String?
+  reviewedAt    DateTime?
 
   @@index([courseSlug])
+  @@index([status])
 }
 
 // Spaced-repetition state per user and glossary card (SM-2 style).

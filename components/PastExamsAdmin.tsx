@@ -5,7 +5,10 @@ import { useState } from "react";
 export type Exam = {
   id: string; courseSlug: string; year: number; moed: string; university: string | null;
   notes: string | null; fileName: string | null; fileSize: number | null; url: string | null; solutionUrl: string | null;
+  status: string; uploaderEmail: string | null;
 };
+
+const STATUS_LABEL: Record<string, string> = { pending: "ממתין לאישור", approved: "מפורסם", rejected: "נדחה" };
 
 const MOEDS = ["א", "ב", "ג", "מיוחד"];
 
@@ -34,9 +37,37 @@ export default function PastExamsAdmin({ initialExams, courses }: { initialExams
   }
 
   async function remove(id: string) {
+    if (!confirm("למחוק את המבחן לצמיתות?")) return;
     await fetch(`/api/admin/past-exams/${id}`, { method: "DELETE" });
     refresh();
   }
+
+  async function setStatus(id: string, status: "approved" | "rejected" | "pending") {
+    await fetch(`/api/admin/past-exams/${id}`, { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ status }) });
+    refresh();
+  }
+
+  const pending = exams.filter((x) => x.status === "pending");
+  const others = exams.filter((x) => x.status !== "pending");
+  const row = (x: Exam, review: boolean) => (
+    <li key={x.id} className="flex items-center gap-3 p-3 text-sm flex-wrap">
+      <span className="font-medium">{courseName(x.courseSlug)}</span>
+      <span>{x.year} · {x.moed === "מיוחד" ? "מועד מיוחד" : `מועד ${x.moed}'`}</span>
+      {x.university && <span className="text-zinc-500">{x.university}</span>}
+      {x.notes && <span className="text-xs text-zinc-500">{x.notes}</span>}
+      {x.uploaderEmail && <span className="text-xs text-zinc-500">הועלה ע"י {x.uploaderEmail}</span>}
+      {!review && <span className={`text-xs rounded-full px-2 py-0.5 ${x.status === "approved" ? "bg-emerald-50 text-emerald-700" : "bg-red-50 text-red-700"}`}>{STATUS_LABEL[x.status] ?? x.status}</span>}
+      {x.fileName && <a className="text-emerald-700 underline" href={`/api/past-exams/${x.id}`} target="_blank" rel="noreferrer">PDF</a>}
+      {x.url && <a className="text-emerald-700 underline" href={x.url} target="_blank" rel="noreferrer">קישור</a>}
+      {x.solutionUrl && <a className="text-emerald-700 underline" href={x.solutionUrl} target="_blank" rel="noreferrer">פתרון</a>}
+      <span className="ms-auto flex gap-3">
+        {x.status !== "approved" && <button onClick={() => setStatus(x.id, "approved")} className="text-emerald-700 font-medium hover:underline">אשר ופרסם</button>}
+        {x.status === "pending" && <button onClick={() => setStatus(x.id, "rejected")} className="text-amber-700 hover:underline">דחה</button>}
+        {x.status === "approved" && <button onClick={() => setStatus(x.id, "rejected")} className="text-amber-700 hover:underline">הסתר</button>}
+        <button onClick={() => remove(x.id)} className="text-red-600 hover:underline">מחק</button>
+      </span>
+    </li>
+  );
 
   const field = "w-full h-10 rounded-lg border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-3 text-sm";
   const courseName = (slug: string) => courses.find((c) => c.slug === slug)?.nameHe ?? slug;
@@ -86,22 +117,23 @@ export default function PastExamsAdmin({ initialExams, courses }: { initialExams
         </div>
       </form>
 
+      {pending.length > 0 && (
+        <section>
+          <h2 className="text-lg font-semibold mb-1">ממתינים לאישור ({pending.length})</h2>
+          <p className="text-sm text-zinc-500 mb-3">מבחנים שסטודנטים העלו. הם לא מוצגים באתר עד שמאשרים אותם — כדאי לפתוח את הקובץ ולבדוק שזה מבחן של הקורס ושמותר לפרסם אותו.</p>
+          <ul className="divide-y divide-zinc-100 dark:divide-zinc-700 rounded-xl border border-amber-300 dark:border-amber-700 bg-white dark:bg-zinc-800">
+            {pending.map((x) => row(x, true))}
+          </ul>
+        </section>
+      )}
+
       <section>
-        <h2 className="text-lg font-semibold mb-3">מבחנים קיימים ({exams.length})</h2>
-        {exams.length === 0 ? (
+        <h2 className="text-lg font-semibold mb-3">מבחנים קיימים ({others.length})</h2>
+        {others.length === 0 ? (
           <p className="text-sm text-zinc-500">עדיין לא הועלו מבחנים.</p>
         ) : (
           <ul className="divide-y divide-zinc-100 dark:divide-zinc-700 rounded-xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800">
-            {exams.map((x) => (
-              <li key={x.id} className="flex items-center gap-3 p-3 text-sm flex-wrap">
-                <span className="font-medium">{courseName(x.courseSlug)}</span>
-                <span>{x.year} · {x.moed === "מיוחד" ? "מועד מיוחד" : `מועד ${x.moed}'`}</span>
-                {x.university && <span className="text-zinc-500">{x.university}</span>}
-                {x.fileName && <a className="text-emerald-700 underline" href={`/api/past-exams/${x.id}`} target="_blank" rel="noreferrer">PDF</a>}
-                {x.url && <a className="text-emerald-700 underline" href={x.url} target="_blank" rel="noreferrer">קישור</a>}
-                <button onClick={() => remove(x.id)} className="ms-auto text-red-600 hover:underline">מחק</button>
-              </li>
-            ))}
+            {others.map((x) => row(x, false))}
           </ul>
         )}
       </section>

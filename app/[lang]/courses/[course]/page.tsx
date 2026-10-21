@@ -13,6 +13,8 @@ import { resolvePlan } from "@/lib/course-plan";
 import CoursePlanView, { type PlanView } from "@/components/CoursePlanView";
 import SyllabusPanel from "@/components/SyllabusPanel";
 import CourseOrderReport from "@/components/CourseOrderReport";
+import PastExamUpload from "@/components/PastExamUpload";
+import { getUser } from "@/lib/supabase/server";
 import { SYLLABI } from "@/content/syllabi/data.generated";
 import { COURSE_KIND_LABEL, GENERAL_UNIVERSITY, universityBySlug } from "@/content/universities";
 
@@ -36,16 +38,17 @@ export default async function CoursePage({ params, searchParams }: PageProps<"/[
   const view: PlanView = viewParam === "lectures" || viewParam === "tutorials" ? viewParam : "topics";
   const planGroups = plan ? (await resolvePlan(plan, lang))[view] : null;
 
-  const [units, topics, exams] = await Promise.all([
+  const [units, topics, exams, user] = await Promise.all([
     resolveCourseUnits(course, lang),
     prisma.topic.findMany({ where: { slug: { in: courseTopics(course) } }, select: { slug: true, nameHe: true, nameEn: true, icon: true } }),
     prisma.pastExam
       .findMany({
-        where: { courseSlug: course.slug },
+        where: { courseSlug: course.slug, status: "approved" },
         select: { id: true, year: true, moed: true, university: true, notes: true, fileName: true, url: true, solutionUrl: true },
         orderBy: [{ year: "desc" }, { moed: "asc" }],
       })
       .catch(() => []),
+    getUser().catch(() => null),
   ]);
 
   return (
@@ -128,6 +131,7 @@ export default async function CoursePage({ params, searchParams }: PageProps<"/[
             ))}
           </ul>
         )}
+        <PastExamUpload courseSlug={course.slug} lang={lang} loggedIn={!!user} />
       </section>
 
       {uni?.sourceUrl && (
