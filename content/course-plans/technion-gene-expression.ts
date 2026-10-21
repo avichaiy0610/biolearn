@@ -28,7 +28,9 @@ const sec = (l: Lesson, ...ids: string[]): PlanItem[] => (ids.length ? ids.map((
 const probs = (l: Lesson, ...ids: string[]): PlanItem[] =>
   (l.workedProblems ?? []).filter((w) => !ids.length || ids.includes(w.id)).map((w) => ({ kind: "lesson" as const, slug: l.slug, problem: w.id }));
 
-const RIBO = "riboswitches-animation-1780833787341";
+// Riboswitches are left out of this course: they belong to "העולם המודרני של הרנ\"א" (134151), whose syllabus
+// names RNA as a gene-expression regulator and ribozymes. The section stays in the unit, marked as extension.
+const NCRNA = sec(gxNcrna, "classes", "bacteria", "mirna", "sirna", "rnai-heterochromatin", "lncrna");
 const PORTAL = { labelHe: "הסילבוס בפורטל הטכניון", url: "https://students.technion.ac.il/local/technionsearch/course/134119" };
 const MED = { labelHe: "הקורס המקביל ברפואה (274243) — ראיה בלבד", url: "https://md.technion.ac.il/wp-content/uploads/2024/05/סיליבוס-מנגנוני-בקרה-מולקולרית-274243-חורף-תשפד-12-שבועות.pdf" };
 
@@ -40,7 +42,7 @@ const LECTURES: { titleHe: string; items: PlanItem[]; practice: PlanItem[] }[] =
   { titleHe: "אפיגנטיקה: הטרוכרומטין, Polycomb, השבתת X והחתמה", items: [...sec(gxEpigenetics), proc("genomic-imprinting", "genetics")], practice: probs(gxEpigenetics) },
   { titleHe: "שחבור חלופי ועריכת RNA", items: sec(gxAlternativeSplicing), practice: probs(gxAlternativeSplicing) },
   { titleHe: "בקרת תרגום ויציבות mRNA", items: sec(gxTranslationControl), practice: probs(gxTranslationControl) },
-  { titleHe: "בקרה על ידי RNA לא מקודד", items: [...sec(gxNcrna), proc(RIBO)], practice: probs(gxNcrna) },
+  { titleHe: "בקרה על ידי RNA לא מקודד", items: NCRNA, practice: probs(gxNcrna, "mirna-reporter") },
   { titleHe: "מבנה הגנום", items: sec(gxGenomeStructure), practice: probs(gxGenomeStructure) },
   { titleHe: "ביטוי מתואם: משפחות גנים וצבירים", items: sec(gxGeneFamilies), practice: probs(gxGeneFamilies) },
   { titleHe: "רצפים חוזרים ורצפים ניידים", items: sec(gxRepeatsMobile), practice: probs(gxRepeatsMobile) },
@@ -64,7 +66,7 @@ export const technionGeneExpressionPlan: CoursePlan = {
     { titleHe: "מודיפיקציות בכרומטין", items: [...sec(gxChromatinModifications), ...sec(gxEpigenetics, "definition", "heterochromatin", "polycomb", "inheritance")] },
     { titleHe: "שחבור חלופי", items: sec(gxAlternativeSplicing) },
     { titleHe: "בקרת תרגום", items: sec(gxTranslationControl) },
-    { titleHe: "בקרה על ידי רנ\"א לא מקודד", items: [...sec(gxNcrna), proc(RIBO)] },
+    { titleHe: "בקרה על ידי רנ\"א לא מקודד", items: NCRNA },
     { titleHe: "מבנה הגנום", items: sec(gxGenomeStructure) },
     { titleHe: "ביטוי מתואם של משפחות וסוגי גנים", items: sec(gxGeneFamilies) },
     { titleHe: "רצפים חוזרים ורצפים ניידים ותפקידם בבקרת הביטוי הגנטי", items: sec(gxRepeatsMobile) },

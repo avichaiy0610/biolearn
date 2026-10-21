@@ -91,7 +91,7 @@ export const technionGeneExpressionScope: CourseScope = {
     },
     "gx-ncrna": {
       "classes": named(NC),
-      "riboswitches": named(NC),
+      "riboswitches": { level: "extension", evidence: "none", noteHe: "הסילבוס של 134119 לא מזכיר ריבוסוויצ'ים; הנושא שייך לקורס \"העולם המודרני של הרנ\"א\" (134151), שהסילבוס שלו עוסק ב-RNA כמבקר של ביטוי גנים ובריבוזימים", source: { labelHe: "הסילבוס של 134151", url: "https://students.technion.ac.il/local/technionsearch/course/134151" } },
       "bacteria": named(NC),
       "mirna": named(NC),
       "sirna": named(NC),
