@@ -678,74 +678,79 @@ function InfectionStages() {
 
 // ── mv-endospores: layers of the endospore ──────────────────────────────────
 function EndospereStructure() {
-  const cx = 196, cy = 148;
+  const cx = 200, cy = 122;
   const layers: [number, number, string, string, string][] = [
-    [148, 86, FILL.gray, MUTED, "אקסוספוריום"],
-    [128, 74, "#fef9c3", ORANGE, "מעטה"],
-    [108, 62, FILL.sky, BLUE, "ממברנה חיצונית"],
-    [92, 52, FILL.orange, ORANGE, "קורטקס"],
-    [72, 40, FILL.blue, BLUE, "ממברנה פנימית"],
-    [58, 32, FILL.green, GREEN, "ליבה"],
+    [162, 103, FILL.gray, MUTED, "6. אקסוספוריום — בחלק מהמינים"],
+    [143, 87, FILL.yellow, ORANGE, "5. מעטה — שכבות חלבון מגינות"],
+    [123, 71, FILL.sky, BLUE, "4. ממברנה חיצונית של הספורה"],
+    [104, 57, FILL.orange, ORANGE, "3. קורטקס — פפטידוגליקן"],
+    [80, 43, FILL.blue, BLUE, "2. ממברנה פנימית — מחסום חדירות"],
+    [65, 33, FILL.green, GREEN, "1. ליבה — DNA, אנזימים ומעט מים"],
   ];
-  // A legend instead of leader lines: in a concentric drawing every leader to an inner layer
-  // would have to cut across the outer ones. The colours carry the mapping.
-  const ly = [52, 82, 112, 142, 172, 202];
+  // Numbered markers identify layers independently of colour. The full-width legend
+  // stays readable on mobile; marker positions sit within the corresponding ring.
+  const markers = [[200, 26], [302, 69], [312, 122], [269, 159], [200, 160], [200, 122]];
   return (
-    <Svg h={300} label="שכבות האנדוספורה מבפנים החוצה: ליבה ובה DNA, ריבוזומים, סידן-DPA וחלבוני SASP; ממברנה פנימית; קורטקס של פפטידוגליקן; ממברנה חיצונית; מעטה חלבוני; ובחלק מהמינים גם אקסוספוריום">
+    <Svg w={400} h={495} label="חתך סכמטי דרך אנדוספורה אחת. המספרים תואמים לרשימת השכבות בטקסט: 1 ליבה, 2 ממברנה פנימית, 3 קורטקס, 4 ממברנה חיצונית, 5 מעטה חלבוני, 6 אקסוספוריום שקיים רק בחלק מהמינים. שכבת הדופן הדקה הפנימית לקורטקס אינה מוצגת בנפרד">
       {layers.map(([rx, ry, fill, stroke, label], i) => (
-        <g key={label}>
-          <ellipse cx={cx} cy={cy} rx={rx} ry={ry} fill={fill} stroke={stroke} strokeWidth={1.6} />
-          <rect x={436} y={ly[i]} width={16} height={16} rx={3} fill={fill} stroke={stroke} strokeWidth={1.4} />
-          <He x={426} y={ly[i] + 13} size={11.5} anchor="end" bold color={stroke}>{label}</He>
-        </g>
+        <ellipse key={label} cx={cx} cy={cy} rx={rx} ry={ry} fill={fill} stroke={stroke} strokeWidth={1.8} {...(i === 0 ? dash : {})} />
       ))}
-      <La x={cx} y={cy - 4} size={10.5} color={INK}>DNA · SASP</La>
-      <La x={cx} y={cy + 14} size={10.5} color={INK}>Ca–DPA</La>
-      <He x={452} y={34} size={10.5} anchor="end" color={MUTED}>מבחוץ פנימה ↓</He>
-      <He x={426} y={ly[5] + 34} size={10.5} anchor="end" color={MUTED}>בליבה 10–25% מים בלבד</He>
-      <He x={160} y={282} size={10.5} color={MUTED}>הממברנה החיצונית של הספורה אינה זו של גראם-שליליים</He>
+      {markers.map(([x, y], i) => <g key={i}>
+        <circle cx={x} cy={y} r={11} fill="white" stroke={layers[i][3]} strokeWidth={1.5} />
+        <La x={x} y={y + 5} size={15} bold color={INK}>{6 - i}</La>
+      </g>)}
+      <He x={200} y={251} size={16} bold>חתך באנדוספורה אחת · מהמרכז החוצה</He>
+      {[...layers].reverse().map(([, , fill, stroke, label], i) => <g key={label}>
+        <rect x={367} y={271 + i * 31} width={16} height={16} rx={3} fill={fill} stroke={stroke} strokeWidth={1.5} />
+        <He x={356} y={285 + i * 31} size={16} anchor="end">{label}</He>
+      </g>)}
+      <He x={200} y={481} size={13} color={MUTED}>סכמטי, לא בקנה מידה; הדופן הדקה אינה מוצגת בנפרד</He>
     </Svg>
   );
 }
 
 // ── mv-endospores: the sporulation cycle ────────────────────────────────────
 function SporulationCycle() {
-  const xs = [410, 300, 190, 80];
-  const Cell = ({ x, y }: { x: number; y: number }) => <rect x={x - 46} y={y - 20} width={92} height={40} rx={20} fill={FILL.gray} stroke={INK} strokeWidth={1.5} />;
-  const t: [string, string][] = [["1. חלוקה", "א-סימטרית"], ["2. בליעה", "בתוך תא האם"], ["3. קורטקס", "ומעטה"], ["4. שחרור", "תא האם מתפרק"]];
+  const ys = [65, 155, 245, 335, 425];
+  const labels = [
+    ["1. חלוקה א-סימטרית", "תא אם גדול ופורספורה קטנה"],
+    ["2. בליעה", "ממברנת תא האם עוטפת את הקטנה"],
+    ["3. בניית שכבות הגנה", "קורטקס ומעטה סביב הפורספורה"],
+    ["4. הבשלה", "הליבה מאבדת מים ורוכשת עמידות"],
+    ["5. שחרור", "תא האם מתפרק; הספורה נשארת"],
+  ];
   return (
-    <Svg h={344} label="מחזור הספורולציה: חלוקה א-סימטרית שיוצרת פורספורה קטנה ותא אם גדול; בליעת הפורספורה בתוך תא האם; בניית הקורטקס והמעטה והבשלה; ופירוק תא האם ששחרר את האנדוספורה הבשלה. הנביטה מחזירה את האנדוספורה לתא פעיל">
-      {t.map(([a, b], i) => (<g key={a}><He x={xs[i]} y={28} size={12} bold>{a}</He><He x={xs[i]} y={44} size={11} color={MUTED}>{b}</He></g>))}
-      <Cell x={xs[0]} y={100} />
-      <line x1={xs[0] + 16} y1={82} x2={xs[0] + 16} y2={118} stroke={INK} strokeWidth={2} />
-      <ellipse cx={xs[0] + 30} cy={100} rx={13} ry={16} fill={FILL.green} stroke={GREEN} strokeWidth={1.4} />
-      <He x={410} y={150} size={10.5} color={MUTED}>תא אם + <tspan fill={GREEN} fontWeight={700}>פורספורה</tspan></He>
-      <Cell x={xs[1]} y={100} />
-      <ellipse cx={xs[1] + 14} cy={100} rx={15} ry={17} fill={FILL.green} stroke={GREEN} strokeWidth={1.4} />
-      <ellipse cx={xs[1] + 14} cy={100} rx={20} ry={22} fill="none" stroke={BLUE} strokeWidth={1.4} />
-      <Cell x={xs[2]} y={100} />
-      <ellipse cx={xs[2] + 10} cy={100} rx={22} ry={24} fill={FILL.orange} stroke={ORANGE} strokeWidth={1.6} />
-      <ellipse cx={xs[2] + 10} cy={100} rx={14} ry={16} fill={FILL.green} stroke={GREEN} strokeWidth={1.4} />
-      <ellipse cx={xs[3]} cy={100} rx={26} ry={28} fill={FILL.yellow} stroke={ORANGE} strokeWidth={2} />
-      <ellipse cx={xs[3]} cy={100} rx={15} ry={17} fill={FILL.green} stroke={GREEN} strokeWidth={1.4} />
-      <He x={xs[3]} y={150} size={10.5} bold color={ORANGE}>אנדוספורה בשלה</He>
-      {[0, 1, 2].map((i) => <Arrow key={i} x1={xs[i] - 50} y1={100} x2={xs[i + 1] + 50} y2={100} color={INK} width={2.2} />)}
-      <He x={222} y={186} size={11} color={MUTED}>כ-8 שעות · מעל 200 גנים · Spo0A ואחריו σF, σE, σG, σK</He>
-      {/* the cycle closes below: each arrow runs from one caption to the next, never from the drawings */}
-      <path d="M80 164 C 78 230, 132 264, 194 264" fill="none" stroke={GREEN} strokeWidth={2.2} markerEnd="url(#bfArrow)" />
-      <Rod x={240} y={264} w={78} h={32} fill={FILL.gray} />
-      <He x={240} y={269} size={11} bold>תא פעיל</He>
-      <path d="M284 258 C 372 258, 452 240, 452 198 C 452 180, 436 170, 418 166" fill="none" stroke={MUTED} strokeWidth={1.8} markerEnd="url(#bfArrow)" {...dash} />
-      <He x={430} y={226} size={10.5} anchor="end" color={MUTED}>רעב ← ספורולציה</He>
-      <He x={150} y={310} size={11} bold color={GREEN}>נביטה: הפעלה ← נביטה ← התפתחות (דקות)</He>
-      <He x={240} y={332} size={10.5} color={MUTED}>בנביטה אובדת העמידות לחום ולכימיקלים</He>
+    <Svg w={440} h={650} label="קוראים מלמעלה למטה: חמישה שלבי בניית אנדוספורה ב-Bacillus subtilis, במשך כשמונה שעות. אפור הוא תא האם, ירוק הוא הפורספורה והליבה, כחול ממברנה עוטפת, כתום קורטקס וזהוב מעטה. בהמשך נביטה והתפתחות מחזירות תא פעיל. הזמנים משתנים לפי התנאים">
+      <He x={220} y={23} size={17} bold>בניית אנדוספורה · קוראים מלמעלה למטה</He>
+      {ys.map((y, i) => <g key={y}>
+        {i < 4 && <Rod x={88} y={y} w={124} h={56} fill={FILL.gray} stroke={MUTED} />}
+        {i === 0 ? <>
+          <path d={`M118 ${y - 26} V${y + 26}`} stroke={BLUE} strokeWidth={2} />
+          <path d={`M118 ${y - 25} a27 27 0 0 1 0 50 Z`} fill={FILL.green} stroke={GREEN} strokeWidth={1.5} />
+        </> : <>
+          {i >= 2 && <ellipse cx={i === 4 ? 88 : 108} cy={y} rx={26} ry={23} fill={FILL.yellow} stroke={ORANGE} strokeWidth={2} />}
+          <ellipse cx={i === 4 ? 88 : 108} cy={y} rx={i >= 2 ? 22 : 20} ry={i >= 2 ? 19 : 22} fill={i >= 2 ? FILL.orange : FILL.blue} stroke={BLUE} strokeWidth={1.5} />
+          <ellipse cx={i === 4 ? 88 : 108} cy={y} rx={i >= 3 ? 12 : 15} ry={i >= 3 ? 11 : 16} fill={FILL.green} stroke={GREEN} strokeWidth={1.5} />
+        </>}
+        <He x={420} y={y - 5} size={17} anchor="end" bold>{labels[i][0]}</He>
+        <He x={420} y={y + 20} size={14} anchor="end">{labels[i][1]}</He>
+        {i < 4 && <Arrow x1={88} y1={y + 34} x2={88} y2={y + 54} color={MUTED} />}
+      </g>)}
+      <He x={220} y={480} size={15} color={MUTED}>ספורולציה: שעות · במודל זה כ-8 שעות</He>
+      <line x1={20} y1={498} x2={420} y2={498} stroke={LINE_GRAY} />
+      <Arrow x1={88} y1={453} x2={88} y2={531} color={GREEN} />
+      <Rod x={88} y={558} w={110} h={40} fill={FILL.gray} />
+      <He x={420} y={550} size={17} anchor="end" bold>נביטה ואחריה התפתחות</He>
+      <He x={420} y={575} size={14} anchor="end">אובדן עמידות, ואז חזרה לגדילה</He>
+      <He x={220} y={612} size={14} color={MUTED}>אפור: תא אם · ירוק: פורספורה וליבה</He>
+      <He x={220} y={636} size={13} color={MUTED}>כחול: ממברנה · כתום: קורטקס ומעטה · סכמטי</He>
     </Svg>
   );
 }
 
 export const MICRO_FIGURES: Record<string, { el: () => React.ReactElement; captionHe: string }> = {
-  "endospore-structure": { el: EndospereStructure, captionHe: "שכבות האנדוספורה. העמידות לחום נובעת מהליבה — מעט מים, קומפלקס סידן-DPA ו-SASP שנקשרים ל-DNA; המעטה חוסם אנזימים וכימיקלים, והממברנה הפנימית חוסמת מולקולות קטנות. סכמטי, לא בקנה מידה." },
-  "sporulation-cycle": { el: SporulationCycle, captionHe: "מחזור הספורולציה והנביטה. הבנייה אורכת שעות ומערבת מעל 200 גנים בסדר קבוע; החזרה לתא פעיל אורכת דקות, ובה אובדת העמידות. סכמטי." },
+  "endospore-structure": { el: EndospereStructure, captionHe: "מה רואים: חתך דרך אנדוספורה אחת, והמספרים תואמים לרשימת השכבות שמעל האיור. הליבה (1) במרכז; המעטפות מקיפות אותה. האקסוספוריום (6, גבול מקווקו) קיים רק בחלק מהמינים. סכמטי, לא בקנה מידה; שכבת הדופן הדקה אינה מוצגת בנפרד." },
+  "sporulation-cycle": { el: SporulationCycle, captionHe: "מה רואים: אותו תא מתקדם מלמעלה למטה מחלוקה א-סימטרית עד שחרור ספורה בשלה. האפור מסמן את תא האם, והירוק את הפורספורה והליבה. בתחתית מוצגת החזרה לתא פעיל: בנביטה אובדת העמידות; ההתפתחות שאחריה מחזירה גדילה וחלוקה. סכמטי, לא בקנה מידה." },
   "gram-stain": { el: GramStain, captionHe: "צביעת גראם בארבעה שלבים. הקומפלקס של גביש סגול ויוד נלכד בדופן העבה של גראם-חיוביים; בגראם-שליליים האלכוהול שוטף אותו, והתאים נצבעים בצבע הנגדי (ספרנין). סכמטי." },
   "transport-systems": { el: TransportSystems, captionHe: "שלוש מערכות הובלה: הובלה פשוטה (מונעת בכוח הפרוטוני), העברה קבוצתית (PTS — הסוכר מזורחן בכניסה על חשבון PEP) ומובל ABC (חלבון קושר בפריפלזמה, אנרגיה מ-ATP). סכמטי." },
   "gram-envelopes": { el: GramEnvelopes, captionHe: "המעטפת הגראם-חיובית (פפטידוגליקן עבה עם חומצות טייכואיות) והגראם-שלילית (ממברנה חיצונית עם LPS ופורינים, פריפלזמה ופפטידוגליקן דק). סכמטי, לא בקנה מידה." },
