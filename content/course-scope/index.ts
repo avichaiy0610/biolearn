@@ -7,8 +7,9 @@ import { technionMolecularScope } from "./technion-molecular";
 import { technionCellScope } from "./technion-cell";
 import { technionGeneExpressionScope } from "./technion-gene-expression";
 import { technionPhysiologyScope } from "./technion-physiology";
+import { technionMicroViroScope } from "./technion-micro-viro";
 
-export const COURSE_SCOPES: CourseScope[] = [technionGeneticsScope, tauGeneticsScope, technionBiochemIntroScope, technionMetabolicScope, technionMolecularScope, technionCellScope, technionGeneExpressionScope, technionPhysiologyScope];
+export const COURSE_SCOPES: CourseScope[] = [technionGeneticsScope, tauGeneticsScope, technionBiochemIntroScope, technionMetabolicScope, technionMolecularScope, technionCellScope, technionGeneExpressionScope, technionPhysiologyScope, technionMicroViroScope];
 
 export const scopeForCourse = (courseSlug: string) => COURSE_SCOPES.find((s) => s.courseSlug === courseSlug);
 

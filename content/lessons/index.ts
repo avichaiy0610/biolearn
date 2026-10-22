@@ -86,8 +86,24 @@ import { phBlood } from "./technion-physiology/ph-blood";
 import { phKidneyFiltration } from "./technion-physiology/ph-kidney-filtration";
 import { phKidneyTubules } from "./technion-physiology/ph-kidney-tubules";
 import { phVolumePressure } from "./technion-physiology/ph-volume-pressure";
+import { mvHistory } from "./technion-micro-viro/mv-history";
+import { mvMethods } from "./technion-micro-viro/mv-methods";
+import { mvCellEnvelope } from "./technion-micro-viro/mv-cell-envelope";
+import { mvSurfaceMotility } from "./technion-micro-viro/mv-surface-motility";
+import { mvGrowth } from "./technion-micro-viro/mv-growth";
+import { mvEnvironment } from "./technion-micro-viro/mv-environment";
+import { mvAntibiotics } from "./technion-micro-viro/mv-antibiotics";
+import { mvMetabolicDiversity } from "./technion-micro-viro/mv-metabolic-diversity";
+import { mvNutrientCycles } from "./technion-micro-viro/mv-nutrient-cycles";
+import { mvEcology } from "./technion-micro-viro/mv-ecology";
+import { mvViruses } from "./technion-micro-viro/mv-viruses";
+import { mvPhages } from "./technion-micro-viro/mv-phages";
+import { mvGeneTransfer } from "./technion-micro-viro/mv-gene-transfer";
+import { mvEvolution } from "./technion-micro-viro/mv-evolution";
+import { mvImmunology } from "./technion-micro-viro/mv-immunology";
+import { mvClinical } from "./technion-micro-viro/mv-clinical";
 
-export const LESSONS: Lesson[] = [mendelProbability, dominanceAlleles, pedigrees, chromosomalTheory, sexDetermination, linkageMapping, mutations, chromosomeStructure, chromosomeNumber, natureOfGene, geneInteraction, nonMendelian, aminoAcids, proteinStructure, proteinFolding, fibrousMembrane, proteinMethods, hemoglobin, enzymePrinciples, enzymeKinetics, catalyticMechanisms, allostericRegulation, covalentRegulation, carbsLipids, metConcepts, metGlycolysis, metGluconeogenesis, metCitricAcid, metOxphos, metPhotosynthesis, metPentose, metGlycogen, metFattyAcids, metIntegration, metLipidsCholesterol, metAminoAcids, metNucleotides, molNucleicAcids, molChromatin, molReplicationFork, molReplicationOrigins, molRepair, molRecombination, molTranscriptionProk, molTranscriptionEuk, molRnaProcessing, molGeneticCode, molRibosomeInitiation, molTranslationElongation, cellMembranes, cellEr, cellQualityControl, cellGolgiEndosomes, cellVesicleTransport, cellNuclearMitoImport, cellCytoskeleton, cellMotorsPolarity, cellJunctions, cellEcm, cellSignalingPrinciples, cellGpcr, cellRtk, cellCycleControl, gxOperons, gxCisElements, gxTranscriptionFactors, gxChromatinModifications, gxEpigenetics, gxAlternativeSplicing, gxTranslationControl, gxNcrna, gxGenomeStructure, gxGeneFamilies, gxRepeatsMobile, gxGenomeWide, gxIntegration, phTransport, phMembranePotential, phActionPotential, phNervousSystem, phSynapse, phSkeletalMuscle, phSmoothCardiacMuscle, phBlood, phKidneyFiltration, phKidneyTubules, phVolumePressure];
+export const LESSONS: Lesson[] = [mendelProbability, dominanceAlleles, pedigrees, chromosomalTheory, sexDetermination, linkageMapping, mutations, chromosomeStructure, chromosomeNumber, natureOfGene, geneInteraction, nonMendelian, aminoAcids, proteinStructure, proteinFolding, fibrousMembrane, proteinMethods, hemoglobin, enzymePrinciples, enzymeKinetics, catalyticMechanisms, allostericRegulation, covalentRegulation, carbsLipids, metConcepts, metGlycolysis, metGluconeogenesis, metCitricAcid, metOxphos, metPhotosynthesis, metPentose, metGlycogen, metFattyAcids, metIntegration, metLipidsCholesterol, metAminoAcids, metNucleotides, molNucleicAcids, molChromatin, molReplicationFork, molReplicationOrigins, molRepair, molRecombination, molTranscriptionProk, molTranscriptionEuk, molRnaProcessing, molGeneticCode, molRibosomeInitiation, molTranslationElongation, cellMembranes, cellEr, cellQualityControl, cellGolgiEndosomes, cellVesicleTransport, cellNuclearMitoImport, cellCytoskeleton, cellMotorsPolarity, cellJunctions, cellEcm, cellSignalingPrinciples, cellGpcr, cellRtk, cellCycleControl, gxOperons, gxCisElements, gxTranscriptionFactors, gxChromatinModifications, gxEpigenetics, gxAlternativeSplicing, gxTranslationControl, gxNcrna, gxGenomeStructure, gxGeneFamilies, gxRepeatsMobile, gxGenomeWide, gxIntegration, phTransport, phMembranePotential, phActionPotential, phNervousSystem, phSynapse, phSkeletalMuscle, phSmoothCardiacMuscle, phBlood, phKidneyFiltration, phKidneyTubules, phVolumePressure, mvHistory, mvMethods, mvCellEnvelope, mvSurfaceMotility, mvGrowth, mvEnvironment, mvAntibiotics, mvMetabolicDiversity, mvNutrientCycles, mvEcology, mvViruses, mvPhages, mvGeneTransfer, mvEvolution, mvImmunology, mvClinical];
 
 export const lessonBySlug = (slug: string) => LESSONS.find((l) => l.slug === slug);
 

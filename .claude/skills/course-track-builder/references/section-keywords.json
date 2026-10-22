@@ -5333,5 +5333,1151 @@
     "baroreceptor reflex"
    ]
   }
+ },
+ "mv-history": {
+  "_heading": {
+   "he": [
+    "היסטוריה",
+    "היסטורי"
+   ],
+   "en": [
+    "history of microbiology"
+   ]
+  },
+  "first-seen": {
+   "he": [
+    "לוונהוק",
+    "הוק"
+   ],
+   "en": [
+    "Leeuwenhoek",
+    "Hooke"
+   ]
+  },
+  "staining": {
+   "he": [
+    "צביעת גראם",
+    "צביעה"
+   ],
+   "en": [
+    "Gram stain"
+   ]
+  },
+  "spontaneous-generation": {
+   "he": [
+    "בריאה ספונטנית",
+    "פסטר"
+   ],
+   "en": [
+    "spontaneous generation",
+    "Pasteur"
+   ]
+  },
+  "germ-theory": {
+   "he": [
+    "תורת החיידקים",
+    "קוך"
+   ],
+   "en": [
+    "germ theory",
+    "Koch"
+   ]
+  },
+  "pure-culture": {
+   "he": [
+    "תרבית טהורה"
+   ],
+   "en": [
+    "pure culture"
+   ]
+  },
+  "environmental": {
+   "he": [
+    "בייירינק",
+    "וינוגרדסקי"
+   ],
+   "en": [
+    "Beijerinck",
+    "Winogradsky"
+   ]
+  },
+  "modern": {
+   "he": [
+    "מיקרוביולוגיה מודרנית"
+   ],
+   "en": [
+    "molecular microbiology"
+   ]
+  }
+ },
+ "mv-methods": {
+  "_heading": {
+   "he": [
+    "שיטות",
+    "חידושים"
+   ],
+   "en": [
+    "methods"
+   ]
+  },
+  "plate-anomaly": {
+   "he": [
+    "אנומליית הספירה"
+   ],
+   "en": [
+    "great plate count anomaly"
+   ]
+  },
+  "16s": {
+   "he": [
+    "16S"
+   ],
+   "en": [
+    "16S rRNA"
+   ]
+  },
+  "fish": {
+   "he": [
+    "FISH"
+   ],
+   "en": [
+    "FISH"
+   ]
+  },
+  "metagenomics": {
+   "he": [
+    "מטגנומיקה"
+   ],
+   "en": [
+    "metagenomics"
+   ]
+  },
+  "activity": {
+   "he": [
+    "פעילות"
+   ],
+   "en": [
+    "stable isotope probing",
+    "SIP"
+   ]
+  },
+  "new-cultivation": {
+   "he": [
+    "תרבית"
+   ],
+   "en": [
+    "iChip",
+    "cultivation"
+   ]
+  },
+  "microscopy": {
+   "he": [
+    "מיקרוסקופ"
+   ],
+   "en": [
+    "microscopy"
+   ]
+  }
+ },
+ "mv-cell-envelope": {
+  "_heading": {
+   "he": [
+    "תאים פרוקריוטים",
+    "מבנה ותפקוד"
+   ],
+   "en": [
+    "prokaryotic cell"
+   ]
+  },
+  "size-shape": {
+   "he": [
+    "צורה",
+    "גודל"
+   ],
+   "en": [
+    "morphology",
+    "cell size"
+   ]
+  },
+  "membrane": {
+   "he": [
+    "ממברנה"
+   ],
+   "en": [
+    "cytoplasmic membrane"
+   ]
+  },
+  "transport": {
+   "he": [
+    "הובלה"
+   ],
+   "en": [
+    "transport",
+    "ABC transporter",
+    "PTS"
+   ]
+  },
+  "peptidoglycan": {
+   "he": [
+    "פפטידוגליקן",
+    "דופן"
+   ],
+   "en": [
+    "peptidoglycan",
+    "cell wall"
+   ]
+  },
+  "gram-positive": {
+   "he": [
+    "גראם חיובי"
+   ],
+   "en": [
+    "gram-positive",
+    "teichoic acid"
+   ]
+  },
+  "gram-negative": {
+   "he": [
+    "גראם שלילי",
+    "ממברנה חיצונית"
+   ],
+   "en": [
+    "gram-negative",
+    "outer membrane",
+    "LPS"
+   ]
+  },
+  "unusual": {
+   "he": [
+    "ארכאונים"
+   ],
+   "en": [
+    "archaea",
+    "S-layer",
+    "pseudomurein"
+   ]
+  }
+ },
+ "mv-surface-motility": {
+  "_heading": {
+   "he": [
+    "תנועה"
+   ],
+   "en": [
+    "motility"
+   ]
+  },
+  "capsule": {
+   "he": [
+    "קופסית"
+   ],
+   "en": [
+    "capsule"
+   ]
+  },
+  "pili": {
+   "he": [
+    "שערות",
+    "פימבריות"
+   ],
+   "en": [
+    "pili",
+    "fimbriae"
+   ]
+  },
+  "inclusions": {
+   "he": [
+    "גופיפים"
+   ],
+   "en": [
+    "inclusions",
+    "gas vesicles"
+   ]
+  },
+  "flagellum": {
+   "he": [
+    "שוטון"
+   ],
+   "en": [
+    "flagellum",
+    "flagella"
+   ]
+  },
+  "surface-motility": {
+   "he": [
+    "תנועה על משטח"
+   ],
+   "en": [
+    "twitching",
+    "gliding"
+   ]
+  },
+  "chemotaxis": {
+   "he": [
+    "כימוטקסיס"
+   ],
+   "en": [
+    "chemotaxis"
+   ]
+  }
+ },
+ "mv-growth": {
+  "_heading": {
+   "he": [
+    "גידול",
+    "גדילה"
+   ],
+   "en": [
+    "growth"
+   ]
+  },
+  "media": {
+   "he": [
+    "מצע"
+   ],
+   "en": [
+    "culture media"
+   ]
+  },
+  "division": {
+   "he": [
+    "חלוקה"
+   ],
+   "en": [
+    "binary fission",
+    "FtsZ"
+   ]
+  },
+  "counting": {
+   "he": [
+    "ספירה"
+   ],
+   "en": [
+    "viable count",
+    "plate count"
+   ]
+  },
+  "exponential": {
+   "he": [
+    "זמן דור",
+    "מעריכי"
+   ],
+   "en": [
+    "generation time",
+    "exponential growth"
+   ]
+  },
+  "growth-curve": {
+   "he": [
+    "עקומת גדילה"
+   ],
+   "en": [
+    "growth curve"
+   ]
+  },
+  "chemostat": {
+   "he": [
+    "כמוסטט"
+   ],
+   "en": [
+    "chemostat"
+   ]
+  }
+ },
+ "mv-environment": {
+  "_heading": {
+   "he": [
+    "גורמים כימופיסיקליים"
+   ],
+   "en": [
+    "environmental factors"
+   ]
+  },
+  "temperature": {
+   "he": [
+    "טמפרטורה"
+   ],
+   "en": [
+    "temperature",
+    "thermophile"
+   ]
+  },
+  "ph": {
+   "he": [
+    "חומציות"
+   ],
+   "en": [
+    "pH",
+    "acidophile"
+   ]
+  },
+  "water": {
+   "he": [
+    "מליחות",
+    "זמינות מים"
+   ],
+   "en": [
+    "water activity",
+    "halophile"
+   ]
+  },
+  "oxygen": {
+   "he": [
+    "חמצן",
+    "אנאירובי"
+   ],
+   "en": [
+    "oxygen",
+    "anaerobe"
+   ]
+  },
+  "control-terms": {
+   "he": [
+    "עיקור",
+    "חיטוי"
+   ],
+   "en": [
+    "sterilization",
+    "disinfection"
+   ]
+  },
+  "physical-control": {
+   "he": [
+    "אוטוקלאב"
+   ],
+   "en": [
+    "autoclave",
+    "D-value"
+   ]
+  },
+  "chemical-control": {
+   "he": [
+    "חומרי חיטוי"
+   ],
+   "en": [
+    "antiseptic",
+    "disinfectant"
+   ]
+  }
+ },
+ "mv-antibiotics": {
+  "_heading": {
+   "he": [
+    "עמידות",
+    "אנטיביוטיקה"
+   ],
+   "en": [
+    "antibiotic resistance"
+   ]
+  },
+  "selective-toxicity": {
+   "he": [
+    "רעילות בררנית"
+   ],
+   "en": [
+    "selective toxicity"
+   ]
+  },
+  "targets": {
+   "he": [
+    "מנגנון פעולה"
+   ],
+   "en": [
+    "mode of action"
+   ]
+  },
+  "mechanisms": {
+   "he": [
+    "מנגנוני עמידות"
+   ],
+   "en": [
+    "resistance mechanisms",
+    "beta-lactamase"
+   ]
+  },
+  "spread": {
+   "he": [
+    "הפצת עמידות"
+   ],
+   "en": [
+    "resistance spread"
+   ]
+  },
+  "tolerance": {
+   "he": [
+    "סבילות"
+   ],
+   "en": [
+    "persisters",
+    "tolerance"
+   ]
+  },
+  "countermeasures": {
+   "he": [],
+   "en": [
+    "antibiotic stewardship"
+   ]
+  }
+ },
+ "mv-metabolic-diversity": {
+  "_heading": {
+   "he": [
+    "שונות מטבולית"
+   ],
+   "en": [
+    "metabolic diversity"
+   ]
+  },
+  "classes": {
+   "he": [
+    "כימוטרופים",
+    "פוטוטרופים"
+   ],
+   "en": [
+    "chemotroph",
+    "phototroph"
+   ]
+  },
+  "redox-tower": {
+   "he": [
+    "פוטנציאל חיזור"
+   ],
+   "en": [
+    "redox potential",
+    "electron tower"
+   ]
+  },
+  "fermentation": {
+   "he": [
+    "תסיסה"
+   ],
+   "en": [
+    "fermentation"
+   ]
+  },
+  "respiration": {
+   "he": [
+    "נשימה אנאירובית"
+   ],
+   "en": [
+    "anaerobic respiration"
+   ]
+  },
+  "chemolithotrophy": {
+   "he": [
+    "כימוליתוטרופים"
+   ],
+   "en": [
+    "chemolithotroph"
+   ]
+  },
+  "phototrophy": {
+   "he": [
+    "פוטוסינתזה"
+   ],
+   "en": [
+    "photosynthesis"
+   ]
+  }
+ },
+ "mv-nutrient-cycles": {
+  "_heading": {
+   "he": [
+    "מחזור החומרים"
+   ],
+   "en": [
+    "nutrient cycles",
+    "biogeochemical"
+   ]
+  },
+  "carbon": {
+   "he": [
+    "מחזור הפחמן",
+    "מתאן"
+   ],
+   "en": [
+    "carbon cycle",
+    "methanogenesis"
+   ]
+  },
+  "nitrogen": {
+   "he": [
+    "מחזור החנקן"
+   ],
+   "en": [
+    "nitrogen cycle",
+    "nitrification",
+    "denitrification"
+   ]
+  },
+  "nitrogenase": {
+   "he": [
+    "קיבוע חנקן"
+   ],
+   "en": [
+    "nitrogen fixation",
+    "nitrogenase"
+   ]
+  },
+  "sulfur": {
+   "he": [
+    "מחזור הגופרית"
+   ],
+   "en": [
+    "sulfur cycle"
+   ]
+  },
+  "redox-zones": {
+   "he": [],
+   "en": [
+    "redox zonation"
+   ]
+  },
+  "human-impact": {
+   "he": [],
+   "en": [
+    "eutrophication"
+   ]
+  }
+ },
+ "mv-ecology": {
+  "_heading": {
+   "he": [
+    "אקולוגיה מיקרוביאלית"
+   ],
+   "en": [
+    "microbial ecology"
+   ]
+  },
+  "concepts": {
+   "he": [
+    "נישה"
+   ],
+   "en": [
+    "niche",
+    "microenvironment"
+   ]
+  },
+  "biofilm": {
+   "he": [
+    "ביופילם"
+   ],
+   "en": [
+    "biofilm"
+   ]
+  },
+  "quorum-sensing": {
+   "he": [
+    "חישת מניין"
+   ],
+   "en": [
+    "quorum sensing"
+   ]
+  },
+  "symbiosis": {
+   "he": [
+    "סימביוזה"
+   ],
+   "en": [
+    "symbiosis"
+   ]
+  },
+  "microbiome": {
+   "he": [
+    "מיקרוביום"
+   ],
+   "en": [
+    "microbiome"
+   ]
+  },
+  "applied": {
+   "he": [
+    "ביורמדיאציה"
+   ],
+   "en": [
+    "bioremediation"
+   ]
+  }
+ },
+ "mv-viruses": {
+  "_heading": {
+   "he": [
+    "וירוסים"
+   ],
+   "en": [
+    "virus"
+   ]
+  },
+  "nature": {
+   "he": [
+    "וירוס"
+   ],
+   "en": [
+    "virus"
+   ]
+  },
+  "structure": {
+   "he": [
+    "קפסיד"
+   ],
+   "en": [
+    "capsid",
+    "envelope"
+   ]
+  },
+  "baltimore": {
+   "he": [
+    "בלטימור"
+   ],
+   "en": [
+    "Baltimore"
+   ]
+  },
+  "cycle": {
+   "he": [
+    "מסלולי הדבקה",
+    "מחזור"
+   ],
+   "en": [
+    "replication cycle"
+   ]
+  },
+  "quantification": {
+   "he": [
+    "פלאקים"
+   ],
+   "en": [
+    "plaque assay"
+   ]
+  },
+  "examples": {
+   "he": [
+    "שפעת",
+    "HIV"
+   ],
+   "en": [
+    "influenza",
+    "HIV"
+   ]
+  },
+  "infection-types": {
+   "he": [
+    "זיהום סמוי"
+   ],
+   "en": [
+    "latent infection"
+   ]
+  },
+  "antivirals": {
+   "he": [
+    "אנטי-ויראליות"
+   ],
+   "en": [
+    "antiviral"
+   ]
+  },
+  "subviral": {
+   "he": [
+    "ויראידים",
+    "פריונים"
+   ],
+   "en": [
+    "viroid",
+    "prion"
+   ]
+  }
+ },
+ "mv-phages": {
+  "_heading": {
+   "he": [
+    "בקטריופאג'ים"
+   ],
+   "en": [
+    "bacteriophage"
+   ]
+  },
+  "structure": {
+   "he": [
+    "פאג'"
+   ],
+   "en": [
+    "phage"
+   ]
+  },
+  "lytic": {
+   "he": [
+    "מחזור ליטי"
+   ],
+   "en": [
+    "lytic cycle",
+    "T4"
+   ]
+  },
+  "lysogeny": {
+   "he": [
+    "ליזוגניה"
+   ],
+   "en": [
+    "lysogeny",
+    "lambda"
+   ]
+  },
+  "lysogenic-conversion": {
+   "he": [
+    "המרה ליזוגנית"
+   ],
+   "en": [
+    "lysogenic conversion"
+   ]
+  },
+  "defenses": {
+   "he": [
+    "הגבלה",
+    "CRISPR"
+   ],
+   "en": [
+    "restriction",
+    "CRISPR"
+   ]
+  },
+  "applications": {
+   "he": [
+    "טיפול בפאג'ים"
+   ],
+   "en": [
+    "phage therapy"
+   ]
+  }
+ },
+ "mv-gene-transfer": {
+  "_heading": {
+   "he": [
+    "העברת חומר גנטי"
+   ],
+   "en": [
+    "horizontal gene transfer"
+   ]
+  },
+  "mutants": {
+   "he": [
+    "מוטנטים"
+   ],
+   "en": [
+    "mutants",
+    "replica plating"
+   ]
+  },
+  "transformation": {
+   "he": [
+    "טרנספורמציה"
+   ],
+   "en": [
+    "transformation"
+   ]
+  },
+  "transduction": {
+   "he": [
+    "טרנסדוקציה"
+   ],
+   "en": [
+    "transduction"
+   ]
+  },
+  "conjugation": {
+   "he": [
+    "קוניוגציה"
+   ],
+   "en": [
+    "conjugation",
+    "Hfr"
+   ]
+  },
+  "plasmids": {
+   "he": [
+    "פלסמידים"
+   ],
+   "en": [
+    "plasmid"
+   ]
+  },
+  "transposons": {
+   "he": [
+    "טרנספוזונים"
+   ],
+   "en": [
+    "transposon"
+   ]
+  },
+  "hgt-significance": {
+   "he": [
+    "העברה אופקית"
+   ],
+   "en": [
+    "horizontal gene transfer"
+   ]
+  }
+ },
+ "mv-evolution": {
+  "_heading": {
+   "he": [
+    "אבולוציה",
+    "סיסטמטיקה"
+   ],
+   "en": [
+    "evolution",
+    "systematics"
+   ]
+  },
+  "early-earth": {
+   "he": [
+    "מקור החיים"
+   ],
+   "en": [
+    "origin of life",
+    "LUCA"
+   ]
+  },
+  "oxygen": {
+   "he": [
+    "חמצון"
+   ],
+   "en": [
+    "Great Oxidation Event",
+    "cyanobacteria"
+   ]
+  },
+  "three-domains": {
+   "he": [
+    "שלושת התחומים",
+    "עץ החיים"
+   ],
+   "en": [
+    "three domains",
+    "tree of life"
+   ]
+  },
+  "endosymbiosis": {
+   "he": [
+    "אנדוסימביוזה"
+   ],
+   "en": [
+    "endosymbiosis"
+   ]
+  },
+  "mechanisms": {
+   "he": [
+    "ברירה טבעית",
+    "סחף"
+   ],
+   "en": [
+    "natural selection",
+    "genetic drift"
+   ]
+  },
+  "hgt": {
+   "he": [
+    "פן-גנום"
+   ],
+   "en": [
+    "pan genome",
+    "mobilome"
+   ]
+  },
+  "phylogeny": {
+   "he": [
+    "פילוגניה"
+   ],
+   "en": [
+    "phylogeny",
+    "phylogenetic tree"
+   ]
+  },
+  "systematics": {
+   "he": [
+    "סיסטמטיקה",
+    "טקסונומיה"
+   ],
+   "en": [
+    "taxonomy",
+    "ANI",
+    "species"
+   ]
+  }
+ },
+ "mv-immunology": {
+  "_heading": {
+   "he": [
+    "תורת החיסון",
+    "חיסון"
+   ],
+   "en": [
+    "immunology",
+    "immunity"
+   ]
+  },
+  "barriers": {
+   "he": [
+    "מחסומים"
+   ],
+   "en": [
+    "barriers"
+   ]
+  },
+  "cells": {
+   "he": [
+    "לויקוציטים"
+   ],
+   "en": [
+    "leukocytes"
+   ]
+  },
+  "innate": {
+   "he": [
+    "חיסון מולד"
+   ],
+   "en": [
+    "innate immunity",
+    "TLR",
+    "complement"
+   ]
+  },
+  "adaptive": {
+   "he": [
+    "חיסון נרכש"
+   ],
+   "en": [
+    "adaptive immunity"
+   ]
+  },
+  "antibodies": {
+   "he": [
+    "נוגדנים"
+   ],
+   "en": [
+    "antibody",
+    "immunoglobulin"
+   ]
+  },
+  "mhc-t": {
+   "he": [
+    "MHC",
+    "תאי T"
+   ],
+   "en": [
+    "MHC",
+    "T cell"
+   ]
+  },
+  "memory": {
+   "he": [
+    "זיכרון חיסוני"
+   ],
+   "en": [
+    "immunological memory"
+   ]
+  },
+  "immunity-types": {
+   "he": [
+    "חיסונים",
+    "ואקצינה"
+   ],
+   "en": [
+    "vaccine",
+    "vaccination"
+   ]
+  }
+ },
+ "mv-clinical": {
+  "_heading": {
+   "he": [
+    "מיקרוביולוגיה קלינית"
+   ],
+   "en": [
+    "clinical microbiology"
+   ]
+  },
+  "concepts": {
+   "he": [
+    "פתוגניות",
+    "אלימות"
+   ],
+   "en": [
+    "pathogenicity",
+    "virulence"
+   ]
+  },
+  "stages": {
+   "he": [
+    "היצמדות",
+    "חדירה"
+   ],
+   "en": [
+    "adherence",
+    "invasion"
+   ]
+  },
+  "toxins": {
+   "he": [
+    "רעלנים"
+   ],
+   "en": [
+    "exotoxin",
+    "endotoxin"
+   ]
+  },
+  "koch": {
+   "he": [
+    "הנחות קוך"
+   ],
+   "en": [
+    "Koch's postulates"
+   ]
+  },
+  "lab": {
+   "he": [
+    "אבחון",
+    "מצע בורר"
+   ],
+   "en": [
+    "diagnosis",
+    "selective medium"
+   ]
+  },
+  "ast": {
+   "he": [
+    "רגישות לאנטיביוטיקה"
+   ],
+   "en": [
+    "MIC",
+    "susceptibility testing"
+   ]
+  },
+  "immuno-molecular": {
+   "he": [
+    "ELISA",
+    "PCR"
+   ],
+   "en": [
+    "ELISA",
+    "PCR"
+   ]
+  },
+  "hai": {
+   "he": [
+    "זיהומים נוזוקומיאליים"
+   ],
+   "en": [
+    "healthcare-associated infection"
+   ]
+  },
+  "epidemiology": {
+   "he": [
+    "אפידמיולוגיה"
+   ],
+   "en": [
+    "epidemiology",
+    "R0"
+   ]
+  }
  }
 }
