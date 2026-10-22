@@ -13,6 +13,7 @@ import { mvEcology } from "../lessons/technion-micro-viro/mv-ecology";
 import { mvViruses } from "../lessons/technion-micro-viro/mv-viruses";
 import { mvPhages } from "../lessons/technion-micro-viro/mv-phages";
 import { mvGeneTransfer } from "../lessons/technion-micro-viro/mv-gene-transfer";
+import { mvEndospores } from "../lessons/technion-micro-viro/mv-endospores";
 import { mvEvolution } from "../lessons/technion-micro-viro/mv-evolution";
 import { mvImmunology } from "../lessons/technion-micro-viro/mv-immunology";
 import { mvClinical } from "../lessons/technion-micro-viro/mv-clinical";
@@ -21,8 +22,8 @@ import { mvClinical } from "../lessons/technion-micro-viro/mv-clinical";
 // input. Topics: the CURRENT syllabus on the Technion students portal — 13 headings, no subtopics. Book: Brock
 // Biology of Microorganisms (official book list). Subtopics by consensus of equivalent general-microbiology courses
 // (BGU, TAU, BIU, HUJI) and Brock's own section lists; one unit per heading (cell structure split in two, viruses
-// and phages split in two). "ספורות בקטריאליות" has no unit of its own yet — endospore resistance and their killing
-// (autoclave, D-value, sterilants) are covered inside mv-environment. Lecture order: Moodle closed to guests —
+// and phages split in two). The endospore unit covers structure, resistance, sporulation and germination; killing
+// them (autoclave, D-value, sterilants) stays in mv-environment. Lecture order: Moodle closed to guests —
 // the syllabus order. Tutorials: no source — "practice for lecture n".
 
 const M = "microbiology";
@@ -47,6 +48,7 @@ const LECTURES: { titleHe: string; items: PlanItem[]; practice: PlanItem[] }[] =
   { titleHe: "וירוסים: מבנה, סיווג ומחזור הדבקה", items: [...sec(mvViruses), proc("viral-life-cycle")], practice: probs(mvViruses) },
   { titleHe: "בקטריופאג'ים", items: sec(mvPhages), practice: probs(mvPhages) },
   { titleHe: "העברת חומר גנטי בחיידקים", items: sec(mvGeneTransfer), practice: probs(mvGeneTransfer) },
+  { titleHe: "ספורות בקטריאליות", items: sec(mvEndospores), practice: probs(mvEndospores) },
   { titleHe: "אבולוציה וסיסטמטיקה של מיקרואורגניזמים", items: sec(mvEvolution), practice: probs(mvEvolution) },
   { titleHe: "מושגי יסוד בתורת החיסון", items: [...sec(mvImmunology), proc("innate-immunity", "immunology"), proc("adaptive-immunity", "immunology")], practice: probs(mvImmunology) },
   { titleHe: "מבוא למיקרוביולוגיה קלינית", items: sec(mvClinical), practice: probs(mvClinical) },
@@ -72,7 +74,7 @@ export const technionMicroViroPlan: CoursePlan = {
     { titleHe: "אקולוגיה מיקרוביאלית", items: sec(mvEcology) },
     { titleHe: "מבנה, תפקוד ומסלולי הדבקה של וירוסים ובקטריופאג'ים", items: [...sec(mvViruses), ...sec(mvPhages), proc("viral-life-cycle")] },
     { titleHe: "העברת חומר גנטי בחיידקים", items: sec(mvGeneTransfer) },
-    { titleHe: "ספורות בקטריאליות", items: sec(mvEnvironment, "control-terms", "physical-control", "chemical-control") },
+    { titleHe: "ספורות בקטריאליות", items: [...sec(mvEndospores), ...sec(mvEnvironment, "control-terms", "physical-control")] },
     { titleHe: "אבולוציה וסיסטמטיקה של מיקרואורגניזמים", items: sec(mvEvolution) },
     { titleHe: "מושגי יסוד בתורת החיסון", items: [...sec(mvImmunology), proc("innate-immunity", "immunology"), proc("adaptive-immunity", "immunology")] },
     { titleHe: "מבוא למיקרוביולוגיה קלינית", items: sec(mvClinical) },

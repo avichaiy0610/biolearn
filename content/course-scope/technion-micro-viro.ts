@@ -24,7 +24,7 @@ const META = "שונות מטבולית והשתלבות במחזור החומר
 const ECO = "אקולוגיה מיקרוביאלית";
 const VIR = "מבנה, תפקוד ומסלולי הדבקה של וירוסים ובקטריופאג'ים";
 const HGT = "העברת חומר גנטי בחיידקים";
-// "ספורות בקטריאליות" — no unit of its own yet; endospore killing is under ENV in mv-environment.
+const SPORE = "ספורות בקטריאליות";
 const EVO = "אבולוציה וסיסטמטיקה של מיקרואורגניזמים";
 const IMM = "מושגי יסוד בתורת החיסון";
 const CLIN = "מבוא למיקרוביולוגיה קלינית";
@@ -145,6 +145,14 @@ export const technionMicroViroScope: CourseScope = {
       "plasmids": named(HGT),
       "transposons": named(HGT),
       "hgt-significance": named(HGT),
+    },
+    "mv-endospores": {
+      "what": named(SPORE),
+      "structure": named(SPORE),
+      "resistance": named(SPORE),
+      "sporulation": named(SPORE),
+      "germination": named(SPORE),
+      "significance": heading(SPORE, "המשמעות במזון ובעיקור"),
     },
     "mv-evolution": {
       "early-earth": named(EVO),

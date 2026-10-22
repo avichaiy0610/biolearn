@@ -6479,5 +6479,81 @@
     "R0"
    ]
   }
+ },
+ "mv-endospores": {
+  "_heading": {
+   "he": [
+    "ספורות בקטריאליות",
+    "אנדוספורה",
+    "ספורות"
+   ],
+   "en": [
+    "endospore",
+    "spore"
+   ]
+  },
+  "what": {
+   "he": [
+    "אנדוספורה",
+    "רדום"
+   ],
+   "en": [
+    "endospore",
+    "dormant"
+   ]
+  },
+  "structure": {
+   "he": [
+    "קורטקס",
+    "מעטה"
+   ],
+   "en": [
+    "cortex",
+    "spore coat",
+    "exosporium"
+   ]
+  },
+  "resistance": {
+   "he": [
+    "עמידות לחום",
+    "דיפיקולינית"
+   ],
+   "en": [
+    "dipicolinic acid",
+    "SASP",
+    "heat resistance"
+   ]
+  },
+  "sporulation": {
+   "he": [
+    "ספורולציה",
+    "פורספורה"
+   ],
+   "en": [
+    "sporulation",
+    "forespore",
+    "Spo0A",
+    "sigma factor"
+   ]
+  },
+  "germination": {
+   "he": [
+    "נביטה"
+   ],
+   "en": [
+    "germination",
+    "outgrowth"
+   ]
+  },
+  "significance": {
+   "he": [
+    "עיקור",
+    "קלקול מזון"
+   ],
+   "en": [
+    "sterilization",
+    "food spoilage"
+   ]
+  }
  }
 }
