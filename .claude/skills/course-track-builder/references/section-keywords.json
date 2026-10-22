@@ -6555,5 +6555,930 @@
     "food spoilage"
    ]
   }
+ },
+ "pp-plant-cell": {
+  "_heading": {
+   "he": [
+    "מבנה הצמח",
+    "התא הצמחי"
+   ],
+   "en": [
+    "plant cell",
+    "plant structure"
+   ]
+  },
+  "body-plan": {
+   "he": [
+    "מריסטמה",
+    "רקמות"
+   ],
+   "en": [
+    "meristem",
+    "tissue systems"
+   ]
+  },
+  "cell-types": {
+   "he": [
+    "עצה",
+    "שיפה"
+   ],
+   "en": [
+    "xylem",
+    "phloem",
+    "parenchyma"
+   ]
+  },
+  "cell-wall": {
+   "he": [
+    "דופן"
+   ],
+   "en": [
+    "cell wall",
+    "apoplast"
+   ]
+  },
+  "plasmodesmata": {
+   "he": [
+    "פלסמודסמה"
+   ],
+   "en": [
+    "plasmodesmata",
+    "symplast"
+   ]
+  },
+  "vacuole-plastids": {
+   "he": [
+    "ואקואולה",
+    "פלסטיד"
+   ],
+   "en": [
+    "vacuole",
+    "plastid"
+   ]
+  },
+  "division": {
+   "he": [
+    "חלוקה"
+   ],
+   "en": [
+    "phragmoplast",
+    "preprophase band"
+   ]
+  }
+ },
+ "pp-research-tools": {
+  "_heading": {
+   "he": [
+    "כלים למחקר"
+   ],
+   "en": [
+    "research tools",
+    "methods"
+   ]
+  },
+  "arabidopsis": {
+   "he": [
+    "ארבידופסיס"
+   ],
+   "en": [
+    "Arabidopsis"
+   ]
+  },
+  "genetics": {
+   "he": [
+    "מוטנטים",
+    "מוטגנזה"
+   ],
+   "en": [
+    "mutant",
+    "forward genetics",
+    "reverse genetics"
+   ]
+  },
+  "agrobacterium": {
+   "he": [
+    "אגרובקטריום"
+   ],
+   "en": [
+    "Agrobacterium",
+    "T-DNA"
+   ]
+  },
+  "reporters": {
+   "he": [
+    "גן מדווח"
+   ],
+   "en": [
+    "GUS",
+    "GFP",
+    "reporter"
+   ]
+  },
+  "silencing-editing": {
+   "he": [
+    "השתקה",
+    "עריכה"
+   ],
+   "en": [
+    "RNAi",
+    "CRISPR"
+   ]
+  }
+ },
+ "pp-water-cells": {
+  "_heading": {
+   "he": [
+    "יחסי צמח-מים",
+    "פוטנציאל מים"
+   ],
+   "en": [
+    "water potential",
+    "water relations"
+   ]
+  },
+  "properties": {
+   "he": [
+    "תכונות המים"
+   ],
+   "en": [
+    "cohesion",
+    "hydrogen bond"
+   ]
+  },
+  "movement": {
+   "he": [
+    "אוסמוזה",
+    "דיפוזיה"
+   ],
+   "en": [
+    "osmosis",
+    "diffusion",
+    "bulk flow"
+   ]
+  },
+  "water-potential": {
+   "he": [
+    "פוטנציאל מים"
+   ],
+   "en": [
+    "water potential",
+    "solute potential"
+   ]
+  },
+  "cell-water": {
+   "he": [
+    "טורגור",
+    "פלסמוליזה"
+   ],
+   "en": [
+    "turgor",
+    "plasmolysis"
+   ]
+  },
+  "aquaporins": {
+   "he": [
+    "אקווהפורין"
+   ],
+   "en": [
+    "aquaporin"
+   ]
+  }
+ },
+ "pp-water-balance": {
+  "_heading": {
+   "he": [
+    "משק מים",
+    "דיות"
+   ],
+   "en": [
+    "water balance",
+    "transpiration"
+   ]
+  },
+  "continuum": {
+   "he": [
+    "רצף קרקע-צמח-אוויר"
+   ],
+   "en": [
+    "soil-plant-atmosphere continuum"
+   ]
+  },
+  "soil-root": {
+   "he": [
+    "לחץ שורש"
+   ],
+   "en": [
+    "root pressure",
+    "endodermis"
+   ]
+  },
+  "cohesion-tension": {
+   "he": [
+    "לכידות",
+    "קביטציה"
+   ],
+   "en": [
+    "cohesion-tension",
+    "cavitation"
+   ]
+  },
+  "transpiration": {
+   "he": [
+    "דיות"
+   ],
+   "en": [
+    "transpiration"
+   ]
+  },
+  "stomata": {
+   "he": [
+    "פיוניות",
+    "תאי שמירה"
+   ],
+   "en": [
+    "stomata",
+    "guard cell"
+   ]
+  }
+ },
+ "pp-cell-growth": {
+  "_heading": {
+   "he": [
+    "גדילה"
+   ],
+   "en": [
+    "cell expansion",
+    "growth"
+   ]
+  },
+  "wall-structure": {
+   "he": [
+    "תאית"
+   ],
+   "en": [
+    "cellulose",
+    "cellulose synthase"
+   ]
+  },
+  "direction": {
+   "he": [
+    "מיקרוטובולים"
+   ],
+   "en": [
+    "microtubules",
+    "anisotropic growth"
+   ]
+  },
+  "lockhart": {
+   "he": [
+    "לוקהרט"
+   ],
+   "en": [
+    "Lockhart"
+   ]
+  },
+  "acid-growth": {
+   "he": [
+    "גדילה חומצית",
+    "אקספנסין"
+   ],
+   "en": [
+    "acid growth",
+    "expansin"
+   ]
+  },
+  "growth-stop": {
+   "he": [],
+   "en": [
+    "wall stiffening"
+   ]
+  }
+ },
+ "pp-development": {
+  "_heading": {
+   "he": [
+    "התפתחות"
+   ],
+   "en": [
+    "development"
+   ]
+  },
+  "dormancy": {
+   "he": [
+    "תרדמה"
+   ],
+   "en": [
+    "seed dormancy"
+   ]
+  },
+  "germination": {
+   "he": [
+    "נביטה"
+   ],
+   "en": [
+    "germination",
+    "aleurone"
+   ]
+  },
+  "seedling": {
+   "he": [
+    "נבט"
+   ],
+   "en": [
+    "etiolation",
+    "de-etiolation"
+   ]
+  },
+  "ram": {
+   "he": [
+    "מריסטמת השורש"
+   ],
+   "en": [
+    "root apical meristem",
+    "quiescent center"
+   ]
+  },
+  "sam": {
+   "he": [
+    "מריסטמת הנבט"
+   ],
+   "en": [
+    "shoot apical meristem",
+    "WUSCHEL",
+    "CLAVATA"
+   ]
+  }
+ },
+ "pp-auxin": {
+  "_heading": {
+   "he": [
+    "אוקסין",
+    "הורמונים"
+   ],
+   "en": [
+    "auxin",
+    "hormone signaling"
+   ]
+  },
+  "signaling-principles": {
+   "he": [
+    "העברת אותות"
+   ],
+   "en": [
+    "signal transduction",
+    "ubiquitin"
+   ]
+  },
+  "auxin-synthesis": {
+   "he": [
+    "אוקסין"
+   ],
+   "en": [
+    "IAA",
+    "YUCCA"
+   ]
+  },
+  "polar-transport": {
+   "he": [
+    "הובלה קוטבית"
+   ],
+   "en": [
+    "polar auxin transport",
+    "PIN"
+   ]
+  },
+  "auxin-signaling": {
+   "he": [
+    "אוקסין"
+   ],
+   "en": [
+    "TIR1",
+    "Aux/IAA",
+    "ARF"
+   ]
+  },
+  "auxin-roles": {
+   "he": [
+    "שליטה קודקודית"
+   ],
+   "en": [
+    "apical dominance"
+   ]
+  }
+ },
+ "pp-cytokinin-gibberellin": {
+  "_heading": {
+   "he": [
+    "ציטוקינין",
+    "גיברלין"
+   ],
+   "en": [
+    "cytokinin",
+    "gibberellin"
+   ]
+  },
+  "cytokinin-synthesis": {
+   "he": [
+    "ציטוקינין"
+   ],
+   "en": [
+    "cytokinin",
+    "IPT"
+   ]
+  },
+  "cytokinin-signaling": {
+   "he": [
+    "ציטוקינין"
+   ],
+   "en": [
+    "AHK",
+    "ARR"
+   ]
+  },
+  "cytokinin-roles": {
+   "he": [
+    "ציטוקינין"
+   ],
+   "en": [
+    "cytokinin",
+    "tissue culture"
+   ]
+  },
+  "gibberellin": {
+   "he": [
+    "גיברלין"
+   ],
+   "en": [
+    "gibberellin"
+   ]
+  },
+  "ga-signaling": {
+   "he": [
+    "גיברלין"
+   ],
+   "en": [
+    "DELLA",
+    "GID1"
+   ]
+  },
+  "green-revolution": {
+   "he": [
+    "המהפכה הירוקה"
+   ],
+   "en": [
+    "Green Revolution"
+   ]
+  }
+ },
+ "pp-aba-ethylene": {
+  "_heading": {
+   "he": [
+    "חומצה אבציסית",
+    "אתילן"
+   ],
+   "en": [
+    "abscisic acid",
+    "ethylene"
+   ]
+  },
+  "aba": {
+   "he": [
+    "חומצה אבציסית"
+   ],
+   "en": [
+    "ABA"
+   ]
+  },
+  "aba-signaling": {
+   "he": [
+    "חומצה אבציסית"
+   ],
+   "en": [
+    "PYR/PYL",
+    "PP2C",
+    "SnRK2"
+   ]
+  },
+  "ethylene": {
+   "he": [
+    "אתילן"
+   ],
+   "en": [
+    "ethylene",
+    "triple response"
+   ]
+  },
+  "ethylene-signaling": {
+   "he": [
+    "אתילן"
+   ],
+   "en": [
+    "ETR1",
+    "CTR1",
+    "EIN2"
+   ]
+  }
+ },
+ "pp-light-reactions": {
+  "_heading": {
+   "he": [
+    "פוטוסינתזה",
+    "שלבי האור"
+   ],
+   "en": [
+    "light reactions",
+    "photosynthesis"
+   ]
+  },
+  "pigments": {
+   "he": [
+    "כלורופיל"
+   ],
+   "en": [
+    "chlorophyll",
+    "action spectrum"
+   ]
+  },
+  "antenna": {
+   "he": [
+    "מרכז תגובה"
+   ],
+   "en": [
+    "reaction center",
+    "antenna"
+   ]
+  },
+  "z-scheme": {
+   "he": [
+    "שרשרת העברת אלקטרונים"
+   ],
+   "en": [
+    "Z scheme",
+    "photosystem"
+   ]
+  },
+  "atp": {
+   "he": [
+    "ATP"
+   ],
+   "en": [
+    "ATP synthase",
+    "chemiosmotic"
+   ]
+  },
+  "cyclic": {
+   "he": [],
+   "en": [
+    "cyclic electron flow"
+   ]
+  },
+  "photoprotection": {
+   "he": [],
+   "en": [
+    "photoinhibition",
+    "NPQ"
+   ]
+  },
+  "herbicides": {
+   "he": [
+    "קוטלי עשבים"
+   ],
+   "en": [
+    "DCMU",
+    "herbicide"
+   ]
+  }
+ },
+ "pp-calvin": {
+  "_heading": {
+   "he": [
+    "מעגל קלוין"
+   ],
+   "en": [
+    "Calvin cycle",
+    "carbon fixation"
+   ]
+  },
+  "cycle": {
+   "he": [
+    "מעגל קלוין"
+   ],
+   "en": [
+    "Calvin cycle"
+   ]
+  },
+  "rubisco": {
+   "he": [
+    "רוביסקו"
+   ],
+   "en": [
+    "Rubisco"
+   ]
+  },
+  "regulation": {
+   "he": [],
+   "en": [
+    "thioredoxin"
+   ]
+  },
+  "products": {
+   "he": [
+    "עמילן",
+    "סוכרוז"
+   ],
+   "en": [
+    "starch",
+    "sucrose"
+   ]
+  },
+  "photorespiration": {
+   "he": [
+    "נשימה פוטוסינתטית"
+   ],
+   "en": [
+    "photorespiration"
+   ]
+  },
+  "c4-cam": {
+   "he": [
+    "C4",
+    "CAM"
+   ],
+   "en": [
+    "C4",
+    "CAM"
+   ]
+  }
+ },
+ "pp-photoreceptors": {
+  "_heading": {
+   "he": [
+    "איכות האור",
+    "קולטני אור"
+   ],
+   "en": [
+    "photoreceptor",
+    "light signaling"
+   ]
+  },
+  "families": {
+   "he": [
+    "קולטני אור"
+   ],
+   "en": [
+    "photoreceptors"
+   ]
+  },
+  "phytochrome": {
+   "he": [
+    "פיטוכרום"
+   ],
+   "en": [
+    "phytochrome"
+   ]
+  },
+  "phya-phyb": {
+   "he": [],
+   "en": [
+    "phyA",
+    "phyB"
+   ]
+  },
+  "phy-signaling": {
+   "he": [],
+   "en": [
+    "PIF",
+    "COP1",
+    "HY5"
+   ]
+  },
+  "shade": {
+   "he": [
+    "צל"
+   ],
+   "en": [
+    "shade avoidance"
+   ]
+  },
+  "blue-uv": {
+   "he": [
+    "אור כחול"
+   ],
+   "en": [
+    "cryptochrome",
+    "phototropin",
+    "UVR8"
+   ]
+  }
+ },
+ "pp-tropisms": {
+  "_heading": {
+   "he": [
+    "טרופיזם"
+   ],
+   "en": [
+    "tropism"
+   ]
+  },
+  "logic": {
+   "he": [
+    "טרופיזם"
+   ],
+   "en": [
+    "tropism"
+   ]
+  },
+  "phototropism": {
+   "he": [
+    "פוטוטרופיזם"
+   ],
+   "en": [
+    "phototropism"
+   ]
+  },
+  "root-gravitropism": {
+   "he": [
+    "גרביטרופיזם"
+   ],
+   "en": [
+    "gravitropism",
+    "statolith"
+   ]
+  },
+  "shoot-gravitropism": {
+   "he": [
+    "גרביטרופיזם"
+   ],
+   "en": [
+    "gravitropism"
+   ]
+  },
+  "other-tropisms": {
+   "he": [],
+   "en": [
+    "thigmotropism",
+    "hydrotropism"
+   ]
+  }
+ },
+ "pp-circadian-photoperiod": {
+  "_heading": {
+   "he": [
+    "שעון צירקאדי",
+    "פוטופריודיזם"
+   ],
+   "en": [
+    "circadian clock",
+    "photoperiodism"
+   ]
+  },
+  "rhythms": {
+   "he": [
+    "שעון צירקאדי"
+   ],
+   "en": [
+    "circadian rhythm"
+   ]
+  },
+  "clock": {
+   "he": [
+    "שעון"
+   ],
+   "en": [
+    "CCA1",
+    "TOC1"
+   ]
+  },
+  "photoperiodism": {
+   "he": [
+    "פוטופריודיזם"
+   ],
+   "en": [
+    "photoperiodism",
+    "short-day"
+   ]
+  },
+  "coincidence": {
+   "he": [],
+   "en": [
+    "CONSTANS",
+    "external coincidence"
+   ]
+  }
+ },
+ "pp-flowering": {
+  "_heading": {
+   "he": [
+    "פריחה"
+   ],
+   "en": [
+    "flowering"
+   ]
+  },
+  "phase-change": {
+   "he": [],
+   "en": [
+    "juvenile phase",
+    "miR156"
+   ]
+  },
+  "florigen": {
+   "he": [
+    "פלוריגן"
+   ],
+   "en": [
+    "florigen",
+    "FT"
+   ]
+  },
+  "vernalization": {
+   "he": [
+    "ורנליזציה"
+   ],
+   "en": [
+    "vernalization",
+    "FLC"
+   ]
+  },
+  "pathways": {
+   "he": [
+    "פריחה"
+   ],
+   "en": [
+    "flowering pathways",
+    "LEAFY"
+   ]
+  },
+  "abc": {
+   "he": [
+    "מודל ABC"
+   ],
+   "en": [
+    "ABC model",
+    "floral organ identity"
+   ]
+  }
+ },
+ "pp-biotic-stress": {
+  "_heading": {
+   "he": [
+    "עקות ביוטית",
+    "פתוגנים"
+   ],
+   "en": [
+    "biotic stress",
+    "plant immunity"
+   ]
+  },
+  "overview": {
+   "he": [
+    "פתוגנים"
+   ],
+   "en": [
+    "pathogen"
+   ]
+  },
+  "pti": {
+   "he": [],
+   "en": [
+    "PTI",
+    "PAMP"
+   ]
+  },
+  "eti": {
+   "he": [],
+   "en": [
+    "ETI",
+    "effector",
+    "NLR"
+   ]
+  },
+  "sa-sar": {
+   "he": [
+    "חומצה סליצילית"
+   ],
+   "en": [
+    "salicylic acid",
+    "systemic acquired resistance"
+   ]
+  },
+  "ja": {
+   "he": [
+    "יסמונט"
+   ],
+   "en": [
+    "jasmonate",
+    "herbivore"
+   ]
+  },
+  "viruses": {
+   "he": [
+    "נגיפים"
+   ],
+   "en": [
+    "RNA silencing",
+    "virus"
+   ]
+  }
  }
 }
