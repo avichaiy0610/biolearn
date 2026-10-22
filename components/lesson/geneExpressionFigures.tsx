@@ -406,8 +406,8 @@ function AltSplicingTypes() {
         const y = 42 + i * 66;
         return (
           <g key={t}>
-            <He x={474} y={y + 4} size={11.5} bold anchor="end">{t}</He>
-            <g transform="translate(-55 0)"><Line x1={110} y1={y} x2={400} y2={y} c={LINE} w={1.4} />{draw(y)}</g>
+            <He x={474} y={y + 4} size={10.5} bold anchor="end">{t}</He>
+            <g transform="translate(-75 0)"><Line x1={110} y1={y} x2={400} y2={y} c={LINE} w={1.4} />{draw(y)}</g>
           </g>
         );
       })}
@@ -604,7 +604,7 @@ function GlobinLocus() {
       {[40, 58, 76, 94, 112].map((x) => <path key={x} d={`M${x} 92 l4 10 l-8 0 z`} fill={RED} />)}
       <Seg x0={30} x1={120} y={110} c={RED} fill={FILL.red} />
       <La x={75} y={114} size={11} bold color={RED}>LCR</La>
-      <He x={75} y={84} size={10.5} color={RED}>אתרי רגישות-יתר</He>
+      <He x={50} y={80} size={10.5} color={RED}>אתרי רגישות-יתר</He>
       {genes.map(([x, t, c]) => <Seg key={t} x0={x - 16} x1={x + 16} y={110} label={t} c={c} fill={c === MUTED ? FILL.gray : c === ORANGE ? FILL.orange : c === GREEN ? FILL.green : FILL.blue} />)}
       <path d="M90 100 C 120 40, 200 40, 225 100" fill="none" stroke={GREEN} strokeWidth={1.8} {...dash} />
       <He x={160} y={44} size={10.5} color={GREEN}>לולאה לגן הפעיל (בעובר)</He>

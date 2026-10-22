@@ -253,7 +253,7 @@ function CicrCardiac() {
       <La x={340} y={100} size={14} bold color={BLUE}>SR</La>
       <LBox x={248} y={96} w={52} h={24} label="RyR2" c={RED} fill={FILL.red} size={10.5} />
       <Arrow x1={200} y1={92} x2={222} y2={104} color={RED} />
-      <He x={190} y={118} size={10} color={RED} anchor="end">Ca²⁺ פותח</He>
+      <He x={154} y={136} size={10} color={RED} anchor="end">Ca²⁺ פותח</He>
       <Arrow x1={248} y1={122} x2={248} y2={180} color={RED} width={3} />
       <He x={248} y={198} size={12} bold color={RED}>Ca²⁺ ↑ → טרופונין C → התכווצות</He>
       <LBox x={390} y={136} w={74} h={24} label="SERCA2" c={GREEN} fill={FILL.green} size={10.5} />
@@ -262,7 +262,7 @@ function CicrCardiac() {
       <LBox x={80} y={58} w={60} h={24} label="NCX" c={ORANGE} fill={FILL.orange} size={10.5} />
       <Arrow x1={40} y1={92} x2={40} y2={44} color={RED} />
       <Arrow x1={120} y1={44} x2={120} y2={92} color={ORANGE} />
-      <He x={80} y={104} size={10} color={MUTED}>Ca²⁺ החוצה, 3 Na⁺ פנימה</He>
+      <He x={80} y={114} size={10} color={MUTED}>Ca²⁺ החוצה, 3 Na⁺ פנימה</He>
       <He x={240} y={240} size={11.5} color={MUTED}>בשריר השלד, לעומת זאת: DHPR מחובר מכנית ל-RyR1 — בלי צורך ב-Ca²⁺ מבחוץ</He>
       <He x={240} y={262} size={11.5} color={PURPLE}>β1 → PKA: מזרחן תעלות L ופוספולמבן → כוח והרפיה מהירה</He>
     </Svg>
@@ -281,7 +281,7 @@ function SmoothMuscleMlck() {
       <HBox x={320} y={114} w={150} label="מיוזין-P → התכווצות" c={GREEN} fill={FILL.green} bold />
       <Arrow x1={244} y1={136} x2={150} y2={136} color={BLUE} width={3} />
       <LBox x={110} y={122} w={70} label="MLCP" c={BLUE} fill={FILL.blue} bold />
-      <He x={110} y={172} size={11} color={BLUE}>מסיר P → הרפיה</He>
+      <He x={102} y={176} size={11} color={BLUE} anchor="end">מסיר P → הרפיה</He>
       <LBox x={110} y={210} w={100} label="Rho kinase" c={RED} fill={FILL.red} />
       <line x1={110} y1={208} x2={110} y2={156} stroke={RED} strokeWidth={2} />
       <line x1={100} y1={156} x2={120} y2={156} stroke={RED} strokeWidth={3} />
@@ -360,7 +360,7 @@ function GlomerularStarling() {
       <Arrow x1={280} y1={180} x2={280} y2={118} color={MUTED} />
       <La x={292} y={160} size={12} bold color={MUTED} anchor="start">P_BS ≈ 15</La>
       <Arrow x1={150} y1={150} x2={150} y2={96} color={BLUE} />
-      <La x={140} y={170} size={12} bold color={BLUE} anchor="end">π_GC ≈ 25→35</La>
+      <La x={158} y={174} size={12} bold color={BLUE} anchor="start">π_GC ≈ 25→35</La>
       <He x={240} y={30} size={12.5} bold>כוח נטו ≈ 55 − 15 − 25 ≈ 15 מ״מ כספית (בתחילת הנים)</He>
     </Svg>
   );

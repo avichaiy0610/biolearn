@@ -469,6 +469,17 @@ function PedigreeXR() {
   );
 }
 
+// Figure ids must be unique across the per-course maps — a later spread silently replaces an earlier figure
+// (this happened with "z-scheme", "calvin-cycle" and "lambda-switch"). Fail loudly instead.
+const FIGURE_SETS = { BIOCHEM_FIGURES, METABOLIC_FIGURES, MOLECULAR_FIGURES, CELL_FIGURES, GENE_EXPRESSION_FIGURES, PHYSIOLOGY_FIGURES, MICRO_FIGURES, PLANT_FIGURES };
+{
+  const seen = new Map<string, string>();
+  for (const [set, figs] of Object.entries(FIGURE_SETS)) for (const id of Object.keys(figs)) {
+    if (seen.has(id)) throw new Error(`Duplicate figure id "${id}" in ${seen.get(id)} and ${set}`);
+    seen.set(id, set);
+  }
+}
+
 const FIGURES: Record<string, { el: () => React.ReactElement; captionHe: string }> = {
   crossover: { el: Crossover, captionHe: "איור 1 — שחלוף יחיד בין שני גנים בתאחיזה במצב cis. השחלוף מערב רק שתיים מארבע הכרומטידות, ולכן מתוך מיוזה כזו רק מחצית מהתוצרים רקומביננטיים. כחול וכתום מציינים את מקור המקטעים בשני ההומולוגים; הסימון המקווקו מציין את אתר ההחלפה. סכמטי, לא בקנה מידה." },
   punnett: { el: Punnett, captionHe: "ריבוע פאנט להצלבה Aa × Aa. כל הורה יוצר שני סוגי גמטות בהסתברות שווה; שלוש מתוך ארבע המשבצות נושאות לפחות אלל A אחד — ולכן 3 סגולים : 1 לבן." },

@@ -64,7 +64,7 @@ export const ppLightReactions: Lesson = {
 
 **החשבון:** כדי לשחרר **מולקולת O₂ אחת** ולהעביר **4 אלקטרונים** עד NADP⁺, צריך **4 פוטונים ב-PSII ועוד 4 ב-PSI — 8 פוטונים**. התוצרים: **2 NADPH** ופרוטונים בלומן שמספיקים לבערך **3 ATP**.
 
-[[figure:z-scheme]]
+[[figure:pp-z-scheme]]
 
 ## ATP: התאוריה הכימיאוסמוטית {#atp}
 

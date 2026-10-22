@@ -328,8 +328,8 @@ function PppOverview() {
       <Arrow x1={385} y1={257} x2={385} y2={292} />
       <He x={385} y={312} size={12.5} bold>גליקוליזה</He>
       <path d="M385 170 Q385 40 220 33" fill="none" stroke={MUTED} strokeWidth={1.6} {...dash} markerEnd="url(#bfArrow)" />
-      <He x={400} y={70} size={11} color={MUTED} anchor="start">גלוקונאוגנזה</He>
-      <He x={400} y={86} size={11} color={MUTED} anchor="start">(כשצריך רק NADPH)</He>
+      <He x={474} y={70} size={11} color={MUTED} anchor="end">גלוקונאוגנזה</He>
+      <He x={474} y={86} size={10.5} color={MUTED} anchor="end">(כשצריך רק NADPH)</He>
     </svg>
   );
 }

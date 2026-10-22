@@ -631,7 +631,7 @@ function TrnaStructure() {
     <Svg h={390} label="מבנה התלתן של tRNA: זרוע הקבלה עם קצה CCA שאליו מחוברת חומצת האמינו, זרוע D, זרוע TψC, לולאה משתנה, וזרוע האנטיקודון שבלולאה שלה שלושת בסיסי האנטיקודון">
       {stemV(240, 80, 160)}
       <La x={222} y={74} size={12} bold>5′</La>
-      {["C", "C", "A"].map((c, i) => <La key={i} x={252} y={72 - i * 16} size={13} bold color={ORANGE}>{c}</La>)}
+      {["C", "C", "A"].map((c, i) => <La key={i} x={266} y={72 - i * 16} size={13} bold color={ORANGE}>{c}</La>)}
       <La x={268} y={22} size={11} bold>3′</La>
       <circle cx={290} cy={30} r={13} fill={FILL.green} stroke={GREEN} strokeWidth={2} />
       <La x={290} y={34} size={10} bold>aa</La>
@@ -750,7 +750,7 @@ function InitiationCompare() {
       <La x={332} y={283} size={11} bold>AUG</La>
       <La x={332} y={308} size={11} color={GREEN}>gccRccAUGG</La>
       <He x={332} y={326} size={10.5} color={MUTED}>הקשר קוזאק</He>
-      <He x={240} y={222} size={10.5} color={MUTED}>מעגל: הכובע והזנב עובדים יחד</He>
+      <He x={240} y={222} size={10.5} color={MUTED}>מעגל: כובע + זנב</He>
     </Svg>
   );
 }

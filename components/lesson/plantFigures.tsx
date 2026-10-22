@@ -92,7 +92,7 @@ function Plasmodesma() {
       {/* labels */}
       <He x={230} y={262} size={11} color={WALL_EDGE}>דופן</He>
       <He x={110} y={256} size={10.5} color={BLUE}>ממברנת התא — רציפה</He>
-      <He x={360} y={210} size={10.5} color={TEAL}>ER</He>
+      <La x={420} y={190} size={10.5} color={TEAL}>ER</La>
       <line x1={330} y1={cy + 6} x2={360} y2={cy + 50} stroke={TEAL} strokeWidth={1} />
       <He x={366} y={cy + 64} size={10.5} color={TEAL}>דסמוטובול (ER דחוס)</He>
       <line x1={250} y1={cy - 10} x2={330} y2={84} stroke={ORANGE} strokeWidth={1} />
@@ -123,7 +123,7 @@ function TiPlasmid() {
       <circle cx={360} cy={75} r={30} fill="none" stroke={BLUE} strokeWidth={4} />
       <path d="M 334 60 A 30 30 0 0 1 352 46" fill="none" stroke={RED} strokeWidth={7} />
       <path d="M 384 92 A 30 30 0 0 1 362 105" fill="none" stroke={PURPLE} strokeWidth={7} />
-      <La x={322} y={44} size={10} color={RED} anchor="end">T-DNA</La>
+      <La x={294} y={44} size={10} color={RED} anchor="end">T-DNA</La>
       <La x={396} y={118} size={10} color={PURPLE} anchor="start">vir</La>
       <He x={360} y={80} size={10} color={BLUE}>Ti</He>
       <path d="M420 50 q 14 10 0 20 q -14 10 0 20" fill="none" stroke={MUTED} strokeWidth={1.4} />
@@ -264,7 +264,7 @@ function AcidGrowth() {
   return (
     <Svg h={320} label="גדילה חומצית: אוקסין מפעיל את משאבת הפרוטונים בממברנת התא, הפרוטונים מחמיצים את הדופן ל-pH 4.5–5, ואקספנסינים פעילים ב-pH הזה מחלישים את קשרי המימן בין שרשרות הקסילוגלוקן למיקרופיברילי התאית. תחת לחץ הטורגור המיקרופיברילים מחליקים, והדופן נמתחת">
       <rect x={20} y={56} width={440} height={140} fill={WALL} stroke={WALL_EDGE} />
-      <He x={450} y={74} size={11} bold color={WALL_EDGE} anchor="end">דופן (pH 4.5–5)</He>
+      <He x={450} y={70} size={10.5} bold color={WALL_EDGE} anchor="end">דופן (pH 4.5–5)</He>
       {fib.map((y) => <rect key={y} x={30} y={y - 6} width={420} height={12} rx={6} fill="#fafaf9" stroke={MUTED} strokeWidth={1.2} />)}
       <He x={86} y={fib[0] - 12} size={10} color={MUTED}>מיקרופיבריל תאית</He>
       {/* xyloglucan tethers */}
@@ -282,7 +282,7 @@ function AcidGrowth() {
       <rect x={20} y={216} width={440} height={56} fill={FILL.cyto} />
       <rect x={196} y={200} width={28} height={16} rx={4} fill={FILL.purple} stroke={PURPLE} />
       <Arrow x1={210} y1={226} x2={210} y2={190} color={RED} />
-      <La x={232} y={234} size={10.5} color={PURPLE} anchor="start">H⁺-ATPase</La>
+      <La x={262} y={234} size={10.5} color={PURPLE} anchor="start">H⁺-ATPase</La>
       <Hormone x={150} y={248} />
       <He x={128} y={252} size={10.5} color={ORANGE} anchor="end">אוקסין</He>
       <Arrow x1={160} y1={244} x2={196} y2={220} color={ORANGE} />
@@ -307,7 +307,8 @@ function ShootMeristem() {
       {/* primordia */}
       <ellipse cx={36} cy={180} rx={22} ry={34} fill="#bbf7d0" stroke={GREEN} transform="rotate(-25 36 180)" />
       <ellipse cx={344} cy={180} rx={22} ry={34} fill="#bbf7d0" stroke={GREEN} transform="rotate(25 344 180)" />
-      <He x={30} y={234} size={10} color={GREEN}>ראשית עלה</He>
+      <line x1={354} y1={206} x2={392} y2={252} stroke={GREEN} strokeWidth={1} />
+      <He x={410} y={266} size={10} color={GREEN}>ראשית עלה</He>
       {/* zones */}
       <ellipse cx={190} cy={110} rx={52} ry={26} fill={FILL.yellow} stroke={ORANGE} strokeWidth={1.4} />
       <He x={190} y={108} size={10.5} bold color={ORANGE}>אזור מרכזי</He>
@@ -315,14 +316,14 @@ function ShootMeristem() {
       <ellipse cx={190} cy={168} rx={38} ry={20} fill={FILL.purple} stroke={PURPLE} strokeWidth={1.4} />
       <He x={190} y={166} size={10} bold color={PURPLE}>מרכז הארגון</He>
       <La x={190} y={180} size={10} color={PURPLE}>WUS</La>
-      <He x={90} y={150} size={10} color={GREEN}>אזור היקפי</He>
+      <He x={90} y={200} size={10} color={GREEN}>אזור היקפי</He>
       <He x={290} y={150} size={10} color={GREEN}>אזור היקפי</He>
       <rect x={150} y={210} width={80} height={80} rx={8} fill="#d1fae5" stroke={GREEN} {...dash} />
       <He x={190} y={256} size={10} color={GREEN}>אזור הצלע</He>
       {/* loop */}
       <Arrow x1={212} y1={152} x2={212} y2={128} color={PURPLE} width={2.4} />
       <path d="M150 116 C 110 130, 110 160, 148 170" fill="none" stroke={RED} strokeWidth={2} markerEnd="url(#ppInhib)" />
-      <La x={104} y={124} size={10} bold color={RED} anchor="end">CLV3→CLV1</La>
+      <La x={112} y={142} size={9.5} bold color={RED} anchor="end">CLV3→CLV1</La>
       {/* side panel */}
       <rect x={360} y={70} width={110} height={170} rx={10} fill="#f8fafc" stroke={LINE_GRAY} />
       <He x={415} y={90} size={11} bold>הלולאה</He>
@@ -437,18 +438,16 @@ function CytokininRelay() {
       <La x={116} y={140} size={10} color={PURPLE}>His</La>
       <La x={148} y={140} size={10} color={PURPLE}>Asp</La>
       <path d="M120 128 C 126 120, 140 120, 146 128" fill="none" stroke={PURPLE} strokeWidth={1.4} markerEnd="url(#bfArrowS)" />
-      <La x={132} y={126} size={9} color={PURPLE}>P</La>
       {/* AHP */}
       <Prot x={240} y={140} w={46} label="AHP" c={PURPLE} fill={FILL.purple} />
       <Arrow x1={164} y1={138} x2={214} y2={140} color={PURPLE} />
-      <Arrow x1={240} y1={156} x2={240} y2={204} color={PURPLE} width={2.4} />
       <He x={232} y={182} size={10} color={PURPLE} anchor="end">נכנס לגרעין</He>
       {/* nucleus */}
       <rect x={20} y={192} width={440} height={118} rx={14} fill={FILL.nuc} stroke={PURPLE} strokeWidth={1.2} />
+      <path d="M240 156 C 240 210, 200 230, 156 240" fill="none" stroke={PURPLE} strokeWidth={2.4} markerEnd="url(#bfArrowS)" />
       <He x={450} y={212} size={10} color={MUTED} anchor="end">גרעין</He>
       <Dna x1={40} x2={440} y={280} site={[90, 50, "מקדם"]} />
       <Prot x={115} y={252} w={72} label="ARR-B" c={GREEN} fill={FILL.green} />
-      <Arrow x1={210} y1={220} x2={140} y2={242} color={PURPLE} />
       <Arrow x1={160} y1={264} x2={250} y2={264} color={GREEN} width={2.4} />
       <He x={302} y={258} size={10.5} bold color={GREEN}>גני תגובה</He>
       <Prot x={380} y={236} w={72} label="ARR-A" c={RED} fill={FILL.red} />
@@ -517,7 +516,7 @@ function AbaCore() {
       <Inhib x1={90} y1={84} x2={90} y2={98} c={BLUE} />
       <Prot x={160} y={84} w={60} label="SnRK2" c={PURPLE} fill={FILL.purple} />
       <La x={196} y={70} size={10} bold color={PURPLE}>P</La>
-      <He x={160} y={130} size={10.5} bold color={GREEN}>פעילה</He>
+      <He x={214} y={110} size={10.5} bold color={GREEN}>פעילה</He>
       {/* targets */}
       <Membrane x1={10} x2={470} y={190} />
       <He x={466} y={182} size={9.5} color={MUTED} anchor="end">ממברנת התא (תא שמירה)</He>
@@ -525,7 +524,7 @@ function AbaCore() {
       <La x={146} y={218} size={10} bold color={ORANGE}>SLAC1</La>
       <Arrow x1={160} y1={100} x2={148} y2={176} color={PURPLE} />
       <Arrow x1={146} y1={196} x2={146} y2={160} color={ORANGE} />
-      <He x={200} y={234} size={10} color={ORANGE}>אניונים יוצאים ← דה-פולריזציה ← K⁺ יוצא ← סגירה</He>
+      <He x={330} y={236} size={10} color={ORANGE}>אניונים יוצאים ← דה-פולריזציה ← K⁺ יוצא ← סגירה</He>
       <rect x={10} y={248} width={460} height={64} rx={12} fill={FILL.nuc} stroke={PURPLE} strokeWidth={1.1} />
       <Dna x1={30} x2={300} y={290} site={[70, 50, "ABRE"]} />
       <Prot x={95} y={270} w={46} label="ABF" c={GREEN} fill={FILL.green} />
@@ -608,10 +607,10 @@ function ZScheme() {
       {chain.slice(0, -1).map((n, i) => { const a = P(n), b = P(chain[i + 1]); return <line key={n} x1={a.x} y1={a.y} x2={b.x} y2={b.y} stroke={MUTED} strokeWidth={1.6} markerEnd="url(#bfArrow)" />; })}
       {chain2.slice(0, -1).map((n, i) => { const a = P(n), b = P(chain2[i + 1]); return <line key={n} x1={a.x} y1={a.y} x2={b.x} y2={b.y} stroke={MUTED} strokeWidth={1.6} markerEnd="url(#bfArrow)" />; })}
       <line x1={P("H₂O").x} y1={P("H₂O").y} x2={P("P680").x - 6} y2={P("P680").y} stroke={TEAL} strokeWidth={1.6} markerEnd="url(#bfArrow)" />
-      {pts.map(([n, , , c]) => { const p = P(n); return <g key={n}><circle cx={p.x} cy={p.y} r={4} fill={c} /><La x={p.x + (n === "P680" || n === "P700" ? 0 : 6)} y={p.y + (n.endsWith("*") ? -8 : n === "P680" || n === "P700" ? 16 : -7)} size={10} bold={n.startsWith("P6") || n.startsWith("P7") || n === "NADP⁺" || n === "H₂O"} color={c} anchor={n === "P680" || n === "P700" ? "middle" : "start"}>{n}</La></g>; })}
-      <La x={P("H₂O").x + 6} y={y(1.0)} size={9.5} color={TEAL} anchor="start">O₂ + 4H⁺</La>
+      {pts.map(([n, , , c]) => { const p = P(n); return <g key={n}><circle cx={p.x} cy={p.y} r={4} fill={c} />{n !== "NADP⁺" && <La x={p.x + (n === "P680" || n === "P700" ? 0 : 6)} y={p.y + (n.endsWith("*") ? -8 : n === "P680" || n === "P700" ? 16 : -7)} size={10} bold={n.startsWith("P6") || n.startsWith("P7") || n === "NADP⁺" || n === "H₂O"} color={c} anchor={n === "P680" || n === "P700" ? "middle" : "start"}>{n}</La>}</g>; })}
+      <La x={P("H₂O").x + 2} y={y(0.66)} size={9.5} color={TEAL} anchor="start">O₂</La>
       <La x={P("b₆f").x - 6} y={y(0.62)} size={9.5} color={PURPLE} anchor="end">H⁺ → lumen (Q cycle)</La>
-      <La x={P("NADP⁺").x} y={y(-0.12)} size={10} bold color={GREEN} anchor="middle">NADPH</La>
+      <La x={472} y={P("NADP⁺").y + 20} size={10} bold color={GREEN} anchor="end">NADP⁺ → NADPH</La>
       <He x={300} y={322} size={10} color={MUTED}>ערכי פוטנציאל בקירוב — סכמטי</He>
     </Svg>
   );
@@ -632,8 +631,9 @@ function ThylakoidMembrane() {
       <Cx x={70} w={70} label="PSII" c={ORANGE} fill={FILL.orange} />
       <Cx x={200} w={64} label="b₆f" c={PURPLE} fill={FILL.purple} />
       <Cx x={310} w={70} label="PSI" c={RED} fill={FILL.red} />
-      <Cx x={420} w={54} h={90} label="ATP" c={TEAL} fill={FILL.teal} />
-      <He x={420} y={174} size={9.5} color={TEAL}>סינתאז</He>
+      <Cx x={420} w={54} h={90} label="" c={TEAL} fill={FILL.teal} />
+      <La x={408} y={154} size={11} bold color={TEAL}>ATP</La>
+      <He x={408} y={174} size={9} color={TEAL}>סינתאז</He>
       {/* PQ */}
       <circle cx={136} cy={150} r={9} fill={FILL.yellow} stroke={ORANGE} /><La x={136} y={154} size={9} bold>PQ</La>
       <Arrow x1={106} y1={150} x2={126} y2={150} color={INK} />
@@ -645,8 +645,7 @@ function ThylakoidMembrane() {
       {/* Fd/FNR in stroma */}
       <circle cx={350} cy={96} r={10} fill={FILL.gray} stroke={MUTED} /><La x={350} y={100} size={9} bold>Fd</La>
       <Arrow x1={320} y1={114} x2={344} y2={104} color={INK} />
-      <La x={300} y={60} size={10} bold color={GREEN}>NADP⁺ → NADPH</La>
-      <Arrow x1={344} y1={88} x2={322} y2={66} color={GREEN} />
+      <La x={350} y={76} size={10} bold color={GREEN}>NADP⁺ → NADPH</La>
       {/* water */}
       <La x={70} y={232} size={10.5} bold color={TEAL}>2H₂O → O₂ + 4H⁺</La>
       <Arrow x1={70} y1={220} x2={70} y2={186} color={TEAL} />
@@ -654,9 +653,9 @@ function ThylakoidMembrane() {
       {[70, 310].map((x) => <path key={x} d={`M${x - 26} 30 l8 10 l-6 2 l10 14`} fill="none" stroke="#ca8a04" strokeWidth={2.2} markerEnd="url(#bfArrowS)" />)}
       <He x={70} y={30} size={10} color="#ca8a04" anchor="end">אור</He>
       {/* protons */}
-      <Arrow x1={200} y1={110} x2={200} y2={240} color={RED} dashed />
-      <La x={212} y={246} size={10.5} bold color={RED} anchor="start">H⁺</La>
-      <Arrow x1={420} y1={240} x2={420} y2={60} color={TEAL} width={2.4} />
+      <Arrow x1={226} y1={110} x2={226} y2={240} color={RED} dashed />
+      <La x={236} y={246} size={10.5} bold color={RED} anchor="start">H⁺</La>
+      <Arrow x1={438} y1={240} x2={438} y2={60} color={TEAL} width={2.4} />
       <La x={420} y={50} size={10.5} bold color={TEAL}>ADP + Pi → ATP</La>
       <He x={240} y={304} size={10} color={MUTED}>החיצים השחורים — מסלול האלקטרון; האדומים — פרוטונים</He>
     </Svg>
@@ -855,8 +854,8 @@ function ExternalCoincidence() {
       {row(130, 8, "יום קצר")}
       {[0, 6, 12, 18, 24].map((t) => <La key={t} x={s.sx(t)} y={226} size={10} color={MUTED}>{String(t)}</La>)}
       <He x={260} y={244} size={10.5}>שעות מהזריחה</He>
-      <He x={380} y={50} size={10.5} bold color={GREEN}>חלבון CO ← FT ← פריחה</He>
-      <He x={380} y={160} size={10.5} bold color={RED}>אין חלבון CO</He>
+      <He x={170} y={40} size={10.5} bold color={GREEN}>חלבון CO ← FT ← פריחה</He>
+      <He x={170} y={150} size={10.5} bold color={RED}>אין חלבון CO</He>
       <He x={130} y={272} size={10} color={BLUE}>- - mRNA של CO (לפי השעון)</He>
       <He x={360} y={272} size={10} color={GREEN}>■ חלבון CO (רק באור)</He>
     </Svg>
@@ -923,8 +922,7 @@ function PlantImmunity() {
       <He x={250} y={216} size={9.5} color={BLUE}>Ca²⁺, ROS, MAPK, פיוניות, קאלוז</He>
       {/* effectors */}
       <line x1={104} y1={68} x2={104} y2={124} stroke={MUTED} strokeWidth={3} />
-      <He x={60} y={90} size={9.5} color={MUTED} anchor="end">מערכת</He>
-      <He x={60} y={104} size={9.5} color={MUTED} anchor="end">הפרשה III</He>
+      <He x={114} y={124} size={9.5} color={MUTED} anchor="start">מערכת הפרשה III</He>
       {[[96, 140], [112, 152], [100, 166]].map(([x, y], i) => <circle key={i} cx={x} cy={y} r={6} fill="#fecaca" stroke={RED} />)}
       <He x={60} y={160} size={10} bold color={RED} anchor="end">אפקטורים</He>
       <Inhib x1={124} y1={160} x2={176} y2={196} />
@@ -958,9 +956,9 @@ export const PLANT_FIGURES: Record<string, { el: () => React.ReactElement; capti
   "ga-della": { el: GaDella, captionHe: "מסלול הגיברלין: GA–GID1 נקשר ל-DELLA, SCF^SLY1 מסמן אותו לפירוק, וגורמי הגדילה משתחררים. סכמטי." },
   "aba-core": { el: AbaCore, captionHe: "מסלול הליבה של ABA: ‏ABA ⊣ PP2C ⊣ SnRK2. ‏SnRK2 הפעילה פותחת את SLAC1 בתא השמירה ומפעילה גורמי שעתוק ABF. סכמטי." },
   "ethylene-pathway": { el: EthylenePathway, captionHe: "מסלול האתילן: בלי אתילן הקולטנים מפעילים את CTR1 שמשבית את EIN2; אתילן משבית את הקולטנים, הקצה של EIN2 עובר לגרעין ו-EIN3 מפעיל את הגנים. סכמטי." },
-  "z-scheme": { el: ZScheme, captionHe: "סכמת Z: רכיבי השרשרת לפי פוטנציאל החיזור (ערכים בקירוב). שני חיצי אור מעלים את האלקטרון ב-PSII וב-PSI; בין לבין הוא יורד ומשחרר אנרגיה. סכמטי." },
+  "pp-z-scheme": { el: ZScheme, captionHe: "סכמת Z: רכיבי השרשרת לפי פוטנציאל החיזור (ערכים בקירוב). שני חיצי אור מעלים את האלקטרון ב-PSII וב-PSI; בין לבין הוא יורד ומשחרר אנרגיה. סכמטי." },
   "thylakoid-membrane": { el: ThylakoidMembrane, captionHe: "הקומפלקסים בממברנת התילקואיד, מסלול האלקטרון (שחור) והפרוטונים (אדום). ATP ו-NADPH משתחררים לסטרומה. סכמטי." },
-  "calvin-cycle": { el: CalvinCycle, captionHe: "מעגל קלווין-בנסון לכל 3 מולקולות CO₂: קיבוע, חיזור והתחדשות. ‏G3P אחד יוצא מהמעגל. סכמטי." },
+  "pp-calvin-cycle": { el: CalvinCycle, captionHe: "מעגל קלווין-בנסון לכל 3 מולקולות CO₂: קיבוע, חיזור והתחדשות. ‏G3P אחד יוצא מהמעגל. סכמטי." },
   "c4-pathway": { el: C4Pathway, captionHe: "מסלול C4 (מהסוג שבו מלאט עובר לעטיפת הצינור): ריכוז CO₂ סביב רוביסקו, במחיר של ATP. סכמטי." },
   "phytochrome-signaling": { el: PhytochromeSignaling, captionHe: "איתות הפיטוכרום: Pfr עובר לגרעין, מפרק PIF ומעכב את COP1, כך ש-HY5 מצטבר. סכמטי." },
   "root-gravitropism": { el: RootGravitropism, captionHe: "גרביטרופיזם בשורש: הסטטוליטים שוקעים, נשאי PIN עוברים לצד התחתון, ויותר אוקסין חוזר בצד התחתון ומעכב בו את ההתארכות. סכמטי." },

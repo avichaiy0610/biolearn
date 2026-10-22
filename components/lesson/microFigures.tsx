@@ -134,7 +134,7 @@ function GramEnvelopes() {
       <Layer x={90} y={82} w={120} h={46} fill="#ffffff" stroke={LINE_GRAY} label="פריפלזמה" />
       <He x={180} y={104} size={10} color={GREEN} anchor="start">פורין</He>
       <Layer x={90} y={128} w={120} h={12} fill={FILL.orange} stroke={ORANGE} label="פפטידוגליקן דק" size={10.5} />
-      <Layer x={90} y={146} w={120} h={22} fill={FILL.gray} stroke={MUTED} label="ממברנה ציטופלזמית" />
+      <Layer x={90} y={146} w={120} h={22} fill={FILL.gray} stroke={MUTED} label="ממברנה פנימית" />
       <He x={150} y={194} size={11} color={MUTED}>ציטופלזמה</He>
       <He x={240} y={256} size={11} color={MUTED}>LPS: ליפיד A (אנדוטוקסין) + ליבה + שרשרת O</He>
       <He x={240} y={276} size={11} color={MUTED}>הפפטידוגליקן מחובר לממברנה החיצונית בליפופרוטאין</He>
@@ -225,7 +225,7 @@ function GrowthCurve() {
       {phases.slice(1).map(([a]) => <line key={a} x1={s.sx(a)} x2={s.sx(a)} y1={230} y2={50} stroke={MUTED} strokeWidth={1} {...dash} />)}
       {phases.map(([a, b, t]) => <He key={t} x={(s.sx(a) + s.sx(b)) / 2} y={62} size={12} bold color={BLUE}>{t}</He>)}
       <path d={curve(f, 0, 24, s)} fill="none" stroke={ORANGE} strokeWidth={3.2} />
-      <He x={s.sx(7.5) + 40} y={s.sy(7.7) + 14} size={10.5} color={MUTED}>קו ישר בסקלה לוגריתמית</He>
+      <He x={s.sx(7)} y={212} size={10.5} color={MUTED}>קו ישר בסקלה לוגריתמית</He>
     </Svg>
   );
 }
@@ -274,11 +274,13 @@ function AntibioticTargets() {
       <He x={50} y={130} size={11} color={MUTED}>ממברנה:</He>
       <He x={50} y={146} size={11} color={MUTED}>פולימיקסינים</He>
       <Arrow x1={70} y1={154} x2={108} y2={160} color={MUTED} />
-      <He x={60} y={206} size={10.5} color={GREEN}>30S: אמינוגליקוזידים,</He>
-      <He x={60} y={222} size={10.5} color={GREEN}>טטרציקלינים</He>
-      <He x={60} y={250} size={10.5} color={GREEN}>50S: מקרולידים,</He>
-      <He x={60} y={266} size={10.5} color={GREEN}>כלורמפניקול</He>
-      <Arrow x1={118} y1={232} x2={158} y2={214} color={GREEN} />
+      <La x={50} y={196} size={10.5} bold color={GREEN}>30S</La>
+      <He x={50} y={210} size={9.5} color={GREEN}>אמינוגליקוזידים</He>
+      <He x={50} y={223} size={9.5} color={GREEN}>טטרציקלינים</He>
+      <La x={50} y={246} size={10.5} bold color={GREEN}>50S</La>
+      <He x={50} y={260} size={9.5} color={GREEN}>מקרולידים</He>
+      <He x={50} y={273} size={9.5} color={GREEN}>כלורמפניקול</He>
+      <Arrow x1={90} y1={232} x2={156} y2={214} color={GREEN} />
       <He x={430} y={92} size={10.5} color={BLUE}>RNA פולימראז:</He>
       <He x={430} y={108} size={10.5} color={BLUE}>ריפמפין</He>
       <Arrow x1={400} y1={106} x2={334} y2={108} color={BLUE} />
@@ -337,9 +339,9 @@ function CarbonCycleAnoxic() {
     <Svg h={360} label="שרשרת הפירוק האנאירובית: פולימרים עוברים הידרוליזה למונומרים; תוססים ראשוניים הופכים אותם לחומצות שומן קצרות ולאלכוהולים; סינטרופים הופכים אותם לאצטט, מימן ו-CO2; מתנוגנים מייצרים מתאן. מעל פני השטח, מתנוטרופים מחמצנים את המתאן ל-CO2">
       {steps.map(([m, sub, enz, c], i) => (
         <g key={m}>
-          <HBox x={240} y={20 + i * 64} w={230} h={sub ? 36 : 28} label={m} c={c} fill={c === GREEN ? FILL.green : c === PURPLE ? FILL.purple : FILL.orange} size={12} bold />
-          {sub && <He x={240} y={20 + i * 64 + 31} size={9.5} color={MUTED}>{sub}</He>}
-          {enz && <><Arrow x1={240} y1={20 + i * 64 + (sub ? 38 : 30)} x2={240} y2={20 + (i + 1) * 64 - 2} color={INK} /><He x={250} y={20 + i * 64 + 54} size={10.5} anchor="start" color={c}>{enz}</He></>}
+          <HBox x={240} y={20 + i * 64} w={230} h={sub ? 42 : 28} label={m} c={c} fill={c === GREEN ? FILL.green : c === PURPLE ? FILL.purple : FILL.orange} size={12} bold />
+          {sub && <He x={240} y={20 + i * 64 + 37} size={9.5} color={MUTED}>{sub}</He>}
+          {enz && <><Arrow x1={240} y1={20 + i * 64 + (sub ? 44 : 30)} x2={240} y2={20 + (i + 1) * 64 - 2} color={INK} /><He x={250} y={20 + i * 64 + 54} size={10.5} anchor="start" color={c}>{enz}</He></>}
         </g>
       ))}
       <He x={420} y={170} size={10.5} color={PURPLE}>אפשרי רק כששותף</He>
@@ -366,8 +368,8 @@ function NitrogenCycle() {
       <He x={130} y={86} size={11} bold color={BLUE}>קיבוע</He>
       <Arrow x1={110} y1={190} x2={200} y2={260} color={ORANGE} width={2.4} />
       <Arrow x1={280} y1={260} x2={370} y2={190} color={ORANGE} width={2.4} />
-      <He x={130} y={238} size={11} bold color={ORANGE}>ניטריפיקציה</He>
-      <He x={350} y={238} size={11} bold color={ORANGE}>ניטריפיקציה</He>
+      <He x={186} y={206} size={11} bold color={ORANGE}>ניטריפיקציה</He>
+      <He x={350} y={262} size={11} bold color={ORANGE}>ניטריפיקציה</He>
       <Arrow x1={390} y1={154} x2={390} y2={90} color={RED} width={2.4} />
       <Arrow x1={348} y1={60} x2={284} y2={46} color={RED} width={2.4} />
       <He x={430} y={124} size={11} bold color={RED}>דניטריפיקציה</He>
@@ -469,7 +471,7 @@ function BaltimoreClasses() {
           </g>
         );
       })}
-      <He x={400} y={240} size={10.5} color={MUTED}>נגיפי RNA (III–V) צריכים RNA פולימראז</He>
+      <He x={360} y={240} size={10.5} color={MUTED}>נגיפי RNA (III–V) צריכים RNA פולימראז</He>
       <He x={400} y={256} size={10.5} color={MUTED}>תלוי-RNA משלהם — אין כזה בתא</He>
       <He x={240} y={292} size={10.5} color={MUTED}>VI ו-VII משתמשים ברוורס טרנסקריפטאז</He>
     </Svg>
@@ -491,12 +493,13 @@ function OneStepGrowth() {
       <line x1={s.sx(12)} x2={s.sx(12)} y1={230} y2={60} stroke={MUTED} strokeWidth={1} {...dash} />
       <line x1={s.sx(25)} x2={s.sx(25)} y1={230} y2={60} stroke={MUTED} strokeWidth={1} {...dash} />
       <He x={(s.sx(0) + s.sx(12)) / 2} y={56} size={11.5} bold color={BLUE}>ליקוי</He>
-      <He x={(s.sx(0) + s.sx(25)) / 2} y={78} size={11.5} bold color={ORANGE}>תקופה סמויה</He>
+      <He x={(s.sx(12) + s.sx(25)) / 2} y={84} size={11.5} bold color={ORANGE}>תקופה סמויה</He>
+      <line x1={s.sx(0)} x2={s.sx(25)} y1={92} y2={92} stroke={ORANGE} strokeWidth={1.2} />
       <He x={s.sx(31)} y={56} size={11.5} bold>שחרור</He>
       <path d={`M${s.sx(44)} ${s.sy(0.2)} L${s.sx(44)} ${s.sy(2.55)}`} stroke={GREEN} strokeWidth={2} markerEnd="url(#bfArrowS)" markerStart="url(#bfArrowS)" />
       <He x={s.sx(44) - 8} y={s.sy(1.4)} size={11} anchor="end" bold color={GREEN}>גודל הפריצה</He>
-      <He x={s.sx(16)} y={s.sy(0.15) - 8} size={10.5} color={ORANGE}>חופשיים</He>
-      <He x={s.sx(18)} y={s.sy(1.7)} size={10.5} color={BLUE}>סך הכול (אחרי פירוק)</He>
+      <He x={s.sx(6)} y={s.sy(0.15) - 10} size={10.5} color={ORANGE}>חופשיים</He>
+      <He x={s.sx(5.5)} y={s.sy(1.55)} size={10.5} color={BLUE}>סך הכול (אחרי פירוק)</He>
     </Svg>
   );
 }
@@ -552,7 +555,7 @@ function ConjugationHfr() {
       <line x1={310} y1={210} x2={250} y2={210} stroke={MUTED} strokeWidth={3} />
       <Cell x={200} y={210} label="F⁻" c={MUTED} />
       <path d="M300 220 L170 220" stroke={PURPLE} strokeWidth={3} />
-      {[["a", 176], ["b", 206], ["c", 236], ["d", 280]].map(([g, x]) => <La key={g} x={x as number} y={236} size={11} bold color={PURPLE}>{g}</La>)}
+      {[["a", 176], ["b", 206], ["c", 236], ["d", 280]].map(([g, x]) => <La key={g} x={x as number} y={213} size={11} bold color={PURPLE}>{g}</La>)}
       <La x={330} y={196} size={10} color={ORANGE}>oriT</La>
       <He x={240} y={276} size={11} color={PURPLE}>הגנים נכנסים לפי הסדר: a ראשון, ואחר כך b, c…</He>
       <He x={240} y={296} size={11} color={MUTED}>ההעברה נקטעת לפני ששאר F עובר — המקבל נשאר F⁻</He>
@@ -766,7 +769,7 @@ export const MICRO_FIGURES: Record<string, { el: () => React.ReactElement; capti
   "quorum-sensing-lux": { el: QuorumSensingLux, captionHe: "חישת מניין במערכת lux: האות (AHL) מצטבר רק בצפיפות גבוהה, נקשר ל-LuxR ומפעיל את אופרון האור. סכמטי." },
   "baltimore-classes": { el: BaltimoreClasses, captionHe: "שבע קבוצות בלטימור, לפי הדרך שבה הגנום מגיע ל-mRNA. סכמטי." },
   "one-step-growth": { el: OneStepGrowth, captionHe: "עקומת גדילה בצעד אחד של פאג'. הקו הרציף: חלקיקים חופשיים; הקו המקווקו: סך החלקיקים המדבקים, בתוך התאים ומחוצה להם, אחרי פירוק מלאכותי של התאים. בשלב הליקוי אין חלקיקים שלמים בתא. גודל הפריצה — צאצאים לכל תא שהודבק. עקומות מודגמות." },
-  "lambda-switch": { el: LambdaSwitch, captionHe: "ההחלטה של פאג' λ בין ליזיס לליזוגניה, וההשראה שמוציאה את הפרופאג'. סכמטי." },
+  "mv-lambda-switch": { el: LambdaSwitch, captionHe: "ההחלטה של פאג' λ בין ליזיס לליזוגניה, וההשראה שמוציאה את הפרופאג'. סכמטי." },
   "conjugation-hfr": { el: ConjugationHfr, captionHe: "קוניוגציה של F⁺ (שני התאים יוצאים F⁺) ושל Hfr (הכרומוזום נמשך מ-oriT, וההעברה נקטעת לפני ששאר F עובר). סכמטי." },
   "tree-of-life": { el: TreeOfLife, captionHe: "שלושת התחומים לפי rRNA של תת-היחידה הקטנה. האאוקריוטים מסתעפים מתוך הקו הארכאוני; החיצים המקווקווים — מוצא המיטוכונדריה והכלורופלסטים באנדוסימביוזה. סכמטי." },
   "antibody-structure": { el: AntibodyStructure, captionHe: "מבנה נוגדן (IgG): שתי שרשראות כבדות ושתי קלות. האזורים המשתנים בקצות הזרועות יוצרים שני אתרי קישור זהים; אזור Fc קובע מה הנוגדן עושה. סכמטי." },

@@ -208,7 +208,7 @@ function CalnexinCycle() {
       <He x={118} y={206} size={11.5} anchor="end" color={ORANGE}>לא</He>
       <HBox x={96} y={236} w={180} label="UGGT מחזיר גלוקוז" c={ORANGE} fill={FILL.orange} />
       <path d="M40 236 C 20 160, 40 110, 112 104" fill="none" stroke={ORANGE} strokeWidth={2.4} markerEnd="url(#bfArrowS)" />
-      <He x={30} y={150} size={11} color={ORANGE} anchor="start">סבב נוסף</He>
+      <He x={44} y={168} size={11} color={ORANGE} anchor="start">סבב נוסף</He>
       <Arrow x1={96} y1={268} x2={96} y2={290} color={RED} dashed />
       <HBox x={96} y={292} w={190} label="אחרי סבבים רבים → ERAD" c={RED} fill={FILL.red} size={12} />
       <He x={300} y={312} size={11} color={MUTED}>(בכל סבב מוסרים לאט גם מנוזים)</He>
@@ -391,7 +391,7 @@ function DynamicInstability() {
       <polyline points={pts.map((p) => p.join(",")).join(" ")} fill="none" stroke={GREEN} strokeWidth={3} strokeLinejoin="round" />
       <He x={132} y={120} size={11.5} color={RED} bold>קטסטרופה</He>
       <He x={148} y={226} size={11.5} color={BLUE} bold>הצלה</He>
-      <He x={68} y={126} size={11} color={MUTED}>גדילה איטית</He>
+      <He x={82} y={150} size={11} color={MUTED}>גדילה איטית</He>
       <He x={240} y={140} size={11} color={MUTED} anchor="start">התכווצות</He>
       <He x={240} y={154} size={11} color={MUTED} anchor="start">מהירה</He>
       {/* growing end */}

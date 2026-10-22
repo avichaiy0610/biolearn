@@ -41,7 +41,7 @@ export const ppCalvin: Lesson = {
 
 כלומר **3 ATP ו-2 NADPH לכל CO₂**. מתוך 6 מולקולות G3P שנוצרות, 5 חוזרות ליצירת 3 RuBP, ורק אחת יוצאת.
 
-[[figure:calvin-cycle]]
+[[figure:pp-calvin-cycle]]
 
 ## רוביסקו {#rubisco}
 

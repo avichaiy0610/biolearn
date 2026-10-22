@@ -153,8 +153,8 @@ function FoldingFunnel() {
       <line x1={455} y1={70} x2={455} y2={250} stroke={INK} strokeWidth={1.6} markerEnd="url(#bfArrow2)" />
       <defs><marker id="bfArrow2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill={INK} /></marker></defs>
       <He x={440} y={160} size={13} rotate={-90}>אנרגיה חופשית יורדת</He>
-      <He x={130} y={190} size={12} color={MUTED}>שקע = תוצר ביניים</He>
-      <line x1={150} y1={178} x2={192} y2={204} stroke={MUTED} strokeWidth={1} />
+      <He x={104} y={190} size={12} color={MUTED}>שקע = תוצר ביניים</He>
+      <line x1={160} y1={192} x2={192} y2={206} stroke={MUTED} strokeWidth={1} />
     </svg>
   );
 }
@@ -250,8 +250,8 @@ function BohrShift() {
       <path d={curve((p) => hill(p, 18, 2.8), 0, 100, s)} fill="none" stroke={GREEN} strokeWidth={3} />
       <path d={curve((p) => hill(p, 26, 2.8), 0, 100, s)} fill="none" stroke={INK} strokeWidth={3} />
       <path d={curve((p) => hill(p, 36, 2.8), 0, 100, s)} fill="none" stroke={ORANGE} strokeWidth={3} />
-      <He x={s.sx(12)} y={s.sy(0.86)} size={13} color={GREEN} bold>זיקה גבוהה לחמצן</He>
-      <He x={s.sx(12)} y={s.sy(0.86) + 16} size={12} color={GREEN}>(עוברי)</He>
+      <He x={70} y={s.sy(0.86)} size={13} color={GREEN} bold anchor="start">זיקה גבוהה לחמצן</He>
+      <He x={70} y={s.sy(0.86) + 16} size={12} color={GREEN} anchor="start">(עוברי)</He>
       <He x={s.sx(78)} y={s.sy(0.42)} size={13} color={ORANGE} bold>זיקה נמוכה לחמצן</He>
       <La x={s.sx(78)} y={s.sy(0.42) + 16} size={12} color={ORANGE}>pH↓  CO₂↑  2,3-BPG↑</La>
       <line x1={s.sx(30)} y1={s.sy(0.5)} x2={s.sx(42)} y2={s.sy(0.5)} stroke={ORANGE} strokeWidth={2} markerEnd="url(#bfArrow)" />
@@ -405,8 +405,8 @@ function AllostericCurves() {
       <path d={curve((a) => mwc(a, 1250), 0, 12, s)} fill="none" stroke={ORANGE} strokeWidth={3} />
       <La x={s.sx(1.0)} y={s.sy(0.62)} size={13} color={GREEN} bold>+ATP</La>
       <La x={s.sx(1.0)} y={s.sy(0.62) + 16} size={12} color={GREEN}>(L = 70)</La>
-      <He x={s.sx(3.6)} y={s.sy(0.42)} size={13} bold>בלי אפקטור</He>
-      <La x={s.sx(3.6)} y={s.sy(0.42) + 16} size={12}>(L = 200)</La>
+      <He x={s.sx(8.6)} y={s.sy(0.6)} size={13} bold>בלי אפקטור</He>
+      <La x={s.sx(8.6)} y={s.sy(0.6) + 16} size={12}>(L = 200)</La>
       <La x={s.sx(5.6)} y={s.sy(0.3)} size={13} color={ORANGE} bold>+CTP</La>
       <La x={s.sx(5.6)} y={s.sy(0.3) + 16} size={12} color={ORANGE}>(L = 1250)</La>
     </svg>
