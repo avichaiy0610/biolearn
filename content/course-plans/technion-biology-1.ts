@@ -23,8 +23,8 @@ import { b1Development } from "../lessons/technion-biology-1/b1-development";
 // level (the deeper versions are in 134019, 134113, 134082, 134119, 134128). Covered from the portal paragraph inside
 // those units: water (b1-membranes), chemical evolution (b1-intro), from cell to tissue (b1-development).
 // NOT written (portal paragraph only, absent from the detailed syllabus): DNA technology and genomics; systematics,
-// taxonomy and phylogeny; foundations of evolution; carbohydrates and lipids as macromolecules. Open question for
-// Avichai — they may belong to the spring version or to an older paragraph.
+// taxonomy and phylogeny; foundations of evolution; carbohydrates and lipids as macromolecules. Avichai (2026-10-22):
+// not taught — the portal paragraph is broader than the course.
 // Lecture order: the topic order of the 2024 syllabus ("the order may change during the semester"); tutorials are
 // optional and have no public schedule — "practice for lecture n".
 
