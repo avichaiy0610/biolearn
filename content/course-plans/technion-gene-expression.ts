@@ -20,6 +20,10 @@ import { gxIntegration } from "../lessons/technion-gene-expression/gx-integratio
 // syllabus order. The Faculty of Medicine's course 274243 (a "no extra credit" pair of BOTH 134082 and 134119)
 // publishes a weekly table whose regulation part runs prokaryotic → eukaryotic transcription → RNA processing →
 // translation control → post-translational control — a different course; evidence only.
+// Scope consensus (2026-10-22): Haifa 223.3003 "בקרה גנטית באוקריוטים" (same books: Lewin, Brown) — chromatin
+// organization, histones and epigenetic modifications, general transcription machinery and factors, enhancers,
+// mRNA stability/turnover, translation, miRNA; HUJI molecular biology — alternative splicing, RNA stability, regulatory
+// RNA; Technion medicine 274243 — transcription regulation, RNA processing, translation control.
 // Tutorials: no source — "practice for lecture n", built from each unit's worked problems.
 
 const M = "molecular-biology";

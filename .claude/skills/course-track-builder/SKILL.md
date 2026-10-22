@@ -104,6 +104,20 @@ cross-checked with the same course at other universities. Every subtopic needs r
 Run `coverage`; zero unresolved, zero placeholders, zero topics without a unit before calling
 a course done. Mark material beyond the syllabus as extension — hide, never delete.
 
+### 5a. Decide the subtopics yourself — before writing a word (mandatory)
+Avichai (2026-10-21): "you must know by yourself what is in the course". Two failures so far (134020, 134119)
+came from filling each topics-only heading with the whole textbook chapter. Before writing units:
+1. **Read the course name as the scope.** "בקרת הביטוי הגנטי" = *regulation* — a mechanism enters only as far as
+   it regulates expression. Material that belongs to another course of the same faculty goes there (check the
+   faculty's other syllabi: e.g. riboswitches/lncRNA → 134151 RNA, CRISPR → 134082 molecular).
+2. **Consensus of equivalent courses.** Collect detailed syllabi of the same course elsewhere — prefer ones using
+   the **same textbooks** (e.g. Haifa 223.3003 uses Lewin + Brown like 134119), plus the Technion medicine pair.
+   A subtopic in most of them = core; in none = do not write it (archive it if already written).
+3. **Completeness inside the scope comes from the course book's own lists.** When a topic is in scope, cover what
+   the book's section/table lists (e.g. Brown Table 11.1 for DNA-binding motifs), not only the famous examples.
+4. Write the subtopic list with its evidence into the plan header comment, then write units.
+Removed material is never deleted: keep full copies under `content/lessons/_archive/<course>/` with a README.
+
 ### 5b. Scope of every section — from documents only
 Nobody's word is evidence: not a student's, not Avichai's (his answers about 134020 are used only
 to *calibrate* the rule), not student reports. Evidence, strongest first: past exams of the course,
