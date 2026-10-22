@@ -4698,5 +4698,640 @@
     "phenotype"
    ]
   }
+ },
+ "ph-transport": {
+  "_heading": {
+   "he": [
+    "משאבות",
+    "נשאים",
+    "תעלות"
+   ],
+   "en": [
+    "membrane transport"
+   ]
+  },
+  "classes": {
+   "he": [
+    "תעלות",
+    "נשאים"
+   ],
+   "en": [
+    "channel",
+    "carrier"
+   ]
+  },
+  "pumps": {
+   "he": [
+    "משאבה",
+    "משאבות"
+   ],
+   "en": [
+    "Na/K-ATPase",
+    "pump"
+   ]
+  },
+  "secondary": {
+   "he": [
+    "הובלה פעילה משנית"
+   ],
+   "en": [
+    "secondary active transport",
+    "symport",
+    "antiport"
+   ]
+  },
+  "kinetics": {
+   "he": [
+    "רוויה"
+   ],
+   "en": [
+    "saturation",
+    "Tm"
+   ]
+  },
+  "osmosis": {
+   "he": [
+    "אוסמוזה",
+    "טוניסיות"
+   ],
+   "en": [
+    "osmosis",
+    "tonicity"
+   ]
+  },
+  "epithelia": {
+   "he": [
+    "אפיתל"
+   ],
+   "en": [
+    "epithelial transport"
+   ]
+  }
+ },
+ "ph-membrane-potential": {
+  "_heading": {
+   "he": [
+    "פוטנציאל מנוחה"
+   ],
+   "en": [
+    "resting potential"
+   ]
+  },
+  "gradients": {
+   "he": [
+    "מפל ריכוז"
+   ],
+   "en": [
+    "concentration gradient"
+   ]
+  },
+  "nernst": {
+   "he": [
+    "נרנסט"
+   ],
+   "en": [
+    "Nernst"
+   ]
+  },
+  "ghk": {
+   "he": [],
+   "en": [
+    "Goldman",
+    "GHK"
+   ]
+  },
+  "driving-force": {
+   "he": [
+    "כוח מניע"
+   ],
+   "en": [
+    "driving force"
+   ]
+  },
+  "potassium": {
+   "he": [
+    "היפרקלמיה"
+   ],
+   "en": [
+    "hyperkalemia"
+   ]
+  }
+ },
+ "ph-action-potential": {
+  "_heading": {
+   "he": [
+    "פוטנציאל הפעולה",
+    "פוטנציאל פעולה"
+   ],
+   "en": [
+    "action potential"
+   ]
+  },
+  "passive": {
+   "he": [],
+   "en": [
+    "length constant",
+    "cable"
+   ]
+  },
+  "phases": {
+   "he": [
+    "פוטנציאל הפעולה"
+   ],
+   "en": [
+    "action potential"
+   ]
+  },
+  "channels": {
+   "he": [
+    "תעלות נתרן"
+   ],
+   "en": [
+    "voltage-gated"
+   ]
+  },
+  "refractory": {
+   "he": [
+    "ריפרקטורי"
+   ],
+   "en": [
+    "refractory"
+   ]
+  },
+  "conduction": {
+   "he": [
+    "הולכה"
+   ],
+   "en": [
+    "conduction velocity"
+   ]
+  },
+  "myelin": {
+   "he": [
+    "מיאלין",
+    "מעטפת המיאלין"
+   ],
+   "en": [
+    "myelin",
+    "saltatory"
+   ]
+  }
+ },
+ "ph-nervous-system": {
+  "_heading": {
+   "he": [
+    "מערכת העצבים"
+   ],
+   "en": [
+    "nervous system"
+   ]
+  },
+  "neuron": {
+   "he": [
+    "נוירון",
+    "נאורון"
+   ],
+   "en": [
+    "neuron"
+   ]
+  },
+  "axonal-transport": {
+   "he": [],
+   "en": [
+    "axonal transport"
+   ]
+  },
+  "cns-pns": {
+   "he": [
+    "המערכת המרכזית וההיקפית"
+   ],
+   "en": [
+    "central nervous system",
+    "peripheral"
+   ]
+  },
+  "glia": {
+   "he": [
+    "תאים תומכים",
+    "גליה"
+   ],
+   "en": [
+    "glia",
+    "astrocyte"
+   ]
+  },
+  "csf-bbb": {
+   "he": [
+    "מחסום דם-מוח"
+   ],
+   "en": [
+    "blood-brain barrier"
+   ]
+  },
+  "injury": {
+   "he": [],
+   "en": [
+    "Wallerian",
+    "regeneration"
+   ]
+  }
+ },
+ "ph-synapse": {
+  "_heading": {
+   "he": [
+    "ההעברה הסינפטית",
+    "סינפסה"
+   ],
+   "en": [
+    "synaptic transmission"
+   ]
+  },
+  "types": {
+   "he": [
+    "סינפסה חשמלית"
+   ],
+   "en": [
+    "electrical synapse"
+   ]
+  },
+  "release": {
+   "he": [
+    "שחרור"
+   ],
+   "en": [
+    "neurotransmitter release",
+    "quantal"
+   ]
+  },
+  "receptors": {
+   "he": [
+    "קולטנים"
+   ],
+   "en": [
+    "ionotropic",
+    "metabotropic"
+   ]
+  },
+  "epsp-ipsp": {
+   "he": [
+    "אקסיטטורים",
+    "אינהיביטורים"
+   ],
+   "en": [
+    "EPSP",
+    "IPSP"
+   ]
+  },
+  "integration": {
+   "he": [
+    "סכימה"
+   ],
+   "en": [
+    "summation"
+   ]
+  },
+  "plasticity": {
+   "he": [],
+   "en": [
+    "LTP",
+    "facilitation"
+   ]
+  },
+  "transmitters": {
+   "he": [
+    "מוליך עצבי"
+   ],
+   "en": [
+    "neurotransmitter"
+   ]
+  }
+ },
+ "ph-skeletal-muscle": {
+  "_heading": {
+   "he": [
+    "שריר משורטט",
+    "התכווצות השריר"
+   ],
+   "en": [
+    "skeletal muscle"
+   ]
+  },
+  "structure": {
+   "he": [
+    "סרקומר"
+   ],
+   "en": [
+    "sarcomere"
+   ]
+  },
+  "nmj": {
+   "he": [
+    "הסינפסה הנאורו-מוסקולרית"
+   ],
+   "en": [
+    "neuromuscular junction"
+   ]
+  },
+  "ec-coupling": {
+   "he": [],
+   "en": [
+    "excitation-contraction coupling"
+   ]
+  },
+  "cross-bridge": {
+   "he": [
+    "גשרי רוחב"
+   ],
+   "en": [
+    "cross-bridge"
+   ]
+  },
+  "mechanics": {
+   "he": [
+    "טטנוס"
+   ],
+   "en": [
+    "tetanus",
+    "length-tension"
+   ]
+  },
+  "motor-units": {
+   "he": [
+    "יחידה מוטורית"
+   ],
+   "en": [
+    "motor unit"
+   ]
+  }
+ },
+ "ph-smooth-cardiac-muscle": {
+  "_heading": {
+   "he": [
+    "שריר חלק",
+    "שריר הלב"
+   ],
+   "en": [
+    "smooth muscle",
+    "cardiac muscle"
+   ]
+  },
+  "cardiac-structure": {
+   "he": [
+    "שריר הלב"
+   ],
+   "en": [
+    "cardiac muscle"
+   ]
+  },
+  "cicr": {
+   "he": [],
+   "en": [
+    "calcium-induced calcium release"
+   ]
+  },
+  "cardiac-regulation": {
+   "he": [],
+   "en": [
+    "inotropy",
+    "phospholamban"
+   ]
+  },
+  "smooth-structure": {
+   "he": [
+    "שריר חלק"
+   ],
+   "en": [
+    "smooth muscle"
+   ]
+  },
+  "smooth-mechanism": {
+   "he": [],
+   "en": [
+    "MLCK",
+    "calmodulin"
+   ]
+  },
+  "smooth-calcium": {
+   "he": [],
+   "en": [
+    "pharmacomechanical"
+   ]
+  }
+ },
+ "ph-blood": {
+  "_heading": {
+   "he": [
+    "מערכת הדם"
+   ],
+   "en": [
+    "blood"
+   ]
+  },
+  "composition": {
+   "he": [
+    "הרכב הדם"
+   ],
+   "en": [
+    "plasma",
+    "hematocrit"
+   ]
+  },
+  "erythrocytes": {
+   "he": [
+    "כדוריות דם אדומות"
+   ],
+   "en": [
+    "erythrocyte"
+   ]
+  },
+  "erythropoiesis": {
+   "he": [
+    "אריתרופויאסיס"
+   ],
+   "en": [
+    "erythropoiesis",
+    "erythropoietin"
+   ]
+  },
+  "platelets": {
+   "he": [
+    "טסיות"
+   ],
+   "en": [
+    "platelet"
+   ]
+  },
+  "coagulation": {
+   "he": [
+    "קרישת הדם",
+    "קרישה"
+   ],
+   "en": [
+    "coagulation",
+    "thrombin"
+   ]
+  },
+  "anticoagulation": {
+   "he": [],
+   "en": [
+    "fibrinolysis",
+    "antithrombin"
+   ]
+  }
+ },
+ "ph-kidney-filtration": {
+  "_heading": {
+   "he": [
+    "הכליה",
+    "סינון"
+   ],
+   "en": [
+    "kidney",
+    "glomerular filtration"
+   ]
+  },
+  "anatomy": {
+   "he": [
+    "נפרון"
+   ],
+   "en": [
+    "nephron"
+   ]
+  },
+  "barrier": {
+   "he": [],
+   "en": [
+    "filtration barrier",
+    "podocyte"
+   ]
+  },
+  "clearance": {
+   "he": [
+    "פינוי"
+   ],
+   "en": [
+    "clearance",
+    "GFR"
+   ]
+  },
+  "starling": {
+   "he": [],
+   "en": [
+    "Starling forces"
+   ]
+  },
+  "autoregulation": {
+   "he": [],
+   "en": [
+    "autoregulation",
+    "tubuloglomerular"
+   ]
+  }
+ },
+ "ph-kidney-tubules": {
+  "_heading": {
+   "he": [
+    "ספיגה"
+   ],
+   "en": [
+    "reabsorption"
+   ]
+  },
+  "overview": {
+   "he": [
+    "ספיגה"
+   ],
+   "en": [
+    "reabsorption"
+   ]
+  },
+  "proximal": {
+   "he": [],
+   "en": [
+    "proximal tubule"
+   ]
+  },
+  "loop": {
+   "he": [
+    "לולאת הנלה"
+   ],
+   "en": [
+    "loop of Henle"
+   ]
+  },
+  "distal": {
+   "he": [],
+   "en": [
+    "distal tubule"
+   ]
+  },
+  "collecting": {
+   "he": [],
+   "en": [
+    "collecting duct",
+    "aldosterone"
+   ]
+  }
+ },
+ "ph-volume-pressure": {
+  "_heading": {
+   "he": [
+    "בקרת נפח הדם ולחץ הדם"
+   ],
+   "en": [
+    "blood volume",
+    "blood pressure"
+   ]
+  },
+  "two-systems": {
+   "he": [
+    "נפח הדם"
+   ],
+   "en": [
+    "osmolality"
+   ]
+  },
+  "adh": {
+   "he": [
+    "ADH",
+    "וזופרסין"
+   ],
+   "en": [
+    "vasopressin",
+    "ADH"
+   ]
+  },
+  "concentration": {
+   "he": [],
+   "en": [
+    "countercurrent"
+   ]
+  },
+  "volume-sensors": {
+   "he": [],
+   "en": [
+    "baroreceptor",
+    "volume sensor"
+   ]
+  },
+  "raas": {
+   "he": [
+    "רנין",
+    "אנגיוטנסין"
+   ],
+   "en": [
+    "renin",
+    "angiotensin"
+   ]
+  },
+  "blood-pressure": {
+   "he": [
+    "לחץ הדם"
+   ],
+   "en": [
+    "blood pressure",
+    "baroreceptor reflex"
+   ]
+  }
  }
 }

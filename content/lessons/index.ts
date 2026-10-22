@@ -75,8 +75,19 @@ import { gxGeneFamilies } from "./technion-gene-expression/gx-gene-families";
 import { gxRepeatsMobile } from "./technion-gene-expression/gx-repeats-mobile";
 import { gxGenomeWide } from "./technion-gene-expression/gx-genome-wide";
 import { gxIntegration } from "./technion-gene-expression/gx-integration";
+import { phTransport } from "./technion-physiology/ph-transport";
+import { phMembranePotential } from "./technion-physiology/ph-membrane-potential";
+import { phActionPotential } from "./technion-physiology/ph-action-potential";
+import { phNervousSystem } from "./technion-physiology/ph-nervous-system";
+import { phSynapse } from "./technion-physiology/ph-synapse";
+import { phSkeletalMuscle } from "./technion-physiology/ph-skeletal-muscle";
+import { phSmoothCardiacMuscle } from "./technion-physiology/ph-smooth-cardiac-muscle";
+import { phBlood } from "./technion-physiology/ph-blood";
+import { phKidneyFiltration } from "./technion-physiology/ph-kidney-filtration";
+import { phKidneyTubules } from "./technion-physiology/ph-kidney-tubules";
+import { phVolumePressure } from "./technion-physiology/ph-volume-pressure";
 
-export const LESSONS: Lesson[] = [mendelProbability, dominanceAlleles, pedigrees, chromosomalTheory, sexDetermination, linkageMapping, mutations, chromosomeStructure, chromosomeNumber, natureOfGene, geneInteraction, nonMendelian, aminoAcids, proteinStructure, proteinFolding, fibrousMembrane, proteinMethods, hemoglobin, enzymePrinciples, enzymeKinetics, catalyticMechanisms, allostericRegulation, covalentRegulation, carbsLipids, metConcepts, metGlycolysis, metGluconeogenesis, metCitricAcid, metOxphos, metPhotosynthesis, metPentose, metGlycogen, metFattyAcids, metIntegration, metLipidsCholesterol, metAminoAcids, metNucleotides, molNucleicAcids, molChromatin, molReplicationFork, molReplicationOrigins, molRepair, molRecombination, molTranscriptionProk, molTranscriptionEuk, molRnaProcessing, molGeneticCode, molRibosomeInitiation, molTranslationElongation, cellMembranes, cellEr, cellQualityControl, cellGolgiEndosomes, cellVesicleTransport, cellNuclearMitoImport, cellCytoskeleton, cellMotorsPolarity, cellJunctions, cellEcm, cellSignalingPrinciples, cellGpcr, cellRtk, cellCycleControl, gxOperons, gxCisElements, gxTranscriptionFactors, gxChromatinModifications, gxEpigenetics, gxAlternativeSplicing, gxTranslationControl, gxNcrna, gxGenomeStructure, gxGeneFamilies, gxRepeatsMobile, gxGenomeWide, gxIntegration];
+export const LESSONS: Lesson[] = [mendelProbability, dominanceAlleles, pedigrees, chromosomalTheory, sexDetermination, linkageMapping, mutations, chromosomeStructure, chromosomeNumber, natureOfGene, geneInteraction, nonMendelian, aminoAcids, proteinStructure, proteinFolding, fibrousMembrane, proteinMethods, hemoglobin, enzymePrinciples, enzymeKinetics, catalyticMechanisms, allostericRegulation, covalentRegulation, carbsLipids, metConcepts, metGlycolysis, metGluconeogenesis, metCitricAcid, metOxphos, metPhotosynthesis, metPentose, metGlycogen, metFattyAcids, metIntegration, metLipidsCholesterol, metAminoAcids, metNucleotides, molNucleicAcids, molChromatin, molReplicationFork, molReplicationOrigins, molRepair, molRecombination, molTranscriptionProk, molTranscriptionEuk, molRnaProcessing, molGeneticCode, molRibosomeInitiation, molTranslationElongation, cellMembranes, cellEr, cellQualityControl, cellGolgiEndosomes, cellVesicleTransport, cellNuclearMitoImport, cellCytoskeleton, cellMotorsPolarity, cellJunctions, cellEcm, cellSignalingPrinciples, cellGpcr, cellRtk, cellCycleControl, gxOperons, gxCisElements, gxTranscriptionFactors, gxChromatinModifications, gxEpigenetics, gxAlternativeSplicing, gxTranslationControl, gxNcrna, gxGenomeStructure, gxGeneFamilies, gxRepeatsMobile, gxGenomeWide, gxIntegration, phTransport, phMembranePotential, phActionPotential, phNervousSystem, phSynapse, phSkeletalMuscle, phSmoothCardiacMuscle, phBlood, phKidneyFiltration, phKidneyTubules, phVolumePressure];
 
 export const lessonBySlug = (slug: string) => LESSONS.find((l) => l.slug === slug);
 
