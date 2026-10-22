@@ -53,6 +53,12 @@ Update this file whenever a source is found, moves, or stops working.
 ## Student material (lowest tier, verify everything)
 - underwar.co.il (one old summary for 134020), Studocu, Scribd — almost nothing useful.
   Public student summaries are not a source for order.
+- **Exception — uploaded official syllabi.** Students upload the course's own syllabus PDF to
+  Scribd/Studocu. Search `site:scribd.com <course code>` and `site:scribd.com "<Hebrew name>" טכניון`.
+  Found this way: 134058 Biology 1, winter 2024 (scribd.com/document/744244211). Scribd's text layer
+  is font-encoded → screenshot `https://www.scribd.com/embeds/<id>/content?start_page=1&view_mode=scroll`
+  (`.outer_page` elements) with Playwright and read the images. Verify identity (code, year,
+  lecturers) as for any source; it is `official-past`, never `official`.
 
 ## Books
 - TAU's genetics syllabus states Griffiths *Introduction to Genetic Analysis* 8th ed. "can be

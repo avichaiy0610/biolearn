@@ -138,6 +138,13 @@ textbook has it.
 confidence, Hebrew note and source links). Units follow the lesson format; each unit gets a
 Codex review (`ask-codex`), a 390px render check, then Avichai's approval before publishing.
 
+### 6a. Figures — no text on lines
+Draw from the textbook figure as a visual reference only (never copy). A label goes beside or
+above its line, arrow or curve — never on it. Before committing figures, run
+`node scripts/figure-audit.mjs <out.json> <slug...>` (dev server on :3123) and look at every hit;
+then screenshot the figures and check them by eye (the audit also flags labels inside segments,
+which are fine).
+
 ### 7. Keep it fresh
 Each semester: re-run `syllabus-fetch.ts`, `staff`, `discover` for changed lecturers or new
 PDFs. Student reports ("הסדר אצלכם שונה?") arrive in /admin/feedback — a verified report can
