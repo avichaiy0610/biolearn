@@ -68,6 +68,7 @@ export const technionMolecularScope: CourseScope = {
       "ner": named(REP),
       "mmr": named(REP),
       "dsb": named(REP),
+      "crispr": heading(REP, "CRISPR ועריכת גנום (הקורס המקביל ברפואה 274243 מזכיר \"עריכה גנומית\" — ראיה בלבד)"),
       "tls": heading(REP, "סינתזה דרך נזק ותגובת SOS"),
     },
     "mol-recombination": {

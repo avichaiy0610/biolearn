@@ -28,9 +28,10 @@ const sec = (l: Lesson, ...ids: string[]): PlanItem[] => (ids.length ? ids.map((
 const probs = (l: Lesson, ...ids: string[]): PlanItem[] =>
   (l.workedProblems ?? []).filter((w) => !ids.length || ids.includes(w.id)).map((w) => ({ kind: "lesson" as const, slug: l.slug, problem: w.id }));
 
-// Riboswitches are left out of this course: they belong to "העולם המודרני של הרנ\"א" (134151), whose syllabus
-// names RNA as a gene-expression regulator and ribozymes. The section stays in the unit, marked as extension.
-const NCRNA = sec(gxNcrna, "classes", "bacteria", "mirna", "sirna", "rnai-heterochromatin", "lncrna");
+// Narrowed 2026-10-22 to the course itself (Avichai: "the course is what its name says"): the regulatory RNA is
+// miRNA/siRNA only; riboswitches (134151), CRISPR (134082), bacterial sRNA, piRNA, lncRNA and other textbook-only
+// sections were moved to content/lessons/_archive/technion-gene-expression (full copies of the units).
+const NCRNA = sec(gxNcrna);
 const PORTAL = { labelHe: "הסילבוס בפורטל הטכניון", url: "https://students.technion.ac.il/local/technionsearch/course/134119" };
 const MED = { labelHe: "הקורס המקביל ברפואה (274243) — ראיה בלבד", url: "https://md.technion.ac.il/wp-content/uploads/2024/05/סיליבוס-מנגנוני-בקרה-מולקולרית-274243-חורף-תשפד-12-שבועות.pdf" };
 
@@ -42,7 +43,7 @@ const LECTURES: { titleHe: string; items: PlanItem[]; practice: PlanItem[] }[] =
   { titleHe: "אפיגנטיקה: הטרוכרומטין, Polycomb, השבתת X והחתמה", items: [...sec(gxEpigenetics), proc("genomic-imprinting", "genetics")], practice: probs(gxEpigenetics) },
   { titleHe: "שחבור חלופי ועריכת RNA", items: sec(gxAlternativeSplicing), practice: probs(gxAlternativeSplicing) },
   { titleHe: "בקרת תרגום ויציבות mRNA", items: sec(gxTranslationControl), practice: probs(gxTranslationControl) },
-  { titleHe: "בקרה על ידי RNA לא מקודד", items: NCRNA, practice: probs(gxNcrna, "mirna-reporter") },
+  { titleHe: "בקרה על ידי RNA לא מקודד", items: NCRNA, practice: probs(gxNcrna) },
   { titleHe: "מבנה הגנום", items: sec(gxGenomeStructure), practice: probs(gxGenomeStructure) },
   { titleHe: "ביטוי מתואם: משפחות גנים וצבירים", items: sec(gxGeneFamilies), practice: probs(gxGeneFamilies) },
   { titleHe: "רצפים חוזרים ורצפים ניידים", items: sec(gxRepeatsMobile), practice: probs(gxRepeatsMobile) },
