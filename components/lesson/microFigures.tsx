@@ -714,12 +714,12 @@ function SporulationCycle() {
   const Cell = ({ x, y }: { x: number; y: number }) => <rect x={x - 46} y={y - 20} width={92} height={40} rx={20} fill={FILL.gray} stroke={INK} strokeWidth={1.5} />;
   const t: [string, string][] = [["1. חלוקה", "א-סימטרית"], ["2. בליעה", "בתוך תא האם"], ["3. קורטקס", "ומעטה"], ["4. שחרור", "תא האם מתפרק"]];
   return (
-    <Svg h={330} label="מחזור הספורולציה: חלוקה א-סימטרית שיוצרת פורספורה קטנה ותא אם גדול; בליעת הפורספורה בתוך תא האם; בניית הקורטקס והמעטה והבשלה; ופירוק תא האם ששחרר את האנדוספורה הבשלה. הנביטה מחזירה את האנדוספורה לתא פעיל">
+    <Svg h={344} label="מחזור הספורולציה: חלוקה א-סימטרית שיוצרת פורספורה קטנה ותא אם גדול; בליעת הפורספורה בתוך תא האם; בניית הקורטקס והמעטה והבשלה; ופירוק תא האם ששחרר את האנדוספורה הבשלה. הנביטה מחזירה את האנדוספורה לתא פעיל">
       {t.map(([a, b], i) => (<g key={a}><He x={xs[i]} y={28} size={12} bold>{a}</He><He x={xs[i]} y={44} size={11} color={MUTED}>{b}</He></g>))}
       <Cell x={xs[0]} y={100} />
       <line x1={xs[0] + 16} y1={82} x2={xs[0] + 16} y2={118} stroke={INK} strokeWidth={2} />
       <ellipse cx={xs[0] + 30} cy={100} rx={13} ry={16} fill={FILL.green} stroke={GREEN} strokeWidth={1.4} />
-      <He x={376} y={150} size={10} color={MUTED}>הגדול — תא אם · <tspan fill={GREEN}>הקטן — פורספורה</tspan></He>
+      <He x={410} y={150} size={10.5} color={MUTED}>תא אם + <tspan fill={GREEN} fontWeight={700}>פורספורה</tspan></He>
       <Cell x={xs[1]} y={100} />
       <ellipse cx={xs[1] + 14} cy={100} rx={15} ry={17} fill={FILL.green} stroke={GREEN} strokeWidth={1.4} />
       <ellipse cx={xs[1] + 14} cy={100} rx={20} ry={22} fill="none" stroke={BLUE} strokeWidth={1.4} />
@@ -728,16 +728,17 @@ function SporulationCycle() {
       <ellipse cx={xs[2] + 10} cy={100} rx={14} ry={16} fill={FILL.green} stroke={GREEN} strokeWidth={1.4} />
       <ellipse cx={xs[3]} cy={100} rx={26} ry={28} fill={FILL.yellow} stroke={ORANGE} strokeWidth={2} />
       <ellipse cx={xs[3]} cy={100} rx={15} ry={17} fill={FILL.green} stroke={GREEN} strokeWidth={1.4} />
-      <He x={xs[3]} y={146} size={10.5} bold color={ORANGE}>אנדוספורה בשלה</He>
+      <He x={xs[3]} y={150} size={10.5} bold color={ORANGE}>אנדוספורה בשלה</He>
       {[0, 1, 2].map((i) => <Arrow key={i} x1={xs[i] - 50} y1={100} x2={xs[i + 1] + 50} y2={100} color={INK} width={2.2} />)}
-      <He x={240} y={184} size={11} color={MUTED}>כ-8 שעות · מעל 200 גנים · Spo0A ואחריו σF, σE, σG, σK</He>
-      <path d="M80 132 C 68 204, 132 252, 194 252" fill="none" stroke={GREEN} strokeWidth={2.2} markerEnd="url(#bfArrow)" />
-      <Rod x={240} y={252} w={78} h={32} fill={FILL.gray} />
-      <He x={240} y={257} size={11} bold>תא פעיל</He>
-      <path d="M282 246 C 356 240, 402 212, 402 132" fill="none" stroke={MUTED} strokeWidth={1.8} markerEnd="url(#bfArrow)" {...dash} />
-      <He x={470} y={208} size={10.5} anchor="end" color={MUTED}>רעב ← ספורולציה</He>
-      <He x={128} y={296} size={11} bold color={GREEN}>נביטה: הפעלה ← נביטה ← התפתחות (דקות)</He>
-      <He x={240} y={320} size={10.5} color={MUTED}>בנביטה אובדת העמידות לחום ולכימיקלים</He>
+      <He x={222} y={186} size={11} color={MUTED}>כ-8 שעות · מעל 200 גנים · Spo0A ואחריו σF, σE, σG, σK</He>
+      {/* the cycle closes below: each arrow runs from one caption to the next, never from the drawings */}
+      <path d="M80 164 C 78 230, 132 264, 194 264" fill="none" stroke={GREEN} strokeWidth={2.2} markerEnd="url(#bfArrow)" />
+      <Rod x={240} y={264} w={78} h={32} fill={FILL.gray} />
+      <He x={240} y={269} size={11} bold>תא פעיל</He>
+      <path d="M284 258 C 372 258, 452 240, 452 198 C 452 180, 436 170, 418 166" fill="none" stroke={MUTED} strokeWidth={1.8} markerEnd="url(#bfArrow)" {...dash} />
+      <He x={430} y={226} size={10.5} anchor="end" color={MUTED}>רעב ← ספורולציה</He>
+      <He x={150} y={310} size={11} bold color={GREEN}>נביטה: הפעלה ← נביטה ← התפתחות (דקות)</He>
+      <He x={240} y={332} size={10.5} color={MUTED}>בנביטה אובדת העמידות לחום ולכימיקלים</He>
     </Svg>
   );
 }
