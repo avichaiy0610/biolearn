@@ -9,6 +9,7 @@ import { GENE_EXPRESSION_FIGURES } from "./geneExpressionFigures";
 import { PHYSIOLOGY_FIGURES } from "./physiologyFigures";
 import { MICRO_FIGURES } from "./microFigures";
 import { PLANT_FIGURES } from "./plantFigures";
+import { BIO1_FIGURES } from "./bio1Figures";
 
 const BLUE = "#1d4ed8", ORANGE = "#c2410c", INK = "#1f2937", MUTED = "#64748b";
 const T = { fontFamily: "var(--font-hebrew), Arial, sans-serif" };
@@ -471,7 +472,7 @@ function PedigreeXR() {
 
 // Figure ids must be unique across the per-course maps — a later spread silently replaces an earlier figure
 // (this happened with "z-scheme", "calvin-cycle" and "lambda-switch"). Fail loudly instead.
-const FIGURE_SETS = { BIOCHEM_FIGURES, METABOLIC_FIGURES, MOLECULAR_FIGURES, CELL_FIGURES, GENE_EXPRESSION_FIGURES, PHYSIOLOGY_FIGURES, MICRO_FIGURES, PLANT_FIGURES };
+const FIGURE_SETS = { BIOCHEM_FIGURES, METABOLIC_FIGURES, MOLECULAR_FIGURES, CELL_FIGURES, GENE_EXPRESSION_FIGURES, PHYSIOLOGY_FIGURES, MICRO_FIGURES, PLANT_FIGURES, BIO1_FIGURES };
 {
   const seen = new Map<string, string>();
   for (const [set, figs] of Object.entries(FIGURE_SETS)) for (const id of Object.keys(figs)) {
@@ -500,6 +501,7 @@ const FIGURES: Record<string, { el: () => React.ReactElement; captionHe: string 
   ...PHYSIOLOGY_FIGURES,
   ...MICRO_FIGURES,
   ...PLANT_FIGURES,
+  ...BIO1_FIGURES,
   map: { el: GeneMap, captionHe: "איור 2 — המפה מהדוגמה התלת-נקודתית: A–C–B. בהזנחת שחלופים מרובים שלא זוהו, המרחקים הם 10 ו-20 cM וסכומם 30 cM. תדירות הרקומבינציה הנמדדת ישירות בין A ל-B היא רק 28%." },
 };
 
