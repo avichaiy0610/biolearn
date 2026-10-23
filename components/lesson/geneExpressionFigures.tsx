@@ -527,7 +527,7 @@ function MirnaPathway() {
       <La x={230} y={148} size={11} bold color={RED}>Dicer</La>
       <Line x1={140} y1={154} x2={190} y2={154} c={PURPLE} w={2} />
       <Line x1={140} y1={162} x2={190} y2={162} c={ORANGE} w={2} />
-      <He x={165} y={184} size={10.5} color={MUTED}>דופלקס ~22</He>
+      <He x={165} y={184} size={10.5} color={MUTED}>דופלקס של כ-22</He>
       <Arrow x1={140} y1={170} x2={110} y2={210} />
       <ellipse cx={100} cy={232} rx={46} ry={20} fill={FILL.green} stroke={GREEN} strokeWidth={1.5} />
       <La x={100} y={236} size={11} bold color={GREEN}>RISC (Ago)</La>

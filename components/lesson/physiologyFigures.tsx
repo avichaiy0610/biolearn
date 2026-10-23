@@ -384,14 +384,14 @@ function NephronSegments() {
   return (
     <Svg h={290} label="מקטעי הנפרון והנשאים העיקריים, עם אחוז ספיגת ה-Na⁺ שסונן: אבובית מקורבת כ-67% (SGLT2, NHE3, אקוופורין 1); החלק העולה העבה כ-25% (NKCC2, אטום למים); אבובית מרוחקת כ-5% (NCC); צינורית מאספת כ-3% (ENaC בתאים ראשיים, אקוופורין 2 בהשפעת ADH)">
       <NephronShape>
-        <He x={145} y={40} size={11.5} bold color={BLUE}>מקורבת ~67%</He>
+        <He x={145} y={40} size={11.5} bold color={BLUE}>מקורבת כ-67%</He>
         <La x={145} y={56} size={10} color={MUTED}>SGLT2 · NHE3 · AQP1</La>
         <He x={120} y={200} size={10.5} color={BLUE} anchor="end">יורד: מים יוצאים</He>
-        <He x={212} y={200} size={10.5} bold color={ORANGE} anchor="start">עולה עבה ~25%</He>
+        <He x={212} y={200} size={10.5} bold color={ORANGE} anchor="start">עולה עבה כ-25%</He>
         <La x={212} y={216} size={10} color={MUTED} anchor="start">NKCC2 · אטום למים</La>
-        <He x={270} y={66} size={11} bold color={GREEN}>מרוחקת ~5%</He>
+        <He x={270} y={66} size={11} bold color={GREEN}>מרוחקת כ-5%</He>
         <La x={270} y={104} size={10} color={MUTED}>NCC</La>
-        <He x={344} y={200} size={11} bold color={PURPLE} anchor="start">מאספת ~3%</He>
+        <He x={344} y={200} size={11} bold color={PURPLE} anchor="start">מאספת כ-3%</He>
         <La x={344} y={216} size={10} color={MUTED} anchor="start">ENaC · AQP2 (ADH)</La>
         <He x={344} y={232} size={10} color={MUTED} anchor="start">אלדוסטרון</He>
       </NephronShape>
@@ -492,6 +492,6 @@ export const PHYSIOLOGY_FIGURES: Record<string, { el: () => React.ReactElement; 
   "glomerular-starling": { el: GlomerularStarling, captionHe: "כוחות סטרלינג בפקעית (ערכים טיפוסיים). הלחץ בנימים דוחף נוזל החוצה; הלחץ בכופסית באומן והלחץ האוסמוטי של חלבוני הפלזמה מתנגדים. הלחץ האוסמוטי עולה לאורך הנים, ולכן הכוח הנטו יורד לאורכו. סכמטי." },
   "nephron-segments": { el: NephronSegments, captionHe: "מקטעי הנפרון, הנשאים העיקריים ואחוז ספיגת ה-Na⁺ שסונן בכל מקטע (בקירוב). רוב הספיגה במקורבת; הכוונון הסופי, בהשפעת אלדוסטרון ו-ADH, בצינורית המאספת. סכמטי." },
   "diuretic-sites": { el: DiureticSites, captionHe: "אתרי הפעולה של המשתנים העיקריים לאורך הנפרון. משתני לולאה הם החזקים ביותר; אמילוריד וספירונולקטון חוסכי אשלגן. סכמטי." },
-  "countercurrent": { el: Countercurrent, captionHe: "מכפל הזרם הנגדי בלולאת הנלה (ערכי אוסמולריות טיפוסיים, mOsm/kg). החלק היורד מאבד מים, החלק העולה מאבד מלח — והנוזל הבין-תאי בליבה מתרכז עד ~1200. בצינורית המאספת, ADH מאפשר למים לצאת והשתן מתרכז. סכמטי." },
+  "countercurrent": { el: Countercurrent, captionHe: "מכפל הזרם הנגדי בלולאת הנלה (ערכי אוסמולריות טיפוסיים, mOsm/kg). החלק היורד מאבד מים, החלק העולה מאבד מלח — והנוזל הבין-תאי בליבה מתרכז עד כ-1200. בצינורית המאספת, ADH מאפשר למים לצאת והשתן מתרכז. סכמטי." },
   "raas": { el: Raas, captionHe: "מערכת הרנין-אנגיוטנסין-אלדוסטרון: מה מגביר רנין, המפל לאנגיוטנסין II, ופעולותיו שמעלות את לחץ הדם ואת הנפח — ומפחיתות בחזרה את הפרשת הרנין. ANP פועל בכיוון ההפוך. סכמטי." },
 };
