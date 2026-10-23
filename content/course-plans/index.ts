@@ -10,7 +10,8 @@ import { technionPhysiologyPlan } from "./technion-physiology";
 import { technionMicroViroPlan } from "./technion-micro-viro";
 import { technionPlantPhysiologyPlan } from "./technion-plant-physiology";
 import { technionBiology1Plan } from "./technion-biology-1";
+import { technionEvolutionPlan } from "./technion-evolution";
 
-export const COURSE_PLANS: CoursePlan[] = [technionGeneticsPlan, tauGeneticsPlan, technionBiochemIntroPlan, technionMetabolicPlan, technionMolecularPlan, technionCellPlan, technionGeneExpressionPlan, technionPhysiologyPlan, technionMicroViroPlan, technionPlantPhysiologyPlan, technionBiology1Plan];
+export const COURSE_PLANS: CoursePlan[] = [technionGeneticsPlan, tauGeneticsPlan, technionBiochemIntroPlan, technionMetabolicPlan, technionMolecularPlan, technionCellPlan, technionGeneExpressionPlan, technionPhysiologyPlan, technionMicroViroPlan, technionPlantPhysiologyPlan, technionBiology1Plan, technionEvolutionPlan];
 
 export const planForCourse = (slug: string) => COURSE_PLANS.find((p) => p.courseSlug === slug);
