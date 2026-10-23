@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import type { Metadata } from "next";
 import ReactMarkdown, { type Components } from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { hasLocale, type Locale } from "@/lib/dictionaries";
 import { prisma } from "@/lib/prisma";
 import { parseSvgData } from "@/lib/svg-scene";
@@ -26,8 +27,18 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/learn/[les
 // Inline code = symbols, genotypes and formulas: isolated, so Hebrew prose keeps its order.
 // Direction follows the first letter (Latin/Greek → LTR, Hebrew → RTL): "P(Aa | סגול) = …" and
 // "χ² = Σ …" read LTR, "מרחק = ½ × …" reads RTL.
+// GFM for tables; single "~" stays literal (the text writes "~90%" for "about 90%").
+const GFM = [[remarkGfm, { singleTilde: false }]] as NonNullable<Parameters<typeof ReactMarkdown>[0]["remarkPlugins"]>;
 const md: Components = {
   h2: () => null, // headings are rendered by the section wrapper
+  table: ({ children }) => (
+    <div className="my-5 overflow-x-auto rounded-xl border border-line">
+      <table className="w-full min-w-[28rem] border-collapse text-[15px] leading-7">{children}</table>
+    </div>
+  ),
+  thead: ({ children }) => <thead className="bg-surface-2">{children}</thead>,
+  th: ({ children }) => <th className="border-b border-line px-3 py-2 text-start font-bold text-ink">{children}</th>,
+  td: ({ children }) => <td className="border-b border-line px-3 py-2 align-top text-ink">{children}</td>,
   p: ({ children }) => <p className="my-4 text-[16.5px] leading-8 text-ink">{children}</p>,
   ul: ({ children }) => <ul className="my-4 list-disc space-y-2 ps-6 text-[16.5px] leading-8">{children}</ul>,
   ol: ({ children }) => <ol className="my-4 list-decimal space-y-2 ps-6 text-[16.5px] leading-8">{children}</ol>,
@@ -129,7 +140,7 @@ export default async function LessonPage({ params }: PageProps<"/[lang]/learn/[l
                 return e ? <ScopeBadge entry={e} courseHe={lesson.course.nameHe} fallbackSource={courseScope.defaultSource} /> : null;
               })()}
               {s.segments.map((g, i) => {
-                if (g.kind === "md") return <ReactMarkdown key={i} components={md}>{g.text}</ReactMarkdown>;
+                if (g.kind === "md") return <ReactMarkdown key={i} remarkPlugins={GFM} components={md}>{g.text}</ReactMarkdown>;
                 if (g.kind === "figure") return <LessonFigure key={i} id={g.id} />;
                 const p = procs.find((x) => x.slug === g.slug);
                 if (!p) return null;
@@ -155,7 +166,7 @@ export default async function LessonPage({ params }: PageProps<"/[lang]/learn/[l
           <section id="experiment" className={`mt-10 scroll-mt-24 ${box} border-amber/40 bg-amber-tint`}>
             <p className="text-xs font-bold text-amber">איך אנחנו יודעים</p>
             <h2 className="mt-1 text-xl font-black">{lesson.experiment.titleHe}</h2>
-            <ReactMarkdown components={md}>{lesson.experiment.bodyHe}</ReactMarkdown>
+            <ReactMarkdown remarkPlugins={GFM} components={md}>{lesson.experiment.bodyHe}</ReactMarkdown>
           </section>
 
           <section id="traps" className={`mt-6 scroll-mt-24 ${box}`}>
@@ -188,11 +199,11 @@ export default async function LessonPage({ params }: PageProps<"/[lang]/learn/[l
                   <li key={w.id} id={`wp-${w.id}`} className={`scroll-mt-24 ${box}`}>
                     <p className="text-xs font-bold text-brand">תרגיל {i + 1}</p>
                     <h3 className="mt-1 text-lg font-black">{w.titleHe}</h3>
-                    <ReactMarkdown components={md}>{w.problemHe}</ReactMarkdown>
+                    <ReactMarkdown remarkPlugins={GFM} components={md}>{w.problemHe}</ReactMarkdown>
                     <details className="group mt-2 rounded-xl border border-line bg-surface-2 px-4 py-3">
                       <summary className="cursor-pointer text-sm font-bold text-brand">הצגת הפתרון</summary>
-                      <ReactMarkdown components={md}>{w.solutionHe}</ReactMarkdown>
-                      <div className="mt-2 rounded-lg bg-tint px-3 py-2 text-sm [&_p]:my-0 [&_p]:text-sm"><ReactMarkdown components={md}>{`**תשובה:** ${w.answerHe}`}</ReactMarkdown></div>
+                      <ReactMarkdown remarkPlugins={GFM} components={md}>{w.solutionHe}</ReactMarkdown>
+                      <div className="mt-2 rounded-lg bg-tint px-3 py-2 text-sm [&_p]:my-0 [&_p]:text-sm"><ReactMarkdown remarkPlugins={GFM} components={md}>{`**תשובה:** ${w.answerHe}`}</ReactMarkdown></div>
                     </details>
                   </li>
                 ))}

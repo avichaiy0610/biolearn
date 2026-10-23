@@ -1,7 +1,7 @@
 import type { Lesson } from "../types";
 
 // Technion 134113 — official syllabus: "זירחון חימצוני". Facts checked against Berg 10e ch. 18
-// (complexes I–IV, proton translocation 4/4/2 per pair, ATP synthase c ring, shuttles, ~30 ATP per glucose, uncouplers).
+// (complexes I–IV, proton translocation 4/4/2 per pair, ATP synthase c ring, shuttles, כ-30 ATP per glucose, uncouplers).
 export const metOxphos: Lesson = {
   slug: "met-oxphos",
   status: "draft",
