@@ -6,6 +6,7 @@ import { hasLocale } from "@/lib/dictionaries";
 import { SEMESTER_LABEL, YEAR_LABEL } from "@/content/courses";
 import { COURSE_KIND_LABEL, GENERAL_UNIVERSITY } from "@/content/universities";
 import { getCourses } from "@/lib/courses-db";
+import { planUnitCount } from "@/content/course-plans";
 import { selectedUniversity } from "@/lib/university";
 import UniversityPicker from "@/components/UniversityPicker";
 
@@ -72,7 +73,8 @@ export default async function CoursesPage({ params, searchParams }: PageProps<"/
                   <h3 className="text-sm font-semibold text-emerald-700 dark:text-emerald-400 mb-2">{SEMESTER_LABEL[L][sem]}</h3>
                   <ul className="space-y-3">
                     {inYear.filter((c) => c.semester === sem).map((c) => {
-                      const empty = c.units.length === 0;
+                      const count = planUnitCount(c.slug) ?? c.units.length;
+                      const empty = count === 0;
                       return (
                         <li key={c.slug}>
                           <Link
@@ -93,7 +95,7 @@ export default async function CoursesPage({ params, searchParams }: PageProps<"/
                             <span className="block mt-2 text-xs text-zinc-400">
                               {empty
                                 ? (he ? "החומר לקורס הזה עוד בכתיבה" : "Material for this course is still being written")
-                                : `${c.units.length} ${he ? "יחידות לימוד" : "units"}`}
+                                : `${count} ${he ? "יחידות לימוד" : "units"}`}
                             </span>
                           </Link>
                         </li>

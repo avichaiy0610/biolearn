@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { hasLocale, type Locale } from "@/lib/dictionaries";
 import { homeData } from "@/lib/home-data";
+import { planUnitCount } from "@/content/course-plans";
 import { GENERAL_UNIVERSITY } from "@/content/universities";
 import { GLOSSARY } from "@/content/glossary";
 import FieldIcon from "@/components/FieldIcon";
@@ -83,7 +84,8 @@ export default async function HomePage({ params, searchParams }: PageProps<"/[la
             <ol className="overflow-hidden rounded-[18px] border border-line bg-surface">
               {d.courses.map((c, i) => {
                 const active = c.course.slug === d.selected?.course.slug;
-                const empty = c.units.length === 0;
+                const planned = planUnitCount(c.course.slug);
+                const empty = (planned ?? c.units.length) === 0;
                 return (
                   <li key={c.course.slug} className="border-b border-line last:border-b-0">
                     <Link href={`/${lang}?course=${c.course.slug}`} scroll={false} aria-current={active ? "true" : undefined}
@@ -95,12 +97,14 @@ export default async function HomePage({ params, searchParams }: PageProps<"/[la
                         <small className="mt-1 block text-xs text-muted">
                           {empty
                             ? (he ? "החומר לקורס בכתיבה" : "Material being written")
+                            : planned !== null
+                              ? (he ? `${planned} יחידות` : `${planned} units`)
                             : !d.loggedIn
                               ? (he ? `${c.units.length} יחידות` : `${c.units.length} units`)
                               : c.read > 0
                                 ? (he ? `${c.read} מתוך ${c.readings} יחידות נקראו` : `${c.read} of ${c.readings} units read`)
                                 : (he ? "התחלה חדשה" : "Not started")}
-                          {c.next && !empty && <> · {name(c.next)}</>}
+                          {c.next && !empty && planned === null && <> · {name(c.next)}</>}
                         </small>
                       </span>
                       <FieldIcon topic={c.icon} size={28} className={empty ? "text-muted" : "text-brand"} />
@@ -185,9 +189,18 @@ export default async function HomePage({ params, searchParams }: PageProps<"/[la
               </article>
             </section>
           ) : (
+            d.selected && planUnitCount(d.selected.course.slug) ? (
+              <section className="rounded-[18px] border border-line bg-surface p-8">
+                <p className="text-muted">{he ? `לקורס יש ${planUnitCount(d.selected.course.slug)} יחידות לימוד, מסודרות לפי הסילבוס.` : `This course has ${planUnitCount(d.selected.course.slug)} units, ordered by the syllabus.`}</p>
+                <Link href={`/${lang}/courses/${d.selected.course.slug}`} className="mt-4 inline-flex min-h-12 items-center gap-3 rounded-xl bg-brand px-6 font-bold text-surface hover:bg-brand-hover">
+                  {he ? "לתוכנית הקורס" : "Open the course plan"} <Arrow />
+                </Link>
+              </section>
+            ) : (
             <section className="rounded-[18px] border border-dashed border-line p-8 text-muted">
               {he ? "החומר לקורס הזה עוד בכתיבה. בינתיים אפשר לבחור קורס אחר מהרשימה." : "This course's material is still being written. Pick another course meanwhile."}
             </section>
+            )
           )}
         </div>
       )}

@@ -16,3 +16,14 @@ import { technionZoologyPlan } from "./technion-zoology";
 export const COURSE_PLANS: CoursePlan[] = [technionGeneticsPlan, tauGeneticsPlan, technionBiochemIntroPlan, technionMetabolicPlan, technionMolecularPlan, technionCellPlan, technionGeneExpressionPlan, technionPhysiologyPlan, technionMicroViroPlan, technionPlantPhysiologyPlan, technionBiology1Plan, technionEvolutionPlan, technionZoologyPlan];
 
 export const planForCourse = (slug: string) => COURSE_PLANS.find((p) => p.courseSlug === slug);
+
+// Number of study units (lessons) a course plan links to, or null without a plan. Plans without lessons count
+// their DB readings and animations. The course cards use this instead of the DB unit list, which predates the plans.
+export const planUnitCount = (slug: string): number | null => {
+  const p = planForCourse(slug);
+  if (!p) return null;
+  const items = p.topics.flatMap((t) => t.items);
+  const lessons = new Set(items.flatMap((i) => (i.kind === "lesson" ? [i.slug] : [])));
+  if (lessons.size) return lessons.size;
+  return new Set(items.flatMap((i) => (i.kind === "subtopic" ? [`s:${i.id}`] : i.kind === "process" ? [`p:${i.slug}`] : []))).size;
+};
