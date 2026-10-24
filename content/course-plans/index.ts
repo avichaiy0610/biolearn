@@ -15,8 +15,9 @@ import { technionZoologyPlan } from "./technion-zoology";
 import { technionEndocrinologyPlan } from "./technion-endocrinology";
 import { technionImmunologyPlan } from "./technion-immunology";
 import { technionDevelopmentalPlan } from "./technion-developmental";
+import { technionEcologyPlan } from "./technion-ecology";
 
-export const COURSE_PLANS: CoursePlan[] = [technionGeneticsPlan, tauGeneticsPlan, technionBiochemIntroPlan, technionMetabolicPlan, technionMolecularPlan, technionCellPlan, technionGeneExpressionPlan, technionPhysiologyPlan, technionMicroViroPlan, technionPlantPhysiologyPlan, technionBiology1Plan, technionEvolutionPlan, technionZoologyPlan, technionEndocrinologyPlan, technionImmunologyPlan, technionDevelopmentalPlan];
+export const COURSE_PLANS: CoursePlan[] = [technionGeneticsPlan, tauGeneticsPlan, technionBiochemIntroPlan, technionMetabolicPlan, technionMolecularPlan, technionCellPlan, technionGeneExpressionPlan, technionPhysiologyPlan, technionMicroViroPlan, technionPlantPhysiologyPlan, technionBiology1Plan, technionEvolutionPlan, technionZoologyPlan, technionEndocrinologyPlan, technionImmunologyPlan, technionDevelopmentalPlan, technionEcologyPlan];
 
 export const planForCourse = (slug: string) => COURSE_PLANS.find((p) => p.courseSlug === slug);
 

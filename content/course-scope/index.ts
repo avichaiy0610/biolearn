@@ -15,8 +15,9 @@ import { technionZoologyScope } from "./technion-zoology";
 import { technionEndocrinologyScope } from "./technion-endocrinology";
 import { technionImmunologyScope } from "./technion-immunology";
 import { technionDevelopmentalScope } from "./technion-developmental";
+import { technionEcologyScope } from "./technion-ecology";
 
-export const COURSE_SCOPES: CourseScope[] = [technionGeneticsScope, tauGeneticsScope, technionBiochemIntroScope, technionMetabolicScope, technionMolecularScope, technionCellScope, technionGeneExpressionScope, technionPhysiologyScope, technionMicroViroScope, technionPlantPhysiologyScope, technionBiology1Scope, technionEvolutionScope, technionZoologyScope, technionEndocrinologyScope, technionImmunologyScope, technionDevelopmentalScope];
+export const COURSE_SCOPES: CourseScope[] = [technionGeneticsScope, tauGeneticsScope, technionBiochemIntroScope, technionMetabolicScope, technionMolecularScope, technionCellScope, technionGeneExpressionScope, technionPhysiologyScope, technionMicroViroScope, technionPlantPhysiologyScope, technionBiology1Scope, technionEvolutionScope, technionZoologyScope, technionEndocrinologyScope, technionImmunologyScope, technionDevelopmentalScope, technionEcologyScope];
 
 export const scopeForCourse = (courseSlug: string) => COURSE_SCOPES.find((s) => s.courseSlug === courseSlug);
 
