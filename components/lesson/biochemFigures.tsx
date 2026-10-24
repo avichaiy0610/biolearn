@@ -2,6 +2,7 @@
    equations in the text (same numbers as the worked problems); schematics are marked as such
    in their captions. Referenced from lesson bodies as [[figure:<id>]]. */
 import type React from "react";
+import { isolatePrimes } from "@/lib/text";
 
 export const BLUE = "#1d4ed8", ORANGE = "#c2410c", GREEN = "#15803d", INK = "#1f2937", MUTED = "#64748b", LINE = "#cbd5e1";
 const HE = { fontFamily: "var(--font-hebrew), Arial, sans-serif" };
@@ -12,6 +13,7 @@ type TxProps = { x: number; y: number; children: React.ReactNode; size?: number;
 // `anchor` uses left-to-right meaning (start = text begins at x and runs right); flipped here for RTL text.
 export function He({ x, y, children, size = 15, anchor = "middle", color = INK, bold, rotate }: TxProps) {
   const a = anchor === "start" ? "end" : anchor === "end" ? "start" : "middle";
+  if (typeof children === "string") children = isolatePrimes(children); // "Na⁺" keeps its order in RTL
   return (
     <text x={x} y={y} fontSize={size} textAnchor={a} direction="rtl" fill={color} fontWeight={bold ? 700 : 400} style={HE}
       transform={rotate ? `rotate(${rotate} ${x} ${y})` : undefined}>{children}</text>

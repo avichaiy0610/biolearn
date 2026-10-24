@@ -13,6 +13,7 @@ import FieldIcon from "@/components/FieldIcon";
 import { SceneStill } from "@/components/ProcessAnimation";
 import LessonPractice from "@/components/lesson/LessonPractice";
 import ScopeBadge from "@/components/lesson/ScopeBadge";
+import { isolatePrimes } from "@/lib/text";
 import { scopeForCourse, sectionScope } from "@/content/course-scope";
 
 export const dynamic = "force-dynamic";
@@ -28,7 +29,16 @@ export async function generateMetadata({ params }: PageProps<"/[lang]/learn/[les
 // Direction follows the first letter (Latin/Greek → LTR, Hebrew → RTL): "P(Aa | סגול) = …" and
 // "χ² = Σ …" read LTR, "מרחק = ½ × …" reads RTL.
 // GFM for tables; single "~" stays literal (the text writes "~90%" for "about 90%").
-const GFM = [[remarkGfm, { singleTilde: false }]] as NonNullable<Parameters<typeof ReactMarkdown>[0]["remarkPlugins"]>;
+// Ions, primes and charges ("Na⁺", "5'→3'") are isolated in every text node so RTL prose keeps their order.
+type MdNode = { type: string; value?: string; children?: MdNode[] };
+const remarkIsolate = () => (tree: MdNode) => {
+  const walk = (n: MdNode) => {
+    if (n.type === "text" && n.value) n.value = isolatePrimes(n.value);
+    n.children?.forEach(walk);
+  };
+  walk(tree);
+};
+const GFM = [[remarkGfm, { singleTilde: false }], remarkIsolate] as NonNullable<Parameters<typeof ReactMarkdown>[0]["remarkPlugins"]>;
 const md: Components = {
   h2: () => null, // headings are rendered by the section wrapper
   table: ({ children }) => (
@@ -103,8 +113,8 @@ export default async function LessonPage({ params }: PageProps<"/[lang]/learn/[l
           <span>{lesson.minutes} דקות קריאה</span>
           <span className="border-s border-hero-muted/40 ps-3">{lesson.questions.length} שאלות ברמת מבחן</span>
         </p>
-        <h1 className="mt-3 text-[clamp(28px,4vw,42px)] font-black leading-tight tracking-tight">{lesson.titleHe}</h1>
-        <p className="mt-3 max-w-[62ch] text-[16px] leading-8 text-hero-muted">{lesson.leadHe}</p>
+        <h1 className="mt-3 text-[clamp(28px,4vw,42px)] font-black leading-tight tracking-tight">{isolatePrimes(lesson.titleHe)}</h1>
+        <p className="mt-3 max-w-[62ch] text-[16px] leading-8 text-hero-muted">{isolatePrimes(lesson.leadHe)}</p>
       </header>
 
       <div className="mt-8 grid items-start gap-8 lg:grid-cols-[240px_minmax(0,1fr)]">
@@ -128,13 +138,13 @@ export default async function LessonPage({ params }: PageProps<"/[lang]/learn/[l
           <section id="objectives" className={`scroll-mt-24 ${box} bg-tint`}>
             <h2 className="text-lg font-bold">בסוף היחידה תדעו</h2>
             <ul className="mt-3 list-disc space-y-2 ps-5 text-[15px] leading-7">
-              {lesson.objectivesHe.map((o) => <li key={o}>{o}</li>)}
+              {lesson.objectivesHe.map((o) => <li key={o}>{isolatePrimes(o)}</li>)}
             </ul>
           </section>
 
           {sections.map((s) => (
             <section key={s.id} id={s.id} className="scroll-mt-24 pt-8">
-              <h2 className="text-[24px] font-black leading-snug tracking-tight">{s.title}</h2>
+              <h2 className="text-[24px] font-black leading-snug tracking-tight">{isolatePrimes(s.title)}</h2>
               {courseScope && (() => {
                 const e = sectionScope(lesson.course.slug, lesson.slug, s.id);
                 return e ? <ScopeBadge entry={e} courseHe={lesson.course.nameHe} fallbackSource={courseScope.defaultSource} /> : null;
@@ -165,7 +175,7 @@ export default async function LessonPage({ params }: PageProps<"/[lang]/learn/[l
 
           <section id="experiment" className={`mt-10 scroll-mt-24 ${box} border-amber/40 bg-amber-tint`}>
             <p className="text-xs font-bold text-amber">איך אנחנו יודעים</p>
-            <h2 className="mt-1 text-xl font-black">{lesson.experiment.titleHe}</h2>
+            <h2 className="mt-1 text-xl font-black">{isolatePrimes(lesson.experiment.titleHe)}</h2>
             <ReactMarkdown remarkPlugins={GFM} components={md}>{lesson.experiment.bodyHe}</ReactMarkdown>
           </section>
 
@@ -173,7 +183,7 @@ export default async function LessonPage({ params }: PageProps<"/[lang]/learn/[l
             <h2 className="text-xl font-black">מלכודות נפוצות במבחן</h2>
             <ul className="mt-3 space-y-2.5 text-[15px] leading-7">
               {lesson.trapsHe.map((t) => (
-                <li key={t} className="flex gap-3"><span aria-hidden className="mt-1 font-black text-amber">!</span><span>{t}</span></li>
+                <li key={t} className="flex gap-3"><span aria-hidden className="mt-1 font-black text-amber">!</span><span>{isolatePrimes(t)}</span></li>
               ))}
             </ul>
           </section>
@@ -183,7 +193,7 @@ export default async function LessonPage({ params }: PageProps<"/[lang]/learn/[l
             <dl className="mt-3 grid gap-x-6 gap-y-2 text-sm sm:grid-cols-2">
               {lesson.terms.map((t) => (
                 <div key={t.en} className="flex items-baseline justify-between gap-3 border-b border-line py-1.5">
-                  <dt className="font-semibold">{t.he}</dt>
+                  <dt className="font-semibold">{isolatePrimes(t.he)}</dt>
                   <dd><bdi dir="ltr" className="text-muted">{t.en}</bdi></dd>
                 </div>
               ))}
@@ -198,7 +208,7 @@ export default async function LessonPage({ params }: PageProps<"/[lang]/learn/[l
                 {lesson.workedProblems.map((w, i) => (
                   <li key={w.id} id={`wp-${w.id}`} className={`scroll-mt-24 ${box}`}>
                     <p className="text-xs font-bold text-brand">תרגיל {i + 1}</p>
-                    <h3 className="mt-1 text-lg font-black">{w.titleHe}</h3>
+                    <h3 className="mt-1 text-lg font-black">{isolatePrimes(w.titleHe)}</h3>
                     <ReactMarkdown remarkPlugins={GFM} components={md}>{w.problemHe}</ReactMarkdown>
                     <details className="group mt-2 rounded-xl border border-line bg-surface-2 px-4 py-3">
                       <summary className="cursor-pointer text-sm font-bold text-brand">הצגת הפתרון</summary>
