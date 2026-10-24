@@ -12,6 +12,7 @@ import LessonFigure from "@/components/lesson/LessonFigure";
 import FieldIcon from "@/components/FieldIcon";
 import { SceneStill } from "@/components/ProcessAnimation";
 import LessonPractice from "@/components/lesson/LessonPractice";
+import LessonChat from "@/components/lesson/LessonChat";
 import ScopeBadge from "@/components/lesson/ScopeBadge";
 import { isolatePrimes } from "@/lib/text";
 import { scopeForCourse, sectionScope } from "@/content/course-scope";
@@ -88,6 +89,7 @@ export default async function LessonPage({ params }: PageProps<"/[lang]/learn/[l
     { id: "traps", title: "מלכודות במבחן" },
     ...(lesson.workedProblems?.length ? [{ id: "worked", title: "תרגילים פתורים" }] : []),
     { id: "practice", title: "תרגול" },
+    { id: "ask", title: "שאלה על היחידה" },
     { id: "sources", title: "מקורות" },
   ];
 
@@ -225,6 +227,12 @@ export default async function LessonPage({ params }: PageProps<"/[lang]/learn/[l
             <h2 className="text-[24px] font-black">תרגול</h2>
             <p className="mt-1 text-sm text-muted">שאלות ברמת מבחן. אחרי כל תשובה מופיע הסבר — גם למה האפשרויות האחרות שגויות.</p>
             <div className="mt-4"><LessonPractice questions={quiz} lang={lang} /></div>
+          </section>
+
+          <section id="ask" className="mt-10 scroll-mt-24">
+            <h2 className="text-[24px] font-black">שאלה על היחידה</h2>
+            <p className="mt-1 text-sm text-muted">מתרגל AI שמכיר את טקסט היחידה. אם משהו לא מופיע כאן, הוא יגיד — ונדע להשלים.</p>
+            <div className="mt-4"><LessonChat lessonSlug={lesson.slug} lessonTitle={lesson.titleHe} /></div>
           </section>
 
           <section id="sources" className="mt-10 scroll-mt-24 border-t border-line pt-6">

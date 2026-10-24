@@ -5,6 +5,7 @@ import { hasLocale } from "@/lib/dictionaries";
 import { isAdmin } from "@/lib/supabase/server";
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
+import { questionGroups, needsMaterial } from "@/lib/question-gaps";
 
 export default async function AdminStatsPage({ params }: PageProps<"/[lang]/admin">) {
   const { lang } = await params;
@@ -29,7 +30,7 @@ export default async function AdminStatsPage({ params }: PageProps<"/[lang]/admi
     prisma.article.count({ where: { hidden: false } }),
     prisma.question.count({ where: { approved: true } }),
     prisma.chatLog.count(),
-    prisma.contentSuggestion.count({ where: { approved: false, rejected: false } }),
+    questionGroups().then((gs) => gs.filter(needsMaterial).length),
     prisma.chatLog.groupBy({
       by: ["topicName"],
       _count: { topicName: true },
@@ -53,7 +54,7 @@ export default async function AdminStatsPage({ params }: PageProps<"/[lang]/admi
     { label: isHe ? "מאמרים" : "Articles", value: `${publishedArticleCount}/${articleCount} ${isHe ? "מפורסמים" : "published"}`, icon: "🔬", color: "bg-amber-50 dark:bg-amber-950/40 border-amber-200 dark:border-amber-900" },
     { label: isHe ? "שאלות מאושרות" : "Approved Questions", value: questionCount, icon: "❓", color: "bg-pink-50 dark:bg-pink-950/40 border-pink-200 dark:border-pink-900" },
     { label: isHe ? "שאילתות צ׳אט" : "Chat Queries", value: chatLogCount, icon: "💬", color: "bg-cyan-50 dark:bg-cyan-950/40 border-cyan-200 dark:border-cyan-900" },
-    { label: isHe ? "הצעות ממתינות" : "Pending Suggestions", value: suggestionCount, icon: "🧠", color: suggestionCount > 0 ? "bg-orange-50 dark:bg-orange-950/40 border-orange-200 dark:border-orange-900" : "bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700" },
+    { label: isHe ? "נושאים חסרים ביחידות" : "Unit Gaps (open)", value: suggestionCount, icon: "🧠", color: suggestionCount > 0 ? "bg-orange-50 dark:bg-orange-950/40 border-orange-200 dark:border-orange-900" : "bg-zinc-50 dark:bg-zinc-800 border-zinc-200 dark:border-zinc-700" },
   ];
 
   return (
@@ -165,7 +166,7 @@ export default async function AdminStatsPage({ params }: PageProps<"/[lang]/admi
               { href: `/${lang}/admin/content`, label: isHe ? "ניהול תוכן" : "Content", icon: "📚" },
               { href: `/${lang}/admin/articles`, label: isHe ? "מאמרים" : "Articles", icon: "🔬" },
               { href: `/${lang}/admin/questions`, label: isHe ? "שאלות" : "Questions", icon: "❓" },
-              { href: `/${lang}/admin/suggestions`, label: isHe ? "הצעות" : "Suggestions", icon: "🧠" },
+              { href: `/${lang}/admin/student-questions`, label: isHe ? "שאלות סטודנטים" : "Student Questions", icon: "🧠" },
             ].map((l) => (
               <Link
                 key={l.href}

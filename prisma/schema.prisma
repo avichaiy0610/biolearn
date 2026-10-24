@@ -123,11 +123,31 @@ model QuizResult {
 }
 
 model ChatLog {
-  id        String   @id @default(cuid())
-  topicSlug String?
-  topicName String
-  question  String
-  createdAt DateTime @default(now())
+  id         String   @id @default(cuid())
+  topicSlug  String?
+  topicName  String
+  question   String
+  createdAt  DateTime @default(now())
+  source     String   @default("topic") // "topic" (old topic pages) | "lesson" (study units)
+  courseSlug String?
+  lessonSlug String?
+  sectionId  String?
+  coverage   String?  // covered | partial | gap | outside | followup — judged against the lesson text
+  topicLabel String?  // short Hebrew label; questions on one concept share it (classifier reuses existing labels)
+
+  @@index([lessonSlug, topicLabel])
+}
+
+// What was done about a recurring student-question topic in a lesson (the queue in /admin/student-questions).
+model QuestionGap {
+  id         String   @id @default(cuid())
+  lessonSlug String
+  topicLabel String
+  status     String   @default("open") // open | added | rejected | outside
+  note       String?
+  updatedAt  DateTime @default(now()) @updatedAt
+
+  @@unique([lessonSlug, topicLabel])
 }
 
 model ContentSuggestion {

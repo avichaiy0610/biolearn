@@ -7,9 +7,9 @@ export async function POST(request: Request) {
     return Response.json({ error: lang === "en" ? "Empty question." : "השאלה ריקה.", code: "bad_request" }, { status: 400 });
   }
 
-  // Log the latest user question (fire-and-forget, don't block the response)
+  // Log the latest user question (fire-and-forget, don't block the response). The AI health check is not a student.
   const lastUserMsg = [...messages].reverse().find((m: { role: string }) => m.role === "user");
-  if (lastUserMsg?.content) {
+  if (lastUserMsg?.content && request.headers.get("x-health-probe") !== "1") {
     prisma.chatLog.create({
       data: { topicSlug: topicSlug ?? null, topicName, question: lastUserMsg.content },
     }).catch(() => {});

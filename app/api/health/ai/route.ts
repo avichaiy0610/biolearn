@@ -32,6 +32,7 @@ export async function GET(request: Request) {
   const cases: { endpoint: string; body: unknown; stream?: boolean }[] = [
     { endpoint: "ai-explain", stream: true, body: { lang: "he", processName: "מיטוזה", stepTitle: "מטאפאזה", stepDesc: "הכרומוזומים מסתדרים במישור המשווני" } },
     { endpoint: "chat", stream: true, body: { lang: "he", topicName: "ביולוגיה של התא", messages: [{ role: "user", content: "מהו ריבוזום? משפט אחד." }] } },
+    { endpoint: "lesson-chat", stream: true, body: { lang: "he", lessonSlug: "cell-membranes", messages: [{ role: "user", content: "מהו דו-שכבה פוספוליפידית? משפט אחד." }] } },
     { endpoint: "generate-flashcards", body: { subtopicId: sub?.id } },
     { endpoint: "generate-quiz", body: { subtopicId: sub?.id, type: "tf", count: 2 } },
     { endpoint: "generate-exam", body: { topicSlug: sub?.topic.slug ?? "cell-biology", count: 2 } },
@@ -45,7 +46,8 @@ export async function GET(request: Request) {
       try {
         const res = await fetch(`${origin}/api/${endpoint}`, {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          // the probe header keeps these test questions out of the student-question log
+          headers: { "Content-Type": "application/json", "x-health-probe": "1" },
           body: JSON.stringify(body),
         });
         if (!res.ok) {

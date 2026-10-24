@@ -36,12 +36,12 @@ export default async function AdminPage({ params }: PageProps<"/[lang]/admin">) 
       descEn: "Analyze PDF/text files and generate new subtopics",
     },
     {
-      href: `/${lang}/admin/suggestions`,
+      href: `/${lang}/admin/student-questions`,
       icon: "🧠",
-      titleHe: "הצעות תוכן (AI)",
-      titleEn: "Content Suggestions (AI)",
-      descHe: "סקור הצעות שנוצרו מניתוח שאלות הצ'אט — אשר או דחה",
-      descEn: "Review suggestions generated from chat question analysis — approve or reject",
+      titleHe: "שאלות סטודנטים",
+      titleEn: "Student Questions",
+      descHe: "שאלות שחוזרות בצ'אט של היחידות — מה חסר ביחידה ומה כבר נוסף",
+      descEn: "Recurring questions from the lesson chat — what each unit is missing",
     },
     {
       href: `/${lang}/admin/articles`,
