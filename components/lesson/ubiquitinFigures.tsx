@@ -41,6 +41,13 @@ const Ub = ({ cx, cy, r = 9, fill = FILL.red, stroke = RED, label = "Ub" }: { cx
     <La x={cx} y={cy + r * 0.38} size={r * 0.85} bold color={stroke}>{label}</La>
   </g>
 );
+// Covalent bond between two ubiquitins (or substrate → ubiquitin), trimmed to the circle edges so the line never
+// runs under the "Ub" label.
+function Bond({ x1, y1, x2, y2, r1 = 8, r2 = 8 }: { x1: number; y1: number; x2: number; y2: number; r1?: number; r2?: number }) {
+  const dx = x2 - x1, dy = y2 - y1, d = Math.hypot(dx, dy) || 1;
+  return <line x1={x1 + (dx / d) * r1} y1={y1 + (dy / d) * r1} x2={x2 - (dx / d) * r2} y2={y2 - (dy / d) * r2} stroke={INK} strokeWidth={1.6} />;
+}
+
 // A blob standing for a folded protein domain.
 const Blob = ({ cx, cy, rx = 26, ry = 20, fill = FILL.gray, stroke = MUTED }: { cx: number; cy: number; rx?: number; ry?: number; fill?: string; stroke?: string }) => (
   <ellipse cx={cx} cy={cy} rx={rx} ry={ry} fill={fill} stroke={stroke} strokeWidth={1.4} />
@@ -102,7 +109,7 @@ function E3Classes() {
       <Ub cx={290} cy={14} r={8} />
       <path d="M 100 34 Q 190 -2 278 22" fill="none" stroke={RED} strokeWidth={1.8} markerEnd="url(#bfArrow)" strokeDasharray="0" />
       <He x={190} y={84} size={9.5} color={RED}>היוביקוויטין עובר ישירות מ-E2 למצע</He>
-      {row(47, "RING", "פיגום בלבד", ORANGE, FILL.orange)}
+      {row(47, "RING", "ללא ביניים קוולנטי", ORANGE, FILL.orange)}
       {/* HECT */}
       <Box x={40} y={136} w={64} h={34} fill={FILL.green} stroke={GREEN} size={11}>E2</Box>
       <Ub cx={72} cy={122} r={8} />
@@ -191,24 +198,33 @@ function ChainTypes() {
       <He x={177} y={116} size={9} color={MUTED}>אנדוציטוזה</He>
       {/* K48 compact */}
       <Sub x={252} y={60} w={76} />
-      <Ub cx={290} cy={42} r={9} />
-      <Ub cx={281} cy={26} r={9} />
-      <Ub cx={296} cy={12} r={9} />
-      <He x={290} y={100} size={10} bold>K48 — קומפקטית</He>
+      <Bond x1={290} y1={62} x2={290} y2={42} r1={0} />
+      <Bond x1={290} y1={42} x2={275} y2={27} />
+      <Bond x1={275} y1={27} x2={296} y2={13} />
+      <Ub cx={290} cy={42} r={8} />
+      <Ub cx={275} cy={27} r={8} />
+      <Ub cx={296} cy={13} r={8} />
+      <He x={290} y={100} size={10} bold>K48</He>
       <He x={290} y={116} size={9} color={RED}>פרוטאזום</He>
       {/* K63 extended */}
       <Sub x={368} y={60} w={76} />
-      <Ub cx={406} cy={46} r={8} />
+      <Bond x1={406} y1={62} x2={406} y2={48} r1={0} />
+      <Bond x1={406} y1={48} x2={406} y2={30} />
+      <Bond x1={406} y1={30} x2={406} y2={12} />
+      <Ub cx={406} cy={48} r={8} />
       <Ub cx={406} cy={30} r={8} />
-      <Ub cx={406} cy={14} r={8} />
-      <He x={406} y={100} size={10} bold>K63 — מוארכת</He>
+      <Ub cx={406} cy={12} r={8} />
+      <He x={406} y={100} size={10} bold>K63</He>
       <He x={406} y={116} size={9} color={BLUE}>איתות, תיקון</He>
       {/* branched */}
       <Sub x={24} y={196} w={110} />
-      <Ub cx={79} cy={178} r={9} />
-      <Ub cx={62} cy={160} r={9} />
-      <Ub cx={96} cy={160} r={9} />
-      <Ub cx={79} cy={142} r={9} />
+      <Bond x1={79} y1={198} x2={79} y2={178} r1={0} />
+      <Bond x1={79} y1={178} x2={58} y2={158} />
+      <Bond x1={79} y1={178} x2={100} y2={158} />
+      <Ub cx={79} cy={178} r={8} />
+      <Ub cx={58} cy={158} r={8} />
+      <Ub cx={100} cy={158} r={8} />
+      <He x={79} y={140} size={9} color={MUTED}>יוביקוויטין אחד נושא שניים</He>
       <He x={79} y={236} size={10} bold>מסועפת</He>
       <He x={79} y={252} size={9} color={MUTED}>K11/K48 — זיהוי יעיל</He>
       {/* M1 */}
@@ -225,7 +241,7 @@ function ChainTypes() {
       <He x={444} y={200} size={9.5} anchor="end">והצורה קובעת מי יזהה אותה.</He>
       <He x={444} y={220} size={9.5} anchor="end">גם שרשראות אחרות מובילות</He>
       <He x={444} y={238} size={9.5} anchor="end">לפירוק — תלוי בהקשר.</He>
-      <He x={240} y={296} size={10} color={MUTED}>הגודל והמרחקים סכמטיים; אין כאן קנה מידה מבני</He>
+      <He x={240} y={296} size={10} color={MUTED}>הקווים = קשרים קוולנטיים. K48 נארזת קומפקטית ו-K63 מוארכת — אריזה, לא קשר נוסף</He>
     </Svg>
   );
 }
@@ -267,7 +283,7 @@ function ProteasomeArchitecture() {
     </g>
   );
   return (
-    <Svg h={360} label="חתך של הפרוטאזום 26S: הליבה 20S בנויה מארבע טבעות — אלפא, בטא, בטא, אלפא. טבעות הבטא הפנימיות נושאות את שלושת האתרים הפעילים, שהנוקלאופיל בהם הוא תראונין. טבעות האלפא החיצוניות סוגרות את השער. מעל הליבה יושב המכסה 19S: טבעת של שש ATPases שפותחות את השער ופורשות את המצע, הקולטנים ליוביקוויטין, ו-Rpn11 שמסיר את השרשרת.">
+    <Svg h={360} label="חתך של הפרוטאזום 26S: הליבה 20S בנויה מארבע טבעות — אלפא, בטא, בטא, אלפא. טבעות הבטא הפנימיות נושאות שלושה סוגי אתרים פעילים, ובסך הכול שישה אתרים, שהנוקלאופיל בהם הוא תראונין. טבעות האלפא החיצוניות סוגרות את השער. מעל הליבה יושב המכסה 19S: טבעת של שש ATPases שפותחות את השער ופורשות את המצע, הקולטנים ליוביקוויטין, ו-Rpn11 שמסיר את השרשרת.">
       {/* cap */}
       <rect x={156} y={28} width={168} height={40} rx={10} fill={FILL.purple} stroke={PURPLE} strokeWidth={1.4} />
       <He x={240} y={53} size={11} bold color={PURPLE}>מכסה (lid) — כולל Rpn11</He>
@@ -288,11 +304,13 @@ function ProteasomeArchitecture() {
         <He x={114} y={200} size={9.5} anchor="end" color={ORANGE}>חלל קטליטי סגור</He>
       </g>
       {/* substrate entering */}
-      <Ub cx={372} cy={42} r={8} />
-      <Ub cx={372} cy={24} r={8} />
-      <Blob cx={396} cy={74} rx={22} ry={17} fill={FILL.yellow} stroke={GOLD} />
-      <He x={396} y={78} size={9.5}>מצע</He>
-      <Arrow x1={372} y1={96} x2={330} y2={120} color={GOLD} width={1.6} />
+      <Ub cx={382} cy={34} r={8} />
+      <Ub cx={382} cy={16} r={8} />
+      <Blob cx={404} cy={64} rx={22} ry={17} fill={FILL.yellow} stroke={GOLD} />
+      <He x={404} y={68} size={9.5}>מצע</He>
+      <path d="M 382 82 Q 352 94 320 94" fill="none" stroke={GOLD} strokeWidth={1.6} markerEnd="url(#bfArrow)" />
+      <path d="M 288 110 L 288 236" stroke={GOLD} strokeWidth={1.6} strokeDasharray="5 4" markerEnd="url(#bfArrow)" />
+      <He x={430} y={14} size={9} color={GOLD}>השרשרת נשארת בחוץ</He>
       <He x={472} y={104} size={9.5} anchor="end" color={MUTED}>קולטנים:</He>
       <La x={472} y={118} size={9.5} anchor="end" color={MUTED}>Rpn10 · Rpn13 · Rpn1</La>
       {/* products */}
@@ -348,7 +366,7 @@ function ProteasomeCycle() {
 // ── ub-like ──────────────────────────────────────────────────────────────────
 function NeddylationCycle() {
   return (
-    <Svg h={290} label="מחזור הנדילציה של ליגאז קולין-RING: הצמדת NEDD8 לקולין משחררת את חלבון ה-RING ומגבירה מאוד את פעילות הליגאז. ה-CSN מסיר את NEDD8, ובמצב הלא נדילי נקשר CAND1 ומאפשר להחליף את קולטן המצע. בלי מחזור, ליגאז שנשאר פעיל מסמן את קולטן המצע של עצמו.">
+    <Svg h={290} label="מחזור הנדילציה של ליגאז קולין-RING: הצמדת NEDD8 לקולין משנה את תנוחת תחום ה-RING ואת גמישותו ומגבירה מאוד את פעילות הליגאז. ה-CSN מסיר את NEDD8, ובמצב הלא נדילי נקשר CAND1 ומאפשר להחליף את קולטן המצע. בלי מחזור, ליגאז שנשאר פעיל מסמן את קולטן המצע של עצמו.">
       {/* neddylated, active */}
       <path d="M 70 70 L 70 190" stroke={GREEN} strokeWidth={10} strokeLinecap="round" />
       <He x={60} y={134} size={10} anchor="end" color={GREEN}>קולין</He>
@@ -358,7 +376,7 @@ function NeddylationCycle() {
       <Box x={16} y={196} w={108} h={30} fill={FILL.blue} stroke={BLUE} size={10}>קולטן מצע</Box>
       <Ub cx={126} cy={86} r={8} />
       <He x={70} y={252} size={10.5} bold color={GREEN}>נדילי — פעיל</He>
-      <He x={70} y={268} size={9} color={MUTED}>ה-RING משתחרר ומתקרב למצע</He>
+      <He x={70} y={268} size={9} color={MUTED}>תחום RING נעשה גמיש ונגיש יותר</He>
       {/* arrows */}
       <Arrow x1={160} y1={100} x2={236} y2={100} color={PURPLE} width={1.7} />
       <Box2 x={168} y={44} w={92} h={44} fill={FILL.purple} stroke={PURPLE} lines={["CSN", "מסיר NEDD8"]} />
@@ -383,14 +401,14 @@ function CycleLigases() {
   const X0 = 64, X1 = 456;
   const at = (f: number) => X0 + (X1 - X0) * f;
   return (
-    <Svg h={290} label="ציר מחזור התא עם חלונות הפעילות של שתי הליגאזות. SCF פעיל לאורך כל המחזור, והתזמון נקבע ע״י זרחון המצע. APC/C פעיל מאמצע המיטוזה ועד סוף G1, עם Cdc20 ואחר כך Cdh1, והתזמון נקבע ע״י הפעלת הליגאז עצמו.">
+    <Svg h={290} label="ציר מחזור התא עם חלונות הפעילות של שתי הליגאזות. משפחת SCF פועלת לאורך המחזור; זיהוי פוספודגרון הוא מנגנון תזמון אחד, לצד בקרה על הליגאז וקולטן המצע. APC/C פעיל מפרו-מטאפאזה ועד סוף G1, עם Cdc20 ואחר כך Cdh1, והתזמון נקבע ע״י הפעלת הליגאז עצמו.">
       <rect x={X0} y={54} width={X1 - X0} height={26} rx={6} fill={FILL.gray} stroke={MUTED} strokeWidth={1.2} />
       {[["G1", 0.12], ["S", 0.38], ["G2", 0.62], ["M", 0.85]].map(([t, f]) => <He key={t as string} x={at(f as number)} y={72} size={11} bold>{t as string}</He>)}
       {[0.26, 0.52, 0.74].map((f) => <line key={f} x1={at(f)} y1={54} x2={at(f)} y2={80} stroke={MUTED} strokeWidth={1} />)}
       {/* SCF band */}
       <rect x={X0} y={108} width={X1 - X0} height={22} rx={8} fill={FILL.blue} stroke={BLUE} strokeWidth={1.3} />
       <He x={X0 - 8} y={124} size={11} anchor="end" bold color={BLUE}>SCF</He>
-      <He x={240} y={148} size={9.5} color={BLUE}>פעיל תמיד — המצע צריך זרחון</He>
+      <He x={240} y={148} size={9.5} color={BLUE}>זיהוי פוספודגרון — בדוגמאות כאן</He>
       {/* substrates of SCF */}
       <He x={at(0.2)} y={98} size={9} color={MUTED}>p27</He>
       <He x={at(0.42)} y={98} size={9} color={MUTED}>ציקלין E</He>
@@ -416,7 +434,7 @@ function SacApc() {
       <rect x={60} y={40} width={116} height={30} rx={6} fill={FILL.red} stroke={RED} strokeWidth={1.3} />
       <He x={118} y={60} size={10}>Mad2 משנה צורה</He>
       <Arrow x1={118} y1={74} x2={118} y2={100} color={RED} width={1.6} />
-      <Box2 x={48} y={104} w={140} h={46} fill={FILL.red} stroke={RED} lines={["MCC", "Mad2 · BubR1 · Bub3"]} />
+      <Box2 x={48} y={104} w={140} h={46} fill={FILL.red} stroke={RED} lines={["MCC", "Mad2 · BubR1 · Bub3 · Cdc20"]} />
       <Arrow x1={118} y1={154} x2={118} y2={180} color={RED} width={1.6} />
       <Box x={48} y={184} w={140} h={32} fill={FILL.gray} stroke={MUTED} size={10} bold>Cdc20 נלכד</Box>
       <Box x={48} y={230} w={140} h={46} fill={FILL.gray} stroke={MUTED} size={10}>APC/C כבוי — התא ממתין</Box>
@@ -482,7 +500,7 @@ function HistoneMarks() {
     </g>
   );
   return (
-    <Svg h={300} label="אותו שינוי, שני מסרים הפוכים. מימין: PRC1 מסמן את H2A על ליזין 119, הסימן מזוהה ע״י PRC2 שמוסיף מתילציה ל-H3K27 והגן מושתק. משמאל: RNF20 ו-RNF40 עם Rad6 מסמנים את H2B על ליזין 120 בזמן הארכת השעתוק, והסימן נדרש למתילציה של H3K4 ו-H3K79 בגנים פעילים.">
+    <Svg h={300} label="אותו שינוי, שני מסרים הפוכים. משמאל: PRC1 מסמן את H2A על ליזין 119, הסימן מזוהה ע״י PRC2 שמוסיף מתילציה ל-H3K27 והגן מושתק. מימין: RNF20 ו-RNF40 עם RAD6A/B מסמנים את H2B על ליזין 120 בזמן הארכת השעתוק, והסימן מעודד מתילציה של H3K4 ו-H3K79, במיוחד דרגות מתילציה גבוהות.">
       {/* repressive */}
       <He x={118} y={28} size={11.5} bold color={PURPLE}>דיכוי</He>
       <Box x={48} y={40} w={140} h={28} fill={FILL.purple} stroke={PURPLE} size={10} bold>PRC1 (RING1B)</Box>
@@ -497,13 +515,13 @@ function HistoneMarks() {
       <line x1={240} y1={34} x2={240} y2={288} stroke={MUTED} strokeWidth={1} strokeDasharray="4 4" />
       {/* active */}
       <He x={360} y={28} size={11.5} bold color={GREEN}>שעתוק פעיל</He>
-      <Box2 x={290} y={36} w={140} h={40} fill={FILL.green} stroke={GREEN} lines={["RNF20/40 + Rad6", "עם Pol II בהארכה"]} />
+      <Box2 x={290} y={36} w={140} h={40} fill={FILL.green} stroke={GREEN} lines={["RNF20/40 + RAD6A/B", "עם Pol II בהארכה"]} />
       <Arrow x1={360} y1={80} x2={360} y2={96} color={GREEN} width={1.6} />
       {nucleosome(360, 134, GREEN, FILL.green)}
       <Ub cx={360} cy={100} r={8} />
       <La x={402} y={118} size={9.5} anchor="start" color={GREEN}>H2B K120ub</La>
       <Arrow x1={360} y1={162} x2={360} y2={190} color={GREEN} width={1.6} />
-      <Box2 x={290} y={194} w={140} h={44} fill={FILL.green} stroke={GREEN} lines={["COMPASS · Dot1", "← H3K4me · H3K79me"]} />
+      <Box2 x={290} y={194} w={140} h={44} fill={FILL.green} stroke={GREEN} lines={["COMPASS · Dot1", "← H3K4me2/3 · H3K79me2/3"]} />
       <He x={360} y={262} size={10.5} bold color={GREEN}>דיבור בין היסטונים</He>
       <He x={360} y={280} size={9} color={MUTED}>מוסר ע"י USP22 (SAGA)</He>
     </Svg>
@@ -560,10 +578,11 @@ function DsbCascade() {
       {stepBox(36, 210, 196, "RNF8 → שרשראות K63", "בעיקר על היסטון H1", ORANGE, FILL.orange)}
       <Arrow x1={240} y1={232} x2={272} y2={232} color={ORANGE} width={1.6} />
       {stepBox(276, 210, 180, "RNF168 קורא ומסמן", "H2A K13/K15ub", ORANGE, FILL.orange)}
-      <Arrow x1={366} y1={206} x2={366} y2={186} color={ORANGE} width={1.5} />
+      <path d="M 320 206 Q 300 194 300 184" fill="none" stroke={ORANGE} strokeWidth={1.5} markerEnd="url(#bfArrow)" />
+      <path d="M 412 206 Q 432 150 432 76" fill="none" stroke={GREEN} strokeWidth={1.5} markerEnd="url(#bfArrow)" />
       {/* readers compete */}
       <Box2 x={276} y={138} w={180} h={44} fill={FILL.purple} stroke={PURPLE} lines={["53BP1: קריאה כפולה", "H2AK15ub + H4K20me2"]} />
-      <Arrow x1={366} y1={134} x2={366} y2={114} color={PURPLE} width={1.5} />
+      <Arrow x1={320} y1={134} x2={320} y2={114} color={PURPLE} width={1.5} />
       <Box x={276} y={82} w={180} h={30} fill={FILL.purple} stroke={PURPLE} size={10} bold>NHEJ — חיבור קצוות</Box>
       <Box2 x={276} y={28} w={180} h={44} fill={FILL.green} stroke={GREEN} lines={["BRCA1–BARD1 (מתחרה)", "עיבוד קצוות ← רקומבינציה"]} />
             <He x={134} y={276} size={9.5} color={MUTED}>המאזן בין שני הקוראים קובע את מסלול התיקון</He>
@@ -616,15 +635,16 @@ function TnfSwitch() {
       <line x1={240} y1={56} x2={240} y2={298} stroke={MUTED} strokeWidth={1} strokeDasharray="4 4" />
       {/* complex II */}
       <He x={360} y={58} size={11.5} bold color={RED}>קומפלקס II — מוות</He>
-      <Box x={284} y={78} w={152} h={30} fill={FILL.red} stroke={RED} size={10} bold>RIPK1 בלי שרשראות</Box>
-      <He x={446} y={122} size={9} anchor="end" color={MUTED}>אין cIAP · CYLD · A20 · OTULIN</He>
+      <Box2 x={284} y={72} w={152} h={40} fill={FILL.red} stroke={RED} lines={["RIPK1 בלי פיגום", "חסרות K63 / M1"]} />
+      <He x={446} y={126} size={9} anchor="end" color={MUTED}>אין cIAP, LUBAC פגום, או CYLD חתך</He>
       <Arrow x1={360} y1={130} x2={360} y2={152} color={RED} width={1.6} />
       <Box2 x={284} y={156} w={152} h={46} fill={FILL.red} stroke={RED} lines={["עובר לציטוזול:", "FADD + קספאזה 8"]} />
       <Arrow x1={330} y1={206} x2={316} y2={228} color={RED} width={1.5} />
       <Arrow x1={392} y1={206} x2={406} y2={228} color={RED} width={1.5} />
       <Box x={262} y={232} w={108} h={30} fill={FILL.red} stroke={RED} size={10}>אפופטוזיס</Box>
-      <Box2 x={376} y={232} w={92} h={44} fill={FILL.red} stroke={RED} lines={["קספאזה 8 חסומה", "← נקרופטוזיס"]} size={9} />
-      <He x={360} y={290} size={9.5} color={MUTED}>היוביקוויטין כאן לא מפרק — הוא מחזיק במקום</He>
+      <Box2 x={372} y={226} w={100} h={54} fill={FILL.red} stroke={RED} lines={["קספאזה 8 חסומה +", "RIPK3/MLKL בתא"]} size={9} />
+      <He x={422} y={294} size={9} color={RED}>← נקרופטוזיס</He>
+      <He x={120} y={306} size={9} color={MUTED}>הפיגום מגייס קינאזות מגִנות</He>
     </Svg>
   );
 }
@@ -692,7 +712,7 @@ function Pink1Parkin() {
 // ── ub-immune ────────────────────────────────────────────────────────────────
 function NfkbActivation() {
   return (
-    <Svg h={330} label="הפעלת NF-κB בשלושה שלבים של יוביקוויטין. TRAF6 עם Ubc13 בונה שרשראות K63 שמגייסות את TAB2 ואת TAK1; LUBAC מוסיף שרשראות M1 ש-NEMO קורא ומגייס את IKK; ורק בשלב השלישי יש פירוק — IKK מזרחן את IκBα, SCF עם בטא-TrCP מסמן אותו בשרשרת K48 והוא מפורק בפרוטאזום, כך ש-NF-κB משתחרר לגרעין. A20, CYLD ו-OTULIN מסירים את השרשראות ומכבים את האות.">
+    <Svg h={330} label="הפעלת NF-κB בשלושה שלבים של יוביקוויטין. TRAF6 עם Ubc13 בונה שרשראות K63 שמגייסות את TAB2 ואת TAK1; LUBAC מוסיף שרשראות M1 ש-NEMO קורא ומגייס את IKK; ורק בשלב השלישי יש פירוק — IKK מזרחן את IκBα, SCF עם בטא-TrCP מסמן אותו בשרשרת K48 והוא מפורק בפרוטאזום, כך ש-NF-κB משתחרר לגרעין. CYLD ו-OTULIN מסירים שרשראות; A20 מרסן את האיתות גם דרך קישור ליוביקוויטין, ואינו רק אנזים שמסיר שרשראות.">
       <rect x={30} y={30} width={420} height={10} rx={5} fill="#cbd5e1" />
       <He x={240} y={22} size={9.5} color={MUTED}>קולטן (IL-1R / TLR)</He>
       {/* step 1 */}
@@ -719,9 +739,12 @@ function NfkbActivation() {
       <Arrow x1={240} y1={256} x2={240} y2={276} color={ORANGE} width={1.6} />
       <Box x={152} y={280} w={176} h={32} fill={FILL.yellow} stroke={GOLD} size={11} bold>NF-κB משתחרר לגרעין</Box>
       {/* off switches */}
-      <rect x={30} y={272} width={110} height={48} rx={8} fill={FILL.purple} stroke={PURPLE} strokeWidth={1.2} />
-      <He x={85} y={292} size={9.5} bold color={PURPLE}>כיבוי</He>
-      <He x={85} y={308} size={9} color={PURPLE}>A20 · CYLD · OTULIN</He>
+      <rect x={398} y={276} width={58} height={44} rx={8} fill={FILL.purple} stroke={PURPLE} strokeWidth={1.2} />
+      <He x={427} y={294} size={9.5} bold color={PURPLE}>ריסון</He>
+      <He x={427} y={310} size={8.5} color={PURPLE}>A20 · CYLD</He>
+      <path d="M 456 276 Q 470 180 440 92" fill="none" stroke={PURPLE} strokeWidth={1.5} strokeDasharray="4 4" markerEnd="url(#bfArrow)" />
+      <path d="M 452 282 Q 462 220 440 166" fill="none" stroke={PURPLE} strokeWidth={1.5} strokeDasharray="4 4" markerEnd="url(#bfArrow)" />
+      <He x={392} y={300} size={8.5} anchor="end" color={PURPLE}>OTULIN (M1)</He>
     </Svg>
   );
 }
@@ -803,17 +826,17 @@ export const UBIQUITIN_FIGURES: Record<string, { el: () => React.ReactElement; c
   "ub-triage": { el: Triage, captionHe: "בקרת איכות: תחרות בין קיפול מחדש לסימון. הזמן על השפרון הוא המדד. מפושט." },
   "ub-chain-types": { el: ChainTypes, captionHe: "צורות הסימון וסוגי השרשראות. הצורה המרחבית — לא היוביקוויטין עצמו — קובעת מי יקרא אותה. סכמטי, לא בקנה מידה." },
   "ub-writers-readers-erasers": { el: WritersReadersErasers, captionHe: "כותבים, קוראים ומוחקים סביב שרשרת היוביקוויטין — מערכת הפיכה, כמו זרחון. סכמטי." },
-  "ub-proteasome-architecture": { el: ProteasomeArchitecture, captionHe: "חתך הפרוטאזום 26S: ליבה α7β7β7α7 עם שער סגור, ומכסה 19S עם טבעת ATPases, קולטנים ו-Rpn11. סכמטי, לא בקנה מידה." },
+  "ub-proteasome-architecture": { el: ProteasomeArchitecture, captionHe: "חתך הפרוטאזום 26S: ליבה α7β7β7α7 ששעריה מווסתים, ומכסה 19S עם טבעת ATPases, קולטנים ו-Rpn11. סכמטי, לא בקנה מידה." },
   "ub-proteasome-cycle": { el: ProteasomeCycle, captionHe: "מחזור הפירוק, ושני התנאים לפירוק יעיל: אות קישור ואזור התחלה לא מקופל. סכמטי." },
   "ub-neddylation-cycle": { el: NeddylationCycle, captionHe: "מחזור הנדילציה: הפעלה ע״י NEDD8, כיבוי ע״י CSN והחלפת קולטן בעזרת CAND1. סכמטי." },
-  "ub-cycle-ligases": { el: CycleLigases, captionHe: "SCF פעיל לאורך כל המחזור (התזמון במצע), ו-APC/C מופעל בחלון מוגדר (התזמון בליגאז). סכמטי." },
+  "ub-cycle-ligases": { el: CycleLigases, captionHe: "משפחת SCF פועלת לאורך המחזור ומבוקרת ברמת המצע, הליגאז וקולטן המצע; פעילות APC/C משתנה לפי מפעיליו ומעכביו. סכמטי." },
   "ub-sac-apc": { el: SacApc, captionHe: "נקודת הבקרה של ציר החלוקה: ה-MCC לוכד את Cdc20 עד שכל הקינטוכורים מחוברים. מפושט." },
   "ub-wnt-destruction": { el: WntDestruction, captionHe: "β-קטנין: פירוק מתמיד כברירת מחדל; אות Wnt מפסיק את ההרס. סכמטי." },
   "ub-histone-marks": { el: HistoneMarks, captionHe: "אותו יוביקוויטין בודד, שני מסרים הפוכים — לפי ההיסטון, הליזין ומי שקורא אותו. סכמטי." },
   "ub-pcna-switch": { el: PcnaSwitch, captionHe: "ליזין 164 ב-PCNA: שלושה שינויים, שלושה מסלולים. מפושט; ה-SUMO ו-Rad5 מתוארים בשמר." },
   "ub-dsb-cascade": { el: DsbCascade, captionHe: "מפל הסימון בשבר דו-גדילי, והתחרות בין 53BP1 ל-BRCA1 על מסלול התיקון. מפושט." },
   "ub-p53-mdm2": { el: P53Mdm2, captionHe: "לולאת המשוב p53–MDM2, ושני מסלולי העקה שמייצבים את p53. סכמטי." },
-  "ub-tnf-switch": { el: TnfSwitch, captionHe: "המתג על RIPK1: שרשראות K63 ו-M1 מחזיקות אותו בקומפלקס ההישרדות; הסרתן משחררת אותו להרוג. סכמטי." },
+  "ub-tnf-switch": { el: TnfSwitch, captionHe: "המתג על RIPK1: שרשראות K63 ו-M1 הן פיגום שמגייס את TAK1 ואת NEMO–IKK ומצמצם את המעבר לקומפלקס המוות. פגיעה בפיגום — היעדר cIAP, LUBAC פגום או חיתוך ע״י CYLD — מאפשרת אפופטוזיס; נקרופטוזיס רק בתאים שמבטאים RIPK3 ו-MLKL. A20 דווקא מגן, בעיקר דרך קישור ליוביקוויטין. סכמטי." },
   "ub-dlk-axon": { el: DlkAxon, captionHe: "ליגאז PHR מחזיק את DLK נמוך; פגיעה מאפשרת לו להצטבר ולשלוח אות רטרוגרדי. סכמטי." },
   "ub-pink1-parkin": { el: Pink1Parkin, captionHe: "PINK1 כחיישן ופרקין כמבצע: פוספו-יוביקוויטין מגייס ומפעיל, ונוצרת לולאת הגברה. מפושט." },
   "ub-nfkb-activation": { el: NfkbActivation, captionHe: "הפעלת NF-κB: שני שלבים של פיגום (K63, M1) ורק בשלישי פירוק (IκBα). A20, CYLD ו-OTULIN מכבים את האות בהסרת השרשראות של שלבים 1–2. סכמטי." },
