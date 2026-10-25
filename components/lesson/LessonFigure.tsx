@@ -19,6 +19,7 @@ import { ECOLOGY_FIGURES } from "./ecologyFigures";
 import { NEURO_FIGURES } from "./neuroFigures";
 import { RNA_FIGURES } from "./rnaFigures";
 import { UBIQUITIN_FIGURES } from "./ubiquitinFigures";
+import { STATS_FIGURES } from "./statsFigures";
 import { DRUGS_FIGURES } from "./drugsFigures";
 
 const BLUE = "#1d4ed8", ORANGE = "#c2410c", INK = "#1f2937", MUTED = "#64748b";
@@ -521,6 +522,7 @@ const FIGURES: Record<string, { el: () => React.ReactElement; captionHe: string 
   ...NEURO_FIGURES,
   ...RNA_FIGURES,
   ...UBIQUITIN_FIGURES,
+  ...STATS_FIGURES,
   ...DRUGS_FIGURES,
   map: { el: GeneMap, captionHe: "איור 2 — המפה מהדוגמה התלת-נקודתית: A–C–B. בהזנחת שחלופים מרובים שלא זוהו, המרחקים הם 10 ו-20 cM וסכומם 30 cM. תדירות הרקומבינציה הנמדדת ישירות בין A ל-B היא רק 28%." },
 };

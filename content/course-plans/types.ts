@@ -20,7 +20,8 @@ export type OrderConfidence =
   | "parallel"       // a parallel course (e.g. "no extra credit" pair) — evidence only
   | "consensus"      // the same course across universities
   | "syllabus"       // the order of the topics in the course's own official syllabus (no schedule)
-  | "textbook";      // the order of the course textbook
+  | "textbook"       // the order of the course textbook
+  | "suggested";     // no source for the order: a learning order of the official topics, chosen by us
 
 export type OrderSource = {
   confidence: OrderConfidence;

@@ -79,7 +79,8 @@ identity is ambiguous; never assume.
 ### 4. Build the order with confidence levels
 Write the order file and run `order` until it reports no problems. Confidence, strongest first:
 `official` (this course, current year) · `official-past` · `students` (checked by students of
-the course) · `syllabus` (the topic order of the course's own syllabus, when it has no weeks) · `parallel` · `consensus` · `textbook`. Lectures take the strongest source marked
+the course) · `syllabus` (the topic order of the course's own syllabus, when it has no weeks) · `parallel` · `consensus` · `textbook` · `suggested` (no source for the order at all: our learning order of the
+official topics — say so in the note, keep the syllabus order in the topics view). Lectures take the strongest source marked
 `usedFor: lectures`. **Tutorials:** only from a real source; with none, set `tutorialOrder:
 null` — the site then shows each session as "תרגול על הרצאה n" with an explicit note. Never
 invent a tutorial order.

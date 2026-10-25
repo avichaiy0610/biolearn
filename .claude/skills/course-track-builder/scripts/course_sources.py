@@ -307,7 +307,7 @@ def cmd_extract(a) -> None:
     })
 
 
-CONF_ORDER = ["official", "official-past", "students", "syllabus", "parallel", "consensus", "textbook"]
+CONF_ORDER = ["official", "official-past", "students", "syllabus", "parallel", "consensus", "textbook", "suggested"]
 
 
 def cmd_order(a) -> None:

@@ -20,8 +20,9 @@ import { technionNeurobiologyScope } from "./technion-neurobiology";
 import { technionRnaScope } from "./technion-rna";
 import { technionUbiquitinScope } from "./technion-ubiquitin";
 import { technionDrugsScope } from "./technion-drugs";
+import { technionBiostatisticsScope } from "./technion-biostatistics";
 
-export const COURSE_SCOPES: CourseScope[] = [technionGeneticsScope, tauGeneticsScope, technionBiochemIntroScope, technionMetabolicScope, technionMolecularScope, technionCellScope, technionGeneExpressionScope, technionPhysiologyScope, technionMicroViroScope, technionPlantPhysiologyScope, technionBiology1Scope, technionEvolutionScope, technionZoologyScope, technionEndocrinologyScope, technionImmunologyScope, technionDevelopmentalScope, technionEcologyScope, technionNeurobiologyScope, technionRnaScope, technionUbiquitinScope, technionDrugsScope];
+export const COURSE_SCOPES: CourseScope[] = [technionGeneticsScope, tauGeneticsScope, technionBiochemIntroScope, technionMetabolicScope, technionMolecularScope, technionCellScope, technionGeneExpressionScope, technionPhysiologyScope, technionMicroViroScope, technionPlantPhysiologyScope, technionBiology1Scope, technionEvolutionScope, technionZoologyScope, technionEndocrinologyScope, technionImmunologyScope, technionDevelopmentalScope, technionEcologyScope, technionNeurobiologyScope, technionRnaScope, technionUbiquitinScope, technionDrugsScope, technionBiostatisticsScope];
 
 export const scopeForCourse = (courseSlug: string) => COURSE_SCOPES.find((s) => s.courseSlug === courseSlug);
 

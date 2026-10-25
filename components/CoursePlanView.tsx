@@ -23,6 +23,7 @@ export const CONFIDENCE_HE: Record<OrderConfidence, string> = {
   consensus: "לפי הסכמה בין אוניברסיטאות",
   syllabus: "לפי סדר הנושאים בסילבוס",
   textbook: "לפי סדר ספר הקורס",
+  suggested: "סדר לימוד מוצע",
 };
 
 const NO_TUTORIAL_SOURCE = "סדר התרגולים בקורס לא פורסם, ולא מצאנו לו מקור. התרגילים כאן מסודרים לפי ההרצאות: כל תרגול מתרגל את החומר של ההרצאה באותו מספר.";
