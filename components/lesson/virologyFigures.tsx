@@ -138,6 +138,88 @@ function OneStepGrowth() {
   );
 }
 
+// ── vr-attachment-entry ──────────────────────────────────────────────────────
+function EntrySteps() {
+  const phage = (cx: number, cy: number, tail = 26) => (
+    <g>
+      <polygon points={poly(cx, cy, 13, 6)} fill={FILL.orange} stroke={ORANGE} strokeWidth={1.4} />
+      <line x1={cx} y1={cy + 13} x2={cx} y2={cy + 13 + tail} stroke={ORANGE} strokeWidth={3} />
+      <rect x={cx - 9} y={cy + 13 + tail} width={18} height={5} rx={1.5} fill={FILL.orange} stroke={ORANGE} strokeWidth={1.2} />
+    </g>
+  );
+  const envelope = (x: number) => (
+    <g>
+      <line x1={x} y1={168} x2={x + 128} y2={168} stroke={MUTED} strokeWidth={2.6} />
+      <rect x={x} y={176} width={128} height={7} fill={FILL.gray} stroke={MUTED} strokeWidth={1} />
+      <line x1={x} y1={191} x2={x + 128} y2={191} stroke={MUTED} strokeWidth={2.6} />
+    </g>
+  );
+  return (
+    <Svg h={300} label="שלושה שלבים בכניסה של פאג' עם זנב. בשלב הראשון הסיבים נוגעים ברכיבים על פני החיידק, והקשירה עדיין הפיכה. בשלב השני מגע נוסף משנה את הבסיס והקשירה נעשית בלתי הפיכה. בשלב השלישי נפתח נתיב מקומי דרך שתי הממברנות והדופן, רק הגנום עובר פנימה, והקפסיד הריק נשאר בחוץ.">
+      <He x={416} y={30} size={11.5} bold color={INK}>1 · ספיחה הפיכה</He>
+      {phage(416, 78)}
+      {envelope(352)}
+      <path d="M 404 120 q -8 20 -14 42 M 428 120 q 8 20 14 42" fill="none" stroke={ORANGE} strokeWidth={1.4} />
+      <He x={416} y={216} size={9.5} color={MUTED}>מגע חולף — אפשר להשתחרר</He>
+
+      <He x={240} y={30} size={11.5} bold color={INK}>2 · בלתי הפיכה</He>
+      {phage(240, 78)}
+      {envelope(176)}
+      <path d="M 228 120 q -6 22 -10 44 M 252 120 q 6 22 10 44" fill="none" stroke={RED} strokeWidth={1.6} />
+      <ellipse cx={240} cy={166} rx={16} ry={5} fill={FILL.red} stroke={RED} strokeWidth={1.2} />
+      <He x={240} y={216} size={9.5} color={RED}>נקודת ההתחייבות</He>
+
+      <He x={64} y={30} size={11.5} bold color={INK}>3 · הגנום נכנס</He>
+      <g opacity={0.95}>
+        <polygon points={poly(64, 78, 13, 6)} fill="#fff" stroke={ORANGE} strokeWidth={1.4} strokeDasharray="3 2" />
+        <line x1={64} y1={91} x2={64} y2={117} stroke={ORANGE} strokeWidth={3} />
+        <rect x={55} y={117} width={18} height={5} rx={1.5} fill={FILL.orange} stroke={ORANGE} strokeWidth={1.2} />
+      </g>
+      {envelope(0)}
+      <rect x={58} y={166} width={12} height={27} fill="#fff" stroke={TEAL} strokeWidth={1.2} />
+      <line x1={64} y1={122} x2={64} y2={200} stroke={GOLD} strokeWidth={2.4} />
+      <Arrow x1={64} y1={194} x2={64} y2={222} color={GOLD} width={1.6} />
+      <He x={100} y={150} size={9} anchor="start" color={TEAL}>נתיב מקומי</He>
+      <He x={64} y={242} size={9.5} color={GOLD}>רק ה-DNA נכנס</He>
+      <He x={64} y={260} size={9.5} color={MUTED}>הקפסיד נשאר בחוץ</He>
+
+      <He x={240} y={286} size={10} color={MUTED}>סכמטי · הקווים האופקיים: שתי הממברנות והדופן ביניהן</He>
+    </Svg>
+  );
+}
+
+// ── vr-dna-expression ────────────────────────────────────────────────────────
+function TemporalCascade() {
+  const band = (y: number, x: number, w: number, fill: string, stroke: string, label: string) => (
+    <g>
+      <rect x={x} y={y} width={w} height={26} rx={6} fill={fill} stroke={stroke} strokeWidth={1.3} />
+      <He x={x + w / 2} y={y + 17} size={10.5} bold>{label}</He>
+    </g>
+  );
+  return (
+    <Svg h={310} label="מפל השעתוק של נגיף DNA. מכונת התא קוראת את הגל המוקדם; בין תוצריו הכלי שקורא את הגל המאוחר, ולכן הגל המאוחר אינו תלוי עוד במכונת התא. שכפול הגנום מפריד בין השניים. מתחת: שתי הדרכים להחליף קורא — פולימראז נגיפי חדש, או שינוי הסגוליות של הפולימראז הקיים.">
+      <Box x={318} y={34} w={132} h={30} fill={FILL.sky} stroke={BLUE} size={10.5}>מכונת השעתוק של התא</Box>
+      <Arrow x1={384} y1={68} x2={384} y2={88} color={BLUE} width={1.5} />
+      {band(92, 318, 132, FILL.yellow, GOLD, "גנים מוקדמים")}
+      <He x={384} y={136} size={9.5} color={MUTED}>אנזימים והכנת התא</He>
+
+      <Arrow x1={314} y1={105} x2={272} y2={105} color={INK} width={1.5} />
+      <Box x={166} y={92} w={104} h={26} fill={FILL.red} stroke={RED} size={10}>הכלי לגל הבא</Box>
+      <Arrow x1={218} y1={122} x2={218} y2={146} color={RED} width={1.5} />
+      {band(150, 166, 104, FILL.orange, ORANGE, "גנים מאוחרים")}
+      <He x={218} y={192} size={9.5} color={MUTED}>חלבוני מבנה, בכמות גדולה</He>
+
+      <line x1={296} y1={146} x2={296} y2={182} stroke={PURPLE} strokeWidth={1.6} {...dash} />
+      <He x={296} y={200} size={9.5} color={PURPLE}>שכפול הגנום</He>
+
+      <rect x={30} y={226} width={420} height={70} rx={12} fill={FILL.gray} stroke={MUTED} strokeWidth={1.2} />
+      <He x={436} y={246} size={10.5} anchor="end" bold color={INK}>שתי דרכים להחליף קורא</He>
+      <He x={436} y={266} size={10} anchor="end">א. פולימראז נגיפי חדש, שמזהה רק מקדמים של הנגיף</He>
+      <He x={436} y={286} size={10} anchor="end">ב. שינוי הסגוליות של הפולימראז של התא — אותו אנזים, מקדמים אחרים</He>
+    </Svg>
+  );
+}
+
 // ── vr-rna-expression ────────────────────────────────────────────────────────
 function RnaTranslationSwitch() {
   const strand = (y: number, color: string) => <line x1={90} y1={y} x2={400} y2={y} stroke={color} strokeWidth={5} strokeLinecap="round" />;
@@ -432,6 +514,8 @@ function Coevolution() {
 }
 
 export const VIROLOGY_FIGURES: Record<string, { el: () => React.ReactElement; captionHe: string }> = {
+  "vr-entry-steps": { el: EntrySteps, captionHe: "שלושה שלבים בכניסת פאג' עם זנב: מגע הפיך, נקודת התחייבות, ונתיב מקומי שדרכו עובר רק הגנום. סכמטי, לא בקנה מידה." },
+  "vr-temporal-cascade": { el: TemporalCascade, captionHe: "מפל השעתוק: כל גל מייצר את מה שמאפשר את הבא אחריו, ושכפול הגנום מפריד בין המוקדם למאוחר. סכמטי." },
   "vr-architecture": { el: Architecture, captionHe: "גן אחד, עותקים רבים: שתי דרכי הסידור של תת-יחידות זהות, והמעבר מ-T = 1 ל-T = 3. מספר המחומשים נשאר 12. סכמטי." },
   "vr-one-step": { el: OneStepGrowth, captionHe: "עקומת גדילה חד-מחזורית, בסולם לוגריתמי: תקופת אפלה, תקופת המתנה וגודל מנה. המספרים להמחשה בלבד." },
   "vr-rna-translation": { el: RnaTranslationSwitch, captionHe: "אותו גדיל, שני שימושים בכיוונים מנוגדים — ולכן נדרש מעבר מסודר מתרגום לשכפול. סכמטי." },

@@ -9,6 +9,70 @@ export const technionVirologyScope: CourseScope = {
     url: "https://students.technion.ac.il/local/technionsearch/course/134039"
   },
   sections: {
+    "vr-attachment-entry": {
+      "receptor": {
+        level: "core",
+        evidence: "syllabus-named",
+        noteHe: "תיאור הקורס מונה את שלבי המסלול הליטי בשמם: ספיחה, כניסה — זיהוי הקולטן ומה שקובע טווח מאכסנים",
+      },
+      "adsorption": {
+        level: "core",
+        evidence: "syllabus-named",
+        noteHe: "תיאור הקורס מונה את שלבי המסלול הליטי בשמם: ספיחה, כניסה — הספיחה עצמה, הפיכה ובלתי הפיכה",
+      },
+      "phage-entry": {
+        level: "core",
+        evidence: "syllabus-named",
+        noteHe: "תיאור הקורס מונה את שלבי המסלול הליטי בשמם: ספיחה, כניסה; הסילבוס מציין דוגמאות מפאג׳ים",
+      },
+      "animal-entry": {
+        level: "core",
+        evidence: "syllabus-named",
+        noteHe: "תיאור הקורס מונה את שלבי המסלול הליטי בשמם: ספיחה, כניסה; הסילבוס מציין דוגמאות מנגיפי בעלי חיים",
+      },
+      "trigger": {
+        level: "likely",
+        evidence: "syllabus-heading",
+        noteHe: "נכלל בשלב הכניסה שבתיאור הקורס, אבל מנגנון הטריגר אינו מוזכר בשמו",
+      },
+      "uncoating": {
+        level: "likely",
+        evidence: "syllabus-heading",
+        noteHe: "נכלל בשלב הכניסה שבתיאור הקורס, אבל פירוק המעטפת אינו מוזכר בשמו",
+      },
+    },
+    "vr-dna-expression": {
+      "waves": {
+        level: "core",
+        evidence: "syllabus-named",
+        noteHe: "תיאור הקורס: המסלול הליטי — ביטוי הגנום — למה הביטוי מחולק בזמן",
+      },
+      "t7": {
+        level: "core",
+        evidence: "syllabus-named",
+        noteHe: "תיאור הקורס: דוגמאות מפאג׳ים בעלי גנומי DNA — T7 כמקרה המלא של החלפת הפולימראז",
+      },
+      "machinery": {
+        level: "core",
+        evidence: "syllabus-named",
+        noteHe: "תיאור הקורס: המסלול הליטי — ביטוי הגנום — מי משעתק כל גל",
+      },
+      "animal": {
+        level: "likely",
+        evidence: "syllabus-heading",
+        noteHe: "נכלל בנושא ביטוי הגנום, אבל טרנסאקטיבטור אינו מוזכר בשמו",
+      },
+      "late-dependency": {
+        level: "likely",
+        evidence: "syllabus-heading",
+        noteHe: "נכלל בנושא ביטוי הגנום, אבל התלות בשכפול אינה מוזכרת בשמה",
+      },
+      "experiments": {
+        level: "core",
+        evidence: "syllabus-named",
+        noteHe: "תיאור הקורס: שיטות מחקר בסיסיות — ניסוי זמנים, מוטנטים ובקרות",
+      },
+    },
     "vr-animal-defenses": {
       "innate-recognition": {
         level: "core",
