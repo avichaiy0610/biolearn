@@ -12,7 +12,6 @@ import { hasProcessVideo, videoUrlFor } from "@/lib/video-storage";
 import LottieProcessPlayer from "@/components/lottie/LottieProcessPlayer";
 import { LOTTIE_SCENES } from "@/components/lottie/scenes";
 import AiContentNote from "@/components/AiContentNote";
-import ExplainerVideoCard from "@/components/ExplainerVideoCard";
 import { EXPLAINER_VIDEOS } from "@/content/explainer-videos";
 import { processSource } from "@/content/process-scenes";
 import type { Metadata } from "next";
@@ -74,8 +73,6 @@ export default async function ProcessPage({
         {processName}
       </h1>
 
-      {explainer && <ExplainerVideoCard video={explainer} />}
-
       {/* ── Real MP4 video (shown when generated via admin 🎬 button) ── */}
       {videoUrl && (
         <div className="mb-8 rounded-2xl overflow-hidden border border-zinc-700 shadow-xl bg-black">
@@ -120,6 +117,7 @@ export default async function ProcessPage({
           processName,
           topicSlug: slug,
           processSlug,
+          explainer,
         };
         return sceneId ? (
           <ProcessVisual sceneId={sceneId} {...animProps} />

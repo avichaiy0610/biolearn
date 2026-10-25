@@ -5,7 +5,8 @@ import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import type { Locale } from "@/lib/dictionaries";
 import AIExplainPanel from "./AIExplainPanel";
 import AnimationControls from "./AnimationControls";
-import ProcessInlineVideo from "./ProcessInlineVideo";
+import ExplainerVideoCard from "./ExplainerVideoCard";
+import type { ExplainerVideo } from "@/content/explainer-videos";
 import FeedbackButton from "./FeedbackButton";
 import { MIN_SVG_LABEL_SIZE } from "@/lib/svg-labels-he";
 import Swatch from "./LegendSwatch";
@@ -427,7 +428,7 @@ const AUTOPLAY_MS = 4500;
 
 /* ─── Main component ─────────────────────────────────────────────────────── */
 export default function ProcessAnimation({
-  steps, lang, dict, processName, topicSlug, processSlug, initialStep = 0,
+  steps, lang, dict, processName, topicSlug, processSlug, initialStep = 0, explainer,
 }: {
   steps: Step[];
   lang: Locale;
@@ -436,6 +437,7 @@ export default function ProcessAnimation({
   topicSlug?: string;
   processSlug?: string;
   initialStep?: number;
+  explainer?: ExplainerVideo; // narrated video played by "הפעל סרטון" (the button is hidden without one)
 }) {
   const [currentStep, setCurrentStep] = useState(initialStep);
   const [videoMode, setVideoMode] = useState(false);
@@ -479,8 +481,8 @@ export default function ProcessAnimation({
     );
   }
 
-  if (videoMode) {
-    return <ProcessInlineVideo steps={steps} lang={lang} processName={processName} onExit={() => setVideoMode(false)} />;
+  if (videoMode && explainer) {
+    return <ExplainerVideoCard video={explainer} lang={lang} autoPlay onBack={() => setVideoMode(false)} />;
   }
 
   const hasElements = allElementIds.length > 0;
@@ -499,13 +501,13 @@ export default function ProcessAnimation({
           <span aria-hidden>{playing ? "⏸" : "▶"}</span>
           {playing ? dict.process.pauseAnimation : dict.process.playAnimation}
         </button>
-        <button
+        {explainer && <button
           onClick={() => setVideoMode(true)}
           className="flex items-center gap-2 px-4 py-2 rounded-xl bg-gradient-to-r from-zinc-800 to-zinc-700 dark:from-zinc-700 dark:to-zinc-600 text-white text-sm font-medium hover:from-zinc-700 hover:to-zinc-600 dark:hover:from-zinc-600 dark:hover:to-zinc-500 shadow transition-all"
         >
           <span>▶</span>
           {lang === "he" ? "הפעל סרטון" : "Play Video"}
-        </button>
+        </button>}
         </div>
       </div>
 
