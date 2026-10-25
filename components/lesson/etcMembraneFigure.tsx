@@ -21,11 +21,9 @@ export default function EtcMembraneFigure() {
   return (
     <div>
       <p className="mb-2 text-sm text-slate-600">
-        אפשר לגלול לרוחב כדי לקרוא את הפרטים, או{" "}
-        <a href="/figures/etc-membrane.svg" target="_blank" rel="noopener noreferrer" className="underline underline-offset-4">לפתוח את האיור להגדלה</a>.
+        <a href="/figures/etc-membrane.svg" target="_blank" rel="noopener noreferrer" className="underline underline-offset-4">פתיחת האיור להגדלה</a>
       </p>
-      <div dir="ltr" className="overflow-x-auto rounded-lg" role="region" aria-label="איור שרשרת מעבר האלקטרונים, ניתן לגלילה לרוחב" tabIndex={0}>
-        <div className="min-w-[960px]">
+      <div dir="ltr" className="w-full min-w-0 rounded-lg">
 <svg aria-label="שרשרת מעבר האלקטרונים: קומפלקסים ונשאים בממברנה הפנימית של המיטוכונדריה" xmlns="http://www.w3.org/2000/svg" className="h-auto w-full" direction="ltr" viewBox="0 0 1440 960" role="img" aria-labelledby="etc-title etc-desc" fontFamily="Arial,sans-serif">
 <title id="etc-title">שרשרת מעבר האלקטרונים בממברנה הפנימית של המיטוכונדריה</title>
 <desc id="etc-desc">אלקטרונים מ-NADH דרך I או מ-FADH2 דרך II, אל Q, III, ציטוכרום c ו-IV, עד חמצן ומים. 4, 4 ו-2 פרוטונים לזוג אלקטרונים ב-I, III ו-IV. חזרת פרוטונים דרך ATP סינתאז מניעה יצירת ATP. צורות החלבונים סכמטיות.</desc>
@@ -123,7 +121,6 @@ export default function EtcMembraneFigure() {
 <He x={978} y={888} size={21} color="#b9601d">מעבר פרוטונים</He>
 <He x={720} y={936} size={18} color="#60748a">איור מקורי סכמטי • מבני החלבונים אינם שחזור אטומי • הגדלים והמרחקים אינם בקנה מידה</He>
 </svg>
-        </div>
       </div>
     </div>
   );
