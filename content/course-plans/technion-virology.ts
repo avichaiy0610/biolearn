@@ -33,10 +33,10 @@ const lectures: PlanSession[] = [
 ];
 export const technionVirologyPlan: CoursePlan = {
   courseSlug: "technion-virology",
-  lectureOrder: { confidence: "suggested", noteHe: "סדר לימוד מוצע של 12 יחידות, ולא לוח הרצאות מאומת. בפורטל רשימת נושאים בלבד ואתר הקורס סגור לאורחים. עשר יחידות כתובות; יחידות ספיחה/כניסה וביטוי DNA טרם נכתבו ומסומנות כחסרות.", links: [{ labelHe: "פורטל הטכניון — 134039", url: "https://students.technion.ac.il/local/technionsearch/course/134039" }] },
+  lectureOrder: { confidence: "suggested", noteHe: "סדר לימוד מוצע של 12 יחידות, ולא לוח הרצאות מאומת. בפורטל רשימת נושאים בלבד ואתר הקורס סגור לאורחים. כל שתים-עשרה היחידות כתובות.", links: [{ labelHe: "פורטל הטכניון — 134039", url: "https://students.technion.ac.il/local/technionsearch/course/134039" }] },
   tutorialOrder: null,
   schedule: "suggested",
-  scheduleNoteHe: "2 נק״ז, שתי שעות הרצאה וללא תרגול רשמי. התרגילים כאן הם לתרגול עצמי. הבסיס המולקולרי והמיקרוביולוגי מקושר כרענון. כרגע חסרות שתי יחידות; אין כאן טענה לכיסוי מלא של הקורס.",
+  scheduleNoteHe: "2 נק״ז, שתי שעות הרצאה וללא תרגול רשמי. התרגילים כאן הם לתרגול עצמי. הבסיס המולקולרי והמיקרוביולוגי מקושר כרענון.",
   topics: [
     { titleHe: "המסלול הליטי: ספיחה", items: sec(vrAttachmentEntry) },
     { titleHe: "כניסה וביטוי הגנום", items: [...sec(vrAttachmentEntry), ...sec(vrDnaExpression), ...sec(vrRnaExpression)] },

@@ -14,6 +14,7 @@ export type PlanEntry = {
   scope?: ScopeLevel; // for sections: is it part of this course (content/course-scope)
   href?: string;
   draft?: boolean;
+  read?: boolean; // the logged-in student read this unit through (lessons and their sections)
 };
 
 export async function resolvePlan(plan: CoursePlan, lang: string) {

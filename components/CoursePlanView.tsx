@@ -93,6 +93,7 @@ export default function CoursePlanView({ lang, courseSlug, view, groups, schedul
                         {e.context && <span className="block text-xs text-muted">מתוך: {e.context}</span>}
                       </span>
                       {e.scope && e.scope !== "core" && <ScopeChip level={e.scope} />}
+                      {e.read && <span className="shrink-0 rounded-full bg-tint px-2 py-0.5 text-[11px] font-bold text-brand">✓ נקרא</span>}
                       {e.draft && <span className="shrink-0 rounded-full bg-amber-tint px-2 py-0.5 text-[11px] font-bold text-amber">טיוטה</span>}
                       <span className={`shrink-0 rounded-full px-2 py-0.5 text-[11px] font-bold ${e.kind === "lesson" || e.kind === "section" || e.kind === "problem" ? "bg-tint text-brand" : "bg-surface-2 text-muted"}`}>
                         {KIND_HE[e.kind]}

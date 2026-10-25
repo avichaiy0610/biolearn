@@ -19,6 +19,7 @@ import { scopeForCourse, sectionScope } from "@/content/course-scope";
 import { isAdmin } from "@/lib/supabase/server";
 import { lessonReview } from "@/lib/lesson-review";
 import LessonReviewPanel from "@/components/admin/LessonReviewPanel";
+import LessonProgressTracker from "@/components/lesson/LessonProgressTracker";
 
 export const dynamic = "force-dynamic";
 
@@ -116,6 +117,8 @@ export default async function LessonPage({ params }: PageProps<"/[lang]/learn/[l
           initial={{ decision: review.decision, comments: review.comments }}
         />
       )}
+
+      <LessonProgressTracker lessonSlug={lesson.slug} endId="traps" />
 
       <nav className="mt-6 flex flex-wrap items-center gap-2 text-[13px]" aria-label="מיקום">
         <span className="font-bold text-brand">הטכניון</span>

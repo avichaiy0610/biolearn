@@ -15,6 +15,7 @@ import SyllabusPanel from "@/components/SyllabusPanel";
 import CourseOrderReport from "@/components/CourseOrderReport";
 import PastExamUpload from "@/components/PastExamUpload";
 import { getUser } from "@/lib/supabase/server";
+import { auth } from "@/auth";
 import { SYLLABI } from "@/content/syllabi/data.generated";
 import { COURSE_KIND_LABEL, GENERAL_UNIVERSITY, universityBySlug } from "@/content/universities";
 
@@ -36,7 +37,16 @@ export default async function CoursePage({ params, searchParams }: PageProps<"/[
   const uni = universityBySlug(course.university);
   const plan = planForCourse(course.slug);
   const view: PlanView = viewParam === "lectures" || viewParam === "tutorials" ? viewParam : "topics";
-  const planGroups = plan ? (await resolvePlan(plan, lang))[view] : null;
+  const email = plan ? (await auth().catch(() => null))?.user?.email : null;
+  const [resolved, readRows] = await Promise.all([
+    plan ? resolvePlan(plan, lang) : Promise.resolve(null),
+    email ? prisma.lessonProgress.findMany({ where: { user: { email }, readAt: { not: null } }, select: { lessonSlug: true } }).catch(() => []) : Promise.resolve([]),
+  ]);
+  // Read marks: a unit the student read through, and the sections of it the plan links to.
+  const readSlugs = new Set(readRows.map((r) => r.lessonSlug));
+  const planGroups = resolved
+    ? resolved[view].map((g) => ({ ...g, entries: g.entries.map((e) => ((e.kind === "lesson" || e.kind === "section") && readSlugs.has(e.key.split("#")[0]) ? { ...e, read: true } : e)) }))
+    : null;
 
   const [units, topics, exams, user] = await Promise.all([
     resolveCourseUnits(course, lang),

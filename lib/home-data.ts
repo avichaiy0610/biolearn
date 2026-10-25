@@ -18,6 +18,8 @@ export type HomeCourse = {
   readings: number; // subtopic (reading) units
   read: number;
   next: ResolvedUnit | null;
+  lessons: Lesson[]; // the course plan's own study units, in lecture order (empty without a plan)
+  lessonsRead: number;
 };
 
 // What the "open now" card points to: an old course unit (subtopic / animation) or a study unit from the course plan.
@@ -67,12 +69,15 @@ export async function homeData(lang: string, courseParam?: string) {
   // One round trip for everything that doesn't depend on the term: the cached
   // course table and unit catalog, plus the student's own progress.
   const email = session?.user?.email;
-  const [all, catalog, visits, dueReviews] = await Promise.all([
+  const [all, catalog, visits, lessonVisits, dueReviews] = await Promise.all([
     getCourses(uni.slug),
     unitCatalog(),
     email
       ? prisma.userProgress.findMany({ where: { user: { email }, visited: true }, select: { subtopicId: true, updatedAt: true }, orderBy: { updatedAt: "desc" } })
       : Promise.resolve([] as { subtopicId: string; updatedAt: Date }[]),
+    email
+      ? prisma.lessonProgress.findMany({ where: { user: { email } }, select: { lessonSlug: true, readAt: true, updatedAt: true }, orderBy: { updatedAt: "desc" } }).catch(() => [])
+      : Promise.resolve([] as { lessonSlug: string; readAt: Date | null; updatedAt: Date }[]),
     email ? prisma.flashcardReview.count({ where: { user: { email }, due: { lte: new Date() } } }) : Promise.resolve(0),
   ]);
 
@@ -84,10 +89,12 @@ export async function homeData(lang: string, courseParam?: string) {
   if (!list.length && all.length) { year = all[0].year; list = all.filter((c) => c.year === year); }
 
   const visited = new Set(visits.map((v) => v.subtopicId));
+  const lessonsRead = new Set(lessonVisits.filter((v) => v.readAt).map((v) => v.lessonSlug));
 
   const courses: HomeCourse[] = list.map((course) => {
       const units = resolveUnitsWith(catalog, course, lang);
       const readings = units.filter((u) => u.kind === "subtopic");
+      const lessons = planLessons(course.slug);
       return {
         course,
         icon: course.units[0]?.topic ?? "cell-biology",
@@ -95,12 +102,18 @@ export async function homeData(lang: string, courseParam?: string) {
         readings: readings.length,
         read: readings.filter((u) => visited.has(u.subtopicId!)).length,
         next: readings.find((u) => !visited.has(u.subtopicId!)) ?? readings[0] ?? units[0] ?? null,
+        lessons,
+        lessonsRead: lessons.filter((l) => lessonsRead.has(l.slug)).length,
       };
     });
 
-  // Resume: the most recently read subtopic that belongs to one of this term's courses.
-  const lastId = visits.find((v) => courses.some((c) => c.units.some((u) => u.subtopicId === v.subtopicId)))?.subtopicId;
-  const resumeCourse = lastId ? courses.find((c) => c.units.some((u) => u.subtopicId === lastId)) : undefined;
+  // Resume: the most recent activity in one of this term's courses — a study unit opened, or a subtopic read.
+  const lastVisit = visits.find((v) => courses.some((c) => c.units.some((u) => u.subtopicId === v.subtopicId)));
+  const lastLesson = lessonVisits.find((v) => courses.some((c) => c.lessons.some((l) => l.slug === v.lessonSlug)));
+  const resumeIsLesson = !!lastLesson && (!lastVisit || lastLesson.updatedAt >= lastVisit.updatedAt);
+  const resumeCourse = resumeIsLesson
+    ? courses.find((c) => c.lessons.some((l) => l.slug === lastLesson!.lessonSlug))
+    : lastVisit ? courses.find((c) => c.units.some((u) => u.subtopicId === lastVisit.subtopicId)) : undefined;
 
   const selected =
     courses.find((c) => c.course.slug === courseParam) ??
@@ -120,12 +133,13 @@ export async function homeData(lang: string, courseParam?: string) {
     const p = candidates.map((slug) => found.find((x) => x.slug === slug)).find((x) => x && drawable(x)) ?? null;
     return p ? { own: p.slug === own, processSlug: p.slug, topicSlug: p.topic.slug, nameHe: p.nameHe, nameEn: p.nameEn, steps: p.steps, step: Math.floor((p.steps.length - 1) / 2) } : null;
   };
-  const lessons = selected ? planLessons(selected.course.slug) : [];
+  const lessons = selected?.lessons ?? [];
   const ref = (l: Lesson): OpenRef => ({ key: `lesson:${l.slug}`, kind: "lesson", href: `/${lang}/learn/${l.slug}`, nameHe: l.titleHe, nameEn: l.titleHe, topicSlug: l.topic });
 
   if (selected && lessons.length) {
-    // A course with a plan opens its study units (the old DB units predate the plans).
-    const l = lessons[0];
+    // A course with a plan opens its study units (the old DB units predate the plans): the first one not read yet.
+    const at = Math.max(0, lessons.findIndex((x) => !lessonsRead.has(x.slug)));
+    const l = lessons[at];
     const own = animationsIn(l)[0] ?? null;
     const candidates = [...new Set([own, ...lessons.flatMap(animationsIn), ...selected.units.filter((u) => u.kind === "process").map((u) => u.key)].filter(Boolean) as string[])].slice(0, 4);
     const [figure, examCount] = await Promise.all([
@@ -136,14 +150,14 @@ export async function homeData(lang: string, courseParam?: string) {
     open = {
       course: selected,
       unit: ref(l),
-      index: 1,
+      index: at + 1,
       total: lessons.length,
       minutes: l.minutes,
       excerpt: excerptOf(l.leadHe),
       terms: l.terms.slice(0, 4),
       questions: l.questions.length,
       figure,
-      after: lessons[1] ? ref(lessons[1]) : null,
+      after: lessons[at + 1] ? ref(lessons[at + 1]) : null,
     };
   } else if (selected?.next) {
     const unit = selected.next;
@@ -173,9 +187,14 @@ export async function homeData(lang: string, courseParam?: string) {
     };
   }
 
-  const resume = lastId && resumeCourse
-    ? { course: resumeCourse, unit: resumeCourse.units.find((u) => u.subtopicId === lastId)! }
-    : null;
+  const resumeLesson = resumeIsLesson ? lessonBySlug(lastLesson!.lessonSlug) : undefined;
+  const resume: { course: HomeCourse; unit: { href: string; nameHe: string; nameEn: string } } | null = !resumeCourse
+    ? null
+    : resumeLesson
+      ? { course: resumeCourse, unit: ref(resumeLesson) }
+      : lastVisit
+        ? { course: resumeCourse, unit: resumeCourse.units.find((u) => u.subtopicId === lastVisit.subtopicId)! }
+        : null;
 
   return { uni, term, year, courses, selected, open, resume, loggedIn: !!email, dueReviews, exams };
 }

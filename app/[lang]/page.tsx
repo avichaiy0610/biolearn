@@ -98,7 +98,9 @@ export default async function HomePage({ params, searchParams }: PageProps<"/[la
                           {empty
                             ? (he ? "החומר לקורס בכתיבה" : "Material being written")
                             : planned !== null
-                              ? (he ? `${planned} יחידות` : `${planned} units`)
+                              ? (d.loggedIn && c.lessonsRead > 0
+                                ? (he ? `${c.lessonsRead} מתוך ${planned} יחידות נקראו` : `${c.lessonsRead} of ${planned} units read`)
+                                : (he ? `${planned} יחידות` : `${planned} units`))
                             : !d.loggedIn
                               ? (he ? `${c.units.length} יחידות` : `${c.units.length} units`)
                               : c.read > 0

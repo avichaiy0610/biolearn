@@ -95,6 +95,22 @@ model User {
   quizResults    QuizResult[]
   reviews        FlashcardReview[]
   studyDays      StudyDay[]
+  lessonProgress LessonProgress[]
+}
+
+// Reading progress in study units (content/lessons). "openedAt" = the unit page was opened; "readAt" = the reader
+// reached the end of the unit body. Units live in git, so lessonSlug is not a foreign key.
+model LessonProgress {
+  id         String    @id @default(cuid())
+  userId     String
+  user       User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  lessonSlug String
+  openedAt   DateTime  @default(now())
+  readAt     DateTime?
+  updatedAt  DateTime  @default(now()) @updatedAt
+
+  @@unique([userId, lessonSlug])
+  @@index([userId, updatedAt])
 }
 
 model UserProgress {

@@ -81,8 +81,8 @@ const s3: El[] = [
   // free ribosomes translating capsid proteins
   ...[[190, 138], [214, 152], [238, 138]].map(([x, y], i) => circle(`rib${i}`, x, y, 7, "#93c5fd", { stroke: CAP, strokeWidth: 1.2 })),
   ...[[196, 178], [224, 188], [250, 176]].flatMap(([x, y], i) => capsid(`cp${i}`, x, y, 6)),
-  label("l_rdrp", 14, 214, "Viral RNA polymerase copies the genome", "פולימראז RNA נגיפי משכפל את הגנום", [120, 160], { anchor: "start", shortHe: "שכפול הגנום", short: "Genome copied" }),
-  label("l_rib", 160, 240, "Free ribosomes: capsid proteins", "ריבוזומים חופשיים: חלבוני קפסיד", [214, 160], { anchor: "start", shortHe: "חלבוני קפסיד", short: "Capsid proteins" }),
+  label("l_rdrp", 14, 206, "Viral polymerase copies the genome", "פולימראז נגיפי משכפל את הגנום", [120, 160], { anchor: "start", shortHe: "שכפול הגנום", short: "Genome copied" }),
+  text("l_rib", 222, 230, "Capsid proteins", "חלבוני קפסיד", { textColor: CAP, weight: 700 }),
 ];
 // glycoproteins: made on the rough ER, through the Golgi, in a vesicle to the membrane
 const s3b: El[] = [
