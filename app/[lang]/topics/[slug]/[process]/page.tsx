@@ -12,6 +12,8 @@ import { hasProcessVideo, videoUrlFor } from "@/lib/video-storage";
 import LottieProcessPlayer from "@/components/lottie/LottieProcessPlayer";
 import { LOTTIE_SCENES } from "@/components/lottie/scenes";
 import AiContentNote from "@/components/AiContentNote";
+import ExplainerVideoCard from "@/components/ExplainerVideoCard";
+import { EXPLAINER_VIDEOS } from "@/content/explainer-videos";
 import { processSource } from "@/content/process-scenes";
 import type { Metadata } from "next";
 
@@ -48,8 +50,10 @@ export default async function ProcessPage({
   const processName = lang === "he" ? proc.nameHe : proc.nameEn;
   const topicName = lang === "he" ? proc.topic.nameHe : proc.topic.nameEn;
 
+  // A narrated explainer (Hebrew) replaces the old generated slideshow MP4 for its process.
+  const explainer = lang === "he" ? EXPLAINER_VIDEOS[processSlug] : undefined;
   // A generated MP4 is stored durably (see lib/video-storage.ts) — served via API route.
-  const videoUrl = (await hasProcessVideo(processSlug)) ? videoUrlFor(processSlug) : null;
+  const videoUrl = !explainer && (await hasProcessVideo(processSlug)) ? videoUrlFor(processSlug) : null;
 
   return (
     <div className="max-w-3xl mx-auto px-4 py-10">
@@ -69,6 +73,8 @@ export default async function ProcessPage({
       <h1 className="text-2xl font-bold text-zinc-900 dark:text-zinc-50 mb-8">
         {processName}
       </h1>
+
+      {explainer && <ExplainerVideoCard video={explainer} />}
 
       {/* ── Real MP4 video (shown when generated via admin 🎬 button) ── */}
       {videoUrl && (

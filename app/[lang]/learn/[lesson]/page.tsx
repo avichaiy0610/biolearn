@@ -9,6 +9,8 @@ import { parseSvgData } from "@/lib/svg-scene";
 import { lessonBySlug, lessonQuizQuestions } from "@/content/lessons";
 import { parseBody } from "@/content/lessons/parse";
 import LessonFigure from "@/components/lesson/LessonFigure";
+import ExplainerVideoCard from "@/components/ExplainerVideoCard";
+import { EXPLAINER_VIDEOS } from "@/content/explainer-videos";
 import FieldIcon from "@/components/FieldIcon";
 import { SceneStill } from "@/components/ProcessAnimation";
 import LessonPractice from "@/components/lesson/LessonPractice";
@@ -171,6 +173,7 @@ export default async function LessonPage({ params }: PageProps<"/[lang]/learn/[l
               {s.segments.map((g, i) => {
                 if (g.kind === "md") return <ReactMarkdown key={i} remarkPlugins={GFM} components={md}>{g.text}</ReactMarkdown>;
                 if (g.kind === "figure") return <LessonFigure key={i} id={g.id} />;
+                if (g.kind === "video") return EXPLAINER_VIDEOS[g.slug] ? <ExplainerVideoCard key={i} video={EXPLAINER_VIDEOS[g.slug]} /> : null;
                 const p = procs.find((x) => x.slug === g.slug);
                 if (!p) return null;
                 const v2 = p.steps.length > 0 && p.steps.every((st) => (parseSvgData(st.svgData).v ?? 1) >= 2);
