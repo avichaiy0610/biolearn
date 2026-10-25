@@ -2,6 +2,7 @@
    generic layouts — a vertical chain and a cycle — so every unit shows its pathway the same way.
    Referenced from lesson bodies as [[figure:<id>]]. */
 import type React from "react";
+import EtcMembraneFigure from "./etcMembraneFigure";
 import { ArrowDefs, Axes, BLUE, GREEN, INK, LINE, MUTED, ORANGE, He, La, curve, dash, scale } from "./biochemFigures";
 
 const PURPLE = "#7c3aed";
@@ -221,47 +222,6 @@ function TcaCycle() {
 }
 
 // ── Oxidative phosphorylation ────────────────────────────────────────────────
-function EtcMembrane() {
-  const mY = 150, mH = 70;
-  const cx = [62, 150, 236, 330, 425];
-  const pump = (x: number, n: string) => (<g><Arrow x1={x} y1={mY + mH + 6} x2={x} y2={mY - 34} color={ORANGE} width={2.2} /><La x={x + 4} y={mY - 40} anchor="middle" size={12.5} color={ORANGE} bold>{n}</La></g>);
-  return (
-    <svg viewBox="0 0 480 360" className="w-full h-auto" role="img" aria-label="שרשרת הנשימה בממברנה הפנימית של המיטוכונדריה: קומפלקסים I, III ו-IV שואבים פרוטונים, קומפלקס II לא; Q וציטוכרום c נושאים אלקטרונים; ATP סינתאז מייצר ATP מזרימת הפרוטונים חזרה">
-      <ArrowDefs />
-      <rect x={0} y={mY} width={480} height={mH} fill="#fef3c7" />
-      <He x={240} y={22} size={12.5} color={MUTED}>מרווח בין-ממברנלי (H⁺ רבים)</He>
-      <He x={240} y={350} size={12.5} color={MUTED}>מטריקס</He>
-      {pump(cx[0] - 14, "4H⁺")}{pump(cx[2] - 14, "4H⁺")}{pump(cx[3] - 14, "2H⁺")}
-      {[["I", BLUE], ["II", MUTED], ["III", BLUE], ["IV", BLUE]].map(([n, c], i) => (
-        <g key={n}><rect x={cx[i] - 30} y={mY - 18} width={60} height={mH + 36} rx={10} fill="#dbeafe" stroke={c} strokeWidth={2} /><La x={cx[i]} y={mY + 42} bold size={16}>{n}</La></g>
-      ))}
-      {/* ATP synthase */}
-      <rect x={cx[4] - 20} y={mY - 4} width={40} height={mH + 8} rx={8} fill="#dcfce7" stroke={GREEN} strokeWidth={2} />
-      <circle cx={cx[4]} cy={mY + mH + 34} r={26} fill="#dcfce7" stroke={GREEN} strokeWidth={2} />
-      <Arrow x1={cx[4] + 30} y1={mY - 30} x2={cx[4] + 30} y2={mY + mH + 4} color={ORANGE} width={2.2} />
-      <La x={cx[4] + 34} y={mY - 36} size={12.5} color={ORANGE} bold>H⁺</La>
-      <La x={cx[4]} y={mY + mH + 30} size={10.5} color={GREEN} bold>ADP+Pᵢ</La>
-      <La x={cx[4]} y={mY + mH + 44} size={10.5} color={GREEN} bold>→ ATP</La>
-      {/* Q and cyt c */}
-      <circle cx={193} cy={mY + 35} r={13} fill="#fde68a" stroke="#b45309" strokeWidth={1.5} /><La x={193} y={mY + 40} size={12.5} bold>Q</La>
-      <circle cx={283} cy={mY - 30} r={14} fill="#fecaca" stroke="#b91c1c" strokeWidth={1.5} /><La x={283} y={mY - 26} size={10.5} bold>cyt c</La>
-      {/* electron path */}
-      <path d={`M${cx[0]} ${mY + mH + 50} L${cx[0]} ${mY + mH + 20}`} stroke={INK} strokeWidth={1.6} markerEnd="url(#bfArrow)" />
-      <La x={cx[0]} y={mY + mH + 66} size={12.5} bold>NADH</La>
-      <path d={`M${cx[1]} ${mY + mH + 50} L${cx[1]} ${mY + mH + 20}`} stroke={INK} strokeWidth={1.6} markerEnd="url(#bfArrow)" />
-      <La x={cx[1]} y={mY + mH + 66} size={12} bold>FADH₂</La>
-      <He x={cx[1]} y={mY + mH + 82} size={10.5} color={MUTED}>(מסוקצינט)</He>
-      <path d={`M${cx[0] + 30} ${mY + 58} Q${cx[1]} ${mY + 100} 186 ${mY + 47}`} fill="none" stroke={INK} strokeWidth={1.6} markerEnd="url(#bfArrow)" />
-      <path d={`M${cx[1] + 30} ${mY + 44} L182 ${mY + 38}`} stroke={INK} strokeWidth={1.6} markerEnd="url(#bfArrow)" />
-      <path d={`M206 ${mY + 35} L${cx[2] - 30} ${mY + 35}`} stroke={INK} strokeWidth={1.6} markerEnd="url(#bfArrow)" />
-      <path d={`M${cx[2] + 18} ${mY - 18} L270 ${mY - 30}`} stroke={INK} strokeWidth={1.6} markerEnd="url(#bfArrow)" />
-      <path d={`M297 ${mY - 30} L${cx[3] - 16} ${mY - 18}`} stroke={INK} strokeWidth={1.6} markerEnd="url(#bfArrow)" />
-      <path d={`M${cx[3]} ${mY + mH + 18} L${cx[3]} ${mY + mH + 46}`} stroke={INK} strokeWidth={1.6} markerEnd="url(#bfArrow)" />
-      <La x={cx[3]} y={mY + mH + 62} size={12} bold>O₂ → H₂O</La>
-    </svg>
-  );
-}
-
 // ── Photosynthesis ───────────────────────────────────────────────────────────
 function ZScheme() {
   // x along the chain, y = energy (up = more reducing)
@@ -556,7 +516,7 @@ export const METABOLIC_FIGURES: Record<string, { el: () => React.ReactElement; c
   "gluconeo-bypasses": { el: GluconeoBypasses, captionHe: "גליקוליזה (כתום, למטה) וגלוקונאוגנזה (ירוק, למעלה). שלוש התגובות הבלתי הפיכות של הגליקוליזה נעקפות בארבעה אנזימים: פירובט קרבוקסילאז ו-PEP קרבוקסיקינאז (דרך אוקסלואצטט), פרוקטוז-1,6-ביספוספטאז וגלוקוז-6-פוספטאז. שאר התגובות הפיכות ומשותפות. סכמטי." },
   "f26bp-switch": { el: F26bpSwitch, captionHe: "פרוקטוז-2,6-ביספוספט כמתג בכבד. בצום, גלוקגון גורם לזרחון של האנזים הדו-תפקידי (PFK2/FBPase2), F-2,6-BP יורד, והכבד עובר לגלוקונאוגנזה. אחרי ארוחה הפוספט מוסר, F-2,6-BP עולה ומפעיל את PFK." },
   "tca-cycle": { el: TcaCycle, captionHe: "מעגל החומצה הציטרית. בפנים — האנזימים (DH = דהידרוגנאז); בחוץ — מה שנכנס ויוצא. החצים הכתומים הם שתי נקודות הבקרה העיקריות בתוך המעגל: איזוציטראט דהידרוגנאז ו-α-קטוגלוטרט דהידרוגנאז." },
-  "etc-membrane": { el: EtcMembrane, captionHe: "שרשרת הנשימה בממברנה הפנימית של המיטוכונדריה. האלקטרונים (חצים שחורים) עוברים מ-NADH (קומפלקס I) או מ-FADH₂ (קומפלקס II) ל-Q, לקומפלקס III, לציטוכרום c, ולקומפלקס IV — עד O₂. קומפלקסים I, III ו-IV מעבירים פרוטונים (כתום; 4, 4 ו-2 לזוג אלקטרונים), וזרימתם חזרה דרך ATP סינתאז מייצרת ATP. סכמטי." },
+  "etc-membrane": { el: EtcMembraneFigure, captionHe: "שרשרת הנשימה בממברנה הפנימית של המיטוכונדריה. האלקטרונים (חצים שחורים) עוברים מ-NADH (קומפלקס I) או מ-FADH₂ (קומפלקס II) ל-Q, לקומפלקס III, לציטוכרום c, ולקומפלקס IV — עד O₂. קומפלקסים I, III ו-IV מעבירים פרוטונים (כתום; 4, 4 ו-2 לזוג אלקטרונים), וזרימתם חזרה דרך ATP סינתאז מייצרת ATP. סכמטי." },
   "z-scheme": { el: ZScheme, captionHe: "סכמת Z של תגובות האור. שתי \"קפיצות\" שמונעות באור (כתום) מרימות את האלקטרון ב-PS II וב-PS I; ביניהן הוא יורד דרך פלסטוקינון (PQ), ציטוכרום bf ופלסטוציאנין (PC), ובסוף מפרדוקסין (Fd) ל-NADP⁺. מקור האלקטרונים — מים, שמתפרקים ל-O₂. הגבהים סכמטיים." },
   "calvin-cycle": { el: CalvinCycle, captionHe: "מעגל קלווין בשלושה שלבים. רוביסקו מקבע CO₂ לריבולוז-1,5-ביספוספט ונוצרות שתי מולקולות 3-פוספוגליצרט; הן מחוזרות ל-GAP בעזרת ATP ו-NADPH; ורוב ה-GAP משמש לחידוש ריבולוז-1,5-ביספוספט. לכל CO₂ — 3 ATP ו-2 NADPH." },
   "ppp-overview": { el: PppOverview, captionHe: "מסלול הפנטוז פוספט. השלב החמצוני (G6PD — השלב המבוקר) מייצר 2 NADPH ו-CO₂; השלב הלא-חמצוני ההפיך מחבר את הפנטוזות לפרוקטוז-6-פוספט ול-GAP של הגליקוליזה. כשצריך רק NADPH, התוצרים חוזרים בגלוקונאוגנזה לגלוקוז-6-פוספט." },
