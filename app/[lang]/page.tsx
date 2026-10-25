@@ -30,7 +30,7 @@ export default async function HomePage({ params, searchParams }: PageProps<"/[la
   const isGeneral = uni.slug === GENERAL_UNIVERSITY;
   const firstVisit = isGeneral && !term.chosen;
   const name = (x: { nameHe: string; nameEn: string }) => (he ? x.nameHe : x.nameEn);
-  const minutes = open ? Math.max(3, Math.round(open.excerpt.length / 60)) : 0;
+  const minutes = open ? open.minutes ?? Math.max(3, Math.round(open.excerpt.length / 60)) : 0;
 
   return (
     <div className="max-w-6xl mx-auto px-4">
@@ -132,8 +132,8 @@ export default async function HomePage({ params, searchParams }: PageProps<"/[la
               <article className="overflow-hidden rounded-[18px] border border-line bg-surface">
                 <div className="bg-hero px-6 py-6 text-hero-ink sm:px-7">
                   <p className="flex flex-wrap gap-3 text-xs text-hero-muted">
-                    <span>{he ? `יחידה ${open.index} מתוך ${open.course.units.length}` : `Unit ${open.index} of ${open.course.units.length}`}</span>
-                    {open.unit.kind === "subtopic" && <span className="border-s border-hero-muted/40 ps-3">{he ? `${minutes} דקות קריאה` : `${minutes} min read`}</span>}
+                    <span>{he ? `יחידה ${open.index} מתוך ${open.total}` : `Unit ${open.index} of ${open.total}`}</span>
+                    {open.unit.kind !== "process" && <span className="border-s border-hero-muted/40 ps-3">{he ? `${minutes} דקות קריאה` : `${minutes} min read`}</span>}
                   </p>
                   <h3 id="open-unit" className="mt-3 text-[clamp(24px,3vw,34px)] font-black leading-tight tracking-tight">{name(open.unit)}</h3>
                   {open.excerpt && <p className="mt-3 max-w-[60ch] text-[15px] leading-8 text-hero-muted">{open.excerpt}</p>}
@@ -143,7 +143,7 @@ export default async function HomePage({ params, searchParams }: PageProps<"/[la
                   <div className="px-6 py-5 sm:px-7">
                     <p className="text-xs font-bold text-brand">{he ? "ביחידה הזו" : "In this unit"}</p>
                     <ul className="mt-2 space-y-1.5 text-sm leading-7 text-muted">
-                      <li>{open.unit.kind === "subtopic" ? (he ? "קריאה מסודרת בעברית" : "A structured reading") : (he ? "אנימציה שלב אחר שלב" : "A step-by-step animation")}</li>
+                      <li>{open.unit.kind !== "process" ? (he ? "קריאה מסודרת בעברית" : "A structured reading") : (he ? "אנימציה שלב אחר שלב" : "A step-by-step animation")}</li>
                       {open.questions > 0 && <li>{he ? `${open.questions} שאלות ברמת מבחן, עם הסבר לכל תשובה` : `${open.questions} exam-level questions with explanations`}</li>}
                       {open.figure?.own && <li>{he ? `אנימציה: ${open.figure.nameHe}` : `Animation: ${open.figure.nameEn}`}</li>}
                     </ul>
@@ -183,7 +183,7 @@ export default async function HomePage({ params, searchParams }: PageProps<"/[la
                 {open.after && (
                   <div className="flex flex-wrap items-center justify-between gap-3 border-t border-line px-6 py-3.5 text-sm sm:px-7">
                     <span className="text-muted">{he ? "בהמשך הקורס:" : "Next in the course:"} <strong className="text-ink">{name(open.after)}</strong></span>
-                    <Link href={`/${lang}/topics/${open.unit.topicSlug}#practice-title`} className="font-bold text-brand">{he ? "לתרגול הנושא" : "Practice the topic"} <Arrow /></Link>
+                    <Link href={open.unit.kind === "lesson" ? `${open.unit.href}#practice` : `/${lang}/topics/${open.unit.topicSlug}#practice-title`} className="font-bold text-brand">{open.unit.kind === "lesson" ? (he ? "לתרגול היחידה" : "Practice this unit") : (he ? "לתרגול הנושא" : "Practice the topic")} <Arrow /></Link>
                   </div>
                 )}
               </article>
