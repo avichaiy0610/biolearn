@@ -16,6 +16,9 @@ import LessonChat from "@/components/lesson/LessonChat";
 import ScopeBadge from "@/components/lesson/ScopeBadge";
 import { isolatePrimes } from "@/lib/text";
 import { scopeForCourse, sectionScope } from "@/content/course-scope";
+import { isAdmin } from "@/lib/supabase/server";
+import { lessonReview } from "@/lib/lesson-review";
+import LessonReviewPanel from "@/components/admin/LessonReviewPanel";
 
 export const dynamic = "force-dynamic";
 
@@ -81,6 +84,8 @@ export default async function LessonPage({ params }: PageProps<"/[lang]/learn/[l
     : [];
   const quiz = lessonQuizQuestions(lesson);
   const draft = lesson.status === "draft";
+  const admin = await isAdmin().catch(() => false);
+  const review = admin ? await lessonReview(lesson.slug) : null;
 
   const toc = [
     { id: "objectives", title: "מטרות היחידה" },
@@ -101,6 +106,15 @@ export default async function LessonPage({ params }: PageProps<"/[lang]/learn/[l
         <div role="note" className="mt-5 rounded-xl border border-amber/40 bg-amber-tint px-4 py-3 text-sm text-ink">
           <strong className="text-amber">טיוטה — ממתינה לבדיקה.</strong> היחידה עוד לא מקושרת מהקורסים. נכתבה ב-{lesson.review.writtenAt}{lesson.review.aiCheckedBy ? `, נבדקה ע"י ${lesson.review.aiCheckedBy}` : ""}; ממתינה לאישור אנושי.
         </div>
+      )}
+
+      {review && (
+        <LessonReviewPanel
+          lessonSlug={lesson.slug}
+          published={!draft}
+          sections={toc.filter((t) => t.id !== "ask")}
+          initial={{ decision: review.decision, comments: review.comments }}
+        />
       )}
 
       <nav className="mt-6 flex flex-wrap items-center gap-2 text-[13px]" aria-label="מיקום">

@@ -36,6 +36,14 @@ export default async function AdminPage({ params }: PageProps<"/[lang]/admin">) 
       descEn: "Analyze PDF/text files and generate new subtopics",
     },
     {
+      href: `/${lang}/admin/lessons`,
+      icon: "✅",
+      titleHe: "יחידות לימוד — אישור והערות",
+      titleEn: "Study Units — Review",
+      descHe: "טיוטות לבדיקה לפי קורס: אישור, בקשת תיקון והערות לפי סעיף",
+      descEn: "Draft units by course: approve, request changes, comment per section",
+    },
+    {
       href: `/${lang}/admin/student-questions`,
       icon: "🧠",
       titleHe: "שאלות סטודנטים",

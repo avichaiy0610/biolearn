@@ -150,6 +150,28 @@ model QuestionGap {
   @@unique([lessonSlug, topicLabel])
 }
 
+// Admin review of study units. The units themselves live in git (content/lessons); these rows only record the
+// decision and the comments, which Claude/Codex apply to the files (scripts/lesson-reviews.ts lists them).
+model LessonReview {
+  lessonSlug String   @id
+  decision   String   @default("pending") // pending | approved | changes
+  note       String?
+  updatedAt  DateTime @default(now()) @updatedAt
+}
+
+model LessonComment {
+  id         String    @id @default(cuid())
+  lessonSlug String
+  sectionId  String? // null = the whole unit
+  body       String
+  status     String    @default("open") // open | done
+  reply      String? // what was done about it
+  createdAt  DateTime  @default(now())
+  resolvedAt DateTime?
+
+  @@index([lessonSlug, status])
+}
+
 model ContentSuggestion {
   id        String   @id @default(cuid())
   topicSlug String?
