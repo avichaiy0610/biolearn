@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { getDictionary, hasLocale, type Locale } from "@/lib/dictionaries";
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
+import { searchLessons } from "@/lib/lesson-search";
 
 export default async function SearchPage({
   params,
@@ -43,7 +44,9 @@ export default async function SearchPage({
       ])
     : [[], [], [], []];
 
-  const totalResults = topics.length + processes.length + subtopics.length + articles.length;
+  // study units are Hebrew and live in the repo — searched in memory, shown first
+  const lessons = query ? searchLessons(query) : [];
+  const totalResults = lessons.length + topics.length + processes.length + subtopics.length + articles.length;
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-10">
@@ -57,6 +60,38 @@ export default async function SearchPage({
             &quot;{query}&quot;
           </span>
         </p>
+      )}
+
+      {lessons.length > 0 && (
+        <section className="mb-8">
+          <h2 className="text-sm font-semibold text-zinc-500 uppercase tracking-wide mb-3">
+            {lang === "he" ? "ביחידות הלימוד" : "In study units (Hebrew)"}
+          </h2>
+          <div className="space-y-3">
+            {lessons.map((l) => (
+              <div key={l.slug} dir="rtl" className="p-4 rounded-xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800">
+                <Link href={`/${lang}/learn/${l.slug}`} className="font-medium text-zinc-900 dark:text-zinc-50 hover:text-emerald-700 dark:hover:text-emerald-400">
+                  {l.titleHe}
+                </Link>
+                <span className="ms-2 text-xs text-zinc-500">{l.courseHe}</span>
+                {l.snippets.length > 0 && (
+                  <ul className="mt-2 space-y-1.5">
+                    {l.snippets.map((s, i) => (
+                      <li key={i}>
+                        <Link href={`/${lang}/learn/${l.slug}${s.anchor ? `#${s.anchor}` : ""}`} className="block rounded-lg px-2 py-1 text-sm hover:bg-zinc-50 dark:hover:bg-zinc-700/50">
+                          <span className="text-xs font-semibold text-emerald-700 dark:text-emerald-400">{s.where} ←</span>{" "}
+                          <span className="text-zinc-600 dark:text-zinc-300" style={{ unicodeBidi: "plaintext" }}>
+                            {s.parts.map((p, k) => (p.hl ? <mark key={k} className="rounded bg-amber-200/70 px-0.5 text-inherit dark:bg-amber-500/40">{p.t}</mark> : p.t))}
+                          </span>
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            ))}
+          </div>
+        </section>
       )}
 
       {topics.length > 0 && (
