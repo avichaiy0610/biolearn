@@ -60,8 +60,13 @@ const md: Components = {
   ul: ({ children }) => <ul className="my-4 list-disc space-y-2 ps-6 text-[16.5px] leading-8">{children}</ul>,
   ol: ({ children }) => <ol className="my-4 list-decimal space-y-2 ps-6 text-[16.5px] leading-8">{children}</ol>,
   strong: ({ children }) => <strong className="font-bold text-ink">{children}</strong>,
-  code: ({ children }) => {
+  // fenced code (R snippets): a left-to-right block that scrolls instead of wrapping
+  pre: ({ children }) => (
+    <pre dir="ltr" className="my-4 overflow-x-auto rounded-xl border border-line bg-surface-2 p-4 text-start font-mono text-[14px] leading-6 text-ink">{children}</pre>
+  ),
+  code: ({ children, className }) => {
     const text = String(children);
+    if (className?.startsWith("language-") || text.includes("\n")) return <code className="font-mono">{children}</code>;
     return (
       <bdi dir={/^[^A-Za-zͰ-Ͽ֐-׿]*[֐-׿]/.test(text) ? "rtl" : "ltr"} className={`rounded bg-surface-2 px-1.5 py-0.5 text-[0.93em] font-semibold text-brand whitespace-nowrap ${text.length > 18 ? "inline-block max-w-full overflow-x-auto align-middle" : ""}`}>
         {text}
