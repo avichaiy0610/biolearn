@@ -38,6 +38,10 @@ export const rnLncrna: Lesson = {
 
 **הוויכוח:** האם רוב ה-lncRNA **פונקציונליים**, או "**רעש תעתיקי**" — שעתוק לא מכוון באזורים פתוחים? ההערכה המקובלת: **מיעוט** מוכח כפונקציונלי; לרבים — אין ראיה. **ההבדל** בין "**מבוטא**" ל"**מתפקד**" הוא מרכז היחידה.
 
+[[animation:gencode-lncrna-discovery]]
+
+[[animation:lncrna-conservation-genomic-context]]
+
 ## איך lncRNA פועלים {#mechanisms}
 
 [[figure:rn-lncrna-modes]]
@@ -56,6 +60,10 @@ export const rnLncrna: Lesson = {
 1. **ה-RNA עצמו** (הרצף, המבנה) פעיל.
 2. **פעולת השעתוק** — מעבר ה-RNA פולימראז משנה את הכרומטין (או "**מתנגש**" עם פרומוטור/מגביר) — **בלי קשר** לרצף ה-RNA.
 3. **אלמנט ב-DNA** (מגביר, אתר קישור) **בתוך** הלוקוס — ה-RNA הוא רק "תופעת לוואי".
+
+[[animation:lncrna-enhancer-function]]
+
+[[animation:lncrna-development-differentiation]]
 
 ## Xist: השתקת כרומוזום X {#xist}
 

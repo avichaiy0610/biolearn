@@ -22,6 +22,10 @@ import { gxNcrna } from "../lessons/technion-gene-expression/gx-ncrna";
 const sec = (l: Lesson, ...ids: string[]): PlanItem[] => (ids.length ? ids.map((section) => ({ kind: "lesson" as const, slug: l.slug, section })) : [{ kind: "lesson", slug: l.slug }]);
 const probs = (l: Lesson): PlanItem[] => (l.workedProblems ?? []).map((w) => ({ kind: "lesson" as const, slug: l.slug, problem: w.id }));
 
+// the four lncRNA animations (made earlier under molecular biology) belong to this course
+const proc = (slug: string): PlanItem => ({ kind: "process", topic: "molecular-biology", slug });
+const LNC_ANIMATIONS = ["gencode-lncrna-discovery", "lncrna-conservation-genomic-context", "lncrna-enhancer-function", "lncrna-development-differentiation"].map(proc);
+
 const PORTAL = { labelHe: "הסילבוס בפורטל הטכניון", url: "https://students.technion.ac.il/local/technionsearch/course/134151" };
 
 const LECTURES: { titleHe: string; items: PlanItem[]; practice: PlanItem[] }[] = [
@@ -30,7 +34,7 @@ const LECTURES: { titleHe: string; items: PlanItem[]; practice: PlanItem[] }[] =
   { titleHe: "RNA מבקר בחיידקים: ריבוסוויצ'ים, sRNA ו-tmRNA", items: sec(rnBacterialRna), practice: probs(rnBacterialRna) },
   { titleHe: "piRNA (רענון: miRNA ו-siRNA)", items: [...sec(gxNcrna), ...sec(rnPirna)], practice: probs(rnPirna) },
   { titleHe: "snoRNA", items: sec(rnSnorna), practice: probs(rnSnorna) },
-  { titleHe: "lncRNA", items: sec(rnLncrna), practice: probs(rnLncrna) },
+  { titleHe: "lncRNA", items: [...sec(rnLncrna), ...LNC_ANIMATIONS], practice: probs(rnLncrna) },
   { titleHe: "RNA כמרכיב תורשתי", items: sec(rnInheritance), practice: probs(rnInheritance) },
 ];
 
@@ -47,7 +51,7 @@ export const technionRnaPlan: CoursePlan = {
   topics: [
     { titleHe: "RNA כאנזים (ריבוזים) בעל פעילויות קטליטיות מגוונות", items: [...sec(rnRibozymes), ...sec(rnRnaWorld, "properties", "evidence", "in-vitro-evolution")] },
     { titleHe: "שלב ביצירת החיים על פני כדור הארץ", items: sec(rnRnaWorld, "hypothesis", "prebiotic", "open-problems") },
-    { titleHe: "RNA המבקר ביטוי גנים — lncRNA", items: sec(rnLncrna) },
+    { titleHe: "RNA המבקר ביטוי גנים — lncRNA", items: [...sec(rnLncrna), ...LNC_ANIMATIONS] },
     { titleHe: "RNA המבקר ביטוי גנים — piRNA", items: sec(rnPirna) },
     { titleHe: "RNA המבקר ביטוי גנים — snoRNA", items: sec(rnSnorna) },
     { titleHe: "RNA המבקר ביטוי גנים — tmRNA (פרשנות זמנית של \"RNATM\") ו-RNA בחיידקים", items: sec(rnBacterialRna) },
