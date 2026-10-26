@@ -69,10 +69,14 @@ model ProcessStep {
 // existing Process queries keep working even before this table is migrated.
 // FREE backend (Turso DB) for testing; swap to a paid CDN/blob store later via
 // lib/video-storage.ts without touching the rest of the app.
-model ProcessVideo {
-  slug      String   @id // matches Process.slug
-  data      String       // base64-encoded MP4
-  createdAt DateTime @default(now())
+// A narrated explainer video the admin asked for. The video itself is made in ../biolearn-video and
+// shipped as a static file listed in content/explainer-videos.ts; see scripts/video-requests.ts.
+model VideoRequest {
+  processSlug String   @id
+  status      String   @default("pending") // pending | in-progress | done | declined
+  note        String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now()) @updatedAt
 }
 
 model UploadedMaterial {

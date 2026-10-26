@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import type { Locale } from "@/lib/dictionaries";
 import ContentDiff from "./ContentDiff";
 import ReactomePathwaysPanel from "./ReactomePathwaysPanel";
+import { EXPLAINER_VIDEOS, videoPageHref } from "@/content/explainer-videos";
 
 type ProcessStep = { id: string; order: number; titleHe: string; titleEn: string; descHe: string; descEn: string };
 type Process = { id: string; slug: string; nameHe: string; nameEn: string; descHe: string; descEn: string; steps: ProcessStep[] };
@@ -708,6 +709,13 @@ function SubtopicReviewInline({ subtopicId, currentContentHe, currentContentEn, 
 
 // ─── Process Row ──────────────────────────────────────────────────────────────
 
+// video-request statuses, fetched once for all rows
+let videoRequestsPromise: Promise<Record<string, string>> | null = null;
+const videoRequests = () =>
+  (videoRequestsPromise ??= fetch("/api/admin/video-requests")
+    .then((r) => (r.ok ? r.json() : { requests: [] }))
+    .then((d: { requests: { processSlug: string; status: string }[] }) => Object.fromEntries(d.requests.map((x) => [x.processSlug, x.status]))));
+
 function ProcessRow({ process, topic, allTopics, lang, onDeleted, onMoved }: {
   process: Process; topic: Topic; allTopics: Topic[]; lang: Locale;
   onDeleted: () => void; onMoved: (newTopicSlug: string) => void;
@@ -716,36 +724,29 @@ function ProcessRow({ process, topic, allTopics, lang, onDeleted, onMoved }: {
   const [moveTo, setMoveTo] = useState("");
   const [moving, setMoving] = useState(false);
   const [reviewing, setReviewing] = useState(false);
-  const [generatingVideo, setGeneratingVideo] = useState(false);
-  const [videoResult, setVideoResult] = useState<string | null>(null);
-  const [videoError, setVideoError] = useState<string | null>(null);
+  const explainer = EXPLAINER_VIDEOS[process.slug];
+  const [videoStatus, setVideoStatus] = useState<string | null>(null);
+  const [videoBusy, setVideoBusy] = useState(false);
   const otherTopics = allTopics.filter((t) => t.slug !== topic.slug);
 
-  async function handleGenerateVideo() {
-    setGeneratingVideo(true);
-    setVideoError(null);
-    setVideoResult(null);
-    try {
-      const res = await fetch("/api/admin/generate-process-video", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ processSlug: process.slug }),
-      });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.details ?? data.error ?? "Failed");
-      if (data.videoUrl) {
-        setVideoResult(data.videoUrl);
-      } else if (data.videoBase64) {
-        const blob = new Blob(
-          [Uint8Array.from(atob(data.videoBase64), (c) => c.charCodeAt(0))],
-          { type: "video/mp4" }
-        );
-        setVideoResult(URL.createObjectURL(blob));
-      }
-    } catch (e) {
-      setVideoError(e instanceof Error ? e.message : "Error");
-    }
-    setGeneratingVideo(false);
+  useEffect(() => {
+    if (explainer) return;
+    let live = true;
+    videoRequests().then((m) => { if (live) setVideoStatus(m[process.slug] ?? null); });
+    return () => { live = false; };
+  }, [explainer, process.slug]);
+
+  // 🎬 asks for a narrated explainer video; Claude/Codex make it (scripts/video-requests.ts)
+  async function toggleVideoRequest() {
+    setVideoBusy(true);
+    const res = await fetch("/api/admin/video-requests", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ processSlug: process.slug, action: videoStatus === "pending" ? "cancel" : "request" }),
+    });
+    const data = await res.json().catch(() => ({}));
+    if (res.ok) setVideoStatus(data.status ?? null);
+    setVideoBusy(false);
   }
 
   async function handleMove() {
@@ -781,37 +782,23 @@ function ProcessRow({ process, topic, allTopics, lang, onDeleted, onMoved }: {
           >
             🔍
           </button>
-          <button
-            onClick={handleGenerateVideo}
-            disabled={generatingVideo}
-            className="text-xs text-violet-500 hover:text-violet-700 dark:hover:text-violet-300 disabled:opacity-40"
-            title={isHe ? "צור סרטון MP4" : "Generate MP4 video"}
-          >
-            {generatingVideo ? "⏳" : "🎬"}
-          </button>
+          {explainer ? (
+            <a href={videoPageHref(lang, process.slug)} target="_blank" rel="noopener noreferrer" className="text-xs text-emerald-600 hover:underline" title={isHe ? "יש סרטון הסבר" : "Has an explainer video"}>
+              🎬✓
+            </a>
+          ) : (
+            <button
+              onClick={toggleVideoRequest}
+              disabled={videoBusy || videoStatus === "in-progress"}
+              className="text-xs text-violet-500 hover:text-violet-700 dark:hover:text-violet-300 disabled:opacity-40"
+              title={videoStatus === "pending" ? (isHe ? "בתור לסרטון — לחיצה מבטלת" : "Queued — click to cancel") : videoStatus === "in-progress" ? (isHe ? "הסרטון בהכנה" : "Being made") : (isHe ? "בקש סרטון הסבר" : "Request an explainer video")}
+            >
+              {videoStatus === "pending" ? (isHe ? "🎬 בתור" : "🎬 queued") : videoStatus === "in-progress" ? (isHe ? "🎬 בהכנה" : "🎬 in progress") : "🎬"}
+            </button>
+          )}
           <button onClick={handleDelete} className="text-xs text-red-500 hover:text-red-700">✕</button>
         </div>
       </div>
-
-      {generatingVideo && (
-        <p className="text-xs text-violet-500 animate-pulse">
-          {isHe ? "מייצר סרטון... (עד 2 דקות)" : "Generating video… (up to 2 min)"}
-        </p>
-      )}
-      {videoResult && (
-        <div className="mt-1 space-y-1">
-          <p className="text-xs text-emerald-600 dark:text-emerald-400">
-            ✓ {isHe ? "סרטון נוצר" : "Video ready"}
-            {!videoResult.startsWith("blob:") && (
-              <> — <a href={videoResult} target="_blank" rel="noopener noreferrer" className="underline">{videoResult}</a></>
-            )}
-          </p>
-          <video controls playsInline className="w-full rounded-lg max-h-48" src={videoResult} />
-        </div>
-      )}
-      {videoError && (
-        <p className="text-xs text-red-500">{isHe ? "שגיאה:" : "Error:"} {videoError}</p>
-      )}
 
       {reviewing && (
         <ProcessReviewInline processSlug={process.slug} lang={lang} />

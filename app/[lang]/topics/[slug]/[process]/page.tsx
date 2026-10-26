@@ -8,7 +8,6 @@ import ProcessAnimation from "@/components/ProcessAnimation";
 import AdminAnimationControls from "@/components/AdminAnimationControls";
 import ProcessVisual from "@/components/ProcessVisual";
 import { findSceneId } from "@/components/scenes/registry";
-import { hasProcessVideo, videoUrlFor } from "@/lib/video-storage";
 import LottieProcessPlayer from "@/components/lottie/LottieProcessPlayer";
 import { LOTTIE_SCENES } from "@/components/lottie/scenes";
 import AiContentNote from "@/components/AiContentNote";
@@ -49,10 +48,8 @@ export default async function ProcessPage({
   const processName = lang === "he" ? proc.nameHe : proc.nameEn;
   const topicName = lang === "he" ? proc.topic.nameHe : proc.topic.nameEn;
 
-  // A narrated explainer (Hebrew) replaces the old generated slideshow MP4 for its process.
+  // A narrated explainer (Hebrew), played by the animation's "הפעל סרטון" button.
   const explainer = lang === "he" ? EXPLAINER_VIDEOS[processSlug] : undefined;
-  // A generated MP4 is stored durably (see lib/video-storage.ts) — served via API route.
-  const videoUrl = !explainer && (await hasProcessVideo(processSlug)) ? videoUrlFor(processSlug) : null;
 
   return (
     <div className="max-w-3xl mx-auto px-4 py-10">
@@ -72,30 +69,6 @@ export default async function ProcessPage({
       <h1 className="text-2xl font-bold text-zinc-900 dark:text-zinc-50 mb-8">
         {processName}
       </h1>
-
-      {/* ── Real MP4 video (shown when generated via admin 🎬 button) ── */}
-      {videoUrl && (
-        <div className="mb-8 rounded-2xl overflow-hidden border border-zinc-700 shadow-xl bg-black">
-          <div className="px-4 py-2.5 bg-zinc-900 border-b border-zinc-800 flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-            <span className="text-emerald-400 text-sm font-semibold">{processName}</span>
-            <span className="text-xs text-zinc-500 ms-auto">
-              {lang === "he" ? "סרטון תהליך" : "Process video"}
-            </span>
-          </div>
-          <video
-            controls
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="w-full aspect-video"
-            src={videoUrl}
-          >
-            {lang === "he" ? "הדפדפן שלך לא תומך בווידאו" : "Your browser does not support video."}
-          </video>
-        </div>
-      )}
 
       {/* ── Visual: vector (Lottie) scene, else bespoke continuous scene, else the step animation ── */}
       {LOTTIE_SCENES[processSlug] ? (
