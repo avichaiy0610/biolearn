@@ -26,8 +26,8 @@ export const biRnaseq: Lesson = {
 
 [[figure:bi-rnaseq-workflow]]
 
-1. **הכנת ספרייה:** מפיקים RNA, מסירים את ה-rRNA (שהוא רוב ה-RNA בתא) — **בבחירת poly-A** (רק mRNA בוגר) או **בדלדול rRNA** (שומר גם RNA ללא זנב) — הופכים ל-cDNA, ומרצפים.
-2. **שיוך קריאות לגנים:** ממפים לגנום (STAR, HISAT2 — מיפוי מפוצל על פני אינטרונים) וסופרים קריאות לכל גן; או **ממפים ישירות לתעתיקים** בשיטה מהירה (Salmon, kallisto).
+1. **הכנת ספרייה:** מפיקים RNA, מסירים את ה-rRNA (שהוא רוב ה-RNA בתא) — **בבחירת poly-A** (העשרה ל-RNA עם זנב poly-A — בעיקר mRNA) או **בדלדול rRNA** (שומר גם RNA ללא זנב) — הופכים ל-cDNA, ומרצפים.
+2. **שיוך קריאות לגנים:** ממפים לגנום (STAR, HISAT2 — מיפוי מפוצל על פני אינטרונים) וסופרים קריאות לכל גן; או **מכמתים מול התעתיקים** בשיטה מהירה (Salmon, kallisto) — ואז מייבאים את האומדנים ל-R בעזרת tximport ומסכמים לגנים.
 3. **טבלת ספירות:** שורות = **גנים**, עמודות = **דגימות**, ובכל תא — **כמה קריאות** הגיעו מהגן בדגימה.
 
 לצד הטבלה יש **טבלת מטא-דאטה**: לכל דגימה — המצב (טיפול/ביקורת), מועד, אצווה, מין, וכל מה שעלול להשפיע. בלעדיה הספירות חסרות משמעות.
@@ -61,7 +61,8 @@ dds <- DESeqDataSetFromMatrix(countData = counts,      # raw counts, genes x sam
                               colData   = samples,     # metadata: condition, batch
                               design    = ~ batch + condition)
 dds <- DESeq(dds)                                      # normalize, estimate dispersion, test every gene
-res <- results(dds, contrast = c("condition", "treated", "control"))
+res <- results(dds, contrast = c("condition", "treated", "control"),
+               alpha = 0.05)                           # match the padj cutoff you will use
 summary(res)
 head(res[order(res$padj), ])
 \`\`\`
@@ -82,7 +83,7 @@ head(res[order(res$padj), ])
 - **pvalue** — למבחן של הגן הזה לבד.
 - **padj** — אחרי תיקון להשוואות מרובות. **עליו** מחליטים (בדרך כלל \`padj < 0.05\`).
 
-**גרף volcano:** ציר X — \`log2FC\` (גודל השינוי וכיוונו); ציר Y — \`−log10(p)\` (עוצמת הראיה). גנים מעניינים — **למעלה ובצדדים**: שינוי גדול **וגם** מובהק.
+**גרף volcano:** ציר X — \`log2FC\` (גודל השינוי וכיוונו); ציר Y — \`−log10(padj)\` (עוצמת הראיה; יש גרסאות שמציגות את p הלא-מתוקן). גנים מעניינים — **למעלה ובצדדים**: שינוי גדול **וגם** מובהק.
 
 **גרף MA:** ציר X — ביטוי ממוצע; ציר Y — \`log2FC\`. מראה שבגנים נמוכי ביטוי ה-\`log2FC\` "מפוזר" — והתיקון של DESeq2 (**shrinkage**, \`lfcShrink\`) מכווץ שינויים לא אמינים כאלה לכיוון 0.
 

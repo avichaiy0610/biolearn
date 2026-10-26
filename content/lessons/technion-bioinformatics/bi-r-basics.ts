@@ -78,6 +78,9 @@ both_all <- merge(expr, annot, by = "gene", all.x = TRUE)   # keep every gene of
 
 \`\`\`r
 hist(expr$log2FC, breaks = 50, main = "log2 fold change")
+# a small demonstration table
+long <- data.frame(condition = rep(c("control", "treated"), each = 3),
+                   value     = c(8, 10, 12, 18, 20, 22))
 boxplot(value ~ condition, data = long, ylab = "expression")
 \`\`\`
 
@@ -233,7 +236,7 @@ res$gene <- sub("\\\\..*$", "", res$gene)    # drop the dot and everything after
         { text: "mean(c(4, NA, 6), na.rm = TRUE) — ולבדוק למה הערך חסר", why: "נכון — מתעלמים מ-NA במודע." },
         { text: "להחליף את NA ב-0", why: "0 הוא ערך אמיתי ויטה את הממוצע." },
         { text: "אי אפשר לחשב ממוצע כשיש ערך חסר", why: "אפשר, עם na.rm = TRUE." },
-        { text: "לכתוב mean(c(4, 6)) ידנית", why: "עובד כאן, אבל לא בקוד על טבלה אמיתית." },
+        { text: "mean(c(4, NA, 6), na.rm = FALSE)", why: "FALSE משאיר את הערך החסר בחישוב, ולכן התוצאה עדיין NA." },
       ],
       correct: 0,
     },
