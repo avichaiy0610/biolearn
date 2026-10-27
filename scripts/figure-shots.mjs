@@ -12,6 +12,16 @@ const shots = [];
 for (const slug of slugs) {
   const r = await p.goto(`http://localhost:3123/he/learn/${slug}`, { waitUntil: "networkidle", timeout: 180000 });
   if (r?.status() !== 200) { console.log(slug, "HTTP", r?.status()); continue; }
+  // Sticky navigation and Next's dev indicators can cover a scrolled figure,
+  // especially when the figure is taller than the viewport. Hide only overlays
+  // outside the figures for the capture; the page's layout stays unchanged.
+  await p.evaluate(() => {
+    for (const el of document.querySelectorAll("body *")) {
+      if (el.closest("figure")) continue;
+      const position = getComputedStyle(el).position;
+      if (position === "fixed" || position === "sticky" || el.tagName === "NEXTJS-PORTAL") el.style.visibility = "hidden";
+    }
+  });
   const figs = await p.$$("figure");
   for (let i = 0; i < figs.length; i++) {
     const f = path.join(outDir, `${slug}_${i}.png`);
