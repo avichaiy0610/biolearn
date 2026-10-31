@@ -20,7 +20,7 @@ export const scReview: Lesson = {
     "להעריך דיווח ולזהות בו מה חסר",
     "לנסח את השאלות הפתוחות בתחום",
   ],
-  bodyHe: `## שלוש דרכים לאותו תא {#routes}
+  bodyHe: `## ארבע דרכים להשיג תפקוד תאי {#routes}
 
 [[figure:sc-routes-compare]]
 
