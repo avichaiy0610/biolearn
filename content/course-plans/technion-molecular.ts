@@ -4,10 +4,12 @@ import { molNucleicAcids } from "../lessons/technion-molecular/mol-nucleic-acids
 import { molChromatin } from "../lessons/technion-molecular/mol-chromatin";
 import { molReplicationFork } from "../lessons/technion-molecular/mol-replication-fork";
 import { molReplicationOrigins } from "../lessons/technion-molecular/mol-replication-origins";
+import { molPcrSequencing } from "../lessons/technion-molecular/mol-pcr-sequencing";
 import { molRepair } from "../lessons/technion-molecular/mol-repair";
 import { molRecombination } from "../lessons/technion-molecular/mol-recombination";
 import { molTranscriptionProk } from "../lessons/technion-molecular/mol-transcription-prok";
 import { molTranscriptionEuk } from "../lessons/technion-molecular/mol-transcription-euk";
+import { molTranscriptionMethods } from "../lessons/technion-molecular/mol-transcription-methods";
 import { molRnaProcessing } from "../lessons/technion-molecular/mol-rna-processing";
 import { molGeneticCode } from "../lessons/technion-molecular/mol-genetic-code";
 import { molRibosomeInitiation } from "../lessons/technion-molecular/mol-ribosome-initiation";
@@ -16,10 +18,13 @@ import { molTranslationElongation } from "../lessons/technion-molecular/mol-tran
 // Technion 01340082 "ביולוגיה מולקולרית" — built with the course-track-builder skill, no insider input.
 // Topics: the CURRENT syllabus on the Technion students portal (topics only, no weeks), in its own order.
 // Lecture order: no public schedule (Moodle is closed to guests; lecturer: Prof. Yoav Arava) — the syllabus
-// order, which follows the central dogma and the course textbook (Lewin's Genes XII). The Faculty of
+// order, which follows the central dogma (the 2024 syllabus names Alberts ch. 4–5 and Lodish ch. 5–6). The Faculty of
 // Medicine's parallel course (274243, "no extra credit" pair) publishes a weekly table in the same order —
 // evidence only, not this course's schedule.
 // Tutorials: no source — "practice for lecture n", built from each unit's worked problems.
+// 2026-11-01: the winter 2024 syllabus (Drive) names a method in almost every topic (Southern, DNase/MNase assays,
+// sequencing, PCR, cloning, Northern, EMSA, reporter, ChIP, optical tweezers, RNA editing, Western), and the 2024–2025
+// homework is method/calculation based. Added mol-pcr-sequencing and mol-transcription-methods + method sections.
 
 const M = "molecular-biology";
 const proc = (slug: string): PlanItem => ({ kind: "process", topic: M, slug });
@@ -32,16 +37,18 @@ const MED = { labelHe: "הקורס המקביל ברפואה (274243) — ראי
 
 const LECTURES: { titleHe: string; items: PlanItem[]; practice: PlanItem[] }[] = [
   { titleHe: "חומצות גרעין: אבני הבניין והסליל הכפול", items: sec(molNucleicAcids, "nucleotides", "polynucleotide", "double-helix", "forms"), practice: probs(molNucleicAcids, "chargaff", "complement") },
-  { titleHe: "דנטורציה והכלאה, פיתול-על ו-RNA", items: sec(molNucleicAcids, "melting", "supercoiling", "rna"), practice: probs(molNucleicAcids, "linking-number") },
+  { titleHe: "דנטורציה והכלאה, Southern ו-FISH, פיתול-על ו-RNA", items: sec(molNucleicAcids, "melting", "blotting", "supercoiling", "rna"), practice: probs(molNucleicAcids, "southern-probe", "helix-geometry", "linking-number") },
   { titleHe: "אריזת ה-DNA: הנוקלאוזום ורמות הכרומטין", items: sec(molChromatin, "packaging", "nucleosome", "levels"), practice: probs(molChromatin) },
-  { titleHe: "אאוכרומטין והטרוכרומטין, צנטרומר וטלומרים", items: sec(molChromatin, "euchromatin", "centromere-telomere", "assembly"), practice: [] },
+  { titleHe: "אאוכרומטין והטרוכרומטין, צנטרומר וטלומרים; ניסויי MNase ו-DNase", items: sec(molChromatin, "euchromatin", "centromere-telomere", "nuclease-assays", "assembly"), practice: [] },
   { titleHe: "שכפול: חצי-שמרני, DNA פולימראז ומזלג השכפול", items: [...sec(molReplicationFork, "semiconservative", "polymerase", "fork", "enzymes"), proc("dna-replication")], practice: probs(molReplicationFork, "meselson-stahl", "mutant-fork") },
   { titleHe: "הרפליזום, דיוק השכפול, שכפול באאוקריוטים ו-PCR", items: [...sec(molReplicationFork, "replisome", "fidelity", "eukaryotes", "pcr"), proc("pcr")], practice: probs(molReplicationFork, "replication-time", "pcr-cycles") },
   { titleHe: "התחלה וסיום של שכפול; קצות הכרומוזום וטלומראז", items: sec(molReplicationOrigins), practice: probs(molReplicationOrigins) },
+  { titleHe: "PCR, ריצוף סנגר ושיבוט", items: sec(molPcrSequencing), practice: probs(molPcrSequencing) },
   { titleHe: "תיקון DNA", items: [...sec(molRepair), proc("dna-mismatch-repair")], practice: probs(molRepair) },
   { titleHe: "רקומבינציה הומולוגית וספציפית לאתר", items: sec(molRecombination), practice: probs(molRecombination) },
   { titleHe: "שעתוק בחיידקים: RNA פולימראז, פרומוטור וסיום", items: [...sec(molTranscriptionProk), proc("transcription")], practice: probs(molTranscriptionProk) },
   { titleHe: "שעתוק באאוקריוטים: פרומוטור, גורמי שעתוק ומגבירים", items: sec(molTranscriptionEuk), practice: probs(molTranscriptionEuk) },
+  { titleHe: "שיטות לחקר שעתוק: Northern, EMSA, גנים מדווחים, ChIP ופינצטה אופטית", items: sec(molTranscriptionMethods), practice: probs(molTranscriptionMethods) },
   { titleHe: "עיבוד ושחבור RNA", items: sec(molRnaProcessing), practice: probs(molRnaProcessing) },
   { titleHe: "הקוד הגנטי ו-tRNA", items: sec(molGeneticCode), practice: probs(molGeneticCode) },
   { titleHe: "הריבוזום ושלבי התרגום: התחלה, הארכה וסיום", items: [...sec(molRibosomeInitiation), ...sec(molTranslationElongation), proc("translation")], practice: [...probs(molRibosomeInitiation), ...probs(molTranslationElongation)] },
@@ -51,21 +58,21 @@ export const technionMolecularPlan: CoursePlan = {
   courseSlug: "technion-molecular",
   lectureOrder: {
     confidence: "textbook",
-    noteHe: "אין לוח הרצאות ציבורי לקורס (אתר הקורס במודל סגור). הסדר כאן הוא סדר הנושאים בסילבוס הרשמי — לפי \"הדוגמה המרכזית\": DNA, שכפול ותיקון, שעתוק ועיבוד, תרגום — והוא גם סדר הפרקים בספר הקורס (Lewin's Genes). גם הקורס המקביל בפקולטה לרפואה (274243) מסודר כך, אבל זה קורס אחר — ראיה בלבד. החלוקה לשבועות בפועל עשויה להיות שונה.",
+    noteHe: "אין לוח הרצאות ציבורי לקורס (אתר הקורס במודל סגור). הסדר כאן הוא סדר הנושאים בסילבוס הרשמי — לפי \"הדוגמה המרכזית\": DNA, שכפול ותיקון, שעתוק ועיבוד, תרגום — והוא גם הסדר של הפרקים שהסילבוס מפנה אליהם (Alberts פרקים 4–5, Lodish פרקים 5–6). גם הקורס המקביל בפקולטה לרפואה (274243) מסודר כך, אבל זה קורס אחר — ראיה בלבד. החלוקה לשבועות בפועל עשויה להיות שונה.",
     links: [PORTAL, MED],
   },
   tutorialOrder: null,
   schedule: "suggested",
-  scheduleNoteHe: "הנושאים לפי הסילבוס העדכני של הקורס בפורטל הטכניון (הוא מפרט נושאים, לא שבועות). הפירוט לתת-נושאים לפי ספר הקורס (Lewin's Genes XII), ונבדק מול Alberts.",
+  scheduleNoteHe: "הנושאים לפי הסילבוס העדכני של הקורס בפורטל הטכניון (הוא מפרט נושאים, לא שבועות). הפירוט לתת-נושאים לפי ספרי הקורס שבסילבוס תשפ\"ד (Alberts, Lodish), ונבדק מול Lewin's Genes XII. השיטות שבכל נושא — לפי הסילבוס ותרגילי הבית של 2024–2025.",
   topics: [
     { titleHe: "חומצות גרעין: אבני הבניין", items: sec(molNucleicAcids, "nucleotides", "polynucleotide") },
-    { titleHe: "מבנה הדנ\"א", items: sec(molNucleicAcids, "double-helix", "forms", "melting", "supercoiling", "rna") },
+    { titleHe: "מבנה הדנ\"א", items: sec(molNucleicAcids, "double-helix", "forms", "melting", "blotting", "supercoiling", "rna") },
     { titleHe: "מבנה הכרומטין בתאים אאוקריוטיים ואריזת הדנ\"א", items: sec(molChromatin) },
-    { titleHe: "שכפול דנ\"א", items: [...sec(molReplicationFork), ...sec(molReplicationOrigins), proc("dna-replication"), proc("pcr")] },
+    { titleHe: "שכפול דנ\"א", items: [...sec(molReplicationFork), ...sec(molReplicationOrigins), ...sec(molPcrSequencing), proc("dna-replication"), proc("pcr")] },
     { titleHe: "תיקון ורקומבינציה — מנגנונים ואנזימים", items: [...sec(molRepair), ...sec(molRecombination), proc("dna-mismatch-repair")] },
-    { titleHe: "תעתוק — מנגנון ואלמנטים בציס ובטרנס (פרומוטור, רנ\"א פולימרז)", items: [...sec(molTranscriptionProk), ...sec(molTranscriptionEuk), proc("transcription")] },
+    { titleHe: "תעתוק — מנגנון ואלמנטים בציס ובטרנס (פרומוטור, רנ\"א פולימרז)", items: [...sec(molTranscriptionProk), ...sec(molTranscriptionEuk), ...sec(molTranscriptionMethods), proc("transcription")] },
     { titleHe: "עיבוד ושחבור רנ\"א", items: sec(molRnaProcessing) },
-    { titleHe: "תרגום — הקוד הגנטי", items: sec(molGeneticCode, "triplet", "cracking", "wobble", "exceptions") },
+    { titleHe: "תרגום — הקוד הגנטי", items: sec(molGeneticCode, "triplet", "cracking", "wobble", "exceptions", "western") },
     { titleHe: "מבנה הריבוזום", items: sec(molRibosomeInitiation, "structure") },
     { titleHe: "tRNA", items: sec(molGeneticCode, "trna", "synthetases", "fidelity") },
     { titleHe: "שלבי התרגום — התחלה, הארכת החלבון וסיום", items: [...sec(molRibosomeInitiation, "overview", "initiator", "initiation-bacteria", "initiation-eukaryotes", "eif2-control", "polysomes"), ...sec(molTranslationElongation), proc("translation")] },
