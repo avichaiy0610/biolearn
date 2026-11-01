@@ -60,6 +60,25 @@ Update this file whenever a source is found, moves, or stops working.
   (`.outer_page` elements) with Playwright and read the images. Verify identity (code, year,
   lecturers) as for any source; it is `official-past`, never `official`.
 
+## Assessment and exams (step 2a)
+- Grading split: HUJI shnaton, TAU detailed syllabus PDF and BIU faculty PDFs usually state it;
+  the Technion portal never does — the staff's own syllabus file (faculty site, Scribd upload,
+  older semester) does.
+- Past exams: Scribd/Studocu uploads, Google Drive folders that students share publicly
+  (`site:drive.google.com <code>`), lecturers' course pages. Exams are evidence of scope and
+  format only — never copy questions to the site.
+- Formula sheets and "material covered" lists (often scanned) are the best map of a quantitative
+  course's examinable content — read them visually.
+
+## Lecturer profile (step 2b)
+- Lab websites (Technion: `<name>.net.technion.ac.il`, faculty staff pages), Google Scholar,
+  PubMed (last ~5 years). Grant/ERC abstracts summarise the lab's focus in a paragraph.
+
+## Canonical core (step 5a.5)
+- Same-name courses with full syllabi: HUJI/TAU/BIU (above), MIT OpenCourseWare (lecture lists,
+  problem sets, exams), other universities that publish full syllabi. Use for "what every course
+  of this name teaches", never for order.
+
 ## Books
 - TAU's genetics syllabus states Griffiths *Introduction to Genetic Analysis* 8th ed. "can be
   downloaded legally and for free" — find that official free source before asking for PDFs.

@@ -234,11 +234,19 @@ def cmd_discover(a) -> None:
         queries += [f'site:{d} סילבוס "{name}" pdf', f'site:{d} "{code}" סילבוס', f'site:{d} "{name}" "תרגיל 1" OR "תרגול 1"',
                     f'site:{d} "{name}" שבוע הרצאה תרגול']
     queries += [f'"{name}" {code} הרצאות תרגולים לפי שבועות', f'"{name}" מבחן קודם {code}']
+    # assessment: how the course is graded and what its exams ask (step 2a)
+    queries += [f'"{name}" {code} "הרכב הציון" OR "מטלה מסכמת" OR "עבודה מסכמת" OR "פרויקט"',
+                f'site:scribd.com "{code}" OR "{name}"', f'site:studocu.com "{code}" OR "{name}"',
+                f'site:drive.google.com "{code}" OR "{name}" מבחן', f'"{code}" מבחן מועד א פתרון']
     if a.staff:
         queries += [f'"{s}" "{name}" אתר הקורס' for s in a.staff.split(",")]
+        # lecturer profile: lab page, recent papers, the lecturer's own course pages (step 2b)
+        queries += [q for s in a.staff.split(",") for q in (f'"{s}" lab research', f'"{s}" site:scholar.google.com OR site:pubmed.ncbi.nlm.nih.gov',
+                                                             f'"{s}" course syllabus OR "exam" OR "lecture notes"')]
     write(a.output, {"course": a.course, "probes": probes, "searchQueries": queries,
                      "instructions": "Run each searchQuery with WebSearch; for each candidate run `extract`, then verify identity "
-                                     "(faculty, code, year) before using it. Record every source, even rejected ones, in the order file."})
+                                     "(faculty, code, year) before using it. Record every source, even rejected ones, in the order file. "
+                                     "Also fill the assessment and lecturer-profile notes (SKILL.md steps 2a-2b)."})
 
 
 def _charset(ct: str, raw: bytes) -> str:

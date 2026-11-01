@@ -18,6 +18,9 @@ found belongs to this course, label everything by how sure we are, and never pre
 as the course's real order.**
 
 Read `references/sources.md` first — what each university publishes, where, and what failed.
+Read `references/calibration-2026-11.md` too — what this skill missed on 29 Technion courses
+when checked against the real exams, HW and syllabi, and why. Every step below marked
+**(calibration)** exists because of a miss listed there.
 
 ## Dependencies
 - `ask-codex` — independent review of every new unit (scientific accuracy, quiz keys) and a
@@ -61,13 +64,48 @@ Run `syllabus`. Note `level` (topics / lectures), the books, and the source URL.
 only lists topics, the rest of the workflow must find the order.
 
 ### 2. Discover — this is the main step, not an extra
-Run `related`, `staff` (Technion), `discover`. Then run **every** search query, plus your own
+Run `related`, `staff` (Technion), then `discover` with `--staff` (lecturer names add the
+lecturer-profile queries). Then run **every** search query, plus your own
 variations (course name in English, old course codes, lecturer names from `staff`). Look for:
 the course's own syllabus PDF on faculty sites (incl. other faculties that teach a parallel
 course — e.g. Technion medicine publishes week-by-week lecture+tutorial tables), older years,
 lecturer/TA pages, public course sites, past exams. Extract each candidate, and **follow its
 `links`** — official pages often link a detailed syllabus file ("לסילבוס המפורט") that holds the
 real lecture and tutorial table (this is how TAU genetics was found).
+
+### 2a. Assessment — how the course is graded and what its exams ask (mandatory) (calibration)
+11 of 29 audited Technion courses had **no exam** (research proposal, paper critique, project,
+poster); most of the rest examine experiment design or data reading, not recall. Units that only
+train recall missed all of it. So, before writing:
+1. Find the grading line: the syllabus PDF (HUJI/TAU/BIU usually state it), older semesters, the
+   faculty's syllabus files, Scribd/Studocu uploads of the syllabus, the lecturer's course page.
+   The Technion portal does not show grading — search for the staff's own syllabus file.
+2. Find real exam questions: `discover` emits queries for Scribd, Studocu, public Google Drive
+   folders and "מועד א" pages. Scans need a visual read. Note the *format*: time, aids (formula
+   sheet? open book?), MC vs open, recurring question types (e.g. "a paper figure from the
+   lecturer's field — fill in, predict, design").
+3. Write an **assessment note** in the plan header: grading split, exam format, recurring
+   question types, with sources — or "not found".
+4. **Practice follows the assessment.** Project/proposal course → units end with "design the
+   follow-up experiment / critique this figure" practice and a project-guide unit. Exam course
+   → worked problems in the exam's own format (state table → Z → P in biophysics; RFLP × pedigree
+   in genetics; data panels in gene expression). **Not found → default to mixed practice**
+   (experiment design + data reading + calculation where the field is quantitative), never
+   recall-only.
+
+### 2b. Lecturer profile (mandatory) (calibration)
+Lecturers teach and examine their own field: muscle atrophy got 3 weeks in physiology
+(lecturer's lab), cell fusion and myoblast fusion appeared in developmental-biology exams
+(Podbilewicz lab), the last question of every virology exam was a paper from the lecturer's
+field, single-molecule methods dominate biophysics (Kaplan). This is public:
+1. From `staff` / the portal / the syllabus take every lecturer and guest lecturer.
+2. Read each lab page and the last ~5 years of papers (titles + abstracts). Write a short
+   **lecturer note**: research topics, model organisms, favourite methods.
+3. A syllabus topic that matches the lecturer's field → raise it to core and give it depth
+   (not a passing mention). A field topic the syllabus does not name → "likely", only with a
+   second signal (old exam, guest-lecture title, course-page section).
+4. Prepare at least one "paper from the lecturer's field" practice item per course (figure
+   reading, predict the KO result, design the next experiment). Never copy the paper's figures.
 
 ### 3. Verify identity before using anything (strict)
 For each source record: **course code, faculty, year, lecturer**. Same code + same faculty →
@@ -116,7 +154,25 @@ came from filling each topics-only heading with the whole textbook chapter. Befo
    A subtopic in most of them = core; in none = do not write it (archive it if already written).
 3. **Completeness inside the scope comes from the course book's own lists.** When a topic is in scope, cover what
    the book's section/table lists (e.g. Brown Table 11.1 for DNA-binding motifs), not only the famous examples.
-4. Write the subtopic list with its evidence into the plan header comment, then write units.
+4. **Never exclude a topic the official text names (calibration).** A broad official heading
+   ("therapeutic and diagnostic agents", "cell death", "population genetics") is filled with the
+   field's canonical examples, not dropped. 136014 excluded CAR-T although the portal said
+   "therapeutic agents" — the 2025 syllabus had engineered T cells, immunotherapy, Gleevec,
+   Herceptin, Rituximab as named lectures. Excluding needs a document that shows it is not taught.
+5. **Canonical core of the course type (calibration).** Intro courses have topics every course of
+   that name teaches, even when a short portal paragraph omits them: Hardy–Weinberg in general
+   genetics, recombinant DNA + PCR in Biology 1, speciation + kin selection in evolution, apoptosis
+   in cell biology. Build the list from ≥3 detailed syllabi of same-name courses (other Israeli
+   universities, MIT OCW and other open full syllabi); a topic in most of them is at least
+   "likely" and gets a unit or a section.
+6. **Methods are content (calibration).** Topic lists rarely name methods; exams test them.
+   Go through `references/methods-checklist.md` for the course type and place every listed
+   method in the unit where it is used (with what it shows and its limits).
+7. **Faculty de-duplication (calibration).** Before writing a unit, check whether the topic is a
+   full topic of another required course of the same faculty (photosynthesis → plant physiology,
+   not metabolic pathways; operons → molecular biology, not gene-expression control; immunology →
+   immunology, not microbiology). If so it becomes a refresher link, not a unit.
+8. Write the subtopic list with its evidence into the plan header comment, then write units.
 Removed material is never deleted: keep full copies under `content/lessons/_archive/<course>/` with a README.
 
 ### 5b. Scope of every section — from documents only
@@ -148,8 +204,13 @@ which are fine).
 
 ### 7. Keep it fresh
 Each semester: re-run `syllabus-fetch.ts`, `staff`, `discover` for changed lecturers or new
-PDFs. Student reports ("הסדר אצלכם שונה?") arrive in /admin/feedback — a verified report can
-raise a course to `students`.
+PDFs; a new lecturer means a new lecturer profile (2b). Course numbers change (134152 → 134157):
+search the old and new code. Student reports ("הסדר אצלכם שונה?") arrive in /admin/feedback —
+a verified report can raise a course to `students`.
+**Students are the only source for what is never public** (exact lecture order, Technion grading,
+recent exams): every exam a student uploads (`/admin/exams`) and every recurring lesson-chat gap
+(`scripts/question-gaps.ts`) re-opens step 2a and the scope check for that course. Weigh recent
+material (2022+) over old exams — a 2010 exam can describe an older version of the course.
 
 ## Rate Limiting
 No documented limits for these university sites → **1 request per second per host**, enforced
@@ -159,6 +220,11 @@ WordPress sites block bots — `extract` falls back to a real browser (Playwrigh
 
 ## Common Mistakes
 - Using a parallel course's order or content as if it were this course's (it is evidence only).
+- Writing recall-only units without knowing how the course is graded (step 2a).
+- Skipping the lecturer's research field — it is where exam questions and extra depth come from.
+- Dropping a named official topic as "too clinical / catalogue" — fill it with canonical examples.
+- A unit for a topic that is another faculty course's full topic (refresher link instead).
+- Treating a topic list as complete when it names no methods (methods checklist).
 - Inventing a tutorial order to fill the tab — use `tutorialOrder: null`.
 - Treating a guest-closed Moodle as "no information": it still gives staff names → lecturer pages.
 - Trusting pdftotext on Hebrew PDFs: when `needsVisualRead`, read the PDF pages visually.
