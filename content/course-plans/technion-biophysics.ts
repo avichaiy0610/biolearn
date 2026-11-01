@@ -6,6 +6,8 @@ import { bpChemicalEquilibrium } from "../lessons/technion-biophysics/bp-chemica
 import { bpEntropy } from "../lessons/technion-biophysics/bp-entropy";
 import { bpRandomWalk } from "../lessons/technion-biophysics/bp-random-walk";
 import { bpPolymers } from "../lessons/technion-biophysics/bp-polymers";
+import { bpPartitionFunction } from "../lessons/technion-biophysics/bp-partition-function";
+import { bpBeamTheory } from "../lessons/technion-biophysics/bp-beam-theory";
 import { bpDiffusionFriction } from "../lessons/technion-biophysics/bp-diffusion-friction";
 import { bpFirstPassage } from "../lessons/technion-biophysics/bp-first-passage";
 import { bpLowReynolds } from "../lessons/technion-biophysics/bp-low-reynolds";
@@ -17,6 +19,10 @@ import { mvSurfaceMotility } from "../lessons/technion-micro-viro/mv-surface-mot
 import { cellMotorsPolarity } from "../lessons/technion-cell/cell-motors-polarity";
 import { molTranscriptionProk } from "../lessons/technion-molecular/mol-transcription-prok";
 
+// 2026-11-01: Drive evidence (official "Material covered from books" 2019/20, 2020 exam, 2021 formula sheet, HW
+// 2018–2021) added bp-partition-function (state tables, lattice binding, channels, grand canonical) and bp-beam-theory
+// (PBC ch. 10: bending, looping, nucleosome); rotational friction, membrane transport, Nernst–Planck, sedimentation,
+// 1D FJC and R_G added to existing units. Codex scope check.
 // Technion 01340156 "ביופיסיקה מולקולרית" (Biology faculty elective, 3 credits / 3 lecture hours, no tutorials). Built
 // with the course-track-builder skill, no insider input. Lecturer: Prof. Ariel Kaplan (single-molecule biophysics;
 // Moodle 2025–2026 closed to guests). Earlier version of the same course: 134136 (same name and faculty, "no extra
@@ -27,8 +33,8 @@ import { molTranscriptionProk } from "../lessons/technion-molecular/mol-transcri
 // friction (calibration needs D = kBT/ζ); motors split into principles (kinesin benchmark) and polymerases/helicases;
 // a consolidation unit because there are no tutorials. Extensions: MWC, quantitative crowding, dynamic force
 // spectroscopy, Berg–Purcell detail, detailed randomness analysis; nonlinear dynamics (Strogatz) not taught.
-export const BIOPHYSICS_LESSONS: Lesson[] = [bpScales, bpMechanicalEquilibrium, bpChemicalEquilibrium, bpEntropy,
-  bpRandomWalk, bpPolymers, bpDiffusionFriction, bpFirstPassage, bpLowReynolds, bpSingleMolecule, bpMotorPrinciples,
+export const BIOPHYSICS_LESSONS: Lesson[] = [bpScales, bpMechanicalEquilibrium, bpChemicalEquilibrium, bpEntropy, bpPartitionFunction,
+  bpRandomWalk, bpPolymers, bpBeamTheory, bpDiffusionFriction, bpFirstPassage, bpLowReynolds, bpSingleMolecule, bpMotorPrinciples,
   bpPolymerasesHelicases, bpCaseStudies];
 
 const sec = (l: Lesson, ...ids: string[]): PlanItem[] => (ids.length ? ids.map((section) => ({ kind: "lesson" as const, slug: l.slug, section })) : [{ kind: "lesson", slug: l.slug }]);
@@ -43,8 +49,10 @@ const LECTURES: { titleHe: string; items: PlanItem[]; practice: PlanItem[] }[] =
   { titleHe: "שיווי משקל מכני, בולצמן ושני מצבים", items: sec(bpMechanicalEquilibrium), practice: probs(bpMechanicalEquilibrium) },
   { titleHe: "שיווי משקל כימי, קשירה ועבודה כימית", items: sec(bpChemicalEquilibrium), practice: probs(bpChemicalEquilibrium) },
   { titleHe: "אנטרופיה, אוסמוזה וכוחות אנטרופיים", items: sec(bpEntropy), practice: probs(bpEntropy) },
+  { titleHe: "פונקציית החלוקה: טבלת מצבים, קשירה ותעלות", items: sec(bpPartitionFunction), practice: probs(bpPartitionFunction) },
   { titleHe: "הליכת אקראי והופעת הדיפוזיה", items: sec(bpRandomWalk), practice: probs(bpRandomWalk) },
   { titleHe: "פולימרים: מבנה וכוח", items: sec(bpPolymers), practice: probs(bpPolymers) },
+  { titleHe: "תורת הקורות: כיפוף DNA, לולאות ונוקלאוזומים", items: sec(bpBeamTheory), practice: probs(bpBeamTheory) },
   { titleHe: "דיפוזיה וחיכוך", items: sec(bpDiffusionFriction), practice: probs(bpDiffusionFriction) },
   { titleHe: "זמני מעבר ראשון ומפגשים", items: sec(bpFirstPassage), practice: probs(bpFirstPassage) },
   { titleHe: "החיים במספר ריינולדס נמוך", items: [...sec(mvSurfaceMotility, "flagellum", "chemotaxis"), ...sec(bpLowReynolds)], practice: probs(bpLowReynolds) },
@@ -67,8 +75,8 @@ export const technionBiophysicsPlan: CoursePlan = {
   topics: [
     { titleHe: "מבוא לעקרונות הפיסיקליים בדינמיקה התוך-תאית", items: [...sec(bpScales), ...sec(bpCaseStudies)] },
     { titleHe: "שיווי משקל מכאני וכימי בהקשר הביולוגי", items: [...sec(bpMechanicalEquilibrium), ...sec(bpChemicalEquilibrium)] },
-    { titleHe: "תהליכים אנטרופיים מרכזיים בתא", items: sec(bpEntropy) },
-    { titleHe: "הליכת אקראי ומודלים למבנה של ביומולקולות", items: [...sec(bpRandomWalk), ...sec(bpPolymers)] },
+    { titleHe: "תהליכים אנטרופיים מרכזיים בתא", items: [...sec(bpEntropy), ...sec(bpPartitionFunction)] },
+    { titleHe: "הליכת אקראי ומודלים למבנה של ביומולקולות", items: [...sec(bpRandomWalk), ...sec(bpPolymers), ...sec(bpBeamTheory)] },
     { titleHe: "שיטות למניפולציות חד-מולקולריות ושימושיהן", items: sec(bpSingleMolecule) },
     { titleHe: "דיפוזיה וחיכוך", items: [...sec(bpDiffusionFriction), ...sec(bpFirstPassage)] },
     { titleHe: "החיים במספר ריינולדס נמוך", items: sec(bpLowReynolds) },

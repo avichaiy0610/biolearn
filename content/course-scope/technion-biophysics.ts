@@ -6,6 +6,7 @@ import type { CourseScope, ScopeEntry } from "./types";
 // material (Moodle closed). Levels: "core" where the paragraph names the topic or the section is part of it by
 // definition; "likely" for sections only reachable under a broad heading; "extension" for the items Codex flagged
 // (crowding/hydrophobic detail, Berg–Purcell, comparison table of other motors).
+// 2026-11-01: Drive course documents added as evidence (material list 2019/20, 2020 exam, homework).
 
 const named = (topic: string, what?: string): ScopeEntry => ({
   level: "core", evidence: "syllabus-named",
@@ -14,6 +15,16 @@ const named = (topic: string, what?: string): ScopeEntry => ({
 const heading = (topic: string, what: string): ScopeEntry => ({
   level: "likely", evidence: "syllabus-heading",
   noteHe: `נכלל בנושא "${topic}" בתיאור הקורס, אבל ${what} לא מוזכר בשמו`,
+});
+// Course documents in the Drive: the official "Material covered from books" (Winter 2019/20), the 2020 exam and
+// the homework 2018–2021 (staff questions).
+const listed = (what: string): ScopeEntry => ({
+  level: "core", evidence: "reading",
+  noteHe: `ברשימת החומר הרשמית של הקורס (חורף תש"ף): ${what}`,
+});
+const examined = (what: string): ScopeEntry => ({
+  level: "core", evidence: "exam",
+  noteHe: `נשאל במבחן או בתרגילי הבית של הקורס: ${what}`,
 });
 const beyond = (what: string): ScopeEntry => ({
   level: "extension", evidence: "none",
@@ -36,7 +47,7 @@ const MOTORS = "אנזימים פרוססיביים כמנועים מולקול�
 
 export const technionBiophysicsScope: CourseScope = {
   courseSlug: "technion-biophysics",
-  checkedAt: "2026-10-26",
+  checkedAt: "2026-11-01",
   defaultSource: { labelHe: "הסילבוס בפורטל הטכניון", url: "https://students.technion.ac.il/local/technionsearch/course/134156" },
   sections: {
     "bp-scales": {
@@ -79,6 +90,8 @@ export const technionBiophysicsScope: CourseScope = {
       persistence: named(WALK, "אורך התמדה"),
       "force-extension": named(WALK, "כוח מול הארכה"),
       "high-force": named(SM, "DNA בכוחות גבוהים"),
+      "fjc-1d": examined("שרשרת חד-ממדית, tanh ועבודת מתיחה (תרגילי בית 2018–2021)"),
+      gyration: examined("הוכחת R_G² = Lℓp/3 (תרגיל בית) ודף הנוסחאות"),
     },
     "bp-diffusion-friction": {
       fick: named(DIFF, "חוק פיק"),
@@ -86,6 +99,8 @@ export const technionBiophysicsScope: CourseScope = {
       einstein: named(DIFF, "יחס איינשטיין"),
       "fluctuation-dissipation": named(DIFF, "פלקטואציה-דיסיפציה"),
       measuring: heading(DIFF, "מדידת דיפוזיה בתא"),
+      rotational: examined("חיכוך ודיפוזיה סיבוביים של E. coli (מבחן 2020, שאלה 1)"),
+      transport: examined("חדירות ממברנה וצריכה לאורך שוטון (תרגילי בית 2019/20); נרנסט-פלאנק וצנטריפוגה בדף הנוסחאות"),
     },
     "bp-first-passage": {
       concept: heading(DIFF, "זמן מעבר ראשון"),
@@ -152,6 +167,22 @@ export const technionBiophysicsScope: CourseScope = {
       termination: outside("סיום"),
       "cis-trans": outside("cis ו-trans"),
       "alt-sigma": outside("פקטורי סיגמא"),
+    },
+    "bp-partition-function": {
+      table: examined("טבלת מצב-אנרגיה-ריבוי-משקל ופונקציית חלוקה — כמעט בכל תרגיל בית"),
+      counting: listed("PBC 6.1–6.2; צירופים וסטירלינג בדף הנוסחאות"),
+      folding: examined("חלבון בן 4 שיירים (תרגיל בית)"),
+      channel: examined("תעלה תחת מתח בממברנה, ΔG = Δε − τΔA (תרגיל בית)"),
+      lattice: listed("PBC 6.4 — מודל הסריג לקשירת ליגנד"),
+      grand: listed("PBC 7.1–7.2; האנסמבל הגרנד-קנוני בדף הנוסחאות"),
+    },
+    "bp-beam-theory": {
+      elasticity: listed("PBC 10.2.1 — מאמץ, עיבור ומודול יאנג"),
+      bending: listed("PBC 10.2.1 — אנרגיית כיפוף EIL/2R²"),
+      persistence: listed("PBC 10.2.2 — אורך התמדה"),
+      looping: listed("PBC 10.3.1–10.3.3 — לולאות DNA ו-J-factor"),
+      nucleosome: examined("אנרגיית הכיפוף ואנרגיית ההיצמדות של הנוקלאוזום (מבחן 2020, שאלה 2)"),
+      accessibility: examined("הסתברות שה-DNA יתפרק תרמית מהנוקלאוזום (מבחן 2020, שאלה 2)"),
     },
   },
 };
