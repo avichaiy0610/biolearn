@@ -3,6 +3,7 @@
    Biology, and Wolpert, Principles of Development — never copied. Labels sit beside shapes and arrows, never on a line.
    Referenced from lesson bodies as [[figure:<id>]]. */
 import type React from "react";
+import { FusionStages } from "./developmentalFusionFigure";
 import { ArrowDefs, BLUE, GREEN, INK, MUTED, ORANGE, He, La } from "./biochemFigures";
 import { Arrow } from "./metabolicFigures";
 
@@ -969,6 +970,7 @@ function EnhancerEvolution() {
 }
 
 export const DEVELOPMENTAL_FIGURES: Record<string, { el: () => React.ReactElement; captionHe: string }> = {
+  "fusion-stages": { el: FusionStages, captionHe: "איחוי ממברנות וקריאת סמנים במיובלסטים. הפס האדום מציין את חסימת LPC לפני המי־פיוז'ן; שטיפתו מסירה את החסימה. Myomaker נדרש להמי־פיוז'ן ו־Myomerger למעבר לנקבובית. סמני השומן והתוכן מוצגים בצבעים שרירותיים; הצורות מפושטות, התוצאות איכותניות, ולא כל גורמי האיחוי מוצגים. ציור מקורי לפי המודל של Leikina ועמיתים (2018), לא בקנה מידה." },
   "dv-specification-modes": { el: SpecificationModes, captionHe: "שלושה אופני קביעת גורל. בעוברים רבים יש שילוב של התמחות אוטונומית ומותנית; התמחות סינציטיאלית אופיינית לשלבים מסוימים, למשל בעובר הזבוב. סכמטי." },
   "dv-french-flag": { el: FrenchFlag, captionHe: "מודל דגל צרפת (וולפרט): מורפוגן אחד ושני ספים יוצרים שלושה אזורים. העקומה סכמטית, לא נתונים." },
   "dv-morphogenesis-mechanics": { el: MorphogenesisMechanics, captionHe: "ארבעה ממנגנוני המורפוגנזה. בגסטרולציה הם פועלים יחד. סכמטי." },

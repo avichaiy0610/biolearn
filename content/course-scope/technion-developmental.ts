@@ -14,6 +14,11 @@ const heading = (topic: string, what: string): ScopeEntry => ({
   noteHe: `נכלל בנושא "${topic}" בסילבוס, אבל ${what} לא מוזכר בשמו`,
 });
 
+// The only exams in the Drive (Winter 2018/19, moed A + B; the same exam).
+const exam19 = (what: string): ScopeEntry => ({
+  level: "core", evidence: "exam",
+  noteHe: `נשאל במבחן הקורס (חורף תשע"ט): ${what}`,
+});
 const MORPH = "מורפוגנזה";
 const PATTERN = "יצירת תבניות הגוף";
 const GRAD = "גרדיינטים ושדות מורפוגנטיים";
@@ -33,7 +38,7 @@ const EVO = "שינויים אבולוציוניים בגנים התפתחותי
 
 export const technionDevelopmentalScope: CourseScope = {
   courseSlug: "technion-developmental",
-  checkedAt: "2026-10-23",
+  checkedAt: "2026-11-01",
   defaultSource: { labelHe: "הסילבוס בפורטל הטכניון", url: "https://students.technion.ac.il/local/technionsearch/course/134069" },
   sections: {
     "dv-principles": {
@@ -73,7 +78,7 @@ export const technionDevelopmentalScope: CourseScope = {
       "early-fates": heading(AXES, "גורלות התאים המייסדים"),
       gonad: named(GONAD),
       vulva: named(GONAD, "הפות"),
-      fusion: heading(GONAD, "איחוי תאים (EFF-1)"),
+      fusion: exam19("איחוי תאים — שאלת המיוגנזה, ותחום המחקר של המרצה (EFF-1)"),
     },
     "dv-vertebrate-axes": {
       "chick-early": named(AXES, "העוף — הקשר העוברי"),
@@ -113,6 +118,13 @@ export const technionDevelopmentalScope: CourseScope = {
       "cis-regulatory": named(EVO, "בקרה על ביטוי גנים"),
       "hox-body-plans": named(EVO, "גנים התפתחותיים"),
       "dorsal-ventral-inversion": heading(POOL, "היפוך הציר הגבי-גחוני"),
+    },
+    "dv-cell-fusion": {
+      myogenesis: exam19("מיוגנזה — שאלה 3"),
+      "membrane-fusion": exam19("סמני שומן ותוכן, LPC והמי-פיוז'ן — שאלה 3א"),
+      fly: heading(SIZE, "איחוי מיובלסטים בזבוב"),
+      myomaker: exam19("Myomaker ו-Myomerger (Leikina et al. 2018) — שאלה 3ב–ג"),
+      "other-fusions": heading(GONAD, "איחוי תאים בהקשרים נוספים (EFF-1, שליה, הפריה)"),
     },
   },
 };

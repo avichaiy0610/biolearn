@@ -11,6 +11,7 @@ import { dvLimb } from "../lessons/technion-developmental/dv-limb";
 import { dvGenes } from "../lessons/technion-developmental/dv-genes";
 import { dvRegeneration } from "../lessons/technion-developmental/dv-regeneration";
 import { dvEvoDevo } from "../lessons/technion-developmental/dv-evo-devo";
+import { dvCellFusion } from "../lessons/technion-developmental/dv-cell-fusion";
 
 // Technion 01340069 "ביולוגיה של ההתפתחות" (Biology faculty, year-3 elective) — built with the course-track-builder
 // skill, no insider input. Evidence: the CURRENT portal paragraph (three parts — morphogenesis and body pattern;
@@ -21,6 +22,8 @@ import { dvEvoDevo } from "../lessons/technion-developmental/dv-evo-devo";
 // under them "likely"; added morphogenesis mechanics, gonad morphogenesis and cell-size control; trimmed morpholinos,
 // Turing models, organ-size and the regeneration survey to brief mentions.
 // Order: the paragraph's own topic order (A → B → C), labelled "syllabus".
+// 2026-11-01: the only exams in the Drive (Winter 2018/19) have a whole question on myoblast fusion (Leikina et al.
+// 2018) and an epistasis/technical-problem question on lin-15/let-23 → added dv-cell-fusion and a dv-worm problem.
 
 const sec = (l: Lesson, ...ids: string[]): PlanItem[] => (ids.length ? ids.map((section) => ({ kind: "lesson" as const, slug: l.slug, section })) : [{ kind: "lesson", slug: l.slug }]);
 const probs = (l: Lesson): PlanItem[] => (l.workedProblems ?? []).map((w) => ({ kind: "lesson" as const, slug: l.slug, problem: w.id }));
@@ -37,6 +40,7 @@ const LECTURES: { titleHe: string; items: PlanItem[]; practice: PlanItem[] }[] =
   { titleHe: "צירי הגוף בעוף ובעכבר", items: sec(dvVertebrateAxes), practice: probs(dvVertebrateAxes) },
   { titleHe: "הגפה: הכנף בעוף והאצבעות בעכבר", items: sec(dvLimb), practice: probs(dvLimb) },
   { titleHe: "גנים התפתחותיים: זיהוי, בקרה, קביעה וגודל התא", items: sec(dvGenes), practice: probs(dvGenes) },
+  { titleHe: "איחוי תאים: מיובלסטים ושריר, EFF-1 ושליה", items: sec(dvCellFusion), practice: probs(dvCellFusion) },
   { titleHe: "התחדשות (רגנרציה)", items: sec(dvRegeneration), practice: probs(dvRegeneration) },
   { titleHe: "התפתחות ואבולוציה", items: sec(dvEvoDevo), practice: probs(dvEvoDevo) },
 ];
@@ -62,8 +66,8 @@ export const technionDevelopmentalPlan: CoursePlan = {
     { titleHe: "זיהוי ובידוד גנים הקשורים להתפתחות", items: sec(dvGenes, "forward", "tools", "necessary-sufficient") },
     { titleHe: "הבקרה על ביטוי גנים בהתפתחות", items: sec(dvGenes, "enhancers", "master-genes") },
     { titleHe: "רגנרציה", items: sec(dvRegeneration) },
-    { titleHe: "קביעת גודל התא, דטרמינציה ודיפרנציאציה", items: sec(dvGenes, "determination", "cell-size") },
-    { titleHe: "יצירת אברי המין בנמטודה", items: sec(dvWorm, "gonad", "vulva", "fusion") },
+    { titleHe: "קביעת גודל התא, דטרמינציה ודיפרנציאציה", items: [...sec(dvGenes, "determination", "cell-size"), ...sec(dvCellFusion, "myogenesis", "membrane-fusion", "fly", "myomaker")] },
+    { titleHe: "יצירת אברי המין בנמטודה", items: [...sec(dvWorm, "gonad", "vulva", "fusion"), ...sec(dvCellFusion, "other-fusions")] },
     { titleHe: "העין בזבוב התסיסה", items: sec(dvFlyOrgans, "eye-master", "ommatidium") },
     { titleHe: "הכנף בעוף והאצבעות בעכבר", items: sec(dvLimb) },
     { titleHe: "ממאגרי גנים דומים ליצירת אורגניזמים שונים", items: sec(dvEvoDevo, "toolkit", "deep-homology") },
