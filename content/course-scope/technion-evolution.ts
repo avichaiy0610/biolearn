@@ -4,6 +4,7 @@ import type { CourseScope, ScopeEntry } from "./types";
 // official book (Barton et al., Evolution), whose chapters the paragraph follows. No reading list, exams or staff
 // material (Moodle closed to guests). Levels were reviewed independently by Codex before writing: "core" only where
 // the portal wording itself names the subject; anything that is only part of a broader heading is "likely".
+// 2026-11-01: exam evidence added (2025 moed B reconstruction, 2014+ exams in the Drive).
 
 const named = (topic: string, what?: string): ScopeEntry => ({
   level: "core", evidence: "syllabus-named",
@@ -12,6 +13,20 @@ const named = (topic: string, what?: string): ScopeEntry => ({
 const heading = (topic: string, what: string): ScopeEntry => ({
   level: "likely", evidence: "syllabus-heading",
   noteHe: `נכלל בנושא "${topic}" בסילבוס, אבל ${what} לא מוזכר בשמו`,
+});
+// Past exams of the course (Drive): the 2025 moed B reconstruction (students) and the 2014+ exam files.
+const exam = (what: string): ScopeEntry => ({
+  level: "core", evidence: "exam",
+  noteHe: `נשאל במבחני הקורס: ${what}`,
+});
+// Taught according to a 2022 student summary of the course only — not a course document, so "extension".
+const summary22 = (what: string): ScopeEntry => ({
+  level: "extension", evidence: "none",
+  noteHe: `לא במסמכי הקורס; מופיע בסיכום סטודנטים של הקורס מ-2022: ${what}`,
+});
+const textbook = (what: string): ScopeEntry => ({
+  level: "extension", evidence: "none",
+  noteHe: `הרחבה מספר הלימוד, לא במסמכי הקורס: ${what}`,
 });
 
 const EVID = "ההוכחות לקיום אבולוציה של החיים";
@@ -25,12 +40,14 @@ const GSYS = "מערכות גנטיות חדשות";
 
 export const technionEvolutionScope: CourseScope = {
   courseSlug: "technion-evolution",
-  checkedAt: "2026-10-23",
+  checkedAt: "2026-11-01",
   defaultSource: { labelHe: "הסילבוס בפורטל הטכניון", url: "https://students.technion.ac.il/local/technionsearch/course/134133" },
   sections: {
     "ev-evidence": {
       claims: named(EVID),
+      history: exam("מה משותף לדרווין וללמארק; בהיעדר מה אוכלוסייה לא יכולה להתפתח (מועד ב' 2025)"),
       trees: heading(EVID, "קריאת עצים פילוגנטיים"),
+      reconstruction: heading(EVID, "בניית עץ ממטריצת מרחקים"),
       fossils: named(EVID, "מאובנים"),
       homology: named(EVID, "הומולוגיה"),
       molecular: named(EVID, "עדויות מולקולריות"),
@@ -93,11 +110,13 @@ export const technionEvolutionScope: CourseScope = {
       cline: named(MEAS, "האינטראקציה של הסלקציה עם הגירה"),
       balancing: heading(MEAS, "ברירה מאזנת"),
       "mutation-selection": named(MEAS, "האינטראקציה של הסלקציה עם מוטציה"),
+      relaxed: exam("דג הקרח בלי המוגלובין — מה אפשר להסיק (מועד ב' 2025)"),
     },
     "ev-measuring-selection": {
       direct: named(MEAS, "מדידת הסלקציה"),
       competition: named(MEAS, "מדידת הסלקציה"),
       response: heading(MEAS, "התגובה לברירה ומשוואת המגדלים"),
+      belyaev: exam("מה הראה הניסוי של בלייאב (מועד ב' 2025)"),
       dnds: heading(MEAS, "היחס dN/dS"),
       sweep: heading(MEAS, "סחף ברירה"),
       summary: named(MEAS, "מדידת הסלקציה"),
@@ -109,6 +128,7 @@ export const technionEvolutionScope: CourseScope = {
       toolkit: named(MULTI, "התפתחות"),
       "deep-homology": heading(MULTI, "הומולוגיה עמוקה"),
       "cis-regulation": named(MULTI, "התפתחות — שינוי בתוכניות ההתפתחות"),
+      embryos: heading(MULTI, "השוואת עוברים: פון בר, הקל ומודל שעון החול"),
     },
     "ev-genetic-systems": {
       overview: named(GSYS),
@@ -117,6 +137,28 @@ export const technionEvolutionScope: CourseScope = {
       "why-sex": heading(GSYS, "היתרונות של רקומבינציה"),
       "y-chromosome": heading(GSYS, "ניוון כרומוזום Y"),
       consequences: heading(GSYS, "אניזוגמיה ודיפלואידיות"),
+    },
+    "ev-origins": {
+      "early-earth": summary22("כדור הארץ הקדום, סטרומטוליטים ותיארוך"),
+      "miller-urey": summary22("מילר-יוריי, פתחים הידרותרמיים ופרוטו-תאים"),
+      "rna-world": exam("איזו מולקולה קידדה וגם זירזה בעולם הקדום (מועד ב' 2025)"),
+      "fossils": exam("חוק הרציפות של דרווין (מועד ב' 2025)"),
+      "universal": exam("מי מהבאים אינו מעיד על חיים אוניברסליים (מועד ב' 2025)"),
+    },
+    "ev-speciation": {
+      "species": exam("התפצלות מינים — בכ-36% ממבחני 2014 ואילך"),
+      "isolation": exam("היבריד בעל פיטנס ירוד (מועד ב' 2025); בידוד רבייתי במבחנים מ-2014"),
+      "dobzhansky-muller": exam("מודל דובז'נסקי-מולר (מועד ב' 2025)"),
+      "modes": exam("התפצלות מינים — בכ-36% ממבחני 2014 ואילך"),
+      "reinforcement": exam("מה יקרה כשהיברידים בעלי פיטנס ירוד (מועד ב' 2025)"),
+    },
+    "ev-social": {
+      "behavior": summary22("התנהגות מולדת ונלמדת, החתמה, שונות בין פרטים ב-C. elegans"),
+      "puzzle": exam("אלטרואיזם וברירת שארים — בכ-36% ממבחני 2014 ואילך"),
+      "inclusive-fitness": exam("אלטרואיזם וברירת שארים — בכ-36% ממבחני 2014 ואילך"),
+      "hamilton": exam("כלל המילטון — עזרה לאח (מועד ב' 2025)"),
+      "haplodiploidy": textbook("הפלודיפלואידיה וקרבה 3/4 בין אחיות"),
+      "reciprocity": textbook("אלטרואיזם הדדי"),
     },
   },
 };

@@ -5,6 +5,7 @@
 import type React from "react";
 import { ArrowDefs, Axes, BLUE, GREEN, INK, MUTED, ORANGE, He, La, curve, dash, scale } from "./biochemFigures";
 import { Arrow } from "./metabolicFigures";
+import { DobzhanskyMuller, HaplodiploidRelatedness, RnaWorld, UpgmaTree, EmbryoHourglass } from "./evolutionExamFigures";
 
 const PURPLE = "#7c3aed";
 const RED = "#b91c1c";
@@ -112,7 +113,7 @@ function Hgt() {
       <Arrow x1={226} y1={84} x2={244} y2={94} color={MUTED} />
       <Arrow x1={262} y1={126} x2={276} y2={140} color={MUTED} />
       <Cell x={282} y={156} rx={28} ry={16} />
-      <He x={262} y={190} size={10} color={MUTED}>הפאג' מעביר DNA</He>
+      <He x={262} y={190} size={10} color={MUTED}>הפאג&apos; מעביר DNA</He>
 
       <Cell x={46} y={110} rx={28} ry={18} c={GREEN} f={FILL.green} />
       <Cell x={124} y={110} rx={28} ry={18} />
@@ -654,6 +655,11 @@ function FisherMuller() {
 }
 
 export const EVOLUTION_FIGURES: Record<string, { el: () => React.ReactElement; captionHe: string }> = {
+  "dobzhansky-muller": { el: DobzhanskyMuller, captionHe: "מודל דובז׳נסקי–מולר בשני לוקוסים: כל שלבי השינוי בשושלות תקינים; רק בהכלאה נפגשים A ו־B. האיור מניח אי־התאמה שמתבטאת בהיבריד AaBb. סכמטי, לא בקנה מידה." },
+  "haplodiploid-relatedness": { el: HaplodiploidRelatedness, captionHe: "קרבה גנטית צפויה במערכת הפלודיפלואידית: בין אחיות מלאות ¾, מפועלת לצאצא שלה ½ ומאחות לאח ¼. בהנחת מלכה שהזדווגה עם זכר יחיד והורים שאינם קרובים; המקטעים להמחשה ואינם מפת כרומוזומים. השיתוף האימהי משתנה בין זוגות אחיות." },
+  "rna-world": { el: RnaWorld, captionHe: "השערת עולם ה־RNA: רצף נושא מידע וקיפול מאפשר קטליזה. זיווג הבסיסים מציג את עקרון ההעתקה, ואינו מוכיח שכפול עצמי מלא. חלוקת העבודה כיום אינה מוחלטת: ליבת ה־RNA בריבוזום מזרזת יצירת קשרים פפטידיים. סגול: RNA קטליטי; כתום: אתר פעיל; אפור: מעטפת הריבוזום הסכמטית. לא בקנה מידה." },
+  "upgma-tree": { el: UpgmaTree, captionHe: "UPGMA למטריצת התרגיל: \u2066(((A,B),C),D)\u2069. גבהי הצמתים הם 1, 3 ו־\u206614/3 ≈ 4.67\u2069, חצי ממרחק האיחוד. במיזוג האחרון משקללים שלושה מינים, ולא שתי קבוצות במשקל שווה. המטריצה אינה אולטרמטרית בדיוק; אורכי הענפים בעץ הם הקירוב שמפיק האלגוריתם בהנחת שעון אחיד." },
+  "embryo-hourglass": { el: EmbryoHourglass, captionHe: "מודל שעון החול: שונות מוקדמת, דמיון יחסי מרבי בשלב הפילוטיפי ושונות מאוחרת. שלוש שושלות לדוגמה: דג, עוף ויונק; צלליות מקוריות ומפושטות, לא שחזור של איורי הקל. רוחב הצורה איכותי, וזמני השלבים אינם בקנה מידה. רעיון הרקפיטולציה נדחה." },
   "ev-tree-reading": { el: TreeReading, captionHe: "קריאת עץ פילוגנטי. הקרבה נקבעת לפי הצומת המשותף הצעיר ביותר: הציפור קרובה יותר ללטאה מאשר לעכבר. סדר הקצוות שרירותי — אפשר לסובב כל צומת." },
   "ev-limb-homology": { el: LimbHomology, captionHe: "הומולוגיה של הגפה הקדמית ביונקים: אותן עצמות, באותו סדר, בגפיים שמשמשות לאחיזה, לתעופה, לשחייה ולהליכה. סכמטי, לא בקנה מידה." },
   "ev-hgt": { el: Hgt, captionHe: "שלוש דרכים להעברה אופקית של גנים בין פרוקריוטים. בגנום של חיידקים רבים, חלק ניכר מהגנים נרכש כך. סכמטי." },

@@ -1,6 +1,9 @@
 import type { CoursePlan, PlanItem, PlanSession } from "./types";
 import type { Lesson } from "../lessons/types";
 import { evEvidence } from "../lessons/technion-evolution/ev-evidence";
+import { evOrigins } from "../lessons/technion-evolution/ev-origins";
+import { evSpeciation } from "../lessons/technion-evolution/ev-speciation";
+import { evSocial } from "../lessons/technion-evolution/ev-social";
 import { evTreeOfLife } from "../lessons/technion-evolution/ev-tree-of-life";
 import { evEukaryotes } from "../lessons/technion-evolution/ev-eukaryotes";
 import { evAnimals } from "../lessons/technion-evolution/ev-animals";
@@ -22,7 +25,10 @@ import { evGeneticSystems } from "../lessons/technion-evolution/ev-genetic-syste
 // (10, 25); natural selection, drift, population structure (15–17); interaction with other forces and measuring
 // selection (18–19); multicellularity and development (9, 11); "new genetic systems" (23, evolution of genetic systems).
 // NOT written (in the book, not in the syllabus): origin of life (4), phenotypic evolution (20), conflict and
-// cooperation (21), speciation (22), novelty (24), phylogenetic reconstruction (27). Parallel 274251 (medicine,
+// cooperation (21), speciation (22), novelty (24), phylogenetic reconstruction (27).
+// 2026-11-01: REVERSED for origin of life, speciation and kin selection — the 2025 moed B exam reconstruction and the
+// 2014+ exams (Drive) ask about them, and a 2022 course summary teaches them. Added ev-origins, ev-speciation, ev-social
+// + sections (Lamarck/Darwin, tree building, orthologs/paralogs, Belyaev, icefish, von Baer/hourglass). Codex scope check. Parallel 274251 (medicine,
 // "no extra credit" pair) is a different course — evidence only. Lecture order: the portal order; no tutorials listed.
 
 const sec = (l: Lesson, ...ids: string[]): PlanItem[] => (ids.length ? ids.map((section) => ({ kind: "lesson" as const, slug: l.slug, section })) : [{ kind: "lesson", slug: l.slug }]);
@@ -33,6 +39,7 @@ const BOOK = { labelHe: "תוכן העניינים של ספר הקורס (Barto
 
 const LECTURES: { titleHe: string; items: PlanItem[]; practice: PlanItem[] }[] = [
   { titleHe: "העדויות לאבולוציה ולמוצא משותף", items: sec(evEvidence), practice: probs(evEvidence) },
+  { titleHe: "מוצא החיים ותיעוד המאובנים", items: sec(evOrigins), practice: probs(evOrigins) },
   { titleHe: "עץ החיים: LUCA, חיידקים וארכאה", items: sec(evTreeOfLife), practice: probs(evTreeOfLife) },
   { titleHe: "מוצא האאוקריוטים ואנדוסימביוזה", items: sec(evEukaryotes), practice: probs(evEukaryotes) },
   { titleHe: "האבולוציה של בעלי החיים", items: sec(evAnimals), practice: probs(evAnimals) },
@@ -42,7 +49,9 @@ const LECTURES: { titleHe: string; items: PlanItem[]; practice: PlanItem[] }[] =
   { titleHe: "מבנה אוכלוסייה", items: sec(evPopulationStructure), practice: probs(evPopulationStructure) },
   { titleHe: "ברירה וכוחות נוספים", items: sec(evSelectionForces), practice: probs(evSelectionForces) },
   { titleHe: "מדידת ברירה", items: sec(evMeasuringSelection), practice: probs(evMeasuringSelection) },
+  { titleHe: "מין והתפצלות מינים", items: sec(evSpeciation), practice: probs(evSpeciation) },
   { titleHe: "רב-תאיות והאבולוציה של ההתפתחות", items: sec(evEvoDevo), practice: probs(evEvoDevo) },
+  { titleHe: "התנהגות, אלטרואיזם וברירת שארים", items: sec(evSocial), practice: probs(evSocial) },
   { titleHe: "האבולוציה של מערכות גנטיות", items: sec(evGeneticSystems), practice: probs(evGeneticSystems) },
 ];
 
@@ -50,7 +59,7 @@ export const technionEvolutionPlan: CoursePlan = {
   courseSlug: "technion-evolution",
   lectureOrder: {
     confidence: "syllabus",
-    noteHe: "אין לוח הרצאות ציבורי (אתר הקורס במודל סגור). הסדר כאן הוא סדר הנושאים בסילבוס הרשמי, והפירוט לתת-נושאים — לפי הפרקים המקבילים בספר הקורס.",
+    noteHe: "אין לוח הרצאות ציבורי (אתר הקורס במודל סגור). הסדר כאן הוא סדר הנושאים בסילבוס הרשמי, והפירוט לתת-נושאים — לפי הפרקים המקבילים בספר הקורס. מוצא החיים, התפצלות מינים והתנהגות ואלטרואיזם נוספו לפי המבחנים (שחזור מועד ב' 2025 ומבחנים מ-2014) וסיכום של הקורס מ-2022; הם לא מופיעים בפסקת הפורטל.",
     links: [PORTAL, BOOK],
   },
   tutorialOrder: null,
@@ -58,13 +67,15 @@ export const technionEvolutionPlan: CoursePlan = {
   scheduleNoteHe: "הנושאים לפי הסילבוס בפורטל הטכניון; כל נושא מפורט לפי הפרק המקביל בספר הקורס (Barton et al., Evolution). בקורס אין תרגולים רשומים — התרגילים הפתורים כאן לתרגול עצמי.",
   topics: [
     { titleHe: "ההוכחות לקיום אבולוציה של החיים", items: sec(evEvidence) },
-    { titleHe: "היווצרות השונות של חיידקים, ארכיאה ואיאוקריוטים", items: [...sec(evTreeOfLife), ...sec(evEukaryotes)] },
+    { titleHe: "היווצרות השונות של חיידקים, ארכיאה ואיאוקריוטים", items: [...sec(evOrigins), ...sec(evTreeOfLife), ...sec(evEukaryotes)] },
     { titleHe: "אבולוציה של חיות ובני האדם", items: [...sec(evAnimals), ...sec(evHuman)] },
     { titleHe: "ברירה טבעית", items: sec(evSelection) },
     { titleHe: "סחף גנטי ומבנה אוכלוסיה", items: [...sec(evDrift), ...sec(evPopulationStructure)] },
     { titleHe: "מדידת הסלקציה הפועלת על השונות והאינטראקציה שלה עם כוחות נוספים", items: [...sec(evSelectionForces), ...sec(evMeasuringSelection)] },
     { titleHe: "אבולוציה של אורגניזמים רב תאיים, התפתחות", items: sec(evEvoDevo) },
     { titleHe: "מערכות גנטיות חדשות", items: sec(evGeneticSystems) },
+    { titleHe: "התפצלות מינים (מהמבחנים — לא בפסקת הפורטל)", items: sec(evSpeciation) },
+    { titleHe: "התנהגות ואלטרואיזם (מהמבחנים — לא בפסקת הפורטל)", items: sec(evSocial) },
   ],
   lectures: LECTURES.map((l, i): PlanSession => ({ n: i + 1, titleHe: l.titleHe, items: l.items })),
   tutorials: LECTURES.map((l, i): PlanSession => ({ n: i + 1, titleHe: l.titleHe, items: l.practice })).filter((t) => t.items.length > 0),
