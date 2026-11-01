@@ -4,6 +4,7 @@
 import type React from "react";
 import { ArrowDefs, BLUE, GREEN, INK, LINE, MUTED, ORANGE, He, La, dash } from "./biochemFigures";
 import { Arrow } from "./metabolicFigures";
+import { CELL_SYLLABUS_FIGURES } from "./cellSyllabusFigures";
 
 const PURPLE = "#7c3aed";
 const RED = "#b91c1c";
@@ -134,19 +135,22 @@ function ProteinSortingMap() {
   );
 }
 
+function Sec61({ x, open }: { x: number; open: boolean }) {
+  return (
+    <g>
+      <rect x={x - 22} y={176} width={16} height={34} rx={4} fill={FILL.green} stroke={GREEN} strokeWidth={1.3} />
+      <rect x={x + 6} y={176} width={16} height={34} rx={4} fill={FILL.green} stroke={GREEN} strokeWidth={1.3} />
+      {!open && <rect x={x - 6} y={186} width={12} height={10} rx={2} fill={GREEN} />}
+    </g>
+  );
+}
+
 function CotranslationalTranslocation() {
   const ribo = (cx: number, cy: number) => (
     <g>
       <ellipse cx={cx} cy={cy - 22} rx={26} ry={12} fill={FILL.sky} stroke={BLUE} strokeWidth={1.4} />
       <ellipse cx={cx} cy={cy} rx={34} ry={18} fill={FILL.blue} stroke={BLUE} strokeWidth={1.4} />
       <Line x1={cx - 50} y1={cy - 11} x2={cx + 50} y2={cy - 11} c={PURPLE} w={1.6} />
-    </g>
-  );
-  const Sec61 = ({ x, open }: { x: number; open: boolean }) => (
-    <g>
-      <rect x={x - 22} y={176} width={16} height={34} rx={4} fill={FILL.green} stroke={GREEN} strokeWidth={1.3} />
-      <rect x={x + 6} y={176} width={16} height={34} rx={4} fill={FILL.green} stroke={GREEN} strokeWidth={1.3} />
-      {!open && <rect x={x - 6} y={186} width={12} height={10} rx={2} fill={GREEN} />}
     </g>
   );
   return (
@@ -237,7 +241,7 @@ function GolgiSorting() {
       <La x={250} y={246} size={12} bold>trans</La>
       {[90, 118, 146, 174, 202].map((y, i) => <circle key={y} cx={292 + (i % 2) * 8} cy={y} r={7} fill={FILL.orange} stroke={ORANGE} strokeWidth={1.3} />)}
       <La x={296} y={246} size={12} bold color={ORANGE}>TGN</La>
-      <He x={224} y={44} size={12} bold>הגולג'י</He>
+      <He x={224} y={44} size={12} bold>הגולג&apos;י</He>
       <Arrow x1={170} y1={56} x2={270} y2={56} color={MUTED} />
       {/* destinations */}
       <Arrow x1={312} y1={92} x2={360} y2={64} color={ORANGE} width={2.4} />
@@ -752,6 +756,7 @@ function CellCycleControl() {
 }
 
 export const CELL_FIGURES: Record<string, { el: () => React.ReactElement; captionHe: string }> = {
+  ...CELL_SYLLABUS_FIGURES,
   "membrane-bilayer": { el: MembraneBilayer, captionHe: "דו-שכבה של שומנים בחתך. הראשים ההידרופיליים פונים למים משני הצדדים, והזנבות יוצרים ליבה הידרופובית של כ-5 ננומטר. השכבות לא זהות: פוספטידילסרין (כתום, טעון שלילית) נמצא רק בשכבה הפנימית, והסוכרים — על גליקוליפידים ועל חלבונים — פונים רק החוצה. סכמטי." },
   "protein-sorting-map": { el: ProteinSortingMap, captionHe: "מפת המיון של חלבונים בתא. כל החלבונים מתחילים להיתרגם בציטוזול. ירוק — מעבר דרך נקבוביות (החלבון מקופל); כחול — מעבר דרך טרנסלוקטורים (השרשרת פרושה); כתום — מעבר בשלפוחיות, במסלול ההפרשה והאנדוציטוזה. סכמטי." },
   "cotranslational-translocation": { el: CotranslationalTranslocation, captionHe: "כניסה ל-ER תוך כדי תרגום. (1) רצף האות (אדום) יוצא מהריבוזום ו-SRP נקשר אליו ומאט את התרגום. (2) SRP נקשר לקולטן שלו בממברנת ה-ER, ליד תעלת Sec61 הסגורה. (3) SRP משתחרר (תלוי GTP), התעלה נפתחת, השרשרת מושחלת לחלל ה-ER, ופפטידאז האות חותך את האות. סכמטי." },

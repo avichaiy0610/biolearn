@@ -14,6 +14,9 @@ import { cellSignalingPrinciples } from "../lessons/technion-cell/cell-signaling
 import { cellGpcr } from "../lessons/technion-cell/cell-gpcr";
 import { cellRtk } from "../lessons/technion-cell/cell-rtk";
 import { cellCycleControl } from "../lessons/technion-cell/cell-cycle-control";
+import { cellDivision } from "../lessons/technion-cell/cell-division";
+import { cellDeath } from "../lessons/technion-cell/cell-death";
+import { cellMethods } from "../lessons/technion-cell/cell-methods";
 
 // Technion 01340128 "ביולוגיה של התא" — built with the course-track-builder skill, no insider input.
 // Topics: the CURRENT syllabus on the Technion students portal (topics only, no weeks), in its own order.
@@ -22,6 +25,9 @@ import { cellCycleControl } from "../lessons/technion-cell/cell-cycle-control";
 // (1, 1, 2, 10, 11, 12–13, 15, 16, 17, 19, 18, 19, 20) — a different order and partly different content;
 // evidence only, not this course's schedule.
 // Tutorials: no source — "practice for lecture n", built from each unit's worked problems.
+// 2026-11-01: REPLACED by the course's own 2024 syllabus (Drive): 11 dated lectures + presentations and 11 tutorials,
+// in English, graded by HW, paper presentation and a final home assignment (no exam). Order below = 2024 schedule.
+// Added cell-death, cell-division, cell-methods; universal features + TRP sensing in cell-signaling-principles.
 
 const C = "cell-biology";
 const proc = (slug: string, topic = C): PlanItem => ({ kind: "process", topic, slug });
@@ -31,35 +37,53 @@ const probs = (l: Lesson, ...ids: string[]): PlanItem[] =>
 
 const UPS = "protein-degradation-and-ubiquitin-proteasome-system-animation-1780958699914";
 const PORTAL = { labelHe: "הסילבוס בפורטל הטכניון", url: "https://students.technion.ac.il/local/technionsearch/course/134128" };
-const MED = { labelHe: "הקורס המקביל ברפואה (274167) — ראיה בלבד", url: "https://md.technion.ac.il/wp-content/uploads/2024/05/סיליבוס-קורס-ביולוגיה-של-התא-274167-תשפד-מעודכן-למלחמה.pdf" };
 
-const LECTURES: { titleHe: string; items: PlanItem[]; practice: PlanItem[] }[] = [
-  { titleHe: "ממברנות: הדו-שכבה, השומנים והחלבונים (ריענון)", items: [...sec(cellMembranes), proc("membrane-transport")], practice: probs(cellMembranes) },
-  { titleHe: "מיון חלבונים ו-ER: אותות, SRP וטרנסלוקציה תוך תרגום", items: [...sec(cellEr), proc("secretory-pathway")], practice: probs(cellEr) },
-  { titleHe: "בקרת איכות ב-ER, UPR ומערכת היוביקוויטין–פרוטאזום", items: [...sec(cellQualityControl), proc(UPS)], practice: probs(cellQualityControl) },
-  { titleHe: "הגולג'י, הליזוזומים ומערך האנדוזומים", items: sec(cellGolgiEndosomes), practice: probs(cellGolgiEndosomes) },
-  { titleHe: "טרנספורט וסיקולרי: מעטפות, Rab ו-SNAREs", items: [...sec(cellVesicleTransport), proc("synaptic-transmission", "physiology")], practice: probs(cellVesicleTransport) },
-  { titleHe: "יבוא לגרעין ולמיטוכונדריה", items: sec(cellNuclearMitoImport), practice: probs(cellNuclearMitoImport) },
-  { titleHe: "שלד התא: אקטין, מיקרוטובולים וסיבי ביניים", items: sec(cellCytoskeleton), practice: probs(cellCytoskeleton) },
-  { titleHe: "חלבונים מוטוריים, ריסים, נדידה ותאים קוטביים", items: [...sec(cellMotorsPolarity), proc("muscle-contraction", "physiology")], practice: probs(cellMotorsPolarity) },
-  { titleHe: "מתא לרקמה: צמתים בין תאים", items: sec(cellJunctions), practice: probs(cellJunctions) },
-  { titleHe: "המטריקס החוץ-תאי והאינטגרינים", items: sec(cellEcm), practice: probs(cellEcm) },
-  { titleHe: "עקרונות של העברת אותות", items: sec(cellSignalingPrinciples), practice: probs(cellSignalingPrinciples) },
-  { titleHe: "קולטנים מצומדי חלבון G: cAMP ו-Ca²⁺", items: [...sec(cellGpcr), proc("gpcr-camp-signaling")], practice: probs(cellGpcr) },
-  { titleHe: "קולטני טירוזין-קינאז: Ras–MAPK ו-PI3K–Akt", items: sec(cellRtk), practice: probs(cellRtk) },
-  { titleHe: "בקרת מחזור התא: Cdks, נקודות ביקורת ו-p53", items: [...sec(cellCycleControl), proc("apoptosis")], practice: probs(cellCycleControl) },
+const SYL24 = { labelHe: "עמוד הקורס בפורטל (הסילבוס של 2024 נבדק מקומית, מתוך הדרייב של הסטודנטים)", url: "https://students.technion.ac.il/local/technionsearch/course/134128" };
+
+// The 2024 lecture schedule (dates 02/06/24–18/08/24); lecture 12 = student paper presentations.
+const LECTURES: { titleHe: string; items: PlanItem[] }[] = [
+  { titleHe: "מבוא: המאפיינים האוניברסליים של תאים, ומבוא לאיתות", items: sec(cellSignalingPrinciples) },
+  { titleHe: "איתות: קולטנים שונים על פני התא", items: sec(cellRtk) },
+  { titleHe: "איתות דרך קולטנים מצומדי חלבון G", items: [...sec(cellGpcr), proc("gpcr-camp-signaling")] },
+  { titleHe: "שלד התא: אקטין, מיקרוטובולים, סיבי ביניים, מנועים, קוטביות ונדידה", items: [...sec(cellCytoskeleton), ...sec(cellMotorsPolarity), proc("muscle-contraction", "physiology")] },
+  { titleHe: "מחזור התא: מערכת הבקרה, שלב S ומיטוזה", items: [...sec(cellCycleControl), ...sec(cellDivision, "spindle", "attachment")] },
+  { titleHe: "מחזור התא: ציטוקינזיס, מיוזה ובקרה על חלוקה וגדילה", items: sec(cellDivision, "cytokinesis", "meiosis", "growth-control", "methods") },
+  { titleHe: "מוות תאי מתוכנת", items: [...sec(cellDeath), proc("apoptosis")] },
+  { titleHe: "צמתים בין תאים, המטריקס החוץ-תאי וצמתים בין תא למטריקס", items: [...sec(cellJunctions), ...sec(cellEcm)] },
+  { titleHe: "מידור של התא ומיון חלבונים", items: [...sec(cellMembranes), proc("membrane-transport"), ...sec(cellNuclearMitoImport)] },
+  { titleHe: "ה-ER: מבנה, תפקיד, הכנסה תוך תרגום והפרשה", items: [...sec(cellEr), proc("secretory-pathway"), ...sec(cellQualityControl), proc(UPS)] },
+  { titleHe: "טרנספורט ממברנלי בתוך התא: אנדוציטוזה ואקסוציטוזה", items: [...sec(cellGolgiEndosomes), ...sec(cellVesicleTransport), proc("synaptic-transmission", "physiology")] },
+];
+
+// The 2024 tutorial schedule.
+const TUTORIALS: { titleHe: string; items: PlanItem[] }[] = [
+  { titleHe: "פלואורופורים ונוגדנים", items: [...sec(cellMethods), ...probs(cellMethods)] },
+  { titleHe: "קולטנים (איתות)", items: [...probs(cellSignalingPrinciples), ...probs(cellRtk)] },
+  { titleHe: "איתות דרך חלבון G", items: probs(cellGpcr) },
+  { titleHe: "שלד התא", items: [...probs(cellCytoskeleton), ...probs(cellMotorsPolarity)] },
+  { titleHe: "מחזור התא", items: [...probs(cellCycleControl), ...probs(cellDivision, "facs-profiles")] },
+  { titleHe: "מחזור התא", items: probs(cellDivision, "meiosis-nondisjunction", "g1-uv-design") },
+  { titleHe: "מוות תאי מתוכנת", items: probs(cellDeath) },
+  { titleHe: "המטריקס החוץ-תאי", items: [...probs(cellEcm), ...probs(cellJunctions)] },
+  { titleHe: "מיון חלבונים", items: [...probs(cellNuclearMitoImport), ...probs(cellEr), ...probs(cellMembranes)] },
+  { titleHe: "בקרת איכות ו-ERAD", items: probs(cellQualityControl) },
+  { titleHe: "אנדוציטוזה ואקסוציטוזה", items: [...probs(cellGolgiEndosomes), ...probs(cellVesicleTransport)] },
 ];
 
 export const technionCellPlan: CoursePlan = {
   courseSlug: "technion-cell",
   lectureOrder: {
-    confidence: "syllabus",
-    noteHe: "אין לוח הרצאות ציבורי לקורס (אתר הקורס במודל סגור). הסדר כאן הוא סדר הנושאים בסילבוס הרשמי: ממברנות, מיון חלבונים ומסלול ההפרשה, שלד התא, צמתים ומטריקס, איתות ומחזור התא. הקורס המקביל בפקולטה לרפואה (274167) מפרסם טבלה שבועית של פרקי Alberts בסדר אחר (למשל איתות לפני שלד התא) — זה קורס אחר, ראיה בלבד. החלוקה לשבועות בפועל עשויה להיות שונה.",
-    links: [PORTAL, MED],
+    confidence: "official-past",
+    noteHe: "סדר ההרצאות לפי הסילבוס של הקורס מסמסטר אביב 2024 (ד\"ר איילה שיבר ופרופ' בני פודבילביץ), עם תאריך לכל הרצאה: מבוא ואיתות, קולטנים, GPCR, שלד התא, מחזור התא (פעמיים), מוות תאי, צמתים ומטריקס, מיון חלבונים, ER וטרנספורט ממברנלי; מפגש 12 (הרצאה ב-18.08.2024 ותרגולים ב-20–21.08) מוקדש להצגות מאמרים של הסטודנטים, ולכן אין לו יחידה כאן. הקורס נלמד באנגלית ואין בו מבחן: 30% תרגילי בית, 30% הצגת מאמר בזוגות, 30% עבודת סיום ו-10% נוכחות. יחידת הממברנות היא ריענון לפני מיון חלבונים.",
+    links: [SYL24, PORTAL],
   },
-  tutorialOrder: null,
-  schedule: "suggested",
-  scheduleNoteHe: "הנושאים לפי הסילבוס העדכני של הקורס בפורטל הטכניון (הוא מפרט נושאים, לא שבועות). הפירוט לתת-נושאים לפי ספר הקורס (Alberts, Molecular Biology of the Cell).",
+  tutorialOrder: {
+    confidence: "official-past",
+    noteHe: "סדר התרגולים לפי הסילבוס של 2024: פלואורופורים ונוגדנים, קולטנים, חלבון G, שלד התא, מחזור התא (פעמיים), מוות תאי, מטריקס, מיון חלבונים, בקרת איכות ו-ERAD, אנדוציטוזה ואקסוציטוזה.",
+    links: [SYL24],
+  },
+  schedule: "official",
+  scheduleNoteHe: "ההרצאות והתרגולים לפי הסילבוס של הקורס מ-2024; הנושאים כאן לפי הפסקה בפורטל הטכניון. הפירוט לתת-נושאים לפי ספרי הקורס (Alberts, Lodish). בקורס אין מבחן, ולכן רוב התרגילים כאן הם תכנון ניסויים ופענוח תוצאות, כמו בתרגילי הבית ובעבודת הסיום.",
   topics: [
     { titleHe: "ממברנת-מבנה ותפקוד (ריענון)", items: [...sec(cellMembranes), proc("membrane-transport")] },
     { titleHe: "איברוני התא האאוקריוטי: הרטיקולום האנדופלסמטי-טרנסלוקציה תוך תרגום", items: [...sec(cellEr), proc("secretory-pathway")] },
@@ -73,8 +97,10 @@ export const technionCellPlan: CoursePlan = {
     { titleHe: "המטריקס החוץ-תאי ותפקידו בעיגון תאים והעברת איתותים", items: sec(cellEcm) },
     { titleHe: "תקשורת בין תאים - מנגנוני העברת אותות באמצעות קולטנים ממברנלים", items: sec(cellSignalingPrinciples) },
     { titleHe: "מסלולי העברת האותות העיקריים באמצעות RTKS/GPCR", items: [...sec(cellGpcr), ...sec(cellRtk), proc("gpcr-camp-signaling")] },
-    { titleHe: "בקרת מחזור התא-מנגנונים מולקולרים", items: sec(cellCycleControl) },
+    { titleHe: "בקרת מחזור התא-מנגנונים מולקולרים", items: [...sec(cellCycleControl), ...sec(cellDivision)] },
+    { titleHe: "מוות תאי מתוכנת (מהסילבוס של 2024)", items: sec(cellDeath) },
+    { titleHe: "שיטות: פלואורופורים ונוגדנים (תרגול 1 בסילבוס של 2024)", items: sec(cellMethods) },
   ],
   lectures: LECTURES.map((l, i): PlanSession => ({ n: i + 1, titleHe: l.titleHe, items: l.items })),
-  tutorials: LECTURES.map((l, i): PlanSession => ({ n: i + 1, titleHe: l.titleHe, items: l.practice })).filter((t) => t.items.length > 0),
+  tutorials: TUTORIALS.map((t, i): PlanSession => ({ n: i + 1, titleHe: t.titleHe, items: t.items })).filter((t) => t.items.length > 0),
 };

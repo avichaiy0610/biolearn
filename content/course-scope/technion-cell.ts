@@ -3,6 +3,7 @@ import type { CourseScope, ScopeEntry } from "./types";
 // Technion 134128 "ביולוגיה של התא". Evidence available (2026-10-21): the official topic list on the students
 // portal only (Moodle closed to guests), so the strongest level is "syllabus-named". Reviewed row by row: subtopics
 // the syllabus does not name (UPR, autophagy, cilia, cell migration, vision, JAK–STAT, targeted drugs…) are "likely".
+// 2026-11-01: the course's own 2024 syllabus and the 2022 assignments (Drive) added as evidence.
 
 const named = (topic: string, what?: string): ScopeEntry => ({
   level: "core", evidence: "syllabus-named",
@@ -11,6 +12,16 @@ const named = (topic: string, what?: string): ScopeEntry => ({
 const heading = (topic: string, what: string): ScopeEntry => ({
   level: "likely", evidence: "syllabus-heading",
   noteHe: `נכלל בכותרת הסילבוס "${topic}", אבל ${what} לא מוזכר בשמו`,
+});
+// The course's own 2024 syllabus (Shiber + Podbilewicz; Drive): dated lectures and tutorials.
+const syl24 = (words: string): ScopeEntry => ({
+  level: "core", evidence: "syllabus-named",
+  noteHe: `סילבוס הקורס 2024: "${words}"`,
+});
+// 2022 homework and final assignment of the course (staff questions; Drive).
+const hw22 = (what: string): ScopeEntry => ({
+  level: "core", evidence: "staff-material",
+  noteHe: `נשאל בתרגילי הבית או בעבודת הסיום של הקורס (2022): ${what}`,
 });
 
 // Official topics (verbatim, from the portal).
@@ -30,7 +41,7 @@ const CC = "בקרת מחזור התא-מנגנונים מולקולרים";
 
 export const technionCellScope: CourseScope = {
   courseSlug: "technion-cell",
-  checkedAt: "2026-10-21",
+  checkedAt: "2026-11-01",
   defaultSource: { labelHe: "הסילבוס בפורטל הטכניון", url: "https://students.technion.ac.il/local/technionsearch/course/134128" },
   sections: {
     "cell-membranes": {
@@ -115,6 +126,8 @@ export const technionCellScope: CourseScope = {
       "focal-adhesions": named(ECM, "העברת איתותים"),
     },
     "cell-signaling-principles": {
+      universal: syl24("Intro to Cell Biology - The universal features of cells on Earth, an evolutionary overview"),
+      sensing: hw22("קולטני טמפרטורה TRPV1 ו-TRPM8 — הרצאת הנובל של ג'וליוס (עבודת הסיום, 30 נקודות)"),
       "types": named(SIG),
       "receptors": named(SIG, "קולטנים ממברנליים"),
       "switches": named(SIG),
@@ -144,6 +157,32 @@ export const technionCellScope: CourseScope = {
       "mitosis": named(CC),
       "g1": named(CC),
       "p53": named(CC),
+    },
+    "cell-death": {
+      "apoptosis-vs-necrosis": syl24("Programmed cell death - regulation"),
+      caspases: syl24("Programmed cell death - regulation"),
+      intrinsic: syl24("Programmed cell death - regulation"),
+      extrinsic: syl24("Programmed cell death - regulation"),
+      methods: hw22("שאלת המאמר על קספאזות במיקרוגליה (עבודת הסיום) ו-MOMP חלקי (תרגיל 3)"),
+      roles: syl24("involvement in development, cancer, neurodegenerative and immune diseases"),
+      beyond: syl24("autophagy (בתוצרי הלמידה); קספאזות בלי מוות — שאלת המאמר בעבודת הסיום 2022"),
+    },
+    "cell-division": {
+      spindle: syl24("Cell cycle - The cell cycle control system, S phase, Mitosis"),
+      attachment: syl24("Cell cycle - The cell cycle control system, S phase, Mitosis"),
+      cytokinesis: syl24("Cell cycle - cytokinesis"),
+      meiosis: syl24("meiosis"),
+      "growth-control": syl24("control of cell division and growth"),
+      methods: hw22("מוטציות שעוקפות עצירה ב-G1 ותכנון ניסוי עם FACS (עבודת הסיום)"),
+    },
+    "cell-methods": {
+      fluorescence: syl24("Tutorial 1: Fluorophores and antibodies"),
+      gfp: syl24("Tutorial 1: Fluorophores and antibodies"),
+      antibodies: syl24("Tutorial 1: Fluorophores and antibodies"),
+      immunofluorescence: syl24("Tutorial 1: Fluorophores and antibodies"),
+      microscopy: hw22("מיקום חלבון במיקרוסקופ — טבעי ועם GFP (תרגיל 1)"),
+      flow: hw22("FACS, BrdU, DAPI ו-PI (תרגילי הבית ועבודת הסיום)"),
+      biochemistry: hw22("חלבון מול mRNA ו-co-IP עם ביקורות (תרגילי הבית)"),
     },
   },
 };
