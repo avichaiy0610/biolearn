@@ -1,6 +1,7 @@
 /* Figures for the ubiquitin units (Technion 134140). Original schematic drawings — never copied from a textbook.
    Labels sit beside shapes and arrows, never on a line. Referenced from lesson bodies as [[figure:<id>]]. */
 import type React from "react";
+import { UpsDiscovery, Pink1Parkin as Pink1ParkinDiscovery, ProtacTernary } from "./ubiquitinGapFigures";
 import { ArrowDefs, BLUE, GREEN, INK, MUTED, ORANGE, He, La } from "./biochemFigures";
 import { Arrow } from "./metabolicFigures";
 
@@ -8,7 +9,6 @@ const PURPLE = "#7c3aed";
 const RED = "#b91c1c";
 const TEAL = "#0f766e";
 const GOLD = "#a16207";
-const PINK = "#be185d";
 const FILL = { blue: "#dbeafe", green: "#dcfce7", orange: "#ffedd5", purple: "#ede9fe", yellow: "#fef3c7", gray: "#f1f5f9", red: "#fee2e2", sky: "#e0f2fe", teal: "#ccfbf1", pink: "#fce7f3" };
 
 const Svg = ({ w = 480, h, label, children }: { w?: number; h: number; label: string; children: React.ReactNode }) => (
@@ -175,13 +175,13 @@ function Triage() {
 }
 
 // ── ub-code ──────────────────────────────────────────────────────────────────
-function ChainTypes() {
-  const Sub = ({ x, y, w = 86 }: { x: number; y: number; w?: number }) => (
+const Sub = ({ x, y, w = 86 }: { x: number; y: number; w?: number }) => (
     <g>
       <rect x={x} y={y} width={w} height={26} rx={6} fill={FILL.yellow} stroke={GOLD} strokeWidth={1.3} />
       <He x={x + w / 2} y={y + 17} size={10}>מצע</He>
     </g>
   );
+function ChainTypes() {
   return (
     <Svg h={330} label="צורות הסימון. מונו-יוביקוויטין בודד; מולטי-מונו — יוביקוויטין בודד על כמה ליזינים; שרשרת K48 קומפקטית, שבה היוביקוויטינים צמודים זה לזה, היא האות הקלאסי לפרוטאזום; שרשרת K63 מוארכת כמו חרוזים על חוט ומשמשת לאיתות; שרשרת מסועפת נושאת שני ענפים מאותו יוביקוויטין.">
       {/* mono */}
@@ -511,7 +511,7 @@ function HistoneMarks() {
       <Arrow x1={118} y1={162} x2={118} y2={190} color={PURPLE} width={1.6} />
       <Box2 x={48} y={194} w={140} h={44} fill={FILL.purple} stroke={PURPLE} lines={["PRC2 קורא", "← H3K27me3"]} />
       <He x={118} y={262} size={10.5} bold color={PURPLE}>השתקה יציבה</He>
-      <He x={118} y={280} size={9} color={MUTED}>מוסר ע"י BAP1</He>
+      <He x={118} y={280} size={9} color={MUTED}>מוסר ע&quot;י BAP1</He>
       <line x1={240} y1={34} x2={240} y2={288} stroke={MUTED} strokeWidth={1} strokeDasharray="4 4" />
       {/* active */}
       <He x={360} y={28} size={11.5} bold color={GREEN}>שעתוק פעיל</He>
@@ -523,7 +523,7 @@ function HistoneMarks() {
       <Arrow x1={360} y1={162} x2={360} y2={190} color={GREEN} width={1.6} />
       <Box2 x={290} y={194} w={140} h={44} fill={FILL.green} stroke={GREEN} lines={["COMPASS · Dot1", "← H3K4me2/3 · H3K79me2/3"]} />
       <He x={360} y={262} size={10.5} bold color={GREEN}>דיבור בין היסטונים</He>
-      <He x={360} y={280} size={9} color={MUTED}>מוסר ע"י USP22 (SAGA)</He>
+      <He x={360} y={280} size={9} color={MUTED}>מוסר ע&quot;י USP22 (SAGA)</He>
     </Svg>
   );
 }
@@ -820,6 +820,9 @@ function VifApobec() {
 }
 
 export const UBIQUITIN_FIGURES: Record<string, { el: () => React.ReactElement; captionHe: string }> = {
+  "ups-discovery": { el: UpsDiscovery, captionHe: "הפרדת תמצית רטיקולוציטים בעמודת DEAE מבטלת את הפירוק היעיל התלוי ב־ATP; שילוב פרקציות I ו־II משחזר אותו, גם לאחר הרתחת I. אין בכך שלילה של פעילות פירוק בסיסית בפרקציה II. ב־1980 הודגמה הצמדה קוולנטית של כמה עותקי APF-1 (יוביקוויטין) למצע, בתלות ב־ATP. סולם הג׳ל סכמטי ואינו נתונים מקוריים; הוא אינו מבחין בין שרשרת לבין סימון בכמה אתרים. לא בקנה מידה." },
+  "pink1-parkin": { el: Pink1ParkinDiscovery, captionHe: "מיטופגיה בתיווך PINK1–Parkin: במיטוכונדריה תקינה PINK1 מיובא, נחתך ומפורק; באובדן פוטנציאל הוא מצטבר בממברנה החיצונית. זרחון יוביקוויטין ותחום UBL של Parkin ב־Ser65 מפעיל לולאת הגברה. קולטני האוטופגיה אופטינורין (OPTN) ו־NDP52 קושרים שרשראות ומגייסים את מכונת האוטופגיה; מוצג גישור מפושט ל־LC3 בממברנת פגופור פתוח, שנסגר בהמשך לאוטופגוזום. לא כל יחידות היוביקוויטין חייבות להיות מזורחנות. סכמטי, לא בקנה מידה." },
+  "protac-ternary": { el: ProtacTernary, captionHe: "משמאל: דבק מולקולרי משנה את משטח זיהוי המצע של CRBN, קולטן בקומפלקס CRL4. מימין: PROTAC דו־ראשי יוצר קומפלקס משולש של מטרה–מולקולה–E3, מאפשר יוביקוויטינציה, משתחרר ויכול לפעול שוב; המטרה מפורקת בפרוטאזום. עקומת ה־hook היא סכמטית, ללא נתונים מדודים או צירים מכוילים; האפקט אינו הכרחי בכל מערכת. Dmax מסמן פירוק מרבי; באיור זה DC50 מציין פירוק של 50% מכמות המטרה ההתחלתית בענף העולה; מיקום סימוני העזר איכותי בלבד. סכמטי, לא בקנה מידה." },
   "ub-vif-apobec": { el: VifApobec, captionHe: "Vif משנה את זיהוי המצע בליגאז CRL5 ומוביל לפירוק APOBEC3G בתא המייצר. בהיעדר Vif, APOBEC3G נארז בצאצאים ופוגע בהדבקה הבאה. בהשוואה מוצג תא המבטא APOBEC3G. סכמטי, לא בקנה מידה." },
   "ub-cascade": { el: Cascade, captionHe: "מפל ההצמדה E1 ← E2 ← E3. ה-ATP נצרך בשפעול כל יוביקוויטין ב-E1; הספציפיות נקבעת ב-E3. סכמטי." },
   "ub-e3-classes": { el: E3Classes, captionHe: "שלוש משפחות E3: ב-RING היוביקוויטין עובר ישירות מ-E2 למצע, וב-HECT וב-RBR הוא עובר דרך ציסטאין של ה-E3. סכמטי." },

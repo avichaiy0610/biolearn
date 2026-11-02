@@ -1,6 +1,9 @@
 import type { CoursePlan, PlanItem, PlanSession } from "./types";
 import type { Lesson } from "../lessons/types";
+import { ubHistory } from "../lessons/technion-ubiquitin/ub-history";
 import { ubConjugation } from "../lessons/technion-ubiquitin/ub-conjugation";
+import { ubTrafficking } from "../lessons/technion-ubiquitin/ub-trafficking";
+import { ubDrugs } from "../lessons/technion-ubiquitin/ub-drugs";
 import { ubCode } from "../lessons/technion-ubiquitin/ub-code";
 import { ubProteasome } from "../lessons/technion-ubiquitin/ub-proteasome";
 import { ubLike } from "../lessons/technion-ubiquitin/ub-like";
@@ -13,6 +16,10 @@ import { ubImmune } from "../lessons/technion-ubiquitin/ub-immune";
 import { cellQualityControl } from "../lessons/technion-cell/cell-quality-control";
 import { cellCycleControl } from "../lessons/technion-cell/cell-cycle-control";
 
+// 2026-11-01: the course's own syllabus + tentative schedule for Winter 2024-25 (Prof. Michael Glickman) and the
+// weekly quizzes 2016-2022 were found in the Drive. They name three lectures the track had no unit for: history and
+// discovery (L2), endocytosis/MVB + autophagy and mitophagy (L8), and drug discovery + PROTACs/molecular glues
+// (L9-L10). No exam: ~76% a critique of a 2020-2024 paper + a research proposal, ~24% weekly quizzes.
 // Technion 01340140 "יוביקוויטין ומחזור חלבונים" (Biology faculty, 2 points, 2 lecture hours, no tutorials) — built
 // with the course-track-builder skill, no insider input. Lecturer: Prof. Michael H. Glickman (proteasome lab); TA in
 // 2025: Sonu Joseph. Prerequisites: biochemistry + cell biology. Evidence: the CURRENT portal paragraph only — the
@@ -32,6 +39,7 @@ const probs = (l: Lesson): PlanItem[] => (l.workedProblems ?? []).map((w) => ({ 
 const PORTAL = { labelHe: "הסילבוס בפורטל הטכניון", url: "https://students.technion.ac.il/local/technionsearch/course/134140" };
 
 const LECTURES: { titleHe: string; items: PlanItem[]; practice: PlanItem[] }[] = [
+  { titleHe: "ההיסטוריה והגילוי של מערכת היוביקוויטין", items: sec(ubHistory), practice: probs(ubHistory) },
   { titleHe: "הצמדת יוביקוויטין ובחירת המצע", items: [...sec(cellQualityControl, "ups"), ...sec(ubConjugation)], practice: probs(ubConjugation) },
   { titleHe: "קוד היוביקוויטין: שרשראות, קוראים ו-DUBs", items: sec(ubCode), practice: probs(ubCode) },
   { titleHe: "הפרוטאזום כמכונה תלוית אנרגיה", items: sec(ubProteasome), practice: probs(ubProteasome) },
@@ -39,7 +47,9 @@ const LECTURES: { titleHe: string; items: PlanItem[]; practice: PlanItem[] }[] =
   { titleHe: "בקרת שעתוק וכרומטין", items: sec(ubTranscription), practice: probs(ubTranscription) },
   { titleHe: "שלמות הגנום", items: sec(ubGenome), practice: probs(ubGenome) },
   { titleHe: "בקרת מחזור התא", items: [...sec(cellCycleControl, "ubiquitin"), ...sec(ubCellCycle)], practice: probs(ubCellCycle) },
+  { titleHe: "אנדוציטוזה, ליזוזום ומיטופגיה", items: sec(ubTrafficking), practice: probs(ubTrafficking) },
   { titleHe: "סרטן ומוות תאי", items: sec(ubCancerDeath), practice: probs(ubCancerDeath) },
+  { titleHe: "תרופות במערכת היוביקוויטין", items: sec(ubDrugs), practice: probs(ubDrugs) },
   { titleHe: "נוירונים: סינפסה, התחדשות וניוון", items: sec(ubNeurons), practice: probs(ubNeurons) },
   { titleHe: "התגובה החיסונית", items: sec(ubImmune), practice: probs(ubImmune) },
 ];
@@ -63,6 +73,9 @@ export const technionUbiquitinPlan: CoursePlan = {
     { titleHe: "שלמות הגנום", items: sec(ubGenome) },
     { titleHe: "בקרת מחזור התא", items: [...sec(ubCellCycle), ...sec(cellCycleControl, "ubiquitin")] },
     { titleHe: "סרטן, מוות תאי", items: sec(ubCancerDeath) },
+    { titleHe: "היסטוריה וגילוי המערכת (מלוח ההרצאות 2024)", items: sec(ubHistory) },
+    { titleHe: "אנדוציטוזה, מיון ואוטופגיה (מלוח ההרצאות 2024)", items: sec(ubTrafficking) },
+    { titleHe: "גילוי תרופות ופירוק ממוקד (מלוח ההרצאות 2024)", items: sec(ubDrugs) },
     { titleHe: "נוירונים, רגנרציה של נוירונים, מחלות ניווניות", items: sec(ubNeurons) },
     { titleHe: "התגובה החיסונית", items: [...sec(ubImmune), ...sec(ubProteasome, "alternatives")] },
   ],

@@ -1,6 +1,7 @@
 import type { CourseScope, ScopeEntry } from "./types";
 
-// Technion 134140 "יוביקוויטין ומחזור חלבונים". Evidence available (2026-10-25): the current portal paragraph only.
+// Technion 134140 "יוביקוויטין ומחזור חלבונים". 2026-11-01: the course syllabus + schedule (Winter 2024-25) and the
+// weekly quizzes were found in the Drive and are now the main evidence, alongside the portal paragraph.
 // No reading list (the portal lists no books), no past exams, no staff material — Moodle is closed to guests and no
 // detailed syllabus was found. Levels reviewed with Codex before writing: "core" where the paragraph names the subject
 // ("components of the system, their structure and mode of action", "the proteasome mechanism", and each application
@@ -10,6 +11,15 @@ import type { CourseScope, ScopeEntry } from "./types";
 // Honest limit: a 12-line paragraph cannot tell which named pathway the lecturer actually teaches inside each area.
 // Every example chosen here is a representative one, not a reconstruction of the real lecture.
 
+// The course's own syllabus and tentative schedule, Winter 2024-25 (Drive), and the weekly quizzes (Drive).
+const sched24 = (what: string): ScopeEntry => ({
+  level: "core", evidence: "syllabus-named",
+  noteHe: `לוח ההרצאות והסילבוס של הקורס, חורף תשפ"ה: ${what}`,
+});
+const quiz = (what: string): ScopeEntry => ({
+  level: "core", evidence: "staff-material",
+  noteHe: `נשאל בבחנים השבועיים של הקורס: ${what}`,
+});
 const named = (topic: string, what?: string): ScopeEntry => ({
   level: "core", evidence: "syllabus-named",
   noteHe: what ? `תיאור הקורס: "${topic}" — ${what}` : `תיאור הקורס: "${topic}"`,
@@ -32,7 +42,7 @@ const IMMUNE = "התגובה החיסונית";
 
 export const technionUbiquitinScope: CourseScope = {
   courseSlug: "technion-ubiquitin",
-  checkedAt: "2026-10-25",
+  checkedAt: "2026-11-01",
   defaultSource: { labelHe: "הסילבוס בפורטל הטכניון", url: "https://students.technion.ac.il/local/technionsearch/course/134140" },
   sections: {
     "ub-conjugation": {
@@ -124,6 +134,25 @@ export const technionUbiquitinScope: CourseScope = {
       mitosis: heading(CYCLE, "המיטוזה (רענון מקורס הקדם)"),
       g1: heading(CYCLE, "Rb ו-E2F (רענון מקורס הקדם)"),
       p53: heading(CANCER, "p53 בנזק ל-DNA (רענון מקורס הקדם)"),
+    },
+    "ub-history": {
+      turnover: sched24("L2: History and Discovery of the Ubiquitin Conjugation System"),
+      "atp-paradox": quiz("מדוע התצפית שפרוטאוליזה תוך-תאית תלויה ב-ATP הייתה מפתיעה (בוחן 2)"),
+      fractionation: quiz("ניסוי המפתח שהראה שבאאוקריוטים נדרש שלב סימון נוסף (בוחן 2)"),
+      "two-atp": quiz("שני האנזימים במערכת שצורכים ATP (בוחן 2)"),
+      cyclins: quiz("מדוע בקרת סינתזה לבדה אינה מסבירה את רמות הציקלינים (בוחן 2)"),
+    },
+    "ub-trafficking": {
+      downregulation: sched24("L8_1: ubiquitin in endocytosis, receptor internalization"),
+      escrt: sched24("Endocytosis, Internalization, MVB sorting"),
+      mitophagy: sched24("L8_2: Autophagy — role of ubiquitin in autophagy and mitophagy; Parkin as a driver of mitophagy"),
+      "which-pathway": heading(FATE, "ההבחנה הניסויית בין פירוק בפרוטאזום לפירוק בליזוזום"),
+    },
+    "ub-drugs": {
+      "proteasome-inhibitors": sched24("L9: Drug Discovery Efforts in the UPS — inhibition of proteasome proteolytic activity, bortezomib"),
+      "other-inhibitors": sched24("L9: inhibitors of E1, of ubiquitin-like activating enzymes, of DUBs, and interference with substrate recognition by E3s"),
+      tpd: sched24("L10: PROTACS, molecular glues, and targeted protein degradation"),
+      reading: sched24("עבודת הסיום: ביקורת על מאמר מ-2020–2024 והצעת מחקר להמשכו"),
     },
   },
 };
