@@ -27,7 +27,7 @@ export function PicAssembly(){return <Svg w={600} h={1110} label="קומפלקס
 <He x={300} y={360} size={20} bold>הקומפלקס המלא: ⁦DNA⁩ בתוך המִבקע</He>
 {/* The flexible CTD exits the polymerase and reaches a separate phosphorylation inset. */}
 <path d="M275 396C270 372 292 374 305 384C327 402 342 380 357 391C371 400 385 388 397 396" fill="none" stroke="#659dbd" strokeWidth={3} strokeLinecap="round"/>
-<La x={463} y={395} size={17} bold>CTD</La>
+<La x={410} y={394} size={17} anchor="start" bold>CTD</La>
 <Polymerase/>
 {/* Upstream TAF scaffold and saddle TBP, A on upstream side, B toward polymerase. */}
 <path d="M79 474C61 451 78 425 101 433C111 407 139 419 145 436C174 422 194 448 179 469L163 484L139 471L115 481Z" fill="#c9bde0" stroke="#7f6b9d" strokeWidth={1.5}/>
@@ -45,7 +45,7 @@ export function PicAssembly(){return <Svg w={600} h={1110} label="קומפלקס
 <La x={485} y={529} size={14} color="#25364a" bold>XPB</La>
 {/* Promoter DNA bends at TBP and enters the polymerase cleft, continuing downstream. */}
 <path d="M41 558H83L125 521Q137 510 148 523L181 548H247L277 510H325L354 539H559M41 569H83L127 534Q137 525 143 535L176 559H253L283 521H320L350 550H559" fill="none" stroke="#4089b7" strokeWidth={3.5}/>
-<La x={99} y={407} size={17} bold>TFIID</La><La x={55} y={449} size={17} bold>A</La><La x={201} y={438} size={17} bold>B</La><La x={412} y={421} size={17} bold>F</La><La x={406} y={458} size={17} bold>E</La><La x={487} y={592} size={18} bold>TFIIH</La>
+<La x={99} y={407} size={17} bold>TFIID</La><La x={55} y={449} size={17} bold>A</La><La x={201} y={438} size={17} bold>B</La><La x={412} y={421} size={17} bold>F</La><La x={406} y={458} size={17} bold>E</La><La x={493} y={415} size={18} bold>TFIIH</La>
 <La x={302} y={447} size={21} color="#25364a" bold>Pol II</La><La x={135} y={587} size={17} bold>TATA</La><La x={302} y={502} size={16} bold>+1</La>
 <He x={300} y={636} size={18}>⁦TFIIH⁩ פותח את ה-⁦DNA⁩ ומזרחן את ה-⁦CTD⁩</He>
 <He x={300} y={672} size={16} color={muted}>הצורות מראות מיקום ומגעים • אינן מבנה אטומי</He>
