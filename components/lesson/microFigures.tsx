@@ -499,7 +499,7 @@ function OneStepGrowth() {
       <path d={`M${s.sx(44)} ${s.sy(0.2)} L${s.sx(44)} ${s.sy(2.55)}`} stroke={GREEN} strokeWidth={2} markerEnd="url(#bfArrowS)" markerStart="url(#bfArrowS)" />
       <He x={s.sx(44) - 8} y={s.sy(1.4)} size={11} anchor="end" bold color={GREEN}>גודל הפריצה</He>
       <He x={s.sx(6)} y={s.sy(0.15) - 10} size={10.5} color={ORANGE}>חופשיים</He>
-      <He x={s.sx(5.5)} y={s.sy(1.55)} size={10.5} color={BLUE}>סך הכול (אחרי פירוק)</He>
+      <He x={s.sx(35)} y={s.sy(0.6)} size={10.5} color={BLUE}>סך הכול (אחרי פירוק)</He>
     </Svg>
   );
 }

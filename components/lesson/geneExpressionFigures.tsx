@@ -528,7 +528,7 @@ function MirnaPathway() {
       <Line x1={140} y1={154} x2={190} y2={154} c={PURPLE} w={2} />
       <Line x1={140} y1={162} x2={190} y2={162} c={ORANGE} w={2} />
       <He x={165} y={184} size={10.5} color={MUTED}>דופלקס של כ-22</He>
-      <Arrow x1={140} y1={170} x2={110} y2={210} />
+      <Arrow x1={128} y1={170} x2={100} y2={206} />
       <ellipse cx={100} cy={232} rx={46} ry={20} fill={FILL.green} stroke={GREEN} strokeWidth={1.5} />
       <La x={100} y={236} size={11} bold color={GREEN}>RISC (Ago)</La>
       {/* target */}
@@ -640,11 +640,11 @@ function TransposonTypes() {
       <Seg x0={50} x1={90} y={y} label="5′UTR" c={MUTED} fill={FILL.gray} size={9.5} />
       <Seg x0={94} x1={150} y={y} label="ORF1" c={BLUE} fill={FILL.blue} />
       <Seg x0={154} x1={320} y={y} label="ORF2 (EN, RT)" c={BLUE} fill={FILL.blue} />
-      <La x={340} y={y + 4} size={10.5} bold color={PURPLE}>AAAA</La>
+        <La x={340} y={y + 24} size={10.5} bold color={PURPLE}>AAAA</La>
     </g>)],
     ["Alu (SINE)", "בלי אנזימים — משתמש ב-L1", (y) => (<g>
       <Seg x0={50} x1={170} y={y} label="~300 bp" c={GREEN} fill={FILL.green} />
-      <La x={190} y={y + 4} size={10.5} bold color={PURPLE}>AAAA</La>
+        <La x={190} y={y + 24} size={10.5} bold color={PURPLE}>AAAA</La>
     </g>)],
   ];
   return (
@@ -656,8 +656,8 @@ function TransposonTypes() {
             <Dna x0={20} x1={366} y={y} c={LINE} />
             {tsd(30, y)}{tsd(354, y)}
             {draw(y)}
-            <He x={474} y={y - 2} size={11.5} bold anchor="end">{t}</He>
-            <He x={474} y={y + 14} size={10.5} anchor="end" color={MUTED}>{sub}</He>
+              <He x={474} y={y - 18} size={11.5} bold anchor="end">{t}</He>
+              <He x={474} y={y + 27} size={10.5} anchor="end" color={MUTED}>{sub}</He>
           </g>
         );
       })}

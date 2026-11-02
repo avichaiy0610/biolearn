@@ -459,7 +459,7 @@ function JunctionsEpithelium() {
   const top = 54, bot = 276, xa = 74, xb = 350, mid = 212;
   const lbl = (y: number, t: string, c = INK) => (
     <g>
-      <line x1={mid + 6} y1={y} x2={374} y2={y} stroke={LINE} strokeWidth={1.2} />
+      <line x1={mid + 6} y1={y} x2={352} y2={y} stroke={LINE} strokeWidth={1.2} />
       <He x={474} y={y + 4} size={11.5} anchor="end" bold color={c}>{t}</He>
     </g>
   );

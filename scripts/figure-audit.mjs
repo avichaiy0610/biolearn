@@ -1,6 +1,6 @@
 // node scripts/figure-audit.mjs <out.json> <slug...>   (dev server on :3123)
 // For every <figure> SVG on each lesson page: find text whose box is crossed by a stroke (line, path,
-// shape outline) or overlaps another text. Coordinates are in each SVG's own viewBox units.
+// shape outline) or overlaps another text. Stroke segments hidden under a later opaque filled shape are ignored. Coordinates are in each SVG's own viewBox units.
 import { chromium } from "playwright";
 import fs from "fs";
 const [out, ...slugs] = process.argv.slice(2);
@@ -19,7 +19,23 @@ for (const slug of slugs) {
       const texts = [...svg.querySelectorAll("text")].filter((t) => t.textContent.trim()).map((t) => ({ s: t.textContent.trim().slice(0, 40), b: boxOf(t) }));
       // sample thin strokes; remember closed shapes so text inside them is not flagged by their outline
       const els = [];
-      svg.querySelectorAll("line, path, polyline, rect, ellipse, circle, polygon").forEach((el) => {
+      // Opaque filled shapes, in paint order: a stroke point they cover is hidden under them, so a label
+      // placed inside an opaque gene box or atom badge over a line beneath it is not a crossing.
+      const shapes = [...svg.querySelectorAll("line, path, polyline, rect, ellipse, circle, polygon")].filter((el) => !el.closest("defs, marker"));
+      const opaque = shapes.map((el, order) => {
+        const cs = getComputedStyle(el);
+        const fill = cs.fill;
+        const alpha = parseFloat(cs.fillOpacity || "1") * parseFloat(cs.opacity || "1");
+        const rgba = /rgba\([^)]*,\s*([\d.]+)\)/.exec(fill);
+        const ok = fill && fill !== "none" && alpha >= 0.9 && !(rgba && parseFloat(rgba[1]) < 0.9) && typeof el.isPointInFill === "function";
+        return ok ? { el, order } : null;
+      }).filter(Boolean);
+      const hidden = (order, sx, sy) => opaque.some(({ el, order: o }) => {
+        if (o <= order) return false;
+        const pt = new DOMPoint(sx, sy).matrixTransform(el.getScreenCTM().inverse());
+        return el.isPointInFill(pt);
+      });
+      shapes.forEach((el, order) => {
         if (el.closest("defs, marker")) return;
         const cs = getComputedStyle(el); const st = el.getAttribute("stroke") || cs.stroke;
         const sw = parseFloat(el.getAttribute("stroke-width") || cs.strokeWidth || "1");
@@ -28,8 +44,8 @@ for (const slug of slugs) {
         let len = 0; try { len = el.getTotalLength(); } catch { return; }
         const ctm = el.getScreenCTM(); const pts = [];
         const n = Math.max(8, Math.min(400, Math.round(len / 2)));
-        for (let i = 0; i <= n; i++) { const q = el.getPointAtLength((len * i) / n); const pt = svg.createSVGPoint(); pt.x = q.x; pt.y = q.y; const s2 = pt.matrixTransform(ctm); pts.push(toLocal(s2.x, s2.y)); }
-        els.push({ closed, bb: boxOf(el), pts });
+        for (let i = 0; i <= n; i++) { const q = el.getPointAtLength((len * i) / n); const pt = svg.createSVGPoint(); pt.x = q.x; pt.y = q.y; const s2 = pt.matrixTransform(ctm); pts.push([...toLocal(s2.x, s2.y), s2.x, s2.y]); }
+        els.push({ closed, bb: boxOf(el), pts, order });
       });
       const vb = svg.viewBox.baseVal;
       const shrink = 1.5;
@@ -40,7 +56,7 @@ for (const slug of slugs) {
         let c = 0;
         for (const e of els) {
           if (e.closed && cx > e.bb[0] && cx < e.bb[2] && cy > e.bb[1] && cy < e.bb[3] && x1 >= e.bb[0] - 2 && x2 <= e.bb[2] + 2 && y1 >= e.bb[1] - 2 && y2 <= e.bb[3] + 2) continue;
-          c += e.pts.filter(([x, y]) => x > x1 + shrink && x < x2 - shrink && y > y1 + shrink + 1 && y < y2 - shrink - 1).length;
+          c += e.pts.filter(([x, y, sx, sy]) => x > x1 + shrink && x < x2 - shrink && y > y1 + shrink + 1 && y < y2 - shrink - 1 && !hidden(e.order, sx, sy)).length;
         }
         if (c >= 2) hits.push({ kind: "stroke", text: t.s, n: c });
         if (x1 < vb.x - 1 || x2 > vb.x + vb.width + 1) hits.push({ kind: "clipped", text: t.s });

@@ -233,8 +233,8 @@ function O2Binding() {
       <path d={curve(hb, 0, 120, s)} fill="none" stroke={ORANGE} strokeWidth={3} />
       <line x1={xa} y1={s.sy(hb(20))} x2={xa} y2={s.sy(hb(100))} stroke={ORANGE} strokeWidth={2} markerStart="url(#bfArrow)" markerEnd="url(#bfArrow)" />
       <line x1={s.sx(20)} y1={s.sy(hb(20))} x2={xa} y2={s.sy(hb(20))} stroke={ORANGE} strokeWidth={1} {...dash} />
-      <La x={xa - 34} y={s.sy(0.62)} size={13} color={ORANGE} bold>≈65%</La>
-      <He x={xa - 34} y={s.sy(0.62) + 17} size={12} color={ORANGE}>נמסר</He>
+      <La x={xa - 78} y={s.sy(0.62)} size={13} color={ORANGE} bold>≈65%</La>
+      <He x={xa - 78} y={s.sy(0.62) + 17} size={12} color={ORANGE}>נמסר</He>
       <He x={s.sx(24)} y={s.sy(0.8)} size={13} color={BLUE} bold anchor="start">מיוגלובין</He>
       <He x={s.sx(55)} y={s.sy(0.62)} size={13} color={ORANGE} bold>המוגלובין</He>
     </svg>

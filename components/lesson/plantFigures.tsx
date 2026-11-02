@@ -323,7 +323,7 @@ function ShootMeristem() {
       {/* loop */}
       <Arrow x1={212} y1={152} x2={212} y2={128} color={PURPLE} width={2.4} />
       <path d="M150 116 C 110 130, 110 160, 148 170" fill="none" stroke={RED} strokeWidth={2} markerEnd="url(#ppInhib)" />
-      <La x={112} y={142} size={9.5} bold color={RED} anchor="end">CLV3→CLV1</La>
+      <La x={112} y={156} size={9.5} bold color={RED} anchor="end">CLV3→CLV1</La>
       {/* side panel */}
       <rect x={360} y={70} width={110} height={170} rx={10} fill="#f8fafc" stroke={LINE_GRAY} />
       <He x={415} y={90} size={11} bold>הלולאה</He>

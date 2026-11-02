@@ -589,7 +589,7 @@ function SplicingMechanism() {
       <La x={130} y={186} size={10.5} color={BLUE} anchor="start">3′-OH</La>
       <circle cx={250} cy={182} r={34} fill="none" stroke={PURPLE} strokeWidth={2.5} />
       <Line x1={284} y1={182} x2={350} y2={182} c={PURPLE} w={2.5} />
-      <La x={284} y={202} size={12} bold color={ORANGE}>A</La>
+      <La x={300} y={210} size={12} bold color={ORANGE}>A</La>
       {ex(350, 100, 182, "אקסון 2", FILL.green, GREEN)}
       <path d="M150 166 Q250 116 346 166" fill="none" stroke={BLUE} strokeWidth={2} markerEnd="url(#bfArrow)" />
       <He x={250} y={234} size={10.5} color={MUTED}>לריאט — G מחובר ל-A בקשר 2′–5′</He>
@@ -743,7 +743,7 @@ function InitiationCompare() {
       <circle cx={50} cy={278} r={13} fill={FILL.yellow} stroke={ORANGE} strokeWidth={1.6} /><La x={50} y={282} size={8.5} bold>m⁷G</La>
       <ellipse cx={84} cy={258} rx={24} ry={12} fill={FILL.orange} stroke={ORANGE} strokeWidth={1.4} /><La x={84} y={262} size={9.5} bold>eIF4F</La>
       <La x={420} y={298} size={11} bold color={PURPLE}>AAAA…</La>
-      <circle cx={418} cy={266} r={10} fill={FILL.gray} stroke={INK} strokeWidth={1.2} /><La x={418} y={252} size={9} bold>PABP</La>
+      <circle cx={418} cy={266} r={10} fill={FILL.gray} stroke={INK} strokeWidth={1.2} /><La x={444} y={248} size={9} bold>PABP</La>
       <ellipse cx={182} cy={268} rx={40} ry={18} fill={FILL.sky} stroke={BLUE} strokeWidth={1.6} /><La x={182} y={272} size={11} bold>43S</La>
       <Arrow x1={226} y1={252} x2={290} y2={252} color={BLUE} />
       <He x={258} y={242} size={10.5} color={BLUE}>סריקה</He>

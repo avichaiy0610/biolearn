@@ -106,7 +106,7 @@ function Kinase({ x, y }: { x: number; y: number }) {
     <path d="M-18 -12 Q-20 -28 0 -26 Q22 -27 20 -9 Q26 8 9 13 Q-12 20 -18 -1Z" fill="#ede9fe" stroke={PURPLE} strokeWidth={1.7} /></g>;
 }
 export function Pink1Parkin() {
-  return <Canvas h={1240} label="PINK1 ו-Parkin מיטופגיה: בבריאה ייבוא וחיתוך PINK1; באיבוד פוטנציאל הוא מצטבר בחוץ, מזרחן יוביקוויטין ו-Parkin ומגביר סימון וגיוס אוטופגיה">
+  return <Canvas h={1280} label="PINK1 ו-Parkin מיטופגיה: בבריאה ייבוא וחיתוך PINK1; באיבוד פוטנציאל הוא מצטבר בחוץ, מזרחן יוביקוויטין ו-Parkin ומגביר סימון וגיוס אוטופגיה">
     <Panel y={8} h={365} title="1. פוטנציאל הממברנה קובע" />
     <He x={126} y={73} size={19} bold color={TEAL}>מיטוכונדריה בריאה</He>
     <He x={354} y={73} size={19} bold color={ORANGE}>מיטוכונדריה פגועה</He>
@@ -139,7 +139,7 @@ export function Pink1Parkin() {
     <Flow d="M405 785 H448 V454 H294" end={[294,454,180]} color={PURPLE} />
     <He x={240} y={811} size={16} bold color={PURPLE}>לולאת הגברה: עוד Ub–P ועוד Parkin פעיל</He>
 
-    <Panel y={845} h={384} title="3. גישור אל ממברנת האוטופגיה" />
+    <Panel y={845} h={424} title="3. גישור אל ממברנת האוטופגיה" />
     {/* Two membranes of an open phagophore. The receptor bridges Ub to lipidated LC3. */}
     <path d="M98 926 C10 976 41 1169 240 1185 C439 1169 470 976 382 926" fill="none" stroke="#86efac" strokeWidth={12} />
     <path d="M105 939 C39 987 66 1148 240 1161 C414 1148 441 987 375 939" fill="none" stroke={GREEN} strokeWidth={3} />
@@ -153,9 +153,9 @@ export function Pink1Parkin() {
     <La x={123} y={900} size={15} bold color={TEAL}>OPTN / NDP52</La>
     <path d="M175 905 L183 916" stroke={TEAL} strokeWidth={1.3} />
     <La x={96} y={1005} size={17} color={GREEN} bold>LC3</La>
-    <He x={240} y={1139} size={16}>חלבון בממברנה החיצונית</He>
-    <He x={240} y={1199} size={13} color={MUTED}>סגול: קינאז / זרחון · כתום: Ub · ירוק: אוטופגיה</He>
-    <He x={240} y={1220} size={15} bold color={GREEN}>עטיפה באוטופגוזום ובהמשך פירוק בליזוזום</He>
+    <He x={240} y={1210} size={16}>חלבון בממברנה החיצונית</He>
+    <He x={240} y={1239} size={13} color={MUTED}>סגול: קינאז / זרחון · כתום: Ub · ירוק: אוטופגיה</He>
+    <He x={240} y={1260} size={15} bold color={GREEN}>עטיפה באוטופגוזום ובהמשך פירוק בליזוזום</He>
   </Canvas>;
 }
 
@@ -187,8 +187,8 @@ export function ProtacTernary() {
     <Target x={107} y={623} /><Chain x={144} y={603} />
     <Target x={340} y={623} /><Chain x={377} y={603} />
     <path d="M129 623 H144 M362 623 H377" fill="none" stroke={ORANGE} strokeWidth={2} />
-    <He x={122} y={668} size={17} bold color={ORANGE}>סימון ביוביקוויטין</He>
-    <He x={357} y={668} size={17} bold color={ORANGE}>סימון ביוביקוויטין</He>
+    <He x={122} y={688} size={17} bold color={ORANGE}>סימון ביוביקוויטין</He>
+    <He x={357} y={688} size={17} bold color={ORANGE}>סימון ביוביקוויטין</He>
     <He x={122} y={715} size={16}>CRBN הוא קולטן המצע</He>
     <La x={122} y={742} size={16} color={TEAL}>in CRL4–CRBN (E3)</La>
     <He x={357} y={715} size={16}>המולקולה משתחררת</He>
