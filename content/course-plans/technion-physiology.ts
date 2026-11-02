@@ -37,7 +37,7 @@ const PORTAL = { labelHe: "הסילבוס בפורטל הטכניון", url: "ht
 const LECTURES: { titleHe: string; items: PlanItem[]; practice: PlanItem[] }[] = [
   // The 13 sessions follow the weekly blocks of the lecturer's syllabus: 1-2 cell physiology, 3-4 anatomy,
   // 5-6 blood, 7-8 urinary, 9-10 nervous, 11-13 musculoskeletal.
-  { titleHe: "פיזיולוגיה של התא: משאבות, נשאים ותעלות", items: [...sec(phTransport, "classes", "pumps", "abc", "secondary", "glut"), proc("membrane-transport", "cell-biology")], practice: probs(phTransport, "ouabain", "pgp-inhibitors") },
+  { titleHe: "פיזיולוגיה של התא: משאבות, נשאים ותעלות", items: [...sec(phTransport, "classes", "channel-structure", "pumps", "abc", "asymmetry", "secondary", "glut"), proc("membrane-transport", "cell-biology")], practice: probs(phTransport, "ouabain", "pgp-inhibitors", "abcb4-liposome") },
   { titleHe: "עקרונות הדיפוזיה, החדירות והאוסמוזה", items: [...sec(phDiffusion), ...sec(phTransport, "kinetics", "osmosis", "epithelia")], practice: [...probs(phDiffusion), ...probs(phTransport, "tonicity")] },
   { titleHe: "אנטומיה של גוף האדם: מונחים, שלד, מפרקים ושרירים", items: sec(phAnatomy, "terms", "visceral-somatic", "skeleton", "joints", "muscles"), practice: probs(phAnatomy, "thorax-reasoning") },
   { titleHe: "אנטומיה: עמוד השדרה, עצבי הגולגולת, בית החזה והבטן", items: sec(phAnatomy, "spine", "cranial-nerves", "thorax", "abdomen", "tissues"), practice: probs(phAnatomy, "epidural-level", "disc-herniation", "cranial-lesion") },
@@ -63,7 +63,7 @@ export const technionPhysiologyPlan: CoursePlan = {
   schedule: "official",
   scheduleNoteHe: "לפי הסילבוס של מרצת הקורס (הנושאים וחלוקת השבועות). בחומרי הקורס יש ארבע חבילות תרגול מתועדות — הובלה, דיפוזיה ושטף, מערכת הדם והכליה — אבל אין לוח תרגולים מלא, ולכן התרגולים כאן מוצגים כתרגול על ההרצאה. הסילבוס מציין במפורש שהתרגולים מלמדים גם חומר שנסקר בהרצאה רק על קצה המזלג, והוא נבחן.",
   topics: [
-    { titleHe: "פיזיולוגיה של התא: ממברנה, משאבות, נשאים ותעלות", items: [...sec(phTransport, "classes", "pumps", "abc", "secondary", "glut", "kinetics"), proc("membrane-transport", "cell-biology")] },
+    { titleHe: "פיזיולוגיה של התא: ממברנה, משאבות, נשאים ותעלות", items: [...sec(phTransport, "classes", "channel-structure", "pumps", "abc", "asymmetry", "secondary", "glut", "kinetics"), proc("membrane-transport", "cell-biology")] },
     { titleHe: "עקרונות הדיפוזיה והאוסמוזה", items: [...sec(phDiffusion), ...sec(phTransport, "osmosis", "epithelia")] },
     { titleHe: "אנטומיה של גוף האדם, כולל מערכת השלד", items: sec(phAnatomy) },
     { titleHe: "מערכת הדם: יצירת תאי הדם וקרישה", items: [...sec(phBlood), ...sec(phBloodDisorders)] },

@@ -64,8 +64,10 @@ export const technionPhysiologyScope: CourseScope = {
   sections: {
     "ph-transport": {
       "classes": named(PUMPS, "משאבות, נשאים ותעלות"),
+      "channel-structure": tested("מבחן 2022 מועד א' (למה תעלות מהירות פי 1000 מנשאים) ומועד ב' (TTX וה-selectivity filter; סלקטיביות בתעלות מים); בהרצאה: S1–S6, TVGYG ואנרגיית ההתייבשות"),
       "pumps": named(PUMPS),
       "abc": lect(CELLPHYS, 'הסעיף "Structure and function of ABC transporters"'),
+      "asymmetry": lect(CELLPHYS, 'הסעיף "Principles of membrane asymmetry" — וגם אחת ממטרות הקורס; ABCB4 כמעביר PC נבחן ב-2011 וב-2014'),
       "secondary": named(CARRIERS),
       "glut": tested('תרגיל בית 1, תשפ"ג — שאלה של 40 נקודות על GLUT1 ו-GLUT4 ועל הזיקה שלהם לגלוקוז'),
       "kinetics": named(CARRIERS),
@@ -83,6 +85,7 @@ export const technionPhysiologyScope: CourseScope = {
       "passive": heading(AP, "התגובה הפסיבית"),
       "phases": named(AP),
       "channels": named(AP),
+      "gating-mechanisms": tested("S4 כחיישן מתח, ball and chain וניסויי המחיקה והפפטיד בהרצאה; במבחן 2022 מועד א' ball and chain מופיע כמסיח בשאלה על מהירות התעלות, ובאותו מבחן נשאלת שאלה על מוטציות בתעלות Na⁺ ואובדן חוש הכאב"),
       "refractory": named(AP),
       "conduction": named(AP),
       "myelin": named(GLIA),
@@ -91,6 +94,8 @@ export const technionPhysiologyScope: CourseScope = {
       "neuron": named(NS),
       "axonal-transport": heading(NS, "הובלה אקסונית"),
       "cns-pns": named(NS),
+      "sensory": staff("הרצאת מערכת העצבים (2020): חישה, עיבוד ותגובה; קולטנים חושיים יונוטרופיים ומטבוטרופיים; קפסאיצין ו-TRPV1 והעצב הטריגמינלי"),
+      "reflex": tested("\"מי מהבאים אינו מייצג תגובת רפלקס\" (2022 מועד ב'); קשת הרפלקס בהרצאת מערכת העצבים"),
       "glia": named(GLIA),
       "csf-bbb": heading(NS, "נוזל המוח ומחסום הדם-מוח"),
       "injury": heading(NS, "ניוון והתחדשות של עצב"),
@@ -103,6 +108,7 @@ export const technionPhysiologyScope: CourseScope = {
       "integration": named(EI),
       "plasticity": heading(AP, "שינויים בחוזק הסינפסה"),
       "transmitters": named(AP),
+      "drugs": tested("SSRI וקליטה חוזרת של סרוטונין (2009 מועד א'), קוקאין וקליטה חוזרת של דופמין (2012 מועד א', 2020 מועד ב'); בהרצאה: פרוזק וציפרלקס, ריטלין, פרקינסון וגזי עצבים"),
     },
     "ph-skeletal-muscle": {
       "structure": named(MUSCLE),
@@ -182,6 +188,7 @@ export const technionPhysiologyScope: CourseScope = {
       "clearance": named(KIDNEY),
       "starling": named(KIDNEY),
       "autoregulation": named(KIDNEY),
+      "kidney-disease": tested("כליה פוליציסטית ושיבוש קליטת Ca²⁺ (2022 מועד ב'), תסמונת נפרוטית וטיפול בה (2022 מועד א'), קריאטינין גבוה כסימן לאי-ספיקה (2022 מועד ב'); בהרצאה: המטוריה, אנוריה והמודיאליזה"),
     },
     "ph-kidney-tubules": {
       "overview": named(KIDNEY),
