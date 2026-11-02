@@ -1,5 +1,6 @@
 import type { CoursePlan, PlanItem, PlanSession } from "./types";
 import type { Lesson } from "../lessons/types";
+import { vrOrigins } from "../lessons/technion-virology/vr-origins";
 import { vrProperties } from "../lessons/technion-virology/vr-properties";
 import { vrAttachmentEntry } from "../lessons/technion-virology/vr-attachment-entry";
 import { vrDnaExpression } from "../lessons/technion-virology/vr-dna-expression";
@@ -13,6 +14,12 @@ import { vrBacterialDefenses } from "../lessons/technion-virology/vr-bacterial-d
 import { vrAnimalDefenses } from "../lessons/technion-virology/vr-animal-defenses";
 import { vrEvolution } from "../lessons/technion-virology/vr-evolution";
 
+// 2026-11-02: six exams from the Drive (2021-2025, Prof. Debbie Lindell) closed the audit gaps: added vr-origins
+// (what every virus takes from the host, "are viruses alive", size/filtration, three origin hypotheses, hallmark
+// genes - 14 points in both 2023 exams) and sections on the three dsDNA gene classes, cytoplasmic DNA viruses,
+// primer types and strand displacement, tailed-phage architecture, anti-CRISPR, deamination/APOBEC3 and Vif,
+// plaque assay/PFU/MOI, and the three sources of diversity. Exam-format practice added in vr-methods and
+// vr-bacterial-defenses.
 // Technion 134039: the agreed 12-unit scope was supplied by the owner after review.
 // No public weekly schedule; the topic view preserves the portal order. The lecture
 // view is explicitly suggested. No official tutorials. Prerequisites own Baltimore,
@@ -22,14 +29,15 @@ import { vrEvolution } from "../lessons/technion-virology/vr-evolution";
 // Examples have one owner: polio/MS2 expression; SV40 replication; phi29 packaging;
 // M13 exit; lambda/HSV latency; cyanophage psbA evolution. No pathogenesis, vaccines,
 // antivirals, giant-virus survey, reverse-genetics protocols or origin speculation.
-export const VIROLOGY_LESSONS: Lesson[] = [vrProperties, vrMethods, vrAttachmentEntry, vrDnaExpression, vrRnaExpression,
+export const VIROLOGY_LESSONS: Lesson[] = [vrOrigins, vrProperties, vrMethods, vrAttachmentEntry, vrDnaExpression, vrRnaExpression,
   vrGenomeReplication, vrAssemblyPackaging, vrExit, vrLatency, vrBacterialDefenses,
   vrAnimalDefenses, vrEvolution];
 const sec = (l: Lesson): PlanItem[] => [{ kind: "lesson", slug: l.slug }];
 const lectures: PlanSession[] = [
-  { n: 1, titleHe: vrProperties.titleHe, items: sec(vrProperties) },
-  { n: 2, titleHe: vrMethods.titleHe, items: sec(vrMethods) },
-  ...VIROLOGY_LESSONS.slice(2).map((l, i) => ({ n: i + 3, titleHe: l.titleHe, items: sec(l) })),
+  { n: 1, titleHe: vrOrigins.titleHe, items: sec(vrOrigins) },
+  { n: 2, titleHe: vrProperties.titleHe, items: sec(vrProperties) },
+  { n: 3, titleHe: vrMethods.titleHe, items: sec(vrMethods) },
+  ...VIROLOGY_LESSONS.slice(3).map((l, i) => ({ n: i + 4, titleHe: l.titleHe, items: sec(l) })),
 ];
 export const technionVirologyPlan: CoursePlan = {
   courseSlug: "technion-virology",
@@ -43,7 +51,7 @@ export const technionVirologyPlan: CoursePlan = {
     { titleHe: "שכפול הגנום", items: sec(vrGenomeReplication) },
     { titleHe: "הרכבה, אריזה ויציאה", items: [...sec(vrAssemblyPackaging), ...sec(vrExit)] },
     { titleHe: "היבטים של המסלול הלטנטי", items: sec(vrLatency) },
-    { titleHe: "מאפייני הנגיף", items: sec(vrProperties) },
+    { titleHe: "מאפייני הנגיף", items: [...sec(vrOrigins), ...sec(vrProperties)] },
     { titleHe: "שיטות מחקר בסיסיות", items: sec(vrMethods) },
     { titleHe: "מנגנוני הגנה ותוצאות אבולוציוניות של יחסי הגומלין", items: [...sec(vrBacterialDefenses), ...sec(vrAnimalDefenses), ...sec(vrEvolution)] },
     { titleHe: "דוגמאות מנגיפי בעלי חיים ומפאג׳ים בעלי גנומי DNA ו-RNA", items: [...sec(vrRnaExpression), ...sec(vrGenomeReplication), ...sec(vrAssemblyPackaging), ...sec(vrExit), ...sec(vrLatency), ...sec(vrEvolution), ...sec(vrAttachmentEntry), ...sec(vrDnaExpression)] },

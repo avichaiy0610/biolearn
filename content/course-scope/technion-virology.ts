@@ -1,9 +1,10 @@
 import type { CourseScope } from "./types";
 
-// Scope of the ten written units only; two missing units remain explicit in the plan.
+// 2026-11-02: six past exams (2021-2025) in the Drive are now evidence, and sections added from them are marked
+// evidence "exam". Scope of the written units; the two unwritten units remain explicit in the plan.
 export const technionVirologyScope: CourseScope = {
   courseSlug: "technion-virology",
-  checkedAt: "2026-10-25",
+  checkedAt: "2026-11-02",
   defaultSource: {
     labelHe: "פורטל הטכניון — 134039",
     url: "https://students.technion.ac.il/local/technionsearch/course/134039"
@@ -42,6 +43,16 @@ export const technionVirologyScope: CourseScope = {
       },
     },
     "vr-dna-expression": {
+      "three-classes": {
+        level: "core",
+        evidence: "exam",
+        noteHe: "שלוש קבוצות הגנים בנגיפי dsDNA לפי זמן הביטוי — 14 נקודות בשני מבחני 2023, וחוזר ב-2025"
+      },
+      cytoplasmic: {
+        level: "core",
+        evidence: "exam",
+        noteHe: "נגיף DNA שמשכפל בציטופלזמה ונושא מערכת שעתוק בוויריון — חלק מהשאלה החוזרת על מקור הפולימראז"
+      },
       "waves": {
         level: "core",
         evidence: "syllabus-named",
@@ -74,6 +85,16 @@ export const technionVirologyScope: CourseScope = {
       },
     },
     "vr-animal-defenses": {
+      deamination: {
+        level: "core",
+        evidence: "exam",
+        noteHe: "דה-אמינציה של ציטוזין: נגד מי פועלת, איך, ומה החלבון הנגיפי שמנטרל אותה — 16 נקודות ב-2023 ב'"
+      },
+      "other-defenses": {
+        level: "core",
+        evidence: "staff-material",
+        noteHe: "ההגנות שהקורס מלמד בצד החי: חישה ו-NF-κB, אפופטוזיס וגנים נגד-אפופטוטיים, ו-RNAi"
+      },
       "innate-recognition": {
         level: "core",
         evidence: "syllabus-named",
@@ -158,6 +179,11 @@ export const technionVirologyScope: CourseScope = {
       }
     },
     "vr-bacterial-defenses": {
+      "anti-crispr": {
+        level: "core",
+        evidence: "exam",
+        noteHe: "מנגנון שמגן על הנגיף מפני CRISPR-Cas — 2023 א'; שני מאמרי 2024 עסקו בנגד-CRISPR מבוסס RNA, 16 נקודות כל אחד"
+      },
       "defense-stages": {
         level: "core",
         evidence: "syllabus-named",
@@ -200,6 +226,11 @@ export const technionVirologyScope: CourseScope = {
       }
     },
     "vr-evolution": {
+      "diversity-sources": {
+        level: "core",
+        evidence: "exam",
+        noteHe: "יצירת שונות: קצב מוטציה לפי סוג גנום, רקומבינציה וריאסורטמנט — שאלה של 15 נקודות ב-2025"
+      },
       "variation-selection": {
         level: "core",
         evidence: "syllabus-named",
@@ -284,6 +315,16 @@ export const technionVirologyScope: CourseScope = {
       }
     },
     "vr-genome-replication": {
+      "primer-types": {
+        level: "core",
+        evidence: "exam",
+        noteHe: "\"נקבו בשלושה סוגי פריימרים שנגיפים שונים משתמשים בהם\" — 18 נקודות ב-2024 ב', ו-20 נקודות ב-2025"
+      },
+      "strand-displacement": {
+        level: "core",
+        evidence: "exam",
+        noteHe: "תיאור תהליך השכפול עם אחד מסוגי הפריימרים — 2025, שאלה על שכפול"
+      },
       "replication-questions": {
         level: "core",
         evidence: "syllabus-named",
@@ -363,6 +404,11 @@ export const technionVirologyScope: CourseScope = {
       }
     },
     "vr-methods": {
+      counting: {
+        level: "core",
+        evidence: "exam",
+        noteHe: "\"באיזו שיטה תכמתו את הנגיפים שנוצרו\" — חלק משאלת תכנון הניסוי בארבעה מבחנים"
+      },
       measurement: {
         level: "core",
         evidence: "syllabus-named",
@@ -400,6 +446,16 @@ export const technionVirologyScope: CourseScope = {
       }
     },
     "vr-properties": {
+      "tailed-phage": {
+        level: "core",
+        evidence: "exam",
+        noteHe: "אילו נגיפים נושאים שתי סימטריות (2021, 2024 א'), שני תפקידי הזנב (2024 ב'), שני תפקידי הפורטל (2024 א')"
+      },
+      "capsid-enlargement": {
+        level: "core",
+        evidence: "exam",
+        noteHe: "\"שתי דרכים שבהן קפסיד איקוסהדרלי יכול להתפתח כדי להכיל גנום גדול יותר\" — 2024 ב'"
+      },
       virion: {
         level: "core",
         evidence: "syllabus-named",
@@ -472,6 +528,38 @@ export const technionVirologyScope: CourseScope = {
         evidence: "syllabus-heading",
         noteHe: "תיאור הקורס: ביטוי הגנום. מנגנון או דוגמה מייצגים; אינם נקובים בשמם בפורטל."
       }
-    }
+    },
+    "vr-origins": {
+      "what-viruses-need": {
+        level: "core",
+        evidence: "exam",
+        noteHe: "נשאל בחמישה מתוך שישה מבחנים: שלושה רכיבים או תפקודים שכל נגיף חייב מהמארח (2025, שאלה 4, 15 נקודות)"
+      },
+      size: {
+        level: "core",
+        evidence: "exam",
+        noteHe: "טווח הגדלים והפרדה לפי גודל בסינון (2025, שאלה 1, 8 נקודות)"
+      },
+      alive: {
+        level: "core",
+        evidence: "exam",
+        noteHe: "\"האם נגיפים חיים\" — 9 נקודות במבחן 2021"
+      },
+      hypotheses: {
+        level: "core",
+        evidence: "exam",
+        noteHe: "מוצא הנגיפים — 14 נקודות בשני מבחני 2023"
+      },
+      "hallmark-genes": {
+        level: "core",
+        evidence: "exam",
+        noteHe: "המאמר שנדון בכיתה ב-2023: קונין ועמיתיו 2006, גנים חתומים ומוצא הנגיפים"
+      },
+      testing: {
+        level: "likely",
+        evidence: "syllabus-heading",
+        noteHe: "מסגרת מתודית לשאלת המוצא; אינה נקובה בשמה בפורטל."
+      }
+    },
   }
 };

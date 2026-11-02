@@ -2,6 +2,7 @@
    textbook; curves are hypothetical illustrations, not experimental data or universal kinetics.
    Labels sit beside shapes, lines and arrows, never on them. Referenced from lesson bodies as [[figure:<id>]]. */
 import type React from "react";
+import { GeneClasses, PrimerTypes, TailedPhage } from "./virologyExamFigures";
 import { ArrowDefs, BLUE, GREEN, INK, MUTED, ORANGE, He, La, scale, dash } from "./biochemFigures";
 import { Arrow } from "./metabolicFigures";
 
@@ -514,6 +515,9 @@ function Coevolution() {
 }
 
 export const VIROLOGY_FIGURES: Record<string, { el: () => React.ReactElement; captionHe: string }> = {
+  "vr-gene-classes": { el: GeneClasses, captionHe: "שלוש קבוצות גנים במודל הרפס והבחנתן באמצעות עיכוב סינתזת חלבון או שכפול DNA. הסימנים מציינים תעתיקים, לא חלבונים; תלות מאוחרת מלאה מוצגת כמודל קנוני. סכמטי." },
+  "vr-primer-types": { el: PrimerTypes, captionHe: "RNA, חלבון וקצה DNA מקופל מספקים התחלה להארכה. באדנו־וירוס DBP מייצב את הגדיל המוסט; זיווג ה־ITR משחזר מוצא לסבב נוסף עם pTP חדש. pTP מעובד ל־TP בהבשלה. סכמטי, לא בקנה מידה." },
+  "vr-tailed-phage": { el: TailedPhage, captionHe: "ראש איקוסהדרלי, זנב סלילי וסיבי זיהוי; הפורטל משמש לאריזה, ליציאת DNA ולעגינת הזנב. ההגדלה באמצעות T מושווית להארכת הראש לצורת prolate. דגם כללי מקורי, לא מין מסוים ולא בקנה מידה." },
   "vr-entry-steps": { el: EntrySteps, captionHe: "שלושה שלבים בכניסת פאג' עם זנב: מגע הפיך, נקודת התחייבות, ונתיב מקומי שדרכו עובר רק הגנום. סכמטי, לא בקנה מידה." },
   "vr-temporal-cascade": { el: TemporalCascade, captionHe: "מפל השעתוק: כל גל מייצר את מה שמאפשר את הבא אחריו, ושכפול הגנום מפריד בין המוקדם למאוחר. סכמטי." },
   "vr-architecture": { el: Architecture, captionHe: "גן אחד, עותקים רבים: שתי דרכי הסידור של תת-יחידות זהות, והמעבר מ-T = 1 ל-T = 3. מספר המחומשים נשאר 12. סכמטי." },
