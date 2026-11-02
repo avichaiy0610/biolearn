@@ -1,0 +1,29 @@
+function TrnaStructure() {
+  const stemV = (x: number, y1: number, y2: number) => (<g><Line x1={x - 12} y1={y1} x2={x - 12} y2={y2} c={PURPLE} /><Line x1={x + 12} y1={y1} x2={x + 12} y2={y2} c={PURPLE} />{Array.from({ length: Math.floor((y2 - y1) / 12) }, (_, i) => <line key={i} x1={x - 12} x2={x + 12} y1={y1 + 8 + i * 12} y2={y1 + 8 + i * 12} stroke={PURPLE} strokeWidth={1.2} />)}</g>);
+  const stemH = (y: number, x1: number, x2: number) => (<g><Line x1={x1} y1={y - 12} x2={x2} y2={y - 12} c={PURPLE} /><Line x1={x1} y1={y + 12} x2={x2} y2={y + 12} c={PURPLE} />{Array.from({ length: Math.floor(Math.abs(x2 - x1) / 12) }, (_, i) => <line key={i} x1={Math.min(x1, x2) + 8 + i * 12} x2={Math.min(x1, x2) + 8 + i * 12} y1={y - 12} y2={y + 12} stroke={PURPLE} strokeWidth={1.2} />)}</g>);
+  return (
+    <Svg h={390} label="מבנה התלתן של tRNA: זרוע הקבלה עם קצה CCA שאליו מחוברת חומצת האמינו, זרוע D, זרוע TψC, לולאה משתנה, וזרוע האנטיקודון שבלולאה שלה שלושת בסיסי האנטיקודון">
+      {stemV(240, 80, 160)}
+      <La x={222} y={74} size={12} bold>5′</La>
+      {["C", "C", "A"].map((c, i) => <La key={i} x={266} y={72 - i * 16} size={13} bold color={ORANGE}>{c}</La>)}
+      <La x={268} y={22} size={11} bold>3′</La>
+      <circle cx={290} cy={30} r={13} fill={FILL.green} stroke={GREEN} strokeWidth={2} />
+      <La x={290} y={34} size={10} bold>aa</La>
+      <He x={360} y={34} size={11} color={GREEN}>חומצת אמינו</He>
+      <He x={340} y={110} size={11} color={MUTED}>זרוע הקבלה</He>
+      {stemH(184, 228, 160)}
+      <circle cx={128} cy={184} r={32} fill="none" stroke={PURPLE} strokeWidth={3} />
+      <He x={128} y={234} size={11} color={MUTED}>זרוע D</He>
+      {stemH(184, 252, 320)}
+      <circle cx={352} cy={184} r={32} fill="none" stroke={PURPLE} strokeWidth={3} />
+      <La x={352} y={240} size={11} color={MUTED}>TψC</La>
+      <path d="M252 212 Q290 226 268 238" fill="none" stroke={PURPLE} strokeWidth={3} />
+      <He x={318} y={258} size={10.5} color={MUTED}>לולאה משתנה</He>
+      {stemV(240, 208, 284)}
+      <circle cx={240} cy={316} r={32} fill="none" stroke={PURPLE} strokeWidth={3} />
+      {[222, 240, 258].map((x) => <rect key={x} x={x - 8} y={340} width={16} height={18} rx={3} fill={FILL.orange} stroke={ORANGE} strokeWidth={1.5} />)}
+      {["G", "A", "A"].map((c, i) => <La key={i} x={222 + i * 18} y={354} size={11} bold>{c}</La>)}
+      <He x={240} y={380} size={12} bold color={ORANGE}>אנטיקודון</He>
+    </Svg>
+  );
+}

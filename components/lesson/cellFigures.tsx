@@ -5,6 +5,7 @@ import type React from "react";
 import { ArrowDefs, BLUE, GREEN, INK, LINE, MUTED, ORANGE, He, La, dash } from "./biochemFigures";
 import { Arrow } from "./metabolicFigures";
 import { CELL_SYLLABUS_FIGURES } from "./cellSyllabusFigures";
+import { CotranslationalTranslocation } from "./redraws/CotranslationalTranslocation";
 
 const PURPLE = "#7c3aed";
 const RED = "#b91c1c";
@@ -135,64 +136,7 @@ function ProteinSortingMap() {
   );
 }
 
-function Sec61({ x, open }: { x: number; open: boolean }) {
-  return (
-    <g>
-      <rect x={x - 22} y={176} width={16} height={34} rx={4} fill={FILL.green} stroke={GREEN} strokeWidth={1.3} />
-      <rect x={x + 6} y={176} width={16} height={34} rx={4} fill={FILL.green} stroke={GREEN} strokeWidth={1.3} />
-      {!open && <rect x={x - 6} y={186} width={12} height={10} rx={2} fill={GREEN} />}
-    </g>
-  );
-}
-
-function CotranslationalTranslocation() {
-  const ribo = (cx: number, cy: number) => (
-    <g>
-      <ellipse cx={cx} cy={cy - 22} rx={26} ry={12} fill={FILL.sky} stroke={BLUE} strokeWidth={1.4} />
-      <ellipse cx={cx} cy={cy} rx={34} ry={18} fill={FILL.blue} stroke={BLUE} strokeWidth={1.4} />
-      <Line x1={cx - 50} y1={cy - 11} x2={cx + 50} y2={cy - 11} c={PURPLE} w={1.6} />
-    </g>
-  );
-  return (
-    <Svg h={300} label="תרגום וטרנסלוקציה ל-ER בשלושה שלבים: 1 — רצף האות יוצא מהריבוזום ו-SRP נקשר אליו; 2 — SRP מביא את הריבוזום לקולטן שלו ליד תעלת Sec61; 3 — SRP משתחרר, השרשרת מושחלת דרך התעלה לחלל ה-ER ופפטידאז האות חותך את האות">
-      <He x={240} y={20} size={12} color={MUTED}>ציטוזול</He>
-      <Membrane y={178} h={30} />
-      <He x={240} y={290} size={12} color={MUTED}>חלל ה-ER</He>
-      {/* 1 */}
-      <Num x={22} y={46} n={1} />
-      {ribo(80, 88)}
-      <path d="M80 106 q6 16 -4 30" fill="none" stroke={INK} strokeWidth={2} />
-      <Line x1={76} y1={136} x2={70} y2={152} c={RED} w={4} />
-      <rect x={52} y={140} width={46} height={16} rx={8} fill={FILL.purple} stroke={PURPLE} strokeWidth={1.4} />
-      <La x={75} y={152} size={11} bold color={PURPLE}>SRP</La>
-      <He x={80} y={232} size={11.5} color={RED}>רצף אות</He>
-      <He x={80} y={248} size={11} color={MUTED}>ו-SRP נקשר</He>
-      <Arrow x1={136} y1={70} x2={180} y2={70} />
-      {/* 2 */}
-      <Num x={186} y={46} n={2} />
-      {ribo(236, 132)}
-      <rect x={256} y={148} width={44} height={16} rx={8} fill={FILL.purple} stroke={PURPLE} strokeWidth={1.4} />
-      <La x={278} y={160} size={11} bold color={PURPLE}>SRP</La>
-      <rect x={268} y={168} width={22} height={22} rx={4} fill={FILL.purple} stroke={PURPLE} strokeWidth={1.3} />
-      <Sec61 x={226} open={false} />
-      <La x={222} y={232} size={11.5} bold color={GREEN}>Sec61</La>
-      <He x={282} y={248} size={11} color={PURPLE}>קולטן SRP</He>
-      <Arrow x1={306} y1={70} x2={346} y2={70} />
-      {/* 3 */}
-      <Num x={350} y={46} n={3} />
-      {ribo(410, 150)}
-      <Sec61 x={410} open />
-      <path d="M410 168 L410 214 q-14 12 0 22 q14 10 0 22" fill="none" stroke={INK} strokeWidth={2} />
-      <Line x1={428} y1={184} x2={428} y2={202} c={RED} w={4} />
-      <He x={362} y={232} size={11} color={RED}>האות נחתך</He>
-      <He x={362} y={248} size={11} color={MUTED}>(פפטידאז)</He>
-      <rect x={420} y={84} width={44} height={16} rx={8} fill={FILL.purple} stroke={PURPLE} strokeWidth={1.4} />
-      <La x={442} y={96} size={11} bold color={PURPLE}>SRP</La>
-      <Arrow x1={430} y1={128} x2={438} y2={104} color={PURPLE} />
-      <La x={368} y={106} size={10.5} color={PURPLE}>GTP</La>
-    </Svg>
-  );
-}
+// CotranslationalTranslocation: redrawn at textbook level (2026-11-02) — see ./redraws/CotranslationalTranslocation.tsx; old code in archive/figures/2026-11-02/.
 
 // ── cell-quality-control ─────────────────────────────────────────────────────
 function CalnexinCycle() {

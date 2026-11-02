@@ -5,6 +5,9 @@ import type React from "react";
 import { ArrowDefs, Axes, BLUE, GREEN, INK, LINE, MUTED, ORANGE, He, La, curve, dash, scale } from "./biochemFigures";
 import { Arrow, Cycle, type Edge } from "./metabolicFigures";
 import { PcrPrimerDesign, SangerRead, PrimerExtensionGel, EmsaGel, FootprintLadder, ChipSteps, TweezersTrace } from "./molecularMethodsFigures";
+import { TrnaStructure } from "./redraws/TrnaStructure";
+import { OriginLicensing } from "./redraws/OriginLicensing";
+import { PicAssembly } from "./redraws/PicAssembly";
 
 const PURPLE = "#7c3aed";
 const RED = "#b91c1c";
@@ -290,33 +293,7 @@ function OricInitiation() {
   );
 }
 
-function OriginLicensing() {
-  return (
-    <Svg h={330} label="רישוי וירי של מקורות באאוקריוטים: ב-G1 (CDK נמוך) ORC, Cdc6 ו-Cdt1 טוענים שתי טבעות MCM לא פעילות; ב-S (CDK ו-DDK גבוהים) נוצר ההליקאז הפעיל CMG ושני מזלגות יוצאים; כל עוד CDK גבוה אין טעינה חדשה">
-      <He x={240} y={22} size={13} bold>G1 — CDK נמוך: רישוי</He>
-      <Line x1={40} y1={72} x2={440} y2={72} />
-      <rect x={130} y={48} width={56} height={22} rx={6} fill={FILL.purple} stroke={PURPLE} strokeWidth={1.5} /><La x={158} y={63} size={11} bold>ORC</La>
-      <circle cx={204} cy={50} r={10} fill={FILL.orange} stroke={ORANGE} strokeWidth={1.5} /><La x={200} y={36} size={9.5} anchor="end">Cdc6</La>
-      <circle cx={224} cy={50} r={10} fill={FILL.orange} stroke={ORANGE} strokeWidth={1.5} /><La x={230} y={36} size={9.5} anchor="start">Cdt1</La>
-      <ellipse cx={272} cy={72} rx={17} ry={20} fill={FILL.yellow} stroke="#b45309" strokeWidth={2} />
-      <ellipse cx={308} cy={72} rx={17} ry={20} fill={FILL.yellow} stroke="#b45309" strokeWidth={2} />
-      <La x={290} y={110} size={11} color="#b45309">MCM ×2</La>
-      <He x={390} y={110} size={11} color={MUTED}>מורשה, לא פעיל</He>
-
-      <He x={240} y={142} size={13} bold>S — CDK ו-DDK גבוהים: ירי</He>
-      <path d="M40 188 L170 188 Q240 152 310 188 L440 188" fill="none" stroke={BLUE} strokeWidth={3} />
-      <path d="M40 198 L170 198 Q240 234 310 198 L440 198" fill="none" stroke={BLUE} strokeWidth={3} />
-      <ellipse cx={186} cy={180} rx={20} ry={14} fill={FILL.yellow} stroke="#b45309" strokeWidth={2} /><La x={186} y={184} size={10} bold>CMG</La>
-      <ellipse cx={294} cy={206} rx={20} ry={14} fill={FILL.yellow} stroke="#b45309" strokeWidth={2} /><La x={294} y={210} size={10} bold>CMG</La>
-      <Arrow x1={162} y1={162} x2={118} y2={162} color="#b45309" />
-      <Arrow x1={318} y1={226} x2={362} y2={226} color="#b45309" />
-      <He x={240} y={248} size={11} color={MUTED}>Cdc45 ו-GINS מצטרפים ל-MCM</He>
-
-      <He x={240} y={284} size={13} bold>מ-S עד סוף המיטוזה: אין רישוי חדש</He>
-      <He x={240} y={306} size={11.5}>Cdc6 מפורק · Cdt1 מעוכב בידי ג&apos;מינין · ORC מזורחן</He>
-    </Svg>
-  );
-}
+// OriginLicensing: redrawn at textbook level (2026-11-02) — see ./redraws/OriginLicensing.tsx; old code in archive/figures/2026-11-02/.
 
 function Telomerase() {
   const step = 17, x0 = 44;
@@ -515,36 +492,7 @@ function Terminators() {
 }
 
 // ── mol-transcription-euk ────────────────────────────────────────────────────
-function PicAssembly() {
-  return (
-    <Svg h={260} label="קומפלקס הטרום-התחלה של RNA פולימראז II: TFIID (עם TBP) נקשר ראשון לתיבת TATA, אחריו TFIIA ו-TFIIB, הפולימראז עם TFIIF, TFIIE ובסוף TFIIH, שפותח את ה-DNA ומזרחן את ה-CTD">
-      <Line x1={20} y1={186} x2={460} y2={186} c={INK} />
-      <Line x1={20} y1={196} x2={460} y2={196} c={INK} />
-      <rect x={112} y={182} width={34} height={18} rx={3} fill={FILL.red} stroke={RED} strokeWidth={1.4} />
-      <La x={129} y={218} size={11.5} bold color={RED}>TATA</La>
-      <La x={250} y={218} size={11.5} bold color={GREEN}>+1</La>
-      <path d="M250 182 L250 168" stroke={GREEN} strokeWidth={2} />
-      <rect x={86} y={110} width={92} height={62} rx={14} fill={FILL.purple} stroke={PURPLE} strokeWidth={1.6} />
-      <La x={132} y={128} size={11.5} bold>TFIID</La>
-      <path d="M106 180 Q129 140 152 180" fill={FILL.orange} stroke={ORANGE} strokeWidth={2} />
-      <La x={129} y={170} size={10} bold>TBP</La>
-      <circle cx={70} cy={160} r={14} fill={FILL.gray} stroke={INK} strokeWidth={1.4} /><La x={70} y={164} size={11} bold>A</La>
-      <circle cx={194} cy={162} r={15} fill={FILL.gray} stroke={INK} strokeWidth={1.4} /><La x={194} y={166} size={11} bold>B</La>
-      <ellipse cx={268} cy={134} rx={52} ry={42} fill={FILL.sky} stroke={BLUE} strokeWidth={1.8} />
-      <La x={262} y={140} size={13} bold>Pol II</La>
-      <circle cx={300} cy={98} r={13} fill={FILL.gray} stroke={INK} strokeWidth={1.4} /><La x={300} y={102} size={11} bold>F</La>
-      <circle cx={336} cy={160} r={14} fill={FILL.gray} stroke={INK} strokeWidth={1.4} /><La x={336} y={164} size={11} bold>E</La>
-      <ellipse cx={392} cy={150} rx={36} ry={22} fill={FILL.green} stroke={GREEN} strokeWidth={1.6} />
-      <La x={392} y={154} size={11} bold>TFIIH</La>
-      <path d="M240 94 Q236 60 270 46 Q300 36 330 50" fill="none" stroke={BLUE} strokeWidth={2.5} {...dash} />
-      {[268, 296, 322].map((x, i) => <g key={x}><circle cx={x} cy={i === 0 ? 47 : i === 1 ? 40 : 48} r={7} fill={FILL.yellow} stroke={ORANGE} strokeWidth={1.4} /><La x={x} y={(i === 0 ? 47 : i === 1 ? 40 : 48) + 4} size={8.5} bold>P</La></g>)}
-      <He x={380} y={44} size={11} color={ORANGE}>CTD: זרחון Ser5</He>
-      <Arrow x1={380} y1={128} x2={346} y2={62} color={ORANGE} />
-      <Num x={132} y={98} n={1} /><Num x={52} y={140} n={2} /><Num x={212} y={142} n={3} /><Num x={230} y={86} n={4} /><Num x={356} y={140} n={5} /><Num x={430} y={126} n={6} />
-      <He x={240} y={246} size={11.5}>המספרים — סדר ההרכבה הקלאסי</He>
-    </Svg>
-  );
-}
+// PicAssembly: redrawn at textbook level (2026-11-02) — see ./redraws/PicAssembly.tsx; old code in archive/figures/2026-11-02/.
 
 function EnhancerLoop() {
   return (
@@ -625,35 +573,7 @@ function AlternativeSplicing() {
 }
 
 // ── mol-genetic-code ─────────────────────────────────────────────────────────
-function TrnaStructure() {
-  const stemV = (x: number, y1: number, y2: number) => (<g><Line x1={x - 12} y1={y1} x2={x - 12} y2={y2} c={PURPLE} /><Line x1={x + 12} y1={y1} x2={x + 12} y2={y2} c={PURPLE} />{Array.from({ length: Math.floor((y2 - y1) / 12) }, (_, i) => <line key={i} x1={x - 12} x2={x + 12} y1={y1 + 8 + i * 12} y2={y1 + 8 + i * 12} stroke={PURPLE} strokeWidth={1.2} />)}</g>);
-  const stemH = (y: number, x1: number, x2: number) => (<g><Line x1={x1} y1={y - 12} x2={x2} y2={y - 12} c={PURPLE} /><Line x1={x1} y1={y + 12} x2={x2} y2={y + 12} c={PURPLE} />{Array.from({ length: Math.floor(Math.abs(x2 - x1) / 12) }, (_, i) => <line key={i} x1={Math.min(x1, x2) + 8 + i * 12} x2={Math.min(x1, x2) + 8 + i * 12} y1={y - 12} y2={y + 12} stroke={PURPLE} strokeWidth={1.2} />)}</g>);
-  return (
-    <Svg h={390} label="מבנה התלתן של tRNA: זרוע הקבלה עם קצה CCA שאליו מחוברת חומצת האמינו, זרוע D, זרוע TψC, לולאה משתנה, וזרוע האנטיקודון שבלולאה שלה שלושת בסיסי האנטיקודון">
-      {stemV(240, 80, 160)}
-      <La x={222} y={74} size={12} bold>5′</La>
-      {["C", "C", "A"].map((c, i) => <La key={i} x={266} y={72 - i * 16} size={13} bold color={ORANGE}>{c}</La>)}
-      <La x={268} y={22} size={11} bold>3′</La>
-      <circle cx={290} cy={30} r={13} fill={FILL.green} stroke={GREEN} strokeWidth={2} />
-      <La x={290} y={34} size={10} bold>aa</La>
-      <He x={360} y={34} size={11} color={GREEN}>חומצת אמינו</He>
-      <He x={340} y={110} size={11} color={MUTED}>זרוע הקבלה</He>
-      {stemH(184, 228, 160)}
-      <circle cx={128} cy={184} r={32} fill="none" stroke={PURPLE} strokeWidth={3} />
-      <He x={128} y={234} size={11} color={MUTED}>זרוע D</He>
-      {stemH(184, 252, 320)}
-      <circle cx={352} cy={184} r={32} fill="none" stroke={PURPLE} strokeWidth={3} />
-      <La x={352} y={240} size={11} color={MUTED}>TψC</La>
-      <path d="M252 212 Q290 226 268 238" fill="none" stroke={PURPLE} strokeWidth={3} />
-      <He x={318} y={258} size={10.5} color={MUTED}>לולאה משתנה</He>
-      {stemV(240, 208, 284)}
-      <circle cx={240} cy={316} r={32} fill="none" stroke={PURPLE} strokeWidth={3} />
-      {[222, 240, 258].map((x) => <rect key={x} x={x - 8} y={340} width={16} height={18} rx={3} fill={FILL.orange} stroke={ORANGE} strokeWidth={1.5} />)}
-      {["G", "A", "A"].map((c, i) => <La key={i} x={222 + i * 18} y={354} size={11} bold>{c}</La>)}
-      <He x={240} y={380} size={12} bold color={ORANGE}>אנטיקודון</He>
-    </Svg>
-  );
-}
+// TrnaStructure: redrawn at textbook level (2026-11-02) — see ./redraws/TrnaStructure.tsx; old code in archive/figures/2026-11-02/.
 
 function Aminoacylation() {
   return (

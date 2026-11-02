@@ -1,0 +1,27 @@
+function OriginLicensing() {
+  return (
+    <Svg h={330} label="רישוי וירי של מקורות באאוקריוטים: ב-G1 (CDK נמוך) ORC, Cdc6 ו-Cdt1 טוענים שתי טבעות MCM לא פעילות; ב-S (CDK ו-DDK גבוהים) נוצר ההליקאז הפעיל CMG ושני מזלגות יוצאים; כל עוד CDK גבוה אין טעינה חדשה">
+      <He x={240} y={22} size={13} bold>G1 — CDK נמוך: רישוי</He>
+      <Line x1={40} y1={72} x2={440} y2={72} />
+      <rect x={130} y={48} width={56} height={22} rx={6} fill={FILL.purple} stroke={PURPLE} strokeWidth={1.5} /><La x={158} y={63} size={11} bold>ORC</La>
+      <circle cx={204} cy={50} r={10} fill={FILL.orange} stroke={ORANGE} strokeWidth={1.5} /><La x={200} y={36} size={9.5} anchor="end">Cdc6</La>
+      <circle cx={224} cy={50} r={10} fill={FILL.orange} stroke={ORANGE} strokeWidth={1.5} /><La x={230} y={36} size={9.5} anchor="start">Cdt1</La>
+      <ellipse cx={272} cy={72} rx={17} ry={20} fill={FILL.yellow} stroke="#b45309" strokeWidth={2} />
+      <ellipse cx={308} cy={72} rx={17} ry={20} fill={FILL.yellow} stroke="#b45309" strokeWidth={2} />
+      <La x={290} y={110} size={11} color="#b45309">MCM ×2</La>
+      <He x={390} y={110} size={11} color={MUTED}>מורשה, לא פעיל</He>
+
+      <He x={240} y={142} size={13} bold>S — CDK ו-DDK גבוהים: ירי</He>
+      <path d="M40 188 L170 188 Q240 152 310 188 L440 188" fill="none" stroke={BLUE} strokeWidth={3} />
+      <path d="M40 198 L170 198 Q240 234 310 198 L440 198" fill="none" stroke={BLUE} strokeWidth={3} />
+      <ellipse cx={186} cy={180} rx={20} ry={14} fill={FILL.yellow} stroke="#b45309" strokeWidth={2} /><La x={186} y={184} size={10} bold>CMG</La>
+      <ellipse cx={294} cy={206} rx={20} ry={14} fill={FILL.yellow} stroke="#b45309" strokeWidth={2} /><La x={294} y={210} size={10} bold>CMG</La>
+      <Arrow x1={162} y1={162} x2={118} y2={162} color="#b45309" />
+      <Arrow x1={318} y1={226} x2={362} y2={226} color="#b45309" />
+      <He x={240} y={248} size={11} color={MUTED}>Cdc45 ו-GINS מצטרפים ל-MCM</He>
+
+      <He x={240} y={284} size={13} bold>מ-S עד סוף המיטוזה: אין רישוי חדש</He>
+      <He x={240} y={306} size={11.5}>Cdc6 מפורק · Cdt1 מעוכב בידי ג&apos;מינין · ORC מזורחן</He>
+    </Svg>
+  );
+}

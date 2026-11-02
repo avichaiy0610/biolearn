@@ -1,0 +1,30 @@
+function PicAssembly() {
+  return (
+    <Svg h={260} label="קומפלקס הטרום-התחלה של RNA פולימראז II: TFIID (עם TBP) נקשר ראשון לתיבת TATA, אחריו TFIIA ו-TFIIB, הפולימראז עם TFIIF, TFIIE ובסוף TFIIH, שפותח את ה-DNA ומזרחן את ה-CTD">
+      <Line x1={20} y1={186} x2={460} y2={186} c={INK} />
+      <Line x1={20} y1={196} x2={460} y2={196} c={INK} />
+      <rect x={112} y={182} width={34} height={18} rx={3} fill={FILL.red} stroke={RED} strokeWidth={1.4} />
+      <La x={129} y={218} size={11.5} bold color={RED}>TATA</La>
+      <La x={250} y={218} size={11.5} bold color={GREEN}>+1</La>
+      <path d="M250 182 L250 168" stroke={GREEN} strokeWidth={2} />
+      <rect x={86} y={110} width={92} height={62} rx={14} fill={FILL.purple} stroke={PURPLE} strokeWidth={1.6} />
+      <La x={132} y={128} size={11.5} bold>TFIID</La>
+      <path d="M106 180 Q129 140 152 180" fill={FILL.orange} stroke={ORANGE} strokeWidth={2} />
+      <La x={129} y={170} size={10} bold>TBP</La>
+      <circle cx={70} cy={160} r={14} fill={FILL.gray} stroke={INK} strokeWidth={1.4} /><La x={70} y={164} size={11} bold>A</La>
+      <circle cx={194} cy={162} r={15} fill={FILL.gray} stroke={INK} strokeWidth={1.4} /><La x={194} y={166} size={11} bold>B</La>
+      <ellipse cx={268} cy={134} rx={52} ry={42} fill={FILL.sky} stroke={BLUE} strokeWidth={1.8} />
+      <La x={262} y={140} size={13} bold>Pol II</La>
+      <circle cx={300} cy={98} r={13} fill={FILL.gray} stroke={INK} strokeWidth={1.4} /><La x={300} y={102} size={11} bold>F</La>
+      <circle cx={336} cy={160} r={14} fill={FILL.gray} stroke={INK} strokeWidth={1.4} /><La x={336} y={164} size={11} bold>E</La>
+      <ellipse cx={392} cy={150} rx={36} ry={22} fill={FILL.green} stroke={GREEN} strokeWidth={1.6} />
+      <La x={392} y={154} size={11} bold>TFIIH</La>
+      <path d="M240 94 Q236 60 270 46 Q300 36 330 50" fill="none" stroke={BLUE} strokeWidth={2.5} {...dash} />
+      {[268, 296, 322].map((x, i) => <g key={x}><circle cx={x} cy={i === 0 ? 47 : i === 1 ? 40 : 48} r={7} fill={FILL.yellow} stroke={ORANGE} strokeWidth={1.4} /><La x={x} y={(i === 0 ? 47 : i === 1 ? 40 : 48) + 4} size={8.5} bold>P</La></g>)}
+      <He x={380} y={44} size={11} color={ORANGE}>CTD: זרחון Ser5</He>
+      <Arrow x1={380} y1={128} x2={346} y2={62} color={ORANGE} />
+      <Num x={132} y={98} n={1} /><Num x={52} y={140} n={2} /><Num x={212} y={142} n={3} /><Num x={230} y={86} n={4} /><Num x={356} y={140} n={5} /><Num x={430} y={126} n={6} />
+      <He x={240} y={246} size={11.5}>המספרים — סדר ההרכבה הקלאסי</He>
+    </Svg>
+  );
+}

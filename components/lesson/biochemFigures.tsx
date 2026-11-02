@@ -3,6 +3,7 @@
    in their captions. Referenced from lesson bodies as [[figure:<id>]]. */
 import type React from "react";
 import { isolatePrimes } from "@/lib/text";
+import { HBondPatterns } from "./redraws/HBondPatterns";
 
 export const BLUE = "#1d4ed8", ORANGE = "#c2410c", GREEN = "#15803d", INK = "#1f2937", MUTED = "#64748b", LINE = "#cbd5e1";
 const HE = { fontFamily: "var(--font-hebrew), Arial, sans-serif" };
@@ -93,32 +94,7 @@ function GlycineTitration() {
 }
 
 // ── Protein structure ────────────────────────────────────────────────────────
-function HBondPatterns() {
-  const xs = Array.from({ length: 11 }, (_, i) => 40 + i * 40);
-  return (
-    <svg viewBox="0 0 480 300" className="w-full h-auto" role="img" aria-label="דפוסי קשרי מימן: בסליל אלפא בין שייר i לשייר i+4 באותה שרשרת; במשטח בטא בין שני גדילים סמוכים">
-      <He x={240} y={24} bold>סליל α — בתוך השרשרת: CO של i ↔ NH של i+4</He>
-      {xs.slice(0, 7).map((x, i) => (
-        <path key={i} d={`M${x} 100 Q${x + 80} ${30 + (i % 2) * 12} ${x + 160} 100`} fill="none" stroke={ORANGE} strokeWidth={1.6} {...dash} />
-      ))}
-      <line x1={40} y1={100} x2={440} y2={100} stroke={INK} strokeWidth={3} />
-      {xs.map((x, i) => (<g key={i}><circle cx={x} cy={100} r={11} fill="#dbeafe" stroke={BLUE} strokeWidth={2} /><La x={x} y={105} size={12}>{i + 1}</La></g>))}
-      <He x={240} y={168} bold>משטח β — בין גדילים סמוכים (אנטי-מקבילי)</He>
-      <line x1={60} y1={200} x2={420} y2={200} stroke={INK} strokeWidth={3} />
-      <line x1={60} y1={262} x2={420} y2={262} stroke={INK} strokeWidth={3} />
-      <La x={440} y={205} size={14} color={MUTED}>→</La><La x={42} y={267} size={14} color={MUTED}>←</La>
-      {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((i) => {
-        const x = 75 + i * 37;
-        return (<g key={i}>
-          {i % 2 === 0 && <line x1={x} y1={209} x2={x} y2={253} stroke={ORANGE} strokeWidth={1.6} {...dash} />}
-          <circle cx={x} cy={200} r={9} fill="#dbeafe" stroke={BLUE} strokeWidth={2} />
-          <circle cx={x} cy={262} r={9} fill="#dcfce7" stroke={GREEN} strokeWidth={2} />
-        </g>);
-      })}
-      <He x={240} y={292} size={13} color={MUTED}>מקווקו כתום = קשר מימן בין קבוצות השלד (סכמטי)</He>
-    </svg>
-  );
-}
+// HBondPatterns: redrawn at textbook level (2026-11-02) — see ./redraws/HBondPatterns.tsx; old code in archive/figures/2026-11-02/.
 
 // ── Folding ──────────────────────────────────────────────────────────────────
 function Denaturation() {
