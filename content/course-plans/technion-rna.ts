@@ -7,6 +7,8 @@ import { rnPirna } from "../lessons/technion-rna/rn-pirna";
 import { rnSnorna } from "../lessons/technion-rna/rn-snorna";
 import { rnLncrna } from "../lessons/technion-rna/rn-lncrna";
 import { rnInheritance } from "../lessons/technion-rna/rn-inheritance";
+import { rnM6a } from "../lessons/technion-rna/rn-m6a";
+import { rnExtracellular } from "../lessons/technion-rna/rn-extracellular";
 import { gxNcrna } from "../lessons/technion-gene-expression/gx-ncrna";
 
 // Technion 01340151 "העולם המודרני של הרנ"א" (Biology faculty, 2 points) — built with the course-track-builder skill,
@@ -36,6 +38,8 @@ const LECTURES: { titleHe: string; items: PlanItem[]; practice: PlanItem[] }[] =
   { titleHe: "snoRNA", items: sec(rnSnorna), practice: probs(rnSnorna) },
   { titleHe: "lncRNA", items: [...sec(rnLncrna), ...LNC_ANIMATIONS], practice: probs(rnLncrna) },
   { titleHe: "RNA כמרכיב תורשתי", items: sec(rnInheritance), practice: probs(rnInheritance) },
+  { titleHe: "שינויים כימיים ב-mRNA: m6A בתורשה ובהתפתחות", items: sec(rnM6a), practice: probs(rnM6a) },
+  { titleHe: "RNA בין תאים: אקסוזומים", items: sec(rnExtracellular), practice: probs(rnExtracellular) },
 ];
 
 export const technionRnaPlan: CoursePlan = {
@@ -55,7 +59,8 @@ export const technionRnaPlan: CoursePlan = {
     { titleHe: "RNA המבקר ביטוי גנים — piRNA", items: sec(rnPirna) },
     { titleHe: "RNA המבקר ביטוי גנים — snoRNA", items: sec(rnSnorna) },
     { titleHe: "RNA המבקר ביטוי גנים — tmRNA (פרשנות זמנית של \"RNATM\") ו-RNA בחיידקים", items: sec(rnBacterialRna) },
-    { titleHe: "RNA כמרכיב תורשתי בעל השפעה בין-דורית", items: sec(rnInheritance) },
+    { titleHe: "RNA כמרכיב תורשתי בעל השפעה בין-דורית", items: [...sec(rnInheritance), ...sec(rnM6a)] },
+    { titleHe: "העברת RNA בין תאים (לוח 2025)", items: sec(rnExtracellular) },
     { titleHe: "רענון מקורס הקדם: miRNA ו-siRNA", items: sec(gxNcrna) },
   ],
   lectures: LECTURES.map((l, i): PlanSession => ({ n: i + 1, titleHe: l.titleHe, items: l.items })),

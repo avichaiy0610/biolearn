@@ -22,11 +22,25 @@ const DEV = "תהליכים בהתפתחות המח";
 const IMM = "האינטראקציה בין מערכת החיסון והמח";
 const METH = "שיטות מחקר מתקדמות בחקר המח";
 
+// The lecturers' own 2025 syllabus and the 2025 moed A reconstruction (added 2026-11-05).
+const syl = (topic: string, what: string): ScopeEntry => ({ level: "core", evidence: "syllabus-named", noteHe: `הסילבוס של המרצים (2025): "${topic}" — ${what}` });
+const exam25 = (what: string): ScopeEntry => ({ level: "core", evidence: "exam", noteHe: `נבחן בשחזור מועד א' 2025: ${what}` });
+
 export const technionNeurobiologyScope: CourseScope = {
   courseSlug: "technion-neurobiology",
-  checkedAt: "2026-10-24",
+  checkedAt: "2026-11-05",
   defaultSource: { labelHe: "הסילבוס בפורטל הטכניון", url: "https://students.technion.ac.il/local/technionsearch/course/134157" },
   sections: {
+    "nb-anatomy-senses": {
+      cortex: exam25("קליפת התנועה, והחידוש בשיטה של ברוקה"),
+      "deep-structures": exam25("התלמוס (היגד על רגשות ופחדים)"),
+      ventricles: exam25("תאי האפנדימה וה-CSF (מחסום הדם-מוח — ב-nb-neuroimmune#bbb)"),
+      spinal: exam25("עצבים שונים לאורך הציר הקדמי-אחורי מעצבבים שרירים שונים"),
+      senses: exam25("חישת טמפרטורה דרך DRG, תצלובת הראייה, ומה דומה בין מסלולי השמיעה והראייה; ריח וטעם מדף העזר 2025"),
+      "reflex-circuit": exam25("מעגל הרפלקס — מוליכים ויונים, והסיגנל לשחרור מוליך"),
+      myasthenia: exam25("מיאסתניה גרביס: תסמינים ושתי אסטרטגיות טיפול"),
+      aging: syl("Brain aging and neurodegeneration", "והיגד במבחן 2025 על שיפור ההולכה בגיל ההתבגרות"),
+    },
     "nb-cells": {
       "neuron-doctrine": heading(CELLS, "תורת הנוירון וההיסטוריה שלה"),
       "neuron-structure": named(CELLS, "מבנה הנוירון"),
@@ -101,6 +115,17 @@ export const technionNeurobiologyScope: CourseScope = {
       refractory: named(MOL, "רענון מקורס הפיזיולוגיה"),
       conduction: named(MOL, "רענון מקורס הפיזיולוגיה"),
       myelin: named(MOL, "רענון מקורס הפיזיולוגיה"),
+      "gating-mechanisms": exam25("עקרונות פוטנציאל הפעולה: הכול או לא כלום, חד-כיווניות ורגנרטיביות — המנגנון המולקולרי"),
+    },
+    "ph-nervous-system": {
+      neuron: named(CELLS, "רענון מקורס הפיזיולוגיה"),
+      "axonal-transport": exam25("הובלה איטית ומהירה באקסון, ומעבר המיטוכונדריה"),
+      "cns-pns": syl("Introduction: Neuroanatomy", "רענון מקורס הפיזיולוגיה"),
+      sensory: syl("Introduction: peripheral nervous system and senses", "תרגום חושי ו-TRPV1"),
+      reflex: exam25("מעגל הרפלקס"),
+      glia: named(CELLS, "רענון מקורס הפיזיולוגיה"),
+      "csf-bbb": exam25("מחסום הדם-מוח, שלושת מרכיביו ומתן תרופות"),
+      injury: syl("Neurodevelopment and regeneration", "ניוון והתחדשות של עצב"),
     },
     "ph-synapse": {
       types: named(MOL, "רענון מקורס הפיזיולוגיה"),
@@ -110,6 +135,7 @@ export const technionNeurobiologyScope: CourseScope = {
       integration: named(FUNC, "רענון מקורס הפיזיולוגיה"),
       plasticity: named(FUNC, "רענון מקורס הפיזיולוגיה"),
       transmitters: named(MOL, "רענון מקורס הפיזיולוגיה"),
+      drugs: exam25("טיפול תרופתי בפרקינסון ומחסום הדם-מוח; מיאסתניה גרביס"),
     },
   },
 };

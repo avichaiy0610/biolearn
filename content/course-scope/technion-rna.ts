@@ -20,6 +20,9 @@ const LIFE = "שלב ביצירת החיים על פני כדור הארץ";
 const REG = "מולקולה המבקרת ביטוי גנים (בדגש על רנ\"א שאיננו מקודד)";
 const INH = "מרכיב תורשתי בתאים אאוקריוטים בעל השפעה בין-דורית";
 
+// The lecturer's own 2025 schedule (`syllabuses/_text/RNA world 2025 Schedule.docx.txt`, added 2026-11-05): one paper per lecture.
+const sched = (lecture: string, paper: string): ScopeEntry => ({ level: "core", evidence: "syllabus-named", noteHe: `לוח ההרצאות של המרצה (2025): "${lecture}" — ${paper}` });
+
 export const technionRnaScope: CourseScope = {
   courseSlug: "technion-rna",
   checkedAt: "2026-10-24",
@@ -70,6 +73,18 @@ export const technionRnaScope: CourseScope = {
       imprinting: named(REG, "lncRNA — החתמה (Airn)"),
       neat1: heading(REG, "NEAT1 ופרספקלים"),
       attribution: named(REG, "lncRNA — איך מוכיחים תפקיד"),
+    },
+    "rn-m6a": {
+      basics: sched("mRNA modifications and inheritance", "רקע לשתי ההרצאות על m6A"),
+      mapping: sched("mRNA modifications and inheritance", "השיטה שבמאמרים"),
+      "zebrafish-mzt": sched("mRNA modifications and inheritance", "Zhao et al., Nature 2017"),
+      "drosophila-ythdf": sched("RNA modifications in development", "Worpenberg et al., EMBO J 2021"),
+    },
+    "rn-extracellular": {
+      vesicles: sched("RNA delivery: exosomes transport RNA between cells", "רקע"),
+      valadi: sched("RNA delivery: exosomes transport RNA between cells", "Valadi et al., Nat Cell Biol 2007"),
+      cai: sched("RNA delivery: exosomes transport RNA between cells", "Cai et al., Science 2018"),
+      critique: sched("RNA delivery", "בקרות — הפרויקט הסופי בקורס בודק בקרות ובקרה חסרה"),
     },
     "rn-inheritance": {
       definitions: named(INH, "בין-דורי מול טרנס-דורי"),
