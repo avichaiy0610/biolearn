@@ -101,6 +101,7 @@ export const technionBiology1Scope: CourseScope = {
       semiconservative: named(T9, "שכפול ה-DNA"),
       replication: named(T9, "שכפול ה-DNA"),
       fidelity: heading(T9, "דיוק השכפול, תיקון וטלומרים"),
+      "genetic-engineering": { level: "core", evidence: "exam", noteHe: "מופיע במבחנים משנים שונות: תחלים ב-PCR (חורף 2020 מועד א'), שעתוק הפוך, PCR ושיבוט לפלסמיד ביטוי (חורף 2020), אנזימי הגבלה וג'ל (2015–2019)" },
     },
     "b1-gene-expression": {
       "central-dogma": named(T9, "מגן לחלבון — שעתוק ותרגום — מהגנוטיפ לפנוטיפ"),
