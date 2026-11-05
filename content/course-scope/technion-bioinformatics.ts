@@ -25,11 +25,13 @@ const STATS = "לנתח תוצאות ביואינפורמטיות בעזרת כ�
 const ADVANCED = "גישות מתקדמות לניתוחם [של נתוני הענק]";
 const STRUCTURE = "ניבוי מבני של מולקולות ביולוגיות";
 const NETWORKS = "ניתוח רשתות ביולוגיות";
+// The lecturer's own 2024-25 schedule (Prof. Yael Mandel-Gutfreund), found in the Drive audit (added 2026-11-05).
+const sched = (lecture: string): ScopeEntry => ({ level: "core", evidence: "syllabus-named", noteHe: `לוח ההרצאות והתרגולים 2024-25: "${lecture}" (הנושא בלוח; הכלים הספציפיים — בחירה דידקטית)` });
 const PROJECT = "לתכנן ולבצע פרויקט בסיסי בביואינפורמטיקה… לסכם תוצאות מחקר ביואינפורמטי ולהציגו";
 
 export const technionBioinformaticsScope: CourseScope = {
   courseSlug: "technion-bioinformatics",
-  checkedAt: "2026-10-26",
+  checkedAt: "2026-11-05",
   defaultSource: { labelHe: "הסילבוס בפורטל הטכניון", url: "https://students.technion.ac.il/local/technionsearch/course/136158" },
   sections: {
     "bi-databases": {
@@ -69,8 +71,22 @@ export const technionBioinformaticsScope: CourseScope = {
       progressive: heading(TOOLS, "עימוד מרובה"),
       conservation: heading(TOOLS, "שימור"),
       motifs: heading(TOOLS, "מוטיבים ו-PWM"),
+      "chip-seq": sched("Motif discovery + function enrichment (tutorial: ChIP-seq + motif prediction)"),
       domains: heading(TOOLS, "תחומים ו-Pfam/InterPro"),
       trees: heading(TOOLS, "עצים פילוגנטיים"),
+    },
+    "bi-microbiome": {
+      approaches: sched("Microbiome (lecture; tutorial: microbiome analysis)"),
+      pipeline: sched("Microbiome analysis tutorial"),
+      diversity: sched("Microbiome analysis tutorial"),
+      pitfalls: sched("Microbiome (lecture)"),
+    },
+    "bi-singlecell": {
+      why: sched("Single-cell RNA-seq (lecture)"),
+      barcodes: sched("Single-cell RNA-seq (lecture)"),
+      qc: sched("Single-cell RNA-seq (lecture)"),
+      pipeline: sched("Single-cell RNA-seq (lecture)"),
+      annotation: sched("Single-cell RNA-seq (lecture)"),
     },
     "bi-sequencing": {
       technologies: named(RETRIEVAL, "טכנולוגיות ריצוף"),

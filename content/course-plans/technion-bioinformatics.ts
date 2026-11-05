@@ -7,6 +7,8 @@ import { biBlast } from "../lessons/technion-bioinformatics/bi-blast";
 import { biMsa } from "../lessons/technion-bioinformatics/bi-msa";
 import { biSequencing } from "../lessons/technion-bioinformatics/bi-sequencing";
 import { biRnaseq } from "../lessons/technion-bioinformatics/bi-rnaseq";
+import { biMicrobiome } from "../lessons/technion-bioinformatics/bi-microbiome";
+import { biSingleCell } from "../lessons/technion-bioinformatics/bi-singlecell";
 import { biStatsExploration } from "../lessons/technion-bioinformatics/bi-stats-exploration";
 import { biEnrichment } from "../lessons/technion-bioinformatics/bi-enrichment";
 import { biProteinStructure } from "../lessons/technion-bioinformatics/bi-protein-structure";
@@ -26,7 +28,7 @@ import { biProject } from "../lessons/technion-bioinformatics/bi-project";
 // "reading a tree" inside the MSA unit, variants merged into the sequencing unit, a project/reproducibility unit added
 // (portal outcomes 5–6). RNA-seq, statistics/exploration, enrichment and RNA structure are PROVISIONAL: plausible
 // applications of the portal text, not confirmed weekly topics.
-export const BIOINFORMATICS_LESSONS: Lesson[] = [biDatabases, biRBasics, biPairwise, biBlast, biMsa, biSequencing, biRnaseq,
+export const BIOINFORMATICS_LESSONS: Lesson[] = [biDatabases, biRBasics, biPairwise, biBlast, biMsa, biSequencing, biRnaseq, biMicrobiome, biSingleCell,
   biStatsExploration, biEnrichment, biProteinStructure, biRnaStructure, biNetworks, biProject];
 
 const sec = (l: Lesson, ...ids: string[]): PlanItem[] => (ids.length ? ids.map((section) => ({ kind: "lesson" as const, slug: l.slug, section })) : [{ kind: "lesson", slug: l.slug }]);
@@ -42,7 +44,7 @@ export const technionBioinformaticsPlan: CoursePlan = {
   courseSlug: "technion-bioinformatics",
   lectureOrder: {
     confidence: "suggested",
-    noteHe: "אין לוח הרצאות ציבורי לקורס (אתר הקורס במודל סגור, ולא נמצא סילבוס מפורט). הסדר כאן הוא סדר לימוד מוצע של הנושאים שבתיאור הקורס: מאגרים ו-R, ניתוח רצפים, נתוני ריצוף וניתוח סטטיסטי, חיזוי מבנה, רשתות, ופרויקט. ארבע יחידות (RNA-seq, סטטיסטיקה, העשרה, מבנה RNA) הן יישומים סבירים של התיאור — לא נושאים שאושרו.",
+    noteHe: "נמצאו בדרייב הסילבוס ולוח ההרצאות והתרגולים של 2024-25 (פרופ' יעל מנדל-גוטפרוינד); היחידות כאן מכסות גם את RNA-seq של תאים בודדים, המיקרוביום ו-ChIP-seq שבלוח. הסדר כאן הוא סדר לימוד מוצע של הנושאים שבתיאור הקורס: מאגרים ו-R, ניתוח רצפים, נתוני ריצוף וניתוח סטטיסטי, חיזוי מבנה, רשתות, ופרויקט. ארבע יחידות (RNA-seq, סטטיסטיקה, העשרה, מבנה RNA) הן יישומים סבירים של התיאור — לא נושאים שאושרו.",
     links: [PORTAL],
   },
   tutorialOrder: null,
@@ -52,7 +54,7 @@ export const technionBioinformaticsPlan: CoursePlan = {
     { titleHe: "כלים מרכזיים בביואינפורמטיקה; גישה למאגרים של נתוני ענק בביולוגיה וברפואה", items: [...sec(biDatabases), ...sec(biSequencing, "clinical")] },
     { titleHe: "שימוש בשפת התכנות R לשאלות ביואינפורמטיות", items: sec(biRBasics) },
     { titleHe: "ייצוג ואחזור רצפי חומצות גרעין וחלבונים", items: [...sec(biDatabases, "formats", "programmatic"), ...sec(biPairwise), ...sec(biBlast), ...sec(biMsa)] },
-    { titleHe: "רצפים מנתוני ריצוף", items: [...sec(biSequencing, "technologies", "fastq", "mapping", "coverage", "vcf", "browser"), ...sec(biRnaseq)] },
+    { titleHe: "רצפים מנתוני ריצוף", items: [...sec(biSequencing, "technologies", "fastq", "mapping", "coverage", "vcf", "browser"), ...sec(biRnaseq), ...sec(biMicrobiome), ...sec(biSingleCell)] },
     { titleHe: "ניתוח תוצאות בכלים סטטיסטיים מתאימים", items: [...sec(biStatsExploration), ...sec(biEnrichment)] },
     { titleHe: "ניבוי מבני של מולקולות ביולוגיות", items: [...sec(biProteinStructure), ...sec(biRnaStructure)] },
     { titleHe: "ניתוח רשתות ביולוגיות", items: sec(biNetworks) },
