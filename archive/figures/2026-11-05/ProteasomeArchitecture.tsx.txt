@@ -1,0 +1,47 @@
+function ProteasomeArchitecture() {
+  const ring = (y: number, fill: string, stroke: string, label: string, sub?: string) => (
+    <g>
+      <rect x={168} y={y} width={144} height={30} rx={4} fill={fill} stroke={stroke} strokeWidth={1.4} />
+      <La x={240} y={y + 20} size={12} bold color={stroke}>{label}</La>
+      {sub && <He x={326} y={y + 20} size={9.5} anchor="start" color={MUTED}>{sub}</He>}
+    </g>
+  );
+  return (
+    <Svg h={360} label="חתך של הפרוטאזום 26S: הליבה 20S בנויה מארבע טבעות — אלפא, בטא, בטא, אלפא. טבעות הבטא הפנימיות נושאות שלושה סוגי אתרים פעילים, ובסך הכול שישה אתרים, שהנוקלאופיל בהם הוא תראונין. טבעות האלפא החיצוניות סוגרות את השער. מעל הליבה יושב המכסה 19S: טבעת של שש ATPases שפותחות את השער ופורשות את המצע, הקולטנים ליוביקוויטין, ו-Rpn11 שמסיר את השרשרת.">
+      {/* cap */}
+      <rect x={156} y={28} width={168} height={40} rx={10} fill={FILL.purple} stroke={PURPLE} strokeWidth={1.4} />
+      <He x={240} y={53} size={11} bold color={PURPLE}>מכסה (lid) — כולל Rpn11</He>
+      <rect x={168} y={72} width={144} height={36} rx={6} fill={FILL.blue} stroke={BLUE} strokeWidth={1.4} />
+      <He x={240} y={95} size={11} bold color={BLUE}>בסיס: 6 ATPases (Rpt1–6)</He>
+      {ring(114, FILL.gray, INK, "α7", "זנבות ה-Rpt פותחים את השער")}
+      {ring(146, FILL.orange, ORANGE, "β7", "β1 · β2 · β5 — אתרים פעילים")}
+      {ring(178, FILL.orange, ORANGE, "β7", "הנוקלאופיל: תראונין בקצה N")}
+      {ring(210, FILL.gray, INK, "α7", "במצב חופשי — השער סגור")}
+      <g>
+        <Lead x1={150} y1={48} x2={110} y2={48} />
+        <He x={106} y={52} size={9.5} anchor="end" color={PURPLE}>DUB: מסיר שרשרת</He>
+        <Lead x1={162} y1={90} x2={110} y2={100} />
+        <He x={106} y={104} size={9.5} anchor="end" color={BLUE}>פרישה והשחלה (ATP)</He>
+        <Lead x1={162} y1={128} x2={118} y2={150} />
+        <He x={114} y={154} size={9.5} anchor="end">שער</He>
+        <Lead x1={162} y1={180} x2={118} y2={196} />
+        <He x={114} y={200} size={9.5} anchor="end" color={ORANGE}>חלל קטליטי סגור</He>
+      </g>
+      {/* substrate entering */}
+      <Ub cx={382} cy={34} r={8} />
+      <Ub cx={382} cy={16} r={8} />
+      <Blob cx={404} cy={64} rx={22} ry={17} fill={FILL.yellow} stroke={GOLD} />
+      <He x={404} y={68} size={9.5}>מצע</He>
+      <path d="M 382 82 Q 352 94 320 94" fill="none" stroke={GOLD} strokeWidth={1.6} markerEnd="url(#bfArrow)" />
+      <path d="M 288 110 L 288 236" stroke={GOLD} strokeWidth={1.6} strokeDasharray="5 4" markerEnd="url(#bfArrow)" />
+      <He x={430} y={14} size={9} color={GOLD}>השרשרת נשארת בחוץ</He>
+      <He x={472} y={104} size={9.5} anchor="end" color={MUTED}>קולטנים:</He>
+      <La x={472} y={118} size={9.5} anchor="end" color={MUTED}>Rpn10 · Rpn13 · Rpn1</La>
+      {/* products */}
+      <Arrow x1={240} y1={244} x2={240} y2={274} color={INK} width={1.6} />
+      {[200, 224, 248, 272, 296].map((x, i) => <rect key={i} x={x} y={282 + (i % 2) * 12} width={18} height={7} rx={3} fill={FILL.teal} stroke={TEAL} strokeWidth={1} />)}
+      <He x={178} y={298} size={10} anchor="end">אוליגופפטידים קצרים</He>
+      <He x={240} y={330} size={9.5} color={MUTED}>סכמטי: חתך לאורך, לא בקנה מידה</He>
+    </Svg>
+  );
+}

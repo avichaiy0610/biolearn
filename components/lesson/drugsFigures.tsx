@@ -4,6 +4,7 @@
 import type { ReactElement, ReactNode } from "react";
 import { ArrowDefs, BLUE, GREEN, INK, MUTED, ORANGE, He, La } from "./biochemFigures";
 import { Arrow } from "./metabolicFigures";
+import { AntibodyFormats } from "./redraws/AntibodyFormats";
 
 const PURPLE = "#7c3aed";
 const Svg = ({ h, label, children }: { h: number; label: string; children: ReactNode }) => (
@@ -108,26 +109,7 @@ function Antibody({ x, y, scale = 1 }: { x: number; y: number; scale?: number })
     <path d="M -42 -39 l -5 -5 M -54 -28 l -5 -5 M 42 -39 l 5 -5 M 54 -28 l 5 -5" stroke={ORANGE} strokeWidth={7} />
   </g>;
 }
-function AntibodyFormats() {
-  return <Svg h={360} label="השוואת IgG מלא עם שתי זרועות ו-Fc, Fab עם אתר קישור אחד ותחומים קבועים, ו-scFv המורכב מ-VH ו-VL המחוברים במקשר וללא Fc. צבע כחול מסמן שרשרת כבדה וירוק קלה ב-IgG וב-Fab; כתום מסמן אזורי קישור.">
-    <La x={100} y={30} size={17} bold>IgG</La><Antibody x={100} y={110} />
-    <La x={100} y={193} size={15} color={BLUE}>Fc</La>
-    <La x={295} y={30} size={17} bold>Fab</La>
-    <g transform="translate(285 110)" strokeLinecap="round" fill="none">
-      <path d="M -8 49 V -37" stroke={BLUE} strokeWidth={10} /><path d="M 10 49 V -37" stroke={GREEN} strokeWidth={9} />
-      <path d="M -8 -37 v -8 M 10 -37 v -8" stroke={ORANGE} strokeWidth={8} />
-    </g>
-    <He x={290} y={193} size={14}>ללא Fc · אתר אחד</He>
-    <La x={70} y={250} size={17} bold>scFv</La>
-    <ellipse cx={176} cy={245} rx={25} ry={19} fill="#dbeafe" stroke={BLUE} strokeWidth={1.4} />
-    <ellipse cx={266} cy={245} rx={25} ry={19} fill="#dcfce7" stroke={GREEN} strokeWidth={1.4} />
-    <path d="M 201 245 q 12 26 20 0 t 20 0" fill="none" stroke={MUTED} strokeWidth={2} />
-    <La x={176} y={249} size={14}>VH</La><La x={266} y={249} size={14}>VL</La>
-    <He x={220} y={290} size={14}>מקשר פפטידי · אתר קישור אחד</He>
-    <He x={200} y={326} size={13} color={MUTED}>כחול: כבדה · ירוק: קלה · כתום: קצות הקישור</He>
-    <He x={200} y={349} size={13} color={MUTED}>scFv: שני תחומים, שרשרת רציפה · סכמטי</He>
-  </Svg>;
-}
+// AntibodyFormats: redrawn at textbook level (2026-11-05) — see ./redraws/AntibodyFormats.tsx; old code in archive/figures/2026-11-05/.
 
 function SplitPool() {
   return <Svg h={345} label="חלוקה ואיחוד מושגיים עם שתי חלופות בכל אחד משני שלבים: A או B, אחר כך X או Y. נוצרים ארבעה צירופים אפשריים AX AY BX BY; כל חרוז מייצג תרכובת אחת באופן אידאלי.">

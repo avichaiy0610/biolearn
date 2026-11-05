@@ -1,0 +1,46 @@
+function ReplicationFork() {
+  const prim = (x1: number, x2: number, y: number) => <Line x1={x1} y1={y} x2={x2} y2={y} c={ORANGE} w={6} />;
+  return (
+    <Svg w={520} h={300} label="מזלג השכפול: ההליקאז פותח את הגדילים, הגיראז משחרר את המתח לפניו, הגדיל המוביל נבנה ברצף לכיוון המזלג והגדיל המפגר נבנה בקטעי אוקזאקי, כל אחד מתחיל בפריימר RNA">
+      {/* parental duplex + templates */}
+      <Line x1={20} y1={140} x2={200} y2={140} c={BLUE} />
+      <Line x1={20} y1={160} x2={200} y2={160} c={BLUE} />
+      <path d="M200 140 L240 100 L505 100" fill="none" stroke={BLUE} strokeWidth={3} strokeLinejoin="round" />
+      <path d="M200 160 L240 200 L505 200" fill="none" stroke={BLUE} strokeWidth={3} strokeLinejoin="round" />
+      <La x={12} y={136} size={12} bold>5′</La><La x={12} y={176} size={12} bold>3′</La>
+      <La x={513} y={96} size={12} bold>3′</La><La x={513} y={216} size={12} bold>5′</La>
+      {/* gyrase */}
+      <rect x={74} y={128} width={42} height={44} rx={10} fill={FILL.purple} stroke={PURPLE} strokeWidth={1.8} />
+      <He x={95} y={118} size={11.5} color={PURPLE} bold>גיראז</He>
+      <Arrow x1={170} y1={188} x2={60} y2={188} color={MUTED} />
+      <He x={115} y={208} size={11} color={MUTED}>המזלג מתקדם</He>
+      {/* helicase */}
+      <ellipse cx={222} cy={182} rx={11} ry={17} transform="rotate(-45 222 182)" fill={FILL.yellow} stroke="#b45309" strokeWidth={2} />
+      <He x={196} y={236} size={11} color="#b45309" bold>הליקאז</He>
+      {/* leading strand */}
+      <Arrow x1={495} y1={113} x2={262} y2={113} color={GREEN} width={3} />
+      <ellipse cx={252} cy={113} rx={20} ry={11} fill={FILL.green} stroke={GREEN} strokeWidth={1.5} />
+      <La x={252} y={117} size={9} bold>Pol III</La>
+      <La x={500} y={128} size={11} color={GREEN}>5′</La>
+      <He x={380} y={88} size={12} bold color={GREEN}>גדיל מוביל — ברצף</He>
+      {/* lagging strand: newest fragment near the fork */}
+      {[248, 258].map((x) => <circle key={x} cx={x} cy={207} r={4} fill={MUTED} />)}
+      <La x={253} y={226} size={10} color={MUTED}>SSB</La>
+      {prim(272, 284, 187)}
+      <Arrow x1={284} y1={187} x2={322} y2={187} color={GREEN} width={3} />
+      <ellipse cx={336} cy={187} rx={20} ry={11} fill={FILL.green} stroke={GREEN} strokeWidth={1.5} />
+      <La x={336} y={191} size={9} bold>Pol III</La>
+      {prim(362, 374, 187)}
+      <Line x1={374} y1={187} x2={424} y2={187} c={GREEN} />
+      <ellipse cx={432} cy={187} rx={13} ry={10} fill={FILL.sky} stroke={BLUE} strokeWidth={1.5} />
+      <La x={432} y={226} size={10.5} color={BLUE} bold>Pol I</La>
+      <Line x1={440} y1={187} x2={448} y2={187} c={ORANGE} w={6} />
+      <Line x1={448} y1={187} x2={500} y2={187} c={GREEN} />
+      <circle cx={278} cy={210} r={6} fill={PURPLE} />
+      <He x={290} y={244} size={10.5} color={PURPLE}>פרימאז</He>
+      <He x={390} y={262} size={12} bold color={GREEN}>גדיל מפגר — קטעי אוקזאקי</He>
+      <rect x={350} y={280} width={16} height={6} fill={ORANGE} />
+      <He x={420} y={287} size={11} color={ORANGE}>פריימר RNA</He>
+    </Svg>
+  );
+}

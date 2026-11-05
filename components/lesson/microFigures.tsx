@@ -4,6 +4,7 @@
 import type React from "react";
 import { ArrowDefs, BLUE, GREEN, INK, MUTED, ORANGE, He, La, curve, dash, scale } from "./biochemFigures";
 import { Arrow } from "./metabolicFigures";
+import { FlagellumMotor } from "./redraws/FlagellumMotor";
 
 const PURPLE = "#7c3aed";
 const RED = "#b91c1c";
@@ -142,36 +143,7 @@ function GramEnvelopes() {
   );
 }
 // ── mv-surface-motility: flagellar motor ─────────────────────────────────────
-function FlagellumMotor() {
-  const cx = 200;
-  return (
-    <Svg h={320} label="המנוע של השוטון בחיידק גראם-שלילי: הסיב מחובר דרך הקרס למוט, שעובר דרך טבעת L בממברנה החיצונית וטבעת P בפפטידוגליקן אל טבעת MS בממברנה הציטופלזמית ואל טבעת C בציטופלזמה. חלבוני Mot מסביב מהווים את הסטטור, וזרימת פרוטונים דרכם מסובבת את הרוטור">
-      <rect x={20} y={110} width={300} height={18} fill={FILL.sky} stroke={BLUE} />
-      <rect x={20} y={150} width={300} height={8} fill={FILL.orange} stroke={ORANGE} />
-      <rect x={20} y={196} width={300} height={18} fill={FILL.gray} stroke={MUTED} />
-      <path d={`M${cx} 112 L${cx} 70 Q ${cx} 50 ${cx + 20} 44 L${cx + 60} 30`} fill="none" stroke={GREEN} strokeWidth={6} strokeLinecap="round" />
-      <path d={`M${cx + 60} 30 C ${cx + 100} 18, ${cx + 120} 40, ${cx + 160} 24 S ${cx + 220} 10, ${cx + 260} 20`} fill="none" stroke={GREEN} strokeWidth={4} />
-      <rect x={cx - 4} y={110} width={8} height={100} fill={GREEN} />
-      <rect x={cx - 18} y={112} width={36} height={14} rx={3} fill="#bbf7d0" stroke={GREEN} />
-      <rect x={cx - 18} y={147} width={36} height={14} rx={3} fill="#bbf7d0" stroke={GREEN} />
-      <rect x={cx - 26} y={198} width={52} height={14} rx={3} fill="#bbf7d0" stroke={GREEN} />
-      <rect x={cx - 36} y={222} width={72} height={22} rx={6} fill="#bbf7d0" stroke={GREEN} />
-      {[cx - 56, cx + 56].map((x) => <rect key={x} x={x - 9} y={160} width={18} height={56} rx={4} fill={FILL.yellow} stroke={ORANGE} />)}
-      <La x={cx + 56} y={150} size={10.5} bold color={ORANGE}>Mot</La>
-      <La x={cx - 56} y={150} size={10.5} bold color={ORANGE}>Mot</La>
-      <La x={cx - 56} y={234} size={11} bold color={RED}>H⁺</La>
-      <Arrow x1={cx - 46} y1={170} x2={cx - 46} y2={214} color={RED} />
-      <He x={476} y={118} size={10.5} anchor="end">ממברנה חיצונית:</He><He x={476} y={133} size={10.5} anchor="end">טבעת L</He>
-      <He x={476} y={152} size={10.5} anchor="end">פפטידוגליקן:</He><He x={476} y={167} size={10.5} anchor="end">טבעת P</He>
-      <He x={476} y={200} size={10.5} anchor="end">ממברנה ציטופלזמית:</He><He x={476} y={215} size={10.5} anchor="end">טבעת MS</He>
-      <He x={476} y={238} size={10.5} anchor="end">טבעת C (המתג)</He>
-      <He x={cx + 170} y={60} size={11} color={GREEN}>הסיב (פלגלין)</He>
-      <He x={cx - 40} y={60} size={11} color={GREEN}>קרס</He>
-      <He x={200} y={278} size={11.5} color={MUTED}>הרוטור: מוט, טבעות MS ו-C · הסטטור: חלבוני Mot</He>
-      <He x={200} y={298} size={11.5} color={MUTED}>זרימת פרוטונים דרך הסטטור מסובבת את הרוטור</He>
-    </Svg>
-  );
-}
+// FlagellumMotor: redrawn at textbook level (2026-11-05) — see ./redraws/FlagellumMotor.tsx; old code in archive/figures/2026-11-05/.
 
 // ── mv-surface-motility: chemotaxis signaling ────────────────────────────────
 function ChemotaxisChe() {

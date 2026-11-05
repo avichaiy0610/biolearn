@@ -5,6 +5,7 @@
 import type React from "react";
 import { ArrowDefs, Axes, BLUE, GREEN, INK, MUTED, ORANGE, He, La, curve, scale } from "./biochemFigures";
 import { Arrow } from "./metabolicFigures";
+import { MhcStructure } from "./redraws/MhcStructure";
 
 const PURPLE = "#7c3aed";
 const RED = "#b91c1c";
@@ -337,36 +338,7 @@ function GerminalCenter() {
 }
 
 // ── im-mhc-structure ─────────────────────────────────────────────────────────
-function MhcStructure() {
-  const d = (x: number, y: number, w: number, h: number, c: string, f: string, t: string) => (
-    <g key={t + x}>
-      <rect x={x} y={y} width={w} height={h} rx={8} fill={f} stroke={c} strokeWidth={1.2} />
-      <La x={x + w / 2} y={y + h / 2 + 4} size={10} color={c}>{t}</La>
-    </g>
-  );
-  return (
-    <Svg h={260} label="מבנה MHC: במחלקה I — שרשרת α עם שלושה מקטעים ו-β2-מיקרוגלובולין; החריץ בין α1 ל-α2 סגור בקצוות וקושר פפטיד של 8–10 חומצות אמינו. במחלקה II — שרשראות α ו-β; החריץ בין α1 ל-β1 פתוח וקושר פפטיד ארוך יותר.">
-      <rect x={10} y={196} width={460} height={18} fill={FILL.yellow} />
-      <He x={240} y={242} size={9.5} color={MUTED}>ממברנה</He>
-      <He x={120} y={22} size={12} bold>MHC מחלקה I</He>
-      {d(64, 50, 52, 34, BLUE, FILL.blue, "α1")}{d(124, 50, 52, 34, BLUE, FILL.blue, "α2")}
-      <rect x={96} y={42} width={56} height={6} rx={3} fill={RED} />
-      {d(94, 100, 52, 36, BLUE, FILL.blue, "α3")}{d(154, 110, 46, 30, ORANGE, FILL.orange, "β2m")}
-      <line x1={120} y1={138} x2={120} y2={214} stroke={BLUE} strokeWidth={3} />
-      <He x={60} y={36} size={9.5} color={RED}>פפטיד 8–10</He>
-      <He x={40} y={162} size={9} color={MUTED}>CD8 נקשר ל-α3</He>
-
-      <He x={360} y={22} size={12} bold>MHC מחלקה II</He>
-      {d(304, 50, 52, 34, BLUE, FILL.blue, "α1")}{d(364, 50, 52, 34, GREEN, FILL.green, "β1")}
-      <rect x={290} y={42} width={140} height={6} rx={3} fill={RED} />
-      {d(304, 100, 52, 36, BLUE, FILL.blue, "α2")}{d(364, 100, 52, 36, GREEN, FILL.green, "β2")}
-      <line x1={330} y1={138} x2={330} y2={214} stroke={BLUE} strokeWidth={3} />
-      <line x1={390} y1={138} x2={390} y2={214} stroke={GREEN} strokeWidth={3} />
-      <He x={448} y={36} size={9.5} color={RED}>פפטיד 13–25</He>
-      <He x={450} y={162} size={9} color={MUTED}>CD4 נקשר ל-β2</He>
-    </Svg>
-  );
-}
+// MhcStructure: redrawn at textbook level (2026-11-05) — see ./redraws/MhcStructure.tsx; old code in archive/figures/2026-11-05/.
 
 // ── im-antigen-processing ────────────────────────────────────────────────────
 function AntigenProcessing() {

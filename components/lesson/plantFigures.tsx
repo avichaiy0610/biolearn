@@ -6,6 +6,7 @@
 import type React from "react";
 import { ArrowDefs, BLUE, GREEN, INK, MUTED, ORANGE, He, La, dash, scale } from "./biochemFigures";
 import { Arrow } from "./metabolicFigures";
+import { ThylakoidMembrane } from "./redraws/ThylakoidMembrane";
 
 const PURPLE = "#7c3aed";
 const RED = "#b91c1c";
@@ -617,50 +618,7 @@ function ZScheme() {
 }
 
 // ── pp-light-reactions: the thylakoid membrane ──────────────────────────────
-function ThylakoidMembrane() {
-  const Cx = ({ x, w, h = 70, label, c, fill }: { x: number; w: number; h?: number; label: string; c: string; fill: string }) => (
-    <g><rect x={x - w / 2} y={150 - h / 2} width={w} height={h} rx={12} fill={fill} stroke={c} strokeWidth={1.6} /><La x={x} y={154} size={11} bold color={c}>{label}</La></g>
-  );
-  return (
-    <Svg h={320} label="ממברנת התילקואיד: מערכת II מפרקת מים בצד הלומן ומעבירה אלקטרונים לפלסטוקינון; ציטוכרום b6f מעביר אותם לפלסטוציאנין בלומן ומשחרר פרוטונים ללומן; מערכת I מעבירה אותם לפרדוקסין בסטרומה, ו-FNR מחזר NADP+. הפרוטונים שהצטברו בלומן חוזרים לסטרומה דרך ATP סינתאז ומניעים ייצור ATP">
-      <rect x={10} y={20} width={460} height={95} fill="#ecfdf5" />
-      <He x={150} y={40} size={11} bold color={GREEN}>סטרומה (pH ≈ 8)</He>
-      <rect x={10} y={185} width={460} height={95} fill="#fef2f2" />
-      <He x={460} y={272} size={11} bold color={RED} anchor="end">לומן (pH ≈ 5–6)</He>
-      <rect x={10} y={125} width={460} height={50} fill="#f8fafc" stroke={MUTED} />
-      <Cx x={70} w={70} label="PSII" c={ORANGE} fill={FILL.orange} />
-      <Cx x={200} w={64} label="b₆f" c={PURPLE} fill={FILL.purple} />
-      <Cx x={310} w={70} label="PSI" c={RED} fill={FILL.red} />
-      <Cx x={420} w={54} h={90} label="" c={TEAL} fill={FILL.teal} />
-      <La x={408} y={154} size={11} bold color={TEAL}>ATP</La>
-      <He x={408} y={174} size={9} color={TEAL}>סינתאז</He>
-      {/* PQ */}
-      <circle cx={136} cy={150} r={9} fill={FILL.yellow} stroke={ORANGE} /><La x={136} y={154} size={9} bold>PQ</La>
-      <Arrow x1={106} y1={150} x2={126} y2={150} color={INK} />
-      <Arrow x1={146} y1={150} x2={166} y2={150} color={INK} />
-      {/* PC in lumen */}
-      <circle cx={255} cy={205} r={10} fill={FILL.blue} stroke={BLUE} /><La x={255} y={209} size={9} bold color={BLUE}>PC</La>
-      <Arrow x1={220} y1={186} x2={247} y2={198} color={INK} />
-      <Arrow x1={264} y1={198} x2={290} y2={186} color={INK} />
-      {/* Fd/FNR in stroma */}
-      <circle cx={350} cy={96} r={10} fill={FILL.gray} stroke={MUTED} /><La x={350} y={100} size={9} bold>Fd</La>
-      <Arrow x1={320} y1={114} x2={344} y2={104} color={INK} />
-      <La x={350} y={76} size={10} bold color={GREEN}>NADP⁺ → NADPH</La>
-      {/* water */}
-      <La x={70} y={232} size={10.5} bold color={TEAL}>2H₂O → O₂ + 4H⁺</La>
-      <Arrow x1={70} y1={220} x2={70} y2={186} color={TEAL} />
-      {/* light */}
-      {[70, 310].map((x) => <path key={x} d={`M${x - 26} 30 l8 10 l-6 2 l10 14`} fill="none" stroke="#ca8a04" strokeWidth={2.2} markerEnd="url(#bfArrowS)" />)}
-      <He x={70} y={30} size={10} color="#ca8a04" anchor="end">אור</He>
-      {/* protons */}
-      <Arrow x1={226} y1={110} x2={226} y2={240} color={RED} dashed />
-      <La x={236} y={246} size={10.5} bold color={RED} anchor="start">H⁺</La>
-      <Arrow x1={438} y1={240} x2={438} y2={60} color={TEAL} width={2.4} />
-      <La x={420} y={50} size={10.5} bold color={TEAL}>ADP + Pi → ATP</La>
-      <He x={240} y={304} size={10} color={MUTED}>החיצים השחורים — מסלול האלקטרון; האדומים — פרוטונים</He>
-    </Svg>
-  );
-}
+// ThylakoidMembrane: redrawn at textbook level (2026-11-05) — see ./redraws/ThylakoidMembrane.tsx; old code in archive/figures/2026-11-05/.
 
 // ── pp-calvin: the Calvin–Benson cycle ──────────────────────────────────────
 function CalvinCycle() {

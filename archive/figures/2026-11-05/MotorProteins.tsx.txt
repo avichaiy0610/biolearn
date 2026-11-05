@@ -1,0 +1,38 @@
+function MotorProteins() {
+  const mtY = 112, acY = 224;
+  return (
+    <Svg h={290} label="שלוש משפחות של מנועים: על מיקרוטובול — קינזין נע לקצה הפלוס (החוצה) ודיינאין לקצה המינוס (אל הצנטרוזום); על סיב אקטין — מיוזין V נע לקצה הפלוס. כל מנוע נושא מטען בזנב">
+      {/* microtubule */}
+      <rect x={40} y={mtY - 7} width={400} height={14} rx={7} fill={FILL.green} stroke={GREEN} strokeWidth={1.4} />
+      <La x={28} y={mtY + 5} size={13} bold>−</La>
+      <La x={454} y={mtY + 5} size={13} bold>+</La>
+      <He x={240} y={mtY + 30} size={11} color={MUTED}>מיקרוטובול</He>
+      {/* dynein */}
+      <circle cx={140} cy={mtY - 18} r={12} fill={FILL.purple} stroke={PURPLE} strokeWidth={1.5} />
+      <circle cx={162} cy={mtY - 18} r={12} fill={FILL.purple} stroke={PURPLE} strokeWidth={1.5} />
+      <Line x1={151} y1={mtY - 30} x2={151} y2={66} c={PURPLE} w={2} />
+      <circle cx={151} cy={50} r={17} fill={FILL.orange} stroke={ORANGE} strokeWidth={1.5} />
+      <Arrow x1={118} y1={50} x2={72} y2={50} color={PURPLE} width={2.4} />
+      <He x={96} y={34} size={12} bold color={PURPLE}>דיינאין</He>
+      {/* kinesin */}
+      <ellipse cx={318} cy={mtY - 12} rx={9} ry={6} fill={FILL.blue} stroke={BLUE} strokeWidth={1.4} />
+      <ellipse cx={338} cy={mtY - 12} rx={9} ry={6} fill={FILL.blue} stroke={BLUE} strokeWidth={1.4} />
+      <path d={`M318 ${mtY - 18} L328 ${mtY - 34} L338 ${mtY - 18}`} fill="none" stroke={BLUE} strokeWidth={1.6} />
+      <Line x1={328} y1={mtY - 34} x2={328} y2={66} c={BLUE} w={2} />
+      <circle cx={328} cy={50} r={17} fill={FILL.orange} stroke={ORANGE} strokeWidth={1.5} />
+      <Arrow x1={362} y1={50} x2={408} y2={50} color={BLUE} width={2.4} />
+      <He x={386} y={34} size={12} bold color={BLUE}>קינזין</He>
+      {/* actin + myosin V */}
+      {Array.from({ length: 34 }, (_, i) => <circle key={i} cx={46 + i * 12} cy={acY + (i % 2 ? 3 : -3)} r={6} fill={FILL.red} stroke={RED} strokeWidth={0.8} />)}
+      <La x={28} y={acY + 5} size={13} bold>−</La>
+      <La x={454} y={acY + 5} size={13} bold>+</La>
+      <He x={240} y={acY + 30} size={11} color={MUTED}>סיב אקטין</He>
+      <ellipse cx={226} cy={acY - 14} rx={10} ry={6} fill={FILL.blue} stroke={INK} strokeWidth={1.2} />
+      <ellipse cx={286} cy={acY - 14} rx={10} ry={6} fill={FILL.blue} stroke={INK} strokeWidth={1.2} />
+      <path d={`M226 ${acY - 20} L256 ${acY - 52} L286 ${acY - 20}`} fill="none" stroke={INK} strokeWidth={2} />
+      <circle cx={256} cy={acY - 66} r={14} fill={FILL.orange} stroke={ORANGE} strokeWidth={1.5} />
+      <Arrow x1={300} y1={acY - 66} x2={344} y2={acY - 66} color={INK} width={2.4} />
+      <He x={372} y={acY - 62} size={12} bold anchor="start">מיוזין V</He>
+    </Svg>
+  );
+}
