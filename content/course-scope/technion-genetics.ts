@@ -51,6 +51,7 @@ export const technionGeneticsScope: CourseScope = {
       symbols: named(PED), patterns: named(PED), deduction: named(PED),
       risk: heading(PED, "חישוב סיכון (כולל בייס)"),
       penetrance: heading(PED, "חדירות וביטוי"),
+      "hardy-weinberg": { level: "core", evidence: "exam", noteHe: "נבחן בקורס בתוך שאלות שושלת: שכיחות אלל באוכלוסייה בשיווי משקל הרדי-ויינברג והסיכוי שבן זוג בריא נשא (למשל חורף 2019 מועד א', בוחן אמצע אביב 2019, ובחני אמצע 2009–2012)" },
     },
     "chromosomal-theory": {
       terms: named(CHROM), meiosis: named(CHROM, "בסיס התיאוריה"), mendel: named(CHROM), proof: named(CHROM),
