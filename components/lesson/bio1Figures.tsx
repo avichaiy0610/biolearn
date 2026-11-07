@@ -4,6 +4,7 @@
 import type React from "react";
 import { ArrowDefs, BLUE, GREEN, INK, MUTED, ORANGE, He, La, dash } from "./biochemFigures";
 import { Arrow } from "./metabolicFigures";
+import AnatomyEmbed from "./anatomy/AnatomyEmbed";
 
 const PURPLE = "#7c3aed";
 const RED = "#b91c1c";
@@ -975,7 +976,12 @@ function Potency() {
   );
 }
 
+function GelRig() {
+  return <AnatomyEmbed src="/figures/anatomy/gel-electrophoresis.html" title="מכשיר אלקטרופורזה בג'ל אגרוז — אינטראקטיבי" />;
+}
+
 export const BIO1_FIGURES: Record<string, { el: () => React.ReactElement; captionHe: string }> = {
+  "b1-gel-rig": { el: GelRig, captionHe: "איור אינטראקטיבי: הזזת העכבר (או החצים) קובעת את זמן הריצה." },
   "b1-life-timeline": { el: LifeTimeline, captionHe: "ציר הזמן של החיים על כדור הארץ (בקירוב). במשך רוב ההיסטוריה היצורים היו חד-תאיים; רוב קבוצות בעלי החיים מופיעות רק ב-540 מיליון השנים האחרונות. סכמטי." },
   "b1-hierarchy": { el: Hierarchy, captionHe: "רמות הארגון הביולוגי. כל רמה בנויה מיחידות של הרמה שמתחתיה, ובכל רמה מופיעות תכונות מתהוות שאין ברמות הנמוכות. בכל משבצת — דוגמה. סכמטי." },
   "b1-scientific-method": { el: ScientificMethod, captionHe: "השיטה המדעית. השערה חייבת להוביל לניבוי שאפשר לבדוק ולהפריך. תוצאות לא \"מוכיחות\" השערה — הן תומכות בה או מפריכות אותה; בפועל עוברים בין השלבים הלוך ושוב. סכמטי." },
