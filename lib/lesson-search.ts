@@ -45,7 +45,7 @@ const INDEX: { lesson: Lesson; blocks: Block[]; all: string }[] = LESSONS.map((l
 });
 
 // up to ~170 characters around `at`, cut at word boundaries, with every query word marked
-function snippet(text: string, at: number, words: string[]): { t: string; hl: boolean }[] {
+export function snippet(text: string, at: number, words: string[]): { t: string; hl: boolean }[] {
   const start = Math.max(0, text.lastIndexOf(" ", Math.max(0, at - 70)) + 1);
   const endSpace = text.indexOf(" ", Math.min(text.length, at + 100));
   const end = endSpace < 0 ? text.length : endSpace;
@@ -78,9 +78,12 @@ const count = (hay: string, w: string) => hay.split(w).length - 1;
 
 /* Ranking: rarer words count more (idf), units that contain more (and rarer) query words rank higher,
    and the exact phrase counts most. A unit needs at least one of the words to appear. */
+// a leading one-letter prefix is dropped from longer words, so "מקטעי" also finds "קטעי" (substring keeps "מקטעי")
+export const queryWords = (query: string) => [...new Set(fold(plain(query)).split(" ").filter((w) => w.length >= 2).map((w) => (w.length >= 5 && "המובלשכ".includes(w[0]) ? w.slice(1) : w)))];
+export { plain as plainText, fold as foldText };
+
 export function searchLessons(query: string, limit = 12): LessonHit[] {
-  // a leading one-letter prefix is dropped from longer words, so "מקטעי" also finds "קטעי" (substring keeps "מקטעי")
-  const words = [...new Set(fold(plain(query)).split(" ").filter((w) => w.length >= 2).map((w) => (w.length >= 5 && "המובלשכ".includes(w[0]) ? w.slice(1) : w)))];
+  const words = queryWords(query);
   if (!words.length) return [];
   const phrase = words.length > 1 ? words.join(" ") : "";
   const idf = Object.fromEntries(words.map((w) => [w, Math.log((INDEX.length + 1) / (1 + INDEX.filter((x) => x.all.includes(w)).length)) + 0.1]));

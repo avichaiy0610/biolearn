@@ -5,6 +5,7 @@ import { getDictionary, hasLocale, type Locale } from "@/lib/dictionaries";
 import { prisma } from "@/lib/prisma";
 import Link from "next/link";
 import { searchLessons } from "@/lib/lesson-search";
+import { searchVisuals } from "@/lib/visual-search";
 
 export default async function SearchPage({
   params,
@@ -46,7 +47,8 @@ export default async function SearchPage({
 
   // study units are Hebrew and live in the repo — searched in memory, shown first
   const lessons = query ? searchLessons(query) : [];
-  const totalResults = lessons.length + topics.length + processes.length + subtopics.length + articles.length;
+  const visuals = query ? searchVisuals(query, lang) : [];
+  const totalResults = lessons.length + visuals.length + topics.length + processes.length + subtopics.length + articles.length;
 
   return (
     <div className="max-w-4xl mx-auto px-4 py-10">
@@ -91,6 +93,31 @@ export default async function SearchPage({
               </div>
             ))}
           </div>
+        </section>
+      )}
+
+      {visuals.length > 0 && (
+        <section className="mb-8">
+          <h2 className="text-sm font-semibold text-zinc-500 uppercase tracking-wide mb-3">
+            {lang === "he" ? "איורים וסרטונים" : "Figures and videos (Hebrew)"}
+          </h2>
+          <ul dir="rtl" className="space-y-2">
+            {visuals.map((v) => (
+              <li key={v.key}>
+                <Link href={v.href} className="flex gap-3 p-3 rounded-xl border border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 hover:border-emerald-400 transition-colors">
+                  <span className="text-xl leading-6" aria-hidden="true">{v.kind === "video" ? "🎬" : "🖼️"}</span>
+                  <span className="min-w-0">
+                    <span className="block text-xs font-semibold text-emerald-700 dark:text-emerald-400">
+                      {v.kind === "video" ? "סרטון" : "איור"} · {v.lessonHe}{v.kind === "figure" ? ` ← ${v.whereHe}` : ""}
+                    </span>
+                    <span className="block text-sm text-zinc-600 dark:text-zinc-300" style={{ unicodeBidi: "plaintext" }}>
+                      {v.parts.map((p, k) => (p.hl ? <mark key={k} className="rounded bg-amber-200/70 px-0.5 text-inherit dark:bg-amber-500/40">{p.t}</mark> : p.t))}
+                    </span>
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
         </section>
       )}
 

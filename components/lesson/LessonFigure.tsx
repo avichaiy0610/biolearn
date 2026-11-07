@@ -549,6 +549,11 @@ const FIGURES: Record<string, { el: () => React.ReactElement; captionHe: string 
   map: { el: GeneMap, captionHe: "איור 2 — המפה מהדוגמה התלת-נקודתית: A–C–B. בהזנחת שחלופים מרובים שלא זוהו, המרחקים הם 10 ו-20 cM וסכומם 30 cM. תדירות הרקומבינציה הנמדדת ישירות בין A ל-B היא רק 28%." },
 };
 
+// used by the site search to find figures by their caption
+export function figureCaption(id: string): string | undefined {
+  return FIGURES[id]?.captionHe;
+}
+
 export default function LessonFigure({ id }: { id: string }) {
   const f = FIGURES[id];
   if (!f) return null;
