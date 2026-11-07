@@ -93,6 +93,12 @@ train recall missed all of it. So, before writing:
    (experiment design + data reading + calculation where the field is quantitative), never
    recall-only.
 
+5. **Newest material first.** Courses change (topics, lecturers, assessment). Rank every source by
+   year and read the newest year's material in full (syllabus, schedule, summaries, lecture
+   files, tutorials, exams) before older material; older exams only add weight to topics the
+   newest material still names. When fixing an existing course, refresh its gap list from its
+   newest material first, then write.
+
 ### 2b. Lecturer profile (mandatory) (calibration)
 Lecturers teach and examine their own field: muscle atrophy got 3 weeks in physiology
 (lecturer's lab), cell fusion and myoblast fusion appeared in developmental-biology exams

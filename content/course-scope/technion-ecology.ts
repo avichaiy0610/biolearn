@@ -24,12 +24,26 @@ const POP = "ויסות גודל האוכלוסיה";
 const INT = "אינטראקציות ביולוגיות במערכת אקולוגית: תחרות וטריפה";
 const HUMAN = "השפעת האדם ומעורבותו במערכת האקולוגית";
 
+// The lecturer's 2025 syllabus and the 2025 moed A reconstruction in the Drive (added 2026-11-07).
+const exam25 = (what: string): ScopeEntry => ({ level: "core", evidence: "exam", noteHe: `נבחן בשחזור מועד א' 2025: ${what}` });
+const syl25 = (what: string): ScopeEntry => ({ level: "core", evidence: "syllabus-named", noteHe: `הסילבוס של המרצה (אביב 2025): ${what}` });
+
 export const technionEcologyScope: CourseScope = {
   courseSlug: "technion-ecology",
-  checkedAt: "2026-10-24",
+  checkedAt: "2026-11-07",
   defaultSource: { labelHe: "הסילבוס בפורטל הטכניון", url: "https://students.technion.ac.il/local/technionsearch/course/134153" },
   sections: {
+    "ec-biomes": {
+      "what-sets": syl25("אקולוגיה גלובלית: תנאים פיזיים; אקלים וביומסה"),
+      walter: exam25("קריאת דיאגרמת אקלים של וולטר"),
+      terrestrial: exam25("דירוג ביומות לפי עושר מינים"),
+      mediterranean: syl25("סיור בחורש הים-תיכוני בטכניון"),
+      aquatic: exam25("אזור פוטי ואפוטי"),
+      intertidal: exam25("שאלה פתוחה על ביומת אזור הגאות והשפל"),
+      richness: exam25("דירוג טונדרה, יער טרופי, ביצה, מדבר ושונית אלמוגים לפי עושר מינים"),
+    },
     "ec-environment": {
+      levels: { level: "core", evidence: "exam", noteHe: "שאלה פתוחה לדוגמה לקראת מבחן 2025: שש רמות ארגון עם דוגמה ישראלית" },
       what: named(DIST, "הגדרות ורמות הארגון"),
       "conditions-resources": named(DIST, "תנאים, משאבים וסבולת"),
       climate: named(DIST, "אקלים"),
@@ -44,6 +58,7 @@ export const technionEcologyScope: CourseScope = {
       light: named(ADAPT, "אור"),
     },
     "ec-population-growth": {
+      dispersion: exam25("יתרונות וחסרונות של דגימה אחידה; שאלה לדוגמה: פיזור מול צפיפות"),
       bookkeeping: named(POP, "מאזן לידות, מוות והגירה"),
       exponential: named(POP, "גידול מעריכי"),
       logistic: named(POP, "גידול לוגיסטי וכושר נשיאה"),
@@ -107,6 +122,8 @@ export const technionEcologyScope: CourseScope = {
       maturation: named(SUCC, "התבגרות המערכת"),
     },
     "ec-human-impact": {
+      footprint: exam25("טביעת רגל אקולוגית, והחלק בכדור הארץ שהאדם שינה"),
+      endangered: syl25("אקולוגיית שימור: מינים בסכנה ומאמצי הצלה עולמיים"),
       crisis: named(HUMAN),
       habitat: named(HUMAN, "אובדן בתי גידול וקיטוע"),
       invasive: named(HUMAN, "מינים פולשים"),

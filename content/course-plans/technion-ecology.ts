@@ -1,6 +1,7 @@
 import type { CoursePlan, PlanItem, PlanSession } from "./types";
 import type { Lesson } from "../lessons/types";
 import { ecEnvironment } from "../lessons/technion-ecology/ec-environment";
+import { ecBiomes } from "../lessons/technion-ecology/ec-biomes";
 import { ecAdaptations } from "../lessons/technion-ecology/ec-adaptations";
 import { ecPopulationGrowth } from "../lessons/technion-ecology/ec-population-growth";
 import { ecPopulationRegulation } from "../lessons/technion-ecology/ec-population-regulation";
@@ -31,6 +32,7 @@ const LECTURES: { titleHe: string; items: PlanItem[]; practice: PlanItem[] }[] =
   { titleHe: "מערכות אקולוגיות: זרימת אנרגיה", items: sec(ecEnergyFlow), practice: probs(ecEnergyFlow) },
   { titleHe: "המחזורים הביוגיאוכימיים", items: sec(ecBiogeochemical), practice: probs(ecBiogeochemical) },
   { titleHe: "הסביבה ותפוצת האורגניזמים", items: sec(ecEnvironment), practice: probs(ecEnvironment) },
+  { titleHe: "ביומות: אקלים, יבשה ומים", items: sec(ecBiomes), practice: probs(ecBiomes) },
   { titleHe: "אדפטציות לבתי הגידול", items: sec(ecAdaptations), practice: probs(ecAdaptations) },
   { titleHe: "מגוון מינים", items: sec(ecDiversity), practice: probs(ecDiversity) },
   { titleHe: "סוקססיה", items: sec(ecSuccession), practice: probs(ecSuccession) },
@@ -45,7 +47,7 @@ export const technionEcologyPlan: CoursePlan = {
   courseSlug: "technion-ecology",
   lectureOrder: {
     confidence: "syllabus",
-    noteHe: "אין לוח הרצאות ציבורי לקורס (אתר הקורס במודל סגור). הסדר כאן לפי סדר הנושאים בסילבוס שבפורטל. בקורסים מקבילים (למשל בת\"א) הסדר הפוך — מהפרט לאוכלוסייה, לחברה ולמערכת — ולכן הסדר בהרצאות עצמן עשוי להיות שונה.",
+    noteHe: "בדרייב נמצא הסילבוס של המרצה (ד\"ר יורם ירושלמי, אביב 2025) עם 13 מפגשים, אבל הסדר כאן הוא סדר לימוד מוצע לפי הנושאים. הסדר כאן לפי סדר הנושאים בסילבוס שבפורטל. בקורסים מקבילים (למשל בת\"א) הסדר הפוך — מהפרט לאוכלוסייה, לחברה ולמערכת — ולכן הסדר בהרצאות עצמן עשוי להיות שונה.",
     links: [PORTAL],
   },
   tutorialOrder: null,
@@ -54,7 +56,7 @@ export const technionEcologyPlan: CoursePlan = {
   topics: [
     { titleHe: "מערכות אקולוגיות (זרימת אנרגיה)", items: sec(ecEnergyFlow) },
     { titleHe: "המסלולים הביוגיאוכימיים", items: sec(ecBiogeochemical) },
-    { titleHe: "גורמים המשפיעים על תפוצת האורגניזמים", items: sec(ecEnvironment) },
+    { titleHe: "גורמים המשפיעים על תפוצת האורגניזמים", items: [...sec(ecEnvironment), ...sec(ecBiomes)] },
     { titleHe: "אדפטציות לבתי הגידול השונים", items: sec(ecAdaptations) },
     { titleHe: "מגוון מינים", items: sec(ecDiversity) },
     { titleHe: "סוקססיה (התבגרות המערכת האקולוגית)", items: sec(ecSuccession) },
