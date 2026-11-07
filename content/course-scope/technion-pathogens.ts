@@ -37,10 +37,11 @@ const EMERGE = "הסיבות להופעת פתוגנים חדשים, או רכי
 const DETECT = "שיטות זיהוי קונבנציונליות ומולקולריות";
 const ANTI = "מנגנוני פעולה של חומרים אנטיבקטריאליים ורכישת עמידות";
 const RISK = "מודלים מתמטיים להערכת סיכון";
+const MICRO = "המיקרוביום האנושי והקשר שלו למחלות";
 
 export const technionPathogensScope: CourseScope = {
   courseSlug: "technion-pathogens",
-  checkedAt: "2026-10-27",
+  checkedAt: "2026-11-07",
   defaultSource: { labelHe: "הסילבוס בפורטל הטכניון", url: "https://students.technion.ac.il/local/technionsearch/course/066418" },
   sections: {
     "pg-intro": {
@@ -118,6 +119,13 @@ export const technionPathogensScope: CourseScope = {
       tolerance: heading(ANTI, "עמידות לעומת סבילות"),
       selection: named(ANTI, "לחץ בררני ורכישת עמידות"),
       "lab-to-field": heading(ANTI, "מתנאי מעבדה ליישום"),
+    },
+    "pg-microbiome": {
+      composition: named(MICRO, "הרכב המיקרוביוטה באתרי הגוף"),
+      definition: named(MICRO, "ההבחנה בין קומנסל לפתוגן, שבה נפתח הקורס"),
+      "colonization-resistance": named(MICRO, "התנגדות לקולוניזציה כהגנה של המארח"),
+      dysbiosis: named(MICRO, "דיסביוזה אחרי אנטיביוטיקה ו-C. difficile"),
+      disease: named(MICRO, "הקשר בין המיקרוביום למחלות"),
     },
     "pg-predictive": {
       "d-value": named(RISK, "ערך D והפחתה בסדרי גודל"),

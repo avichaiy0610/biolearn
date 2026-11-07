@@ -1,6 +1,7 @@
 import type { CoursePlan, PlanItem, PlanSession } from "./types";
 import type { Lesson } from "../lessons/types";
 import { pgIntro } from "../lessons/technion-pathogens/pg-intro";
+import { pgMicrobiome } from "../lessons/technion-pathogens/pg-microbiome";
 import { pgPhysiology } from "../lessons/technion-pathogens/pg-physiology";
 import { pgAdhesion } from "../lessons/technion-pathogens/pg-adhesion";
 import { pgInvasion } from "../lessons/technion-pathogens/pg-invasion";
@@ -32,7 +33,7 @@ import { mvAntibiotics } from "../lessons/technion-micro-viro/mv-antibiotics";
 // damage and evasion to two principal case studies each; strengthen mould physiology, detection limits and the
 // quantitative part (hence predictive and QMRA split into two units); biosensors, phage biocontrol, genome reduction
 // and extensive antigenic variation marked extension.
-export const PATHOGENS_LESSONS: Lesson[] = [pgIntro, pgPhysiology, pgAdhesion, pgInvasion, pgToxins,
+export const PATHOGENS_LESSONS: Lesson[] = [pgIntro, pgMicrobiome, pgPhysiology, pgAdhesion, pgInvasion, pgToxins,
   pgEvasionRegulation, pgVirusesMolds, pgEmergence, pgDetectionConventional, pgDetectionMolecular, pgAntimicrobials,
   pgPredictive, pgRisk];
 
@@ -44,6 +45,7 @@ const PORTAL = { labelHe: "הסילבוס בפורטל הטכניון", url: "ht
 // Codex's recommended order; refresher sections from 134121 sit after the local unit that needs them
 const LECTURES: { titleHe: string; items: PlanItem[]; practice: PlanItem[] }[] = [
   { titleHe: "פתוגנים ממזון וממים: מסגרת מושגית", items: [...sec(pgIntro), ...sec(mvClinical, "concepts", "stages", "koch", "epidemiology")], practice: probs(pgIntro) },
+  { titleHe: "המיקרוביום האנושי: נורמלי, פתוגן והתחום שביניהם", items: sec(pgMicrobiome), practice: probs(pgMicrobiome) },
   { titleHe: "פיזיולוגיה של שרידות מחוץ למארח", items: [...sec(pgPhysiology), ...sec(mvEnvironment, "temperature", "ph", "water"), ...sec(mvGrowth, "growth-curve")], practice: probs(pgPhysiology) },
   { titleHe: "היצמדות והתיישבות ברקמה", items: [...sec(pgAdhesion), ...sec(mvSurfaceMotility, "capsule", "pili")], practice: probs(pgAdhesion) },
   { titleHe: "חדירה לרקמה וחיים בתוך התא", items: sec(pgInvasion), practice: probs(pgInvasion) },
@@ -75,6 +77,7 @@ export const technionPathogensPlan: CoursePlan = {
     { titleHe: "הופעת פתוגנים חדשים ורכישת תכונות פתוגניות", items: sec(pgEmergence) },
     { titleHe: "שיטות זיהוי קונבנציונליות ומולקולריות", items: [...sec(pgDetectionConventional), ...sec(pgDetectionMolecular)] },
     { titleHe: "מנגנוני פעולה של חומרים אנטיבקטריאליים ורכישת עמידות", items: sec(pgAntimicrobials) },
+    { titleHe: "המיקרוביום האנושי והקשר שלו למחלות", items: sec(pgMicrobiome) },
     { titleHe: "מודלים מתמטיים להערכת סיכון", items: [...sec(pgPredictive), ...sec(pgRisk)] },
   ],
   lectures: LECTURES.map((l, i): PlanSession => ({ n: i + 1, titleHe: l.titleHe, items: l.items })),
