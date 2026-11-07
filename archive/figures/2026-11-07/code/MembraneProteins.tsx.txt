@@ -1,0 +1,28 @@
+// From components/lesson/biochemFigures.tsx before 2026-11-07
+function MembraneProteins() {
+  const heads = (y: number) => Array.from({ length: 30 }, (_, i) => <circle key={`${y}-${i}`} cx={10 + i * 16} cy={y} r={6} fill="#fde68a" stroke="#b45309" strokeWidth={1} />);
+  return (
+    <svg viewBox="0 30 480 270" className="w-full h-auto" role="img" aria-label="סוגים של חלבוני ממברנה: סליל שחוצה את הממברנה, חבית בטא, חלבון היקפי וחלבון שמעוגן בשומן">
+      <rect x={0} y={110} width={480} height={70} fill="#fef3c7" />
+      {heads(110)}{heads(180)}
+      <He x={240} y={60} size={13} color={MUTED}>↑ בחוץ</He>
+      <He x={20} y={292} size={13} color={MUTED} anchor="start">↓ בפנים</He>
+      {/* TM helices */}
+      <rect x={52} y={88} width={16} height={114} rx={7} fill={BLUE} />
+      <rect x={74} y={88} width={16} height={114} rx={7} fill={BLUE} />
+      <He x={71} y={235} size={13}>סלילי α</He><He x={71} y={252} size={13}>חוצי ממברנה</He>
+      {/* beta barrel */}
+      <rect x={160} y={92} width={70} height={106} rx={14} fill="#dcfce7" stroke={GREEN} strokeWidth={2} />
+      {[172, 186, 200, 214].map((x) => <line key={x} x1={x} y1={98} x2={x} y2={192} stroke={GREEN} strokeWidth={4} />)}
+      <He x={195} y={235} size={13}>חבית β</He><He x={195} y={252} size={13}>(פורין)</He>
+      {/* peripheral bound to a TM protein */}
+      <rect x={272} y={88} width={16} height={114} rx={7} fill={BLUE} />
+      <ellipse cx={295} cy={222} rx={28} ry={18} fill="#fed7aa" stroke={ORANGE} strokeWidth={2} />
+      <He x={295} y={262} size={13}>היקפי</He><He x={295} y={278} size={12} color={MUTED}>(נקשר לחלבון/לראשים)</He>
+      {/* lipid anchored */}
+      <ellipse cx={420} cy={232} rx={30} ry={18} fill="#e9d5ff" stroke="#7c3aed" strokeWidth={2} />
+      <path d="M415 214 L415 196 L408 186 L415 176 L408 166" fill="none" stroke="#7c3aed" strokeWidth={3} />
+      <He x={420} y={272} size={13}>מעוגן בשומן</He><He x={420} y={288} size={12} color={MUTED}>(פלמיטויל, GPI…)</He>
+    </svg>
+  );
+}

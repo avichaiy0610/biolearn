@@ -1,0 +1,26 @@
+// From components/lesson/geneExpressionFigures.tsx before 2026-11-07
+function TadLoopExtrusion() {
+  const tri = (x0: number, x1: number, c: string) => <path d={`M${x0} 110 L${(x0 + x1) / 2} ${110 - (x1 - x0) / 2} L${x1} 110 z`} fill={c} opacity={0.35} stroke={c} strokeWidth={1.2} />;
+  return (
+    <Svg h={290} label="TADs ושליחת לולאה: למעלה — מפת מגעים (Hi-C) עם שני משולשים, שני תחומים שבתוכם הרבה מגעים. למטה — טבעת קוהזין מושכת את ה-DNA ויוצרת לולאה שגדלה, עד שהיא נעצרת בשני אתרי CTCF שפונים זה אל זה; המגביר והפרומוטור בתוך אותה לולאה באים במגע">
+      <He x={240} y={20} size={12} bold>מפת מגעים (Hi-C)</He>
+      {tri(40, 240, ORANGE)}{tri(240, 440, BLUE)}
+      <Line x1={40} y1={110} x2={440} y2={110} c={MUTED} w={1.4} />
+      <La x={140} y={100} size={11} bold color={ORANGE}>TAD 1</La>
+      <La x={340} y={100} size={11} bold color={BLUE}>TAD 2</La>
+      <line x1={20} x2={460} y1={130} y2={130} stroke={LINE} strokeWidth={1} />
+      <He x={240} y={152} size={12} bold>שליחת לולאה</He>
+      <path d="M40 250 L180 250 C 175 170, 305 170, 300 250 L440 250" fill="none" stroke={MUTED} strokeWidth={3} />
+      <ellipse cx={240} cy={246} rx={70} ry={10} fill="none" stroke={ORANGE} strokeWidth={4} />
+      <He x={240} y={276} size={10.5} bold color={ORANGE}>קוהזין</He>
+      <path d="M170 238 l14 12 l-14 12 z" fill={RED} />
+      <path d="M310 238 l-14 12 l14 12 z" fill={RED} />
+      <La x={150} y={238} size={10.5} bold color={RED}>CTCF</La>
+      <La x={330} y={238} size={10.5} bold color={RED}>CTCF</La>
+      <circle cx={208} cy={186} r={7} fill={GREEN} /><He x={192} y={182} size={10.5} anchor="end" color={GREEN}>מגביר</He>
+      <circle cx={272} cy={186} r={7} fill={BLUE} /><He x={288} y={182} size={10.5} anchor="start" color={BLUE}>פרומוטור</He>
+      <Arrow x1={110} y1={268} x2={160} y2={268} color={MUTED} />
+      <Arrow x1={370} y1={268} x2={320} y2={268} color={MUTED} />
+    </Svg>
+  );
+}

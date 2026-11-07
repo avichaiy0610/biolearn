@@ -1,0 +1,55 @@
+// From components/lesson/endocrineFigures.tsx before 2026-11-07
+function ThyroidSynthesis() {
+  const num = (x: number, y: number, n: string) => (
+    <g key={n}>
+      <circle cx={x} cy={y} r={8} fill={RED} />
+      <He x={x} y={y + 4} size={10} bold color="white">{n}</He>
+    </g>
+  );
+  return (
+    <Svg h={340} label="ייצור הורמוני התריס בתא הזקיק: יודיד נכנס מהדם דרך NIS, יוצא לקולואיד, ושם TPO מחמצן אותו וקושר אותו לטירוזינים של התירוגלובולין ומצמד אותם ל-T₄ ול-T₃. בתגובה ל-TSH התא בולע קולואיד, הליזוזום מפרק את התירוגלובולין, ו-T₄ ו-T₃ יוצאים לדם.">
+      <rect x={14} y={20} width={120} height={226} rx={10} fill={FILL.red} />
+      <He x={74} y={38} size={11} bold color={RED}>דם</He>
+      <rect x={150} y={20} width={180} height={226} rx={10} fill={FILL.cyto} stroke={ORANGE} strokeWidth={1.4} />
+      <He x={240} y={38} size={11} bold>תא הזקיק</He>
+      <rect x={346} y={20} width={124} height={226} rx={10} fill={FILL.yellow} />
+      <He x={408} y={38} size={11} bold color={ORANGE}>קולואיד</He>
+
+      <circle cx={150} cy={74} r={8} fill={BLUE} />
+      <La x={74} y={78} size={11}>I⁻</La>
+      <Arrow x1={92} y1={74} x2={140} y2={74} color={BLUE} />
+      <La x={124} y={58} size={9} color={BLUE}>NIS</La>
+      <Arrow x1={162} y1={74} x2={318} y2={74} color={BLUE} />
+      <circle cx={330} cy={74} r={6} fill={BLUE} />
+      <Arrow x1={338} y1={74} x2={376} y2={74} color={BLUE} />
+      <La x={392} y={78} size={11} anchor="start">I⁻</La>
+
+      <Arrow x1={240} y1={118} x2={318} y2={118} color={ORANGE} />
+      <He x={240} y={110} size={10}>ייצור תירוגלובולין</He>
+      <path d="M360 120 q8 -10 16 0 t16 0 t16 0 t16 0 t16 0" fill="none" stroke={ORANGE} strokeWidth={2.2} />
+      <La x={408} y={142} size={10} color={ORANGE}>Tg</La>
+      <rect x={326} y={94} width={14} height={20} rx={3} fill={GREEN} />
+      <La x={350} y={106} size={9} anchor="start" color={GREEN}>TPO</La>
+      <He x={408} y={170} size={9.5}>חמצון, קשירה לטירוזין</He>
+      <He x={408} y={184} size={9.5}>וצימוד — בתוך התירוגלובולין</He>
+
+      <circle cx={300} cy={214} r={13} fill={FILL.yellow} stroke={ORANGE} />
+      <Arrow x1={372} y1={214} x2={318} y2={214} color={ORANGE} />
+      <circle cx={232} cy={214} r={11} fill={FILL.purple} stroke={PURPLE} />
+      <Arrow x1={284} y1={214} x2={246} y2={214} color={PURPLE} />
+      <Arrow x1={218} y1={214} x2={96} y2={214} color={PURPLE} />
+      <La x={74} y={204} size={11} color={PURPLE}>T₄, T₃</La>
+      <He x={232} y={238} size={9.5} color={PURPLE}>ליזוזום</He>
+
+      <La x={74} y={150} size={11} color={GREEN}>TSH</La>
+      <Arrow x1={92} y1={154} x2={142} y2={154} color={GREEN} />
+      <rect x={144} y={146} width={10} height={16} rx={3} fill={GREEN} />
+      {num(110, 94, "1")}{num(352, 62, "2")}{num(316, 140, "3")}{num(320, 196, "4")}{num(160, 228, "5")}
+      <He x={465} y={266} size={10.5} anchor="end">1 — קליטת יודיד מהדם (NIS, עם נתרן)</He>
+      <He x={465} y={282} size={10.5} anchor="end">2 — מעבר היודיד לקולואיד</He>
+      <He x={465} y={298} size={10.5} anchor="end">3 — TPO: חמצון, קשירה לטירוזינים בתירוגלובולין וצימוד</He>
+      <He x={465} y={314} size={10.5} anchor="end">4 — בליעת קולואיד בתגובה ל-TSH</He>
+      <He x={465} y={330} size={10.5} anchor="end">5 — פירוק בליזוזום ושחרור T₄ ו-T₃ לדם</He>
+    </Svg>
+  );
+}

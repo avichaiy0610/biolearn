@@ -1,0 +1,32 @@
+// From components/lesson/biochemFigures.tsx before 2026-11-07
+function CatalyticTriad() {
+  const box = (x: number, y: number, w: number, label: string, sub: string, color: string) => (
+    <g>
+      <rect x={x} y={y} width={w} height={58} rx={12} fill="#fff" stroke={color} strokeWidth={2.5} />
+      <La x={x + w / 2} y={y + 25} bold color={color}>{label}</La>
+      <La x={x + w / 2} y={y + 45} size={13} color={MUTED}>{sub}</La>
+    </g>
+  );
+  return (
+    <svg viewBox="0 0 480 300" className="w-full h-auto" role="img" aria-label="השלישייה הקטליטית של כימוטריפסין: אספרטט 102 מכוון את היסטידין 57, שמושך פרוטון מסרין 195; הסרין תוקף את הקרבוניל של המצע, והמטען השלילי מיוצב בחור האוקסיאניון">
+      <ArrowDefs />
+      {box(16, 40, 120, "Asp102", "–COO⁻", "#7c3aed")}
+      {box(180, 40, 120, "His57", "imidazole", BLUE)}
+      {box(344, 40, 120, "Ser195", "–CH₂–OH", ORANGE)}
+      <line x1={136} y1={69} x2={180} y2={69} stroke={INK} strokeWidth={2} {...dash} />
+      <line x1={300} y1={69} x2={344} y2={69} stroke={INK} strokeWidth={2} {...dash} />
+      <He x={190} y={122} size={13}>His57 מושך פרוטון מהסרין,</He>
+      <He x={190} y={140} size={13}>והסרין הופך לנוקלאופיל חזק</He>
+      <rect x={300} y={170} width={164} height={70} rx={12} fill="#f1f5f9" stroke={MUTED} strokeWidth={2} />
+      <La x={382} y={198} bold>C=O</La>
+      <He x={382} y={222} size={13} color={MUTED}>הקשר הפפטידי שנחתך</He>
+      <path d="M404 100 Q430 140 400 168" fill="none" stroke={ORANGE} strokeWidth={2.5} markerEnd="url(#bfArrow)" />
+      <He x={448} y={146} size={12} color={ORANGE}>תקיפה</He>
+      <rect x={16} y={170} width={230} height={70} rx={12} fill="#dcfce7" stroke={GREEN} strokeWidth={2} />
+      <He x={131} y={198} size={14} bold color={GREEN}>חור האוקסיאניון</He>
+      <He x={131} y={222} size={12} color={GREEN}>NH של השלד מייצבים את ה-O⁻</He>
+      <line x1={246} y1={205} x2={300} y2={205} stroke={GREEN} strokeWidth={2} {...dash} />
+      <He x={240} y={280} size={12} color={MUTED}>מקווקו = קשר מימן. סכמטי.</He>
+    </svg>
+  );
+}

@@ -1,0 +1,20 @@
+// From components/lesson/molecularFigures.tsx before 2026-11-07
+function ElongationCycle() {
+  return (
+    <Svg h={410} label="מחזור ההארכה: EF-Tu–GTP מביא אמינואציל-tRNA לאתר A; ה-rRNA יוצר קשר פפטידי והשרשרת עוברת ל-tRNA שבאתר A; EF-G–GTP מזיז את הריבוזום בקודון אחד, וה-tRNA הריק עובר ל-E">
+      <Ribo cx={240} cy={96} E="trna" P="peptide" A="empty" k={0.95} />
+      <He x={240} y={168} size={11} color={MUTED}>שרשרת ב-P, אתר A פנוי</He>
+      <Ribo cx={370} cy={300} P="peptide" A="aa" k={0.95} />
+      <Ribo cx={110} cy={300} P="trna" A="peptide" k={0.95} peptideLen={4} />
+      <Arrow x1={330} y1={160} x2={380} y2={226} color={GREEN} width={2.4} />
+      <He x={420} y={170} size={11.5} bold color={GREEN}>1. כניסה לאתר A</He>
+      <La x={420} y={188} size={11} color={GREEN}>EF-Tu–GTP</La>
+      <Arrow x1={282} y1={330} x2={200} y2={330} color={ORANGE} width={2.4} />
+      <He x={240} y={372} size={11.5} bold color={ORANGE}>2. קשר פפטידי</He>
+      <He x={240} y={390} size={10.5} color={ORANGE}>ה-rRNA מזרז, בלי GTP</He>
+      <Arrow x1={100} y1={226} x2={150} y2={160} color={BLUE} width={2.4} />
+      <He x={64} y={170} size={11.5} bold color={BLUE}>3. טרנסלוקציה</He>
+      <La x={64} y={188} size={11} color={BLUE}>EF-G–GTP</La>
+    </Svg>
+  );
+}

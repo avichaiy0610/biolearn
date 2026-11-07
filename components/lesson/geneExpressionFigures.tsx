@@ -5,6 +5,8 @@ import type React from "react";
 import { ArrowDefs, BLUE, GREEN, INK, LINE, MUTED, ORANGE, He, La, curve, dash, scale } from "./biochemFigures";
 import { Arrow } from "./metabolicFigures";
 
+import { DnaBindingMotifs } from "./redraws/DnaBindingMotifs";
+import { TadLoopExtrusion } from "./redraws/TadLoopExtrusion";
 const PURPLE = "#7c3aed";
 const RED = "#b91c1c";
 const FILL = { blue: "#dbeafe", green: "#dcfce7", orange: "#ffedd5", purple: "#ede9fe", yellow: "#fef3c7", gray: "#f1f5f9", red: "#fee2e2", sky: "#e0f2fe" };
@@ -169,50 +171,7 @@ function TrpAttenuation() {
 }
 
 // ── gx-transcription-factors ─────────────────────────────────────────────────
-function DnaBindingMotifs() {
-  const cell = (cx: number, cy: number, title: string, sub: string, body: React.ReactNode) => (
-    <g>
-      <Dna x0={cx - 90} x1={cx + 90} y={cy + 44} />
-      <path d={`M${cx - 26} ${cy + 41} q26 -10 52 0`} fill="none" stroke={MUTED} strokeWidth={1} {...dash} />
-      {body}
-      <He x={cx} y={cy + 72} size={12} bold>{title}</He>
-      <He x={cx} y={cy + 88} size={10.5} color={MUTED}>{sub}</He>
-    </g>
-  );
-  const helix = (x: number, y: number, w: number, h: number, c: string, rot = 0) => (
-    <rect x={x - w / 2} y={y - h / 2} width={w} height={h} rx={h / 2} fill={c === RED ? FILL.red : FILL.blue} stroke={c} strokeWidth={1.4} transform={rot ? `rotate(${rot} ${x} ${y})` : undefined} />
-  );
-  return (
-    <Svg h={290} label="ארבעה מוטיבים לקישור DNA: סליל-סיבוב-סליל — סליל הזיהוי (אדום) בחריץ הגדול; אצבע אבץ — לולאה שמיוצבת ביון אבץ; רוכסן לאוצין — שני סלילים ארוכים שנצמדים לדימר ואוחזים ב-DNA כמו מלקחיים; סליל-לולאה-סליל — דימר עם לולאה בין הסלילים">
-      {cell(120, 20, "סליל-סיבוב-סליל", "סליל הזיהוי בחריץ הגדול", (
-        <g>{helix(98, 30, 46, 14, BLUE, -30)}{helix(130, 52, 46, 14, RED)}<path d="M116 22 q10 6 2 22" fill="none" stroke={INK} strokeWidth={1.4} /></g>
-      ))}
-      {cell(360, 20, "אצבע אבץ", "Zn²⁺ מייצב לולאה", (
-        <g>
-          <path d="M330 56 C 320 10, 360 0, 372 20 C 384 40, 392 50, 390 56" fill="none" stroke={BLUE} strokeWidth={3} />
-          {helix(372, 48, 40, 12, RED, 10)}
-          <circle cx={350} cy={30} r={8} fill={FILL.yellow} stroke={ORANGE} strokeWidth={1.4} /><La x={350} y={33.5} size={9} bold color={ORANGE}>Zn</La>
-        </g>
-      ))}
-      {cell(120, 160, "רוכסן לאוצין (bZIP)", "דימר — Jun/Fos, CREB", (
-        <g>
-          <path d="M112 146 L102 190 M128 146 L138 190" fill="none" stroke={BLUE} strokeWidth={8} strokeLinecap="round" />
-          <path d="M112 146 L128 146" stroke={INK} strokeWidth={1} />
-          {[150, 158, 166].map((y) => <line key={y} x1={113} x2={127} y1={y} y2={y} stroke={ORANGE} strokeWidth={2} />)}
-          <path d="M102 190 L86 200 M138 190 L154 200" fill="none" stroke={RED} strokeWidth={8} strokeLinecap="round" />
-        </g>
-      ))}
-      {cell(360, 160, "סליל-לולאה-סליל (bHLH)", "דימר — MyoD, Myc", (
-        <g>
-          {helix(340, 172, 14, 34, BLUE)}{helix(380, 172, 14, 34, BLUE)}
-          <path d="M340 154 q-14 -16 0 -22 M380 154 q14 -16 0 -22" fill="none" stroke={INK} strokeWidth={1.6} />
-          {helix(340, 128, 14, 26, BLUE)}{helix(380, 128, 14, 26, BLUE)}
-          <path d="M340 190 L330 200 M380 190 L390 200" fill="none" stroke={RED} strokeWidth={7} strokeLinecap="round" />
-        </g>
-      ))}
-    </Svg>
-  );
-}
+// DnaBindingMotifs: recomposed at textbook level, one picture on desktop (2026-11-07) — see ./redraws/DnaBindingMotifs.tsx; old code in archive/figures/2026-11-07/.
 
 function GalSwitch() {
   const panel = (x0: number, on: boolean) => {
@@ -668,31 +627,7 @@ function TransposonTypes() {
 }
 
 // ── gx-genome-wide ───────────────────────────────────────────────────────────
-function TadLoopExtrusion() {
-  const tri = (x0: number, x1: number, c: string) => <path d={`M${x0} 110 L${(x0 + x1) / 2} ${110 - (x1 - x0) / 2} L${x1} 110 z`} fill={c} opacity={0.35} stroke={c} strokeWidth={1.2} />;
-  return (
-    <Svg h={290} label="TADs ושליחת לולאה: למעלה — מפת מגעים (Hi-C) עם שני משולשים, שני תחומים שבתוכם הרבה מגעים. למטה — טבעת קוהזין מושכת את ה-DNA ויוצרת לולאה שגדלה, עד שהיא נעצרת בשני אתרי CTCF שפונים זה אל זה; המגביר והפרומוטור בתוך אותה לולאה באים במגע">
-      <He x={240} y={20} size={12} bold>מפת מגעים (Hi-C)</He>
-      {tri(40, 240, ORANGE)}{tri(240, 440, BLUE)}
-      <Line x1={40} y1={110} x2={440} y2={110} c={MUTED} w={1.4} />
-      <La x={140} y={100} size={11} bold color={ORANGE}>TAD 1</La>
-      <La x={340} y={100} size={11} bold color={BLUE}>TAD 2</La>
-      <line x1={20} x2={460} y1={130} y2={130} stroke={LINE} strokeWidth={1} />
-      <He x={240} y={152} size={12} bold>שליחת לולאה</He>
-      <path d="M40 250 L180 250 C 175 170, 305 170, 300 250 L440 250" fill="none" stroke={MUTED} strokeWidth={3} />
-      <ellipse cx={240} cy={246} rx={70} ry={10} fill="none" stroke={ORANGE} strokeWidth={4} />
-      <He x={240} y={276} size={10.5} bold color={ORANGE}>קוהזין</He>
-      <path d="M170 238 l14 12 l-14 12 z" fill={RED} />
-      <path d="M310 238 l-14 12 l14 12 z" fill={RED} />
-      <La x={150} y={238} size={10.5} bold color={RED}>CTCF</La>
-      <La x={330} y={238} size={10.5} bold color={RED}>CTCF</La>
-      <circle cx={208} cy={186} r={7} fill={GREEN} /><He x={192} y={182} size={10.5} anchor="end" color={GREEN}>מגביר</He>
-      <circle cx={272} cy={186} r={7} fill={BLUE} /><He x={288} y={182} size={10.5} anchor="start" color={BLUE}>פרומוטור</He>
-      <Arrow x1={110} y1={268} x2={160} y2={268} color={MUTED} />
-      <Arrow x1={370} y1={268} x2={320} y2={268} color={MUTED} />
-    </Svg>
-  );
-}
+// TadLoopExtrusion: recomposed at textbook level, one picture on desktop (2026-11-07) — see ./redraws/TadLoopExtrusion.tsx; old code in archive/figures/2026-11-07/.
 
 function DosageCompensation() {
   const chr = (x: number, y: number, kind: "on" | "off" | "up" | "half" | "y") => {

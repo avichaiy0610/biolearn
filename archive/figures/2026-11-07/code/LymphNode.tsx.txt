@@ -1,0 +1,28 @@
+// From components/lesson/immunologyFigures.tsx before 2026-11-07
+function LymphNode() {
+  return (
+    <Svg h={300} label="בלוטת לימפה בחתך: כלי לימפה מביאים מגיעים לקופסית; בקליפה זקיקים של תאי B, חלקם עם מרכז נבט; בפרה-קליפה תאי T ותאים דנדריטיים, וורידונים עם אנדותל גבוה (HEV) שדרכם נכנסים לימפוציטים מהדם; בליבה תאי פלזמה, ומשם כלי הלימפה היוצא.">
+      <path d="M60 150 Q60 50 230 46 Q400 44 410 110 Q380 150 410 190 Q400 256 230 254 Q60 250 60 150 Z" fill={FILL.cyto} stroke={ORANGE} strokeWidth={1.6} />
+      <ellipse cx={220} cy={156} rx={120} ry={54} fill={FILL.green} />
+      {[[120, 92], [210, 74], [300, 84], [110, 208], [210, 228]].map(([x, y], i) => (
+        <g key={i}>
+          <circle cx={x} cy={y} r={24} fill={FILL.blue} stroke={BLUE} />
+          {i < 2 && <circle cx={x + 4} cy={y + 4} r={11} fill="white" stroke={BLUE} strokeDasharray="2 2" />}
+        </g>
+      ))}
+      {["M372 120 q-20 20 0 40", "M356 112 q-18 30 2 60", "M386 132 q-12 12 0 24"].map((d) => <path key={d} d={d} fill="none" stroke={PURPLE} strokeWidth={2} />)}
+      <path d="M190 150 q10 -12 20 0 q10 12 20 0" fill="none" stroke={RED} strokeWidth={2.4} />
+      <Arrow x1={30} y1={70} x2={82} y2={96} color={TEAL} />
+      <Arrow x1={40} y1={240} x2={84} y2={214} color={TEAL} />
+      <Arrow x1={412} y1={150} x2={466} y2={150} color={TEAL} />
+      <He x={60} y={40} size={10} color={TEAL}>כלי לימפה מביאים</He>
+      <He x={210} y={30} size={10} color={BLUE}>זקיקים — תאי B</He>
+      <He x={330} y={36} size={10}>מרכז נבט</He><Lead x1={312} y1={40} x2={218} y2={80} />
+      <He x={220} y={184} size={10.5} bold color={GREEN}>פרה-קליפה — תאי T</He>
+      <He x={300} y={140} size={9.5} color={RED} anchor="start">HEV</He>
+      <He x={430} y={100} size={10} color={PURPLE}>ליבה</He><Lead x1={420} y1={104} x2={382} y2={124} />
+      <He x={440} y={172} size={10} color={TEAL}>כלי לימפה יוצא</He>
+      <He x={240} y={284} size={10} color={MUTED}>לימפוציטים מהדם נכנסים דרך HEV; האנטיגן מגיע עם הלימפה</He>
+    </Svg>
+  );
+}

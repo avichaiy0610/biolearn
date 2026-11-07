@@ -1,0 +1,38 @@
+// From components/lesson/endocrineFigures.tsx before 2026-11-07
+function GpcrCascade() {
+  const zig = Array.from({ length: 7 }, (_, i) => `L${96 + i * 8} ${i % 2 ? 112 : 88} L${100 + i * 8} ${i % 2 ? 112 : 88}`).join(" ");
+  return (
+    <Svg h={290} label="מסלול Gs: ההורמון נקשר לקולטן בעל שבעה מעברים, חלבון Gαs קושר GTP ומפעיל אדניליל ציקלאז, נוצר cAMP, cAMP מפעיל את PKA, ו-PKA מזרחן אנזימים ותעלות ואת פקטור השעתוק CREB. מתחת: מסלול Gq דרך פוספוליפאז C.">
+      <rect x={10} y={88} width={460} height={24} fill={FILL.yellow} />
+      <He x={36} y={104} size={10} color={MUTED}>ממברנה</He>
+      <He x={36} y={72} size={10} color={MUTED}>בחוץ</He>
+      <He x={36} y={140} size={10} color={MUTED}>בתוך התא</He>
+      <path d={`M96 112 ${zig}`} fill="none" stroke={PURPLE} strokeWidth={2.4} />
+      <polygon points="114,62 126,62 130,72 120,80 110,72" fill={ORANGE} />
+      <He x={120} y={50} size={10}>הורמון</He>
+      <ellipse cx={150} cy={126} rx={7} ry={6} fill={FILL.gray} stroke={MUTED} />
+      <ellipse cx={162} cy={131} rx={8} ry={7} fill={FILL.gray} stroke={MUTED} />
+      <ellipse cx={186} cy={128} rx={15} ry={11} fill={FILL.orange} stroke={ORANGE} strokeWidth={1.4} />
+      <La x={186} y={132} size={10}>αs</La>
+      <La x={186} y={155} size={9} color={MUTED}>GTP</La>
+      <Arrow x1={202} y1={124} x2={258} y2={110} color={ORANGE} />
+      <rect x={262} y={84} width={34} height={32} rx={5} fill={FILL.green} stroke={GREEN} strokeWidth={1.4} />
+      <La x={279} y={104} size={11} bold>AC</La>
+      <La x={258} y={154} size={10} anchor="end">ATP</La>
+      <Arrow x1={262} y1={150} x2={290} y2={150} />
+      <La x={296} y={154} size={11} bold anchor="start">cAMP</La>
+      <Arrow x1={312} y1={160} x2={312} y2={186} />
+      <rect x={290} y={190} width={46} height={24} rx={5} fill={FILL.blue} stroke={BLUE} strokeWidth={1.4} />
+      <La x={313} y={206} size={11} bold>PKA</La>
+      <Arrow x1={290} y1={208} x2={238} y2={226} color={BLUE} />
+      <He x={190} y={236} size={10}>זרחון אנזימים ותעלות</He>
+      <Arrow x1={338} y1={208} x2={372} y2={222} color={BLUE} />
+      <ellipse cx={420} cy={232} rx={52} ry={24} fill={FILL.purple} stroke={PURPLE} />
+      <La x={420} y={230} size={10} bold>CREB</La>
+      <He x={420} y={245} size={9.5}>שעתוק בגרעין</He>
+      <He x={186} y={176} size={9} color={MUTED}>α מפרקת GTP ונכבית</He>
+      <La x={240} y={276} size={10} color={TEAL}>Gq → PLC → IP₃ + DAG → Ca²⁺ , PKC</La>
+      <He x={240} y={260} size={10} color={TEAL}>מסלול אחר (Gq):</He>
+    </Svg>
+  );
+}

@@ -6,6 +6,10 @@ import type React from "react";
 import { ArrowDefs, Axes, BLUE, GREEN, INK, MUTED, ORANGE, He, La, curve, scale } from "./biochemFigures";
 import { Arrow } from "./metabolicFigures";
 
+import { BetaCell } from "./redraws/BetaCell";
+import { GpcrCascade } from "./redraws/GpcrCascade";
+import { HypothalamicPituitary } from "./redraws/HypothalamicPituitary";
+import { ThyroidSynthesis } from "./redraws/ThyroidSynthesis";
 const PURPLE = "#7c3aed";
 const RED = "#b91c1c";
 const TEAL = "#0f766e";
@@ -116,43 +120,7 @@ function HormoneClasses() {
 }
 
 // ── en-gpcr-cascade ──────────────────────────────────────────────────────────
-function GpcrCascade() {
-  const zig = Array.from({ length: 7 }, (_, i) => `L${96 + i * 8} ${i % 2 ? 112 : 88} L${100 + i * 8} ${i % 2 ? 112 : 88}`).join(" ");
-  return (
-    <Svg h={290} label="מסלול Gs: ההורמון נקשר לקולטן בעל שבעה מעברים, חלבון Gαs קושר GTP ומפעיל אדניליל ציקלאז, נוצר cAMP, cAMP מפעיל את PKA, ו-PKA מזרחן אנזימים ותעלות ואת פקטור השעתוק CREB. מתחת: מסלול Gq דרך פוספוליפאז C.">
-      <rect x={10} y={88} width={460} height={24} fill={FILL.yellow} />
-      <He x={36} y={104} size={10} color={MUTED}>ממברנה</He>
-      <He x={36} y={72} size={10} color={MUTED}>בחוץ</He>
-      <He x={36} y={140} size={10} color={MUTED}>בתוך התא</He>
-      <path d={`M96 112 ${zig}`} fill="none" stroke={PURPLE} strokeWidth={2.4} />
-      <polygon points="114,62 126,62 130,72 120,80 110,72" fill={ORANGE} />
-      <He x={120} y={50} size={10}>הורמון</He>
-      <ellipse cx={150} cy={126} rx={7} ry={6} fill={FILL.gray} stroke={MUTED} />
-      <ellipse cx={162} cy={131} rx={8} ry={7} fill={FILL.gray} stroke={MUTED} />
-      <ellipse cx={186} cy={128} rx={15} ry={11} fill={FILL.orange} stroke={ORANGE} strokeWidth={1.4} />
-      <La x={186} y={132} size={10}>αs</La>
-      <La x={186} y={155} size={9} color={MUTED}>GTP</La>
-      <Arrow x1={202} y1={124} x2={258} y2={110} color={ORANGE} />
-      <rect x={262} y={84} width={34} height={32} rx={5} fill={FILL.green} stroke={GREEN} strokeWidth={1.4} />
-      <La x={279} y={104} size={11} bold>AC</La>
-      <La x={258} y={154} size={10} anchor="end">ATP</La>
-      <Arrow x1={262} y1={150} x2={290} y2={150} />
-      <La x={296} y={154} size={11} bold anchor="start">cAMP</La>
-      <Arrow x1={312} y1={160} x2={312} y2={186} />
-      <rect x={290} y={190} width={46} height={24} rx={5} fill={FILL.blue} stroke={BLUE} strokeWidth={1.4} />
-      <La x={313} y={206} size={11} bold>PKA</La>
-      <Arrow x1={290} y1={208} x2={238} y2={226} color={BLUE} />
-      <He x={190} y={236} size={10}>זרחון אנזימים ותעלות</He>
-      <Arrow x1={338} y1={208} x2={372} y2={222} color={BLUE} />
-      <ellipse cx={420} cy={232} rx={52} ry={24} fill={FILL.purple} stroke={PURPLE} />
-      <La x={420} y={230} size={10} bold>CREB</La>
-      <He x={420} y={245} size={9.5}>שעתוק בגרעין</He>
-      <He x={186} y={176} size={9} color={MUTED}>α מפרקת GTP ונכבית</He>
-      <La x={240} y={276} size={10} color={TEAL}>Gq → PLC → IP₃ + DAG → Ca²⁺ , PKC</La>
-      <He x={240} y={260} size={10} color={TEAL}>מסלול אחר (Gq):</He>
-    </Svg>
-  );
-}
+// GpcrCascade: recomposed at textbook level, one picture on desktop (2026-11-07) — see ./redraws/GpcrCascade.tsx; old code in archive/figures/2026-11-07/.
 
 // ── en-nuclear-receptor ──────────────────────────────────────────────────────
 function NuclearReceptor() {
@@ -270,37 +238,7 @@ function PrimarySecondary() {
 }
 
 // ── en-hypothalamic-pituitary ────────────────────────────────────────────────
-function HypothalamicPituitary() {
-  return (
-    <Svg h={320} label="ההיפותלמוס וההיפופיזה: תאי עצב קטנים משחררים הורמונים משחררים לנימים בבליטה החציונית, ומשם ורידי השער מובילים אותם להיפופיזה הקדמית, שמפרישה שישה הורמונים לדם. תאי עצב גדולים שולחים אקסונים דרך הגבעול להיפופיזה האחורית, ומשחררים שם ADH ואוקסיטוצין.">
-      <rect x={120} y={18} width={240} height={78} rx={14} fill={FILL.yellow} stroke={ORANGE} strokeWidth={1.4} />
-      <He x={150} y={84} size={11} bold>היפותלמוס</He>
-      <circle cx={180} cy={46} r={7} fill={PURPLE} />
-      <path d="M180 53 Q200 90 224 106" fill="none" stroke={PURPLE} strokeWidth={2} />
-      <circle cx={304} cy={42} r={9} fill={BLUE} />
-      <path d="M304 51 Q290 120 298 184" fill="none" stroke={BLUE} strokeWidth={2.4} />
-      <path d="M222 96 L236 176" fill="none" stroke={MUTED} strokeWidth={1.2} />
-      <path d="M276 96 L264 176" fill="none" stroke={MUTED} strokeWidth={1.2} />
-      <path d="M220 110 q6 -8 12 0 q6 8 12 0" fill="none" stroke={RED} strokeWidth={1.8} />
-      <path d="M232 112 Q226 150 206 190" fill="none" stroke={RED} strokeWidth={2.2} />
-      <ellipse cx={190} cy={222} rx={72} ry={44} fill={FILL.orange} stroke={ORANGE} strokeWidth={1.4} />
-      <path d="M190 194 q8 -6 16 0 q8 6 16 0" fill="none" stroke={RED} strokeWidth={1.6} />
-      <ellipse cx={304} cy={214} rx={44} ry={40} fill={FILL.blue} stroke={BLUE} strokeWidth={1.4} />
-      {[290, 300, 310].map((x) => <circle key={x} cx={x} cy={188} r={3.5} fill={BLUE} />)}
-      <He x={180} y={236} size={11} bold>קדמית</He>
-      <He x={304} y={230} size={11} bold>אחורית</He>
-      <He x={62} y={44} size={10}>הורמונים משחררים</He><Lead x1={100} y1={44} x2={172} y2={46} />
-      <He x={420} y={42} size={10}>ייצור ADH</He><He x={420} y={56} size={10}>ואוקסיטוצין</He><Lead x1={392} y1={46} x2={314} y2={42} />
-      <He x={62} y={118} size={10}>הבליטה החציונית</He><Lead x1={104} y1={116} x2={218} y2={110} />
-      <He x={62} y={160} size={10}>ורידי השער</He><Lead x1={92} y1={158} x2={220} y2={160} />
-      <He x={420} y={130} size={10}>אקסונים בגבעול</He><Lead x1={384} y1={128} x2={295} y2={130} />
-      <Arrow x1={170} y1={268} x2={156} y2={292} color={ORANGE} />
-      <La x={140} y={310} size={10} color={ORANGE}>GH, PRL, ACTH, TSH, LH, FSH</La>
-      <Arrow x1={316} y1={256} x2={334} y2={286} color={BLUE} />
-      <He x={366} y={306} size={10} color={BLUE}>ADH ואוקסיטוצין</He>
-    </Svg>
-  );
-}
+// HypothalamicPituitary: recomposed at textbook level, one picture on desktop (2026-11-07) — see ./redraws/HypothalamicPituitary.tsx; old code in archive/figures/2026-11-07/.
 
 // ── en-gh-igf ────────────────────────────────────────────────────────────────
 function GhIgf() {
@@ -332,60 +270,7 @@ function GhIgf() {
 }
 
 // ── en-thyroid-synthesis ─────────────────────────────────────────────────────
-function ThyroidSynthesis() {
-  const num = (x: number, y: number, n: string) => (
-    <g key={n}>
-      <circle cx={x} cy={y} r={8} fill={RED} />
-      <He x={x} y={y + 4} size={10} bold color="white">{n}</He>
-    </g>
-  );
-  return (
-    <Svg h={340} label="ייצור הורמוני התריס בתא הזקיק: יודיד נכנס מהדם דרך NIS, יוצא לקולואיד, ושם TPO מחמצן אותו וקושר אותו לטירוזינים של התירוגלובולין ומצמד אותם ל-T₄ ול-T₃. בתגובה ל-TSH התא בולע קולואיד, הליזוזום מפרק את התירוגלובולין, ו-T₄ ו-T₃ יוצאים לדם.">
-      <rect x={14} y={20} width={120} height={226} rx={10} fill={FILL.red} />
-      <He x={74} y={38} size={11} bold color={RED}>דם</He>
-      <rect x={150} y={20} width={180} height={226} rx={10} fill={FILL.cyto} stroke={ORANGE} strokeWidth={1.4} />
-      <He x={240} y={38} size={11} bold>תא הזקיק</He>
-      <rect x={346} y={20} width={124} height={226} rx={10} fill={FILL.yellow} />
-      <He x={408} y={38} size={11} bold color={ORANGE}>קולואיד</He>
-
-      <circle cx={150} cy={74} r={8} fill={BLUE} />
-      <La x={74} y={78} size={11}>I⁻</La>
-      <Arrow x1={92} y1={74} x2={140} y2={74} color={BLUE} />
-      <La x={124} y={58} size={9} color={BLUE}>NIS</La>
-      <Arrow x1={162} y1={74} x2={318} y2={74} color={BLUE} />
-      <circle cx={330} cy={74} r={6} fill={BLUE} />
-      <Arrow x1={338} y1={74} x2={376} y2={74} color={BLUE} />
-      <La x={392} y={78} size={11} anchor="start">I⁻</La>
-
-      <Arrow x1={240} y1={118} x2={318} y2={118} color={ORANGE} />
-      <He x={240} y={110} size={10}>ייצור תירוגלובולין</He>
-      <path d="M360 120 q8 -10 16 0 t16 0 t16 0 t16 0 t16 0" fill="none" stroke={ORANGE} strokeWidth={2.2} />
-      <La x={408} y={142} size={10} color={ORANGE}>Tg</La>
-      <rect x={326} y={94} width={14} height={20} rx={3} fill={GREEN} />
-      <La x={350} y={106} size={9} anchor="start" color={GREEN}>TPO</La>
-      <He x={408} y={170} size={9.5}>חמצון, קשירה לטירוזין</He>
-      <He x={408} y={184} size={9.5}>וצימוד — בתוך התירוגלובולין</He>
-
-      <circle cx={300} cy={214} r={13} fill={FILL.yellow} stroke={ORANGE} />
-      <Arrow x1={372} y1={214} x2={318} y2={214} color={ORANGE} />
-      <circle cx={232} cy={214} r={11} fill={FILL.purple} stroke={PURPLE} />
-      <Arrow x1={284} y1={214} x2={246} y2={214} color={PURPLE} />
-      <Arrow x1={218} y1={214} x2={96} y2={214} color={PURPLE} />
-      <La x={74} y={204} size={11} color={PURPLE}>T₄, T₃</La>
-      <He x={232} y={238} size={9.5} color={PURPLE}>ליזוזום</He>
-
-      <La x={74} y={150} size={11} color={GREEN}>TSH</La>
-      <Arrow x1={92} y1={154} x2={142} y2={154} color={GREEN} />
-      <rect x={144} y={146} width={10} height={16} rx={3} fill={GREEN} />
-      {num(110, 94, "1")}{num(352, 62, "2")}{num(316, 140, "3")}{num(320, 196, "4")}{num(160, 228, "5")}
-      <He x={465} y={266} size={10.5} anchor="end">1 — קליטת יודיד מהדם (NIS, עם נתרן)</He>
-      <He x={465} y={282} size={10.5} anchor="end">2 — מעבר היודיד לקולואיד</He>
-      <He x={465} y={298} size={10.5} anchor="end">3 — TPO: חמצון, קשירה לטירוזינים בתירוגלובולין וצימוד</He>
-      <He x={465} y={314} size={10.5} anchor="end">4 — בליעת קולואיד בתגובה ל-TSH</He>
-      <He x={465} y={330} size={10.5} anchor="end">5 — פירוק בליזוזום ושחרור T₄ ו-T₃ לדם</He>
-    </Svg>
-  );
-}
+// ThyroidSynthesis: recomposed at textbook level, one picture on desktop (2026-11-07) — see ./redraws/ThyroidSynthesis.tsx; old code in archive/figures/2026-11-07/.
 
 // ── en-gnrh-pulses ───────────────────────────────────────────────────────────
 function GnrhPulses() {
@@ -541,42 +426,7 @@ function Steroidogenesis() {
 }
 
 // ── en-beta-cell ─────────────────────────────────────────────────────────────
-function BetaCell() {
-  const num = (x: number, y: number, n: string) => (
-    <g key={n}>
-      <circle cx={x} cy={y} r={8} fill={RED} />
-      <He x={x} y={y + 4} size={10} bold color="white">{n}</He>
-    </g>
-  );
-  return (
-    <Svg h={300} label="הפרשת אינסולין מתא β: גלוקוז נכנס בנשא, גלוקוקינאזה מזרחנת אותו, הגליקוליזה והנשימה מעלות ATP, ATP סוגר את תעלות האשלגן הרגישות ל-ATP, הממברנה עוברת דה-פולריזציה, תעלות סידן נפתחות, וסידן גורם לאקסוציטוזה של שלפוחיות האינסולין.">
-      <rect x={70} y={44} width={340} height={196} rx={24} fill={FILL.cyto} stroke={ORANGE} strokeWidth={1.6} />
-      <rect x={64} y={100} width={12} height={22} rx={3} fill={BLUE} />
-      <He x={34} y={98} size={10.5} color={BLUE}>גלוקוז</He>
-      <Arrow x1={20} y1={111} x2={62} y2={111} color={BLUE} />
-      <Arrow x1={80} y1={111} x2={112} y2={111} color={BLUE} />
-      <He x={150} y={115} size={10.5}>גלוקוקינאזה</He>
-      <Arrow x1={190} y1={111} x2={222} y2={111} />
-      <He x={256} y={108} size={10}>גליקוליזה</He><He x={256} y={122} size={10}>ונשימה</He>
-      <Arrow x1={290} y1={111} x2={318} y2={111} />
-      <La x={344} y={115} size={11} bold>ATP ↑</La>
-      <rect x={290} y={38} width={24} height={12} rx={3} fill={TEAL} />
-      <La x={302} y={30} size={9.5} color={TEAL}>KATP</La>
-      <Arrow x1={340} y1={100} x2={312} y2={56} color={TEAL} />
-      <He x={366} y={80} size={9.5} anchor="start" color={TEAL}>נסגרת</He>
-      <He x={210} y={72} size={9.5} color={MUTED}>פחות K⁺ יוצא — דה-פולריזציה</He>
-      <rect x={404} y={150} width={12} height={22} rx={3} fill={PURPLE} />
-      <La x={452} y={150} size={10} color={PURPLE}>Ca²⁺</La>
-      <Arrow x1={452} y1={160} x2={420} y2={160} color={PURPLE} />
-      <Arrow x1={400} y1={164} x2={320} y2={196} color={PURPLE} />
-      {[[180, 214], [210, 220], [240, 216], [270, 222], [300, 214]].map(([x, y]) => <circle key={x} cx={x} cy={y} r={7} fill="white" stroke={ORANGE} />)}
-      <Arrow x1={240} y1={242} x2={240} y2={272} color={ORANGE} />
-      <He x={260} y={268} size={10.5} anchor="start" color={ORANGE}>אינסולין + פפטיד C</He>
-      {num(46, 132, "1")}{num(150, 136, "2")}{num(356, 132, "3")}{num(286, 64, "4")}{num(440, 186, "5")}{num(212, 262, "6")}
-      <He x={240} y={292} size={9.5} color={MUTED}>סולפונילאוראה סוגרת את KATP ישירות; אינקרטינים (GLP-1) מגבירים את שלב 6</He>
-    </Svg>
-  );
-}
+// BetaCell: recomposed at textbook level, one picture on desktop (2026-11-07) — see ./redraws/BetaCell.tsx; old code in archive/figures/2026-11-07/.
 
 // ── en-fed-fast ──────────────────────────────────────────────────────────────
 function FedFast() {

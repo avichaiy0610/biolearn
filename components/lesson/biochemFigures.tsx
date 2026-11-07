@@ -5,6 +5,8 @@ import type React from "react";
 import { isolatePrimes } from "@/lib/text";
 import { HBondPatterns } from "./redraws/HBondPatterns";
 
+import { CatalyticTriad } from "./redraws/CatalyticTriad";
+import { MembraneProteins } from "./redraws/MembraneProteins";
 export const BLUE = "#1d4ed8", ORANGE = "#c2410c", GREEN = "#15803d", INK = "#1f2937", MUTED = "#64748b", LINE = "#cbd5e1";
 const HE = { fontFamily: "var(--font-hebrew), Arial, sans-serif" };
 const LAT = { fontFamily: "Arial, sans-serif" };
@@ -138,33 +140,7 @@ function FoldingFunnel() {
 }
 
 // ── Fibrous & membrane proteins ──────────────────────────────────────────────
-function MembraneProteins() {
-  const heads = (y: number) => Array.from({ length: 30 }, (_, i) => <circle key={`${y}-${i}`} cx={10 + i * 16} cy={y} r={6} fill="#fde68a" stroke="#b45309" strokeWidth={1} />);
-  return (
-    <svg viewBox="0 30 480 270" className="w-full h-auto" role="img" aria-label="סוגים של חלבוני ממברנה: סליל שחוצה את הממברנה, חבית בטא, חלבון היקפי וחלבון שמעוגן בשומן">
-      <rect x={0} y={110} width={480} height={70} fill="#fef3c7" />
-      {heads(110)}{heads(180)}
-      <He x={240} y={60} size={13} color={MUTED}>↑ בחוץ</He>
-      <He x={20} y={292} size={13} color={MUTED} anchor="start">↓ בפנים</He>
-      {/* TM helices */}
-      <rect x={52} y={88} width={16} height={114} rx={7} fill={BLUE} />
-      <rect x={74} y={88} width={16} height={114} rx={7} fill={BLUE} />
-      <He x={71} y={235} size={13}>סלילי α</He><He x={71} y={252} size={13}>חוצי ממברנה</He>
-      {/* beta barrel */}
-      <rect x={160} y={92} width={70} height={106} rx={14} fill="#dcfce7" stroke={GREEN} strokeWidth={2} />
-      {[172, 186, 200, 214].map((x) => <line key={x} x1={x} y1={98} x2={x} y2={192} stroke={GREEN} strokeWidth={4} />)}
-      <He x={195} y={235} size={13}>חבית β</He><He x={195} y={252} size={13}>(פורין)</He>
-      {/* peripheral bound to a TM protein */}
-      <rect x={272} y={88} width={16} height={114} rx={7} fill={BLUE} />
-      <ellipse cx={295} cy={222} rx={28} ry={18} fill="#fed7aa" stroke={ORANGE} strokeWidth={2} />
-      <He x={295} y={262} size={13}>היקפי</He><He x={295} y={278} size={12} color={MUTED}>(נקשר לחלבון/לראשים)</He>
-      {/* lipid anchored */}
-      <ellipse cx={420} cy={232} rx={30} ry={18} fill="#e9d5ff" stroke="#7c3aed" strokeWidth={2} />
-      <path d="M415 214 L415 196 L408 186 L415 176 L408 166" fill="none" stroke="#7c3aed" strokeWidth={3} />
-      <He x={420} y={272} size={13}>מעוגן בשומן</He><He x={420} y={288} size={12} color={MUTED}>(פלמיטויל, GPI…)</He>
-    </svg>
-  );
-}
+// MembraneProteins: recomposed at textbook level, one picture on desktop (2026-11-07) — see ./redraws/MembraneProteins.tsx; old code in archive/figures/2026-11-07/.
 
 // ── Protein methods ──────────────────────────────────────────────────────────
 function SdsStandard() {
@@ -336,37 +312,7 @@ const InhUncompetitive = () => <InhibitionLB kind="uncompetitive" />;
 const InhNoncompetitive = () => <InhibitionLB kind="noncompetitive" />;
 
 // ── Catalytic mechanisms ─────────────────────────────────────────────────────
-function CatalyticTriad() {
-  const box = (x: number, y: number, w: number, label: string, sub: string, color: string) => (
-    <g>
-      <rect x={x} y={y} width={w} height={58} rx={12} fill="#fff" stroke={color} strokeWidth={2.5} />
-      <La x={x + w / 2} y={y + 25} bold color={color}>{label}</La>
-      <La x={x + w / 2} y={y + 45} size={13} color={MUTED}>{sub}</La>
-    </g>
-  );
-  return (
-    <svg viewBox="0 0 480 300" className="w-full h-auto" role="img" aria-label="השלישייה הקטליטית של כימוטריפסין: אספרטט 102 מכוון את היסטידין 57, שמושך פרוטון מסרין 195; הסרין תוקף את הקרבוניל של המצע, והמטען השלילי מיוצב בחור האוקסיאניון">
-      <ArrowDefs />
-      {box(16, 40, 120, "Asp102", "–COO⁻", "#7c3aed")}
-      {box(180, 40, 120, "His57", "imidazole", BLUE)}
-      {box(344, 40, 120, "Ser195", "–CH₂–OH", ORANGE)}
-      <line x1={136} y1={69} x2={180} y2={69} stroke={INK} strokeWidth={2} {...dash} />
-      <line x1={300} y1={69} x2={344} y2={69} stroke={INK} strokeWidth={2} {...dash} />
-      <He x={190} y={122} size={13}>His57 מושך פרוטון מהסרין,</He>
-      <He x={190} y={140} size={13}>והסרין הופך לנוקלאופיל חזק</He>
-      <rect x={300} y={170} width={164} height={70} rx={12} fill="#f1f5f9" stroke={MUTED} strokeWidth={2} />
-      <La x={382} y={198} bold>C=O</La>
-      <He x={382} y={222} size={13} color={MUTED}>הקשר הפפטידי שנחתך</He>
-      <path d="M404 100 Q430 140 400 168" fill="none" stroke={ORANGE} strokeWidth={2.5} markerEnd="url(#bfArrow)" />
-      <He x={448} y={146} size={12} color={ORANGE}>תקיפה</He>
-      <rect x={16} y={170} width={230} height={70} rx={12} fill="#dcfce7" stroke={GREEN} strokeWidth={2} />
-      <He x={131} y={198} size={14} bold color={GREEN}>חור האוקסיאניון</He>
-      <He x={131} y={222} size={12} color={GREEN}>NH של השלד מייצבים את ה-O⁻</He>
-      <line x1={246} y1={205} x2={300} y2={205} stroke={GREEN} strokeWidth={2} {...dash} />
-      <He x={240} y={280} size={12} color={MUTED}>מקווקו = קשר מימן. סכמטי.</He>
-    </svg>
-  );
-}
+// CatalyticTriad: recomposed at textbook level, one picture on desktop (2026-11-07) — see ./redraws/CatalyticTriad.tsx; old code in archive/figures/2026-11-07/.
 
 // ── Allosteric regulation (MWC, n = 6 like ATCase) ───────────────────────────
 const mwc = (a: number, L: number, c = 0.05, n = 6) => (a * (1 + a) ** (n - 1) + L * c * a * (1 + c * a) ** (n - 1)) / ((1 + a) ** n + L * (1 + c * a) ** n);

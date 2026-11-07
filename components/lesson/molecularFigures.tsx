@@ -11,6 +11,8 @@ import { PicAssembly } from "./redraws/PicAssembly";
 import { ReplicationFork } from "./redraws/ReplicationFork";
 import AnatomyEmbed from "./anatomy/AnatomyEmbed";
 
+import { ElongationCycle } from "./redraws/ElongationCycle";
+import { RibosomeSites } from "./redraws/RibosomeSites";
 const PURPLE = "#7c3aed";
 const RED = "#b91c1c";
 const FILL = { blue: "#dbeafe", green: "#dcfce7", orange: "#ffedd5", purple: "#ede9fe", yellow: "#fef3c7", gray: "#f1f5f9", red: "#fee2e2", sky: "#e0f2fe" };
@@ -576,22 +578,7 @@ function Ribo({ cx, cy, E = "empty", P = "empty", A = "empty", codons, k = 1, pe
 }
 
 // ── mol-ribosome-initiation ──────────────────────────────────────────────────
-function RibosomeSites() {
-  return (
-    <Svg h={305} label="הריבוזום: תת-יחידה גדולה (מרכז הפפטידיל טרנספראז) ותת-יחידה קטנה (מרכז הפענוח), שלושה אתרים ל-tRNA — E, P ו-A — וה-mRNA שעובר בתת-היחידה הקטנה מ-5′ ל-3′; השרשרת יוצאת דרך תעלת היציאה">
-      <Ribo cx={220} cy={180} E="trna" P="peptide" A="aa" codons={["GCU", "UUC", "AAA"]} k={1.5} peptideLen={4} />
-      <La x={56} y={202} size={12} bold color={PURPLE}>5′</La>
-      <La x={384} y={202} size={12} bold color={PURPLE}>3′</La>
-      <He x={430} y={110} size={11.5} bold color={PURPLE}>תת-יחידה גדולה</He>
-      <He x={430} y={128} size={10.5} color={PURPLE}>פפטידיל טרנספראז</He>
-      <He x={430} y={226} size={11.5} bold color={BLUE}>תת-יחידה קטנה</He>
-      <He x={430} y={244} size={10.5} color={BLUE}>מרכז הפענוח</He>
-      <He x={330} y={44} size={11} color={ORANGE}>השרשרת יוצאת</He>
-      <Arrow x1={300} y1={284} x2={370} y2={284} color={MUTED} />
-      <He x={220} y={290} size={10.5} color={MUTED}>הריבוזום נע לכיוון 3′</He>
-    </Svg>
-  );
-}
+// RibosomeSites: recomposed at textbook level, one picture on desktop (2026-11-07) — see ./redraws/RibosomeSites.tsx; old code in archive/figures/2026-11-07/.
 
 function InitiationCompare() {
   return (
@@ -634,25 +621,7 @@ function InitiationCompare() {
 }
 
 // ── mol-translation-elongation ───────────────────────────────────────────────
-function ElongationCycle() {
-  return (
-    <Svg h={410} label="מחזור ההארכה: EF-Tu–GTP מביא אמינואציל-tRNA לאתר A; ה-rRNA יוצר קשר פפטידי והשרשרת עוברת ל-tRNA שבאתר A; EF-G–GTP מזיז את הריבוזום בקודון אחד, וה-tRNA הריק עובר ל-E">
-      <Ribo cx={240} cy={96} E="trna" P="peptide" A="empty" k={0.95} />
-      <He x={240} y={168} size={11} color={MUTED}>שרשרת ב-P, אתר A פנוי</He>
-      <Ribo cx={370} cy={300} P="peptide" A="aa" k={0.95} />
-      <Ribo cx={110} cy={300} P="trna" A="peptide" k={0.95} peptideLen={4} />
-      <Arrow x1={330} y1={160} x2={380} y2={226} color={GREEN} width={2.4} />
-      <He x={420} y={170} size={11.5} bold color={GREEN}>1. כניסה לאתר A</He>
-      <La x={420} y={188} size={11} color={GREEN}>EF-Tu–GTP</La>
-      <Arrow x1={282} y1={330} x2={200} y2={330} color={ORANGE} width={2.4} />
-      <He x={240} y={372} size={11.5} bold color={ORANGE}>2. קשר פפטידי</He>
-      <He x={240} y={390} size={10.5} color={ORANGE}>ה-rRNA מזרז, בלי GTP</He>
-      <Arrow x1={100} y1={226} x2={150} y2={160} color={BLUE} width={2.4} />
-      <He x={64} y={170} size={11.5} bold color={BLUE}>3. טרנסלוקציה</He>
-      <La x={64} y={188} size={11} color={BLUE}>EF-G–GTP</La>
-    </Svg>
-  );
-}
+// ElongationCycle: recomposed at textbook level, one picture on desktop (2026-11-07) — see ./redraws/ElongationCycle.tsx; old code in archive/figures/2026-11-07/.
 
 function Termination() {
   return (

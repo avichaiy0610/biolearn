@@ -1,0 +1,48 @@
+// From components/lesson/cellFigures.tsx before 2026-11-07
+function VesicleCycle() {
+  const y = 128;
+  const coat = (cx: number) => (
+    <g>
+      <circle cx={cx} cy={y} r={22} fill="none" stroke={ORANGE} strokeWidth={3} strokeDasharray="3 3" />
+    </g>
+  );
+  const ves = (cx: number) => <circle cx={cx} cy={y} r={15} fill={FILL.blue} stroke={BLUE} strokeWidth={1.8} />;
+  const steps: [number, string, string][] = [[70, "מעטפת", "נבנית"], [138, "ניתוק", ""], [206, "הסרת", "המעטפת"], [276, "הובלה", ""], [348, "עגינה", "Rab"], [408, "התמזגות", "SNAREs"]];
+  return (
+    <Svg h={250} label="מחזור של שלפוחית: נבנית מעטפת על הממברנה התורמת, השלפוחית מתנתקת, המעטפת מוסרת, השלפוחית מובלת לאורך מיקרוטובול, חלבוני Rab וגורמי קשירה מעגנים אותה ליעד, וחלבוני SNARE ממזגים את הממברנות">
+      <rect x={-10} y={58} width={56} height={140} rx={14} fill={FILL.blue} stroke={BLUE} strokeWidth={1.8} />
+      <He x={22} y={222} size={11.5} bold color={BLUE}>תורם</He>
+      <rect x={434} y={58} width={60} height={140} rx={14} fill={FILL.green} stroke={GREEN} strokeWidth={1.8} />
+      <He x={458} y={222} size={11.5} bold color={GREEN}>יעד</He>
+      {/* 1: budding */}
+      <path d={`M46 ${y - 15} a15 15 0 1 1 0 30`} fill={FILL.blue} stroke={BLUE} strokeWidth={1.8} />
+      <path d={`M46 ${y - 22} a22 22 0 1 1 0 44`} fill="none" stroke={ORANGE} strokeWidth={3} strokeDasharray="3 3" />
+      {/* 2: pinched, coated */}
+      {ves(138)}{coat(138)}
+      {/* 3: uncoated */}
+      {ves(206)}
+      {[[-26, -14], [24, -18], [-20, 22], [26, 18]].map(([dx, dy], i) => <path key={i} d={`M${206 + dx} ${y + dy} q4 -4 8 0`} fill="none" stroke={ORANGE} strokeWidth={2.4} />)}
+      {/* 4: transport on a microtubule */}
+      <Line x1={236} y1={172} x2={322} y2={172} c={MUTED} w={6} />
+      {ves(276)}
+      <Line x1={276} y1={143} x2={276} y2={166} c={PURPLE} w={2} />
+      <circle cx={272} cy={167} r={4} fill={PURPLE} /><circle cx={281} cy={167} r={4} fill={PURPLE} />
+      <Arrow x1={290} y1={190} x2={320} y2={190} color={MUTED} />
+      {/* 5: tethering */}
+      {ves(348)}
+      <circle cx={361} cy={y - 9} r={5} fill={PURPLE} />
+      <path d={`M365 ${y - 12} C 390 ${y - 40}, 410 ${y - 40}, 434 ${y - 30}`} fill="none" stroke={PURPLE} strokeWidth={1.8} />
+      {/* 6: SNARE fusion */}
+      <circle cx={416} cy={y + 22} r={15} fill={FILL.blue} stroke={BLUE} strokeWidth={1.8} />
+      <path d={`M424 ${y + 12} q6 4 12 0 q-6 6 0 10`} fill="none" stroke={RED} strokeWidth={2} />
+      <path d={`M426 ${y + 30} q6 -4 10 0`} fill="none" stroke={GREEN} strokeWidth={2} />
+      {steps.map(([x, a, b], i) => (
+        <g key={x}>
+          <Num x={x} y={44} n={i + 1} />
+          <He x={x} y={226} size={11.5} bold>{a}</He>
+          {b && (/[A-Za-z]/.test(b) ? <La x={x} y={242} size={11} color={MUTED}>{b}</La> : <He x={x} y={242} size={11.5} bold>{b}</He>)}
+        </g>
+      ))}
+    </Svg>
+  );
+}

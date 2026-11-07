@@ -6,6 +6,7 @@ import { ArrowDefs, BLUE, GREEN, INK, MUTED, ORANGE, He, La, curve, dash, scale 
 import { Arrow } from "./metabolicFigures";
 import { FlagellumMotor } from "./redraws/FlagellumMotor";
 
+import { GramEnvelopes } from "./redraws/GramEnvelopes";
 const PURPLE = "#7c3aed";
 const RED = "#b91c1c";
 const PINK = "#db2777";
@@ -111,37 +112,7 @@ function TransportSystems() {
 }
 
 // ── mv-cell-envelope: Gram-positive vs Gram-negative envelopes ──────────────
-function GramEnvelopes() {
-  const Layer = ({ x, y, w, h, fill, stroke, label, size = 11 }: { x: number; y: number; w: number; h: number; fill: string; stroke: string; label: string; size?: number }) => (
-    <g>
-      <rect x={x} y={y} width={w} height={h} fill={fill} stroke={stroke} strokeWidth={1.3} />
-      <He x={x - 8} y={y + h / 2 + 4} size={size} anchor="end">{label}</He>
-    </g>
-  );
-  return (
-    <Svg h={300} label="השוואת המעטפות: בגראם-חיוביים שכבה עבה של פפטידוגליקן עם חומצות טייכואיות מעל הממברנה הציטופלזמית; בגראם-שליליים ממברנה חיצונית עם LPS ופורינים, פריפלזמה, שכבה דקה של פפטידוגליקן וממברנה ציטופלזמית">
-      <He x={360} y={24} size={13} bold color={PURPLE}>גראם-חיובי</He>
-      <Layer x={330} y={70} w={120} h={90} fill={FILL.orange} stroke={ORANGE} label="פפטידוגליקן עבה" />
-      {[350, 380, 410].map((x) => <line key={x} x1={x} y1={50} x2={x} y2={160} stroke={ORANGE} strokeWidth={2} />)}
-      <He x={325} y={52} size={10.5} anchor="end" color={ORANGE}>חומצות טייכואיות</He>
-      <Layer x={330} y={166} w={120} h={22} fill={FILL.gray} stroke={MUTED} label="ממברנה ציטופלזמית" />
-      <He x={390} y={214} size={11} color={MUTED}>ציטופלזמה</He>
-
-      <He x={120} y={24} size={13} bold color={PINK}>גראם-שלילי</He>
-      {[100, 116, 132, 148, 164].map((x) => <line key={x} x1={x} y1={40} x2={x} y2={60} stroke={RED} strokeWidth={2} />)}
-      <He x={86} y={50} size={10.5} anchor="end" color={RED}>LPS</He>
-      <Layer x={90} y={60} w={120} h={22} fill={FILL.sky} stroke={BLUE} label="ממברנה חיצונית" />
-      <rect x={140} y={56} width={14} height={30} rx={4} fill={FILL.green} stroke={GREEN} />
-      <Layer x={90} y={82} w={120} h={46} fill="#ffffff" stroke={LINE_GRAY} label="פריפלזמה" />
-      <He x={180} y={104} size={10} color={GREEN} anchor="start">פורין</He>
-      <Layer x={90} y={128} w={120} h={12} fill={FILL.orange} stroke={ORANGE} label="פפטידוגליקן דק" size={10.5} />
-      <Layer x={90} y={146} w={120} h={22} fill={FILL.gray} stroke={MUTED} label="ממברנה פנימית" />
-      <He x={150} y={194} size={11} color={MUTED}>ציטופלזמה</He>
-      <He x={240} y={256} size={11} color={MUTED}>LPS: ליפיד A (אנדוטוקסין) + ליבה + שרשרת O</He>
-      <He x={240} y={276} size={11} color={MUTED}>הפפטידוגליקן מחובר לממברנה החיצונית בליפופרוטאין</He>
-    </Svg>
-  );
-}
+// GramEnvelopes: recomposed at textbook level, one picture on desktop (2026-11-07) — see ./redraws/GramEnvelopes.tsx; old code in archive/figures/2026-11-07/.
 // ── mv-surface-motility: flagellar motor ─────────────────────────────────────
 // FlagellumMotor: redrawn at textbook level (2026-11-05) — see ./redraws/FlagellumMotor.tsx; old code in archive/figures/2026-11-05/.
 

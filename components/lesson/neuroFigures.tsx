@@ -6,6 +6,7 @@ import type React from "react";
 import { ArrowDefs, Axes, BLUE, GREEN, INK, MUTED, ORANGE, He, La, curve, scale } from "./biochemFigures";
 import { Arrow } from "./metabolicFigures";
 
+import { Bbb } from "./redraws/Bbb";
 const PURPLE = "#7c3aed";
 const RED = "#b91c1c";
 const TEAL = "#0f766e";
@@ -534,33 +535,7 @@ function AppProcessing() {
 }
 
 // ── nb-neuroimmune ───────────────────────────────────────────────────────────
-function Bbb() {
-  return (
-    <Svg h={262} label="מחסום דם-מוח בחתך של נים: תאי אנדותל מחוברים בצומתי הדוק סוגרים את הנים; פריציט עוטף אותו; ממברנת בסיס; ורגליים של אסטרוציטים מכסות מבחוץ. גזים ומולקולות שומניות עוברים בדיפוזיה; גלוקוז וחומצות אמינו עוברים במובילים; חלבונים ותאים כמעט לא עוברים.">
-      <circle cx={180} cy={130} r={92} fill={FILL.teal} />
-      <circle cx={180} cy={130} r={70} fill="#f8fafc" stroke={MUTED} strokeWidth={1} />
-      <circle cx={180} cy={130} r={66} fill={FILL.pink} />
-      <circle cx={180} cy={130} r={46} fill={FILL.red} />
-      {[0, 90, 180, 270].map((a) => {
-        const r = (a * Math.PI) / 180;
-        return <rect key={a} x={180 + 56 * Math.cos(r) - 3} y={130 + 56 * Math.sin(r) - 3} width={6} height={6} fill={PURPLE} />;
-      })}
-      <path d="M118 74 Q150 60 168 66" fill="none" stroke={GOLD} strokeWidth={8} strokeLinecap="round" />
-      <He x={180} y={136} size={10} color={RED}>דם</He>
-      <He x={330} y={36} size={10} anchor="start" color={TEAL}>רגליים של אסטרוציטים</He>
-      <Lead x1={328} y1={34} x2={250} y2={70} />
-      <He x={330} y={70} size={10} anchor="start" color={GOLD}>פריציט</He>
-      <Lead x1={328} y1={68} x2={172} y2={64} />
-      <He x={330} y={104} size={10} anchor="start" color={PINK}>תאי אנדותל</He>
-      <Lead x1={328} y1={102} x2={232} y2={116} />
-      <He x={330} y={138} size={10} anchor="start" color={PURPLE}>צומתי הדוק</He>
-      <Lead x1={328} y1={136} x2={240} y2={131} />
-      <He x={330} y={186} size={9.5} anchor="start" color={GREEN}>עובר: גזים, שומניים</He>
-      <He x={330} y={204} size={9.5} anchor="start" color={BLUE}>במוביל: גלוקוז, L-DOPA</He>
-      <He x={330} y={222} size={9.5} anchor="start" color={RED}>כמעט לא: חלבונים, תאים</He>
-    </Svg>
-  );
-}
+// Bbb: recomposed at textbook level, one picture on desktop (2026-11-07) — see ./redraws/Bbb.tsx; old code in archive/figures/2026-11-07/.
 
 function MicrogliaStates() {
   const ramified = (x: number, y: number) => (

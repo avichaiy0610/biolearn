@@ -1,0 +1,17 @@
+// From components/lesson/molecularFigures.tsx before 2026-11-07
+function RibosomeSites() {
+  return (
+    <Svg h={305} label="הריבוזום: תת-יחידה גדולה (מרכז הפפטידיל טרנספראז) ותת-יחידה קטנה (מרכז הפענוח), שלושה אתרים ל-tRNA — E, P ו-A — וה-mRNA שעובר בתת-היחידה הקטנה מ-5′ ל-3′; השרשרת יוצאת דרך תעלת היציאה">
+      <Ribo cx={220} cy={180} E="trna" P="peptide" A="aa" codons={["GCU", "UUC", "AAA"]} k={1.5} peptideLen={4} />
+      <La x={56} y={202} size={12} bold color={PURPLE}>5′</La>
+      <La x={384} y={202} size={12} bold color={PURPLE}>3′</La>
+      <He x={430} y={110} size={11.5} bold color={PURPLE}>תת-יחידה גדולה</He>
+      <He x={430} y={128} size={10.5} color={PURPLE}>פפטידיל טרנספראז</He>
+      <He x={430} y={226} size={11.5} bold color={BLUE}>תת-יחידה קטנה</He>
+      <He x={430} y={244} size={10.5} color={BLUE}>מרכז הפענוח</He>
+      <He x={330} y={44} size={11} color={ORANGE}>השרשרת יוצאת</He>
+      <Arrow x1={300} y1={284} x2={370} y2={284} color={MUTED} />
+      <He x={220} y={290} size={10.5} color={MUTED}>הריבוזום נע לכיוון 3′</He>
+    </Svg>
+  );
+}
