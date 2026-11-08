@@ -400,7 +400,7 @@ function ErrorTypes() {
       <He x={s.sx(crit)} y={32} size={10} color={INK}>ערך קריטי 1.645</He>
       <La x={s.sx(-0.9)} y={s.sy(0.3) - 8} size={11} anchor="end" color={BLUE} bold>H₀</La>
       <La x={s.sx(3.4)} y={s.sy(0.3) - 8} size={11} anchor="start" color={PURPLE} bold>H₁</La>
-      <La x={s.sx(2.25)} y={178} size={11} color={RED} bold>α</La>
+      <La x={s.sx(3.2)} y={168} size={11} color={RED} bold>α</La>
       <La x={s.sx(1.0)} y={178} size={11} color={ORANGE} bold>β</La>
       <XAxis x0={30} x1={450} y={190} s={s} ticks={[[-2, "−2"], [0, "0"], [2, "2"], [2.5, ""], [4, "4"], [6, "6"]]} />
       <He x={240} y={226} size={10.5}>{`α = 0.05 · β ≈ ${fmt(beta, 2)} · עוצמה = 1 − β ≈ ${fmt(1 - beta, 2)}`}</He>

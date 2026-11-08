@@ -50,7 +50,7 @@ export const bsConfidenceIntervals: Lesson = {
 - **רווח סמך 95%: 22.33 עד 26.27.**
 - (אילו ידענו ש-\`σ = 3\` בדיוק — \`24.3 ± 1.96 × 3/√12\` = 22.60 עד 26.00.)
 
-**ב-SPSS:** \`Analyze → Descriptive Statistics → Explore\` מציג "95% Confidence Interval for Mean" (Lower Bound / Upper Bound). גם \`One-Sample T Test\` מציג רווח — אבל **להפרש** מערך הייחוס שהוזן, לא לממוצע עצמו.
+**ב-R:** \`t.test(x)\` מדפיס "95 percent confidence interval" — **לממוצע עצמו** (גם כשמוסיפים \`mu = 50\` לבדיקת השערה, הרווח הוא עדיין לממוצע, לא להפרש מ-50). לרמת ביטחון אחרת: \`t.test(x, conf.level = 0.99)\`.
 
 ## מה "95%" אומר {#interpretation}
 

@@ -1,5 +1,7 @@
 import type { Lesson } from "../types";
 
+// 2026-11-08: software sections converted from SPSS to R — the course works in R (syllabus winter 2024; R output in the 2023 exams).
+
 // Technion 134154 — portal: "examining relationships between … quantitative variables". Scope (Codex 2026-10-25):
 // scatter plots, Pearson r, its t-test, linear association only, outliers, association vs causation, SPSS output.
 // Spearman — short optional paragraph. The temperature–growth data are shared with bs-regression (r = 0.966,
@@ -19,7 +21,7 @@ export const bsCorrelation: Lesson = {
     "לבצע מבחן t ל-H₀: ρ = 0",
     "לזהות מצבים שבהם r מטעה: קשר לא ליניארי, ערך חריג, טווח מצומצם",
     "להבחין בין מתאם לסיבתיות, ולתת דוגמה למשתנה מתערב",
-    "לקרוא את טבלת Correlations ב-SPSS",
+    "לקרוא את הפלט של cor.test ב-R",
   ],
   bodyHe: `
 ## תרשים פיזור {#scatter}
@@ -32,7 +34,7 @@ export const bsCorrelation: Lesson = {
 - **עוצמה** — עד כמה הנקודות צפופות סביב הצורה.
 - **חריגים** — נקודות רחוקות מהדפוס.
 
-**ב-SPSS:** \`Graphs → Chart Builder → Scatter/Dot\`.
+**ב-R:** \`plot(df$Temp, df$Rate)\`.
 
 ## מקדם המתאם של פירסון {#pearson}
 
@@ -71,7 +73,7 @@ r מחושב ממדגם, ולכן משתנה ממדגם למדגם. השאלה: 
 
 **מובהק ≠ חזק:** במדגם של 1,000 זוגות, \`r = 0.07\` כבר מובהק ברמת 5% — אבל מסביר פחות מ-0.5% מהשונות. במדגם של 5, אפילו \`r = 0.8\` לא מובהק.
 
-**ב-SPSS:** \`Analyze → Correlate → Bivariate\`, מסמנים Pearson. בטבלת **Correlations** כל זוג משתנים מופיע פעמיים (המטריצה סימטרית), עם \`Pearson Correlation\`, \`Sig. (2-tailed)\` ו-\`N\`. האלכסון (מתאם של משתנה עם עצמו) הוא 1 כשיש שונות ונתונים תקפים; במשתנה קבוע המתאם אינו מוגדר.
+**ב-R:** \`cor(x, y)\` נותן את r; \`cor.test(x, y)\` נותן גם את המבחן — לדוגמת השמרים: \`t = 9.2115, df = 6, p-value = 9.229e-05\`, רווח סמך 95% ל-ρ: \`0.8205 0.9941\`, ו-\`cor 0.9664\`. ה-p זהה ל-p של השיפוע ברגרסיה.
 
 ## מתאם אינו סיבתיות {#causation}
 
@@ -90,7 +92,7 @@ r מחושב ממדגם, ולכן משתנה ממדגם למדגם. השאלה: 
 
 ## מתאם ספירמן (להרחבה) {#spearman}
 
-כשהקשר **מונוטוני** אבל לא ליניארי, כשיש חריגים, או כשאחד המשתנים סודר — מחשבים מתאם פירסון על **הדרגות** (המיקום של כל ערך במיון) במקום על הערכים. זה **מקדם ספירמן** \`r_s\`. הוא פחות רגיש לערך חריג בודד ומודד "עד כמה y עולה (או יורד) כש-x עולה", בלי לדרוש קו ישר. ב-SPSS: באותו מסך, מסמנים Spearman.
+כשהקשר **מונוטוני** אבל לא ליניארי, כשיש חריגים, או כשאחד המשתנים סודר — מחשבים מתאם פירסון על **הדרגות** (המיקום של כל ערך במיון) במקום על הערכים. זה **מקדם ספירמן** \`r_s\`. הוא פחות רגיש לערך חריג בודד ומודד "עד כמה y עולה (או יורד) כש-x עולה", בלי לדרוש קו ישר. ב-R: \`cor.test(x, y, method = "spearman")\`.
 `,
   experiment: {
     titleHe: "איך אנחנו יודעים: גלטון, אפונה ו\"רגרסיה לממוצע\" (1877–1888)",

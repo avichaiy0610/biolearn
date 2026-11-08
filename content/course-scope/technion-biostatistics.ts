@@ -31,11 +31,20 @@ const ANOVA = "ניתוח שונות חד גורמי";
 const RV = "משתנים מקריים";
 const BINOMIAL = "התפלגות בינומית";
 const CONDITIONAL = "הסתברות מותנית";
-const SPSS = "התנסות בעיבוד סטטיסטי של נתונים באמצעות תוכנת SPSS";
+// The portal line "התנסות בעיבוד סטטיסטי של נתונים באמצעות תוכנת SPSS" is outdated — the course works in R.
+// 2026-11-08: the lecturer's winter 2024 syllabus (12 weeks, R) and the 2023 exams are now the main evidence.
+const week = (n: number, what: string): ScopeEntry => ({
+  level: "core", evidence: "staff-material",
+  noteHe: `סילבוס הקורס חורף 2024 (ד"ר נעמה וולף), שבוע ${n} — ${what}`,
+});
+const RLAB = (what: string): ScopeEntry => ({
+  level: "core", evidence: "staff-material",
+  noteHe: `סילבוס הקורס חורף 2024: עיבוד נתונים בתוכנה R, מעבדת R ושימוש ב-R במבחן — ${what}`,
+});
 
 export const technionBiostatisticsScope: CourseScope = {
   courseSlug: "technion-biostatistics",
-  checkedAt: "2026-10-25",
+  checkedAt: "2026-11-08",
   defaultSource: { labelHe: "הסילבוס בפורטל הטכניון", url: "https://students.technion.ac.il/local/technionsearch/course/134154" },
   sections: {
     "bs-describing-data": {
@@ -44,7 +53,7 @@ export const technionBiostatisticsScope: CourseScope = {
       frequency: named(GRAPHS, "טבלאות שכיחות"),
       graphs: named(GRAPHS),
       shape: named(GRAPHS, "צורת ההתפלגות"),
-      spss: named(SPSS, "הזנת נתונים והגדרת משתנים"),
+      r: RLAB("מבנה הנתונים, סוגי משתנים, ערכים חסרים וטבלת סיכום עם dplyr (נשאלה במועד א' 2023)"),
     },
     "bs-center-spread": {
       center: named(CENTER),
@@ -59,6 +68,7 @@ export const technionBiostatisticsScope: CourseScope = {
       independence: named(CONDITIONAL, "אי-תלות"),
       multiplication: named(CONDITIONAL, "כלל הכפל והסתברות שלמה"),
       bayes: named(CONDITIONAL, "היפוך התניה (כלל בייס)"),
+      diagnostic: week(12, "\"דיאגנוסטיקה של בדיקות אבחון — רגישות, סגוליות, gold standard, ערך מנבא חיובי ושלילי, דיוק של בדיקה\""),
     },
     "bs-random-variables": {
       discrete: named(RV),
@@ -68,9 +78,9 @@ export const technionBiostatisticsScope: CourseScope = {
     },
     "bs-normal-clt": {
       continuous: heading(RV, "משתנה רציף ופונקציית צפיפות"),
-      normal: heading(CI, "ההתפלגות הנורמלית"),
+      normal: week(2, "\"התפלגות נורמלית\""),
       sampling: heading(CI, "התפלגות הדגימה וטעות התקן"),
-      clt: heading(CI, "משפט הגבול המרכזי"),
+      clt: week(2, "\"משפט הגבול המרכזי לתוחלות ולסכומים\""),
       normality: heading(TESTS, "בדיקת הנחת הנורמליות"),
     },
     "bs-confidence-intervals": {
@@ -78,24 +88,25 @@ export const technionBiostatisticsScope: CourseScope = {
       "mean-ci": named(CI, "רווח סמך לתוחלת"),
       interpretation: named(CI, "פירוש רווח הסמך"),
       width: named(CI, "רוחב הרווח"),
-      proportion: heading(CI, "רווח סמך לפרופורציה"),
+      proportion: week(6, "\"רווחי סמך לפרופורציה ולהשוואת פרופורציות\""),
     },
     "bs-hypothesis-testing": {
       logic: named(TESTS),
       "p-value": named(TESTS, "ערך p"),
       errors: named(TESTS, "סוגי טעויות ועוצמה"),
-      "one-sample-t": heading(TESTS, "מבחן t למדגם אחד"),
+      power: week(3, "\"מבחן Z ... עצמת המבחן, גודל אפקט, חישוב גודל מדגם\"; ושאלת GPower במועד א' 2023"),
+      "one-sample-t": week(4, "\"מבחן t לתוחלת\""),
       sidedness: named(TESTS, "מבחן חד-צדדי ודו-צדדי"),
-      "proportion-test": heading(TESTS, "מבחן לפרופורציה"),
+      "proportion-test": week(6, "\"מבחני השערות ... לפרופורציה\""),
       "ci-duality": named(CI, "הקשר בין רווח סמך למבחן"),
       significance: named(TESTS, "מובהקות וחשיבות"),
     },
     "bs-two-means": {
-      designs: heading(TESTS, "מדגמים בלתי תלויים ומזווגים"),
-      independent: heading(TESTS, "מבחן t לשני מדגמים"),
-      paired: heading(TESTS, "מבחן t מזווג"),
+      designs: week(5, "\"שתי תוחלות מזווגות ובלתי תלויות\""),
+      independent: week(5, "מבחן לשתי תוחלות בלתי תלויות; t.test במועד א' 2023"),
+      paired: week(5, "מבחן לשתי תוחלות מזווגות"),
       "ci-difference": named(CI, "רווח סמך להפרש"),
-      spss: heading(SPSS, "פלט מבחני t ב-SPSS"),
+      r: RLAB("פלט t.test (מועד א' 2023)"),
     },
     "bs-categorical": {
       map: named(RELATIONS, "איזה כלי לאיזה זוג משתנים"),
@@ -103,7 +114,7 @@ export const technionBiostatisticsScope: CourseScope = {
       "independence-test": named(RELATIONS, "מבחן χ² לאי-תלות"),
       conditions: heading(RELATIONS, "תנאי המבחן ומבחן פישר"),
       "goodness-of-fit": heading(TESTS, "מבחן χ² לטיב התאמה"),
-      effect: extension("סיכון יחסי ויחס סיכויים"),
+      effect: week(8, "\"מקדם מתאם קרמר\"; סיכון יחסי ויחס סיכויים מובאים כהרחבה בתוך הסעיף"),
     },
     "bs-correlation": {
       scatter: named(RELATIONS, "תרשים פיזור למשתנים כמותיים"),
@@ -119,7 +130,7 @@ export const technionBiostatisticsScope: CourseScope = {
       "slope-test": named(REGRESSION, "מבחן ורווח סמך לשיפוע"),
       assumptions: named(REGRESSION, "הנחות המודל ותרשים שאריות"),
       prediction: heading(REGRESSION, "חיזוי ואקסטרפולציה"),
-      spss: heading(SPSS, "פלט הרגרסיה ב-SPSS"),
+      r: RLAB("פלט summary(lm()) (מועד א' 2023)"),
     },
     "bs-anova": {
       multiplicity: named(ANOVA, "למה לא כמה מבחני t"),
@@ -127,7 +138,20 @@ export const technionBiostatisticsScope: CourseScope = {
       table: named(ANOVA, "טבלת ANOVA ומבחן F"),
       assumptions: named(ANOVA, "ההנחות"),
       "post-hoc": heading(ANOVA, "השוואות מרובות (Tukey, Bonferroni)"),
-      spss: heading(SPSS, "פלט ניתוח השונות ב-SPSS"),
+      r: RLAB("פלט aov ו-TukeyHSD; ניתוח שונות ו-head(df) במועד א' 2023"),
+    },
+    "bs-nonparametric": {
+      why: week(7, "\"מבחנים אפרמטריים להשוואת שתי קבוצות\""),
+      "rank-sum": week(7, "מבחן לשתי קבוצות בלתי תלויות (וילקוקסון / מאן-ויטני)"),
+      "signed-rank": week(7, "מבחן לשתי קבוצות מזווגות (דרגות מסומנות, מבחן הסימן)"),
+      choose: week(7, "בחירה בין מבחן פרמטרי לאפרמטרי"),
+    },
+    "bs-multiple-regression": {
+      model: week(10, "\"רגרסיה לינארית מרובה\""),
+      output: week(10, "פלט summary(lm()) עם כמה מנבאים — נשאל במועד א' 2023"),
+      categorical: week(10, "\"הוספת משתנים קטגוריים למודל רגרסיה\""),
+      vif: week(10, "\"קולינאריות וחישוב VIF\""),
+      selection: week(10, "\"שיטות לבחירה בין מודלים\""),
     },
     // Prerequisite unit (genetics 134020), linked as a refresher.
     "mendel-probability": {
