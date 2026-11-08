@@ -1,0 +1,31 @@
+function KChannel() {
+  const filterY = [70, 84, 98, 112];
+  return (
+    <Svg h={262} label="תעלת אשלגן בחתך: שתיים מארבע תת-היחידות מוצגות משני צדי הנקבובית. במסנן הסלקטיביות (למעלה) יוני K⁺ עוברים בלי מעטפת המים, וחמצני הקרבוניל של החלבון מחליפים את מולקולות המים. בחלל הפנימי, היונים עטופים במים. יון Na⁺ קטן מדי לחמצני המסנן ולכן לא נכנס.">
+      <Membrane y={56} h={130} x={60} w={360} />
+      <He x={448} y={48} size={9.5} color={MUTED} anchor="end">חוץ</He>
+      <He x={448} y={210} size={9.5} color={MUTED} anchor="end">פנים</He>
+      <path d="M160 40 L222 40 L222 128 L212 150 L206 200 L160 200 Z" fill={FILL.blue} stroke={BLUE} strokeWidth={1.4} />
+      <path d="M320 40 L258 40 L258 128 L268 150 L274 200 L320 200 Z" fill={FILL.blue} stroke={BLUE} strokeWidth={1.4} />
+      {filterY.map((y) => (
+        <g key={y}>
+          <circle cx={226} cy={y} r={3} fill={RED} />
+          <circle cx={254} cy={y} r={3} fill={RED} />
+        </g>
+      ))}
+      <circle cx={240} cy={77} r={7} fill={PURPLE} />
+      <circle cx={240} cy={105} r={7} fill={PURPLE} />
+      <circle cx={240} cy={168} r={7} fill={PURPLE} />
+      {[[226, 160], [254, 160], [226, 178], [254, 178], [240, 152], [240, 184]].map(([x, y], i) => <circle key={i} cx={x} cy={y} r={3} fill="#38bdf8" />)}
+      <He x={110} y={78} size={10} color={RED} anchor="end">מסנן הסלקטיביות</He>
+      <Lead x1={114} y1={74} x2={222} y2={84} />
+      <He x={110} y={96} size={9} color={MUTED} anchor="end">(חמצני קרבוניל, TVGYG)</He>
+      <He x={360} y={30} size={10} color={PURPLE}>K⁺ בלי מים</He>
+      <Lead x1={340} y1={34} x2={247} y2={76} />
+      <He x={370} y={232} size={10} color="#0284c7">K⁺ עם מעטפת מים</He>
+      <Lead x1={320} y1={224} x2={260} y2={184} />
+      <circle cx={100} cy={232} r={5} fill={ORANGE} />
+      <He x={112} y={236} size={9.5} anchor="start" color={ORANGE}>Na⁺ — קטן מדי למסנן, לא נכנס</He>
+    </Svg>
+  );
+}

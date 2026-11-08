@@ -6,6 +6,6 @@
 - `svg/` — צילומי SVG של הגרסאות הישנות (בהיר וכהה).
 - ההשוואה ישן/חדש: `visual-lab/textbook-redraws-2/compare.html`.
 
-**סבב נוסף (אותו יום):** AntibodyStructure (מ-`microFigures.tsx`), BrainRegions, VesicleRelease, LtpNmda (מ-`neuroFigures.tsx`). אותו מבנה: `code/` ו-`svg/`; הרכיבים החדשים ב-`components/lesson/redraws/` עם `geometry/six.tsx`.
+**סבב נוסף (אותו יום):** AntibodyStructure (מ-`microFigures.tsx`), BrainRegions, VesicleRelease, LtpNmda, KChannel (מ-`neuroFigures.tsx`), ו-Nucleosome של `molecularFigures.tsx` (עכשיו `MolecularNucleosome`, כדי לא להתנגש בנוקלאוזום של הביופיזיקה; להחזיר `el: Nucleosome` בשחזור). אותו מבנה: `code/` ו-`svg/`; הרכיבים החדשים ב-`components/lesson/redraws/` עם `geometry/six.tsx`.
 
 **שחזור:** להדביק את הפונקציה בחזרה לקובץ המקור (`immunologyFigures.tsx` / `microFigures.tsx` / `neuroFigures.tsx`), למחוק את שורת ה-import של `./redraws/<Name>`, ובמקרה של הנוגדן להחזיר את `el: AntibodyStructure` ב-registry.

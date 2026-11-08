@@ -13,6 +13,7 @@ import AnatomyEmbed from "./anatomy/AnatomyEmbed";
 
 import { ElongationCycle } from "./redraws/ElongationCycle";
 import { RibosomeSites } from "./redraws/RibosomeSites";
+import { MolecularNucleosome } from "./redraws/MolecularNucleosome";
 const PURPLE = "#7c3aed";
 const RED = "#b91c1c";
 const FILL = { blue: "#dbeafe", green: "#dcfce7", orange: "#ffedd5", purple: "#ede9fe", yellow: "#fef3c7", gray: "#f1f5f9", red: "#fee2e2", sky: "#e0f2fe" };
@@ -153,44 +154,6 @@ function DnaMelting() {
 }
 
 // ── mol-chromatin ────────────────────────────────────────────────────────────
-function Nucleosome() {
-  const cx = 240, cy = 140;
-  const arc = (r: number, a0: number, a1: number) => {
-    const p = (a: number) => [cx + r * Math.cos((a * Math.PI) / 180), cy + r * Math.sin((a * Math.PI) / 180)];
-    const [x0, y0] = p(a0), [x1, y1] = p(a1);
-    return `M${x0.toFixed(1)} ${y0.toFixed(1)} A${r} ${r} 0 ${a1 - a0 > 180 ? 1 : 0} 1 ${x1.toFixed(1)} ${y1.toFixed(1)}`;
-  };
-  const tail = (a: number) => {
-    const r0 = 60, r1 = 98, rad = (a * Math.PI) / 180;
-    const x0 = cx + r0 * Math.cos(rad), y0 = cy + r0 * Math.sin(rad), x1 = cx + r1 * Math.cos(rad), y1 = cy + r1 * Math.sin(rad);
-    return <path key={a} d={`M${x0} ${y0} Q${(x0 + x1) / 2 + 8} ${(y0 + y1) / 2 - 8} ${x1} ${y1}`} fill="none" stroke="#b45309" strokeWidth={2} />;
-  };
-  return (
-    <Svg h={300} label="נוקלאוזום: אוקטמר של היסטונים (שניים מכל אחד מ-H2A, H2B, H3, H4) ו-DNA מלופף סביבו כ-1.65 סיבובים; DNA מקשר מחבר לנוקלאוזום הבא, והיסטון H1 יושב במקום שבו ה-DNA נכנס ויוצא">
-      {[-140, -100, -60, -20].map(tail)}
-      <He x={240} y={26} size={11.5} color="#b45309">זנבות היסטונים</He>
-      <circle cx={cx} cy={cy} r={60} fill={FILL.yellow} stroke="#b45309" strokeWidth={2} />
-      <La x={218} y={126} size={13} bold>H3</La><La x={262} y={126} size={13} bold>H4</La>
-      <La x={216} y={166} size={13} bold>H2A</La><La x={264} y={166} size={13} bold>H2B</La>
-      <circle cx={cx} cy={cy} r={72} fill="none" stroke={BLUE} strokeWidth={7} />
-      <path d={arc(82, 100, 330)} fill="none" stroke={BLUE} strokeWidth={7} strokeLinecap="round" />
-      {/* linkers to neighbours */}
-      <path d={`M226 214 L80 262`} stroke={BLUE} strokeWidth={6} strokeLinecap="round" />
-      <path d={`M254 214 L400 262`} stroke={BLUE} strokeWidth={6} strokeLinecap="round" />
-      <circle cx={56} cy={268} r={26} fill={FILL.yellow} stroke="#b45309" strokeWidth={1.5} />
-      <circle cx={424} cy={268} r={26} fill={FILL.yellow} stroke="#b45309" strokeWidth={1.5} />
-      <circle cx={240} cy={226} r={12} fill={FILL.orange} stroke={ORANGE} strokeWidth={2} />
-      <La x={240} y={231} size={11} bold>H1</La>
-      <He x={150} y={286} size={12} color={BLUE}>DNA מקשר</He>
-      <He x={398} y={112} size={12} bold>DNA הליבה</He>
-      <He x={398} y={130} size={12}>כ-147 זוגות בסיסים</He>
-      <He x={398} y={148} size={12}>כ-1.65 סיבובים</He>
-      <He x={82} y={112} size={12} bold>אוקטמר</He>
-      <La x={82} y={130} size={11.5}>2×(H2A, H2B,</La>
-      <La x={82} y={146} size={11.5}>H3, H4)</La>
-    </Svg>
-  );
-}
 
 function ChromatinLevels() {
   const rows = [42, 108, 178, 252, 330];
@@ -662,7 +625,7 @@ export const MOLECULAR_FIGURES: Record<string, { el: () => React.ReactElement; c
   "nucleotide-structure": { el: NucleotideStructure, captionHe: "מבנה של נוקלאוטיד. הבסיס מחובר לפחמן 1′ של הסוכר בקשר N-גליקוזידי; הפוספט — לפחמן 5′; ב-OH של פחמן 3′ יתחבר הנוקלאוטיד הבא. ההבדל בין DNA ל-RNA: בפחמן 2′ יש H (דאוקסיריבוז) או OH (ריבוז). סכמטי." },
   "double-helix": { el: DoubleHelix, captionHe: "הסליל הכפול. משמאל — \"פרוש\": שני גדילים אנטי-מקבילים, A מול T בשני קשרי מימן ו-G מול C בשלושה, תמיד פורין מול פירימידין. מימין — הסליל הימני, שבו המרחקים הלא שווים בין שני השלדים יוצרים חריץ גדול וחריץ קטן. סכמטי." },
   "dna-melting": { el: DnaMelting, captionHe: "עקומות התכה מחושבות (מודל של מעבר חד). הבליעה ב-260 ננומטר עולה כשהגדילים נפרדים — האפקט ההיפרכרומי. Tm חושב לפי הקשר האמפירי של מרמור ודוטי, Tm ≈ 69.3 + 0.41 × (%G+C), שנמדד בתמיסת מלח מסוימת (SSC); בתנאים אחרים הערכים משתנים, אבל הכיוון נשמר: יותר G+C — Tm גבוה יותר." },
-  nucleosome: { el: Nucleosome, captionHe: "נוקלאוזום. כ-147 זוגות בסיסים של DNA מלופפים כ-1.65 סיבובים סביב אוקטמר של היסטונים — שניים מכל אחד מ-H2A, H2B, H3 ו-H4. DNA מקשר מחבר לנוקלאוזום הבא, והיסטון H1 נקשר במקום הכניסה והיציאה. זנבות ההיסטונים בולטים החוצה. סכמטי." },
+  nucleosome: { el: MolecularNucleosome, captionHe: "נוקלאוזום. כ-147 זוגות בסיסים של DNA מלופפים כ-1.65 סיבובים סביב אוקטמר של היסטונים — שניים מכל אחד מ-H2A, H2B, H3 ו-H4. DNA מקשר מחבר לנוקלאוזום הבא, והיסטון H1 נקשר במקום הכניסה והיציאה. זנבות ההיסטונים בולטים החוצה. סכמטי." },
   "chromatin-levels": { el: ChromatinLevels, captionHe: "רמות האריזה של ה-DNA, מהסליל הכפול ועד הכרומוזום המיטוטי. סיב 30 ננומטר נראה בבירור במבחנה; האם הוא נפוץ בגרעין החי שנוי במחלוקת. סכמטי, לא בקנה מידה." },
   "replication-fork": { el: ReplicationFork, captionHe: "מזלג השכפול ב-E. coli. ההליקאז פותח את הגדילים והגיראז משחרר את פיתול-העל החיובי לפניו. הגדיל המוביל נבנה ברצף לכיוון המזלג; הגדיל המפגר נבנה בקטעי אוקזאקי, כל אחד מתחיל בפריימר RNA (כתום) שמייצר הפרימאז. Pol I מחליף את הפריימר ב-DNA, וליגאז סוגר את החריץ. סכמטי — בתא שני הפולימראזים מחוברים ברפליזום אחד." },
   "oric-initiation": { el: OricInitiation, captionHe: "התחלת השכפול ב-oriC של E. coli. (1) המקור המינימלי: שלושה רצפים של 13 זוגות בסיסים עשירים ב-A-T, וארבעה רצפים של 9 שאליהם נקשר DnaA. (2) DnaA-ATP נקשר במולקולות רבות ופותח את אזור ה-13. (3) DnaC טוען שני הליקאזים DnaB, אחד לכל מזלג. סכמטי." },
