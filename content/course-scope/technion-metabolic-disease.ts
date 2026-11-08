@@ -15,14 +15,20 @@ const heading = (topic: string, what: string): ScopeEntry => ({
   level: "likely", evidence: "syllabus-heading",
   noteHe: `נכלל בנושא "${topic}" בתיאור הקורס, אבל ${what} לא מוזכר בשמו`,
 });
-const beyond = (what: string): ScopeEntry => ({
-  level: "extension", evidence: "none",
-  noteHe: `${what} — לא מוזכר בתיאור הקורס; הסעיף הוא העשרה`,
-});
 const refresher = (topic: string, what: string): ScopeEntry => heading(topic, `${what} (רענון מקורס קדם)`);
 const outside = (what: string): ScopeEntry => ({
   level: "extension", evidence: "none",
   noteHe: `${what} — סעיף ביחידה של קורס אחר שלא מקושר מהקורס הזה`,
+});
+
+// 2026-11-08: the lecturer's own syllabus (13 weeks) and the 2024 slides are staff material — the strongest evidence.
+const week = (n: number, what: string): ScopeEntry => ({
+  level: "core", evidence: "staff-material",
+  noteHe: `סילבוס המרצה (פרופ' שנהב כהן), שבוע ${n} — ${what}`,
+});
+const slides = (n: number, what: string): ScopeEntry => ({
+  level: "core", evidence: "staff-material",
+  noteHe: `שקפי הרצאה ${n} (2024) — ${what}`,
 });
 
 const TISSUES = "האינטראקציות המטבוליות בין שריר, כבד ורקמת שומן";
@@ -37,7 +43,7 @@ const UPS = "muscle wasting by the ubiquitin-proteasome system and autophagy";
 
 export const technionMetabolicDiseaseScope: CourseScope = {
   courseSlug: "technion-metabolic-disease",
-  checkedAt: "2026-10-26",
+  checkedAt: "2026-11-08",
   defaultSource: { labelHe: "הסילבוס בפורטל הטכניון", url: "https://students.technion.ac.il/local/technionsearch/course/134147" },
   sections: {
     "md-crosstalk": {
@@ -67,13 +73,13 @@ export const technionMetabolicDiseaseScope: CourseScope = {
       "type-2": named(DIABETES, "סוג 2 ברקמות"),
       "beta-failure": heading(DIABETES, "כשל תאי בטא"),
       treatments: named(TARGETS, "תרופות לסוכרת"),
-      complications: beyond("סיבוכי הסוכרת"),
+      complications: week(6, "\"complications\" של הסוכרת"),
     },
     "md-obesity": {
       functions: named(OBESITY, "תפקידי רקמת השומן"),
       expansion: named(OBESITY, "התרחבות בריאה ופגומה"),
       leptin: named(OBESITY, "לפטין"),
-      "genetics-environment": beyond("גנטיקה וסביבה בהשמנה"),
+      "genetics-environment": week(8, "\"Obesity: definition, causes and heredity\""),
       treatments: named(TARGETS, "טיפולים בהשמנה"),
     },
     "md-hyperlipidemia": {
@@ -82,7 +88,7 @@ export const technionMetabolicDiseaseScope: CourseScope = {
       pcsk9: named(TARGETS, "PCSK9 והתרופות"),
       triglycerides: named(LIPIDS, "טריגליצרידים ו-LPL"),
       "liver-fat": heading(TISSUES, "כבד שומני"),
-      atherosclerosis: beyond("טרשת עורקים"),
+      atherosclerosis: week(11, "\"role of the liver, atherosclerosis\""),
     },
     "md-muscle-metabolism": {
       fuels: named(TISSUES, "דלק בשריר"),
@@ -90,6 +96,7 @@ export const technionMetabolicDiseaseScope: CourseScope = {
       synthesis: named(FED, "בניית חלבון בשריר"),
       degradation: named(UPS, "מערכות הפירוק בשריר"),
       "why-mass": named(ATROPHY, "חשיבות מסת השריר והכוח"),
+      satellite: week(2, "\"satellite cells\"; וגם בשקפי הרצאה 4 (טסטוסטרון ומספר תאי הלוויין) ובנושא \"Muscle hypertrophy and growth\""),
     },
     "md-atrophy-ups": {
       signals: named(ATROPHY, "האותות"),
@@ -111,6 +118,36 @@ export const technionMetabolicDiseaseScope: CourseScope = {
       cachexia: heading(ATROPHY, "קכקסיה"),
       disuse: heading(ATROPHY, "חוסר שימוש"),
       therapies: named(TARGETS, "טיפולים באטרופיה"),
+    },
+    "md-inborn-errors": {
+      principles: slides(9, "עקרונות, תכונות, סימני אזהרה והיגיון הטיפול"),
+      "amino-acids": slides(9, "פירוק חומצות אמינו ומעגל גלוקוז–אלנין"),
+      pku: week(9, "\"Phenylketonuria — reduced metabolism of phenylalanine\""),
+      "other-aa": slides(9, "אלקפטונוריה ומחלת שתן בריח סירופ מייפל"),
+      "urea-cycle": week(9, "\"Urea cycle disorders\" — ארגינין, בנזואט ופניל-אצטט"),
+      storage: slides(9, "פון גירקה, פומפה, קורי, לקטאז וטיי-זקס"),
+      metabolomics: slides(9, "מטבולומיקה להסבר הפנוטיפ"),
+    },
+    "md-energy-metabolism": {
+      atp: slides(10, "צימוד ל-ATP, ATP בשריר, ותחלופת ATP יומית"),
+      creatine: slides(10, "קריאטין-פוספט"),
+      interactosome: slides(10, "סידור המיטוכונדריות בתאי לב, MtCK והאינטראקטוזום"),
+      "energy-charge": slides(10, "המטען האנרגטי"),
+      balance: week(10, "\"Dynamics and regulation of energy balance ... energy expenditure on body composition and weight\""),
+    },
+    "md-calcium": {
+      signal: slides(12, "סידן כשליח שני, קלמודולין, IP3"),
+      flux: slides(12, "SERCA ושחרור מקומי בשריר"),
+      muscle: slides(12, "איתות סידן ומטבוליזם בשריר; דליפה דרך RyR בהזדקנות"),
+      homeostasis: week(12, "\"Maintenance of extracellular and intracellular concentrations and calcium homeostasis\""),
+      disorders: week(12, "\"hypo- and hypercalcemia, pathological consequences\""),
+    },
+    "md-master-regulators": {
+      overview: week(13, "\"Master regulators of metabolism\""),
+      fgf21: week(13, "\"FGF-21\"; נשאל גם במועד א' 2022 (עכברים חסרי FGF21 בדיאטה קטוגנית)"),
+      mtor: week(13, "\"mTOR\""),
+      sirt1: week(13, "\"SIRT1\"; ובשקפי הרצאה 4: \"SIRT1 is a master regulator of muscle growth and atrophy\""),
+      resistance: week(13, "\"metabolic resistance in disease\""),
     },
     // refreshers from prerequisite or neighbouring courses (linked before the unit that needs them)
     "met-integration": {

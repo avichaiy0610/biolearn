@@ -19,6 +19,7 @@ export const mdMuscleMetabolism: Lesson = {
     "להסביר איך IGF-1, אינסולין וחומצות אמינו מפעילים בניית חלבון דרך Akt ו-mTORC1",
     "לתאר את \"התנגודת האנבולית\" ואת המצבים שבהם היא מופיעה",
     "למנות את ארבע מערכות הפירוק בשריר ואת תפקיד כל אחת",
+    "לתאר את תאי הלוויין, את הפעלתם ואת תפקידם בגדילה, בהתחדשות ובמחלה",
   ],
   bodyHe: `
 ## איזה דלק ומתי {#fuels}
@@ -79,6 +80,26 @@ export const mdMuscleMetabolism: Lesson = {
 - **השמנה וסוכרת סוג 2** — ראיות חלקיות.
 ← הבנייה יורדת גם בלי שהפירוק עולה — ועדיין המאזן שלילי.
 
+## תאי לוויין: גרעינים חדשים לסיב {#satellite}
+
+סיב שריר הוא תא ענק עם **מאות גרעינים**, שכולם כבר **לא מתחלקים**. אז מאיפה מגיעים גרעינים חדשים כשהסיב גדל או נפגע? מ**תאי לוויין** — תאי הגזע של השריר.
+
+**איפה ומה:** תאים קטנים שיושבים **צמוד לסיב**, בין ממברנת הסיב (הסרקולמה) לבין **הלמינה הבזלית** שעוטפת אותו. הם מבטאים את גורם השעתוק **Pax7**, ורובם הזמן **רדומים**.
+
+**מה קורה כשהם מופעלים** (פגיעה, עומס חזק):
+1. יוצאים מהרדמה ו**מתחלקים** (מבטאים גורמים מיוגניים כמו MyoD).
+2. חלק מהצאצאים הופכים ל**מיובלסטים**, שאינם הופכים לסיבים בעצמם אלא **מתאחים עם הסיב הקיים** ומוסיפים לו **גרעינים** — או, אחרי פגיעה קשה, מתאחים זה עם זה ויוצרים סיבים חדשים.
+3. חלק **חוזרים לרדמה** ומחדשים את מאגר תאי הלוויין (התחדשות עצמית).
+
+**למה זה חשוב לגדילה:** כל גרעין "מנהל" נפח מסוים של ציטופלסמה. בהיפרטרופיה מתונה הסיב גדל בעזרת הגרעינים הקיימים (mTORC1, בסעיף הקודם); בגדילה גדולה וממושכת נוספים גם **גרעינים חדשים** מתאי לוויין.
+
+**ברפואה:**
+- **טסטוסטרון** מגדיל שריר וגם את **מספר תאי הלוויין** — אבל השימוש בו מוגבל בגלל תופעות לוואי (הגדלת ערמונית, הופעת מאפייני מין זכריים בנשים, והשפעות התנהגותיות). **SARMs** — מולקולות שנקשרות לקולטן האנדרוגן ופועלות בעיקר בשריר ובעצם — פותחו כדי לעקוף חלק מהבעיות (ביחידת הדלדול והטיפול).
+- ב**הזדקנות** מספר תאי הלוויין ותפקודם יורדים, וההתחדשות אחרי פגיעה איטית יותר.
+- ב**ניוון שרירים** (דיסטרופיה) הסיבים נהרסים שוב ושוב, וההתחדשות נכשלת בהדרגה — חלק מהשריר מוחלף ברקמת חיבור ושומן. הכישלון אינו רק "התעייפות" של המאגר: מחזורי נזק חוזרים, דלקת ופיברוזיס פוגעים בסביבה שבה תאי הלוויין פועלים, **ובדושן יש גם פגמים פנימיים בתאי הלוויין עצמם** — בקוטביות שלהם וביכולתם להתחלק חלוקה א-סימטרית, שהיא התנאי לחידוש המאגר.
+
+[[figure:satellite-cells]]
+
 ## ארבע מערכות פירוק {#degradation}
 
 [[figure:md-four-degradation-systems]]
@@ -132,6 +153,9 @@ export const mdMuscleMetabolism: Lesson = {
     "לחשוב שמסה וכוח זהים — בהזדקנות הכוח יורד מהר יותר מהמסה.",
   ],
   terms: [
+    { he: "תאי לוויין", en: "Satellite cells" },
+    { he: "Pax7", en: "Paired box 7 (satellite-cell marker)" },
+    { he: "התחדשות עצמית", en: "Self-renewal" },
     { he: "סיבים איטיים / מהירים", en: "Type I (slow) / type II (fast) fibers" },
     { he: "GLUT4", en: "Glucose transporter 4" },
     { he: "קליטה תלוית התכווצות", en: "Contraction-stimulated glucose uptake" },
@@ -258,6 +282,8 @@ export const mdMuscleMetabolism: Lesson = {
     },
   ],
   refs: [
+    { kind: "paper", text: "Mauro A. (1961). Satellite cell of skeletal muscle fibers. Journal of Biophysical and Biochemical Cytology 9: 493–495." },
+    { kind: "paper", text: "Seale P. et al. (2000). Pax7 is required for the specification of myogenic satellite cells. Cell 102: 777–786." },
     { kind: "paper", text: "Wojtaszewski JFP et al. (1999) Exercise modulates postreceptor insulin signaling and glucose transport in muscle-specific insulin receptor knockout mice. J Clin Invest 104:1257–1264; Brüning JC et al. (1998) A muscle-specific insulin receptor knockout exhibits features of the metabolic syndrome of NIDDM without altering glucose tolerance. Mol Cell 2:559–569." },
     { kind: "paper", text: "Richter EA, Hargreaves M (2013) Exercise, GLUT4, and skeletal muscle glucose uptake. Physiol Rev 93:993–1017." },
     { kind: "paper", text: "Bodine SC et al. (2001) Akt/mTOR pathway is a crucial regulator of skeletal muscle hypertrophy and can prevent muscle atrophy in vivo. Nat Cell Biol 3:1014–1019." },
