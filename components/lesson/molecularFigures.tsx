@@ -641,11 +641,16 @@ function Termination() {
   );
 }
 
+function MeselsonStahlCentrifuge() {
+  return <AnatomyEmbed src="/figures/anatomy/meselson-stahl-centrifuge.html" title="ניסוי מזלסון-סטאל — אולטרה-צנטריפוגה, אינטראקטיבי" />;
+}
+
 function PcrCycler() {
   return <AnatomyEmbed src="/figures/anatomy/pcr-thermocycler.html" title="מכשיר PCR — אינטראקטיבי" />;
 }
 
 export const MOLECULAR_FIGURES: Record<string, { el: () => React.ReactElement; captionHe: string }> = {
+  "meselson-stahl-centrifuge": { el: MeselsonStahlCentrifuge, captionHe: "איור אינטראקטיבי: הזזת העכבר (או החצים) קובעת כמה דורות גדלו החיידקים בחנקן קל, והפסים במבחנה משתנים בהתאם." },
   "pcr-cycler": { el: PcrCycler, captionHe: "איור אינטראקטיבי: הזזת העכבר (או החצים) קובעת את מספר המחזור." },
   "pcr-primer-design": { el: PcrPrimerDesign, captionHe: "תכנון זוג פריימרים: הקדמי זהה לקצה 5′ של הגדיל העליון ונקשר לתחתון; האחורי הוא המשלים ההפוך של הקצה השני ונקשר לעליון. שני קצות 3′ מוארכים פנימה, והתוצר המוגדר כולל את שני הפריימרים. הפריימר האחורי מוצג גם \u20665′→3′\u2069 כרצף להזמנה, וגם בכיוון הקישור בפועל. דוגמה לימודית מקוצרת של 18 זוגות בסיסים ופריימרים בני 6 בסיסים, לא אורכי עבודה מומלצים; סכמטי." },
   "sanger-read": { el: SangerRead, captionHe: "סנגר בדוגמה בת שבע עמדות אחרי הפריימר: התבנית היא \u20663′–CCTTGCATGC–5′\u2069 והפריימר \u20665′–GGA–3′\u2069; הקריאה היא \u20665′–ACGTACG–3′\u2069, משלימת מקטע התבנית שאחרי הפריימר. מוצג כל אורך אפשרי בחלון זה, כולל ddNTP מסיים בצבע הבסיס. סדר הגילוי בנימית, קצר לפני ארוך, נותן את הכרומטוגרמה. פיק כפול מצביע על שתי אוכלוסיות תבנית. הצבעים נבחרו להמחשה ואינם תקן צבע מחייב; סכמטי." },
