@@ -1,8 +1,10 @@
 import type { CoursePlan, PlanItem, PlanSession } from "./types";
 import type { Lesson } from "../lessons/types";
 import { gxOperons } from "../lessons/technion-gene-expression/gx-operons";
+import { gxExpressionData } from "../lessons/technion-gene-expression/gx-expression-data";
 import { gxCisElements } from "../lessons/technion-gene-expression/gx-cis-elements";
 import { gxTranscriptionFactors } from "../lessons/technion-gene-expression/gx-transcription-factors";
+import { gxGenomicTracks } from "../lessons/technion-gene-expression/gx-genomic-tracks";
 import { gxChromatinModifications } from "../lessons/technion-gene-expression/gx-chromatin-modifications";
 import { gxEpigenetics } from "../lessons/technion-gene-expression/gx-epigenetics";
 import { gxAlternativeSplicing } from "../lessons/technion-gene-expression/gx-alternative-splicing";
@@ -14,17 +16,17 @@ import { gxRepeatsMobile } from "../lessons/technion-gene-expression/gx-repeats-
 import { gxGenomeWide } from "../lessons/technion-gene-expression/gx-genome-wide";
 import { gxIntegration } from "../lessons/technion-gene-expression/gx-integration";
 
+import { gxCrisprTools } from "../lessons/technion-gene-expression/gx-crispr-tools";
 // Technion 01340119 "בקרת הביטוי הגנטי" — built with the course-track-builder skill, no insider input.
-// Topics: the CURRENT syllabus on the Technion students portal (topics only, no weeks), in its own order.
-// Lecture order: no public schedule (Moodle is closed to guests; lecturer: Prof. Yael Mandel-Gutfreund) — the
-// syllabus order. The Faculty of Medicine's course 274243 (a "no extra credit" pair of BOTH 134082 and 134119)
-// publishes a weekly table whose regulation part runs prokaryotic → eukaryotic transcription → RNA processing →
-// translation control → post-translational control — a different course; evidence only.
-// Scope consensus (2026-10-22): Haifa 223.3003 "בקרה גנטית באוקריוטים" (same books: Lewin, Brown) — chromatin
-// organization, histones and epigenetic modifications, general transcription machinery and factors, enhancers,
-// mRNA stability/turnover, translation, miRNA; HUJI molecular biology — alternative splicing, RNA stability, regulatory
-// RNA; Technion medicine 274243 — transcription regulation, RNA processing, translation control.
-// Tutorials: no source — "practice for lecture n", built from each unit's worked problems.
+// Lecture AND tutorial order (rebuilt 2026-11-07): the course's own 2024 schedule (Prof. Yael Mandel-Gutfreund),
+// syllabuses/_text/סילבוס בקרת הביטוי הגנטי 2024.docx.txt — 12 weeks, each with a lecture topic and a tutorial topic.
+// Topics view: the official topic list on the Technion students portal, in its own order (it is broader than the 2024
+// schedule: genome structure, gene families, genome-wide control and integration are portal topics only).
+// Bacterial operons: not in the 2024 schedule and in no exam since 2016 → "extension" (scope file); kept in the topics
+// view only, off the lecture/tutorial sequence.
+// Week 10 "Gene editing: siRNA, CRISPR/Cas9": the CRISPR unit is written in a separate session (parked in
+// ../parked/134119-crispr) and added here when done; until then the week holds the siRNA section only.
+// Exams are research scenarios read from figures (moed A 2022, moed B 2021) — hence the two data-reading units.
 
 const M = "molecular-biology";
 const proc = (slug: string, topic = M): PlanItem => ({ kind: "process", topic, slug });
@@ -32,52 +34,70 @@ const sec = (l: Lesson, ...ids: string[]): PlanItem[] => (ids.length ? ids.map((
 const probs = (l: Lesson, ...ids: string[]): PlanItem[] =>
   (l.workedProblems ?? []).filter((w) => !ids.length || ids.includes(w.id)).map((w) => ({ kind: "lesson" as const, slug: l.slug, problem: w.id }));
 
-// Narrowed 2026-10-22 to the course itself (Avichai: "the course is what its name says"): the regulatory RNA is
-// miRNA/siRNA only; riboswitches (134151), CRISPR (134082), bacterial sRNA, piRNA, lncRNA and other textbook-only
-// sections were moved to content/lessons/_archive/technion-gene-expression (full copies of the units).
-const NCRNA = sec(gxNcrna);
 const PORTAL = { labelHe: "הסילבוס בפורטל הטכניון", url: "https://students.technion.ac.il/local/technionsearch/course/134119" };
-const MED = { labelHe: "הקורס המקביל ברפואה (274243) — ראיה בלבד", url: "https://md.technion.ac.il/wp-content/uploads/2024/05/סיליבוס-מנגנוני-בקרה-מולקולרית-274243-חורף-תשפד-12-שבועות.pdf" };
 
-const LECTURES: { titleHe: string; items: PlanItem[]; practice: PlanItem[] }[] = [
-  { titleHe: "בקרה בחיידקים: אופרונים, lac ו-trp", items: [...sec(gxOperons), proc("lac-operon")], practice: probs(gxOperons) },
-  { titleHe: "אלמנטים רגולטוריים בציס: מגבירים ומבודדים", items: sec(gxCisElements), practice: probs(gxCisElements) },
-  { titleHe: "גורמי שעתוק", items: sec(gxTranscriptionFactors), practice: probs(gxTranscriptionFactors) },
-  { titleHe: "שינויים בכרומטין ומתילציה של DNA", items: sec(gxChromatinModifications), practice: probs(gxChromatinModifications) },
-  { titleHe: "אפיגנטיקה: הטרוכרומטין, Polycomb, השבתת X והחתמה", items: [...sec(gxEpigenetics), proc("genomic-imprinting", "genetics")], practice: probs(gxEpigenetics) },
-  { titleHe: "שחבור חלופי ועריכת RNA", items: sec(gxAlternativeSplicing), practice: probs(gxAlternativeSplicing) },
-  { titleHe: "בקרת תרגום ויציבות mRNA", items: sec(gxTranslationControl), practice: probs(gxTranslationControl) },
-  { titleHe: "בקרה על ידי RNA לא מקודד", items: NCRNA, practice: probs(gxNcrna) },
-  { titleHe: "מבנה הגנום", items: sec(gxGenomeStructure), practice: probs(gxGenomeStructure) },
-  { titleHe: "ביטוי מתואם: משפחות גנים וצבירים", items: sec(gxGeneFamilies), practice: probs(gxGeneFamilies) },
-  { titleHe: "רצפים חוזרים ורצפים ניידים", items: sec(gxRepeatsMobile), practice: probs(gxRepeatsMobile) },
-  { titleHe: "בקרה כלל-גנומית", items: sec(gxGenomeWide), practice: probs(gxGenomeWide) },
-  { titleHe: "אינטגרציה בין מערכות בקרה ופנוטיפ", items: sec(gxIntegration), practice: probs(gxIntegration) },
+const LECTURES: PlanSession[] = [
+  { n: 1, titleHe: "הקדמה לבקרת ביטוי גנים", items: [...sec(gxCisElements, "layout"), ...sec(gxExpressionData)] },
+  { n: 2, titleHe: "עקרונות ההכרה המולקולרית בין חלבונים לדנ\"א", items: sec(gxTranscriptionFactors, "modular", "motifs", "recognition") },
+  { n: 3, titleHe: "בקרת שעתוק", items: [...sec(gxCisElements, "enhancers", "insulators", "response-elements", "methods"), ...sec(gxTranscriptionFactors, "activators", "repressors", "regulation", "gal")] },
+  { n: 4, titleHe: "בקרת שעתוק קומבינטורית", items: [...sec(gxTranscriptionFactors, "combinatorial", "fly-eve"), ...sec(gxIntegration, "drosophila")] },
+  { n: 5, titleHe: "אפיגנטיקה: ארגון הכרומטין", items: [...sec(gxChromatinModifications, "barrier", "remodeling", "marks", "readers"), ...sec(gxEpigenetics, "definition", "heterochromatin", "polycomb"), ...sec(gxGenomeWide, "nucleus", "tads")] },
+  { n: 6, titleHe: "אפיגנטיקה: מודיפיקציות של דנ\"א", items: [...sec(gxChromatinModifications, "dna-methylation", "crosstalk"), ...sec(gxEpigenetics, "inheritance", "x-inactivation", "imprinting"), proc("genomic-imprinting", "genetics")] },
+  { n: 7, titleHe: "בקרת שחבור חלופי", items: sec(gxAlternativeSplicing, "types", "regulation", "kinetic-coupling", "drosophila", "examples") },
+  { n: 8, titleHe: "בקרת שחבור חלופי ו-NMD", items: [...sec(gxAlternativeSplicing, "nmd-disease"), ...sec(gxTranslationControl, "decay")] },
+  { n: 9, titleHe: "miRNA ובקרת תרגום", items: [...sec(gxNcrna, "classes", "mirna"), ...sec(gxTranslationControl, "why", "global", "uorf", "iron", "ires", "localization")] },
+  { n: 10, titleHe: "עריכת גנים: siRNA ו-CRISPR/Cas9", items: [...sec(gxNcrna, "sirna"), ...sec(gxCrisprTools)] },
+  { n: 11, titleHe: "אבולוציה של בקרת הביטוי: טרנספוזונים", items: sec(gxRepeatsMobile) },
+  {
+    n: 12, titleHe: "סימולציה לבחינה",
+    items: [
+      ...probs(gxAlternativeSplicing, "pol2-chip"), ...probs(gxGenomicTracks, "motif-spacing", "browser-read"),
+      ...probs(gxExpressionData, "volcano-read", "exon-primers-nmd"), ...probs(gxTranscriptionFactors, "stripe2-reporter"),
+    ],
+  },
+];
+
+const TUTORIALS: PlanSession[] = [
+  { n: 1, titleHe: "RT ו-Real time PCR", items: [...sec(gxExpressionData, "rt", "qpcr", "ddct", "primers"), ...probs(gxExpressionData, "ddct-calc")] },
+  { n: 2, titleHe: "הכרה בין חלבון ל-DNA", items: [...sec(gxTranscriptionFactors, "recognition"), ...probs(gxTranscriptionFactors, "egr1-affinity", "two-hybrid")] },
+  { n: 3, titleHe: "ChIP-seq, Genome Browser ו-MEME", items: [...sec(gxGenomicTracks), ...probs(gxGenomicTracks), ...probs(gxCisElements)] },
+  { n: 4, titleHe: "הזבוב כמודל לבקרת שעתוק", items: [...sec(gxTranscriptionFactors, "fly-eve"), ...probs(gxTranscriptionFactors, "stripe2-reporter", "gal-mutants")] },
+  { n: 5, titleHe: "מודיפיקציות על הכרומטין", items: [...probs(gxChromatinModifications, "marks-predict"), ...probs(gxEpigenetics, "pev-genetics")] },
+  { n: 6, titleHe: "מתילציה של דנ\"א", items: [...probs(gxChromatinModifications, "methylation-inheritance"), ...sec(gxExpressionData, "volcano"), ...probs(gxExpressionData, "volcano-read"), ...probs(gxEpigenetics, "x-inactivation-cases")] },
+  { n: 7, titleHe: "שחבור חלופי", items: [...sec(gxExpressionData, "rna-seq"), ...probs(gxAlternativeSplicing, "minigene", "sex-cascade", "pol2-chip")] },
+  { n: 8, titleHe: "NMD", items: [...sec(gxExpressionData, "turnover"), ...probs(gxExpressionData, "exon-primers-nmd", "new-total-scatter")] },
+  { n: 9, titleHe: "מאמר RNAi", items: [...probs(gxNcrna, "mirna-reporter", "processing-mutants"), ...probs(gxTranslationControl)] },
+  { n: 10, titleHe: "שיטות מתקדמות להשתקת גנים: siRNA ו-CRISPR/Cas9", items: [...sec(gxNcrna, "sirna"), ...sec(gxCrisprTools)] },
+  { n: 11, titleHe: "טרנספוזונים", items: probs(gxRepeatsMobile) },
 ];
 
 export const technionGeneExpressionPlan: CoursePlan = {
   courseSlug: "technion-gene-expression",
   lectureOrder: {
-    confidence: "syllabus",
-    noteHe: "אין לוח הרצאות ציבורי לקורס (אתר הקורס במודל סגור). הסדר כאן הוא סדר הנושאים בסילבוס הרשמי: בקרת שעתוק (בחיידקים ובאאוקריוטים), כרומטין, שחבור חלופי, תרגום, RNA לא מקודד, ואחר כך מבנה הגנום ובקרה כלל-גנומית. הקורס בפקולטה לרפואה (274243), שמחליף גם את 134082 וגם את הקורס הזה, מפרסם טבלה שבועית שבה הבקרה מסודרת באותו כיוון (שעתוק → עיבוד RNA → תרגום) — אבל זה קורס אחר, ראיה בלבד. החלוקה לשבועות בפועל עשויה להיות שונה.",
-    links: [PORTAL, MED],
+    confidence: "official-past",
+    noteHe: "לפי לוח ההרצאות של הקורס מסמסטר אביב 2024 (פרופ' יעל מנדל-גוטפרוינד): 12 שבועות — הקדמה, הכרה בין חלבון ל-DNA, בקרת שעתוק, בקרה קומבינטורית, שני שבועות אפיגנטיקה (כרומטין ומתילציה של DNA), שני שבועות שחבור חלופי (כולל NMD), miRNA ובקרת תרגום, עריכת גנים, טרנספוזונים, וסימולציה לבחינה. היחידה על CRISPR (שבוע 10) תתווסף בהמשך. בסמסטר הנוכחי ייתכנו שינויים.",
+    links: [PORTAL],
   },
-  tutorialOrder: null,
-  schedule: "suggested",
-  scheduleNoteHe: "הנושאים לפי הסילבוס העדכני של הקורס בפורטל הטכניון (הוא מפרט נושאים, לא שבועות). הפירוט לתת-נושאים לפי ספרי הקורס — Lewin's Genes XII ו-Genomes 4 (Brown).",
+  tutorialOrder: {
+    confidence: "official-past",
+    noteHe: "לוח 2024 מפרט גם את נושא התרגול בכל שבוע: RT ו-Real time PCR, הכרה בין חלבון ל-DNA, ChIP-seq + Genome Browser + MEME, הזבוב כמודל, מודיפיקציות על הכרומטין, מתילציה של DNA, שחבור חלופי, NMD, מאמר על RNAi, siRNA ו-CRISPR, וטרנספוזונים. התרגילים כאן בנויים בסגנון המבחנים — תרחישי מחקר שנקראים מתוך נתונים.",
+    links: [PORTAL],
+  },
+  schedule: "official",
+  scheduleNoteHe: "ההרצאות והתרגולים לפי לוח הקורס מ-2024. רשימת הנושאים לפי הסילבוס בפורטל, שהוא רחב יותר (מבנה הגנום, משפחות גנים, בקרה כלל-גנומית ואינטגרציה מופיעים בפורטל אך לא בלוח 2024). בקרה בחיידקים (אופרונים) לא מופיעה בלוח 2024 ולא נשאלה במבחנים מאז 2016 — היא מסומנת כהרחבה. המבחן: 3 שעות, שלוש שאלות גדולות, מותר דף עזר בכתב יד.",
   topics: [
-    { titleHe: "בקרת הביטוי הגנטי בתאים פרוקריטים ואאוקריוטים: בקרת תעתוק-אלמנטים רגולטורים בציס", items: [...sec(gxOperons), ...sec(gxCisElements), proc("lac-operon")] },
+    { titleHe: "בקרת הביטוי הגנטי בתאים פרוקריטים ואאוקריוטים: בקרת תעתוק-אלמנטים רגולטורים בציס", items: [...sec(gxCisElements), ...sec(gxGenomicTracks), ...sec(gxOperons), proc("lac-operon")] },
     { titleHe: "פקטורי תעתוק", items: sec(gxTranscriptionFactors) },
     { titleHe: "מודיפיקציות בכרומטין", items: [...sec(gxChromatinModifications), ...sec(gxEpigenetics, "definition", "heterochromatin", "polycomb", "inheritance")] },
     { titleHe: "שחבור חלופי", items: sec(gxAlternativeSplicing) },
     { titleHe: "בקרת תרגום", items: sec(gxTranslationControl) },
-    { titleHe: "בקרה על ידי רנ\"א לא מקודד", items: NCRNA },
+    { titleHe: "בקרה על ידי רנ\"א לא מקודד", items: sec(gxNcrna) },
     { titleHe: "מבנה הגנום", items: sec(gxGenomeStructure) },
     { titleHe: "ביטוי מתואם של משפחות וסוגי גנים", items: sec(gxGeneFamilies) },
     { titleHe: "רצפים חוזרים ורצפים ניידים ותפקידם בבקרת הביטוי הגנטי", items: sec(gxRepeatsMobile) },
-    { titleHe: "בקרה כלל-גנומית", items: [...sec(gxGenomeWide), ...sec(gxEpigenetics, "x-inactivation", "imprinting"), proc("genomic-imprinting", "genetics")] },
+    { titleHe: "בקרה כלל-גנומית", items: [...sec(gxGenomeWide), ...sec(gxExpressionData), ...sec(gxEpigenetics, "x-inactivation", "imprinting"), proc("genomic-imprinting", "genetics")] },
     { titleHe: "אינטגרציה בין מערכות בקרה והמשמעות הפנוטיפית שלה", items: sec(gxIntegration) },
   ],
-  lectures: LECTURES.map((l, i): PlanSession => ({ n: i + 1, titleHe: l.titleHe, items: l.items })),
-  tutorials: LECTURES.map((l, i): PlanSession => ({ n: i + 1, titleHe: l.titleHe, items: l.practice })).filter((t) => t.items.length > 0),
+  lectures: LECTURES,
+  tutorials: TUTORIALS,
 };
