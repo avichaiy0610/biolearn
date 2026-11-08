@@ -2,6 +2,7 @@ import type { CoursePlan, PlanItem, PlanSession } from "./types";
 import type { Lesson } from "../lessons/types";
 import { pgIntro } from "../lessons/technion-pathogens/pg-intro";
 import { pgMicrobiome } from "../lessons/technion-pathogens/pg-microbiome";
+import { pgDualUse } from "../lessons/technion-pathogens/pg-dual-use";
 import { pgPhysiology } from "../lessons/technion-pathogens/pg-physiology";
 import { pgAdhesion } from "../lessons/technion-pathogens/pg-adhesion";
 import { pgInvasion } from "../lessons/technion-pathogens/pg-invasion";
@@ -35,7 +36,7 @@ import { mvAntibiotics } from "../lessons/technion-micro-viro/mv-antibiotics";
 // and extensive antigenic variation marked extension.
 export const PATHOGENS_LESSONS: Lesson[] = [pgIntro, pgMicrobiome, pgPhysiology, pgAdhesion, pgInvasion, pgToxins,
   pgEvasionRegulation, pgVirusesMolds, pgEmergence, pgDetectionConventional, pgDetectionMolecular, pgAntimicrobials,
-  pgPredictive, pgRisk];
+  pgPredictive, pgRisk, pgDualUse];
 
 const sec = (l: Lesson, ...ids: string[]): PlanItem[] => (ids.length ? ids.map((section) => ({ kind: "lesson" as const, slug: l.slug, section })) : [{ kind: "lesson", slug: l.slug }]);
 const probs = (l: Lesson): PlanItem[] => (l.workedProblems ?? []).map((w) => ({ kind: "lesson" as const, slug: l.slug, problem: w.id }));
@@ -58,6 +59,7 @@ const LECTURES: { titleHe: string; items: PlanItem[]; practice: PlanItem[] }[] =
   { titleHe: "חומרים אנטיבקטריאליים ורכישת עמידות", items: [...sec(pgAntimicrobials), ...sec(mvAntibiotics, "selective-toxicity", "targets", "mechanisms", "spread", "tolerance", "countermeasures"), ...sec(mvClinical, "ast"), ...sec(mvEnvironment, "chemical-control")], practice: probs(pgAntimicrobials) },
   { titleHe: "מודלים לחיזוי גדילה וקטילה", items: [...sec(pgPredictive), ...sec(mvGrowth, "exponential"), ...sec(mvEnvironment, "physical-control")], practice: probs(pgPredictive) },
   { titleHe: "הערכת סיכון מיקרוביאלית כמותית", items: sec(pgRisk), practice: probs(pgRisk) },
+  { titleHe: "שימוש כפול: אתיקה ומדיניות במחקר פתוגנים", items: sec(pgDualUse), practice: probs(pgDualUse) },
 ];
 
 export const technionPathogensPlan: CoursePlan = {
@@ -79,6 +81,7 @@ export const technionPathogensPlan: CoursePlan = {
     { titleHe: "מנגנוני פעולה של חומרים אנטיבקטריאליים ורכישת עמידות", items: sec(pgAntimicrobials) },
     { titleHe: "המיקרוביום האנושי והקשר שלו למחלות", items: sec(pgMicrobiome) },
     { titleHe: "מודלים מתמטיים להערכת סיכון", items: [...sec(pgPredictive), ...sec(pgRisk)] },
+    { titleHe: "Dual use: מחקר בפתוגניות וביוטרור", items: sec(pgDualUse) },
   ],
   lectures: LECTURES.map((l, i): PlanSession => ({ n: i + 1, titleHe: l.titleHe, items: l.items })),
   tutorials: LECTURES.map((l, i): PlanSession => ({ n: i + 1, titleHe: l.titleHe, items: l.practice })).filter((t) => t.items.length > 0),

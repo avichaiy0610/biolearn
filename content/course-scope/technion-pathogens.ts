@@ -38,6 +38,7 @@ const DETECT = "שיטות זיהוי קונבנציונליות ומולקול�
 const ANTI = "מנגנוני פעולה של חומרים אנטיבקטריאליים ורכישת עמידות";
 const RISK = "מודלים מתמטיים להערכת סיכון";
 const MICRO = "המיקרוביום האנושי והקשר שלו למחלות";
+const DUAL = "Dual use: מחקר בפתוגניות וביוטרור";
 
 export const technionPathogensScope: CourseScope = {
   courseSlug: "technion-pathogens",
@@ -126,6 +127,13 @@ export const technionPathogensScope: CourseScope = {
       "colonization-resistance": named(MICRO, "התנגדות לקולוניזציה כהגנה של המארח"),
       dysbiosis: named(MICRO, "דיסביוזה אחרי אנטיביוטיקה ו-C. difficile"),
       disease: named(MICRO, "הקשר בין המיקרוביום למחלות"),
+    },
+    "pg-dual-use": {
+      definition: named(DUAL, "הגדרת DURC והבחנה מכוונת החוקר"),
+      history: named(DUAL, "אסילומר, האמנה לאיסור נשק ביולוגי, דוח פינק והמדיניות הנוכחית"),
+      h5n1: named(DUAL, "פרשת H5N1 כמקרה המבחן של מערכת הפיקוח"),
+      debate: named(DUAL, "המחלוקת בין פתיחות מדעית לצמצום סיכון"),
+      practice: named(DUAL, "מה נדרש מחוקר: ועדה מוסדית, גוף מממן וכתב עת"),
     },
     "pg-predictive": {
       "d-value": named(RISK, "ערך D והפחתה בסדרי גודל"),
