@@ -135,8 +135,9 @@ export const technionHumanGeneticsScope: CourseScope = {
       ngs: named(DIAGNOSIS, "לוח, אקסום וגנום"),
       segregation: named(DIAGNOSIS, "בדיקת ההורים"),
       classification: heading(DIAGNOSIS, "סיווג ACMG"),
+      databases: { level: "core", evidence: "staff-material", noteHe: "עבודת הבית של הקורס תשפ\"ד (עם פתרון): שמות HGVS, חיפוש ב-OMIM, Ensembl ו-gnomAD, קריטריונים לפתוגניות ושימור אבולוציוני — כולל ניתוח מאמר על ריצוף אקסום" },
       screening: named(DIAGNOSIS, "סריקה מול אבחון"),
-      prenatal: heading(DIAGNOSIS, "NIPT ו-PGT"),
+      prenatal: { level: "core", evidence: "staff-material", noteHe: "עבודת הבית של הקורס תשפ\"ד: PGT-M — בניית הפלוטיפ מסמנים פולימורפיים, סמנים לא אינפורמטיביים ונשירת אלל" },
     },
     "sex-determination": {
       systems: refresher(SEX, "מערכות קביעת מין"),
