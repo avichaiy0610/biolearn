@@ -33,31 +33,29 @@ const PORTAL = { labelHe: "הסילבוס בפורטל הטכניון", url: "ht
 const PARALLEL = { labelHe: "הסילבוס של הקורס המקביל 274261 (רפואה, אותם מרצים)", url: "https://md.technion.ac.il/wp-content/uploads/2025/03/%D7%A1%D7%99%D7%9C%D7%91%D7%95%D7%A1-%D7%90%D7%99%D7%9E%D7%95%D7%A0%D7%95%D7%9C%D7%95%D7%92%D7%99%D7%94-%D7%91%D7%A1%D7%99%D7%A1%D7%99%D7%AA-%D7%95%D7%A7%D7%9C%D7%99%D7%A0%D7%99%D7%AA-2740261-%D7%90%D7%91%D7%99%D7%91-%D7%AA%D7%A9%D7%A4%D7%94-2024-2025.pdf" };
 
 const LECTURES: { titleHe: string; items: PlanItem[]; practice: PlanItem[] }[] = [
-  { titleHe: "מבוא: חסינות מולדת ונרכשת, תאים ואיברים", items: sec(imIntro), practice: probs(imIntro) },
-  { titleHe: "החסינות המולדת: קולטנים, תאים, משלים ודלקת", items: sec(imInnate), practice: probs(imInnate) },
-  { titleHe: "אנטיגנים ונוגדנים", items: sec(imAntibodies), practice: probs(imAntibodies) },
-  { titleHe: "הגנטיקה והביוסינטזה של נוגדנים", items: sec(imIgGenetics), practice: probs(imIgGenetics) },
-  { titleHe: "תאי B: התפתחות, הפעלה וזיכרון", items: sec(imBCells), practice: probs(imBCells) },
-  { titleHe: "MHC והצגת אנטיגנים", items: sec(imMhc), practice: probs(imMhc) },
-  { titleHe: "תאי T: הקולטן, התימוס וההפעלה", items: sec(imTCells), practice: probs(imTCells) },
-  { titleHe: "ציטוקינים, מולקולות הדבקה ונדידה", items: sec(imCytokines), practice: probs(imCytokines) },
-  { titleHe: "תאי T מבצעים ויחסי גומלין בין תאים", items: sec(imEffector), practice: probs(imEffector) },
-  { titleHe: "סבילות ואוטואימוניות", items: sec(imTolerance), practice: probs(imTolerance) },
-  { titleHe: "זיהומים, ריריות, יילוד וחיסונים", items: sec(imInfection), practice: probs(imInfection) },
-  { titleHe: "רגישות יתר ואלרגיה", items: sec(imHypersensitivity), practice: probs(imHypersensitivity) },
-  { titleHe: "ביולוגיה של השתלות", items: sec(imTransplant), practice: probs(imTransplant) },
-  { titleHe: "חסרים חיסוניים ראשוניים ואיידס", items: sec(imImmunodeficiency), practice: probs(imImmunodeficiency) },
+  { titleHe: "מבוא למערכת החיסון; מרכיבי החסינות המולדת ומנגנוניה", items: [...sec(imIntro, "arms", "organs", "lymph-node"), ...sec(imInnate, "barriers", "prr")], practice: probs(imIntro) },
+  { titleHe: "מנגנוני החסינות המולדת (המשך); יצירה והתפתחות של תאי החיסון", items: [...sec(imInnate, "phagocytes", "complement", "inflammation"), ...sec(imIntro, "cells")], practice: probs(imInnate) },
+  { titleHe: "חיסון הסתגלותי; נוגדנים — מבנה ותפקיד; גנטיקה של שונות", items: [...sec(imAntibodies, "antigens", "structure", "classes", "isotype-allotype-idiotype"), ...sec(imIgGenetics, "problem", "diversity")], practice: probs(imAntibodies) },
+  { titleHe: "תהליכי רקומבינציה; ריאקציית אנטיגן-נוגדן", items: [...sec(imIgGenetics, "vdj", "allelic-exclusion", "biosynthesis"), ...sec(imAntibodies, "hybridomas", "assays")], practice: probs(imIgGenetics) },
+  { titleHe: "התפתחות תאי B, שפעול וזיכרון; סבילות חיסונית", items: [...sec(imBCells, "development", "bcr", "t-dependent", "subsets"), ...sec(imIgGenetics, "csr-shm"), ...sec(imTolerance, "definition", "central")], practice: probs(imBCells) },
+  { titleHe: "אנטיגן תואם הרקמות (MHC) והצגת אנטיגנים לתאי T", items: sec(imMhc), practice: probs(imMhc) },
+  { titleHe: "הרצפטור לאנטיגן של תאי T והתפתחות תאי T", items: sec(imTCells, "tcr", "thymus"), practice: [] },
+  { titleHe: "שפעול תאי T וזיכרון; T-B במרכז הנבט; העברת האותות בתאי T", items: [...sec(imTCells, "activation", "checkpoints"), ...sec(imBCells, "germinal-center"), ...sec(imEffector, "memory")], practice: probs(imTCells) },
+  { titleHe: "מבוא לחיסונים (vaccination); ציטוקינים וכמוקינים; העברת אותות בתגובה לציטוקינים", items: [...sec(imInfection, "vaccines"), ...sec(imCytokines, "what", "key", "receptors", "chemokines")], practice: probs(imCytokines) },
+  { titleHe: "ציטוקינים בהפעלת החסינות המולדת", items: [...sec(imInnate, "inflammation"), ...sec(imCytokines, "extravasation")], practice: [] },
+  { titleHe: "תתי-אוכלוסיות של תאי T, תאים רגולטוריים וסבילות", items: [...sec(imEffector, "polarization", "helpers", "ctl"), ...sec(imTolerance, "peripheral", "autoimmunity")], practice: [...probs(imEffector), ...probs(imTolerance)] },
+  { titleHe: "יחסי גומלין בין תאים", items: sec(imEffector, "interactions"), practice: [] },
 ];
 
 export const technionImmunologyPlan: CoursePlan = {
   courseSlug: "technion-immunology",
   lectureOrder: {
-    confidence: "parallel",
-    noteHe: "אין לוח הרצאות ציבורי לקורס (אתר הקורס במודל סגור). הסדר כאן לפי לוח ההרצאות של הקורס המקביל 274261 בפקולטה לרפואה, שמלמדים בו אותם מרצים — סביר שהוא קרוב, אבל לא הוכח שהוא זהה.",
+    confidence: "official",
+    noteHe: "לפי לוח 12 השבועות בסילבוס הקורס לחורף תשפ\"ה (פרופ' דורון מלמד, פרופ' נתן קרין, ד\"ר ארי גלסנר, פרופ\"ח דבי יבלונסקי). רגישות יתר, השתלות, חסרים חיסוניים ורוב יחידת הזיהומים לא נלמדים בלוח הזה — הם נשארו בלשונית \"לפי נושאים\" ומסומנים כהרחבה. המבחן: 50 שאלות אמריקאיות, שעתיים.",
     links: [PORTAL, PARALLEL],
   },
   tutorialOrder: null,
-  schedule: "suggested",
+  schedule: "official",
   scheduleNoteHe: "הנושאים לפי הסילבוס בפורטל הטכניון (24 נושאים). בפורטל לא רשומים ספרים; הפירוט לפי הספרים של הקורס המקביל (Janeway, Abbas). בקורס אין תרגולים רשומים — התרגילים הפתורים כאן לתרגול עצמי.",
   topics: [
     { titleHe: "מבוא לחסינות טבעית ונרכשת", items: [...sec(imIntro, "arms", "cells"), ...sec(imInnate)] },

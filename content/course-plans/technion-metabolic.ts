@@ -33,7 +33,7 @@ const LECTURES: { titleHe: string; items: PlanItem[]; practice: Lesson[]; extra?
   { titleHe: "גליקוליזה", items: [...sec(metGlycolysis), proc("glycolysis")], practice: [metGlycolysis] },
   { titleHe: "פירובט דהידרוגנאז ומעגל החומצה הציטרית", items: [...sec(metCitricAcid), proc("cellular-respiration")], practice: [metCitricAcid] },
   { titleHe: "זרחון חמצוני", items: [...sec(metOxphos), proc("cellular-respiration")], practice: [metOxphos] },
-  { titleHe: "פוטוסינתזה: תגובות האור ומעגל קלווין", items: [...sec(metPhotosynthesis), proc("photosynthesis")], practice: [metPhotosynthesis] },
+  { titleHe: "פוטוסינתזה: תגובות האור ומעגל קלווין (אחרי הבוחן השני — לא נבחן)", items: [...sec(metPhotosynthesis), proc("photosynthesis")], practice: [metPhotosynthesis] },
   { titleHe: "מסלול הפנטוז פוספט", items: sec(metPentose), practice: [metPentose] },
   { titleHe: "גלוקונאוגנזה ובקרה הדדית", items: [...sec(metGluconeogenesis), proc("gluconeogenesis")], practice: [metGluconeogenesis] },
   { titleHe: "גליקוגן ובקרה הורמונלית", items: sec(metGlycogen), practice: [metGlycogen] },

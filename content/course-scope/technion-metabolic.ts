@@ -4,6 +4,12 @@ import type { CourseScope, ScopeEntry } from "./types";
 // portal only (Moodle closed to guests), so the strongest level is "syllabus-named". Generated from `scope --suggest`
 // and reviewed row by row: specific examples the syllabus does not name (PKU, Cori cycle, storage diseases…) are "likely".
 
+// 2026-11-08: in the winter 2024 syllabus photosynthesis is taught last, after the second quiz, and no quiz or exam
+// since 2016 asks it — so for exam preparation it is "extension".
+const PHOTO_LAST: ScopeEntry = {
+  level: "extension", evidence: "none",
+  noteHe: "בסילבוס חורף 2024 פוטוסינתזה נלמדת בסוף הסמסטר, אחרי הבוחן השני, ולא נשאלה באף בוחן או מבחן מאז 2016 — לכן להכנה לבחינות היא הרחבה",
+};
 const named = (topic: string, what?: string): ScopeEntry => ({
   level: "core", evidence: "syllabus-named",
   noteHe: what ? `הסילבוס הרשמי: "${topic}" — ${what}` : `הסילבוס הרשמי: "${topic}"`,
@@ -63,11 +69,11 @@ export const technionMetabolicScope: CourseScope = {
       "control": named(PATH),
     },
     "met-photosynthesis": {
-      "overview": named(PATH),
-      "light": named(PATH),
-      "z-scheme": named(PATH),
-      "calvin": named(PATH),
-      "photorespiration": heading(PATH, "נשימה אורית, C₄ ו-CAM"),
+      "overview": PHOTO_LAST,
+      "light": PHOTO_LAST,
+      "z-scheme": PHOTO_LAST,
+      "calvin": PHOTO_LAST,
+      "photorespiration": PHOTO_LAST,
     },
     "met-pentose": {
       "overview": named(PATH),

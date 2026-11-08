@@ -5,6 +5,11 @@ import type { CourseScope, ScopeEntry } from "./types";
 // (Moodle closed to guests). Levels reviewed with Codex before writing: "core" only where the portal wording names
 // the subject (or the section is that subject by definition); anything that is only part of a broader heading is "likely".
 
+// 2026-11-08: the integument is a portal topic but is not in the winter 2024 syllabus (13 weeks) — "extension".
+const INT_OUT: ScopeEntry = {
+  level: "extension", evidence: "none",
+  noteHe: "האינטגומנט מופיע ברשימת הנושאים בפורטל, אבל לא בסילבוס חורף 2024 (13 שבועות: 6 חסרי חוליות, 7 חולייתנים)",
+};
 const named = (topic: string, what?: string): ScopeEntry => ({
   level: "core", evidence: "syllabus-named",
   noteHe: what ? `הסילבוס הרשמי: "${topic}" — ${what}` : `הסילבוס הרשמי: "${topic}"`,
@@ -29,7 +34,6 @@ const BLOOD = "מערכת הדם";
 const CNS = "מערכת העצבים המרכזית והחושים";
 const EMB = "עקרונות ההתפתחות העוברית";
 const AXES = "התפתחות צירי הגוף";
-const INT = "אבולוציה של האינטגומנט ותוצריו - קווי ההתפתחות של קשקשים, שערות ונוצות";
 
 export const technionZoologyScope: CourseScope = {
   courseSlug: "technion-zoology",
@@ -125,12 +129,12 @@ export const technionZoologyScope: CourseScope = {
       olfaction: heading(CNS, "חוש הריח"),
     },
     "z-integument": {
-      skin: named(INT, "האינטגומנט"),
-      "fish-scales": named(INT, "קשקשים"),
-      "reptile-scales": named(INT, "קשקשים"),
-      feathers: named(INT, "נוצות"),
-      hair: named(INT, "שערות"),
-      placodes: named(INT, "קווי ההתפתחות"),
+      skin: INT_OUT,
+      "fish-scales": INT_OUT,
+      "reptile-scales": INT_OUT,
+      feathers: INT_OUT,
+      hair: INT_OUT,
+      placodes: INT_OUT,
     },
   },
 };

@@ -46,7 +46,6 @@ const LECTURES: { titleHe: string; items: PlanItem[]; practice: PlanItem[] }[] =
   { titleHe: "מערכות המין והשתן", items: sec(zUrogenital), practice: probs(zUrogenital) },
   { titleHe: "נשימה ומחזור הדם", items: sec(zRespiration), practice: probs(zRespiration) },
   { titleHe: "מערכת העצבים המרכזית והחושים", items: sec(zNervousSenses), practice: probs(zNervousSenses) },
-  { titleHe: "האינטגומנט: קשקשים, נוצות ושערות", items: sec(zIntegument), practice: probs(zIntegument) },
 ];
 
 export const technionZoologyPlan: CoursePlan = {

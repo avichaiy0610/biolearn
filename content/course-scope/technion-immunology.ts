@@ -15,6 +15,18 @@ const heading = (topic: string, what: string): ScopeEntry => ({
   noteHe: `נכלל בנושא "${topic}" בסילבוס, אבל ${what} לא מוזכר בשמו`,
 });
 
+// 2026-11-08: the course's own winter 2024-25 syllabus (12 weeks; syllabuses/_text/סיליבוס מעודכן 12 שבועות ... 2760413 ...)
+// does not teach hypersensitivity, transplantation, immunodeficiency or the pathogen-by-pathogen part of infection; the
+// Feb 2025 exam uses them only as context. Those sections are "extension". Vaccines stay core (syllabus week 9).
+const NOT2425 = (what: string): ScopeEntry => ({
+  level: "extension", evidence: "none",
+  noteHe: `${what} — מופיע ברשימת הנושאים בפורטל, אבל לא בלוח הקורס לחורף תשפ"ה (12 שבועות), ובמבחן פברואר 2025 רק כהקשר לשאלה על נושא אחר`,
+});
+const WEEK = (n: number, what: string): ScopeEntry => ({
+  level: "core", evidence: "staff-material",
+  noteHe: `לוח הקורס חורף תשפ"ה, שבוע ${n} — ${what}`,
+});
+
 const INTRO = "מבוא לחסינות טבעית ונרכשת";
 const LYMPH = "מערכת הלימפטית: איברים, רקמות, תאים";
 const COMPL = "משלים בחסינות הומורלית ובדלקת";
@@ -33,17 +45,10 @@ const MIG = "נדידת תאים ויחסי גומלין בין תאים";
 const HELP = "תאי עזר";
 const TOL = "סבילות טבעית ונרכשת";
 const AUTO = "אוטואימוניות";
-const INF = "תנגודת לזיהומים";
-const MUC = "חסינות של מערכת הריריות";
-const NEO = "חסינות בילוד";
-const HYPER = "אלרגיות ורגישויות יתר";
-const TX = "ביולוגיה של השתלות";
-const AIDS = "תסמונת הכשל החיסוני (AIDS)";
-const PID = "הבסיס המולקולרי של חסרים חיסוניים ראשוניים";
 
 export const technionImmunologyScope: CourseScope = {
   courseSlug: "technion-immunology",
-  checkedAt: "2026-10-23",
+  checkedAt: "2026-11-08",
   defaultSource: { labelHe: "הסילבוס בפורטל הטכניון", url: "https://students.technion.ac.il/local/technionsearch/course/276413" },
   sections: {
     "im-intro": {
@@ -116,36 +121,36 @@ export const technionImmunologyScope: CourseScope = {
       autoimmunity: named(AUTO),
     },
     "im-infection": {
-      "by-pathogen": named(INF),
-      evasion: heading(INF, "התחמקות של פתוגנים"),
-      mucosa: named(MUC),
-      neonate: named(NEO),
-      vaccines: heading(INF, "חיסונים"),
+      "by-pathogen": NOT2425("התגובה לפי סוג הפתוגן"),
+      evasion: NOT2425("התחמקות של פתוגנים"),
+      mucosa: NOT2425("חסינות הריריות"),
+      neonate: NOT2425("חסינות ביילוד"),
+      vaccines: WEEK(9, "\"Into to vaccination\""),
     },
     "im-hypersensitivity": {
-      types: named(HYPER),
-      "type-1": named(HYPER, "אלרגיה (סוג I)"),
-      "type-2": named(HYPER, "סוג II"),
-      "type-3": named(HYPER, "סוג III"),
-      "type-4": named(HYPER, "סוג IV"),
-      drugs: heading(HYPER, "אלרגיה לתרופות"),
+      types: NOT2425("סוגי רגישות היתר"),
+      "type-1": NOT2425("אלרגיה (סוג I)"),
+      "type-2": NOT2425("סוג II"),
+      "type-3": NOT2425("סוג III"),
+      "type-4": NOT2425("סוג IV"),
+      drugs: NOT2425("אלרגיה לתרופות"),
     },
     "im-transplant": {
-      terms: named(TX),
-      alloreactivity: named(TX),
-      recognition: named(TX, "זיהוי השתל"),
-      rejection: named(TX, "דחייה"),
-      matching: heading(TX, "התאמה ובדיקות לפני השתלה"),
-      immunosuppression: heading(TX, "דיכוי חיסוני"),
-      hsct: heading(TX, "השתלת מח עצם ו-GVHD"),
+      terms: NOT2425("מונחי יסוד בהשתלות"),
+      alloreactivity: NOT2425("אלוריאקטיביות"),
+      recognition: NOT2425("זיהוי השתל"),
+      rejection: NOT2425("דחייה"),
+      matching: NOT2425("התאמה ובדיקות לפני השתלה"),
+      immunosuppression: NOT2425("דיכוי חיסוני"),
+      hsct: NOT2425("השתלת מח עצם ו-GVHD"),
     },
     "im-immunodeficiency": {
-      "by-infection": named(PID),
-      "b-defects": named(PID, "חסרים בתאי B"),
-      scid: named(PID, "SCID"),
-      "phagocyte-complement": named(PID, "חסרים בתאים בולעים ובמשלים"),
-      hiv: named(AIDS, "HIV"),
-      aids: named(AIDS),
+      "by-infection": NOT2425("חסרים חיסוניים לפי סוג הזיהום"),
+      "b-defects": NOT2425("חסרים בתאי B"),
+      scid: NOT2425("SCID"),
+      "phagocyte-complement": NOT2425("חסרים בתאים בולעים ובמשלים"),
+      hiv: NOT2425("HIV"),
+      aids: NOT2425("איידס"),
     },
   },
 };
