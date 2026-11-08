@@ -24,6 +24,12 @@ const outside = (what: string): ScopeEntry => ({
   noteHe: `${what} — סעיף ביחידה של קורס אחר שלא מקושר מהקורס הזה`,
 });
 
+// 2026-11-08: the winter 2025-26 syllabus (Dr. Shay Stern) gives 70% of the grade to a final project in pairs, without
+// publishing its requirements — the project unit is "core" on that evidence, as general guidance.
+const PROJECT = (what: string): ScopeEntry => ({
+  level: "core", evidence: "staff-material",
+  noteHe: `סילבוס הקורס חורף תשפ"ו: "70% - Final project, done in pairs" — ${what}. הדרישות המדויקות של הפרויקט לא פורסמו בסילבוס; ההנחיות של הסגל קובעות`,
+});
 const CS = "רעיונות ומושגים מרכזיים ממדעי המחשב";
 const PY = "שיעורי בסיס בשפת התכנות פייתון";
 const DATA = "ניתוח רשימות נתונים";
@@ -121,6 +127,14 @@ export const technionComputationalScope: CourseScope = {
       stability: heading(SIM, "יציבות של מצב יציב"),
       toggle: beyond("משוב חיובי ומתג גנטי"),
       validation: heading(SIM, "תיקוף מודלים"),
+    },
+    "cb-project": {
+      question: PROJECT("בחירת שאלה מתאימה"),
+      data: PROJECT("מקורות נתונים ציבוריים"),
+      plan: PROJECT("תכנון וחלוקת עבודה בזוג"),
+      reproducible: PROJECT("קוד שאפשר לשחזר"),
+      validate: PROJECT("תיקוף בתוך הפרויקט"),
+      report: PROJECT("דוח והצגה"),
     },
     "cb-review": {
       pipeline: named(CS, "משאלה ביולוגית לפתרון חישובי"),

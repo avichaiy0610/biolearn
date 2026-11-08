@@ -13,6 +13,7 @@ import { cbSegmentationTracking } from "../lessons/technion-computational/cb-seg
 import { cbDynamics } from "../lessons/technion-computational/cb-dynamics";
 import { cbFeedback } from "../lessons/technion-computational/cb-feedback";
 import { cbReview } from "../lessons/technion-computational/cb-review";
+import { cbProject } from "../lessons/technion-computational/cb-project";
 import { biPairwise } from "../lessons/technion-bioinformatics/bi-pairwise";
 import { biBlast } from "../lessons/technion-bioinformatics/bi-blast";
 import { biNetworks } from "../lessons/technion-bioinformatics/bi-networks";
@@ -27,7 +28,7 @@ import { biStatsExploration } from "../lessons/technion-bioinformatics/bi-stats-
 // teaching choice, not extra syllabus); one feedback model; a review unit instead of a stochastic-methods unit.
 // Refreshers from 136158 (bioinformatics) are linked for depth; bi-r-basics is NOT used (R, not Python).
 export const COMPUTATIONAL_LESSONS: Lesson[] = [cbThinking, cbPython, cbDataTables, cbSequences, cbAlignment, cbGraphs,
-  cbNetworks, cbClustering, cbImages, cbSegmentationTracking, cbDynamics, cbFeedback, cbReview];
+  cbNetworks, cbClustering, cbImages, cbSegmentationTracking, cbDynamics, cbFeedback, cbReview, cbProject];
 
 const sec = (l: Lesson, ...ids: string[]): PlanItem[] => (ids.length ? ids.map((section) => ({ kind: "lesson" as const, slug: l.slug, section })) : [{ kind: "lesson", slug: l.slug }]);
 const probs = (l: Lesson): PlanItem[] => (l.workedProblems ?? []).map((w) => ({ kind: "lesson" as const, slug: l.slug, problem: w.id }));
@@ -49,6 +50,7 @@ const LECTURES: { titleHe: string; items: PlanItem[]; practice: PlanItem[] }[] =
   { titleHe: "מודלים דינמיים וסימולציה", items: sec(cbDynamics), practice: probs(cbDynamics) },
   { titleHe: "משוב, יציבות ותיקוף מודלים", items: sec(cbFeedback), practice: probs(cbFeedback) },
   { titleHe: "יישום משולב וסיכום", items: sec(cbReview), practice: probs(cbReview) },
+  { titleHe: "הפרויקט המסכם (70% מהציון): תכנון, נתונים, שחזוריות ודוח", items: sec(cbProject), practice: probs(cbProject) },
 ];
 
 export const technionComputationalPlan: CoursePlan = {
@@ -69,6 +71,7 @@ export const technionComputationalPlan: CoursePlan = {
     { titleHe: "אלגוריתמים ברשתות ביולוגיות", items: [...sec(cbGraphs), ...sec(cbNetworks)] },
     { titleHe: "עיבוד תמונות ביולוגיות", items: [...sec(cbImages), ...sec(cbSegmentationTracking)] },
     { titleHe: "סימולציה של מערכות דינמיות", items: [...sec(cbDynamics), ...sec(cbFeedback)] },
+    { titleHe: "פרויקט מסכם בזוגות (70% מהציון, לפי סילבוס חורף תשפ\"ו)", items: sec(cbProject) },
   ],
   lectures: LECTURES.map((l, i): PlanSession => ({ n: i + 1, titleHe: l.titleHe, items: l.items })),
   tutorials: LECTURES.map((l, i): PlanSession => ({ n: i + 1, titleHe: l.titleHe, items: l.practice })).filter((t) => t.items.length > 0),
