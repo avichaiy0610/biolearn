@@ -15,6 +15,7 @@ import { mvPhages } from "../lessons/technion-micro-viro/mv-phages";
 import { mvGeneTransfer } from "../lessons/technion-micro-viro/mv-gene-transfer";
 import { mvEndospores } from "../lessons/technion-micro-viro/mv-endospores";
 import { mvEvolution } from "../lessons/technion-micro-viro/mv-evolution";
+import { mvDiversity } from "../lessons/technion-micro-viro/mv-diversity";
 import { mvImmunology } from "../lessons/technion-micro-viro/mv-immunology";
 import { mvClinical } from "../lessons/technion-micro-viro/mv-clinical";
 
@@ -50,6 +51,7 @@ const LECTURES: { titleHe: string; items: PlanItem[]; practice: PlanItem[] }[] =
   { titleHe: "העברת חומר גנטי בחיידקים", items: sec(mvGeneTransfer), practice: probs(mvGeneTransfer) },
   { titleHe: "ספורות בקטריאליות", items: sec(mvEndospores), practice: probs(mvEndospores) },
   { titleHe: "אבולוציה וסיסטמטיקה של מיקרואורגניזמים", items: sec(mvEvolution), practice: probs(mvEvolution) },
+  { titleHe: "מגוון מיקרוביאלי: חיידקים, ארכאונים ואאוקריוטים", items: sec(mvDiversity), practice: probs(mvDiversity) },
   { titleHe: "מושגי יסוד בתורת החיסון", items: [...sec(mvImmunology), proc("innate-immunity", "immunology"), proc("adaptive-immunity", "immunology")], practice: probs(mvImmunology) },
   { titleHe: "מבוא למיקרוביולוגיה קלינית", items: sec(mvClinical), practice: probs(mvClinical) },
 ];
@@ -76,6 +78,7 @@ export const technionMicroViroPlan: CoursePlan = {
     { titleHe: "העברת חומר גנטי בחיידקים", items: sec(mvGeneTransfer) },
     { titleHe: "ספורות בקטריאליות", items: [...sec(mvEndospores), ...sec(mvEnvironment, "control-terms", "physical-control")] },
     { titleHe: "אבולוציה וסיסטמטיקה של מיקרואורגניזמים", items: sec(mvEvolution) },
+    { titleHe: "מגוון מיקרוביאלי", items: sec(mvDiversity) },
     { titleHe: "מושגי יסוד בתורת החיסון", items: [...sec(mvImmunology), proc("innate-immunity", "immunology"), proc("adaptive-immunity", "immunology")] },
     { titleHe: "מבוא למיקרוביולוגיה קלינית", items: sec(mvClinical) },
   ],

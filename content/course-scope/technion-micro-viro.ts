@@ -29,9 +29,21 @@ const EVO = "אבולוציה וסיסטמטיקה של מיקרואורגניז
 const IMM = "מושגי יסוד בתורת החיסון";
 const CLIN = "מבוא למיקרוביולוגיה קלינית";
 
+// Staff material found in the Drive (2026-11-08): the spring 2024 syllabus (Prof. Sima Yaron) and a 2025
+// student summary of all 14 lectures. Lectures 11, 12 and 14 are the diversity tour (bacteria, archaea,
+// eukaryotes), and NEITHER source has an immunology or a clinical-microbiology lecture.
+const lect = (n: string, what: string): ScopeEntry => ({
+  level: "core", evidence: "staff-material",
+  noteHe: `סיכום ההרצאות 2025, הרצאה ${n} — ${what}`,
+});
+const dropped = (what: string): ScopeEntry => ({
+  level: "extension", evidence: "none",
+  noteHe: `${what} — מופיע בתיאור הקורס בפורטל, אך לא נמצא לו פרק הוראה עצמאי בסילבוס אביב 2024 ולא בסיכום ההרצאות 2025. לכן הסעיף מסומן כהרחבה; נושאים בודדים מתוך היחידה שכן מתועדים בחומר הקורס נשארים בליבה.`,
+});
+
 export const technionMicroViroScope: CourseScope = {
   courseSlug: "technion-micro-viro",
-  checkedAt: "2026-10-22",
+  checkedAt: "2026-11-08",
   defaultSource: { labelHe: "הסילבוס בפורטל הטכניון", url: "https://students.technion.ac.il/local/technionsearch/course/134121" },
   sections: {
     "mv-history": {
@@ -164,26 +176,38 @@ export const technionMicroViroScope: CourseScope = {
       "phylogeny": named(EVO),
       "systematics": named(EVO),
     },
+    "mv-diversity": {
+      why: lect("11", "מבוא לשונות המיקרוביאלית ולמגבלות המיון"),
+      proteobacteria: lect("11", "פרוטאובקטריה ותת-הקבוצות אלפא עד אפסילון"),
+      phototrophs: lect("11", "חיידקים פוטוטרופיים סגולים, גופרית ואל-גופרית"),
+      chemolithotrophs: lect("11", "חיידקים מחנררים, מתאנוטרופים ומתילוטרופים"),
+      vibrio: lect("11", "ויבריו, פוטובקטריום וביולומינסנציה"),
+      "gram-positive": lect("11", "גראם-חיוביים דלי GC ועשירי GC"),
+      cyanobacteria: lect("11", "ציאנובקטריה, קיבוע חנקן ופרוכלורוקוקוס"),
+      archaea: lect("12", "הלופילים, מתאנוגנים והיפר-תרמופילים"),
+      eukaryotes: lect("14", "מוצא המיטוכונדריה ושלושת גלי האנדוסימביוזה"),
+      asgard: lect("12", "ארכאות אסגארד ומודל שני התחומים"),
+    },
     "mv-immunology": {
-      "barriers": named(IMM),
-      "cells": named(IMM),
-      "innate": named(IMM),
-      "adaptive": named(IMM),
-      "antibodies": named(IMM),
-      "mhc-t": named(IMM),
-      "memory": named(IMM),
-      "immunity-types": heading(IMM, "סוגי חיסונים (ואקצינות)"),
+      "barriers": dropped("מחסומים מולדים"),
+      "cells": dropped("תאי מערכת החיסון"),
+      "innate": dropped("חסינות מולדת"),
+      "adaptive": dropped("חסינות נרכשת"),
+      "antibodies": dropped("נוגדנים"),
+      "mhc-t": dropped("MHC ותאי T"),
+      "memory": dropped("זיכרון חיסוני"),
+      "immunity-types": dropped("סוגי חיסונים (ואקצינות)"),
     },
     "mv-clinical": {
-      "concepts": named(CLIN),
-      "stages": named(CLIN),
-      "toxins": heading(CLIN, "רעלנים"),
-      "koch": named(CLIN),
-      "lab": named(CLIN),
-      "ast": named(CLIN),
-      "immuno-molecular": named(CLIN),
-      "hai": heading(CLIN, "זיהומים במוסדות רפואיים"),
-      "epidemiology": heading(CLIN, "אפידמיולוגיה"),
+      "concepts": dropped("מושגי מארח-פתוגן"),
+      "stages": dropped("שלבי ההדבקה"),
+      "toxins": dropped("רעלנים"),
+      "koch": lect("11", "הנחות קוך ומגבלותיהן — נלמדות בהרצאה, אף שאין פרק קליני נפרד"),
+      "lab": dropped("אבחון מעבדתי"),
+      "ast": dropped("בדיקת רגישות לאנטיביוטיקה"),
+      "immuno-molecular": dropped("שיטות אימונולוגיות ומולקולריות"),
+      "hai": dropped("זיהומים במוסדות רפואיים"),
+      "epidemiology": dropped("אפידמיולוגיה"),
     },
   },
 };
