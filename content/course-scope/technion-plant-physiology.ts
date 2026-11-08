@@ -71,8 +71,9 @@ export const technionPlantPhysiologyScope: CourseScope = {
       "growth-stop": heading(GROW, "סיום הגדילה והקשחת הדופן"),
     },
     "pp-development": {
+      "seed-formation": { level: "core", evidence: "exam", noteHe: "נשאל במועד א' 2024: רמת הפלואידיות של האנדוספרם, האם היא חלק מהספורופיט או מהגמטופיט, והיחס בין הדורות בטחבים לעומת צמחים פורחים" },
       "dormancy": heading(GROW, "תרדמת זרעים"),
-      "germination": heading(GROW, "נביטה"),
+      "germination": { level: "core", evidence: "syllabus-named", noteHe: "הסילבוס של הקורס (אביב 2024) מונה \"נביטה\" כנושא בפני עצמו" },
       "seedling": named(GROW),
       "ram": named(GROW),
       "sam": named(GROW),
