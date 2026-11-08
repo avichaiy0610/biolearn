@@ -1,0 +1,18 @@
+import {He,La} from './helpers';
+import {IC,Defs,Responsive} from './geometry/immune';
+const label='מבנה נוגדן IgG: שתי שרשראות כבדות וקלות. בכל זרוע (Fab) אזור משתנה של הכבדה ושל הקלה יוצרים יחד אתר קשירה; בזנב (Fc) המקטעים הקבועים CH2 ו-CH3 של שתי הכבדות. אזור הציר מחבר ביניהם.';
+function Domain({x,y,rot=0,light=false,v=false,id}:{x:number;y:number;rot?:number;light?:boolean;v?:boolean;id:string}){const c=light?(v?IC.goldDark:IC.gold):(v?IC.blueDark:IC.blue);return <g transform={`translate(${x} ${y}) rotate(${rot})`}><path d="M-12-23 C-22-13-20 12-9 23 C1 30 17 20 18 5 C20-13 9-31-3-27Z" fill={v?c:`url(#${id}-${light?'gold':'blue'})`} stroke={c} strokeWidth={1.5}/><path d="M-10-15 Q-14 0-5 14 M-3-17 Q-7-1 3 17 M5-16 Q2 0 10 11" fill="none" stroke={v?'#ffffff70':c} strokeWidth={1.1}/><path d="M-7 0 L5 0" stroke={IC.red} strokeWidth={2}/>{v&&<path d="M-13-21q2-9 7-3q4-9 8-3q7-4 10 6" fill="none" stroke={IC.red} strokeWidth={3.5}/>}</g>;}
+function Molecule({id}:{id:string}){return <g><path d="M-17 142 V25 Q-14 8-34-20 L-91-112 M17 142 V25 Q14 8 34-20 L91-112" fill="none" stroke={IC.blue} strokeWidth={5}/><path d="M-76-10 L-127-91 M76-10 L127-91" fill="none" stroke={IC.gold} strokeWidth={5}/>{[-1,1].map(s=><g key={s}><Domain x={s*86} y={-103} rot={s*40} v id={id}/><Domain x={s*48} y={-51} rot={s*40} id={id}/><Domain x={s*121} y={-77} rot={s*40} v light id={id}/><Domain x={s*83} y={-25} rot={s*40} light id={id}/><Domain x={s*18} y={58} id={id}/><Domain x={s*18} y={116} id={id}/><path d={`M${s*62} -22 L${s*72} -13`} stroke={IC.red} strokeWidth={2}/></g>)}<path d="M-17 10 Q-9 3-4 10 T17 10 M-17 20 Q-9 13-4 20 T17 20" fill="none" stroke={IC.red} strokeWidth={2.5}/></g>;}
+function Scene({m=false}:{m?:boolean}){const id=m?'ias-m':'ias-d',cx=m?180:320,cy=m?242:260,k=m?.88:1.2,w=m?360:640;return <><Defs id={id}/><He x={w/2} y={30} size={m?21:24} bold>מבנה נוגדן IgG</He><He x={w/2} y={57} size={m?15:16}>שתי שרשראות כבדות ושתי שרשראות קלות</He><g transform={`translate(${cx} ${cy}) scale(${k})`}><Molecule id={id}/></g>
+ <He x={w/2} y={m?99:92} size={m?16:17} color={IC.red} bold>שני אתרי קשירה — לולאות CDRs</He>
+ <path d={m?'M125 111 L102 128 M235 111 L258 128':'M245 104 L212 119 M395 104 L428 119'} stroke={IC.red} strokeWidth={1.1} fill="none"/>
+ <La x={m?28:113} y={m?164:152} size={m?16:16} color={IC.goldDark}>VL</La><La x={m?153:268} y={m?142:124} size={16} color={IC.blueDark}>VH</La>
+ <La x={m?49:139} y={m?232:250} size={16} color={IC.gold}>CL</La><La x={m?173:320} y={m?201:203} size={16} color={IC.blue}>CH1</La>
+ <La x={m?111:244} y={m?298:336} size={16} color={IC.blue}>CH2</La><La x={m?111:244} y={m?348:405} size={16} color={IC.blue}>CH3</La>
+ <path d={m?'M207 257 H269':'M354 278 H465'} fill="none" stroke={IC.muted} strokeWidth={1.1}/><He x={m?281:516} y={m?280:263} size={16}>ציר גמיש</He>
+ <La x={m?294:524} y={m?327:334} size={21} bold color={IC.blue}>Fc</La><He x={m?285:522} y={m?351:358} size={m?15:16}>קולטני Fc</He><La x={m?285:522} y={m?375:382} size={m?15:16}>FcRn</La><He x={m?285:522} y={m?399:406} size={m?15:16}>משלים</He>
+ <La x={m?65:94} y={m?338:300} size={21} bold>Fab</La><He x={m?65:94} y={m?365:324} size={m?15:16}>קושר אנטיגן</He>
+ <He x={w/2} y={m?423:477} size={16} color={IC.red}>אדום: קשרי דיסולפיד ולולאות הקשירה</He>
+ <He x={w/2} y={m?458:513} size={16} color={IC.blue}>כחול — שרשרת כבדה</He><He x={w/2} y={m?485:540} size={16} color={IC.goldDark}>זהב — שרשרת קלה</He>
+ <He x={w/2} y={m?522:575} size={m?15:16}>כהה: משתנה (V) · בהיר: קבוע (C)</He><He x={w/2} y={m?552:604} size={14} color={IC.muted}>הדומיינים והקשרים סכמטיים, לא בקנה מידה</He></>;}
+export function ImmunologyAntibodyStructure(){return <Responsive id="ias" label={label} h={620} mh={570} wide={<Scene/>} mobile={<Scene m/>}/>;}

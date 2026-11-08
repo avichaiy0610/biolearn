@@ -8,6 +8,9 @@ import { Arrow } from "./metabolicFigures";
 import { MhcStructure } from "./redraws/MhcStructure";
 
 import { LymphNode } from "./redraws/LymphNode";
+import { AntigenProcessing } from "./redraws/AntigenProcessing";
+import { ImmunologyAntibodyStructure } from "./redraws/ImmunologyAntibodyStructure";
+import { LeukocyteMigration } from "./redraws/LeukocyteMigration";
 const PURPLE = "#7c3aed";
 const RED = "#b91c1c";
 const TEAL = "#0f766e";
@@ -73,6 +76,7 @@ function Hematopoiesis() {
 }
 
 // ── im-lymph-node ────────────────────────────────────────────────────────────
+// AntigenProcessing, ImmunologyAntibodyStructure (was AntibodyStructure), LeukocyteMigration: textbook-level redraws, one picture on desktop and a phone layout (2026-11-08) — see ./redraws/; old code in archive/figures/2026-11-08/.
 // LymphNode: recomposed at textbook level, one picture on desktop (2026-11-07) — see ./redraws/LymphNode.tsx; old code in archive/figures/2026-11-07/.
 
 // ── im-prr ───────────────────────────────────────────────────────────────────
@@ -134,39 +138,6 @@ function Complement() {
 }
 
 // ── im-antibody-structure ────────────────────────────────────────────────────
-function AntibodyStructure() {
-  const thick = (d: string, c: string) => <path d={d} fill="none" stroke={c} strokeWidth={10} strokeLinecap="round" strokeLinejoin="round" />;
-  return (
-    <Svg h={310} label="מבנה נוגדן IgG: שתי שרשראות כבדות וקלות. בכל זרוע (Fab) אזור משתנה של הכבדה ושל הקלה יוצרים יחד אתר קשירה; בזנב (Fc) המקטעים הקבועים CH2 ו-CH3 של שתי הכבדות. אזור הציר מחבר ביניהם.">
-      {thick("M226 280 L226 168 L190 118", BLUE)}{thick("M190 118 L168 88", "#1e3a8a")}
-      {thick("M254 280 L254 168 L290 118", BLUE)}{thick("M290 118 L312 88", "#1e3a8a")}
-      {thick("M204 166 L174 124", ORANGE)}{thick("M174 124 L152 94", "#9a3412")}
-      {thick("M276 166 L306 124", ORANGE)}{thick("M306 124 L328 94", "#9a3412")}
-      <line x1={226} y1={176} x2={254} y2={176} stroke={INK} strokeWidth={2} />
-      <line x1={226} y1={184} x2={254} y2={184} stroke={INK} strokeWidth={2} />
-      <circle cx={158} cy={82} r={7} fill="none" stroke={RED} strokeWidth={2} />
-      <circle cx={322} cy={82} r={7} fill="none" stroke={RED} strokeWidth={2} />
-      <La x={140} y={70} size={10} anchor="end" color="#9a3412">VL</La>
-      <La x={188} y={80} size={10} anchor="start" color="#1e3a8a">VH</La>
-      <La x={156} y={140} size={10} anchor="end" color={ORANGE}>CL</La>
-      <La x={206} y={130} size={10} anchor="start" color={BLUE}>CH1</La>
-      <La x={214} y={222} size={10} anchor="end" color={BLUE}>CH2</La>
-      <La x={214} y={266} size={10} anchor="end" color={BLUE}>CH3</La>
-      <He x={380} y={64} size={10} color={RED}>אתר קשירה (CDRs)</He><Lead x1={352} y1={68} x2={330} y2={80} />
-      <He x={330} y={180} size={10} anchor="start">אזור הציר</He><Lead x1={326} y1={177} x2={258} y2={180} />
-      <path d="M266 196 L272 196 L272 282 L266 282" fill="none" stroke={MUTED} strokeWidth={1.2} />
-      <He x={280} y={236} size={11} bold anchor="start">Fc</He>
-      <He x={280} y={252} size={9.5} anchor="start" color={MUTED}>קולטני Fc, משלים, FcRn</He>
-      <He x={90} y={110} size={11} bold>Fab</He>
-      <He x={90} y={126} size={9.5} color={MUTED}>קושר אנטיגן</He>
-      <rect x={330} y={274} width={14} height={10} fill={FILL.blue} stroke={BLUE} />
-      <He x={350} y={283} size={10} anchor="start">כבדה</He>
-      <rect x={400} y={274} width={14} height={10} fill={FILL.orange} stroke={ORANGE} />
-      <He x={420} y={283} size={10} anchor="start">קלה</He>
-      <He x={120} y={300} size={9.5} color={MUTED}>כהה — אזור משתנה (V); בהיר — קבוע (C)</He>
-    </Svg>
-  );
-}
 
 // ── im-hybridoma ─────────────────────────────────────────────────────────────
 function Hybridoma() {
@@ -316,50 +287,6 @@ function GerminalCenter() {
 // MhcStructure: redrawn at textbook level (2026-11-05) — see ./redraws/MhcStructure.tsx; old code in archive/figures/2026-11-05/.
 
 // ── im-antigen-processing ────────────────────────────────────────────────────
-function AntigenProcessing() {
-  return (
-    <Svg w={500} h={320} label="שני מסלולי ההצגה: במסלול MHC I חלבון בציטוזול מפורק בפרוטאזום, הפפטידים עוברים ב-TAP ל-ER, נטענים על MHC I ומוצגים לתאי T CD8. במסלול MHC II חלבון נבלע מבחוץ ומפורק באנדוזום; MHC II מגיע מה-ER עם השרשרת הנלווית (CLIP), ו-HLA-DM מחליף את CLIP בפפטיד; המולקולה מוצגת לתאי T CD4.">
-      <rect x={30} y={40} width={440} height={230} rx={30} fill={FILL.cyto} stroke={ORANGE} strokeWidth={1.6} />
-      <He x={140} y={30} size={12} bold color={BLUE}>MHC I</He>
-      <He x={360} y={30} size={12} bold color={GREEN}>MHC II</He>
-      <path d="M60 240 q10 -10 20 0 t20 0" fill="none" stroke={PURPLE} strokeWidth={2} />
-      <He x={86} y={262} size={9.5} color={PURPLE}>חלבון בציטוזול</He>
-      <rect x={70} y={180} width={34} height={24} rx={6} fill={FILL.gray} stroke={MUTED} />
-      <He x={87} y={174} size={9.5}>פרוטאזום</He>
-      <Arrow x1={86} y1={228} x2={86} y2={206} color={PURPLE} />
-      <ellipse cx={165} cy={190} rx={46} ry={26} fill={FILL.blue} stroke={BLUE} />
-      <He x={168} y={194} size={10}>ER</He>
-      <rect x={118} y={178} width={8} height={18} fill={TEAL} />
-      <La x={122} y={222} size={9} color={TEAL}>TAP</La>
-      <Arrow x1={106} y1={188} x2={116} y2={188} color={PURPLE} />
-      <Arrow x1={170} y1={162} x2={150} y2={70} color={BLUE} />
-      <He x={196} y={120} size={9} color={MUTED} anchor="start">גולג'י</He>
-      <rect x={136} y={40} width={22} height={10} fill={BLUE} />
-      <Arrow x1={130} y1={40} x2={100} y2={14} color={BLUE} />
-      <La x={84} y={12} size={10} color={BLUE} anchor="end">CD8</La>
-
-      <path d="M430 40 q-20 30 -40 34" fill="none" stroke={ORANGE} strokeWidth={1.6} />
-      <circle cx={430} cy={30} r={6} fill={ORANGE} />
-      <He x={444} y={34} size={9.5} anchor="start" color={ORANGE}>נבלע</He>
-      <ellipse cx={380} cy={110} rx={40} ry={24} fill={FILL.purple} stroke={PURPLE} />
-      <He x={380} y={114} size={9.5}>אנדוזום</He>
-      <ellipse cx={330} cy={200} rx={46} ry={26} fill={FILL.blue} stroke={BLUE} />
-      <He x={330} y={204} size={10}>ER</He>
-      <He x={416} y={240} size={9} color={MUTED}>MHC II + שרשרת נלווית</He>
-      <ellipse cx={300} cy={120} rx={36} ry={22} fill={FILL.green} stroke={GREEN} />
-      <La x={300} y={118} size={9} color={GREEN}>MIIC</La>
-      <He x={300} y={132} size={8.5} color={GREEN}>CLIP ← פפטיד</He>
-      <Arrow x1={320} y1={174} x2={306} y2={144} color={BLUE} />
-      <Arrow x1={342} y1={112} x2={338} y2={116} color={PURPLE} />
-      <Arrow x1={290} y1={98} x2={270} y2={52} color={GREEN} />
-      <rect x={256} y={40} width={22} height={10} fill={GREEN} />
-      <Arrow x1={260} y1={40} x2={240} y2={14} color={GREEN} />
-      <La x={226} y={12} size={10} color={GREEN} anchor="end">CD4</La>
-      <La x={262} y={152} size={9} color={GREEN} anchor="end">HLA-DM</La>
-      <He x={250} y={300} size={10} color={MUTED}>MHC I — פפטידים מבפנים, לתאי CD8; MHC II — פפטידים ממה שנבלע, לתאי CD4</He>
-    </Svg>
-  );
-}
 
 // ── im-thymus-selection ──────────────────────────────────────────────────────
 function ThymusSelection() {
@@ -422,34 +349,6 @@ function TwoSignals() {
 }
 
 // ── im-leukocyte-migration ───────────────────────────────────────────────────
-function LeukocyteMigration() {
-  const cell = (x: number, y: number, flat = false) => <ellipse cx={x} cy={y} rx={flat ? 18 : 13} ry={flat ? 9 : 13} fill={FILL.purple} stroke={PURPLE} strokeWidth={1.4} />;
-  return (
-    <Svg w={500} h={250} label="יציאה של נויטרופיל מכלי הדם: גלגול בעזרת סלקטינים על אנדותל מופעל; הפעלה בעזרת כמוקין שמוצג על האנדותל; היצמדות יציבה של אינטגרין (LFA-1) ל-ICAM-1; ומעבר בין תאי האנדותל לרקמה, בעקבות מפל הכמוקינים אל החיידקים.">
-      <rect x={10} y={20} width={480} height={100} fill={FILL.red} />
-      <Arrow x1={30} y1={40} x2={110} y2={40} color={RED} />
-      <He x={70} y={32} size={9} color={RED}>זרימת הדם</He>
-      <line x1={10} y1={120} x2={490} y2={120} stroke={ORANGE} strokeWidth={5} />
-      {cell(70, 100)}{cell(180, 104)}{cell(300, 108, true)}{cell(400, 122, true)}
-      <path d="M58 110 q6 -18 20 -6" fill="none" stroke={PURPLE} strokeWidth={1.2} markerEnd="url(#bfArrow)" />
-      {[170, 186, 196].map((x) => <circle key={x} cx={x} cy={119} r={2.5} fill={GREEN} />)}
-      <He x={70} y={70} size={10} bold>1. גלגול</He>
-      <He x={70} y={84} size={9} color={MUTED}>סלקטינים</He>
-      <He x={180} y={70} size={10} bold>2. הפעלה</He>
-      <He x={180} y={84} size={9} color={MUTED}>כמוקין</He>
-      <He x={300} y={70} size={10} bold>3. היצמדות</He>
-      <La x={300} y={84} size={9} color={MUTED}>LFA-1 – ICAM-1</La>
-      <He x={410} y={70} size={10} bold>4. מעבר</He>
-      <He x={420} y={84} size={9} color={MUTED}>בין תאי האנדותל</He>
-      <rect x={10} y={126} width={480} height={100} fill={FILL.cyto} />
-      <Arrow x1={400} y1={140} x2={430} y2={190} color={PURPLE} />
-      {[[452, 200], [466, 208], [458, 216]].map(([x, y]) => <ellipse key={`${x}-${y}`} cx={x} cy={y} rx={6} ry={3} fill={GREEN} />)}
-      <He x={440} y={240} size={9.5} color={GREEN}>חיידקים</He>
-      <He x={190} y={180} size={10} color={MUTED}>רקמה: TNF ו-IL-1 מפעילים את האנדותל</He>
-      <He x={190} y={196} size={10} color={MUTED}>מפל כמוקינים מוביל לאתר הזיהום</He>
-    </Svg>
-  );
-}
 
 // ── im-th-subsets ────────────────────────────────────────────────────────────
 function ThSubsets() {
@@ -693,7 +592,7 @@ export const IMMUNOLOGY_FIGURES: Record<string, { el: () => React.ReactElement; 
   "im-lymph-node": { el: LymphNode, captionHe: "בלוטת לימפה: המבנה מפגיש את האנטיגן (בלימפה) עם הלימפוציטים (מהדם), כל סוג תא באזור שלו. סכמטי." },
   "im-prr": { el: Prr, captionHe: "קולטנים לזיהוי דפוסים במקומות שונים בתא — כל אחד במקום שבו הוא צפוי לפגוש את הפתוגן. סכמטי." },
   "im-complement": { el: Complement, captionHe: "שלושת מסלולי המשלים נפגשים ב-C3. הפעולות העיקריות: אופסוניזציה, דלקת וחירור. סכמטי." },
-  "im-antibody-structure": { el: AntibodyStructure, captionHe: "מבנה IgG: שתי שרשראות כבדות (כחול) ושתיים קלות (כתום). האזורים המשתנים יוצרים את אתר הקשירה; ה-Fc קובע את התפקיד. סכמטי." },
+  "im-antibody-structure": { el: ImmunologyAntibodyStructure, captionHe: "מבנה IgG: שתי שרשראות כבדות (כחול) ושתיים קלות (כתום). האזורים המשתנים יוצרים את אתר הקשירה; ה-Fc קובע את התפקיד. סכמטי." },
   "im-hybridoma": { el: Hybridoma, captionHe: "ייצור נוגדנים חד-שבטיים בשיטת ההיברידומה (קוהלר ומילשטיין, 1975). סכמטי." },
   "im-elisa": { el: Elisa, captionHe: "ELISA בשיטת סנדוויץ'. עוצמת הצבע — לפי עקומת כיול — נותנת את הכמות. סכמטי." },
   "im-vdj": { el: Vdj, captionHe: "צירוף V(D)J בשרשרת הכבדה: שני שלבי חיתוך וחיבור ב-DNA, ואחר כך שחבור RNA. מספר המקטעים מוקטן. סכמטי." },

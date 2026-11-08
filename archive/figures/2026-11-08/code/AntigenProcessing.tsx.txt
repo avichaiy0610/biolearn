@@ -1,0 +1,44 @@
+function AntigenProcessing() {
+  return (
+    <Svg w={500} h={320} label="שני מסלולי ההצגה: במסלול MHC I חלבון בציטוזול מפורק בפרוטאזום, הפפטידים עוברים ב-TAP ל-ER, נטענים על MHC I ומוצגים לתאי T CD8. במסלול MHC II חלבון נבלע מבחוץ ומפורק באנדוזום; MHC II מגיע מה-ER עם השרשרת הנלווית (CLIP), ו-HLA-DM מחליף את CLIP בפפטיד; המולקולה מוצגת לתאי T CD4.">
+      <rect x={30} y={40} width={440} height={230} rx={30} fill={FILL.cyto} stroke={ORANGE} strokeWidth={1.6} />
+      <He x={140} y={30} size={12} bold color={BLUE}>MHC I</He>
+      <He x={360} y={30} size={12} bold color={GREEN}>MHC II</He>
+      <path d="M60 240 q10 -10 20 0 t20 0" fill="none" stroke={PURPLE} strokeWidth={2} />
+      <He x={86} y={262} size={9.5} color={PURPLE}>חלבון בציטוזול</He>
+      <rect x={70} y={180} width={34} height={24} rx={6} fill={FILL.gray} stroke={MUTED} />
+      <He x={87} y={174} size={9.5}>פרוטאזום</He>
+      <Arrow x1={86} y1={228} x2={86} y2={206} color={PURPLE} />
+      <ellipse cx={165} cy={190} rx={46} ry={26} fill={FILL.blue} stroke={BLUE} />
+      <He x={168} y={194} size={10}>ER</He>
+      <rect x={118} y={178} width={8} height={18} fill={TEAL} />
+      <La x={122} y={222} size={9} color={TEAL}>TAP</La>
+      <Arrow x1={106} y1={188} x2={116} y2={188} color={PURPLE} />
+      <Arrow x1={170} y1={162} x2={150} y2={70} color={BLUE} />
+      <He x={196} y={120} size={9} color={MUTED} anchor="start">גולג'י</He>
+      <rect x={136} y={40} width={22} height={10} fill={BLUE} />
+      <Arrow x1={130} y1={40} x2={100} y2={14} color={BLUE} />
+      <La x={84} y={12} size={10} color={BLUE} anchor="end">CD8</La>
+
+      <path d="M430 40 q-20 30 -40 34" fill="none" stroke={ORANGE} strokeWidth={1.6} />
+      <circle cx={430} cy={30} r={6} fill={ORANGE} />
+      <He x={444} y={34} size={9.5} anchor="start" color={ORANGE}>נבלע</He>
+      <ellipse cx={380} cy={110} rx={40} ry={24} fill={FILL.purple} stroke={PURPLE} />
+      <He x={380} y={114} size={9.5}>אנדוזום</He>
+      <ellipse cx={330} cy={200} rx={46} ry={26} fill={FILL.blue} stroke={BLUE} />
+      <He x={330} y={204} size={10}>ER</He>
+      <He x={416} y={240} size={9} color={MUTED}>MHC II + שרשרת נלווית</He>
+      <ellipse cx={300} cy={120} rx={36} ry={22} fill={FILL.green} stroke={GREEN} />
+      <La x={300} y={118} size={9} color={GREEN}>MIIC</La>
+      <He x={300} y={132} size={8.5} color={GREEN}>CLIP ← פפטיד</He>
+      <Arrow x1={320} y1={174} x2={306} y2={144} color={BLUE} />
+      <Arrow x1={342} y1={112} x2={338} y2={116} color={PURPLE} />
+      <Arrow x1={290} y1={98} x2={270} y2={52} color={GREEN} />
+      <rect x={256} y={40} width={22} height={10} fill={GREEN} />
+      <Arrow x1={260} y1={40} x2={240} y2={14} color={GREEN} />
+      <La x={226} y={12} size={10} color={GREEN} anchor="end">CD4</La>
+      <La x={262} y={152} size={9} color={GREEN} anchor="end">HLA-DM</La>
+      <He x={250} y={300} size={10} color={MUTED}>MHC I — פפטידים מבפנים, לתאי CD8; MHC II — פפטידים ממה שנבלע, לתאי CD4</He>
+    </Svg>
+  );
+}

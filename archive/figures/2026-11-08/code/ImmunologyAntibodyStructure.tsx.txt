@@ -1,0 +1,33 @@
+function AntibodyStructure() {
+  const thick = (d: string, c: string) => <path d={d} fill="none" stroke={c} strokeWidth={10} strokeLinecap="round" strokeLinejoin="round" />;
+  return (
+    <Svg h={310} label="מבנה נוגדן IgG: שתי שרשראות כבדות וקלות. בכל זרוע (Fab) אזור משתנה של הכבדה ושל הקלה יוצרים יחד אתר קשירה; בזנב (Fc) המקטעים הקבועים CH2 ו-CH3 של שתי הכבדות. אזור הציר מחבר ביניהם.">
+      {thick("M226 280 L226 168 L190 118", BLUE)}{thick("M190 118 L168 88", "#1e3a8a")}
+      {thick("M254 280 L254 168 L290 118", BLUE)}{thick("M290 118 L312 88", "#1e3a8a")}
+      {thick("M204 166 L174 124", ORANGE)}{thick("M174 124 L152 94", "#9a3412")}
+      {thick("M276 166 L306 124", ORANGE)}{thick("M306 124 L328 94", "#9a3412")}
+      <line x1={226} y1={176} x2={254} y2={176} stroke={INK} strokeWidth={2} />
+      <line x1={226} y1={184} x2={254} y2={184} stroke={INK} strokeWidth={2} />
+      <circle cx={158} cy={82} r={7} fill="none" stroke={RED} strokeWidth={2} />
+      <circle cx={322} cy={82} r={7} fill="none" stroke={RED} strokeWidth={2} />
+      <La x={140} y={70} size={10} anchor="end" color="#9a3412">VL</La>
+      <La x={188} y={80} size={10} anchor="start" color="#1e3a8a">VH</La>
+      <La x={156} y={140} size={10} anchor="end" color={ORANGE}>CL</La>
+      <La x={206} y={130} size={10} anchor="start" color={BLUE}>CH1</La>
+      <La x={214} y={222} size={10} anchor="end" color={BLUE}>CH2</La>
+      <La x={214} y={266} size={10} anchor="end" color={BLUE}>CH3</La>
+      <He x={380} y={64} size={10} color={RED}>אתר קשירה (CDRs)</He><Lead x1={352} y1={68} x2={330} y2={80} />
+      <He x={330} y={180} size={10} anchor="start">אזור הציר</He><Lead x1={326} y1={177} x2={258} y2={180} />
+      <path d="M266 196 L272 196 L272 282 L266 282" fill="none" stroke={MUTED} strokeWidth={1.2} />
+      <He x={280} y={236} size={11} bold anchor="start">Fc</He>
+      <He x={280} y={252} size={9.5} anchor="start" color={MUTED}>קולטני Fc, משלים, FcRn</He>
+      <He x={90} y={110} size={11} bold>Fab</He>
+      <He x={90} y={126} size={9.5} color={MUTED}>קושר אנטיגן</He>
+      <rect x={330} y={274} width={14} height={10} fill={FILL.blue} stroke={BLUE} />
+      <He x={350} y={283} size={10} anchor="start">כבדה</He>
+      <rect x={400} y={274} width={14} height={10} fill={FILL.orange} stroke={ORANGE} />
+      <He x={420} y={283} size={10} anchor="start">קלה</He>
+      <He x={120} y={300} size={9.5} color={MUTED}>כהה — אזור משתנה (V); בהיר — קבוע (C)</He>
+    </Svg>
+  );
+}
