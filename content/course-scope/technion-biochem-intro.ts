@@ -1,6 +1,6 @@
 import type { CourseScope, ScopeEntry } from "./types";
 
-// Technion 134019 "מבוא לביוכימיה ואנזימולוגיה". Evidence available (2026-10-19): the official topic list on
+// Technion 134019 "מבוא לביוכימיה ואנזימולוגיה". Evidence available (2026-10-19; עודכן 2026-11-08 אחרי ביקורת הדרייב — נמצאו מבחנים בדרייב הסטודנטים, ולכן יש כעת גם ראיית "exam"): the official topic list on
 // the students portal only. No public exams, reading list or staff material were found (Moodle is closed to
 // guests). So the strongest possible level here is "syllabus-named". Generated from `scope --suggest`,
 // reviewed row by row.
@@ -15,6 +15,11 @@ const named = (topic: string, what?: string): ScopeEntry => ({
 const heading = (topic: string, what: string): ScopeEntry => ({
   level: "likely", evidence: "syllabus-heading",
   noteHe: `נכלל בכותרת הסילבוס "${topic}", אבל ${what} לא מוזכר בשמו`,
+});
+
+const exam19 = (what: string): ScopeEntry => ({
+  level: "core", evidence: "exam",
+  noteHe: `נשאל במבחן מועד א אביב 2021 של הקורס — ${what}`,
 });
 
 // Official topics (verbatim, from the portal).
@@ -33,7 +38,7 @@ const CL = "מבוא למבנה ותפקוד של סוכרים וליפידים"
 
 export const technionBiochemIntroScope: CourseScope = {
   courseSlug: "technion-biochem-intro",
-  checkedAt: "2026-10-19",
+  checkedAt: "2026-11-08",
   defaultSource: { labelHe: "הסילבוס בפורטל הטכניון", url: "https://students.technion.ac.il/local/technionsearch/course/134019" },
   sections: {
     "amino-acids": {
@@ -45,6 +50,7 @@ export const technionBiochemIntroScope: CourseScope = {
       quaternary: named(HB),
     },
     "protein-folding": {
+      thermostability: exam19("שאלה 2: איזה חלבון סביר שמבוטא בחיידק תרמופילי ואיזה בחיידק שחי בקור, ולמה"),
       anfinsen: named(FOLD), cooperative: named(FOLD), pathway: named(FOLD), chaperones: named(FOLD),
       misfolding: heading(FOLD, "קיפול שגוי, עמילואיד ופריונים"),
     },
@@ -54,6 +60,7 @@ export const technionBiochemIntroScope: CourseScope = {
       hydropathy: heading(FIB, "עקומת הידרופתיה"),
     },
     "protein-methods": {
+      structure: exam19("שאלה 3: לבחור את השיטה המתאימה ביותר לפתרון המבנה התלת-ממדי של חלבון נתון, ולנמק"),
       assay: named(ISO), solubility: named(ISO), chromatography: named(ISO), electrophoresis: named(ISO),
       evaluation: named(ISO), mass: named(ISO, "אולטרה-צנטריפוגה היא שיטת הפרדה"),
     },
