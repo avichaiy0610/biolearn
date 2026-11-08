@@ -1,0 +1,26 @@
+function LtpNmda() {
+  const panel = (x0: number, active: boolean) => (
+    <g>
+      <He x={x0 + 105} y={20} size={11} bold color={active ? RED : MUTED}>{active ? "בדה-פולריזציה" : "במנוחה (−65 mV)"}</He>
+      <Membrane y={90} h={44} x={x0} w={210} />
+      <rect x={x0 + 30} y={78} width={34} height={68} rx={8} fill={FILL.blue} stroke={BLUE} strokeWidth={1.4} />
+      <La x={x0 + 47} y={72} size={9.5} bold color={BLUE}>AMPA</La>
+      <rect x={x0 + 120} y={78} width={40} height={68} rx={8} fill={FILL.purple} stroke={PURPLE} strokeWidth={1.4} />
+      <La x={x0 + 140} y={72} size={9.5} bold color={PURPLE}>NMDA</La>
+      <circle cx={x0 + 140} cy={active ? 50 : 112} r={7} fill={MUTED} />
+      <La x={x0 + 140} y={(active ? 50 : 112) + 3.5} size={7.5} bold color="white">Mg</La>
+      <Arrow x1={x0 + 47} y1={80} x2={x0 + 47} y2={166} color={BLUE} width={1.4} />
+      <La x={x0 + 22} y={176} size={9} color={BLUE}>Na⁺</La>
+      {active && <Arrow x1={x0 + 140} y1={80} x2={x0 + 140} y2={162} color={RED} width={2.2} />}
+      {active && <La x={x0 + 178} y={160} size={10} bold color={RED}>Ca²⁺</La>}
+      {!active && <He x={x0 + 105} y={206} size={9.5} color={MUTED}>Mg²⁺ חוסם — אין Ca²⁺</He>}
+      {active && <He x={x0 + 105} y={206} size={9.5} color={RED}>Ca²⁺ ← CaMKII ← עוד AMPA</He>}
+    </g>
+  );
+  return (
+    <Svg h={226} label="קולטן NMDA כגלאי צירוף מקרים. במנוחה: גלוטמט פותח את AMPA (Na⁺ נכנס), אבל יון Mg²⁺ חוסם את NMDA. בדה-פולריזציה חזקה (הרבה קלט יחד): Mg²⁺ נדחה החוצה, Ca²⁺ נכנס דרך NMDA ומפעיל CaMKII, שמגייס עוד קולטני AMPA — הסינפסה מתחזקת (LTP).">
+      {panel(20, false)}
+      {panel(250, true)}
+    </Svg>
+  );
+}

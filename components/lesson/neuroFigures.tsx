@@ -7,6 +7,9 @@ import { ArrowDefs, Axes, BLUE, GREEN, INK, MUTED, ORANGE, He, La, curve, scale 
 import { Arrow } from "./metabolicFigures";
 
 import { Bbb } from "./redraws/Bbb";
+import { BrainRegions } from "./redraws/BrainRegions";
+import { VesicleRelease } from "./redraws/VesicleRelease";
+import { LtpNmda } from "./redraws/LtpNmda";
 const PURPLE = "#7c3aed";
 const RED = "#b91c1c";
 const TEAL = "#0f766e";
@@ -127,37 +130,6 @@ function GliaTypes() {
   );
 }
 
-function BrainRegions() {
-  return (
-    <Svg h={250} label="מבט צד סכמטי על המוח: אונה מצחית (מקדימה), קודקודית (למעלה), רקתית (בצד), עורפית (מאחור); ההיפוקמפוס בעומק האונה הרקתית; התלמוס והגרעינים הבסיסיים בעומק; המוחון מאחור למטה; וגזע המוח שממשיך לחוט השדרה.">
-      <path d="M80 140 Q70 60 170 40 Q280 22 350 70 Q400 100 390 150 Q370 176 330 172 L150 180 Q90 178 80 140 Z" fill="#f8fafc" stroke={INK} strokeWidth={1.4} />
-      <path d="M86 130 Q90 64 170 46 L200 120 L120 150 Z" fill="#dbeafe" />
-      <path d="M200 120 L170 46 Q260 28 300 54 L270 118 Z" fill="#dcfce7" />
-      <path d="M270 118 L300 54 Q370 82 386 140 L320 150 Z" fill="#fef3c7" />
-      <path d="M120 150 L200 120 L270 118 L320 150 L300 172 L150 178 Q122 172 120 150 Z" fill="#fce7f3" />
-      <ellipse cx={230} cy={148} rx={30} ry={10} fill="#f9a8d4" />
-      <ellipse cx={220} cy={110} rx={22} ry={14} fill="#c4b5fd" />
-      <path d="M318 172 Q350 168 362 190 Q350 214 316 204 Q300 190 318 172 Z" fill="#fed7aa" stroke={ORANGE} strokeWidth={1.2} />
-      <path d="M262 176 L282 176 L284 236 L266 236 Z" fill="#e2e8f0" stroke={MUTED} strokeWidth={1} />
-      <He x={160} y={24} size={10} color={BLUE}>אונה מצחית</He>
-      <Lead x1={156} y1={30} x2={140} y2={84} />
-      <He x={238} y={22} size={10} color={GREEN}>אונה קודקודית</He>
-      <Lead x1={238} y1={28} x2={236} y2={60} />
-      <He x={432} y={96} size={10} color={GOLD}>אונה עורפית</He>
-      <Lead x1={418} y1={102} x2={358} y2={116} />
-      <He x={130} y={210} size={10} color={PINK}>אונה רקתית</He>
-      <Lead x1={140} y1={200} x2={168} y2={168} />
-      <He x={210} y={236} size={10} color={PINK}>היפוקמפוס (בעומק)</He>
-      <Lead x1={214} y1={226} x2={226} y2={158} />
-      <He x={12} y={62} size={10} color={PURPLE} anchor="start">תלמוס, גרעינים בסיסיים</He>
-      <Lead x1={96} y1={68} x2={200} y2={106} />
-      <He x={420} y={210} size={10} color={ORANGE}>מוחון</He>
-      <Lead x1={404} y1={206} x2={362} y2={194} />
-      <He x={300} y={244} size={10} color={MUTED} anchor="start">גזע המוח</He>
-      <Lead x1={298} y1={240} x2={286} y2={226} />
-    </Svg>
-  );
-}
 
 // ── nb-channels ──────────────────────────────────────────────────────────────
 function KChannel() {
@@ -221,35 +193,6 @@ function NavStructure() {
 }
 
 // ── nb-synapse ───────────────────────────────────────────────────────────────
-function VesicleRelease() {
-  return (
-    <Svg h={276} label="שחרור נוירוטרנסמיטר: פוטנציאל פעולה מגיע לכפתור הסינפטי, תעלות Ca²⁺ תלויות-מתח באזור הפעיל נפתחות, Ca²⁺ נקשר לסינפטוטגמין, חלבוני SNARE (סינפטוברווין על השלפוחית, סינטקסין ו-SNAP-25 על הממברנה) מתלפפים ומושכים את השלפוחית לאיחוי, והנוירוטרנסמיטר משתחרר אל הקולטנים בצד הפוסט-סינפטי.">
-      <path d="M60 20 L420 20 L420 150 Q240 176 60 150 Z" fill={FILL.green} stroke={GREEN} strokeWidth={1.4} />
-      {[[120, 60], [170, 80], [300, 70], [350, 90], [220, 100]].map(([x, y]) => (
-        <g key={`${x}-${y}`}>
-          <circle cx={x} cy={y} r={15} fill="white" stroke={GREEN} strokeWidth={1.2} />
-          {[[-4, -3], [4, 2], [-1, 5]].map(([dx, dy], i) => <circle key={i} cx={x + dx} cy={y + dy} r={2} fill={ORANGE} />)}
-        </g>
-      ))}
-      <circle cx={240} cy={142} r={14} fill="white" stroke={GREEN} strokeWidth={1.4} />
-      {[[234, 140], [244, 146], [240, 136]].map(([x, y], i) => <circle key={i} cx={x} cy={y} r={2} fill={ORANGE} />)}
-      <rect x={150} y={150} width={14} height={18} rx={3} fill={FILL.purple} stroke={PURPLE} strokeWidth={1.2} />
-      <rect x={316} y={150} width={14} height={18} rx={3} fill={FILL.purple} stroke={PURPLE} strokeWidth={1.2} />
-      {[[157, 140], [323, 140], [170, 132]].map(([x, y], i) => <circle key={i} cx={x} cy={y} r={3} fill={PURPLE} />)}
-      {[[228, 162], [240, 166], [252, 162]].map(([x, y], i) => <line key={i} x1={x} y1={y - 8} x2={x} y2={y + 2} stroke={RED} strokeWidth={2.4} />)}
-      {[[200, 190], [230, 196], [262, 192], [284, 198]].map(([x, y], i) => <circle key={i} cx={x} cy={y} r={2.4} fill={ORANGE} />)}
-      <rect x={60} y={220} width={360} height={40} rx={6} fill={FILL.blue} stroke={BLUE} strokeWidth={1.4} />
-      {[190, 240, 290].map((x) => <rect key={x} x={x - 6} y={210} width={12} height={14} rx={3} fill={BLUE} />)}
-      <He x={410} y={40} size={10} anchor="end" color={GREEN}>כפתור פרה-סינפטי</He>
-      <He x={240} y={244} size={10} color={BLUE}>תא פוסט-סינפטי — קולטנים</He>
-      <He x={20} y={206} size={10} anchor="start" color={PURPLE}>תעלות Ca²⁺ — Ca²⁺ נכנס</He>
-      <Lead x1={60} y1={197} x2={152} y2={168} />
-      <He x={372} y={190} size={10} color={RED}>SNARE + סינפטוטגמין</He>
-      <Lead x1={318} y1={186} x2={256} y2={160} />
-      <He x={130} y={118} size={10} color={MUTED}>שלפוחיות מוכנות</He>
-    </Svg>
-  );
-}
 
 function ReceptorTypes() {
   return (
@@ -349,32 +292,6 @@ function Aplysia() {
   );
 }
 
-function LtpNmda() {
-  const panel = (x0: number, active: boolean) => (
-    <g>
-      <He x={x0 + 105} y={20} size={11} bold color={active ? RED : MUTED}>{active ? "בדה-פולריזציה" : "במנוחה (−65 mV)"}</He>
-      <Membrane y={90} h={44} x={x0} w={210} />
-      <rect x={x0 + 30} y={78} width={34} height={68} rx={8} fill={FILL.blue} stroke={BLUE} strokeWidth={1.4} />
-      <La x={x0 + 47} y={72} size={9.5} bold color={BLUE}>AMPA</La>
-      <rect x={x0 + 120} y={78} width={40} height={68} rx={8} fill={FILL.purple} stroke={PURPLE} strokeWidth={1.4} />
-      <La x={x0 + 140} y={72} size={9.5} bold color={PURPLE}>NMDA</La>
-      <circle cx={x0 + 140} cy={active ? 50 : 112} r={7} fill={MUTED} />
-      <La x={x0 + 140} y={(active ? 50 : 112) + 3.5} size={7.5} bold color="white">Mg</La>
-      <Arrow x1={x0 + 47} y1={80} x2={x0 + 47} y2={166} color={BLUE} width={1.4} />
-      <La x={x0 + 22} y={176} size={9} color={BLUE}>Na⁺</La>
-      {active && <Arrow x1={x0 + 140} y1={80} x2={x0 + 140} y2={162} color={RED} width={2.2} />}
-      {active && <La x={x0 + 178} y={160} size={10} bold color={RED}>Ca²⁺</La>}
-      {!active && <He x={x0 + 105} y={206} size={9.5} color={MUTED}>Mg²⁺ חוסם — אין Ca²⁺</He>}
-      {active && <He x={x0 + 105} y={206} size={9.5} color={RED}>Ca²⁺ ← CaMKII ← עוד AMPA</He>}
-    </g>
-  );
-  return (
-    <Svg h={226} label="קולטן NMDA כגלאי צירוף מקרים. במנוחה: גלוטמט פותח את AMPA (Na⁺ נכנס), אבל יון Mg²⁺ חוסם את NMDA. בדה-פולריזציה חזקה (הרבה קלט יחד): Mg²⁺ נדחה החוצה, Ca²⁺ נכנס דרך NMDA ומפעיל CaMKII, שמגייס עוד קולטני AMPA — הסינפסה מתחזקת (LTP).">
-      {panel(20, false)}
-      {panel(250, true)}
-    </Svg>
-  );
-}
 
 // ── nb-development ───────────────────────────────────────────────────────────
 function NeuralTube() {

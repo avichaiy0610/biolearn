@@ -1,0 +1,34 @@
+function AntibodyStructure() {
+  const arm = (dir: 1 | -1) => {
+    const x0 = 240, y0 = 150;
+    const hx = x0 + dir * 110, hy = 40;
+    return (
+      <g>
+        <line x1={x0 + dir * 8} y1={y0} x2={hx} y2={hy} stroke={BLUE} strokeWidth={14} strokeLinecap="round" />
+        <line x1={x0 + dir * 34} y1={y0 + 6} x2={hx + dir * 26} y2={hy + 18} stroke={GREEN} strokeWidth={12} strokeLinecap="round" />
+        <line x1={hx - dir * 22} y1={hy + 24} x2={hx} y2={hy} stroke={ORANGE} strokeWidth={14} strokeLinecap="round" opacity={0.75} />
+        <line x1={hx + dir * 4} y1={hy + 40} x2={hx + dir * 26} y2={hy + 18} stroke={ORANGE} strokeWidth={12} strokeLinecap="round" opacity={0.75} />
+      </g>
+    );
+  };
+  return (
+    <Svg h={320} label="מבנה הנוגדן: שתי שרשראות כבדות (כחול) ושתי שרשראות קלות (ירוק) בצורת Y, מחוברות בקשרי דיסולפיד. בקצה כל זרוע האזורים המשתנים (כתום) של שרשרת כבדה ושל שרשרת קלה יוצרים אתר קישור לאנטיגן. הגבעול, אזור Fc, קבוע וקובע את תפקיד הנוגדן">
+      {arm(-1)}{arm(1)}
+      <line x1={232} y1={150} x2={232} y2={270} stroke={BLUE} strokeWidth={14} strokeLinecap="round" />
+      <line x1={248} y1={150} x2={248} y2={270} stroke={BLUE} strokeWidth={14} strokeLinecap="round" />
+      {[160, 172].map((y) => <line key={y} x1={225} x2={255} y1={y} y2={y} stroke={RED} strokeWidth={2.5} />)}
+      <He x={286} y={170} size={10.5} anchor="start" color={RED}>קשרי S–S (ציר)</He>
+      <circle cx={130} cy={34} r={9} fill={FILL.red} stroke={RED} />
+      <circle cx={350} cy={34} r={9} fill={FILL.red} stroke={RED} />
+      <He x={100} y={22} size={11} bold color={ORANGE}>אתר קישור</He>
+      <He x={380} y={22} size={11} bold color={ORANGE}>אתר קישור</He>
+      <He x={60} y={110} size={11} color={GREEN}>שרשרת קלה</He>
+      <He x={140} y={130} size={11} color={BLUE}>שרשרת כבדה</He>
+      <He x={420} y={100} size={11} color={ORANGE}>אזורים משתנים</He>
+      <He x={420} y={116} size={11} color={ORANGE}>(V, עם CDRs)</He>
+      <La x={290} y={240} size={13} bold color={BLUE} anchor="start">Fc</La>
+      <He x={340} y={262} size={10.5} color={MUTED}>קבוע במחלקה — קובע את התפקיד</He>
+      <La x={240} y={306} size={11} color={MUTED}>Fab — Fab</La>
+    </Svg>
+  );
+}
