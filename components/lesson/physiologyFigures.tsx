@@ -4,6 +4,7 @@
 import type React from "react";
 import { ArrowDefs, BLUE, GREEN, INK, LINE, MUTED, ORANGE, He, La, curve, dash, scale } from "./biochemFigures";
 import { Arrow } from "./metabolicFigures";
+import AnatomyEmbed from "./anatomy/AnatomyEmbed";
 
 const PURPLE = "#7c3aed";
 const RED = "#b91c1c";
@@ -658,7 +659,12 @@ function ChannelGating() {
 }
 
 
+function VoltageClamp() {
+  return <AnatomyEmbed src="/figures/anatomy/voltage-clamp.html" title="קיבוע מתח — אינטראקטיבי" />;
+}
+
 export const PHYSIOLOGY_FIGURES: Record<string, { el: () => React.ReactElement; captionHe: string }> = {
+  "voltage-clamp": { el: VoltageClamp, captionHe: "איור אינטראקטיבי: הזזת העכבר (או החצים) קובעת את מתח הפקודה, והמקשים מחליפים בין ביקורת, TTX ו-TEA. הזרמים מחושבים ממודל הודג'קין-האקסלי." },
 
   "k-selectivity-filter": { el: KSelectivityFilter, captionHe: "תעלת K⁺ בחתך: יון מוקף מים בחלל המרכזי ושני יונים ללא מעטפת מים במסנן TVGYG, עם מים ביניהם, לפי מודל האכלוס ביחידה. חמצני הקרבוניל מחליפים את מעטפת המים של K⁺; Na⁺ קטן מכדי ליצור אותה התאמה, ולכן מחיר השלת המים אינו מפוצה. סכמטי, לא בקנה מידה; שתי תת־יחידות מארבע מוצגות, וההשוואה מתארת תיאום תלת־ממדי בהיטל." },
   "membrane-asymmetry": { el: MembraneAsymmetry, captionHe: "א־סימטריה בממברנת התא: PC, ספינגומיאלין וגליקוליפידים מועשרים בחוץ; PS השלילי, PE ו־PI בפנים; סוכרים פונים החוצה וכולסטרול בשני העלעלים. פליפאזה P4 מעבירה PS/PE פנימה עם ATP; פלופאזה כגון ABCB4 מעבירה PC החוצה עם ATP; סקרמבלאזה מערבבת בשני הכיוונים ללא ATP. קספאזות משביתות פליפאזה ומפעילות סקרמבלאזה באפופטוזיס, וכך PS נחשף בחוץ. סכמטי: אין כאן מדידת כמויות או הפרדה מוחלטת בין העלעלים." },
