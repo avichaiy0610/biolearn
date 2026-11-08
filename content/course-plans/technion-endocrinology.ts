@@ -10,6 +10,10 @@ import { enHpg } from "../lessons/technion-endocrinology/en-hpg";
 import { enReproduction } from "../lessons/technion-endocrinology/en-reproduction";
 import { enAdrenal } from "../lessons/technion-endocrinology/en-adrenal";
 import { enPancreas } from "../lessons/technion-endocrinology/en-pancreas";
+import { enPuberty } from "../lessons/technion-endocrinology/en-puberty";
+import { enPregnancy } from "../lessons/technion-endocrinology/en-pregnancy";
+import { enMethods } from "../lessons/technion-endocrinology/en-methods";
+import { enSteroidsDisruptors } from "../lessons/technion-endocrinology/en-steroids-disruptors";
 
 // Technion 01340155 "אנדוקרינולוגיה" (Faculty of Biology, elective, year 3) — built with the course-track-builder
 // skill, no insider input. Evidence: the CURRENT portal paragraph (nine topics, no weeks) and the official book list
@@ -35,9 +39,13 @@ const LECTURES: { titleHe: string; items: PlanItem[]; practice: PlanItem[] }[] =
   { titleHe: "הבקרה האנדוקרינית על גדילה", items: sec(enGrowth), practice: probs(enGrowth) },
   { titleHe: "בלוטת המגן (התריס)", items: sec(enThyroid), practice: probs(enThyroid) },
   { titleHe: "ציר הרבייה: GnRH, LH ו-FSH", items: sec(enHpg), practice: probs(enHpg) },
+  { titleHe: "התבגרות מינית", items: sec(enPuberty), practice: probs(enPuberty) },
   { titleHe: "האשכים, השחלות והמחזור החודשי", items: sec(enReproduction), practice: probs(enReproduction) },
+  { titleHe: "אנדוקרינולוגיה של ההיריון", items: sec(enPregnancy), practice: probs(enPregnancy) },
   { titleHe: "בלוטת האדרנל וסטרואידוגנזה", items: sec(enAdrenal), practice: probs(enAdrenal) },
   { titleHe: "הלבלב וסוכרת", items: sec(enPancreas), practice: probs(enPancreas) },
+  { titleHe: "תרגול: שיטות מדידה של הורמונים", items: sec(enMethods), practice: probs(enMethods) },
+  { titleHe: "תרגול: שמות סטרואידים, משבשים אנדוקריניים וסטרואידים אנבוליים", items: sec(enSteroidsDisruptors), practice: probs(enSteroidsDisruptors) },
 ];
 
 export const technionEndocrinologyPlan: CoursePlan = {
@@ -57,9 +65,10 @@ export const technionEndocrinologyPlan: CoursePlan = {
     { titleHe: "ההיפופיזה — בלוטה מרכזית במערכת האנדוקרינית", items: sec(enPituitary) },
     { titleHe: "הבקרה האנדוקרינית על גדילה", items: sec(enGrowth) },
     { titleHe: "בלוטת המגן", items: sec(enThyroid) },
-    { titleHe: "תפקידי המערכת האנדוקרינית ברבייה", items: [...sec(enHpg), ...sec(enReproduction)] },
+    { titleHe: "תפקידי המערכת האנדוקרינית ברבייה", items: [...sec(enHpg), ...sec(enReproduction), ...sec(enPuberty), ...sec(enPregnancy)] },
     { titleHe: "בלוטת האדרנל וסטראוידוגנזה", items: sec(enAdrenal) },
     { titleHe: "הלבלב וסוכרת", items: sec(enPancreas) },
+    { titleHe: "תרגולים: שיטות מדידה, סטרואידוגנזה, משבשים אנדוקריניים וסטרואידים אנבוליים", items: [...sec(enMethods), ...sec(enSteroidsDisruptors)] },
   ],
   lectures: LECTURES.map((l, i): PlanSession => ({ n: i + 1, titleHe: l.titleHe, items: l.items })),
   tutorials: LECTURES.map((l, i): PlanSession => ({ n: i + 1, titleHe: l.titleHe, items: l.practice })).filter((t) => t.items.length > 0),

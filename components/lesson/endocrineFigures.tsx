@@ -10,6 +10,7 @@ import { BetaCell } from "./redraws/BetaCell";
 import { GpcrCascade } from "./redraws/GpcrCascade";
 import { HypothalamicPituitary } from "./redraws/HypothalamicPituitary";
 import { ThyroidSynthesis } from "./redraws/ThyroidSynthesis";
+import { ElisaFormats } from "./redraws/ElisaFormats";
 const PURPLE = "#7c3aed";
 const RED = "#b91c1c";
 const TEAL = "#0f766e";
@@ -462,6 +463,7 @@ function FedFast() {
 }
 
 export const ENDOCRINE_FIGURES: Record<string, { el: () => React.ReactElement; captionHe: string }> = {
+  "elisa-formats": { el: ElisaFormats, captionHe: "השוואת ELISA תחרותית וסנדוויץ׳ לאחר שטיפה והוספת סובסטרט. בתחרותית יותר הורמון בדגימה משאיר פחות מתחרה מסומן קשור, ולכן האות יורד; בסנדוויץ׳ יותר הורמון קושר יותר נוגדני גילוי עם אנזים, ולכן האות עולה. בתחרותית מוצג עיגון הנוגדן הראשוני לבארית באמצעות נוגדן שניוני, כפי שמתואר ביחידה. סכמטי, ללא קנה מידה; העקומות להמחשה ואינן נתוני כיול." },
   "en-signaling-modes": { el: SignalingModes, captionHe: "ארבע דרכי איתות כימי. ההבדל — לאן המולקולה מגיעה ובאיזו דרך. סכמטי." },
   "en-hormone-classes": { el: HormoneClasses, captionHe: "הקבוצה הכימית קובעת את כל השאר: אחסון, הובלה בדם, זמן מחצית חיים ומיקום הקולטן. הורמוני התריס דומים לסטרואידים בהובלה ובקולטן, אבל נוצרים מטירוזין ויוד ונאגרים בתירוגלובולין. סכמטי." },
   "en-gpcr-cascade": { el: GpcrCascade, captionHe: "מסלול Gs–cAMP–PKA, הנפוץ ביותר בהורמוני הפפטידים. בכל שלב יש הגברה. Gi מעכב את האדניליל ציקלאז; Gq מפעיל מסלול אחר. סכמטי." },
