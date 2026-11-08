@@ -3,6 +3,8 @@
 import type React from "react";
 import { ArrowDefs, BLUE, GREEN, INK, MUTED, ORANGE, He, La } from "./biochemFigures";
 import { Arrow } from "./metabolicFigures";
+import { RibosomePtc } from "./redraws/RibosomePtc";
+import { GroupIISpliceosome } from "./redraws/GroupIISpliceosome";
 
 const PURPLE = "#7c3aed";
 const RED = "#b91c1c";
@@ -82,33 +84,6 @@ function RnaStructure() {
   );
 }
 
-function RibosomePtc() {
-  return (
-    <Svg h={250} label="הריבוזום: תת-היחידה הגדולה (למעלה) ותת-היחידה הקטנה (למטה) על ה-mRNA. שני tRNA באתרים P ו-A; הקשר הפפטידי נוצר במרכז הפפטידיל-טרנספראז, שהליבה הקטליטית שלו בנויה מ-rRNA. השרשרת החדשה יוצאת דרך מנהרה בתת-היחידה הגדולה.">
-      <path d="M70 40 Q200 10 330 40 Q360 75 340 130 L60 130 Q40 75 70 40 Z" fill={FILL.sky} stroke="#0284c7" strokeWidth={1.4} />
-      <path d="M80 144 Q200 132 320 144 Q338 180 300 200 L100 200 Q66 180 80 144 Z" fill={FILL.green} stroke={GREEN} strokeWidth={1.4} />
-      <rect x={40} y={204} width={320} height={8} rx={4} fill={ORANGE} />
-      <He x={34} y={212} size={9.5} anchor="end" color={ORANGE}>mRNA</He>
-      <path d="M176 196 L176 118 L158 100" fill="none" stroke={PURPLE} strokeWidth={6} strokeLinecap="round" />
-      <path d="M226 196 L226 118 L208 100" fill="none" stroke={TEAL} strokeWidth={6} strokeLinecap="round" />
-      <La x={176} y={228} size={10} bold color={PURPLE}>P</La>
-      <La x={226} y={228} size={10} bold color={TEAL}>A</La>
-      <circle cx={190} cy={96} r={26} fill="none" stroke={RED} strokeWidth={1.2} strokeDasharray="4 3" />
-      <circle cx={190} cy={96} r={5} fill={RED} />
-      <path d="M190 70 Q194 50 188 34 Q184 22 194 12" fill="none" stroke={INK} strokeWidth={2} strokeDasharray="2 3" />
-      <He x={376} y={84} size={9.5} anchor="start" color={RED}>המרכז הקטליטי (PTC)</He>
-      <He x={376} y={100} size={9.5} anchor="start" color={RED}>ליבה קטליטית של rRNA</He>
-      <Lead x1={372} y1={90} x2={216} y2={94} />
-      <He x={376} y={30} size={9.5} anchor="start" color={MUTED}>מנהרת היציאה</He>
-      <Lead x1={372} y1={28} x2={196} y2={26} />
-      <He x={376} y={128} size={9.5} anchor="start" color="#0284c7">תת-יחידה גדולה</He>
-      <He x={376} y={144} size={9} anchor="start" color="#0284c7">(23S rRNA)</He>
-      <Lead x1={372} y1={130} x2={344} y2={118} />
-      <He x={376} y={180} size={9.5} anchor="start" color={GREEN}>תת-יחידה קטנה</He>
-      <Lead x1={372} y1={176} x2={330} y2={170} />
-    </Svg>
-  );
-}
 
 function Selex() {
   return (
@@ -167,25 +142,6 @@ function GroupISplicing() {
   );
 }
 
-function GroupIISpliceosome() {
-  return (
-    <Svg h={250} label="השוואה: אינטרון מקבוצה II משחבר את עצמו — 2′-OH של אדנוזין בנקודת ההסתעפות (בתחום D6) תוקף, ותחום D5 קושר שני יוני Mg²⁺ באתר הפעיל. בספלייסוזום — אותה כימיה: snRNA U2 ו-U6 יוצרים את האתר הפעיל עם שני יוני Mg²⁺, ו-U6 דומה במבנה ל-D5. בשניהם האינטרון יוצא כלסו.">
-      <He x={120} y={18} size={11} bold color={ORANGE}>אינטרון מקבוצה II</He>
-      <He x={360} y={18} size={11} bold color={PURPLE}>הספלייסוזום</He>
-      <Box x={40} y={40} w={160} h={34} fill={FILL.orange} stroke={ORANGE} size={10}>D5 — שני יוני Mg²⁺</Box>
-      <Box x={40} y={90} w={160} h={34} fill={FILL.orange} stroke={ORANGE} size={10}>D6 — אדנוזין להסתעפות</Box>
-      <Box x={280} y={40} w={160} h={34} fill={FILL.purple} stroke={PURPLE} size={10}>U6 — שני יוני Mg²⁺</Box>
-      <Box x={280} y={90} w={160} h={34} fill={FILL.purple} stroke={PURPLE} size={10}>U2 מזווג עם נקודת ההסתעפות</Box>
-      <He x={240} y={62} size={14} bold color={MUTED}>≈</He>
-      <He x={240} y={112} size={14} bold color={MUTED}>≈</He>
-      <Box x={60} y={150} w={360} h={30} fill={FILL.gray} stroke={MUTED} size={10}>אותה כימיה: 2′-OH של A תוקף ← לסו ← אקסונים מחוברים</Box>
-      <path d="M200 216 Q230 200 250 216 Q230 234 200 216 Z" fill="none" stroke={ORANGE} strokeWidth={2} />
-      <line x1={250} y1={216} x2={300} y2={216} stroke={ORANGE} strokeWidth={2} />
-      <He x={170} y={220} size={10} anchor="end" color={ORANGE}>לסו</He>
-      <He x={240} y={246} size={9} color={MUTED}>בספלייסוזום — עוד יותר מ-100 חלבונים (פיגום, למשל Prp8)</He>
-    </Svg>
-  );
-}
 
 // ── rn-bacterial-rna ─────────────────────────────────────────────────────────
 function Riboswitch() {

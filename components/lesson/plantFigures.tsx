@@ -7,6 +7,7 @@ import type React from "react";
 import { ArrowDefs, BLUE, GREEN, INK, MUTED, ORANGE, He, La, dash, scale } from "./biochemFigures";
 import { Arrow } from "./metabolicFigures";
 import { ThylakoidMembrane } from "./redraws/ThylakoidMembrane";
+import { Plasmodesma } from "./redraws/Plasmodesma";
 
 const PURPLE = "#7c3aed";
 const RED = "#b91c1c";
@@ -66,51 +67,6 @@ const Hormone = ({ x, y, r = 7 }: { x: number; y: number; r?: number }) => <poly
 const PanelTitle = ({ x, y, t, c = INK }: { x: number; y: number; t: string; c?: string }) => <He x={x} y={y} size={12.5} bold color={c}>{t}</He>;
 
 // ── pp-plant-cell: plasmodesma ──────────────────────────────────────────────
-function Plasmodesma() {
-  const wx1 = 190, wx2 = 270, cy = 140;
-  return (
-    <Svg h={300} label="פלסמודסמה בחתך אורכי: ממברנת התא רציפה בין שני התאים דרך התעלה בדופן. במרכז עובר הדסמוטובול — צינור ER דחוס שמחבר את ה-ER של שני התאים. בין הדסמוטובול לממברנה נשאר שרוול ציטופלזמי צר שדרכו עוברות מולקולות קטנות. בצוואר התעלה יכול להצטבר קאלוז שסוגר אותה. משמאל למטה: חתך רוחב">
-      <rect x={20} y={40} width={170} height={200} fill={FILL.cyto} />
-      <rect x={270} y={40} width={170} height={200} fill={FILL.cyto} />
-      <He x={100} y={30} size={11.5} color={MUTED}>תא A</He>
-      <He x={360} y={30} size={11.5} color={MUTED}>תא B</He>
-      {/* cell wall with channel */}
-      <rect x={wx1} y={40} width={wx2 - wx1} height={cy - 18 - 40} fill={WALL} stroke={WALL_EDGE} />
-      <rect x={wx1} y={cy + 18} width={wx2 - wx1} height={240 - cy - 18} fill={WALL} stroke={WALL_EDGE} />
-      <line x1={230} x2={230} y1={40} y2={cy - 18} stroke={WALL_EDGE} strokeWidth={1} {...dash} />
-      <line x1={230} x2={230} y1={cy + 18} y2={240} stroke={WALL_EDGE} strokeWidth={1} {...dash} />
-      {/* plasma membrane continuous through the channel */}
-      <path d={`M${wx1 - 4} 40 L${wx1 - 4} ${cy - 22} Q${wx1 - 4} ${cy - 14} ${wx1 + 8} ${cy - 14} L${wx2 - 8} ${cy - 14} Q${wx2 + 4} ${cy - 14} ${wx2 + 4} ${cy - 22} L${wx2 + 4} 40`} fill="none" stroke={BLUE} strokeWidth={2.4} />
-      <path d={`M${wx1 - 4} 240 L${wx1 - 4} ${cy + 22} Q${wx1 - 4} ${cy + 14} ${wx1 + 8} ${cy + 14} L${wx2 - 8} ${cy + 14} Q${wx2 + 4} ${cy + 14} ${wx2 + 4} ${cy + 22} L${wx2 + 4} 240`} fill="none" stroke={BLUE} strokeWidth={2.4} />
-      {/* callose collars at the necks */}
-      {[wx1 + 6, wx2 - 6].map((x) => <g key={x}><ellipse cx={x} cy={cy - 20} rx={6} ry={4} fill="#fde68a" stroke="#b45309" /><ellipse cx={x} cy={cy + 20} rx={6} ry={4} fill="#fde68a" stroke="#b45309" /></g>)}
-      {/* ER and desmotubule */}
-      <path d={`M60 ${cy - 30} Q120 ${cy - 30} 150 ${cy - 4} L${wx2 + 40} ${cy - 4} Q340 ${cy - 30} 400 ${cy - 30}`} fill="none" stroke={TEAL} strokeWidth={2} />
-      <path d={`M60 ${cy + 30} Q120 ${cy + 30} 150 ${cy + 4} L${wx2 + 40} ${cy + 4} Q340 ${cy + 30} 400 ${cy + 30}`} fill="none" stroke={TEAL} strokeWidth={2} />
-      <rect x={150} y={cy - 4} width={wx2 + 40 - 150} height={8} fill={FILL.teal} />
-      {/* small molecules moving through the sleeve */}
-      {[205, 225, 245].map((x) => <circle key={x} cx={x} cy={cy - 9} r={2.6} fill={ORANGE} />)}
-      {/* labels */}
-      <He x={230} y={262} size={11} color={WALL_EDGE}>דופן</He>
-      <He x={110} y={256} size={10.5} color={BLUE}>ממברנת התא — רציפה</He>
-      <La x={420} y={190} size={10.5} color={TEAL}>ER</La>
-      <line x1={330} y1={cy + 6} x2={360} y2={cy + 50} stroke={TEAL} strokeWidth={1} />
-      <He x={366} y={cy + 64} size={10.5} color={TEAL}>דסמוטובול (ER דחוס)</He>
-      <line x1={250} y1={cy - 10} x2={330} y2={84} stroke={ORANGE} strokeWidth={1} />
-      <He x={360} y={66} size={10.5} color={ORANGE}>שרוול ציטופלזמי:</He>
-      <He x={360} y={80} size={10} color={ORANGE}>מולקולות עד כ-1 kDa</He>
-      <line x1={wx1 + 6} y1={cy + 24} x2={150} y2={200} stroke="#b45309" strokeWidth={1} />
-      <He x={120} y={214} size={10.5} color="#b45309">קאלוז בצוואר — סוגר</He>
-      {/* cross-section */}
-      <g transform="translate(420 268)">
-        <circle r={22} fill={WALL} stroke={WALL_EDGE} />
-        <circle r={14} fill={FILL.cyto} stroke={BLUE} strokeWidth={2} />
-        <circle r={5} fill={FILL.teal} stroke={TEAL} strokeWidth={1.5} />
-      </g>
-      <He x={386} y={290} size={10} color={MUTED} anchor="end">חתך רוחב</He>
-    </Svg>
-  );
-}
 
 // ── pp-research-tools: Ti plasmid and T-DNA ─────────────────────────────────
 function TiPlasmid() {

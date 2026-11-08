@@ -1,0 +1,30 @@
+function NeuralTube() {
+  return (
+    <Svg h={220} label="נוירולציה בחתך: (1) לוחית עצבית באקטודרם מעל מיתר הגב; (2) הקפלים העצביים מתרוממים; (3) הקפלים נסגרים לצינור עצבי מתחת לעור, ותאי הציצה העצבית (כתום) נודדים מהשוליים.">
+      <rect x={20} y={80} width={130} height={14} fill={FILL.gray} />
+      <rect x={55} y={80} width={60} height={14} fill={FILL.blue} />
+      <circle cx={85} cy={118} r={9} fill={FILL.purple} stroke={PURPLE} strokeWidth={1} />
+      <He x={85} y={60} size={9.5} color={BLUE}>לוחית עצבית</He>
+      <He x={85} y={150} size={9} color={PURPLE}>מיתר הגב</He>
+
+      <path d="M170 92 L200 92 Q205 64 222 60 Q240 84 258 60 Q275 64 280 92 L310 92 L310 104 L170 104 Z" fill={FILL.gray} />
+      <path d="M205 92 Q210 70 222 66 Q240 92 258 66 Q270 70 275 92 L262 98 Q240 104 218 98 Z" fill={FILL.blue} />
+      <circle cx={222} cy={64} r={4} fill={ORANGE} />
+      <circle cx={258} cy={64} r={4} fill={ORANGE} />
+      <circle cx={240} cy={124} r={9} fill={FILL.purple} stroke={PURPLE} strokeWidth={1} />
+      <He x={240} y={40} size={9.5} color={MUTED}>קפלים עצביים</He>
+
+      <rect x={330} y={60} width={140} height={12} fill={FILL.gray} />
+      <circle cx={400} cy={104} r={22} fill={FILL.blue} />
+      <circle cx={400} cy={104} r={6} fill="white" />
+      {[[372, 78], [428, 78], [362, 96], [438, 96]].map(([x, y]) => <circle key={`${x}-${y}`} cx={x} cy={y} r={4} fill={ORANGE} />)}
+      <circle cx={400} cy={144} r={9} fill={FILL.purple} stroke={PURPLE} strokeWidth={1} />
+      <He x={400} y={46} size={9.5} color={MUTED}>עור</He>
+      <He x={400} y={180} size={9.5} color={BLUE}>צינור עצבי</He>
+      <He x={400} y={198} size={9.5} color={ORANGE}>ציצה עצבית — נודדת</He>
+      <He x={85} y={208} size={10} bold>1</He>
+      <He x={240} y={208} size={10} bold>2</He>
+      <He x={322} y={208} size={10} bold>3</He>
+    </Svg>
+  );
+}

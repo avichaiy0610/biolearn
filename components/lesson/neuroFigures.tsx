@@ -11,6 +11,8 @@ import { BrainRegions } from "./redraws/BrainRegions";
 import { VesicleRelease } from "./redraws/VesicleRelease";
 import { LtpNmda } from "./redraws/LtpNmda";
 import { KChannel } from "./redraws/KChannel";
+import { NeuralTube } from "./redraws/NeuralTube";
+import { GrowthCone } from "./redraws/GrowthCone";
 const PURPLE = "#7c3aed";
 const RED = "#b91c1c";
 const TEAL = "#0f766e";
@@ -264,36 +266,6 @@ function Aplysia() {
 
 
 // ── nb-development ───────────────────────────────────────────────────────────
-function NeuralTube() {
-  return (
-    <Svg h={220} label="נוירולציה בחתך: (1) לוחית עצבית באקטודרם מעל מיתר הגב; (2) הקפלים העצביים מתרוממים; (3) הקפלים נסגרים לצינור עצבי מתחת לעור, ותאי הציצה העצבית (כתום) נודדים מהשוליים.">
-      <rect x={20} y={80} width={130} height={14} fill={FILL.gray} />
-      <rect x={55} y={80} width={60} height={14} fill={FILL.blue} />
-      <circle cx={85} cy={118} r={9} fill={FILL.purple} stroke={PURPLE} strokeWidth={1} />
-      <He x={85} y={60} size={9.5} color={BLUE}>לוחית עצבית</He>
-      <He x={85} y={150} size={9} color={PURPLE}>מיתר הגב</He>
-
-      <path d="M170 92 L200 92 Q205 64 222 60 Q240 84 258 60 Q275 64 280 92 L310 92 L310 104 L170 104 Z" fill={FILL.gray} />
-      <path d="M205 92 Q210 70 222 66 Q240 92 258 66 Q270 70 275 92 L262 98 Q240 104 218 98 Z" fill={FILL.blue} />
-      <circle cx={222} cy={64} r={4} fill={ORANGE} />
-      <circle cx={258} cy={64} r={4} fill={ORANGE} />
-      <circle cx={240} cy={124} r={9} fill={FILL.purple} stroke={PURPLE} strokeWidth={1} />
-      <He x={240} y={40} size={9.5} color={MUTED}>קפלים עצביים</He>
-
-      <rect x={330} y={60} width={140} height={12} fill={FILL.gray} />
-      <circle cx={400} cy={104} r={22} fill={FILL.blue} />
-      <circle cx={400} cy={104} r={6} fill="white" />
-      {[[372, 78], [428, 78], [362, 96], [438, 96]].map(([x, y]) => <circle key={`${x}-${y}`} cx={x} cy={y} r={4} fill={ORANGE} />)}
-      <circle cx={400} cy={144} r={9} fill={FILL.purple} stroke={PURPLE} strokeWidth={1} />
-      <He x={400} y={46} size={9.5} color={MUTED}>עור</He>
-      <He x={400} y={180} size={9.5} color={BLUE}>צינור עצבי</He>
-      <He x={400} y={198} size={9.5} color={ORANGE}>ציצה עצבית — נודדת</He>
-      <He x={85} y={208} size={10} bold>1</He>
-      <He x={240} y={208} size={10} bold>2</He>
-      <He x={322} y={208} size={10} bold>3</He>
-    </Svg>
-  );
-}
 
 function CortexMigration() {
   const layers: [string, number][] = [["2/3", 70], ["4", 104], ["5", 134], ["6", 164]];
@@ -323,29 +295,6 @@ function CortexMigration() {
   );
 }
 
-function GrowthCone() {
-  return (
-    <Svg h={230} label="קונוס הגדילה בקצה אקסון צומח: פילופודיה חשות את הסביבה. מצד אחד מפל של אות מושך (נטרין, ירוק) — האקטין מתארך שם; מהצד השני אות דוחה (Slit, אדום) — האקטין מתפרק. הקונוס פונה לכיוון המשיכה.">
-      <defs>
-        <linearGradient id="nbAttr" x1="0" x2="1" y1="0" y2="0">
-          <stop offset="0" stopColor={RED} stopOpacity={0.35} />
-          <stop offset="0.5" stopColor="white" stopOpacity={0} />
-          <stop offset="1" stopColor={GREEN} stopOpacity={0.35} />
-        </linearGradient>
-      </defs>
-      <rect x={20} y={20} width={440} height={190} fill="url(#nbAttr)" />
-      <rect x={236} y={150} width={8} height={70} fill="#94a3b8" />
-      <path d="M220 150 Q210 120 226 100 Q240 92 258 100 Q276 114 262 150 Z" fill={FILL.blue} stroke={BLUE} strokeWidth={1.4} />
-      {[[226, 102, 212, 80], [236, 96, 232, 70], [248, 96, 258, 68], [258, 100, 282, 78], [264, 112, 296, 100]].map(([a, b, c, d], i) => <line key={i} x1={a} y1={b} x2={c} y2={d} stroke={BLUE} strokeWidth={2} strokeLinecap="round" />)}
-      <path d="M262 92 Q300 70 330 60" fill="none" stroke={GREEN} strokeWidth={2} markerEnd="url(#bfArrow)" />
-      <He x={420} y={120} size={11} bold color={GREEN}>נטרין — משיכה</He>
-      <He x={60} y={120} size={11} bold color={RED}>Slit — דחייה</He>
-      <He x={300} y={196} size={10} color={BLUE} anchor="start">קונוס הגדילה (אקטין)</He>
-      <Lead x1={298} y1={192} x2={262} y2={140} />
-      <He x={240} y={36} size={10} color={MUTED}>פילופודיה</He>
-    </Svg>
-  );
-}
 
 function OcularDominance() {
   const row = (y: number, wl: number, wr: number) => {

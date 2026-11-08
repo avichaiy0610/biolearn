@@ -1,0 +1,19 @@
+function GroupIISpliceosome() {
+  return (
+    <Svg h={250} label="השוואה: אינטרון מקבוצה II משחבר את עצמו — 2′-OH של אדנוזין בנקודת ההסתעפות (בתחום D6) תוקף, ותחום D5 קושר שני יוני Mg²⁺ באתר הפעיל. בספלייסוזום — אותה כימיה: snRNA U2 ו-U6 יוצרים את האתר הפעיל עם שני יוני Mg²⁺, ו-U6 דומה במבנה ל-D5. בשניהם האינטרון יוצא כלסו.">
+      <He x={120} y={18} size={11} bold color={ORANGE}>אינטרון מקבוצה II</He>
+      <He x={360} y={18} size={11} bold color={PURPLE}>הספלייסוזום</He>
+      <Box x={40} y={40} w={160} h={34} fill={FILL.orange} stroke={ORANGE} size={10}>D5 — שני יוני Mg²⁺</Box>
+      <Box x={40} y={90} w={160} h={34} fill={FILL.orange} stroke={ORANGE} size={10}>D6 — אדנוזין להסתעפות</Box>
+      <Box x={280} y={40} w={160} h={34} fill={FILL.purple} stroke={PURPLE} size={10}>U6 — שני יוני Mg²⁺</Box>
+      <Box x={280} y={90} w={160} h={34} fill={FILL.purple} stroke={PURPLE} size={10}>U2 מזווג עם נקודת ההסתעפות</Box>
+      <He x={240} y={62} size={14} bold color={MUTED}>≈</He>
+      <He x={240} y={112} size={14} bold color={MUTED}>≈</He>
+      <Box x={60} y={150} w={360} h={30} fill={FILL.gray} stroke={MUTED} size={10}>אותה כימיה: 2′-OH של A תוקף ← לסו ← אקסונים מחוברים</Box>
+      <path d="M200 216 Q230 200 250 216 Q230 234 200 216 Z" fill="none" stroke={ORANGE} strokeWidth={2} />
+      <line x1={250} y1={216} x2={300} y2={216} stroke={ORANGE} strokeWidth={2} />
+      <He x={170} y={220} size={10} anchor="end" color={ORANGE}>לסו</He>
+      <He x={240} y={246} size={9} color={MUTED}>בספלייסוזום — עוד יותר מ-100 חלבונים (פיגום, למשל Prp8)</He>
+    </Svg>
+  );
+}
