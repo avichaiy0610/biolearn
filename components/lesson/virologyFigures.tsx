@@ -6,6 +6,8 @@ import { GeneClasses, PrimerTypes, TailedPhage } from "./virologyExamFigures";
 import { ArrowDefs, BLUE, GREEN, INK, MUTED, ORANGE, He, La, scale, dash } from "./biochemFigures";
 import { Arrow } from "./metabolicFigures";
 
+import { Architecture } from "./redraws/Architecture";
+import { PackagingMotor } from "./redraws/PackagingMotor";
 const PURPLE = "#7c3aed";
 const RED = "#b91c1c";
 const TEAL = "#0f766e";
@@ -36,58 +38,7 @@ const poly = (cx: number, cy: number, r: number, n: number, rot = -Math.PI / 2) 
   }).join(" ");
 
 // ── vr-properties ────────────────────────────────────────────────────────────
-function Architecture() {
-  const sub = (x: number, y: number, c: string) => <rect x={x} y={y} width={9} height={9} rx={1.5} fill={c} fillOpacity={0.85} />;
-  return (
-    <Svg h={300} label="חזרתיות בקפסיד. משמאל: גן אחד מקודד תת-יחידה אחת, שממנה נבנים עשרות עד מאות עותקים. במרכז: סידור סלילי שבו האורך נקבע לפי אורך הגנום. מימין: קפסיד איקוסהדרלי, שבו 12 מחומשים יושבים בקודקודים ומספר המשושים גדל עם מספר הטריאנגולציה.">
-      {/* one gene → many copies */}
-      <He x={420} y={26} size={12} bold color={INK}>גן אחד, הרבה עותקים</He>
-      <rect x={338} y={40} width={110} height={16} rx={3} fill={FILL.yellow} stroke={GOLD} strokeWidth={1.2} />
-      <He x={393} y={52} size={9.5} color={GOLD}>גן תת-היחידה</He>
-      <Arrow x1={393} y1={62} x2={393} y2={82} color={MUTED} width={1.4} />
-      {Array.from({ length: 24 }, (_, i) => <g key={i}>{sub(344 + (i % 8) * 13, 90 + Math.floor(i / 8) * 13, BLUE)}</g>)}
-      <He x={393} y={142} size={9.5} color={MUTED}>תרגום חוזר — מאגר תת-יחידות</He>
-
-      {/* helical */}
-      <He x={240} y={26} size={12} bold color={TEAL}>סלילי</He>
-      <path d="M 170 60 Q 185 48 200 60 T 230 60 T 260 60 T 290 60 T 310 60" fill="none" stroke={GOLD} strokeWidth={2} />
-      {Array.from({ length: 14 }, (_, i) => (
-        <rect key={i} x={168 + i * 10.5} y={46} width={8} height={28} rx={2} fill={FILL.teal} stroke={TEAL} strokeWidth={1} />
-      ))}
-      <He x={240} y={92} size={9.5} color={MUTED}>האורך נקבע לפי אורך הגנום</He>
-      <He x={240} y={108} size={9.5} color={GOLD}>הקו הצהוב: חומצת הגרעין</He>
-
-      {/* icosahedral: T = 1 vs T = 3 */}
-      <He x={240} y={150} size={12} bold color={PURPLE}>איקוסהדרלי</He>
-      <g>
-        <polygon points={poly(150, 215, 48, 6)} fill="none" stroke={MUTED} strokeWidth={1} {...dash} />
-        {[0, 1, 2, 3, 4].map((i) => {
-          const a = -Math.PI / 2 + (2 * Math.PI * i) / 5;
-          return <polygon key={i} points={poly(150 + 26 * Math.cos(a), 215 + 26 * Math.sin(a), 13, 5)} fill={FILL.purple} stroke={PURPLE} strokeWidth={1.2} />;
-        })}
-        <He x={150} y={272} size={10.5} bold color={PURPLE}>T = 1 · 60 תת-יחידות</He>
-        <He x={150} y={288} size={9.5} color={MUTED}>רק מחומשים</He>
-      </g>
-      <g>
-        <polygon points={poly(330, 215, 52, 6)} fill="none" stroke={MUTED} strokeWidth={1} {...dash} />
-        {[0, 1, 2, 3, 4].map((i) => {
-          const a = -Math.PI / 2 + (2 * Math.PI * i) / 5;
-          return <polygon key={i} points={poly(330 + 34 * Math.cos(a), 215 + 34 * Math.sin(a), 12, 5)} fill={FILL.purple} stroke={PURPLE} strokeWidth={1.2} />;
-        })}
-        {[0, 1, 2, 3, 4].map((i) => {
-          const a = -Math.PI / 2 + Math.PI / 5 + (2 * Math.PI * i) / 5;
-          return <polygon key={i} points={poly(330 + 34 * Math.cos(a), 215 + 34 * Math.sin(a), 12, 6)} fill={FILL.sky} stroke={BLUE} strokeWidth={1.2} />;
-        })}
-        <polygon points={poly(330, 215, 12, 6)} fill={FILL.sky} stroke={BLUE} strokeWidth={1.2} />
-        <He x={330} y={276} size={10.5} bold color={PURPLE}>T = 3 · 180 תת-יחידות</He>
-        <He x={330} y={288} size={9.5} color={BLUE}>12 מחומשים + משושים (כחול)</He>
-      </g>
-      <He x={60} y={200} size={10} color={MUTED}>סכמטי:</He>
-      <He x={60} y={218} size={10} color={MUTED}>מספר המחומשים</He>
-      <He x={60} y={234} size={10} color={MUTED}>קבוע — 12</He>
-    </Svg>
-  );
-}
+// Architecture: redrawn at textbook level (2026-11-09) — see ./redraws/Architecture.tsx; old code in archive/figures/2026-11-09/.
 
 // ── vr-methods ───────────────────────────────────────────────────────────────
 function OneStepGrowth() {
@@ -295,45 +246,7 @@ function ReplicationOrigin() {
 }
 
 // ── vr-assembly-packaging ────────────────────────────────────────────────────
-function PackagingMotor() {
-  return (
-    <Svg h={290} label="אריזת גנום לתוך מעטפת מוכנה. פרוקפסיד ריק נבנה סביב פיגום, שער יושב בקודקוד אחד, ומנוע שצורך ATP מכניס את ה-DNA פנימה. ככל שנכנס יותר DNA הלחץ בתוך הראש עולה.">
-      <He x={430} y={28} size={11.5} bold color={INK}>1 · פרוקפסיד ריק</He>
-      <polygon points={poly(390, 92, 40, 6)} fill={FILL.gray} stroke={MUTED} strokeWidth={1.6} />
-      <circle cx={390} cy={92} r={18} fill="none" stroke={TEAL} strokeWidth={1.4} {...dash} />
-      <He x={390} y={96} size={9} color={TEAL}>פיגום</He>
-      <rect x={378} y={128} width={24} height={10} rx={3} fill={FILL.purple} stroke={PURPLE} strokeWidth={1.3} />
-      <He x={352} y={144} size={9.5} anchor="start" color={PURPLE}>שער</He>
-
-      <Arrow x1={330} y1={92} x2={296} y2={92} color={MUTED} width={1.5} />
-
-      <He x={252} y={28} size={11.5} bold color={INK}>2 · אריזה תלוית ATP</He>
-      <polygon points={poly(220, 92, 40, 6)} fill={FILL.yellow} stroke={GOLD} strokeWidth={1.6} />
-      <path d="M 200 80 q 10 8 20 0 q 10 -8 20 0 M 200 96 q 10 8 20 0 q 10 -8 20 0" fill="none" stroke={GOLD} strokeWidth={1.6} />
-      <rect x={208} y={128} width={24} height={10} rx={3} fill={FILL.purple} stroke={PURPLE} strokeWidth={1.3} />
-      <ellipse cx={220} cy={152} rx={26} ry={12} fill={FILL.red} stroke={RED} strokeWidth={1.4} />
-      <He x={267} y={156} size={9} color={RED}>מנוע</He>
-      <line x1={220} y1={164} x2={220} y2={196} stroke={GOLD} strokeWidth={3} />
-      <He x={258} y={186} size={9.5} anchor="start" color={GOLD}>DNA שטרם נארז</He>
-      <La x={182} y={158} size={9.5} anchor="end" color={RED}>ATP → ADP + Pi</La>
-      <Arrow x1={220} y1={190} x2={220} y2={146} color={RED} width={1.5} />
-
-      <Arrow x1={160} y1={92} x2={126} y2={92} color={MUTED} width={1.5} />
-
-      <He x={82} y={28} size={11.5} bold color={INK}>3 · ראש מלא</He>
-      <polygon points={poly(70, 92, 40, 6)} fill={FILL.orange} stroke={ORANGE} strokeWidth={1.8} />
-      {Array.from({ length: 5 }, (_, i) => (
-        <circle key={i} cx={70} cy={92} r={8 + i * 6} fill="none" stroke={GOLD} strokeWidth={1.4} />
-      ))}
-      <rect x={58} y={128} width={24} height={10} rx={3} fill={FILL.purple} stroke={PURPLE} strokeWidth={1.3} />
-      <He x={70} y={154} size={9.5} color={ORANGE}>לחץ גבוה בפנים</He>
-
-      <rect x={40} y={226} width={400} height={52} rx={10} fill={FILL.teal} stroke={TEAL} strokeWidth={1.2} />
-      <He x={430} y={246} size={10.5} anchor="end" bold color={TEAL}>שתי שאלות נפרדות</He>
-      <He x={430} y={266} size={10} anchor="end">מה נארז (זיהוי אות האריזה) · מתי נפסקת האריזה (רצף מסוים או קיבולת הראש)</He>
-    </Svg>
-  );
-}
+// PackagingMotor: redrawn at textbook level (2026-11-09) — see ./redraws/PackagingMotor.tsx; old code in archive/figures/2026-11-09/.
 
 // ── vr-exit ──────────────────────────────────────────────────────────────────
 function ExitRoutes() {

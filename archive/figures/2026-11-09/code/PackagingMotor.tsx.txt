@@ -1,0 +1,40 @@
+// Cut from biolearn/components/lesson/virologyFigures.tsx on 2026-11-09
+function PackagingMotor() {
+  return (
+    <Svg h={290} label="אריזת גנום לתוך מעטפת מוכנה. פרוקפסיד ריק נבנה סביב פיגום, שער יושב בקודקוד אחד, ומנוע שצורך ATP מכניס את ה-DNA פנימה. ככל שנכנס יותר DNA הלחץ בתוך הראש עולה.">
+      <He x={430} y={28} size={11.5} bold color={INK}>1 · פרוקפסיד ריק</He>
+      <polygon points={poly(390, 92, 40, 6)} fill={FILL.gray} stroke={MUTED} strokeWidth={1.6} />
+      <circle cx={390} cy={92} r={18} fill="none" stroke={TEAL} strokeWidth={1.4} {...dash} />
+      <He x={390} y={96} size={9} color={TEAL}>פיגום</He>
+      <rect x={378} y={128} width={24} height={10} rx={3} fill={FILL.purple} stroke={PURPLE} strokeWidth={1.3} />
+      <He x={352} y={144} size={9.5} anchor="start" color={PURPLE}>שער</He>
+
+      <Arrow x1={330} y1={92} x2={296} y2={92} color={MUTED} width={1.5} />
+
+      <He x={252} y={28} size={11.5} bold color={INK}>2 · אריזה תלוית ATP</He>
+      <polygon points={poly(220, 92, 40, 6)} fill={FILL.yellow} stroke={GOLD} strokeWidth={1.6} />
+      <path d="M 200 80 q 10 8 20 0 q 10 -8 20 0 M 200 96 q 10 8 20 0 q 10 -8 20 0" fill="none" stroke={GOLD} strokeWidth={1.6} />
+      <rect x={208} y={128} width={24} height={10} rx={3} fill={FILL.purple} stroke={PURPLE} strokeWidth={1.3} />
+      <ellipse cx={220} cy={152} rx={26} ry={12} fill={FILL.red} stroke={RED} strokeWidth={1.4} />
+      <He x={267} y={156} size={9} color={RED}>מנוע</He>
+      <line x1={220} y1={164} x2={220} y2={196} stroke={GOLD} strokeWidth={3} />
+      <He x={258} y={186} size={9.5} anchor="start" color={GOLD}>DNA שטרם נארז</He>
+      <La x={182} y={158} size={9.5} anchor="end" color={RED}>ATP → ADP + Pi</La>
+      <Arrow x1={220} y1={190} x2={220} y2={146} color={RED} width={1.5} />
+
+      <Arrow x1={160} y1={92} x2={126} y2={92} color={MUTED} width={1.5} />
+
+      <He x={82} y={28} size={11.5} bold color={INK}>3 · ראש מלא</He>
+      <polygon points={poly(70, 92, 40, 6)} fill={FILL.orange} stroke={ORANGE} strokeWidth={1.8} />
+      {Array.from({ length: 5 }, (_, i) => (
+        <circle key={i} cx={70} cy={92} r={8 + i * 6} fill="none" stroke={GOLD} strokeWidth={1.4} />
+      ))}
+      <rect x={58} y={128} width={24} height={10} rx={3} fill={FILL.purple} stroke={PURPLE} strokeWidth={1.3} />
+      <He x={70} y={154} size={9.5} color={ORANGE}>לחץ גבוה בפנים</He>
+
+      <rect x={40} y={226} width={400} height={52} rx={10} fill={FILL.teal} stroke={TEAL} strokeWidth={1.2} />
+      <He x={430} y={246} size={10.5} anchor="end" bold color={TEAL}>שתי שאלות נפרדות</He>
+      <He x={430} y={266} size={10} anchor="end">מה נארז (זיהוי אות האריזה) · מתי נפסקת האריזה (רצף מסוים או קיבולת הראש)</He>
+    </Svg>
+  );
+}

@@ -1,0 +1,53 @@
+// Cut from biolearn/components/lesson/virologyFigures.tsx on 2026-11-09
+function Architecture() {
+  const sub = (x: number, y: number, c: string) => <rect x={x} y={y} width={9} height={9} rx={1.5} fill={c} fillOpacity={0.85} />;
+  return (
+    <Svg h={300} label="חזרתיות בקפסיד. משמאל: גן אחד מקודד תת-יחידה אחת, שממנה נבנים עשרות עד מאות עותקים. במרכז: סידור סלילי שבו האורך נקבע לפי אורך הגנום. מימין: קפסיד איקוסהדרלי, שבו 12 מחומשים יושבים בקודקודים ומספר המשושים גדל עם מספר הטריאנגולציה.">
+      {/* one gene → many copies */}
+      <He x={420} y={26} size={12} bold color={INK}>גן אחד, הרבה עותקים</He>
+      <rect x={338} y={40} width={110} height={16} rx={3} fill={FILL.yellow} stroke={GOLD} strokeWidth={1.2} />
+      <He x={393} y={52} size={9.5} color={GOLD}>גן תת-היחידה</He>
+      <Arrow x1={393} y1={62} x2={393} y2={82} color={MUTED} width={1.4} />
+      {Array.from({ length: 24 }, (_, i) => <g key={i}>{sub(344 + (i % 8) * 13, 90 + Math.floor(i / 8) * 13, BLUE)}</g>)}
+      <He x={393} y={142} size={9.5} color={MUTED}>תרגום חוזר — מאגר תת-יחידות</He>
+
+      {/* helical */}
+      <He x={240} y={26} size={12} bold color={TEAL}>סלילי</He>
+      <path d="M 170 60 Q 185 48 200 60 T 230 60 T 260 60 T 290 60 T 310 60" fill="none" stroke={GOLD} strokeWidth={2} />
+      {Array.from({ length: 14 }, (_, i) => (
+        <rect key={i} x={168 + i * 10.5} y={46} width={8} height={28} rx={2} fill={FILL.teal} stroke={TEAL} strokeWidth={1} />
+      ))}
+      <He x={240} y={92} size={9.5} color={MUTED}>האורך נקבע לפי אורך הגנום</He>
+      <He x={240} y={108} size={9.5} color={GOLD}>הקו הצהוב: חומצת הגרעין</He>
+
+      {/* icosahedral: T = 1 vs T = 3 */}
+      <He x={240} y={150} size={12} bold color={PURPLE}>איקוסהדרלי</He>
+      <g>
+        <polygon points={poly(150, 215, 48, 6)} fill="none" stroke={MUTED} strokeWidth={1} {...dash} />
+        {[0, 1, 2, 3, 4].map((i) => {
+          const a = -Math.PI / 2 + (2 * Math.PI * i) / 5;
+          return <polygon key={i} points={poly(150 + 26 * Math.cos(a), 215 + 26 * Math.sin(a), 13, 5)} fill={FILL.purple} stroke={PURPLE} strokeWidth={1.2} />;
+        })}
+        <He x={150} y={272} size={10.5} bold color={PURPLE}>T = 1 · 60 תת-יחידות</He>
+        <He x={150} y={288} size={9.5} color={MUTED}>רק מחומשים</He>
+      </g>
+      <g>
+        <polygon points={poly(330, 215, 52, 6)} fill="none" stroke={MUTED} strokeWidth={1} {...dash} />
+        {[0, 1, 2, 3, 4].map((i) => {
+          const a = -Math.PI / 2 + (2 * Math.PI * i) / 5;
+          return <polygon key={i} points={poly(330 + 34 * Math.cos(a), 215 + 34 * Math.sin(a), 12, 5)} fill={FILL.purple} stroke={PURPLE} strokeWidth={1.2} />;
+        })}
+        {[0, 1, 2, 3, 4].map((i) => {
+          const a = -Math.PI / 2 + Math.PI / 5 + (2 * Math.PI * i) / 5;
+          return <polygon key={i} points={poly(330 + 34 * Math.cos(a), 215 + 34 * Math.sin(a), 12, 6)} fill={FILL.sky} stroke={BLUE} strokeWidth={1.2} />;
+        })}
+        <polygon points={poly(330, 215, 12, 6)} fill={FILL.sky} stroke={BLUE} strokeWidth={1.2} />
+        <He x={330} y={276} size={10.5} bold color={PURPLE}>T = 3 · 180 תת-יחידות</He>
+        <He x={330} y={288} size={9.5} color={BLUE}>12 מחומשים + משושים (כחול)</He>
+      </g>
+      <He x={60} y={200} size={10} color={MUTED}>סכמטי:</He>
+      <He x={60} y={218} size={10} color={MUTED}>מספר המחומשים</He>
+      <He x={60} y={234} size={10} color={MUTED}>קבוע — 12</He>
+    </Svg>
+  );
+}
