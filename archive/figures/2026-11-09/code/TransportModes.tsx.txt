@@ -1,0 +1,41 @@
+function TransportModes() {
+  const M = { y1: 98, y2: 122 };
+  return (
+    <Svg h={240} label="דרכי מעבר דרך הממברנה (למעלה — מחוץ לתא, למטה — הציטופלזמה): דיפוזיה פשוטה, תעלה ונשא — הובלה סבילה במורד המפל; משאבת נתרן-אשלגן שצורכת ATP — הובלה פעילה ראשונית; וסימפורט Na⁺-גלוקוז — הובלה פעילה משנית.">
+      <rect x={10} y={M.y1} width={460} height={M.y2 - M.y1} fill="#fef9c3" />
+      <line x1={10} x2={470} y1={M.y1} y2={M.y1} stroke={MUTED} strokeWidth={1.6} />
+      <line x1={10} x2={470} y1={M.y2} y2={M.y2} stroke={MUTED} strokeWidth={1.6} />
+
+      <La x={440} y={48} size={11} bold>O₂, CO₂</La>
+      <Arrow x1={440} y1={58} x2={440} y2={152} color={INK} />
+
+      <rect x={336} y={86} width={13} height={48} rx={4} fill={FILL.blue} stroke={BLUE} strokeWidth={1.4} />
+      <rect x={361} y={86} width={13} height={48} rx={4} fill={FILL.blue} stroke={BLUE} strokeWidth={1.4} />
+      <He x={355} y={48} size={11} bold>יון</He>
+      <Arrow x1={355} y1={58} x2={355} y2={152} color={BLUE} />
+
+      <rect x={250} y={84} width={40} height={52} rx={12} fill={FILL.green} stroke={GREEN} strokeWidth={1.4} />
+      <He x={270} y={48} size={11} bold>גלוקוז</He>
+      <Arrow x1={270} y1={58} x2={270} y2={152} color={GREEN} />
+
+      <rect x={150} y={84} width={40} height={52} rx={6} fill={FILL.purple} stroke={PURPLE} strokeWidth={1.4} />
+      <Arrow x1={160} y1={140} x2={160} y2={60} color={RED} width={2} />
+      <Arrow x1={180} y1={60} x2={180} y2={140} color={ORANGE} width={2} />
+      <La x={152} y={54} size={11} bold color={RED} anchor="end">3Na⁺</La>
+      <La x={188} y={54} size={11} bold color={ORANGE} anchor="start">2K⁺</La>
+      <La x={170} y={160} size={10} color={PURPLE}>ATP → ADP + Pᵢ</La>
+
+      <rect x={42} y={84} width={40} height={52} rx={12} fill={FILL.teal} stroke={TEAL} strokeWidth={1.4} />
+      <Arrow x1={52} y1={60} x2={52} y2={140} color={RED} width={2} />
+      <Arrow x1={72} y1={60} x2={72} y2={140} color={GREEN} width={2} />
+      <La x={44} y={54} size={11} bold color={RED} anchor="end">Na⁺</La>
+      <He x={80} y={54} size={11} bold color={GREEN} anchor="start">גלוקוז</He>
+
+      {([[440, "דיפוזיה פשוטה"], [355, "תעלה"], [270, "נשא"], [170, "משאבה (ראשונית)"], [62, "סימפורט (משנית)"]] as [number, string][]).map(([x, t]) => <He key={t} x={x} y={182} size={11} bold>{t}</He>)}
+      <path d="M232 192 L232 198 L472 198 L472 192" fill="none" stroke={GREEN} strokeWidth={1.4} />
+      <He x={352} y={218} size={11} color={GREEN}>הובלה סבילה — במורד המפל</He>
+      <path d="M12 192 L12 198 L214 198 L214 192" fill="none" stroke={RED} strokeWidth={1.4} />
+      <He x={113} y={218} size={11} color={RED}>הובלה פעילה — נגד המפל</He>
+    </Svg>
+  );
+}

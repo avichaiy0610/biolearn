@@ -7,6 +7,7 @@ import { HBondPatterns } from "./redraws/HBondPatterns";
 
 import { CatalyticTriad } from "./redraws/CatalyticTriad";
 import { MembraneProteins } from "./redraws/MembraneProteins";
+import { Polysaccharides } from "./redraws/Polysaccharides";
 export const BLUE = "#1d4ed8", ORANGE = "#c2410c", GREEN = "#15803d", INK = "#1f2937", MUTED = "#64748b", LINE = "#cbd5e1";
 const HE = { fontFamily: "var(--font-hebrew), Arial, sans-serif" };
 const LAT = { fontFamily: "Arial, sans-serif" };
@@ -385,33 +386,7 @@ function ZymogenCascade() {
 }
 
 // ── Carbohydrates & lipids ───────────────────────────────────────────────────
-function Polysaccharides() {
-  const chain = (x0: number, y: number, n: number, dx: number, color: string, k = "") => Array.from({ length: n }, (_, i) => (
-    <circle key={`${k}${y}-${i}`} cx={x0 + i * dx} cy={y} r={7} fill="#fff" stroke={color} strokeWidth={2} />
-  ));
-  return (
-    <svg viewBox="0 0 480 330" className="w-full h-auto" role="img" aria-label="רב-סוכרים של גלוקוז: עמילוז שרשרת לא מסועפת, גליקוגן מסועף מאוד, ותאית שרשראות ישרות מקבילות שמחוברות בקשרי מימן">
-      <He x={240} y={22} bold>עמילוז — α-1,4, לא מסועף (נוטה ליצור סליל)</He>
-      <line x1={40} y1={50} x2={440} y2={50} stroke={BLUE} strokeWidth={2} />
-      {chain(40, 50, 21, 20, BLUE, "a")}
-      <He x={240} y={98} bold>גליקוגן — α-1,4 עם הסתעפויות α-1,6</He>
-      <line x1={60} y1={180} x2={420} y2={180} stroke={ORANGE} strokeWidth={2} />
-      {chain(60, 180, 19, 20, ORANGE, "g")}
-      {[[140, 140, 1], [260, 140, 1], [340, 220, -1], [180, 220, -1]].map(([x, y, dir], i) => (
-        <g key={i}>
-          <line x1={x} y1={180} x2={x + 20} y2={y} stroke={ORANGE} strokeWidth={2} />
-          <line x1={x + 20} y1={y} x2={x + 120} y2={y} stroke={ORANGE} strokeWidth={2} />
-          {chain(x + 20, y, 6, 20, ORANGE, `b${i}`)}
-          <circle cx={x + 120} cy={y} r={4} fill={GREEN} />
-          {dir === 1 && i === 0 && <He x={x + 70} y={y - 14} size={11} color={GREEN}>קצה לא מחזר</He>}
-        </g>
-      ))}
-      <He x={240} y={262} bold>תאית — β-1,4, שרשראות ישרות במקביל</He>
-      {[280, 304].map((y) => <g key={y}><line x1={40} y1={y} x2={440} y2={y} stroke={GREEN} strokeWidth={2} />{chain(40, y, 21, 20, GREEN, "c")}</g>)}
-      {Array.from({ length: 10 }, (_, i) => <line key={i} x1={60 + i * 40} y1={287} x2={60 + i * 40} y2={297} stroke={MUTED} strokeWidth={1.5} {...dash} />)}
-    </svg>
-  );
-}
+
 
 function MicelleBilayer() {
   const lipid = (x: number, y: number, ang: number, color: string, two = true, k = "") => {

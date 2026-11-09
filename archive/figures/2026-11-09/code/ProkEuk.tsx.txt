@@ -1,0 +1,40 @@
+function ProkEuk() {
+  const ribos: [number, number][] = [[342, 100], [348, 126], [395, 92], [404, 130], [424, 100]];
+  return (
+    <Svg h={270} label="תא פרוקריוטי (חיידק) מול תא אאוקריוטי (של בעל חיים). בחיידק: קופסית, דופן, ממברנה, נוקלאואיד בלי ממברנה, פלסמיד, ריבוזומים ושוטון. בתא האאוקריוטי: גרעין עם מעטפת כפולה וגרעינון, ER, גולג'י ומיטוכונדריון. לא בקנה מידה.">
+      <rect x={315} y={70} width={130} height={80} rx={40} fill={FILL.yellow} stroke="#ca8a04" strokeWidth={1.2} {...dash} />
+      <rect x={322} y={77} width={116} height={66} rx={33} fill={WALL} stroke={WALL_EDGE} strokeWidth={2} />
+      <rect x={328} y={83} width={104} height={54} rx={27} fill={FILL.cyto} stroke={MUTED} strokeWidth={1.5} />
+      <path d="M356 100 C 366 90, 372 118, 382 104 C 392 92, 396 122, 384 124 C 372 126, 366 112, 358 120 C 352 126, 348 108, 356 100" fill="none" stroke={BLUE} strokeWidth={1.8} />
+      <circle cx={415} cy={122} r={6} fill="none" stroke={PURPLE} strokeWidth={1.6} />
+      {ribos.map(([x, y]) => <circle key={`${x}${y}`} cx={x} cy={y} r={2.6} fill={INK} />)}
+      <path d="M445 110 q6 -9 11 0 t11 0 t9 -2" fill="none" stroke={INK} strokeWidth={1.6} />
+      <He x={310} y={46} size={10}>קופסית</He><Lead x1={312} y1={51} x2={326} y2={74} />
+      <He x={355} y={46} size={10}>דופן</He><Lead x1={355} y1={51} x2={352} y2={78} />
+      <He x={405} y={46} size={10}>ממברנה</He><Lead x1={405} y1={51} x2={410} y2={84} />
+      <He x={455} y={46} size={10}>ריבוזומים</He><Lead x1={452} y1={51} x2={425} y2={97} />
+      <He x={350} y={180} size={10}>נוקלאואיד (DNA)</He><Lead x1={358} y1={168} x2={372} y2={122} />
+      <He x={425} y={180} size={10}>פלסמיד</He><Lead x1={423} y1={168} x2={416} y2={129} />
+      <He x={465} y={134} size={10}>שוטון</He>
+      <He x={380} y={240} size={12.5} bold>תא פרוקריוטי (1–5 µm)</He>
+
+      <ellipse cx={145} cy={118} rx={120} ry={86} fill={FILL.cyto} stroke={MUTED} strokeWidth={1.8} />
+      <circle cx={115} cy={112} r={38} fill={FILL.nuc} stroke={PURPLE} strokeWidth={1.4} />
+      <circle cx={115} cy={112} r={34} fill="none" stroke={PURPLE} strokeWidth={1.4} />
+      <circle cx={106} cy={106} r={10} fill="#c4b5fd" stroke="none" />
+      {[0, 1, 2].map((i) => <path key={i} d={`M${160 + i * 9} ${80 + i * 3} C ${176 + i * 9} ${100}, ${176 + i * 9} ${124}, ${160 + i * 9} ${144 - i * 3}`} fill="none" stroke={BLUE} strokeWidth={1.6} />)}
+      {[[170, 92], [178, 112], [186, 128], [172, 136]].map(([x, y]) => <circle key={`${x}${y}`} cx={x} cy={y} r={2.2} fill={INK} />)}
+      {[0, 1, 2].map((i) => <path key={i} d={`M${200 - i * 2} ${50 + i * 8} q22 -6 44 0`} fill="none" stroke={ORANGE} strokeWidth={2} />)}
+      <ellipse cx={210} cy={160} rx={24} ry={12} fill={FILL.orange} stroke={ORANGE} strokeWidth={1.5} />
+      <path d="M192 160 l5 -6 l5 12 l5 -12 l5 12 l5 -12 l5 12 l5 -6" fill="none" stroke={ORANGE} strokeWidth={1} />
+      <He x={60} y={22} size={10}>גרעין</He><Lead x1={64} y1={27} x2={92} y2={82} />
+      <He x={130} y={22} size={10}>גרעינון</He><Lead x1={127} y1={27} x2={108} y2={95} />
+      <He x={190} y={22} size={10}>ER</He><Lead x1={190} y1={27} x2={170} y2={84} />
+      <He x={250} y={36} size={10}>גולג'י</He><Lead x1={246} y1={41} x2={232} y2={52} />
+      <He x={215} y={222} size={10}>מיטוכונדריון</He><Lead x1={214} y1={210} x2={211} y2={173} />
+      <He x={70} y={222} size={10}>ממברנת התא</He><Lead x1={72} y1={210} x2={78} y2={183} />
+      <He x={145} y={240} size={12.5} bold>תא אאוקריוטי (10–100 µm)</He>
+      <He x={240} y={262} size={10} color={MUTED}>לא בקנה מידה — קוטר תא אאוקריוטי גדול בדרך כלל פי 10 ויותר</He>
+    </Svg>
+  );
+}

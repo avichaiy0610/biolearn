@@ -1,0 +1,62 @@
+function AnimalPlantCell() {
+  const legend = ["גרעין", "גרעינון", "ER מחוספס", "ER חלק", "גולג'י", "מיטוכונדריון", "ליזוזום", "צנטריולים", "ממברנת התא", "דופן תאית", "כלורופלסט", "וואקואולה מרכזית", "פלזמודסמה"];
+  const Mito = ({ x, y, r = 0 }: { x: number; y: number; r?: number }) => (
+    <g transform={`rotate(${r} ${x} ${y})`}>
+      <ellipse cx={x} cy={y} rx={17} ry={8} fill={FILL.orange} stroke={ORANGE} strokeWidth={1.3} />
+      <path d={`M${x - 12} ${y} l4 -5 l4 10 l4 -10 l4 10 l4 -10 l4 5`} fill="none" stroke={ORANGE} strokeWidth={0.9} />
+    </g>
+  );
+  const Chloro = ({ x, y, r = 0 }: { x: number; y: number; r?: number }) => (
+    <g transform={`rotate(${r} ${x} ${y})`}>
+      <ellipse cx={x} cy={y} rx={20} ry={10} fill={FILL.green} stroke={GREEN} strokeWidth={1.4} />
+      {[-10, -2, 6].map((d) => <rect key={d} x={x + d} y={y - 6} width={5} height={12} fill={GREEN} opacity={0.6} />)}
+    </g>
+  );
+  const Golgi = ({ x, y }: { x: number; y: number }) => <g>{[0, 1, 2, 3].map((i) => <path key={i} d={`M${x - 18 + i} ${y + i * 5} q18 -7 36 0`} fill="none" stroke={ORANGE} strokeWidth={2} />)}</g>;
+  return (
+    <Svg h={360} label="תא של בעל חיים מול תא צמחי, עם אברונים ממוספרים: גרעין, גרעינון, ER מחוספס וחלק, גולג'י, מיטוכונדריה, ליזוזומים וצנטריולים בתא של בעל החיים; בתא הצמחי גם דופן תאית, כלורופלסטים, וואקואולה מרכזית ופלזמודסמטה.">
+      <He x={120} y={18} size={12.5} bold>תא של בעל חיים</He>
+      <ellipse cx={120} cy={120} rx={105} ry={88} fill={FILL.cyto} stroke={MUTED} strokeWidth={2} />
+      <circle cx={110} cy={118} r={30} fill={FILL.nuc} stroke={PURPLE} strokeWidth={2.4} />
+      <circle cx={104} cy={112} r={9} fill="#c4b5fd" />
+      {[0, 1, 2].map((i) => <path key={i} d={`M${146 + i * 8} ${94 + i * 2} C ${160 + i * 8} 108, ${160 + i * 8} 130, ${146 + i * 8} ${142 - i * 2}`} fill="none" stroke={BLUE} strokeWidth={1.6} />)}
+      {[[156, 102], [164, 118], [170, 132]].map(([x, y]) => <circle key={x} cx={x} cy={y} r={2} fill={INK} />)}
+      {[0, 1].map((i) => <path key={i} d={`M${60 + i * 8} ${172 - i * 4} q10 -14 26 -10 q10 4 22 -6`} fill="none" stroke={TEAL} strokeWidth={1.6} />)}
+      <Golgi x={110} y={52} />
+      <Mito x={190} y={150} r={-20} />
+      <Mito x={50} y={100} r={70} />
+      <circle cx={190} cy={96} r={7} fill={FILL.red} stroke={RED} strokeWidth={1.3} />
+      <rect x={72} y={56} width={5} height={14} fill={INK} transform="rotate(20 74 63)" />
+      <rect x={80} y={60} width={14} height={5} fill={INK} />
+      <Badge x={110} y={160} n={1} /><Badge x={84} y={112} n={2} /><Badge x={190} y={120} n={3} /><Badge x={110} y={190} n={4} />
+      <Badge x={148} y={52} n={5} /><Badge x={190} y={176} n={6} /><Badge x={205} y={86} n={7} /><Badge x={60} y={50} n={8} /><Badge x={24} y={150} n={9} />
+
+      <He x={360} y={18} size={12.5} bold>תא צמחי</He>
+      <rect x={250} y={30} width={220} height={182} rx={6} fill={WALL} stroke={WALL_EDGE} strokeWidth={2} />
+      <rect x={258} y={38} width={204} height={166} rx={4} fill={FILL.cyto} stroke={MUTED} strokeWidth={1.5} />
+      <rect x={300} y={70} width={140} height={110} rx={22} fill={FILL.sky} stroke={TEAL} strokeWidth={1.6} />
+      <circle cx={276} cy={110} r={14} fill={FILL.nuc} stroke={PURPLE} strokeWidth={2.2} />
+      <circle cx={274} cy={108} r={4.5} fill="#c4b5fd" />
+      <Chloro x={300} y={52} /><Chloro x={362} y={52} /><Chloro x={426} y={190} /><Chloro x={448} y={110} r={90} />
+      <Mito x={340} y={192} /><Mito x={276} y={160} r={80} />
+      <Golgi x={420} y={52} />
+      {[95, 145].map((y) => <rect key={y} x={462} y={y} width={8} height={5} fill={FILL.cyto} stroke={WALL_EDGE} strokeWidth={0.8} />)}
+      <Badge x={276} y={86} n={1} /><Badge x={296} y={186} n={6} /><Badge x={420} y={72} n={5} /><Badge x={331} y={52} n={11} /><Badge x={370} y={125} n={12} />
+      <Badge x={240} y={60} n={10} /><Badge x={451} y={170} n={9} /><Badge x={478 - 8} y={84} n={13} />
+
+      {legend.map((t, i) => {
+        const col = i < 7 ? 0 : 1;
+        const row = i < 7 ? i : i - 7;
+        const x = col === 0 ? 450 : 220;
+        const y = 240 + row * 17;
+        return (
+          <g key={t}>
+            <Badge x={x} y={y - 4} n={i + 1} />
+            <He x={x - 14} y={y} size={11} anchor="end">{t}</He>
+          </g>
+        );
+      })}
+      <He x={110} y={346} size={10} color={MUTED}>לשניהם: גרעין, ER, גולג'י, מיטוכונדריה</He>
+    </Svg>
+  );
+}

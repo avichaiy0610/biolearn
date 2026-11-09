@@ -1,0 +1,39 @@
+function EnzymeRegulation() {
+  return (
+    <Svg h={300} label="ארבע דרכים לבקרת אנזים: עיכוב תחרותי — המעכב תופס את האתר הפעיל; עיכוב לא-תחרותי — המעכב נקשר באתר אחר ומעוות את האתר הפעיל; בקרה אלוסטרית — מפעיל מייצב את הצורה הפעילה ומעכב את הלא פעילה; עיכוב במשוב — התוצר הסופי של מסלול מעכב את האנזים הראשון.">
+      <line x1={240} y1={10} x2={240} y2={290} stroke="#e2e8f0" strokeWidth={1} />
+      <line x1={10} y1={150} x2={470} y2={150} stroke="#e2e8f0" strokeWidth={1} />
+
+      <He x={360} y={22} size={12.5} bold>עיכוב תחרותי</He>
+      <Enz cx={360} cy={92} site={false} />
+      <Sub x={360} y={77} c={RED} fill={FILL.red} />
+      <Sub x={432} y={52} />
+      <He x={442} y={78} size={10} color={GREEN}>מצע</He>
+      <He x={300} y={56} size={10} color={RED}>מעכב</He>
+      <He x={360} y={138} size={10.5} color={MUTED}>המעכב תופס את האתר הפעיל</He>
+
+      <He x={120} y={22} size={12.5} bold>עיכוב לא-תחרותי</He>
+      <Enz cx={112} cy={92} skew={7} />
+      <circle cx={157} cy={92} r={8} fill={FILL.red} stroke={RED} strokeWidth={1.4} />
+      <Sub x={112} y={50} />
+      <He x={190} y={96} size={10} color={RED} anchor="start">מעכב</He>
+      <He x={120} y={138} size={10.5} color={MUTED}>נקשר באתר אחר ומשנה את הצורה</He>
+
+      <He x={360} y={172} size={12.5} bold>בקרה אלוסטרית</He>
+      <Enz cx={410} cy={228} w={70} />
+      <circle cx={450} cy={228} r={7} fill={FILL.green} stroke={GREEN} strokeWidth={1.4} />
+      <Enz cx={300} cy={228} w={70} skew={8} fill={FILL.gray} c={MUTED} />
+      <circle cx={340} cy={228} r={7} fill={FILL.red} stroke={RED} strokeWidth={1.4} />
+      <He x={410} y={270} size={10.5} color={GREEN}>מפעיל ← צורה פעילה</He>
+      <He x={300} y={270} size={10.5} color={RED}>מעכב ← צורה לא פעילה</He>
+      <He x={355} y={290} size={10} color={MUTED}>הקשירה היא באתר הבקרה, לא באתר הפעיל</He>
+
+      <He x={120} y={172} size={12.5} bold>עיכוב במשוב</He>
+      {["A", "B", "C", "D"].map((t, i) => <La key={t} x={30 + i * 60} y={236} size={15} bold color={i === 3 ? RED : INK}>{t}</La>)}
+      {[0, 1, 2].map((i) => <Arrow key={i} x1={42 + i * 60} y1={231} x2={78 + i * 60} y2={231} />)}
+      {[0, 1, 2].map((i) => <La key={i} x={60 + i * 60} y={252} size={9.5} color={MUTED}>{`E${i + 1}`}</La>)}
+      <path d="M210 220 C 205 186, 70 186, 62 222" fill="none" stroke={RED} strokeWidth={1.8} {...dash} markerEnd="url(#b1Inhib)" />
+      <He x={120} y={276} size={10.5} color={MUTED}>התוצר הסופי D מעכב את האנזים הראשון</He>
+    </Svg>
+  );
+}

@@ -5,6 +5,11 @@ import type React from "react";
 import { ArrowDefs, BLUE, GREEN, INK, MUTED, ORANGE, He, La, dash } from "./biochemFigures";
 import { Arrow } from "./metabolicFigures";
 import AnatomyEmbed from "./anatomy/AnatomyEmbed";
+import { ProteinLevels } from "./redraws/ProteinLevels";
+import { EnzymeRegulation } from "./redraws/EnzymeRegulation";
+import { ProkEuk } from "./redraws/ProkEuk";
+import { AnimalPlantCell } from "./redraws/AnimalPlantCell";
+import { TransportModes } from "./redraws/TransportModes";
 
 const PURPLE = "#7c3aed";
 const RED = "#b91c1c";
@@ -36,12 +41,6 @@ const Bx = ({ x, y, w, h = 30, t, t2, c = BLUE, fill = FILL.blue, size = 12, bol
 );
 // Leader line from a label to a structure.
 const Lead = ({ x1, y1, x2, y2 }: { x1: number; y1: number; x2: number; y2: number }) => <line x1={x1} y1={y1} x2={x2} y2={y2} stroke={MUTED} strokeWidth={1} />;
-const Badge = ({ x, y, n }: { x: number; y: number; n: number }) => (
-  <g>
-    <circle cx={x} cy={y} r={8} fill="#fff" stroke={INK} strokeWidth={1.2} />
-    <La x={x} y={y + 3.5} size={9.5} bold>{n}</La>
-  </g>
-);
 
 // ── b1-life-timeline ─────────────────────────────────────────────────────────
 function LifeTimeline() {
@@ -168,138 +167,13 @@ function AminoAcid() {
 }
 
 // ── b1-protein-levels ────────────────────────────────────────────────────────
-function ProteinLevels() {
-  const beads = [[388, 48], [410, 62], [432, 52], [452, 70], [440, 92], [418, 104], [396, 118], [410, 140], [434, 150]];
-  const helix: string[] = [];
-  for (let i = 0; i <= 120; i++) {
-    const t = (i / 120) * 7 * Math.PI;
-    helix.push(`${i ? "L" : "M"}${(300 + 18 * Math.cos(t)).toFixed(1)} ${(36 + t * 3.2 + 5 * Math.sin(t)).toFixed(1)}`);
-  }
-  const strand = (y: number, dir: 1 | -1) => {
-    const x0 = dir === 1 ? 266 : 334, x1 = dir === 1 ? 326 : 274;
-    return <path d={`M${x0} ${y - 4} L${x1 - dir * 8} ${y - 4} L${x1 - dir * 8} ${y - 9} L${x1} ${y} L${x1 - dir * 8} ${y + 9} L${x1 - dir * 8} ${y + 4} L${x0} ${y + 4} Z`} fill={FILL.yellow} stroke={ORANGE} strokeWidth={1.3} />;
-  };
-  const panels: [number, string, string, string][] = [
-    [420, "ראשוני", "רצף חומצות האמינו", "קשרים פפטידיים"],
-    [300, "שניוני", "סליל α ומשטח β", "קשרי מימן בשלד"],
-    [180, "שלישוני", "קיפול השרשרת כולה", "קשרים בין שרשראות צד"],
-    [60, "רבעוני", "כמה תת-יחידות", "(המוגלובין: 2α + 2β)"],
-  ];
-  return (
-    <Svg h={235} label="ארבע רמות המבנה של חלבון: ראשוני — רצף חומצות האמינו; שניוני — סליל α ומשטח β שמוחזקים בקשרי מימן של השלד; שלישוני — הקיפול התלת-ממדי של שרשרת אחת; רבעוני — כמה תת-יחידות.">
-      <polyline points={beads.map((p) => p.join(",")).join(" ")} fill="none" stroke={MUTED} strokeWidth={1.5} />
-      {beads.map(([x, y], i) => <circle key={i} cx={x} cy={y} r={8} fill={[FILL.green, FILL.blue, FILL.orange, FILL.purple][i % 4]} stroke={INK} strokeWidth={1} />)}
-      <path d={helix.join("")} fill="none" stroke={RED} strokeWidth={2.2} />
-      {strand(122, 1)}{strand(140, -1)}{strand(158, 1)}
-      <path d="M150 70 C 120 40, 210 30, 214 70 C 218 100, 160 92, 156 118 C 152 146, 214 150, 206 120 C 200 96, 236 100, 222 136 C 210 166, 140 166, 140 136 C 140 110, 176 80, 150 70" fill="none" stroke={PURPLE} strokeWidth={2.4} />
-      <circle cx={184} cy={102} r={5} fill="#fde68a" stroke="#b45309" />
-      <La x={184} y={88} size={9} color="#b45309">S–S</La>
-      {[[40, 70, GREEN, FILL.green, "α"], [82, 70, BLUE, FILL.blue, "β"], [40, 118, BLUE, FILL.blue, "β"], [82, 118, GREEN, FILL.green, "α"]].map(([x, y, c, f, t], i) => (
-        <g key={i}>
-          <ellipse cx={x as number} cy={y as number} rx={22} ry={22} fill={f as string} stroke={c as string} strokeWidth={1.6} />
-          <La x={x as number} y={(y as number) + 5} size={14} bold color={c as string}>{t as string}</La>
-        </g>
-      ))}
-      {panels.map(([x, t, d1, d2]) => (
-        <g key={t}>
-          <He x={x} y={190} size={13} bold>{t}</He>
-          <He x={x} y={207} size={10.5} color={MUTED}>{d1}</He>
-          <He x={x} y={222} size={10.5} color={MUTED}>{d2}</He>
-        </g>
-      ))}
-    </Svg>
-  );
-}
+
 
 // ── b1-enzyme-regulation ─────────────────────────────────────────────────────
-const Enz = ({ cx, cy, w = 80, skew = 0, site = true, fill = FILL.blue, c = BLUE }: { cx: number; cy: number; w?: number; skew?: number; site?: boolean; fill?: string; c?: string }) => {
-  const h = 46, l = cx - w / 2, r = cx + w / 2, t = cy - h / 2, b = cy + h / 2;
-  const notch = `L${cx - 12} ${t} L${cx + skew} ${t + 16 - Math.abs(skew) / 2} L${cx + 12} ${t}`;
-  const side = site ? `L${r} ${cy - 7} L${r - 9} ${cy - 7} L${r - 9} ${cy + 7} L${r} ${cy + 7}` : "";
-  return <path d={`M${l + 8} ${t} ${notch} L${r - 8} ${t} Q${r} ${t} ${r} ${t + 8} ${side} L${r} ${b - 8} Q${r} ${b} ${r - 8} ${b} L${l + 8} ${b} Q${l} ${b} ${l} ${b - 8} L${l} ${t + 8} Q${l} ${t} ${l + 8} ${t} Z`} fill={fill} stroke={c} strokeWidth={1.6} />;
-};
-const Sub = ({ x, y, c = GREEN, fill = FILL.green }: { x: number; y: number; c?: string; fill?: string }) => <path d={`M${x - 11} ${y - 8} L${x + 11} ${y - 8} L${x} ${y + 8} Z`} fill={fill} stroke={c} strokeWidth={1.4} />;
-function EnzymeRegulation() {
-  return (
-    <Svg h={300} label="ארבע דרכים לבקרת אנזים: עיכוב תחרותי — המעכב תופס את האתר הפעיל; עיכוב לא-תחרותי — המעכב נקשר באתר אחר ומעוות את האתר הפעיל; בקרה אלוסטרית — מפעיל מייצב את הצורה הפעילה ומעכב את הלא פעילה; עיכוב במשוב — התוצר הסופי של מסלול מעכב את האנזים הראשון.">
-      <line x1={240} y1={10} x2={240} y2={290} stroke="#e2e8f0" strokeWidth={1} />
-      <line x1={10} y1={150} x2={470} y2={150} stroke="#e2e8f0" strokeWidth={1} />
 
-      <He x={360} y={22} size={12.5} bold>עיכוב תחרותי</He>
-      <Enz cx={360} cy={92} site={false} />
-      <Sub x={360} y={77} c={RED} fill={FILL.red} />
-      <Sub x={432} y={52} />
-      <He x={442} y={78} size={10} color={GREEN}>מצע</He>
-      <He x={300} y={56} size={10} color={RED}>מעכב</He>
-      <He x={360} y={138} size={10.5} color={MUTED}>המעכב תופס את האתר הפעיל</He>
-
-      <He x={120} y={22} size={12.5} bold>עיכוב לא-תחרותי</He>
-      <Enz cx={112} cy={92} skew={7} />
-      <circle cx={157} cy={92} r={8} fill={FILL.red} stroke={RED} strokeWidth={1.4} />
-      <Sub x={112} y={50} />
-      <He x={190} y={96} size={10} color={RED} anchor="start">מעכב</He>
-      <He x={120} y={138} size={10.5} color={MUTED}>נקשר באתר אחר ומשנה את הצורה</He>
-
-      <He x={360} y={172} size={12.5} bold>בקרה אלוסטרית</He>
-      <Enz cx={410} cy={228} w={70} />
-      <circle cx={450} cy={228} r={7} fill={FILL.green} stroke={GREEN} strokeWidth={1.4} />
-      <Enz cx={300} cy={228} w={70} skew={8} fill={FILL.gray} c={MUTED} />
-      <circle cx={340} cy={228} r={7} fill={FILL.red} stroke={RED} strokeWidth={1.4} />
-      <He x={410} y={270} size={10.5} color={GREEN}>מפעיל ← צורה פעילה</He>
-      <He x={300} y={270} size={10.5} color={RED}>מעכב ← צורה לא פעילה</He>
-      <He x={355} y={290} size={10} color={MUTED}>הקשירה היא באתר הבקרה, לא באתר הפעיל</He>
-
-      <He x={120} y={172} size={12.5} bold>עיכוב במשוב</He>
-      {["A", "B", "C", "D"].map((t, i) => <La key={t} x={30 + i * 60} y={236} size={15} bold color={i === 3 ? RED : INK}>{t}</La>)}
-      {[0, 1, 2].map((i) => <Arrow key={i} x1={42 + i * 60} y1={231} x2={78 + i * 60} y2={231} />)}
-      {[0, 1, 2].map((i) => <La key={i} x={60 + i * 60} y={252} size={9.5} color={MUTED}>{`E${i + 1}`}</La>)}
-      <path d="M210 220 C 205 186, 70 186, 62 222" fill="none" stroke={RED} strokeWidth={1.8} {...dash} markerEnd="url(#b1Inhib)" />
-      <He x={120} y={276} size={10.5} color={MUTED}>התוצר הסופי D מעכב את האנזים הראשון</He>
-    </Svg>
-  );
-}
 
 // ── b1-prok-euk ──────────────────────────────────────────────────────────────
-function ProkEuk() {
-  const ribos: [number, number][] = [[342, 100], [348, 126], [395, 92], [404, 130], [424, 100]];
-  return (
-    <Svg h={270} label="תא פרוקריוטי (חיידק) מול תא אאוקריוטי (של בעל חיים). בחיידק: קופסית, דופן, ממברנה, נוקלאואיד בלי ממברנה, פלסמיד, ריבוזומים ושוטון. בתא האאוקריוטי: גרעין עם מעטפת כפולה וגרעינון, ER, גולג'י ומיטוכונדריון. לא בקנה מידה.">
-      <rect x={315} y={70} width={130} height={80} rx={40} fill={FILL.yellow} stroke="#ca8a04" strokeWidth={1.2} {...dash} />
-      <rect x={322} y={77} width={116} height={66} rx={33} fill={WALL} stroke={WALL_EDGE} strokeWidth={2} />
-      <rect x={328} y={83} width={104} height={54} rx={27} fill={FILL.cyto} stroke={MUTED} strokeWidth={1.5} />
-      <path d="M356 100 C 366 90, 372 118, 382 104 C 392 92, 396 122, 384 124 C 372 126, 366 112, 358 120 C 352 126, 348 108, 356 100" fill="none" stroke={BLUE} strokeWidth={1.8} />
-      <circle cx={415} cy={122} r={6} fill="none" stroke={PURPLE} strokeWidth={1.6} />
-      {ribos.map(([x, y]) => <circle key={`${x}${y}`} cx={x} cy={y} r={2.6} fill={INK} />)}
-      <path d="M445 110 q6 -9 11 0 t11 0 t9 -2" fill="none" stroke={INK} strokeWidth={1.6} />
-      <He x={310} y={46} size={10}>קופסית</He><Lead x1={312} y1={51} x2={326} y2={74} />
-      <He x={355} y={46} size={10}>דופן</He><Lead x1={355} y1={51} x2={352} y2={78} />
-      <He x={405} y={46} size={10}>ממברנה</He><Lead x1={405} y1={51} x2={410} y2={84} />
-      <He x={455} y={46} size={10}>ריבוזומים</He><Lead x1={452} y1={51} x2={425} y2={97} />
-      <He x={350} y={180} size={10}>נוקלאואיד (DNA)</He><Lead x1={358} y1={168} x2={372} y2={122} />
-      <He x={425} y={180} size={10}>פלסמיד</He><Lead x1={423} y1={168} x2={416} y2={129} />
-      <He x={465} y={134} size={10}>שוטון</He>
-      <He x={380} y={240} size={12.5} bold>תא פרוקריוטי (1–5 µm)</He>
 
-      <ellipse cx={145} cy={118} rx={120} ry={86} fill={FILL.cyto} stroke={MUTED} strokeWidth={1.8} />
-      <circle cx={115} cy={112} r={38} fill={FILL.nuc} stroke={PURPLE} strokeWidth={1.4} />
-      <circle cx={115} cy={112} r={34} fill="none" stroke={PURPLE} strokeWidth={1.4} />
-      <circle cx={106} cy={106} r={10} fill="#c4b5fd" stroke="none" />
-      {[0, 1, 2].map((i) => <path key={i} d={`M${160 + i * 9} ${80 + i * 3} C ${176 + i * 9} ${100}, ${176 + i * 9} ${124}, ${160 + i * 9} ${144 - i * 3}`} fill="none" stroke={BLUE} strokeWidth={1.6} />)}
-      {[[170, 92], [178, 112], [186, 128], [172, 136]].map(([x, y]) => <circle key={`${x}${y}`} cx={x} cy={y} r={2.2} fill={INK} />)}
-      {[0, 1, 2].map((i) => <path key={i} d={`M${200 - i * 2} ${50 + i * 8} q22 -6 44 0`} fill="none" stroke={ORANGE} strokeWidth={2} />)}
-      <ellipse cx={210} cy={160} rx={24} ry={12} fill={FILL.orange} stroke={ORANGE} strokeWidth={1.5} />
-      <path d="M192 160 l5 -6 l5 12 l5 -12 l5 12 l5 -12 l5 12 l5 -6" fill="none" stroke={ORANGE} strokeWidth={1} />
-      <He x={60} y={22} size={10}>גרעין</He><Lead x1={64} y1={27} x2={92} y2={82} />
-      <He x={130} y={22} size={10}>גרעינון</He><Lead x1={127} y1={27} x2={108} y2={95} />
-      <He x={190} y={22} size={10}>ER</He><Lead x1={190} y1={27} x2={170} y2={84} />
-      <He x={250} y={36} size={10}>גולג'י</He><Lead x1={246} y1={41} x2={232} y2={52} />
-      <He x={215} y={222} size={10}>מיטוכונדריון</He><Lead x1={214} y1={210} x2={211} y2={173} />
-      <He x={70} y={222} size={10}>ממברנת התא</He><Lead x1={72} y1={210} x2={78} y2={183} />
-      <He x={145} y={240} size={12.5} bold>תא אאוקריוטי (10–100 µm)</He>
-      <He x={240} y={262} size={10} color={MUTED}>לא בקנה מידה — קוטר תא אאוקריוטי גדול בדרך כלל פי 10 ויותר</He>
-    </Svg>
-  );
-}
 
 // ── b1-virus ─────────────────────────────────────────────────────────────────
 function Virus() {
@@ -317,7 +191,7 @@ function Virus() {
       <La x={300} y={48} size={10.5} color={RED} anchor="end">DNA</La><Lead x1={302} y1={44} x2={356} y2={52} />
       <He x={430} y={124} size={10.5} anchor="start">זנב</He><Lead x1={428} y1={120} x2={380} y2={120} />
       <He x={440} y={196} size={10.5} anchor="start">סיבי זנב</He><Lead x1={438} y1={192} x2={414} y2={190} />
-      <He x={370} y={226} size={12.5} bold>בקטריופאג'</He>
+      <He x={370} y={226} size={12.5} bold>{"בקטריופאג'"}</He>
 
       <circle cx={120} cy={110} r={60} fill={FILL.yellow} stroke="#ca8a04" strokeWidth={2.4} />
       {spikes.map((a, i) => (
@@ -338,68 +212,7 @@ function Virus() {
 }
 
 // ── b1-animal-plant-cell ─────────────────────────────────────────────────────
-function AnimalPlantCell() {
-  const legend = ["גרעין", "גרעינון", "ER מחוספס", "ER חלק", "גולג'י", "מיטוכונדריון", "ליזוזום", "צנטריולים", "ממברנת התא", "דופן תאית", "כלורופלסט", "וואקואולה מרכזית", "פלזמודסמה"];
-  const Mito = ({ x, y, r = 0 }: { x: number; y: number; r?: number }) => (
-    <g transform={`rotate(${r} ${x} ${y})`}>
-      <ellipse cx={x} cy={y} rx={17} ry={8} fill={FILL.orange} stroke={ORANGE} strokeWidth={1.3} />
-      <path d={`M${x - 12} ${y} l4 -5 l4 10 l4 -10 l4 10 l4 -10 l4 5`} fill="none" stroke={ORANGE} strokeWidth={0.9} />
-    </g>
-  );
-  const Chloro = ({ x, y, r = 0 }: { x: number; y: number; r?: number }) => (
-    <g transform={`rotate(${r} ${x} ${y})`}>
-      <ellipse cx={x} cy={y} rx={20} ry={10} fill={FILL.green} stroke={GREEN} strokeWidth={1.4} />
-      {[-10, -2, 6].map((d) => <rect key={d} x={x + d} y={y - 6} width={5} height={12} fill={GREEN} opacity={0.6} />)}
-    </g>
-  );
-  const Golgi = ({ x, y }: { x: number; y: number }) => <g>{[0, 1, 2, 3].map((i) => <path key={i} d={`M${x - 18 + i} ${y + i * 5} q18 -7 36 0`} fill="none" stroke={ORANGE} strokeWidth={2} />)}</g>;
-  return (
-    <Svg h={360} label="תא של בעל חיים מול תא צמחי, עם אברונים ממוספרים: גרעין, גרעינון, ER מחוספס וחלק, גולג'י, מיטוכונדריה, ליזוזומים וצנטריולים בתא של בעל החיים; בתא הצמחי גם דופן תאית, כלורופלסטים, וואקואולה מרכזית ופלזמודסמטה.">
-      <He x={120} y={18} size={12.5} bold>תא של בעל חיים</He>
-      <ellipse cx={120} cy={120} rx={105} ry={88} fill={FILL.cyto} stroke={MUTED} strokeWidth={2} />
-      <circle cx={110} cy={118} r={30} fill={FILL.nuc} stroke={PURPLE} strokeWidth={2.4} />
-      <circle cx={104} cy={112} r={9} fill="#c4b5fd" />
-      {[0, 1, 2].map((i) => <path key={i} d={`M${146 + i * 8} ${94 + i * 2} C ${160 + i * 8} 108, ${160 + i * 8} 130, ${146 + i * 8} ${142 - i * 2}`} fill="none" stroke={BLUE} strokeWidth={1.6} />)}
-      {[[156, 102], [164, 118], [170, 132]].map(([x, y]) => <circle key={x} cx={x} cy={y} r={2} fill={INK} />)}
-      {[0, 1].map((i) => <path key={i} d={`M${60 + i * 8} ${172 - i * 4} q10 -14 26 -10 q10 4 22 -6`} fill="none" stroke={TEAL} strokeWidth={1.6} />)}
-      <Golgi x={110} y={52} />
-      <Mito x={190} y={150} r={-20} />
-      <Mito x={50} y={100} r={70} />
-      <circle cx={190} cy={96} r={7} fill={FILL.red} stroke={RED} strokeWidth={1.3} />
-      <rect x={72} y={56} width={5} height={14} fill={INK} transform="rotate(20 74 63)" />
-      <rect x={80} y={60} width={14} height={5} fill={INK} />
-      <Badge x={110} y={160} n={1} /><Badge x={84} y={112} n={2} /><Badge x={190} y={120} n={3} /><Badge x={110} y={190} n={4} />
-      <Badge x={148} y={52} n={5} /><Badge x={190} y={176} n={6} /><Badge x={205} y={86} n={7} /><Badge x={60} y={50} n={8} /><Badge x={24} y={150} n={9} />
 
-      <He x={360} y={18} size={12.5} bold>תא צמחי</He>
-      <rect x={250} y={30} width={220} height={182} rx={6} fill={WALL} stroke={WALL_EDGE} strokeWidth={2} />
-      <rect x={258} y={38} width={204} height={166} rx={4} fill={FILL.cyto} stroke={MUTED} strokeWidth={1.5} />
-      <rect x={300} y={70} width={140} height={110} rx={22} fill={FILL.sky} stroke={TEAL} strokeWidth={1.6} />
-      <circle cx={276} cy={110} r={14} fill={FILL.nuc} stroke={PURPLE} strokeWidth={2.2} />
-      <circle cx={274} cy={108} r={4.5} fill="#c4b5fd" />
-      <Chloro x={300} y={52} /><Chloro x={362} y={52} /><Chloro x={426} y={190} /><Chloro x={448} y={110} r={90} />
-      <Mito x={340} y={192} /><Mito x={276} y={160} r={80} />
-      <Golgi x={420} y={52} />
-      {[95, 145].map((y) => <rect key={y} x={462} y={y} width={8} height={5} fill={FILL.cyto} stroke={WALL_EDGE} strokeWidth={0.8} />)}
-      <Badge x={276} y={86} n={1} /><Badge x={296} y={186} n={6} /><Badge x={420} y={72} n={5} /><Badge x={331} y={52} n={11} /><Badge x={370} y={125} n={12} />
-      <Badge x={240} y={60} n={10} /><Badge x={451} y={170} n={9} /><Badge x={478 - 8} y={84} n={13} />
-
-      {legend.map((t, i) => {
-        const col = i < 7 ? 0 : 1;
-        const row = i < 7 ? i : i - 7;
-        const x = col === 0 ? 450 : 220;
-        const y = 240 + row * 17;
-        return (
-          <g key={t}>
-            <Badge x={x} y={y - 4} n={i + 1} />
-            <He x={x - 14} y={y} size={11} anchor="end">{t}</He>
-          </g>
-        );
-      })}
-      <He x={110} y={346} size={10} color={MUTED}>לשניהם: גרעין, ER, גולג'י, מיטוכונדריה</He>
-    </Svg>
-  );
-}
 
 // ── b1-tonicity ──────────────────────────────────────────────────────────────
 function Tonicity() {
@@ -448,47 +261,7 @@ function Tonicity() {
 }
 
 // ── b1-transport-modes ───────────────────────────────────────────────────────
-function TransportModes() {
-  const M = { y1: 98, y2: 122 };
-  return (
-    <Svg h={240} label="דרכי מעבר דרך הממברנה (למעלה — מחוץ לתא, למטה — הציטופלזמה): דיפוזיה פשוטה, תעלה ונשא — הובלה סבילה במורד המפל; משאבת נתרן-אשלגן שצורכת ATP — הובלה פעילה ראשונית; וסימפורט Na⁺-גלוקוז — הובלה פעילה משנית.">
-      <rect x={10} y={M.y1} width={460} height={M.y2 - M.y1} fill="#fef9c3" />
-      <line x1={10} x2={470} y1={M.y1} y2={M.y1} stroke={MUTED} strokeWidth={1.6} />
-      <line x1={10} x2={470} y1={M.y2} y2={M.y2} stroke={MUTED} strokeWidth={1.6} />
 
-      <La x={440} y={48} size={11} bold>O₂, CO₂</La>
-      <Arrow x1={440} y1={58} x2={440} y2={152} color={INK} />
-
-      <rect x={336} y={86} width={13} height={48} rx={4} fill={FILL.blue} stroke={BLUE} strokeWidth={1.4} />
-      <rect x={361} y={86} width={13} height={48} rx={4} fill={FILL.blue} stroke={BLUE} strokeWidth={1.4} />
-      <He x={355} y={48} size={11} bold>יון</He>
-      <Arrow x1={355} y1={58} x2={355} y2={152} color={BLUE} />
-
-      <rect x={250} y={84} width={40} height={52} rx={12} fill={FILL.green} stroke={GREEN} strokeWidth={1.4} />
-      <He x={270} y={48} size={11} bold>גלוקוז</He>
-      <Arrow x1={270} y1={58} x2={270} y2={152} color={GREEN} />
-
-      <rect x={150} y={84} width={40} height={52} rx={6} fill={FILL.purple} stroke={PURPLE} strokeWidth={1.4} />
-      <Arrow x1={160} y1={140} x2={160} y2={60} color={RED} width={2} />
-      <Arrow x1={180} y1={60} x2={180} y2={140} color={ORANGE} width={2} />
-      <La x={152} y={54} size={11} bold color={RED} anchor="end">3Na⁺</La>
-      <La x={188} y={54} size={11} bold color={ORANGE} anchor="start">2K⁺</La>
-      <La x={170} y={160} size={10} color={PURPLE}>ATP → ADP + Pᵢ</La>
-
-      <rect x={42} y={84} width={40} height={52} rx={12} fill={FILL.teal} stroke={TEAL} strokeWidth={1.4} />
-      <Arrow x1={52} y1={60} x2={52} y2={140} color={RED} width={2} />
-      <Arrow x1={72} y1={60} x2={72} y2={140} color={GREEN} width={2} />
-      <La x={44} y={54} size={11} bold color={RED} anchor="end">Na⁺</La>
-      <He x={80} y={54} size={11} bold color={GREEN} anchor="start">גלוקוז</He>
-
-      {([[440, "דיפוזיה פשוטה"], [355, "תעלה"], [270, "נשא"], [170, "משאבה (ראשונית)"], [62, "סימפורט (משנית)"]] as [number, string][]).map(([x, t]) => <He key={t} x={x} y={182} size={11} bold>{t}</He>)}
-      <path d="M232 192 L232 198 L472 198 L472 192" fill="none" stroke={GREEN} strokeWidth={1.4} />
-      <He x={352} y={218} size={11} color={GREEN}>הובלה סבילה — במורד המפל</He>
-      <path d="M12 192 L12 198 L214 198 L214 192" fill="none" stroke={RED} strokeWidth={1.4} />
-      <He x={113} y={218} size={11} color={RED}>הובלה פעילה — נגד המפל</He>
-    </Svg>
-  );
-}
 
 // ── b1-exergonic ─────────────────────────────────────────────────────────────
 function Exergonic() {

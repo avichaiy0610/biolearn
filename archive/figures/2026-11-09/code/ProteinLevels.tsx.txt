@@ -1,0 +1,42 @@
+function ProteinLevels() {
+  const beads = [[388, 48], [410, 62], [432, 52], [452, 70], [440, 92], [418, 104], [396, 118], [410, 140], [434, 150]];
+  const helix: string[] = [];
+  for (let i = 0; i <= 120; i++) {
+    const t = (i / 120) * 7 * Math.PI;
+    helix.push(`${i ? "L" : "M"}${(300 + 18 * Math.cos(t)).toFixed(1)} ${(36 + t * 3.2 + 5 * Math.sin(t)).toFixed(1)}`);
+  }
+  const strand = (y: number, dir: 1 | -1) => {
+    const x0 = dir === 1 ? 266 : 334, x1 = dir === 1 ? 326 : 274;
+    return <path d={`M${x0} ${y - 4} L${x1 - dir * 8} ${y - 4} L${x1 - dir * 8} ${y - 9} L${x1} ${y} L${x1 - dir * 8} ${y + 9} L${x1 - dir * 8} ${y + 4} L${x0} ${y + 4} Z`} fill={FILL.yellow} stroke={ORANGE} strokeWidth={1.3} />;
+  };
+  const panels: [number, string, string, string][] = [
+    [420, "ראשוני", "רצף חומצות האמינו", "קשרים פפטידיים"],
+    [300, "שניוני", "סליל α ומשטח β", "קשרי מימן בשלד"],
+    [180, "שלישוני", "קיפול השרשרת כולה", "קשרים בין שרשראות צד"],
+    [60, "רבעוני", "כמה תת-יחידות", "(המוגלובין: 2α + 2β)"],
+  ];
+  return (
+    <Svg h={235} label="ארבע רמות המבנה של חלבון: ראשוני — רצף חומצות האמינו; שניוני — סליל α ומשטח β שמוחזקים בקשרי מימן של השלד; שלישוני — הקיפול התלת-ממדי של שרשרת אחת; רבעוני — כמה תת-יחידות.">
+      <polyline points={beads.map((p) => p.join(",")).join(" ")} fill="none" stroke={MUTED} strokeWidth={1.5} />
+      {beads.map(([x, y], i) => <circle key={i} cx={x} cy={y} r={8} fill={[FILL.green, FILL.blue, FILL.orange, FILL.purple][i % 4]} stroke={INK} strokeWidth={1} />)}
+      <path d={helix.join("")} fill="none" stroke={RED} strokeWidth={2.2} />
+      {strand(122, 1)}{strand(140, -1)}{strand(158, 1)}
+      <path d="M150 70 C 120 40, 210 30, 214 70 C 218 100, 160 92, 156 118 C 152 146, 214 150, 206 120 C 200 96, 236 100, 222 136 C 210 166, 140 166, 140 136 C 140 110, 176 80, 150 70" fill="none" stroke={PURPLE} strokeWidth={2.4} />
+      <circle cx={184} cy={102} r={5} fill="#fde68a" stroke="#b45309" />
+      <La x={184} y={88} size={9} color="#b45309">S–S</La>
+      {[[40, 70, GREEN, FILL.green, "α"], [82, 70, BLUE, FILL.blue, "β"], [40, 118, BLUE, FILL.blue, "β"], [82, 118, GREEN, FILL.green, "α"]].map(([x, y, c, f, t], i) => (
+        <g key={i}>
+          <ellipse cx={x as number} cy={y as number} rx={22} ry={22} fill={f as string} stroke={c as string} strokeWidth={1.6} />
+          <La x={x as number} y={(y as number) + 5} size={14} bold color={c as string}>{t as string}</La>
+        </g>
+      ))}
+      {panels.map(([x, t, d1, d2]) => (
+        <g key={t}>
+          <He x={x} y={190} size={13} bold>{t}</He>
+          <He x={x} y={207} size={10.5} color={MUTED}>{d1}</He>
+          <He x={x} y={222} size={10.5} color={MUTED}>{d2}</He>
+        </g>
+      ))}
+    </Svg>
+  );
+}
