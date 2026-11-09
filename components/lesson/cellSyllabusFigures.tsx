@@ -1,6 +1,11 @@
 /* Original textbook-informed drawings. See visual-lab/cell-2024-gaps/learning-card.md. */
 import type React from "react";
 import { He, La, BLUE, GREEN, INK, MUTED, ORANGE } from "./biochemFigures";
+import AnatomyEmbed from "./anatomy/AnatomyEmbed";
+
+function FluorescenceMicroscope() {
+  return <AnatomyEmbed src="/figures/anatomy/fluorescence-microscope.html" title="מיקרוסקופ פלואורסצנטי — אינטראקטיבי" />;
+}
 
 const PURPLE = "#7c3aed", RED = "#b91c1c", PALE = "#f1f5f9";
 function Frame({ h, label, children }: { h: number; label: string; children: React.ReactNode }) {
@@ -225,5 +230,6 @@ export const CELL_SYLLABUS_FIGURES: Record<string, {el:()=>React.ReactElement;ca
   "apoptosis-pathways": {el:ApoptosisPathways,captionHe:"מסלול Fas–FADD–DISC והמסלול המיטוכונדריאלי מתכנסים לקספאזות 3 ו־7. BH3-only מנטרלים Bcl-2 וחלקם מפעילים Bax/Bak ישירות; tBid מגביר את הקשר בין המסלולים. Smac יוצא דרך MOMP ומנטרל XIAP, נציג ממשפחת IAP שמעכב קספאזות 9, 3 ו־7. TNFR1 אינו מיוצג: קומפלקסי האיתות שלו שונים מ־Fas. למינים נחתכים בעיקר בידי קספאזה־6 במפל הביצוע. סכמטי, לא בקנה מידה."},
   "meiosis-cohesin": {el:MeiosisCohesin,captionHe:"זוג הומולוגים אחד וארבע כרומטידות: כיאזמה וקוהזין בזרועות מחזיקים את ההומולוגים עד אנאפאזה I. הקוהזין הצנטרומרי מוגן בידי שוגושין–PP2A ונשמר עד מיוזה II. שני תאי הבת מוצגים בחלוקה השנייה. מוצג חיבור מקומי אחד לכל קינטוכור, ללא כל סיבי הכישור; הצבע מציין מוצא צנטרומרי, ואינו ממפה מקטעים לאחר שחלוף. סכמטי."},
   "facs-dna-profile": {el:FacsDnaProfile,captionHe:"נתוני התרגיל facs-profiles: ללא טיפול 60/25/15; נוקודזול 10/10/80; מעכב RhoA ‏35/15/35/15 (האחרון ב־8C). אחוזים הם שטחי רכיבי ההתפלגות, לא גובה הפסגות. צורות הפסגות סכמטיות, בצירים משותפים; אינן מדידה ניסויית. נוקודזול פוגע בכישור; כשל ציטוקינזיס בעקבות עיכוב RhoA יכול להוביל לשכפול נוסף ול־8C. אחרי כשל כזה, 4C עשוי להיות גם תא דו־גרעיני שחזר ל־G1. נדרשים סינון צברי תאים וסמן מיטוטי להסקה."},
+  "fluorescence-microscope": {el:FluorescenceMicroscope,captionHe:"איור אינטראקטיבי: הזזת העכבר (או החצים) מחליפה את קוביית המסננים — DAPI, GFP, mCherry — ואחריהן מיזוג של שלושת הצבעים ודוגמה לקולוקליזציה. הגרף מראה את ספקטרום העירור והפליטה ואת מה שכל מסנן מעביר. שיאי הספקטרום אמיתיים; צורת העקומות ותמונת התאים סכמטיות."},
   "immunofluorescence-steps": {el:ImmunofluorescenceSteps,captionHe:"דוגמה לצביעה עקיפה בתאים שקובעו בפורמלדהיד: פרמאביליזציה, חסימה, ראשוני, שטיפה, משני מסומן, שטיפה, DAPI וצילום. כמה משניים יכולים להיקשר לראשוני ולהגביר את האות. בחלונית הטופולוגיה קצה N חוץ־תאי וקצה C ציטוזולי: רק לאחר פתיחת הממברנה שני הקצוות נגישים לנוגדנים. קיבוע במתנול עשוי גם לבצע פרמאביליזציה, ולכן נדרש קיבוע שמשמר ממברנה לביקורת ללא פרמאביליזציה. סכמטי."},
 };
