@@ -1,0 +1,29 @@
+function BirdLung() {
+  const num = (x: number, y: number, n: string) => <He x={x} y={y} size={12} bold color={RED}>{n}</He>;
+  return (
+    <Svg h={262} label="זרימת האוויר בציפור: בשאיפה הראשונה האוויר עובר בברונכוס לשקי האוויר האחוריים; בנשיפה — מהם לריאה; בשאיפה השנייה — מהריאה לשקי האוויר הקדמיים; ובנשיפה השנייה — החוצה. בריאה האוויר זורם תמיד באותו כיוון.">
+      <rect x={20} y={14} width={16} height={162} rx={6} fill={FILL.gray} stroke={INK} strokeWidth={1.2} />
+      <rect x={20} y={164} width={340} height={12} rx={6} fill={FILL.gray} stroke={INK} strokeWidth={1.2} />
+      <ellipse cx={105} cy={105} rx={45} ry={38} fill={FILL.sky} stroke={BLUE} strokeWidth={1.4} />
+      <rect x={180} y={82} width={130} height={46} rx={8} fill={FILL.red} stroke={RED} strokeWidth={1.4} />
+      {[92, 101, 110, 119].map((y) => <line key={y} x1={186} y1={y} x2={304} y2={y} stroke={RED} strokeWidth={0.8} />)}
+      <ellipse cx={405} cy={110} rx={55} ry={46} fill={FILL.sky} stroke={BLUE} strokeWidth={1.4} />
+      <Arrow x1={28} y1={22} x2={28} y2={160} color={BLUE} />
+      <Arrow x1={44} y1={170} x2={350} y2={170} color={BLUE} />
+      <Arrow x1={356} y1={168} x2={372} y2={150} color={BLUE} />
+      <Arrow x1={362} y1={105} x2={316} y2={105} color={BLUE} />
+      <Arrow x1={176} y1={105} x2={154} y2={105} color={BLUE} />
+      <Arrow x1={70} y1={78} x2={40} y2={42} color={BLUE} />
+      {num(46, 120, "1")}{num(338, 96, "2")}{num(166, 96, "3")}{num(62, 52, "4")}
+      <He x={105} y={58} size={10}>שקי אוויר קדמיים</He>
+      <He x={245} y={72} size={10}>ריאה (פרברונכים)</He>
+      <He x={405} y={56} size={10}>שקי אוויר אחוריים</He>
+      <He x={44} y={14} size={10} anchor="start">קנה הנשימה</He>
+      <He x={200} y={192} size={10} color={MUTED}>ברונכוס ראשי</He>
+      <He x={470} y={218} size={10} anchor="end">1 — שאיפה: לשקים האחוריים</He>
+      <He x={470} y={238} size={10} anchor="end">2 — נשיפה: מהשקים האחוריים לריאה</He>
+      <He x={230} y={218} size={10} anchor="end">3 — שאיפה: מהריאה לשקים הקדמיים</He>
+      <He x={230} y={238} size={10} anchor="end">4 — נשיפה: מהשקים הקדמיים החוצה</He>
+    </Svg>
+  );
+}

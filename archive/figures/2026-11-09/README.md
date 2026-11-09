@@ -10,3 +10,10 @@
 - המקור המוקפא והצילומים הישנים נמצאים גם ב-`visual-lab/textbook-redraws-2/old/`.
 
 **שחזור:** להדביק את הפונקציה בחזרה לקובץ ה-registry ולמחוק את שורת ה-import של `./redraws/<Name>`.
+
+## סבב נוסף — אישור אביחי 9.11
+הגרסאות הישנות של איורים שצוירו מחדש (Codex, textbook-redraws-2) ואושרו ע"י אביחי:
+- `ubiquitinFigures.tsx`: E3Classes (`ub-e3-classes`), ProteasomeCycle (`ub-proteasome-cycle`)
+- `zoologyFigures.tsx`: Sponge (`z-sponge`), Cnidocyte (`z-cnidocyte`), BirdLung (`z-bird-lung`), HairCell (`z-hair-cell`)
+`code/<Name>.tsx.txt` — הפונקציה הישנה בדיוק כפי שהייתה; `svg/` — רינדור בהיר/כהה.
+שחזור: להחזיר את הפונקציה לקובץ המקור, למחוק את שורת `import { <Name> } from "./redraws/<Name>"` ואת `components/lesson/redraws/<Name>.tsx`.

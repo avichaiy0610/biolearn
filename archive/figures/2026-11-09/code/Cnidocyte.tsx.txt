@@ -1,0 +1,33 @@
+function Cnidocyte() {
+  const coil = Array.from({ length: 7 }, (_, i) => `q${i % 2 ? -14 : 14} 5 0 10`).join(" ");
+  return (
+    <Svg h={250} label="תא צורב לפני הירי ואחריו. לפני: כמוסה (נמטוציסט) עם חוט מגולגל ומכסה, וקנידוציל רגיש על פני התא. אחרי גירוי: המכסה נפתח והחוט מתהפך החוצה, עם קוצים בבסיסו; הכמוסה נשארת ריקה.">
+      <ellipse cx={130} cy={150} rx={55} ry={70} fill={FILL.sky} stroke={BLUE} strokeWidth={1.6} />
+      <ellipse cx={130} cy={140} rx={28} ry={45} fill={FILL.yellow} stroke={ORANGE} strokeWidth={1.6} />
+      <path d={`M130 104 ${coil}`} fill="none" stroke={ORANGE} strokeWidth={1.4} />
+      <line x1={118} y1={96} x2={142} y2={96} stroke={ORANGE} strokeWidth={3} />
+      <line x1={150} y1={84} x2={157} y2={56} stroke={INK} strokeWidth={2} />
+      <circle cx={130} cy={203} r={9} fill={FILL.purple} stroke={PURPLE} />
+      <He x={166} y={62} size={10} anchor="start">קנידוציל</He>
+      <He x={36} y={92} size={10}>מכסה</He><Lead x1={50} y1={90} x2={117} y2={96} />
+      <He x={36} y={122} size={10}>נמטוציסט</He><Lead x1={62} y1={120} x2={103} y2={128} />
+      <He x={36} y={166} size={10}>חוט מגולגל</He><Lead x1={66} y1={163} x2={124} y2={160} />
+      <He x={36} y={214} size={10}>גרעין</He><Lead x1={50} y1={211} x2={121} y2={205} />
+      <He x={130} y={244} size={13} bold>לפני הירי</He>
+
+      <He x={240} y={140} size={10} color={MUTED}>מגע / חומר כימי</He>
+      <Arrow x1={195} y1={150} x2={282} y2={150} />
+
+      <ellipse cx={350} cy={150} rx={55} ry={70} fill={FILL.sky} stroke={BLUE} strokeWidth={1.6} />
+      <ellipse cx={350} cy={140} rx={28} ry={45} fill="white" stroke={ORANGE} strokeWidth={1.6} />
+      <line x1={338} y1={95} x2={330} y2={76} stroke={ORANGE} strokeWidth={3} />
+      <path d="M350 95 L350 60 Q352 30 400 22 L462 16" fill="none" stroke={ORANGE} strokeWidth={1.8} />
+      {[66, 76, 86].map((y) => <g key={y}><line x1={350} y1={y} x2={343} y2={y + 6} stroke={ORANGE} strokeWidth={1.4} /><line x1={350} y1={y} x2={357} y2={y + 6} stroke={ORANGE} strokeWidth={1.4} /></g>)}
+      <circle cx={350} cy={203} r={9} fill={FILL.purple} stroke={PURPLE} />
+      <He x={420} y={50} size={10}>חוט שהתהפך החוצה</He>
+      <He x={302} y={66} size={10}>קוצים</He><Lead x1={316} y1={70} x2={341} y2={74} />
+      <He x={450} y={150} size={10}>כמוסה ריקה</He><Lead x1={422} y1={146} x2={377} y2={140} />
+      <He x={350} y={244} size={13} bold>אחרי הירי</He>
+    </Svg>
+  );
+}

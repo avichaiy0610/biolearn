@@ -5,6 +5,8 @@ import { UpsDiscovery, Pink1Parkin as Pink1ParkinDiscovery, ProtacTernary } from
 import { ArrowDefs, BLUE, GREEN, INK, MUTED, ORANGE, He, La } from "./biochemFigures";
 import { Arrow } from "./metabolicFigures";
 import { ProteasomeArchitecture } from "./redraws/ProteasomeArchitecture";
+import { E3Classes } from "./redraws/E3Classes";
+import { ProteasomeCycle } from "./redraws/ProteasomeCycle";
 
 const PURPLE = "#7c3aed";
 const RED = "#b91c1c";
@@ -53,13 +55,6 @@ function Bond({ x1, y1, x2, y2, r1 = 8, r2 = 8 }: { x1: number; y1: number; x2: 
 const Blob = ({ cx, cy, rx = 26, ry = 20, fill = FILL.gray, stroke = MUTED }: { cx: number; cy: number; rx?: number; ry?: number; fill?: string; stroke?: string }) => (
   <ellipse cx={cx} cy={cy} rx={rx} ry={ry} fill={fill} stroke={stroke} strokeWidth={1.4} />
 );
-// Unstructured tail — a wavy line, drawn away from any text.
-const Tail = ({ x, y, len = 44, dir = 1 }: { x: number; y: number; len?: number; dir?: 1 | -1 }) => {
-  const seg = len / 4;
-  let d = `M ${x} ${y}`;
-  for (let i = 0; i < 4; i++) d += ` q ${(seg / 2) * dir} ${i % 2 ? 7 : -7} ${seg * dir} 0`;
-  return <path d={d} fill="none" stroke={INK} strokeWidth={1.8} strokeLinecap="round" />;
-};
 const Lead = ({ x1, y1, x2, y2 }: { x1: number; y1: number; x2: number; y2: number }) => <line x1={x1} y1={y1} x2={x2} y2={y2} stroke={MUTED} strokeWidth={1} />;
 
 // ── ub-conjugation ───────────────────────────────────────────────────────────
@@ -92,55 +87,7 @@ function Cascade() {
   );
 }
 
-function E3Classes() {
-  const row = (y: number, name: string, note: string, color: string, fill: string) => (
-    <g>
-      <Box x={388} y={y - 16} w={68} h={34} fill={fill} stroke={color} size={11} bold>{name}</Box>
-      <He x={422} y={y + 32} size={9.5} color={MUTED}>{note}</He>
-    </g>
-  );
-  return (
-    <Svg h={300} label="שלוש משפחות E3. ב-RING היוביקוויטין עובר ישירות מה-E2 למצע וה-E3 משמש פיגום. ב-HECT היוביקוויטין עובר קודם לציסטאין של ה-E3 ורק ממנו למצע. ב-RBR תחום RING1 קושר את E2 אבל היוביקוויטין עובר דרך ציסטאין בתחום RING2 — שילוב של שתי הדרכים.">
-      {/* RING */}
-      <Box x={40} y={30} w={64} h={34} fill={FILL.green} stroke={GREEN} size={11}>E2</Box>
-      <Ub cx={72} cy={16} r={8} />
-      <Box x={136} y={30} w={74} h={34} fill={FILL.orange} stroke={ORANGE} size={11}>RING</Box>
-      <Blob cx={290} cy={47} rx={30} ry={22} fill={FILL.yellow} stroke={GOLD} />
-      <He x={290} y={51} size={10.5}>מצע</He>
-      <Ub cx={290} cy={14} r={8} />
-      <path d="M 100 34 Q 190 -2 278 22" fill="none" stroke={RED} strokeWidth={1.8} markerEnd="url(#bfArrow)" strokeDasharray="0" />
-      <He x={190} y={84} size={9.5} color={RED}>היוביקוויטין עובר ישירות מ-E2 למצע</He>
-      {row(47, "RING", "ללא ביניים קוולנטי", ORANGE, FILL.orange)}
-      {/* HECT */}
-      <Box x={40} y={136} w={64} h={34} fill={FILL.green} stroke={GREEN} size={11}>E2</Box>
-      <Ub cx={72} cy={122} r={8} />
-      <Box x={136} y={136} w={74} h={34} fill={FILL.purple} stroke={PURPLE} size={11}>HECT</Box>
-      <Ub cx={173} cy={118} r={8} />
-      <La x={173} y={104} size={9} color={PURPLE}>Cys</La>
-      <Arrow x1={106} y1={146} x2={132} y2={132} color={RED} width={1.6} />
-      <Blob cx={290} cy={153} rx={30} ry={22} fill={FILL.yellow} stroke={GOLD} />
-      <He x={290} y={157} size={10.5}>מצע</He>
-      <Ub cx={290} cy={120} r={8} />
-      <Arrow x1={196} y1={124} x2={272} y2={124} color={RED} width={1.6} />
-      <He x={196} y={186} size={9.5} anchor="start" color={RED}>שני שלבים — ה-E3 עצמו קטליטי</He>
-      {row(153, "HECT", "ציסטאין קטליטי", PURPLE, FILL.purple)}
-      {/* RBR */}
-      <Box x={40} y={240} w={64} h={34} fill={FILL.green} stroke={GREEN} size={11}>E2</Box>
-      <Ub cx={72} cy={226} r={8} />
-      <Box x={122} y={240} w={56} h={34} fill={FILL.teal} stroke={TEAL} size={10}>RING1</Box>
-      <Box x={186} y={240} w={56} h={34} fill={FILL.teal} stroke={TEAL} size={10}>RING2</Box>
-      <Ub cx={214} cy={222} r={8} />
-      <La x={214} y={208} size={9} color={TEAL}>Cys</La>
-      <Arrow x1={106} y1={250} x2={118} y2={243} color={MUTED} width={1.4} />
-      <Arrow x1={150} y1={232} x2={196} y2={228} color={RED} width={1.6} />
-      <Blob cx={310} cy={257} rx={30} ry={22} fill={FILL.yellow} stroke={GOLD} />
-      <He x={310} y={261} size={10.5}>מצע</He>
-      <Ub cx={310} cy={224} r={8} />
-      <Arrow x1={234} y1={224} x2={292} y2={224} color={RED} width={1.6} />
-      {row(257, "RBR", "הכלאה", TEAL, FILL.teal)}
-    </Svg>
-  );
-}
+
 
 function Triage() {
   return (
@@ -277,46 +224,7 @@ function WritersReadersErasers() {
 // ── ub-proteasome ────────────────────────────────────────────────────────────
 // ProteasomeArchitecture: redrawn at textbook level (2026-11-05) — see ./redraws/ProteasomeArchitecture.tsx; old code in archive/figures/2026-11-05/.
 
-function ProteasomeCycle() {
-  const step = (x: number, n: string, t1: string, t2: string) => (
-    <g>
-      <circle cx={x} cy={30} r={13} fill={FILL.blue} stroke={BLUE} strokeWidth={1.3} />
-      <La x={x} y={35} size={12} bold color={BLUE}>{n}</La>
-      <He x={x} y={62} size={10} bold>{t1}</He>
-      <He x={x} y={78} size={9.5} color={MUTED}>{t2}</He>
-    </g>
-  );
-  return (
-    <Svg h={250} label="מחזור הפירוק בחמישה שלבים: קישור השרשרת לקולטן — שלב הפיך; היתפסות של אזור לא מקופל בטבעת ה-ATPases, שהיא נקודת ההחלטה; הסרת השרשרת בידי Rpn11 ומחזור היוביקוויטין; פרישה והשחלה בעזרת ATP; ופירוק לפפטידים. מתחת: מצע מסומן שאין לו אזור לא מקופל נקשר ומשתחרר בלי להתפרק.">
-      {step(60, "1", "קישור", "הפיך")}
-      {step(166, "2", "היתפסות", "נקודת ההחלטה")}
-      {step(272, "3", "הסרת שרשרת", "Rpn11 — ממחזר")}
-      {step(378, "4", "פרישה והשחלה", "ATP")}
-      <Arrow x1={82} y1={30} x2={142} y2={30} color={INK} width={1.5} />
-      <Arrow x1={190} y1={30} x2={248} y2={30} color={INK} width={1.5} />
-      <Arrow x1={296} y1={30} x2={354} y2={30} color={INK} width={1.5} />
-      <Arrow x1={420} y1={30} x2={452} y2={30} color={INK} width={1.5} />
-      <He x={458} y={62} size={10} anchor="end" bold>פפטידים</He>
-      {/* the two requirements */}
-      <rect x={24} y={104} width={432} height={62} rx={8} fill={FILL.sky} stroke={BLUE} strokeWidth={1.1} />
-      <He x={444} y={126} size={10.5} anchor="end" bold color={BLUE}>שני תנאים</He>
-      <He x={444} y={146} size={10} anchor="end">שרשרת יוביקוויטין לקישור · אזור התחלה לא מקופל לתפיסה</He>
-      {/* failed substrate */}
-      <Blob cx={92} cy={206} rx={30} ry={22} fill={FILL.yellow} stroke={GOLD} />
-      <He x={92} y={210} size={10}>מקופל לגמרי</He>
-      <Ub cx={92} cy={176} r={8} />
-      <Ub cx={110} cy={186} r={8} />
-      <Arrow x1={128} y1={206} x2={172} y2={206} color={MUTED} width={1.5} />
-      <He x={236} y={198} size={10} color={RED}>נקשר ומשתחרר — בלי פירוק</He>
-      <He x={236} y={216} size={9.5} color={MUTED}>ה-DUBs מסירים את השרשרת</He>
-      {/* with tail */}
-      <Blob cx={404} cy={206} rx={26} ry={20} fill={FILL.yellow} stroke={GOLD} />
-      <Tail x={378} y={206} len={40} dir={-1} />
-      <He x={404} y={210} size={9.5}>עם זנב</He>
-      <He x={404} y={240} size={9.5} color={GREEN}>מתפרק</He>
-    </Svg>
-  );
-}
+
 
 // ── ub-like ──────────────────────────────────────────────────────────────────
 function NeddylationCycle() {

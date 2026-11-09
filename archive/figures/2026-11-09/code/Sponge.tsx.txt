@@ -1,0 +1,37 @@
+function Sponge() {
+  const pores = [110, 150, 190];
+  const chY = [84, 97, 124, 137, 164, 177, 204, 217];
+  const choano = (x: number, y: number, dir: 1 | -1, k: string) => (
+    <g key={k}>
+      <line x1={x} y1={y} x2={x + dir * 9} y2={y - 3} stroke={GREEN} strokeWidth={1} />
+      <circle cx={x} cy={y} r={4.5} fill={FILL.green} stroke={GREEN} />
+    </g>
+  );
+  return (
+    <Svg h={290} label="ספוג פשוט בחתך: מים נכנסים דרך נקבוביות בדופן לחלל המרכזי, שמרופד בתאי צווארון עם שוטונים, ויוצאים דרך האוסקולום למעלה. משמאל — תא צווארון מוגדל.">
+      <rect x={110} y={70} width={25} height={175} fill={FILL.yellow} stroke={ORANGE} strokeWidth={1.4} />
+      <rect x={265} y={70} width={25} height={175} fill={FILL.yellow} stroke={ORANGE} strokeWidth={1.4} />
+      <rect x={110} y={230} width={180} height={20} fill={FILL.yellow} stroke={ORANGE} strokeWidth={1.4} />
+      <rect x={111} y={231} width={178} height={14} fill={FILL.yellow} />
+      {pores.map((y) => <g key={y}><rect x={108} y={y - 4} width={29} height={8} fill="white" /><rect x={263} y={y - 4} width={29} height={8} fill="white" /></g>)}
+      {chY.map((y) => choano(141, y, 1, `l${y}`))}
+      {chY.map((y) => choano(259, y, -1, `r${y}`))}
+      {[155, 175, 200, 225, 245].map((x) => choano(x, 224, 1, `b${x}`))}
+      {pores.map((y) => <g key={y}><Arrow x1={62} y1={y} x2={132} y2={y} color={BLUE} /><Arrow x1={338} y1={y} x2={268} y2={y} color={BLUE} /></g>)}
+      <Arrow x1={200} y1={150} x2={200} y2={32} color={BLUE} width={2.4} />
+      <He x={212} y={40} size={11} anchor="start">אוסקולום — יציאת המים</He>
+      <He x={58} y={96} size={11}>נקבובית (אוסטיה)</He>
+      <He x={200} y={200} size={11} color={MUTED}>חלל מרכזי</He>
+      <line x1={420} y1={224} x2={414} y2={182} stroke={GREEN} strokeWidth={1.2} />
+      <line x1={436} y1={224} x2={442} y2={182} stroke={GREEN} strokeWidth={1.2} />
+      {[190, 198, 206, 214].map((y) => <line key={y} x1={418 - (224 - y) * 0.1} y1={y} x2={438 + (224 - y) * 0.1} y2={y} stroke={GREEN} strokeWidth={0.6} strokeDasharray="1 2" />)}
+      <path d="M428 222 q-6 -8 0 -16 t0 -16 t0 -16 t0 -16" fill="none" stroke={GREEN} strokeWidth={1.4} />
+      <circle cx={428} cy={238} r={15} fill={FILL.green} stroke={GREEN} strokeWidth={1.4} />
+      <circle cx={428} cy={242} r={5} fill="white" stroke={GREEN} />
+      <Lead x1={380} y1={210} x2={264} y2={178} />
+      <He x={428} y={286} size={11}>תא צווארון (קואנוציט)</He>
+      <He x={446} y={200} size={9} color={MUTED} anchor="start">צווארון</He>
+      <He x={436} y={166} size={9} color={MUTED} anchor="start">שוטון</He>
+    </Svg>
+  );
+}

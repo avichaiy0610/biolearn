@@ -4,6 +4,10 @@
 import type React from "react";
 import { ArrowDefs, BLUE, GREEN, INK, MUTED, ORANGE, He } from "./biochemFigures";
 import { Arrow } from "./metabolicFigures";
+import { Sponge } from "./redraws/Sponge";
+import { Cnidocyte } from "./redraws/Cnidocyte";
+import { BirdLung } from "./redraws/BirdLung";
+import { HairCell } from "./redraws/HairCell";
 
 const PURPLE = "#7c3aed";
 const RED = "#b91c1c";
@@ -178,43 +182,7 @@ function Paramecium() {
 }
 
 // ── z-sponge ─────────────────────────────────────────────────────────────────
-function Sponge() {
-  const pores = [110, 150, 190];
-  const chY = [84, 97, 124, 137, 164, 177, 204, 217];
-  const choano = (x: number, y: number, dir: 1 | -1, k: string) => (
-    <g key={k}>
-      <line x1={x} y1={y} x2={x + dir * 9} y2={y - 3} stroke={GREEN} strokeWidth={1} />
-      <circle cx={x} cy={y} r={4.5} fill={FILL.green} stroke={GREEN} />
-    </g>
-  );
-  return (
-    <Svg h={290} label="ספוג פשוט בחתך: מים נכנסים דרך נקבוביות בדופן לחלל המרכזי, שמרופד בתאי צווארון עם שוטונים, ויוצאים דרך האוסקולום למעלה. משמאל — תא צווארון מוגדל.">
-      <rect x={110} y={70} width={25} height={175} fill={FILL.yellow} stroke={ORANGE} strokeWidth={1.4} />
-      <rect x={265} y={70} width={25} height={175} fill={FILL.yellow} stroke={ORANGE} strokeWidth={1.4} />
-      <rect x={110} y={230} width={180} height={20} fill={FILL.yellow} stroke={ORANGE} strokeWidth={1.4} />
-      <rect x={111} y={231} width={178} height={14} fill={FILL.yellow} />
-      {pores.map((y) => <g key={y}><rect x={108} y={y - 4} width={29} height={8} fill="white" /><rect x={263} y={y - 4} width={29} height={8} fill="white" /></g>)}
-      {chY.map((y) => choano(141, y, 1, `l${y}`))}
-      {chY.map((y) => choano(259, y, -1, `r${y}`))}
-      {[155, 175, 200, 225, 245].map((x) => choano(x, 224, 1, `b${x}`))}
-      {pores.map((y) => <g key={y}><Arrow x1={62} y1={y} x2={132} y2={y} color={BLUE} /><Arrow x1={338} y1={y} x2={268} y2={y} color={BLUE} /></g>)}
-      <Arrow x1={200} y1={150} x2={200} y2={32} color={BLUE} width={2.4} />
-      <He x={212} y={40} size={11} anchor="start">אוסקולום — יציאת המים</He>
-      <He x={58} y={96} size={11}>נקבובית (אוסטיה)</He>
-      <He x={200} y={200} size={11} color={MUTED}>חלל מרכזי</He>
-      <line x1={420} y1={224} x2={414} y2={182} stroke={GREEN} strokeWidth={1.2} />
-      <line x1={436} y1={224} x2={442} y2={182} stroke={GREEN} strokeWidth={1.2} />
-      {[190, 198, 206, 214].map((y) => <line key={y} x1={418 - (224 - y) * 0.1} y1={y} x2={438 + (224 - y) * 0.1} y2={y} stroke={GREEN} strokeWidth={0.6} strokeDasharray="1 2" />)}
-      <path d="M428 222 q-6 -8 0 -16 t0 -16 t0 -16 t0 -16" fill="none" stroke={GREEN} strokeWidth={1.4} />
-      <circle cx={428} cy={238} r={15} fill={FILL.green} stroke={GREEN} strokeWidth={1.4} />
-      <circle cx={428} cy={242} r={5} fill="white" stroke={GREEN} />
-      <Lead x1={380} y1={210} x2={264} y2={178} />
-      <He x={428} y={286} size={11}>תא צווארון (קואנוציט)</He>
-      <He x={446} y={200} size={9} color={MUTED} anchor="start">צווארון</He>
-      <He x={436} y={166} size={9} color={MUTED} anchor="start">שוטון</He>
-    </Svg>
-  );
-}
+
 
 // ── z-polyp-medusa ───────────────────────────────────────────────────────────
 function PolypMedusa() {
@@ -250,39 +218,7 @@ function PolypMedusa() {
 }
 
 // ── z-cnidocyte ──────────────────────────────────────────────────────────────
-function Cnidocyte() {
-  const coil = Array.from({ length: 7 }, (_, i) => `q${i % 2 ? -14 : 14} 5 0 10`).join(" ");
-  return (
-    <Svg h={250} label="תא צורב לפני הירי ואחריו. לפני: כמוסה (נמטוציסט) עם חוט מגולגל ומכסה, וקנידוציל רגיש על פני התא. אחרי גירוי: המכסה נפתח והחוט מתהפך החוצה, עם קוצים בבסיסו; הכמוסה נשארת ריקה.">
-      <ellipse cx={130} cy={150} rx={55} ry={70} fill={FILL.sky} stroke={BLUE} strokeWidth={1.6} />
-      <ellipse cx={130} cy={140} rx={28} ry={45} fill={FILL.yellow} stroke={ORANGE} strokeWidth={1.6} />
-      <path d={`M130 104 ${coil}`} fill="none" stroke={ORANGE} strokeWidth={1.4} />
-      <line x1={118} y1={96} x2={142} y2={96} stroke={ORANGE} strokeWidth={3} />
-      <line x1={150} y1={84} x2={157} y2={56} stroke={INK} strokeWidth={2} />
-      <circle cx={130} cy={203} r={9} fill={FILL.purple} stroke={PURPLE} />
-      <He x={166} y={62} size={10} anchor="start">קנידוציל</He>
-      <He x={36} y={92} size={10}>מכסה</He><Lead x1={50} y1={90} x2={117} y2={96} />
-      <He x={36} y={122} size={10}>נמטוציסט</He><Lead x1={62} y1={120} x2={103} y2={128} />
-      <He x={36} y={166} size={10}>חוט מגולגל</He><Lead x1={66} y1={163} x2={124} y2={160} />
-      <He x={36} y={214} size={10}>גרעין</He><Lead x1={50} y1={211} x2={121} y2={205} />
-      <He x={130} y={244} size={13} bold>לפני הירי</He>
 
-      <He x={240} y={140} size={10} color={MUTED}>מגע / חומר כימי</He>
-      <Arrow x1={195} y1={150} x2={282} y2={150} />
-
-      <ellipse cx={350} cy={150} rx={55} ry={70} fill={FILL.sky} stroke={BLUE} strokeWidth={1.6} />
-      <ellipse cx={350} cy={140} rx={28} ry={45} fill="white" stroke={ORANGE} strokeWidth={1.6} />
-      <line x1={338} y1={95} x2={330} y2={76} stroke={ORANGE} strokeWidth={3} />
-      <path d="M350 95 L350 60 Q352 30 400 22 L462 16" fill="none" stroke={ORANGE} strokeWidth={1.8} />
-      {[66, 76, 86].map((y) => <g key={y}><line x1={350} y1={y} x2={343} y2={y + 6} stroke={ORANGE} strokeWidth={1.4} /><line x1={350} y1={y} x2={357} y2={y + 6} stroke={ORANGE} strokeWidth={1.4} /></g>)}
-      <circle cx={350} cy={203} r={9} fill={FILL.purple} stroke={PURPLE} />
-      <He x={420} y={50} size={10}>חוט שהתהפך החוצה</He>
-      <He x={302} y={66} size={10}>קוצים</He><Lead x1={316} y1={70} x2={341} y2={74} />
-      <He x={450} y={150} size={10}>כמוסה ריקה</He><Lead x1={422} y1={146} x2={377} y2={140} />
-      <He x={350} y={244} size={13} bold>אחרי הירי</He>
-    </Svg>
-  );
-}
 
 // ── z-worm-sections ──────────────────────────────────────────────────────────
 function WormSections() {
@@ -613,35 +549,7 @@ function Countercurrent() {
 }
 
 // ── z-bird-lung ──────────────────────────────────────────────────────────────
-function BirdLung() {
-  const num = (x: number, y: number, n: string) => <He x={x} y={y} size={12} bold color={RED}>{n}</He>;
-  return (
-    <Svg h={262} label="זרימת האוויר בציפור: בשאיפה הראשונה האוויר עובר בברונכוס לשקי האוויר האחוריים; בנשיפה — מהם לריאה; בשאיפה השנייה — מהריאה לשקי האוויר הקדמיים; ובנשיפה השנייה — החוצה. בריאה האוויר זורם תמיד באותו כיוון.">
-      <rect x={20} y={14} width={16} height={162} rx={6} fill={FILL.gray} stroke={INK} strokeWidth={1.2} />
-      <rect x={20} y={164} width={340} height={12} rx={6} fill={FILL.gray} stroke={INK} strokeWidth={1.2} />
-      <ellipse cx={105} cy={105} rx={45} ry={38} fill={FILL.sky} stroke={BLUE} strokeWidth={1.4} />
-      <rect x={180} y={82} width={130} height={46} rx={8} fill={FILL.red} stroke={RED} strokeWidth={1.4} />
-      {[92, 101, 110, 119].map((y) => <line key={y} x1={186} y1={y} x2={304} y2={y} stroke={RED} strokeWidth={0.8} />)}
-      <ellipse cx={405} cy={110} rx={55} ry={46} fill={FILL.sky} stroke={BLUE} strokeWidth={1.4} />
-      <Arrow x1={28} y1={22} x2={28} y2={160} color={BLUE} />
-      <Arrow x1={44} y1={170} x2={350} y2={170} color={BLUE} />
-      <Arrow x1={356} y1={168} x2={372} y2={150} color={BLUE} />
-      <Arrow x1={362} y1={105} x2={316} y2={105} color={BLUE} />
-      <Arrow x1={176} y1={105} x2={154} y2={105} color={BLUE} />
-      <Arrow x1={70} y1={78} x2={40} y2={42} color={BLUE} />
-      {num(46, 120, "1")}{num(338, 96, "2")}{num(166, 96, "3")}{num(62, 52, "4")}
-      <He x={105} y={58} size={10}>שקי אוויר קדמיים</He>
-      <He x={245} y={72} size={10}>ריאה (פרברונכים)</He>
-      <He x={405} y={56} size={10}>שקי אוויר אחוריים</He>
-      <He x={44} y={14} size={10} anchor="start">קנה הנשימה</He>
-      <He x={200} y={192} size={10} color={MUTED}>ברונכוס ראשי</He>
-      <He x={470} y={218} size={10} anchor="end">1 — שאיפה: לשקים האחוריים</He>
-      <He x={470} y={238} size={10} anchor="end">2 — נשיפה: מהשקים האחוריים לריאה</He>
-      <He x={230} y={218} size={10} anchor="end">3 — שאיפה: מהריאה לשקים הקדמיים</He>
-      <He x={230} y={238} size={10} anchor="end">4 — נשיפה: מהשקים הקדמיים החוצה</He>
-    </Svg>
-  );
-}
+
 
 // ── z-circuits ───────────────────────────────────────────────────────────────
 function Circuits() {
@@ -728,40 +636,7 @@ function BrainComparison() {
 }
 
 // ── z-hair-cell ──────────────────────────────────────────────────────────────
-function HairCell() {
-  const cell = (cx: number, tilt: number, spikes: number, title: string, sub: string, arrow: number) => {
-    const heights = [20, 26, 32, 38, 44];
-    return (
-      <g>
-        <He x={cx} y={22} size={11} bold>{title}</He>
-        {arrow !== 0 && <Arrow x1={cx - arrow * 16} y1={40} x2={cx + arrow * 16} y2={40} color={RED} />}
-        <g transform={`rotate(${tilt} ${cx} 110)`}>
-          {heights.map((h, i) => <line key={h} x1={cx - 16 + i * 7} y1={110} x2={cx - 16 + i * 7} y2={110 - h} stroke={TEAL} strokeWidth={2.4} strokeLinecap="round" />)}
-          <line x1={cx + 19} y1={110} x2={cx + 19} y2={58} stroke={INK} strokeWidth={2.6} strokeLinecap="round" />
-        </g>
-        <rect x={cx - 26} y={110} width={52} height={66} rx={10} fill={FILL.teal} stroke={TEAL} strokeWidth={1.4} />
-        <circle cx={cx} cy={150} r={8} fill="white" stroke={TEAL} />
-        <line x1={cx} y1={176} x2={cx} y2={198} stroke={PURPLE} strokeWidth={2} />
-        <line x1={cx - 44} y1={222} x2={cx + 44} y2={222} stroke={MUTED} strokeWidth={1} />
-        {Array.from({ length: spikes }, (_, i) => {
-          const x = cx - 40 + ((i + 0.5) * 80) / spikes;
-          return <line key={i} x1={x} y1={222} x2={x} y2={206} stroke={PURPLE} strokeWidth={1.6} />;
-        })}
-        <He x={cx} y={240} size={10} color={MUTED}>{sub}</He>
-      </g>
-    );
-  };
-  return (
-    <Svg h={250} label="תא שערה: כשהצרור מתכופף לעבר השערה הארוכה (הקינוציליום), התא משחרר יותר מוליך ותדירות הפוטנציאלים בעצב עולה; כשהוא מתכופף לכיוון ההפוך — התדירות יורדת מתחת לקצב הבסיסי.">
-      {cell(80, 0, 5, "מנוחה", "קצב בסיסי", 0)}
-      {cell(240, 18, 12, "כפיפה לעבר הארוכה", "יותר פוטנציאלי פעולה", 1)}
-      {cell(400, -18, 1, "כפיפה הפוכה", "פחות פוטנציאלי פעולה", -1)}
-      <He x={142} y={56} size={10} anchor="start">קינוציליום</He><Lead x1={140} y1={58} x2={102} y2={60} />
-      <He x={30} y={74} size={10}>סטריאוצילים</He><Lead x1={40} y1={80} x2={64} y2={90} />
-      <He x={88} y={194} size={10} anchor="start" color={PURPLE}>עצב</He>
-    </Svg>
-  );
-}
+
 
 // ── z-skin-layers ────────────────────────────────────────────────────────────
 function SkinLayers() {

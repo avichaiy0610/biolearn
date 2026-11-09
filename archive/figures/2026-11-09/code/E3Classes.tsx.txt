@@ -1,0 +1,49 @@
+function E3Classes() {
+  const row = (y: number, name: string, note: string, color: string, fill: string) => (
+    <g>
+      <Box x={388} y={y - 16} w={68} h={34} fill={fill} stroke={color} size={11} bold>{name}</Box>
+      <He x={422} y={y + 32} size={9.5} color={MUTED}>{note}</He>
+    </g>
+  );
+  return (
+    <Svg h={300} label="שלוש משפחות E3. ב-RING היוביקוויטין עובר ישירות מה-E2 למצע וה-E3 משמש פיגום. ב-HECT היוביקוויטין עובר קודם לציסטאין של ה-E3 ורק ממנו למצע. ב-RBR תחום RING1 קושר את E2 אבל היוביקוויטין עובר דרך ציסטאין בתחום RING2 — שילוב של שתי הדרכים.">
+      {/* RING */}
+      <Box x={40} y={30} w={64} h={34} fill={FILL.green} stroke={GREEN} size={11}>E2</Box>
+      <Ub cx={72} cy={16} r={8} />
+      <Box x={136} y={30} w={74} h={34} fill={FILL.orange} stroke={ORANGE} size={11}>RING</Box>
+      <Blob cx={290} cy={47} rx={30} ry={22} fill={FILL.yellow} stroke={GOLD} />
+      <He x={290} y={51} size={10.5}>מצע</He>
+      <Ub cx={290} cy={14} r={8} />
+      <path d="M 100 34 Q 190 -2 278 22" fill="none" stroke={RED} strokeWidth={1.8} markerEnd="url(#bfArrow)" strokeDasharray="0" />
+      <He x={190} y={84} size={9.5} color={RED}>היוביקוויטין עובר ישירות מ-E2 למצע</He>
+      {row(47, "RING", "ללא ביניים קוולנטי", ORANGE, FILL.orange)}
+      {/* HECT */}
+      <Box x={40} y={136} w={64} h={34} fill={FILL.green} stroke={GREEN} size={11}>E2</Box>
+      <Ub cx={72} cy={122} r={8} />
+      <Box x={136} y={136} w={74} h={34} fill={FILL.purple} stroke={PURPLE} size={11}>HECT</Box>
+      <Ub cx={173} cy={118} r={8} />
+      <La x={173} y={104} size={9} color={PURPLE}>Cys</La>
+      <Arrow x1={106} y1={146} x2={132} y2={132} color={RED} width={1.6} />
+      <Blob cx={290} cy={153} rx={30} ry={22} fill={FILL.yellow} stroke={GOLD} />
+      <He x={290} y={157} size={10.5}>מצע</He>
+      <Ub cx={290} cy={120} r={8} />
+      <Arrow x1={196} y1={124} x2={272} y2={124} color={RED} width={1.6} />
+      <He x={196} y={186} size={9.5} anchor="start" color={RED}>שני שלבים — ה-E3 עצמו קטליטי</He>
+      {row(153, "HECT", "ציסטאין קטליטי", PURPLE, FILL.purple)}
+      {/* RBR */}
+      <Box x={40} y={240} w={64} h={34} fill={FILL.green} stroke={GREEN} size={11}>E2</Box>
+      <Ub cx={72} cy={226} r={8} />
+      <Box x={122} y={240} w={56} h={34} fill={FILL.teal} stroke={TEAL} size={10}>RING1</Box>
+      <Box x={186} y={240} w={56} h={34} fill={FILL.teal} stroke={TEAL} size={10}>RING2</Box>
+      <Ub cx={214} cy={222} r={8} />
+      <La x={214} y={208} size={9} color={TEAL}>Cys</La>
+      <Arrow x1={106} y1={250} x2={118} y2={243} color={MUTED} width={1.4} />
+      <Arrow x1={150} y1={232} x2={196} y2={228} color={RED} width={1.6} />
+      <Blob cx={310} cy={257} rx={30} ry={22} fill={FILL.yellow} stroke={GOLD} />
+      <He x={310} y={261} size={10.5}>מצע</He>
+      <Ub cx={310} cy={224} r={8} />
+      <Arrow x1={234} y1={224} x2={292} y2={224} color={RED} width={1.6} />
+      {row(257, "RBR", "הכלאה", TEAL, FILL.teal)}
+    </Svg>
+  );
+}
