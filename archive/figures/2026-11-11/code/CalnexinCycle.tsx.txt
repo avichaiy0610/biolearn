@@ -1,0 +1,24 @@
+function CalnexinCycle() {
+  return (
+    <Svg h={330} label="מחזור הקלנקסין: גלוקוזידאזות מסירות שני גלוקוזים; חלבון עם גלוקוז אחד נקשר לקלנקסין; הגלוקוז האחרון מוסר; חלבון מקופל ממשיך לגולג'י, וחלבון לא מקופל מקבל גלוקוז מחדש ב-UGGT וחוזר לקלנקסין; אחרי סבבים רבים מנוזים מוסרים והחלבון מפורק ב-ERAD">
+      <HBox x={240} y={14} w={250} label="חלבון חדש — 3 גלוקוזים על הגליקן" c={INK} fill={FILL.gray} />
+      <Arrow x1={240} y1={46} x2={240} y2={84} />
+      <He x={252} y={70} size={11.5} anchor="start" color={MUTED}>גלוקוזידאזות I, II מסירות 2</He>
+      <HBox x={240} y={88} w={250} label="גלוקוז אחד — קשור לקלנקסין" c={PURPLE} fill={FILL.purple} bold />
+      <Arrow x1={240} y1={120} x2={240} y2={158} />
+      <He x={252} y={144} size={11.5} anchor="start" color={MUTED}>גלוקוזידאז II מסיר את האחרון</He>
+      <HBox x={240} y={162} w={200} label="בלי גלוקוז — מקופל?" c={INK} fill={FILL.gray} />
+      <Arrow x1={320} y1={194} x2={384} y2={232} color={GREEN} width={2.4} />
+      <He x={372} y={206} size={11.5} anchor="start" color={GREEN}>כן</He>
+      <HBox x={394} y={236} w={140} label="ממשיך לגולג'י" c={GREEN} fill={FILL.green} bold />
+      <Arrow x1={160} y1={194} x2={104} y2={232} color={ORANGE} width={2.4} />
+      <He x={118} y={206} size={11.5} anchor="end" color={ORANGE}>לא</He>
+      <HBox x={96} y={236} w={180} label="UGGT מחזיר גלוקוז" c={ORANGE} fill={FILL.orange} />
+      <path d="M40 236 C 20 160, 40 110, 112 104" fill="none" stroke={ORANGE} strokeWidth={2.4} markerEnd="url(#bfArrowS)" />
+      <He x={44} y={168} size={11} color={ORANGE} anchor="start">סבב נוסף</He>
+      <Arrow x1={96} y1={268} x2={96} y2={290} color={RED} dashed />
+      <HBox x={96} y={292} w={190} label="אחרי סבבים רבים → ERAD" c={RED} fill={FILL.red} size={12} />
+      <He x={300} y={312} size={11} color={MUTED}>(בכל סבב מוסרים לאט גם מנוזים)</He>
+    </Svg>
+  );
+}

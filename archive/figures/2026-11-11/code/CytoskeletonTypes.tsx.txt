@@ -1,0 +1,39 @@
+function CytoskeletonTypes() {
+  const top = 48, bot = 196;
+  const actin = [];
+  for (let i = 0; i <= 12; i++) {
+    const y = top + 4 + i * 12;
+    actin.push(<circle key={`a${i}`} cx={85 + 6 * Math.sin(i * 0.9)} cy={y} r={6.5} fill={FILL.red} stroke={RED} strokeWidth={1} />);
+    actin.push(<circle key={`b${i}`} cx={85 - 6 * Math.sin(i * 0.9) + 0} cy={y + 6} r={6.5} fill="#fecaca" stroke={RED} strokeWidth={1} />);
+  }
+  const mt = [];
+  for (let c = 0; c < 5; c++) for (let r = 0; r < 14; r++) {
+    const fill = (r + c) % 2 ? FILL.green : "#bbf7d0";
+    mt.push(<rect key={`${c}-${r}`} x={216 + c * 10} y={top + r * 10.6 + (c % 2) * 3} width={9} height={10} rx={2} fill={fill} stroke={GREEN} strokeWidth={0.8} />);
+  }
+  const rope = (ph: number, c: string) => {
+    let d = "";
+    for (let y = top; y <= bot; y += 4) d += `${y === top ? "M" : "L"}${(395 + 7 * Math.sin((y - top) / 10 + ph)).toFixed(1)} ${y}`;
+    return <path key={ph} d={d} fill="none" stroke={c} strokeWidth={3} />;
+  };
+  const cols: [number, string, string, string][] = [[85, "סיב אקטין", "כ-7 ננומטר · אקטין", RED], [240, "מיקרוטובול", "25 ננומטר · α/β-טובולין", GREEN], [395, "סיב ביניים", "כ-10 ננומטר · אין קוטביות", BLUE]];
+  return (
+    <Svg h={262} label="שלושת סוגי הסיבים: סיב אקטין — שני גדילים של אקטין, 7 ננומטר, עם קצה פלוס ומינוס; מיקרוטובול — צינור חלול של α/β-טובולין, 25 ננומטר, עם קטבים; סיב ביניים — חבל של כמה חלבונים, 10 ננומטר, בלי קוטביות">
+      {actin}
+      {mt}
+      {[0, 1.6, 3.2].map((p, i) => rope(p, [BLUE, "#3b82f6", "#1e40af"][i]))}
+      {[85, 240].map((x) => (
+        <g key={x}>
+          <La x={x + 42} y={top + 6} size={13} bold>(−)</La>
+          <La x={x + 42} y={bot + 4} size={13} bold>(+)</La>
+        </g>
+      ))}
+      {cols.map(([x, a, b, c]) => (
+        <g key={x}>
+          <He x={x} y={226} size={13} bold color={c}>{a}</He>
+          <He x={x} y={246} size={11.5} color={MUTED}>{b}</He>
+        </g>
+      ))}
+    </Svg>
+  );
+}

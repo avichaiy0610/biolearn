@@ -2,13 +2,17 @@
    Colors: membranes gray, proteins purple, signals/ligands orange, active/GTP green, actin red.
    Referenced from lesson bodies as [[figure:<id>]]. */
 import type React from "react";
-import { ArrowDefs, BLUE, GREEN, INK, LINE, MUTED, ORANGE, He, La, dash } from "./biochemFigures";
+import { ArrowDefs, BLUE, GREEN, INK, LINE, MUTED, ORANGE, He, La } from "./biochemFigures";
 import { Arrow } from "./metabolicFigures";
 import { CELL_SYLLABUS_FIGURES } from "./cellSyllabusFigures";
 import { CotranslationalTranslocation } from "./redraws/CotranslationalTranslocation";
 import { MotorProteins } from "./redraws/MotorProteins";
 
 import { VesicleCycle } from "./redraws/VesicleCycle";
+import { CalnexinCycle } from "./redraws/CalnexinCycle";
+import { GolgiSorting } from "./redraws/GolgiSorting";
+import { RanCycle } from "./redraws/RanCycle";
+import { CytoskeletonTypes } from "./redraws/CytoskeletonTypes";
 const PURPLE = "#7c3aed";
 const RED = "#b91c1c";
 const FILL = { blue: "#dbeafe", green: "#dcfce7", orange: "#ffedd5", purple: "#ede9fe", yellow: "#fef3c7", gray: "#f1f5f9", red: "#fee2e2", sky: "#e0f2fe" };
@@ -33,9 +37,6 @@ const LBox = ({ x, y, w, h = 30, label, c = BLUE, fill = FILL.blue, size = 13, b
     <rect x={x - w / 2} y={y} width={w} height={h} rx={8} fill={fill} stroke={c} strokeWidth={1.6} />
     <La x={x} y={y + h / 2 + size * 0.36} size={size} bold={bold}>{label}</La>
   </g>
-);
-const Num = ({ x, y, n }: { x: number; y: number; n: number }) => (
-  <g><circle cx={x} cy={y} r={9} fill={INK} /><La x={x} y={y + 4} size={11} bold color="#ffffff">{n}</La></g>
 );
 // A membrane seen edge-on: a band between y and y + h.
 const Membrane = ({ x0 = 0, x1 = 480, y, h = 24 }: { x0?: number; x1?: number; y: number; h?: number }) => (
@@ -141,148 +142,19 @@ function ProteinSortingMap() {
 // CotranslationalTranslocation: redrawn at textbook level (2026-11-02) — see ./redraws/CotranslationalTranslocation.tsx; old code in archive/figures/2026-11-02/.
 
 // ── cell-quality-control ─────────────────────────────────────────────────────
-function CalnexinCycle() {
-  return (
-    <Svg h={330} label="מחזור הקלנקסין: גלוקוזידאזות מסירות שני גלוקוזים; חלבון עם גלוקוז אחד נקשר לקלנקסין; הגלוקוז האחרון מוסר; חלבון מקופל ממשיך לגולג'י, וחלבון לא מקופל מקבל גלוקוז מחדש ב-UGGT וחוזר לקלנקסין; אחרי סבבים רבים מנוזים מוסרים והחלבון מפורק ב-ERAD">
-      <HBox x={240} y={14} w={250} label="חלבון חדש — 3 גלוקוזים על הגליקן" c={INK} fill={FILL.gray} />
-      <Arrow x1={240} y1={46} x2={240} y2={84} />
-      <He x={252} y={70} size={11.5} anchor="start" color={MUTED}>גלוקוזידאזות I, II מסירות 2</He>
-      <HBox x={240} y={88} w={250} label="גלוקוז אחד — קשור לקלנקסין" c={PURPLE} fill={FILL.purple} bold />
-      <Arrow x1={240} y1={120} x2={240} y2={158} />
-      <He x={252} y={144} size={11.5} anchor="start" color={MUTED}>גלוקוזידאז II מסיר את האחרון</He>
-      <HBox x={240} y={162} w={200} label="בלי גלוקוז — מקופל?" c={INK} fill={FILL.gray} />
-      <Arrow x1={320} y1={194} x2={384} y2={232} color={GREEN} width={2.4} />
-      <He x={372} y={206} size={11.5} anchor="start" color={GREEN}>כן</He>
-      <HBox x={394} y={236} w={140} label="ממשיך לגולג'י" c={GREEN} fill={FILL.green} bold />
-      <Arrow x1={160} y1={194} x2={104} y2={232} color={ORANGE} width={2.4} />
-      <He x={118} y={206} size={11.5} anchor="end" color={ORANGE}>לא</He>
-      <HBox x={96} y={236} w={180} label="UGGT מחזיר גלוקוז" c={ORANGE} fill={FILL.orange} />
-      <path d="M40 236 C 20 160, 40 110, 112 104" fill="none" stroke={ORANGE} strokeWidth={2.4} markerEnd="url(#bfArrowS)" />
-      <He x={44} y={168} size={11} color={ORANGE} anchor="start">סבב נוסף</He>
-      <Arrow x1={96} y1={268} x2={96} y2={290} color={RED} dashed />
-      <HBox x={96} y={292} w={190} label="אחרי סבבים רבים → ERAD" c={RED} fill={FILL.red} size={12} />
-      <He x={300} y={312} size={11} color={MUTED}>(בכל סבב מוסרים לאט גם מנוזים)</He>
-    </Svg>
-  );
-}
+
 
 // ── cell-golgi-endosomes ─────────────────────────────────────────────────────
-function GolgiSorting() {
-  const cis = [148, 182, 216, 250];
-  const cols = [BLUE, "#4f46e5", PURPLE, "#9333ea"];
-  return (
-    <Svg h={300} label="הגולג'י: ערימת בורות מצד cis שפונה ל-ER ועד רשת ה-trans; חלבונים מגיעים מה-ER בשלפוחיות COPII וחוזרים ב-COPI; מה-TGN הם ממוינים לליזוזומים דרך קולטן מנוז-6-פוספט, לגרגרי הפרשה מווסתת, ולהפרשה רציפה">
-      {/* ER */}
-      <rect x={14} y={92} width={74} height={116} rx={14} fill={FILL.sky} stroke={BLUE} strokeWidth={1.6} />
-      {[108, 128, 148, 168, 188].map((y) => <circle key={y} cx={20} cy={y} r={3} fill={BLUE} />)}
-      <La x={52} y={156} size={15} bold color={BLUE}>ER</La>
-      <Arrow x1={92} y1={128} x2={136} y2={128} color={GREEN} width={2.4} />
-      <La x={114} y={118} size={11} bold color={GREEN}>COPII</La>
-      <Arrow x1={136} y1={178} x2={92} y2={178} color={MUTED} width={1.8} dashed />
-      <La x={114} y={198} size={11} color={MUTED}>COPI</La>
-      {/* stack */}
-      {cis.map((x, i) => <rect key={x} x={x - 9} y={74} width={18} height={152} rx={9} fill={FILL.purple} stroke={cols[i]} strokeWidth={1.8} />)}
-      <La x={148} y={246} size={12} bold>cis</La>
-      <He x={199} y={246} size={11.5}>מדיאלי</He>
-      <La x={250} y={246} size={12} bold>trans</La>
-      {[90, 118, 146, 174, 202].map((y, i) => <circle key={y} cx={292 + (i % 2) * 8} cy={y} r={7} fill={FILL.orange} stroke={ORANGE} strokeWidth={1.3} />)}
-      <La x={296} y={246} size={12} bold color={ORANGE}>TGN</La>
-      <He x={224} y={44} size={12} bold>הגולג&apos;י</He>
-      <Arrow x1={170} y1={56} x2={270} y2={56} color={MUTED} />
-      {/* destinations */}
-      <Arrow x1={312} y1={92} x2={360} y2={64} color={ORANGE} width={2.4} />
-      <circle cx={376} cy={58} r={15} fill={FILL.red} stroke={RED} strokeWidth={1.6} />
-      <He x={440} y={56} size={12} bold>ליזוזום</He>
-      <He x={440} y={72} size={10.5} color={MUTED}>(קולטן M6P)</He>
-      <Arrow x1={314} y1={146} x2={360} y2={146} color={ORANGE} width={2.4} />
-      <circle cx={376} cy={146} r={13} fill={PURPLE} stroke={PURPLE} />
-      <He x={440} y={144} size={12} bold>גרגר הפרשה</He>
-      <He x={440} y={160} size={10.5} color={MUTED}>(הפרשה מווסתת)</He>
-      <Arrow x1={312} y1={200} x2={360} y2={226} color={ORANGE} width={2.4} />
-      <circle cx={376} cy={232} r={10} fill={FILL.orange} stroke={ORANGE} strokeWidth={1.4} />
-      <He x={440} y={230} size={12} bold>ממברנת התא</He>
-      <He x={440} y={246} size={10.5} color={MUTED}>(הפרשה רציפה)</He>
-      <He x={240} y={286} size={11} color={MUTED}>חלבונים עוברים מ-cis ל-trans, ובכל בור משתנים הסוכרים שלהם</He>
-    </Svg>
-  );
-}
+
 
 // ── cell-vesicle-transport ───────────────────────────────────────────────────
 // VesicleCycle: recomposed at textbook level, one picture on desktop (2026-11-07) — see ./redraws/VesicleCycle.tsx; old code in archive/figures/2026-11-07/.
 
 // ── cell-nuclear-mito-import ─────────────────────────────────────────────────
-function RanCycle() {
-  const pores = [[72, 104], [156, 188], [236, 268]];
-  const env = [30, ...pores.flat(), 292];
-  const segs: [number, number][] = [];
-  for (let i = 0; i < env.length; i += 2) segs.push([env[i], env[i + 1]]);
-  return (
-    <Svg h={300} label="מחזור Ran: בציטוזול RanGAP הופך Ran-GTP ל-Ran-GDP, ובגרעין RanGEF על הכרומטין הופך Ran-GDP ל-Ran-GTP. אימפורטין נכנס עם מטען, Ran-GTP בגרעין משחרר את המטען, האימפורטין יוצא עם Ran-GTP, וה-GTP מתפרק בציטוזול; Ran-GDP חוזר לגרעין עם NTF2">
-      {segs.map(([a, b]) => <rect key={a} x={232} y={a} width={16} height={b - a} fill={FILL.gray} stroke={MUTED} strokeWidth={1.4} />)}
-      <He x={116} y={20} size={13} bold>ציטוזול</He>
-      <He x={116} y={38} size={11} color={MUTED}>בעיקר Ran-GDP</He>
-      <He x={364} y={20} size={13} bold>גרעין</He>
-      <He x={364} y={38} size={11} color={MUTED}>בעיקר Ran-GTP</He>
-      {/* import */}
-      <HBox x={116} y={72} w={170} label="אימפורטין + מטען" fill={FILL.orange} c={ORANGE} />
-      <Arrow x1={204} y1={88} x2={276} y2={88} color={ORANGE} width={2.4} />
-      <HBox x={364} y={72} w={200} label="Ran-GTP משחרר את המטען" fill={FILL.green} c={GREEN} />
-      {/* export of importin */}
-      <HBox x={364} y={156} w={180} label="אימפורטין + Ran-GTP" fill={FILL.green} c={GREEN} />
-      <Arrow x1={272} y1={172} x2={206} y2={172} color={GREEN} width={2.4} />
-      <HBox x={116} y={156} w={200} label="RanGAP: פירוק GTP" fill={FILL.gray} c={INK} />
-      <He x={116} y={204} size={11} color={MUTED}>האימפורטין פנוי למטען הבא</He>
-      <Arrow x1={116} y1={210} x2={116} y2={234} />
-      {/* Ran-GDP returns */}
-      <LBox x={116} y={238} w={110} label="Ran-GDP" fill={FILL.gray} c={INK} size={12.5} />
-      <Arrow x1={174} y1={252} x2={278} y2={252} width={2.4} />
-      <La x={200} y={278} size={11} color={MUTED}>NTF2</La>
-      <HBox x={364} y={238} w={190} label="RanGEF: GDP → GTP" fill={FILL.green} c={GREEN} />
-      <path d="M462 238 C 474 200, 474 140, 462 104" fill="none" stroke={GREEN} strokeWidth={1.8} markerEnd="url(#bfArrow)" {...dash} />
-    </Svg>
-  );
-}
+
 
 // ── cell-cytoskeleton ────────────────────────────────────────────────────────
-function CytoskeletonTypes() {
-  const top = 48, bot = 196;
-  const actin = [];
-  for (let i = 0; i <= 12; i++) {
-    const y = top + 4 + i * 12;
-    actin.push(<circle key={`a${i}`} cx={85 + 6 * Math.sin(i * 0.9)} cy={y} r={6.5} fill={FILL.red} stroke={RED} strokeWidth={1} />);
-    actin.push(<circle key={`b${i}`} cx={85 - 6 * Math.sin(i * 0.9) + 0} cy={y + 6} r={6.5} fill="#fecaca" stroke={RED} strokeWidth={1} />);
-  }
-  const mt = [];
-  for (let c = 0; c < 5; c++) for (let r = 0; r < 14; r++) {
-    const fill = (r + c) % 2 ? FILL.green : "#bbf7d0";
-    mt.push(<rect key={`${c}-${r}`} x={216 + c * 10} y={top + r * 10.6 + (c % 2) * 3} width={9} height={10} rx={2} fill={fill} stroke={GREEN} strokeWidth={0.8} />);
-  }
-  const rope = (ph: number, c: string) => {
-    let d = "";
-    for (let y = top; y <= bot; y += 4) d += `${y === top ? "M" : "L"}${(395 + 7 * Math.sin((y - top) / 10 + ph)).toFixed(1)} ${y}`;
-    return <path key={ph} d={d} fill="none" stroke={c} strokeWidth={3} />;
-  };
-  const cols: [number, string, string, string][] = [[85, "סיב אקטין", "כ-7 ננומטר · אקטין", RED], [240, "מיקרוטובול", "25 ננומטר · α/β-טובולין", GREEN], [395, "סיב ביניים", "כ-10 ננומטר · אין קוטביות", BLUE]];
-  return (
-    <Svg h={262} label="שלושת סוגי הסיבים: סיב אקטין — שני גדילים של אקטין, 7 ננומטר, עם קצה פלוס ומינוס; מיקרוטובול — צינור חלול של α/β-טובולין, 25 ננומטר, עם קטבים; סיב ביניים — חבל של כמה חלבונים, 10 ננומטר, בלי קוטביות">
-      {actin}
-      {mt}
-      {[0, 1.6, 3.2].map((p, i) => rope(p, [BLUE, "#3b82f6", "#1e40af"][i]))}
-      {[85, 240].map((x) => (
-        <g key={x}>
-          <La x={x + 42} y={top + 6} size={13} bold>(−)</La>
-          <La x={x + 42} y={bot + 4} size={13} bold>(+)</La>
-        </g>
-      ))}
-      {cols.map(([x, a, b, c]) => (
-        <g key={x}>
-          <He x={x} y={226} size={13} bold color={c}>{a}</He>
-          <He x={x} y={246} size={11.5} color={MUTED}>{b}</He>
-        </g>
-      ))}
-    </Svg>
-  );
-}
+
 
 function DynamicInstability() {
   const pts: [number, number][] = [[60, 222], [132, 132], [148, 204], [216, 112], [232, 222], [296, 168]];

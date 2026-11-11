@@ -1,0 +1,31 @@
+function RanCycle() {
+  const pores = [[72, 104], [156, 188], [236, 268]];
+  const env = [30, ...pores.flat(), 292];
+  const segs: [number, number][] = [];
+  for (let i = 0; i < env.length; i += 2) segs.push([env[i], env[i + 1]]);
+  return (
+    <Svg h={300} label="מחזור Ran: בציטוזול RanGAP הופך Ran-GTP ל-Ran-GDP, ובגרעין RanGEF על הכרומטין הופך Ran-GDP ל-Ran-GTP. אימפורטין נכנס עם מטען, Ran-GTP בגרעין משחרר את המטען, האימפורטין יוצא עם Ran-GTP, וה-GTP מתפרק בציטוזול; Ran-GDP חוזר לגרעין עם NTF2">
+      {segs.map(([a, b]) => <rect key={a} x={232} y={a} width={16} height={b - a} fill={FILL.gray} stroke={MUTED} strokeWidth={1.4} />)}
+      <He x={116} y={20} size={13} bold>ציטוזול</He>
+      <He x={116} y={38} size={11} color={MUTED}>בעיקר Ran-GDP</He>
+      <He x={364} y={20} size={13} bold>גרעין</He>
+      <He x={364} y={38} size={11} color={MUTED}>בעיקר Ran-GTP</He>
+      {/* import */}
+      <HBox x={116} y={72} w={170} label="אימפורטין + מטען" fill={FILL.orange} c={ORANGE} />
+      <Arrow x1={204} y1={88} x2={276} y2={88} color={ORANGE} width={2.4} />
+      <HBox x={364} y={72} w={200} label="Ran-GTP משחרר את המטען" fill={FILL.green} c={GREEN} />
+      {/* export of importin */}
+      <HBox x={364} y={156} w={180} label="אימפורטין + Ran-GTP" fill={FILL.green} c={GREEN} />
+      <Arrow x1={272} y1={172} x2={206} y2={172} color={GREEN} width={2.4} />
+      <HBox x={116} y={156} w={200} label="RanGAP: פירוק GTP" fill={FILL.gray} c={INK} />
+      <He x={116} y={204} size={11} color={MUTED}>האימפורטין פנוי למטען הבא</He>
+      <Arrow x1={116} y1={210} x2={116} y2={234} />
+      {/* Ran-GDP returns */}
+      <LBox x={116} y={238} w={110} label="Ran-GDP" fill={FILL.gray} c={INK} size={12.5} />
+      <Arrow x1={174} y1={252} x2={278} y2={252} width={2.4} />
+      <La x={200} y={278} size={11} color={MUTED}>NTF2</La>
+      <HBox x={364} y={238} w={190} label="RanGEF: GDP → GTP" fill={FILL.green} c={GREEN} />
+      <path d="M462 238 C 474 200, 474 140, 462 104" fill="none" stroke={GREEN} strokeWidth={1.8} markerEnd="url(#bfArrow)" {...dash} />
+    </Svg>
+  );
+}
