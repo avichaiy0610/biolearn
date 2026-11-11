@@ -21,7 +21,10 @@ export type SyllabusRecord = {
   level: "lectures" | "topics";
   contentHe: string; // the official topic text, verbatim
   topicsHe: string[]; // best-effort split of contentHe
-  sessions?: { lectures: string; topicsHe: string[] }[]; // e.g. { lectures: "1–7", ... }
+  sessions?: { lectures: string; topicsHe: string[]; partHe?: string }[]; // e.g. { lectures: "1–7", ... }; partHe opens a part of the course
+  sessionLabelHe?: string; // what the table numbers when it is not lessons: "שבוע", "יחידה"
+  /** The lesson table was read by eye from the PDF (content/syllabi/manual.ts), not extracted. */
+  manual?: { readAt: string; noteHe?: string };
   notTaughtHe?: string[]; // "לא ילמדו השנה"
   books?: string[];
 

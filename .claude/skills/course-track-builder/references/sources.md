@@ -10,7 +10,10 @@
 - the raw download (PDF/HTML/JSON): `Project One/syllabuses/_fetched/<slug>/` (local only).
 `content/syllabi/report.generated.md` lists every warning of the last full run. A record with
 `hasUnparsedSchedule` has a weekly table in its PDF whose columns pdftotext interleaves → open the PDF
-from `_fetched` with the Read tool and enter the order by hand (it is `official` / `official-past`).
+from `_fetched` with the Read tool and enter the table in `content/syllabi/manual.ts` (verbatim, in order;
+the entry is bound to the PDF's sha256 and stops applying, with a warning, when the faculty replaces the
+file). Seven Bar-Ilan courses were entered this way on 2026-11-11 (80150, 80202, 80204, 80206, 80214,
+80242, 80377). Such an order is `official` / `official-past`.
 A document that does not name the course is REJECTED (Haifa links a Medical Microbiology file under
 "מבוא לנוירוביולוגיה מערכתית"). Parsers: `scripts/syllabus-parse.ts`, tests `npx tsx scripts/syllabus-parse.test.ts`.
 

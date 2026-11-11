@@ -31,6 +31,7 @@ import fs from "fs";
 import os from "os";
 import path from "path";
 import { SYLLABUS_TARGETS, type SyllabusTarget } from "../content/syllabi/registry";
+import { MANUAL_SYLLABI } from "../content/syllabi/manual";
 import type { SyllabusRecord } from "../content/syllabi/types";
 import {
   BIDI, assessmentLines, clean, hasScheduleMarkers, identityOk, norm, numberedSessions, parseHuji, parseSap,
@@ -72,6 +73,11 @@ class Evidence {
   }
   raw(name: string, data: Buffer | string) { this.files.push({ name, data }); }
   get fullText() { return this.parts.join("\n"); }
+  /** First 16 hex digits of the sha256 of the downloaded PDF — the key a manual read is bound to. */
+  get pdfSha16() {
+    const f = this.files.find((x) => /\.pdf$/i.test(x.name) && Buffer.isBuffer(x.data));
+    return f ? createHash("sha256").update(f.data).digest("hex").slice(0, 16) : null;
+  }
   commit(slug: string): NonNullable<SyllabusRecord["evidence"]> {
     fs.mkdirSync(TEXT_DIR, { recursive: true });
     const textFile = path.join(TEXT_DIR, `${slug}.txt`).replace(/\\/g, "/");
@@ -412,6 +418,26 @@ function validate(rec: SyllabusRecord, t: SyllabusTarget, ours: { he: string; en
   return {};
 }
 
+/** A lesson table that a person read from this exact PDF (content/syllabi/manual.ts) replaces what the text layer gave. */
+function applyManual(rec: SyllabusRecord, ev: Evidence) {
+  const m = MANUAL_SYLLABI[rec.courseSlug];
+  if (!m) return;
+  if (ev.pdfSha16 !== m.pdfSha16) {
+    ev.warnings.push(`ה-PDF באתר הוחלף מאז הקריאה הידנית (${m.readAt}) — הטבלה הידנית לא הוחלה; לקרוא את הקובץ החדש ולעדכן content/syllabi/manual.ts`);
+    return;
+  }
+  const label = m.sessionLabelHe ?? "שיעור";
+  rec.sessions = m.sessions;
+  rec.sessionLabelHe = m.sessionLabelHe;
+  rec.level = "lectures";
+  rec.topicsHe = m.sessions.flatMap((s) => s.topicsHe);
+  rec.contentHe = m.sessions.map((s) => `${s.partHe ? `${s.partHe}\n` : ""}${label} ${s.lectures}: ${s.topicsHe.join("; ")}`).join("\n");
+  rec.assessmentHe = m.assessmentHe ?? rec.assessmentHe;
+  rec.hasUnparsedSchedule = undefined;
+  rec.manual = { readAt: m.readAt, noteHe: m.noteHe };
+  ev.warnings = ev.warnings.filter((w) => !/לא נמצאה כותרת נושאים/.test(w));
+}
+
 const fingerprint = (r?: SyllabusRecord) => r && JSON.stringify([r.contentHe, r.sessions, r.assessmentHe, r.teachers, r.semesterHe, r.books, r.year]);
 
 async function main() {
@@ -436,6 +462,7 @@ async function main() {
     try {
       const ev = new Evidence();
       const rec = await ADAPTERS[t.university](t, ev);
+      applyManual(rec, ev);
       const v = validate(rec, t, ours.get(t.courseSlug), ev);
       if (v.reject) {
         delete next[t.courseSlug];

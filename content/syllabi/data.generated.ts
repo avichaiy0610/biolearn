@@ -402,56 +402,117 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "fetchedAt": "2026-11-11",
   "source": "biu-pdf",
   "sourceUrl": "https://life-sciences.biu.ac.il/sites/life-sciences/files/shared/Med%20Mechina/Sylabi25/%D7%A1%D7%99%D7%9C%D7%91%D7%95%D7%A1-%D7%9E%D7%91%D7%95%D7%90-%D7%9C%D7%A4%D7%99%D7%96%D7%99%D7%95%D7%9C%D7%95%D7%92%D7%99%D7%94-%D7%A9%D7%9C-%D7%94%D7%97%D7%99-80206-%D7%AA%D7%A9%D7%A4%D7%94.pdf",
-  "level": "topics",
-  "contentHe": "תאריך10/2024 :\nסילבוס -תוכנית הוראה לקורס\nמבוא לפיזיולוגיה של החי\nדר' יואב פז | הפקולטה למדעי החיים\nIntroduction to Animal Physiology | 80206\nשיעור ) 2ש\"ש( +תרגיל ) 1ש\"ש( סוג הקורס:\n2 היקף נ\"ז:\nב'\nא' שנת לימודים:\nסמסטר:\nג') 14:00-16:00 ,קב' 01ו) 16:00-18:00 ,(30-קב' + (10תרגול מפוזר. יום ושעה\nיום א' ) 16:00-17:00בתיאום מראש(\n[email] שעת קבלה:\nמייל מרצה:\nhttps://lemida.biu.ac.il/course/view.php?id=93705 קישור לאתר למדה:\nתיאור הקורס ומטרות למידה\nתקציר הקורס\nעקרונות נוירו-פיזיולוגיים תוך מיקוד על תקשורת בין-תאית במערכת העצבים המרכזית ומערכת העצבים\nהפריפריאלית ,וזאת ברמה המולקולרית ,התאית והמערכתית ,תוך מתן דוגמאות להשפעת מערכת\nהעצבים על תפקוד האורגניזם המלא )האדם(.\nמטרות/תוצרי הלמידה\nידע\n.1הלומדים ידעו ויוכלו לתאר כיצד תאי עצב מוליכים אותות חשמליים לאורך שלוחת האקסון,\nוכיצד הם מפעילים תגובות אצל תאי עצב אחרים בעזרת מנגנונים סינפטיים.\n.2הלומדים ידעו ויוכלו לתאר כיצד תאי עצב מוטוריים מפעילים שרירי שלד ,ומהו מנגנון הכיווץ\nשל שריר השלד.\n.3הלומדים ידעו ויוכלו לתאר תגובות רפלקס סומטיות ,וכיצד פועלים חוש המישוש ,חוש הריח,\nחוש הטעם ,חוש השמע וחוש הראיה אצל האדם.\nמיומנויות\n.1הלומדים ינתחו התנהגות של מעגלים חשמליים המורכבים ממקור מתח ,קבל ונגד ויחשבו\nטעינה ופריקה של הקבל בתלות עם הזמן.\n.2הלומדים יחשבו וינתחו את התנהגות הממברנה הביולוגית כקבל וכנגד והתנהגות הזרמים\nוהשטפים היוניים על פי מודל המוליכויות המקבילות ,תוך שימוש בנוסחת הזרם היוני שכוללת\nחישובים של כוחות אלקטרו מניעים עבור יונים שונים.\n.3הלומדים יחשבו וינתחו ,שינויים במתח ומוליכות הממברנה הביולוגית עקב הפעלה של\nתעלות יונים ומשאבות נתרן-אשלגן.",
+  "level": "lectures",
+  "contentHe": "שיעור 1: מבוא לפיזיולוגיה של ממברנות\nשיעור 2: פוטנציאל המנוחה של הממברנה\nשיעור 3: תעלות יוניות\nשיעור 4: תעלות תלויות מתח ופוטנציאל הפעולה\nשיעור 5: העברה סינפטית\nשיעור 6: תעלות יוניות המופעלות על ידי ליגנד\nשיעור 7: מנגנון ההתכווצות של שריר השלד\nשיעור 8: חוש המישוש\nשיעור 9: חוש המישוש (המשך)\nשיעור 10: בקרה על תנועה\nשיעור 11: החושים הכימיים\nשיעור 12: חוש השמע\nשיעור 13: חוש הראיה",
   "topicsHe": [
-   "תאריך10/2024 :",
-   "סילבוס -תוכנית הוראה לקורס",
-   "מבוא לפיזיולוגיה של החי",
-   "דר' יואב פז | הפקולטה למדעי החיים",
-   "Introduction to Animal Physiology | 80206",
-   "שיעור ) 2ש\"ש( +תרגיל ) 1ש\"ש( סוג הקורס:",
-   "2 היקף נ\"ז:",
-   "א' שנת לימודים:",
-   "סמסטר:",
-   "ג') 14:00-16:00 ,קב' 01ו) 16:00-18:00 ,(30-קב' + (10תרגול מפוזר. יום ושעה",
-   "יום א' ) 16:00-17:00בתיאום מראש(",
-   "[email] שעת קבלה:",
-   "מייל מרצה:",
-   "https://lemida.biu.ac.il/course/view.php?id=93705 קישור לאתר למדה:",
-   "תיאור הקורס ומטרות למידה",
-   "תקציר הקורס",
-   "עקרונות נוירו-פיזיולוגיים תוך מיקוד על תקשורת בין-תאית במערכת העצבים המרכזית ומערכת העצבים",
-   "הפריפריאלית ,וזאת ברמה המולקולרית ,התאית והמערכתית ,תוך מתן דוגמאות להשפעת מערכת",
-   "העצבים על תפקוד האורגניזם המלא )האדם(.",
-   "מטרות/תוצרי הלמידה",
-   ".1הלומדים ידעו ויוכלו לתאר כיצד תאי עצב מוליכים אותות חשמליים לאורך שלוחת האקסון,",
-   "וכיצד הם מפעילים תגובות אצל תאי עצב אחרים בעזרת מנגנונים סינפטיים.",
-   ".2הלומדים ידעו ויוכלו לתאר כיצד תאי עצב מוטוריים מפעילים שרירי שלד ,ומהו מנגנון הכיווץ",
-   "של שריר השלד.",
-   ".3הלומדים ידעו ויוכלו לתאר תגובות רפלקס סומטיות ,וכיצד פועלים חוש המישוש ,חוש הריח,",
-   "חוש הטעם ,חוש השמע וחוש הראיה אצל האדם.",
-   "מיומנויות",
-   ".1הלומדים ינתחו התנהגות של מעגלים חשמליים המורכבים ממקור מתח ,קבל ונגד ויחשבו",
-   "טעינה ופריקה של הקבל בתלות עם הזמן.",
-   ".2הלומדים יחשבו וינתחו את התנהגות הממברנה הביולוגית כקבל וכנגד והתנהגות הזרמים",
-   "והשטפים היוניים על פי מודל המוליכויות המקבילות ,תוך שימוש בנוסחת הזרם היוני שכוללת",
-   "חישובים של כוחות אלקטרו מניעים עבור יונים שונים.",
-   ".3הלומדים יחשבו וינתחו ,שינויים במתח ומוליכות הממברנה הביולוגית עקב הפעלה של",
-   "תעלות יונים ומשאבות נתרן-אשלגן."
+   "מבוא לפיזיולוגיה של ממברנות",
+   "פוטנציאל המנוחה של הממברנה",
+   "תעלות יוניות",
+   "תעלות תלויות מתח ופוטנציאל הפעולה",
+   "העברה סינפטית",
+   "תעלות יוניות המופעלות על ידי ליגנד",
+   "מנגנון ההתכווצות של שריר השלד",
+   "חוש המישוש",
+   "חוש המישוש (המשך)",
+   "בקרה על תנועה",
+   "החושים הכימיים",
+   "חוש השמע",
+   "חוש הראיה"
+  ],
+  "sessions": [
+   {
+    "lectures": "1",
+    "topicsHe": [
+     "מבוא לפיזיולוגיה של ממברנות"
+    ]
+   },
+   {
+    "lectures": "2",
+    "topicsHe": [
+     "פוטנציאל המנוחה של הממברנה"
+    ]
+   },
+   {
+    "lectures": "3",
+    "topicsHe": [
+     "תעלות יוניות"
+    ]
+   },
+   {
+    "lectures": "4",
+    "topicsHe": [
+     "תעלות תלויות מתח ופוטנציאל הפעולה"
+    ]
+   },
+   {
+    "lectures": "5",
+    "topicsHe": [
+     "העברה סינפטית"
+    ]
+   },
+   {
+    "lectures": "6",
+    "topicsHe": [
+     "תעלות יוניות המופעלות על ידי ליגנד"
+    ]
+   },
+   {
+    "lectures": "7",
+    "topicsHe": [
+     "מנגנון ההתכווצות של שריר השלד"
+    ]
+   },
+   {
+    "lectures": "8",
+    "topicsHe": [
+     "חוש המישוש"
+    ]
+   },
+   {
+    "lectures": "9",
+    "topicsHe": [
+     "חוש המישוש (המשך)"
+    ]
+   },
+   {
+    "lectures": "10",
+    "topicsHe": [
+     "בקרה על תנועה"
+    ]
+   },
+   {
+    "lectures": "11",
+    "topicsHe": [
+     "החושים הכימיים"
+    ]
+   },
+   {
+    "lectures": "12",
+    "topicsHe": [
+     "חוש השמע"
+    ]
+   },
+   {
+    "lectures": "13",
+    "topicsHe": [
+     "חוש הראיה"
+    ]
+   }
   ],
   "books": [
    "\"Principles of Neural Science\" 5th Edition, Eric R. Kandel, James H. Schwartz, Thomas M. Jessell,",
    "Steven A. Siegelbaum & A. J. Hudspeth"
   ],
   "assessmentHe": [
-   "100%מהציון תיאור התוצר",
-   "7%בונוס ) 7נקודות( מבחן מסכם",
-   "0%מהציון הסופי הערכה מעצבת :הגשת תרגילים",
-   "מטלות – הגשת תרגילים )נקודות הבונוס יילקחו בחשבון רק למי שהגיש 80%מהתרגילים(.",
-   "נוכחות – חובה ב 80%-משיעורים והתרגולים."
+   "מבחן מסכם — 100% מהציון",
+   "בוחן ביניים — 7% בונוס (7 נקודות)",
+   "הערכה מעצבת: הגשת תרגילים — 0% מהציון הסופי (נקודות הבונוס נחשבות רק למי שהגיש 80% מהתרגילים)",
+   "נוכחות – חובה ב-80% מהשיעורים והתרגולים"
   ],
-  "hasUnparsedSchedule": true,
+  "manual": {
+   "readAt": "2026-11-11",
+   "noteHe": "קריאה לפי הטבלה (Kandel, Principles of Neural Science, מהדורה 5): שיעורים 1–13 – פרקים 4, 6, 5, 7, 12, 10, 34, 22, 22, 35, 32, 30, 26."
+  },
   "evidence": {
    "textFile": "content/syllabi/text/biu-animal-physiology.txt",
    "sha256": "d09326e7f7ebfa2ec95752aa6d9f5a40a4899def95a52f33f30ecd658a9c80d9",
@@ -460,9 +521,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
    ]
   },
   "warnings": [
-   "לא נמצאה כותרת נושאים במסמך — הנושאים המוצגים הם פתיחת המסמך; לקרוא את קובץ הטקסט",
-   "הסילבוס החדש ביותר באתר הפקולטה הוא משנת 2025",
-   "במסמך יש טבלת שבועות/שיעורים שלא פוענחה אוטומטית (עמודות מעורבבות) — לקרוא את ה-PDF בעין ולהזין את הסדר"
+   "הסילבוס החדש ביותר באתר הפקולטה הוא משנת 2025"
   ]
  },
  "biu-biochem-a": {
@@ -658,6 +717,22 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
     ]
    }
   ],
+  "books": [
+   ":) וספרי עזר נוספיםtextbooks( ספרי הלימוד",
+   "Biochemistry, 3rd or 4th ed. Mathews and van Holde",
+   "First Part ()חלק ראשון",
+   "Chapter 4: Pages 90 –122",
+   "Chapter 24: Pages 1002 – 1031",
+   "Chapter 25: Pages 1036 – 1074",
+   "Chapter 26: Pages 1079 – 1106",
+   "Chapter 27: Pages 1125 – 1164",
+   "Chapter 28: Pages 1173 – 1224",
+   "Second Part ()חלק שני",
+   "Chapter 3: Pages 58 – 77",
+   "Chapter 6: Pages 177 – 215",
+   "Chapter 7: Pages 234 – 254 ; 277 – 278",
+   "Chapter 11: Pages 410 – 445 ; 454 – 461"
+  ],
   "assessmentHe": [
    "בחינה90%",
    "בחנים+ תרגילים10%"
@@ -670,8 +745,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
    ]
   },
   "warnings": [
-   "שנת הסילבוס לא ידועה (תיקייה בלי שנה באתר הפקולטה)",
-   "המקור לא מציין ספרים"
+   "שנת הסילבוס לא ידועה (תיקייה בלי שנה באתר הפקולטה)"
   ]
  },
  "biu-biochem-b": {
@@ -682,65 +756,380 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "fetchedAt": "2026-11-11",
   "source": "biu-pdf",
   "sourceUrl": "https://life-sciences.biu.ac.il/sites/life-sciences/files/shared/Med%20BSc/%D7%91%D7%99%D7%95%D7%9B%D7%99%D7%9E%D7%99%D7%94-%D7%91'-80202.pdf",
-  "level": "topics",
-  "contentHe": "הקורס עוסק בביוכימיה של חילוף חומרים באנרגיה ובמנגנוני הבקרה שלה ,כולל ויסות\nהורמונלי .הדגש המרכזי הוא על חילוף חומרים של פחמימות ,חילוף חומרים של שומנים,\nסינתזת חלבונים והפרעות מטבוליות קשורות .הנושאים המרכזיים כוללים )1( :יצירת , ATP\nמגליקוליזה למעגל קרבס ועד זרחון חמצוני ,המבנה הביולוגי של ממברנות ותפקידן\nבהעברה ובאיתות תאי ,וכן קטבוליזם של שומנים לצורך הפקת אנרגיה וסינתזת חומצות\nשומן; ( )2חילוף חומרים של תרכובות חנקן ,כולל ניצול אמוניה לביוסינתזה של תרכובות\nאורגניות המכילות חנקן ,סינתזת חומצות אמינו ,פירוק חלבונים וחומצות אמינו ,חילוף\nחומרים של פורפירינים ושל נוירוטרנסמיטרים ,וחילוף חומרים של נוקלאוטידים; ( )3מסלולי\nחילוף החומרים העיקריים בגוף ,עם דגש על גלוקונאוגנזה ,שיתוף פעולה בין איברי הגוף\nבנוגע לניצול ושימור אנרגיה ,ומסלולי האיתות החוץ-תאי וההורמונים .החומר המועבר\nבקורס זה חיוני לכל היבט בביולוגיה .כל תהליך ביולוגי מלווה בצורך אנרגטי אקוטי או כרוני,\nכך שהבנת המטבוליזם התאי קריטית לעתיד המקצועי של כל חוקר ורופא לעתיד.\nבהתבסס על תקציר הקורס שלך ועל שילוב כלים מבוססי מודלים שפתיים גדולים ()LLMs\nבהוראה ,בלמידה ובמטלות הקורס ,להלן מטרות ותוצרי למידה מומלצים ,המחולקים\nלקטגוריות של ידע ,מיומנויות וערכים:",
+  "level": "lectures",
+  "contentHe": "חלק א׳: ד״ר מורן דבלה-לויט\nיחידה 1: Course introduction\nיחידה 2: Introduction to Biochemistry; Introduction to Bioenergetics\nיחידה 3: Carbohydrates structure; Glycoconjugates: importance, function to cellular biology and research strategies\nיחידה 4: Overview of cellular respiration and major metabolic pathways (Glycolysis, PDC, Kreb's cycle, Electron transport chain, and anaerobic pathways)\nיחידה 5: Glycolysis; Lactic acid and Ethanol fermentation\nיחידה 6: Regulation on enzymatic function\nיחידה 7: Glycolysis regulation, reactions and regulation\nיחידה 8: Pyruvate Dehydrogenase complex: principles and reactions\nיחידה 9: Krebs cycle: main principles and reactions\nיחידה 10: Krebs cycle regulation and integration of the cellular respiration pathways\nחלק ב׳: פרופ׳ ניסן יששכר\nיחידה 1: Oxidative phosphorylation, Membrane Structure, Membrane Transport - Fundamental Concepts\nיחידה 2: Electron Transport Chain and Chemical Variations\nיחידה 3: איך כל מה שלמדנו מתבטא במציאות\nיחידה 4: Biological Membranes\nיחידה 5: Fatty acids metabolism\nיחידה 6: Fatty acid oxidation\nיחידה 7: איך כל מה שלמדנו מתבטא במציאות\nחלק ג׳: ד״ר יואב פז\nיחידה 1: Metabolism of Nitrogenous Compounds I: Principles of Biosynthesis, Utilization, and Turnover; Utilization of Inorganic Nitrogen: The Nitrogen Cycle; Utilization of Ammonia: Biogenesis of Organic Nitrogen\nיחידה 2: Metabolism of Nitrogenous Compounds I: Principles of Biosynthesis, Utilization, and Turnover; The Nitrogen Economy: Aspects of Amino Acid Synthesis and Degradation; Protein Turnover; Amino Acid Degradation and Metabolism of Nitrogenous End Products; Coenzymes Involved in Nitrogen Metabolism\nיחידה 3: Metabolism of Nitrogenous Compounds II: Amino Acids, Porphyrins, and Neurotransmitters; Pathways of Amino Acid Degradation; Amino Acids as Biosynthetic Precursors\nיחידה 4: Regulation of Glutamine Synthetase\nיחידה 5: Metabolism of Nitrogenous Compounds II: Amino Acids, Porphyrins, and Neurotransmitters; Porphyrin and Heme Metabolism; Amino Acids and Their Metabolites as Neurotransmitters and Biological Regulators; Amino Acid Biosynthesis\nיחידה 6: Nucleotide Metabolism; Outlines of Pathways in Nucleotide Metabolism; De Novo Biosynthesis of Purine Nucleotides; Purine Degradation and Clinical Disorders of Purine Metabolism\nיחידה 7: Nucleotide Metabolism; Pyrimidine Nucleotide Metabolism; Glutamine-Dependent Amidotransferases; Deoxyribonucleotide Biosynthesis and Metabolism\nיחידה 8: Heme Metabolism: Synthesis & Catabolism\nחלק ד׳: פרופ׳ איתן אוקון\nיחידה 1: Gluconeogenesis: Substrates, enzymes, regulation\nיחידה 2: Glycogen synthesis and breakdown\nיחידה 3: Lactate metabolism\nיחידה 4: Gluconeogenesis substrates\nיחידה 5: Amino Acid Degradation and Metabolism of Nitrogenous End Products\nיחידה 6: Metabolic diseases: Defects of Glycogen metabolism\nיחידה 7: The effect of mutations in metabolism related enzyme on diseases\nיחידה 8: Metabolic Division of Labor Among the Major Organs\nיחידה 9: Coordination of Energy Homeostasis\nיחידה 10: Diabetes\nיחידה 11: Treatment strategies for type 1 and 2 diabetes\nיחידה 12: Signal transduction mechanisms of metabolism-related hormones\nיחידה 13: GPCRs\nיחידה 14: Secondary messengers\nיחידה 15: RTK\nיחידה 16: Steroid hormones\nיחידה 17: Caloric restriction, lifespan extention and autophagy\nיחידה 18: Metabolic fueling of the brain\nיחידה 19: Caffeine and energy metabolism",
   "topicsHe": [
-   "הקורס עוסק בביוכימיה של חילוף חומרים באנרגיה ובמנגנוני הבקרה שלה ,כולל ויסות",
-   "הורמונלי .הדגש המרכזי הוא על חילוף חומרים של פחמימות ,חילוף חומרים של שומנים,",
-   "סינתזת חלבונים והפרעות מטבוליות קשורות .הנושאים המרכזיים כוללים )1( :יצירת , ATP",
-   "מגליקוליזה למעגל קרבס ועד זרחון חמצוני ,המבנה הביולוגי של ממברנות ותפקידן",
-   "בהעברה ובאיתות תאי ,וכן קטבוליזם של שומנים לצורך הפקת אנרגיה וסינתזת חומצות",
-   "שומן; ( )2חילוף חומרים של תרכובות חנקן ,כולל ניצול אמוניה לביוסינתזה של תרכובות",
-   "אורגניות המכילות חנקן ,סינתזת חומצות אמינו ,פירוק חלבונים וחומצות אמינו ,חילוף",
-   "חומרים של פורפירינים ושל נוירוטרנסמיטרים ,וחילוף חומרים של נוקלאוטידים; ( )3מסלולי",
-   "חילוף החומרים העיקריים בגוף ,עם דגש על גלוקונאוגנזה ,שיתוף פעולה בין איברי הגוף",
-   "בנוגע לניצול ושימור אנרגיה ,ומסלולי האיתות החוץ-תאי וההורמונים .החומר המועבר",
-   "בקורס זה חיוני לכל היבט בביולוגיה .כל תהליך ביולוגי מלווה בצורך אנרגטי אקוטי או כרוני,",
-   "כך שהבנת המטבוליזם התאי קריטית לעתיד המקצועי של כל חוקר ורופא לעתיד.",
-   "בהתבסס על תקציר הקורס שלך ועל שילוב כלים מבוססי מודלים שפתיים גדולים ()LLMs",
-   "בהוראה ,בלמידה ובמטלות הקורס ,להלן מטרות ותוצרי למידה מומלצים ,המחולקים",
-   "לקטגוריות של ידע ,מיומנויות וערכים:"
+   "Course introduction",
+   "Introduction to Biochemistry",
+   "Introduction to Bioenergetics",
+   "Carbohydrates structure",
+   "Glycoconjugates: importance, function to cellular biology and research strategies",
+   "Overview of cellular respiration and major metabolic pathways (Glycolysis, PDC, Kreb's cycle, Electron transport chain, and anaerobic pathways)",
+   "Glycolysis",
+   "Lactic acid and Ethanol fermentation",
+   "Regulation on enzymatic function",
+   "Glycolysis regulation, reactions and regulation",
+   "Pyruvate Dehydrogenase complex: principles and reactions",
+   "Krebs cycle: main principles and reactions",
+   "Krebs cycle regulation and integration of the cellular respiration pathways",
+   "Oxidative phosphorylation, Membrane Structure, Membrane Transport - Fundamental Concepts",
+   "Electron Transport Chain and Chemical Variations",
+   "איך כל מה שלמדנו מתבטא במציאות",
+   "Biological Membranes",
+   "Fatty acids metabolism",
+   "Fatty acid oxidation",
+   "איך כל מה שלמדנו מתבטא במציאות",
+   "Metabolism of Nitrogenous Compounds I: Principles of Biosynthesis, Utilization, and Turnover",
+   "Utilization of Inorganic Nitrogen: The Nitrogen Cycle; Utilization of Ammonia: Biogenesis of Organic Nitrogen",
+   "Metabolism of Nitrogenous Compounds I: Principles of Biosynthesis, Utilization, and Turnover",
+   "The Nitrogen Economy: Aspects of Amino Acid Synthesis and Degradation; Protein Turnover; Amino Acid Degradation and Metabolism of Nitrogenous End Products; Coenzymes Involved in Nitrogen Metabolism",
+   "Metabolism of Nitrogenous Compounds II: Amino Acids, Porphyrins, and Neurotransmitters",
+   "Pathways of Amino Acid Degradation; Amino Acids as Biosynthetic Precursors",
+   "Regulation of Glutamine Synthetase",
+   "Metabolism of Nitrogenous Compounds II: Amino Acids, Porphyrins, and Neurotransmitters",
+   "Porphyrin and Heme Metabolism; Amino Acids and Their Metabolites as Neurotransmitters and Biological Regulators; Amino Acid Biosynthesis",
+   "Nucleotide Metabolism",
+   "Outlines of Pathways in Nucleotide Metabolism; De Novo Biosynthesis of Purine Nucleotides; Purine Degradation and Clinical Disorders of Purine Metabolism",
+   "Nucleotide Metabolism",
+   "Pyrimidine Nucleotide Metabolism; Glutamine-Dependent Amidotransferases; Deoxyribonucleotide Biosynthesis and Metabolism",
+   "Heme Metabolism: Synthesis & Catabolism",
+   "Gluconeogenesis: Substrates, enzymes, regulation",
+   "Glycogen synthesis and breakdown",
+   "Lactate metabolism",
+   "Gluconeogenesis substrates",
+   "Amino Acid Degradation and Metabolism of Nitrogenous End Products",
+   "Metabolic diseases: Defects of Glycogen metabolism",
+   "The effect of mutations in metabolism related enzyme on diseases",
+   "Metabolic Division of Labor Among the Major Organs",
+   "Coordination of Energy Homeostasis",
+   "Diabetes",
+   "Treatment strategies for type 1 and 2 diabetes",
+   "Signal transduction mechanisms of metabolism-related hormones",
+   "GPCRs",
+   "Secondary messengers",
+   "RTK",
+   "Steroid hormones",
+   "Caloric restriction, lifespan extention and autophagy",
+   "Metabolic fueling of the brain",
+   "Caffeine and energy metabolism"
+  ],
+  "sessions": [
+   {
+    "lectures": "1",
+    "partHe": "חלק א׳: ד״ר מורן דבלה-לויט",
+    "topicsHe": [
+     "Course introduction"
+    ]
+   },
+   {
+    "lectures": "2",
+    "topicsHe": [
+     "Introduction to Biochemistry",
+     "Introduction to Bioenergetics"
+    ]
+   },
+   {
+    "lectures": "3",
+    "topicsHe": [
+     "Carbohydrates structure",
+     "Glycoconjugates: importance, function to cellular biology and research strategies"
+    ]
+   },
+   {
+    "lectures": "4",
+    "topicsHe": [
+     "Overview of cellular respiration and major metabolic pathways (Glycolysis, PDC, Kreb's cycle, Electron transport chain, and anaerobic pathways)"
+    ]
+   },
+   {
+    "lectures": "5",
+    "topicsHe": [
+     "Glycolysis",
+     "Lactic acid and Ethanol fermentation"
+    ]
+   },
+   {
+    "lectures": "6",
+    "topicsHe": [
+     "Regulation on enzymatic function"
+    ]
+   },
+   {
+    "lectures": "7",
+    "topicsHe": [
+     "Glycolysis regulation, reactions and regulation"
+    ]
+   },
+   {
+    "lectures": "8",
+    "topicsHe": [
+     "Pyruvate Dehydrogenase complex: principles and reactions"
+    ]
+   },
+   {
+    "lectures": "9",
+    "topicsHe": [
+     "Krebs cycle: main principles and reactions"
+    ]
+   },
+   {
+    "lectures": "10",
+    "topicsHe": [
+     "Krebs cycle regulation and integration of the cellular respiration pathways"
+    ]
+   },
+   {
+    "lectures": "1",
+    "partHe": "חלק ב׳: פרופ׳ ניסן יששכר",
+    "topicsHe": [
+     "Oxidative phosphorylation, Membrane Structure, Membrane Transport - Fundamental Concepts"
+    ]
+   },
+   {
+    "lectures": "2",
+    "topicsHe": [
+     "Electron Transport Chain and Chemical Variations"
+    ]
+   },
+   {
+    "lectures": "3",
+    "topicsHe": [
+     "איך כל מה שלמדנו מתבטא במציאות"
+    ]
+   },
+   {
+    "lectures": "4",
+    "topicsHe": [
+     "Biological Membranes"
+    ]
+   },
+   {
+    "lectures": "5",
+    "topicsHe": [
+     "Fatty acids metabolism"
+    ]
+   },
+   {
+    "lectures": "6",
+    "topicsHe": [
+     "Fatty acid oxidation"
+    ]
+   },
+   {
+    "lectures": "7",
+    "topicsHe": [
+     "איך כל מה שלמדנו מתבטא במציאות"
+    ]
+   },
+   {
+    "lectures": "1",
+    "partHe": "חלק ג׳: ד״ר יואב פז",
+    "topicsHe": [
+     "Metabolism of Nitrogenous Compounds I: Principles of Biosynthesis, Utilization, and Turnover",
+     "Utilization of Inorganic Nitrogen: The Nitrogen Cycle; Utilization of Ammonia: Biogenesis of Organic Nitrogen"
+    ]
+   },
+   {
+    "lectures": "2",
+    "topicsHe": [
+     "Metabolism of Nitrogenous Compounds I: Principles of Biosynthesis, Utilization, and Turnover",
+     "The Nitrogen Economy: Aspects of Amino Acid Synthesis and Degradation; Protein Turnover; Amino Acid Degradation and Metabolism of Nitrogenous End Products; Coenzymes Involved in Nitrogen Metabolism"
+    ]
+   },
+   {
+    "lectures": "3",
+    "topicsHe": [
+     "Metabolism of Nitrogenous Compounds II: Amino Acids, Porphyrins, and Neurotransmitters",
+     "Pathways of Amino Acid Degradation; Amino Acids as Biosynthetic Precursors"
+    ]
+   },
+   {
+    "lectures": "4",
+    "topicsHe": [
+     "Regulation of Glutamine Synthetase"
+    ]
+   },
+   {
+    "lectures": "5",
+    "topicsHe": [
+     "Metabolism of Nitrogenous Compounds II: Amino Acids, Porphyrins, and Neurotransmitters",
+     "Porphyrin and Heme Metabolism; Amino Acids and Their Metabolites as Neurotransmitters and Biological Regulators; Amino Acid Biosynthesis"
+    ]
+   },
+   {
+    "lectures": "6",
+    "topicsHe": [
+     "Nucleotide Metabolism",
+     "Outlines of Pathways in Nucleotide Metabolism; De Novo Biosynthesis of Purine Nucleotides; Purine Degradation and Clinical Disorders of Purine Metabolism"
+    ]
+   },
+   {
+    "lectures": "7",
+    "topicsHe": [
+     "Nucleotide Metabolism",
+     "Pyrimidine Nucleotide Metabolism; Glutamine-Dependent Amidotransferases; Deoxyribonucleotide Biosynthesis and Metabolism"
+    ]
+   },
+   {
+    "lectures": "8",
+    "topicsHe": [
+     "Heme Metabolism: Synthesis & Catabolism"
+    ]
+   },
+   {
+    "lectures": "1",
+    "partHe": "חלק ד׳: פרופ׳ איתן אוקון",
+    "topicsHe": [
+     "Gluconeogenesis: Substrates, enzymes, regulation"
+    ]
+   },
+   {
+    "lectures": "2",
+    "topicsHe": [
+     "Glycogen synthesis and breakdown"
+    ]
+   },
+   {
+    "lectures": "3",
+    "topicsHe": [
+     "Lactate metabolism"
+    ]
+   },
+   {
+    "lectures": "4",
+    "topicsHe": [
+     "Gluconeogenesis substrates"
+    ]
+   },
+   {
+    "lectures": "5",
+    "topicsHe": [
+     "Amino Acid Degradation and Metabolism of Nitrogenous End Products"
+    ]
+   },
+   {
+    "lectures": "6",
+    "topicsHe": [
+     "Metabolic diseases: Defects of Glycogen metabolism"
+    ]
+   },
+   {
+    "lectures": "7",
+    "topicsHe": [
+     "The effect of mutations in metabolism related enzyme on diseases"
+    ]
+   },
+   {
+    "lectures": "8",
+    "topicsHe": [
+     "Metabolic Division of Labor Among the Major Organs"
+    ]
+   },
+   {
+    "lectures": "9",
+    "topicsHe": [
+     "Coordination of Energy Homeostasis"
+    ]
+   },
+   {
+    "lectures": "10",
+    "topicsHe": [
+     "Diabetes"
+    ]
+   },
+   {
+    "lectures": "11",
+    "topicsHe": [
+     "Treatment strategies for type 1 and 2 diabetes"
+    ]
+   },
+   {
+    "lectures": "12",
+    "topicsHe": [
+     "Signal transduction mechanisms of metabolism-related hormones"
+    ]
+   },
+   {
+    "lectures": "13",
+    "topicsHe": [
+     "GPCRs"
+    ]
+   },
+   {
+    "lectures": "14",
+    "topicsHe": [
+     "Secondary messengers"
+    ]
+   },
+   {
+    "lectures": "15",
+    "topicsHe": [
+     "RTK"
+    ]
+   },
+   {
+    "lectures": "16",
+    "topicsHe": [
+     "Steroid hormones"
+    ]
+   },
+   {
+    "lectures": "17",
+    "topicsHe": [
+     "Caloric restriction, lifespan extention and autophagy"
+    ]
+   },
+   {
+    "lectures": "18",
+    "topicsHe": [
+     "Metabolic fueling of the brain"
+    ]
+   },
+   {
+    "lectures": "19",
+    "topicsHe": [
+     "Caffeine and energy metabolism"
+    ]
+   }
   ],
   "books": [
-   "הביוכימיה.",
-   "פיתוח חשיבה ביקורתית ומודעות אתית :הסטודנטים יפתחו גישה ביקורתית לניתוח",
-   "תהליכים ביוכימיים ויבחנו את ההשלכות האתיות של מחקר ופיתוח בתחום הביוכימיה,",
-   "במיוחד בהקשר לשימוש בכלי .AI",
-   "שיתוף פעולה בין-תחומי :הסטודנטים יפגינו יכולת לעבוד בצוותים רב-תחומיים ,תוך",
-   "שילוב ידע ביוכימי עם כלים טכנולוגיים מתקדמים לפתרון בעיות מורכבות.",
-   "הסטודנטים יסבירו את המבנה והתפקוד של מולקולות ביולוגיות מרכזיות ,כגון חלבונים,",
-   "ליפידים ,פחמימות וחומצות גרעין.",
-   "הסטודנטים יתארו את המסלולים המטבוליים העיקריים ואת מנגנוני הבקרה שלהם",
-   "בתאים ובאורגניזמים שלמים.",
-   "הסטודנטים יזהו את התהליכים הביוכימיים המעורבים בהפרעות מטבוליות ויקשרו בין",
-   "שינויים במטבוליזם לבין מצבים פתולוגיים.",
-   "מיומנויות:",
-   "הסטודנטים ינתחו נתונים ניסויים בתחום הביוכימיה ויפרשו את משמעותם בהקשר",
-   "של תהליכים מטבוליים.",
-   "הסטודנטים יתכננו ויבצעו ניסויים ביוכימיים ,תוך שימוש בטכניקות מעבדה",
-   "מתקדמות ,ויעריכו את תוצאותיהם.",
-   "הסטודנטים ישתמשו בכלים מבוססי LLMלסיכום ספרות מדעית ,זיהוי מגמות",
-   "והפקת תובנות רלוונטיות למחקריהם.",
-   "ערכים:",
-   "הסטודנטים יפתחו מודעות לחשיבות הביוכימיה בהבנת תהליכים פיזיולוגיים",
-   "ופתולוגיים ,ויעריכו את תרומתה לרפואה ולמדעי החיים.",
-   "הסטודנטים יגבׁשו גישה אתית ואחראית בביצוע מחקר ביוכימי ,תוך התחשבות",
-   "בהשלכות החברתיות והסביבתיות של עבודתם ,במיוחד בהקשר לשימוש",
-   "בטכנולוגיות . AI",
-   "הסטודנטים יפגינו סקרנות מדעית ורצון להעמיק את הידע בתחום הביוכימיה ,מתוך",
-   "הבנה לחשיבות הלמידה המתמשכת ושילוב טכנולוגיות חדשות במחקריהם."
+   "ספרי הלימוד ( )Textbooksוספרי עזר נוספים:",
+   "ספר הלימוד של הקורס נקרא:",
+   "Biochemistry (Van Holde) 4th edition",
+   "הפרקים הרלוונטיים מתוכו:",
+   "חלק א׳ :פרקים 14 ,13 , 9 ,3",
+   "חלק ב׳ :פרקים 17 ,15 ,10",
+   "חלק ג׳ :פרקים 22 ,21 ,20",
+   "חלק ד׳ :פרקים 23 ,20 ,18 ,13",
+   "תכני חובה (מאמרים) נוספים:",
+   "The energetic brain – A review from students to Students. (Journal of",
+   "Neurochemistry, 2020)",
+   "Impact of coffee and its bioactive compounds on the risks of type 2",
+   "diabetes and its complications: A comprehensive review (Diabetes &",
+   "Metabolic Syndrome: Clinical Research & Reviews, 2024)",
+   "Effects of coffee/caffeine on brain health and disease: What should I",
+   "tell my patients? (Practical Neurology, 2015)",
+   "Molecular targets of caffeine In the central nervous system (Progress in",
+   "Brain Research, Volume 288, 2024)",
+   "International consensus on fasting terminology (Cell metbolism, 2024)",
+   "The Association Between Regular Physical Exercise, Sleep Patterns,",
+   "Fasting, and Autophagy for Healthy Longevity and Well-Being: A",
+   "Narrative Review (Frontiers in Psychology, 2021)",
+   "The ups and downs of caloric restriction and fasting: from molecular",
+   "effects to clinical application (EMBO molecular medicine, 2022)"
   ],
   "assessmentHe": [
-   "25%מענה על מטלות ה Perusal",
-   "25%מענה על מטלות האנוטו",
-   "25%בוטים עם תרחישים",
-   "25%מבחן מסכם",
-   "25%מהציון הסופי מטלות perusal",
-   "25%מהציון הסופי מטלות Annoto",
-   "25%מהציון הסופי מטלות בוטים עם תרחישים",
-   "25%מהציון הסופי"
+   "מטלות Perusal — 25% מהציון הסופי",
+   "מטלות Annoto — 25% מהציון הסופי",
+   "מטלות בוטים עם תרחישים — 25% מהציון הסופי",
+   "מבחן סופי — 25% מהציון הסופי",
+   "בכל אחד מארבעת חלקי הקורס כשני מפגשים פרונטליים, שהנוכחות בהם חובה"
   ],
-  "hasUnparsedSchedule": true,
+  "sessionLabelHe": "יחידה",
+  "manual": {
+   "readAt": "2026-11-11",
+   "noteHe": "הטבלה מחולקת ליחידות לימוד (לא לשיעורים): הקורס היברידי, ארבעה מרצים ברצף, רוב היחידות מקוונות. ספר: Biochemistry (Van Holde), מהדורה 4 — חלק א׳ פרקים 3, 9, 13, 14; חלק ב׳ 10, 15, 17; חלק ג׳ 20, 21, 22; חלק ד׳ 13, 18, 20, 23. ליחידות 17–19 בחלק ד׳ מוצמדים שבעת מאמרי החובה שבסוף המסמך."
+  },
   "evidence": {
    "textFile": "content/syllabi/text/biu-biochem-b.txt",
    "sha256": "9da77d6ddc19dee993b64cf4c6df6f5e9550e6c08417f977fe1c21506cf1c77f",
@@ -749,8 +1138,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
    ]
   },
   "warnings": [
-   "שנת הסילבוס לא ידועה (תיקייה בלי שנה באתר הפקולטה)",
-   "במסמך יש טבלת שבועות/שיעורים שלא פוענחה אוטומטית (עמודות מעורבבות) — לקרוא את ה-PDF בעין ולהזין את הסדר"
+   "שנת הסילבוס לא ידועה (תיקייה בלי שנה באתר הפקולטה)"
   ]
  },
  "biu-biostatistics": {
@@ -762,31 +1150,113 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "fetchedAt": "2026-11-11",
   "source": "biu-pdf",
   "sourceUrl": "https://life-sciences.biu.ac.il/sites/life-sciences/files/shared/Med%20Mechina/Sylabi24/%D7%91%D7%99%D7%95%D7%A1%D7%98%D7%98%D7%99%D7%A1%D7%98%D7%99%D7%A7%D7%94-80-150-30-1).pdf",
-  "level": "topics",
-  "contentHe": "המחלקה למדעי החיים\nביוסטטיסטיקה\nד\"ר דפנה עציון מרצה:\nד\"ר דפנה עציון :לפי תאום מראש ( )[email]או בטלפון מתרג לים:\nשעות קבלה:\nמתרגלים :כל מתרגל יודיע בקבוצתו.\nמטרת הקורס\nמטרת הקורס הינה להקנות לתלמיד הבנה בסיסית בשיטות לעיבוד נתונים המשמשות את\nהמחקר החברתי כיום .השיטות שנבחרו הן ברובן שיטות ניתוח דו-משתנים ורב-משתנים.\nהכוונה היא להביא את הסטודנט לרמת הבנה שתאפשר :\nא .לבצע עבודת מחקר בתחום מדעי החיים ,תוך שימוש במחשב ,ניתוח הנתונים והסקת\nהמסקנות .\nב .לדעת מתי רצוי להשתמש בכל אחת מן השיטות ולאילו ניתוחים סטטיסטיים אפשר לצפות\nמכל שיטה .\nג .להבין את הספרות המקצועית המתפרסמת ,המביאה ממצאים שהוסברו בעזרת שיטות אלו .\nמהלך הקורס\nבמהלך הקורס יקבל הסטודנט כלים ,הן בתיאוריה והן באופן מעשי ,לביצוע עבודת מחקר\nמדעית במדעי החיים .\nילמדו בקורס תהליכי תכנון וביצוע המחקר מן השלב של הגדרת בעיית המחקר ועד לניתוח\nהתוצאות והסקת המסקנות .\nבמהלך הקורס יידרש הסטודנט לפתור תרגילים בסטטיסטיקה ולהבין פלטים המופקים בתוכנת\nה.SPSS",
+  "level": "lectures",
+  "contentHe": "שבוע 1: תהליך המחקר המדעי - מאפיינים ועקרונות; מהי הסטטיסטיקה - תיאור והסקה; הגדרת משתנים. משתנה בדיד ומשתנה רציף; רמות מדידה של משתנים\nשבוע 2: סטטיסטיקה תיאורית; משתנים – תלוי וב\"ת, אוכלוסיה, מדגם, סולמות מדידה; אופני תיאור והצגת משתנה – סדרת ערכים, טבלת שכיחויות, הצגה גרפית\nשבוע 3: מדדי המרכז: חישוב מדדי מרכז והשימוש בהם – הממוצע האריתמטי, החציון, השכיח; מדדי פיזור: סטיית תקן ושונות, תחום; תכונות מדדי הפיזור\nשבוע 4: התפלגות נורמלית; משמעות ציון התקן; התפלגות נורמלית סטנדרטית; חישוב הסתברות בהתפלגות נורמלית; חישוב אחוזונים\nשבוע 5: בדיקת השערות; מבחן Z; חישוב והבנת לוח Z\nשבוע 6: מבחן T – תיאוריה; רווח סמך - מבחן Z ומבחן T\nשבוע 7: מבחן T למדגמים בלתי תלויים ולמדגמים מזווגים – תיאוריה; קריאת פלטים\nשבוע 8: קורלציה – חישוב; רגרסיה – תיאוריה והבנת פלטים\nשבוע 9: חי בריבוע\nשבוע 10: מבחני שונות חד ודו כיווניים – תיאוריה והבנת פלטים",
   "topicsHe": [
-   "המחלקה למדעי החיים",
-   "ביוסטטיסטיקה",
-   "ד\"ר דפנה עציון מרצה:",
-   "ד\"ר דפנה עציון :לפי תאום מראש ( )[email]או בטלפון מתרג לים:",
-   "שעות קבלה:",
-   "מתרגלים :כל מתרגל יודיע בקבוצתו.",
-   "מטרת הקורס",
-   "מטרת הקורס הינה להקנות לתלמיד הבנה בסיסית בשיטות לעיבוד נתונים המשמשות את",
-   "המחקר החברתי כיום .השיטות שנבחרו הן ברובן שיטות ניתוח דו-משתנים ורב-משתנים.",
-   "הכוונה היא להביא את הסטודנט לרמת הבנה שתאפשר :",
-   "א .לבצע עבודת מחקר בתחום מדעי החיים ,תוך שימוש במחשב ,ניתוח הנתונים והסקת",
-   "המסקנות .",
-   "ב .לדעת מתי רצוי להשתמש בכל אחת מן השיטות ולאילו ניתוחים סטטיסטיים אפשר לצפות",
-   "מכל שיטה .",
-   "ג .להבין את הספרות המקצועית המתפרסמת ,המביאה ממצאים שהוסברו בעזרת שיטות אלו .",
-   "מהלך הקורס",
-   "במהלך הקורס יקבל הסטודנט כלים ,הן בתיאוריה והן באופן מעשי ,לביצוע עבודת מחקר",
-   "מדעית במדעי החיים .",
-   "ילמדו בקורס תהליכי תכנון וביצוע המחקר מן השלב של הגדרת בעיית המחקר ועד לניתוח",
-   "התוצאות והסקת המסקנות .",
-   "במהלך הקורס יידרש הסטודנט לפתור תרגילים בסטטיסטיקה ולהבין פלטים המופקים בתוכנת",
-   "ה.SPSS"
+   "תהליך המחקר המדעי - מאפיינים ועקרונות",
+   "מהי הסטטיסטיקה - תיאור והסקה",
+   "הגדרת משתנים. משתנה בדיד ומשתנה רציף",
+   "רמות מדידה של משתנים",
+   "סטטיסטיקה תיאורית",
+   "משתנים – תלוי וב\"ת, אוכלוסיה, מדגם, סולמות מדידה",
+   "אופני תיאור והצגת משתנה – סדרת ערכים, טבלת שכיחויות, הצגה גרפית",
+   "מדדי המרכז: חישוב מדדי מרכז והשימוש בהם – הממוצע האריתמטי, החציון, השכיח",
+   "מדדי פיזור: סטיית תקן ושונות, תחום",
+   "תכונות מדדי הפיזור",
+   "התפלגות נורמלית",
+   "משמעות ציון התקן",
+   "התפלגות נורמלית סטנדרטית",
+   "חישוב הסתברות בהתפלגות נורמלית",
+   "חישוב אחוזונים",
+   "בדיקת השערות",
+   "מבחן Z",
+   "חישוב והבנת לוח Z",
+   "מבחן T – תיאוריה",
+   "רווח סמך - מבחן Z ומבחן T",
+   "מבחן T למדגמים בלתי תלויים ולמדגמים מזווגים – תיאוריה",
+   "קריאת פלטים",
+   "קורלציה – חישוב",
+   "רגרסיה – תיאוריה והבנת פלטים",
+   "חי בריבוע",
+   "מבחני שונות חד ודו כיווניים – תיאוריה והבנת פלטים"
+  ],
+  "sessions": [
+   {
+    "lectures": "1",
+    "topicsHe": [
+     "תהליך המחקר המדעי - מאפיינים ועקרונות",
+     "מהי הסטטיסטיקה - תיאור והסקה",
+     "הגדרת משתנים. משתנה בדיד ומשתנה רציף",
+     "רמות מדידה של משתנים"
+    ]
+   },
+   {
+    "lectures": "2",
+    "topicsHe": [
+     "סטטיסטיקה תיאורית",
+     "משתנים – תלוי וב\"ת, אוכלוסיה, מדגם, סולמות מדידה",
+     "אופני תיאור והצגת משתנה – סדרת ערכים, טבלת שכיחויות, הצגה גרפית"
+    ]
+   },
+   {
+    "lectures": "3",
+    "topicsHe": [
+     "מדדי המרכז: חישוב מדדי מרכז והשימוש בהם – הממוצע האריתמטי, החציון, השכיח",
+     "מדדי פיזור: סטיית תקן ושונות, תחום",
+     "תכונות מדדי הפיזור"
+    ]
+   },
+   {
+    "lectures": "4",
+    "topicsHe": [
+     "התפלגות נורמלית",
+     "משמעות ציון התקן",
+     "התפלגות נורמלית סטנדרטית",
+     "חישוב הסתברות בהתפלגות נורמלית",
+     "חישוב אחוזונים"
+    ]
+   },
+   {
+    "lectures": "5",
+    "topicsHe": [
+     "בדיקת השערות",
+     "מבחן Z",
+     "חישוב והבנת לוח Z"
+    ]
+   },
+   {
+    "lectures": "6",
+    "topicsHe": [
+     "מבחן T – תיאוריה",
+     "רווח סמך - מבחן Z ומבחן T"
+    ]
+   },
+   {
+    "lectures": "7",
+    "topicsHe": [
+     "מבחן T למדגמים בלתי תלויים ולמדגמים מזווגים – תיאוריה",
+     "קריאת פלטים"
+    ]
+   },
+   {
+    "lectures": "8",
+    "topicsHe": [
+     "קורלציה – חישוב",
+     "רגרסיה – תיאוריה והבנת פלטים"
+    ]
+   },
+   {
+    "lectures": "9",
+    "topicsHe": [
+     "חי בריבוע"
+    ]
+   },
+   {
+    "lectures": "10",
+    "topicsHe": [
+     "מבחני שונות חד ודו כיווניים – תיאוריה והבנת פלטים"
+    ]
+   }
   ],
   "books": [
    "אייזנבך רונית \" ,סטטיסטיקה ללא סטטיסטיקאים \" ,הוצאת אקדמון .",
@@ -794,7 +1264,6 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
    "יחידות . 1-5",
    "רות בייט -מרום \" :מבוא לסטטיסטיקה \" ,הוצאת עם עובד ,ספריה אוניברסיטאית .",
    "סטטיסטיקה והסתברות של בני גורן או אספיס ( לתרגול ) .",
-   "בספרית המכון הפדגוגי 519.07אספ.סט ()189361",
    "דרום אפרים \" ,סטטיסטיקה עם דוגמאות מתחומי החינוך והפסיכולוגיה \" ,הוצאת",
    "רגרסיה לינארית ,ד\"ר אפרים דרום ,בי\"ס לחינוך ומרכז המחשבים ,אונ' בר -אילן .",
    "ישראלית שולה ,סטטיסטיקה הלכה למעשה ,לוגיק מערכות יעוץ והדרכה .",
@@ -803,10 +1272,15 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
    "spss .10לחלונות ,מדריך לסטודנט ,מאת נורית ברק בהוצאת אקדמון ."
   ],
   "assessmentHe": [
-   "א .תרגילי בית (.)10%",
-   "ב .מבחן מסכם (.)85%"
+   "הגשת ארבעה תרגילים",
+   "תרגילי בית (10%)",
+   "מבחן מסכם (85%)"
   ],
-  "hasUnparsedSchedule": true,
+  "sessionLabelHe": "שבוע",
+  "manual": {
+   "readAt": "2026-11-11",
+   "noteHe": "תרגילי הבית לפי הטבלה: תרגיל 1 (סטטיסטיקה תיאורית, מדדי מרכז ופיזור) בשבוע 3; תרגיל 2 (התפלגות נורמלית, בדיקת השערות ורווח סמך) בשבוע 6; תרגיל 3 (הבנת פלטים – מבחני טי ומבחני שונות) בשבוע 10. במסמך מצוינים רק 95% מהציון."
+  },
   "evidence": {
    "textFile": "content/syllabi/text/biu-biostatistics.txt",
    "sha256": "e63496a908cda7af644502b2db7793925b7e1faf54a71060c36b401f6cdcd400",
@@ -815,9 +1289,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
    ]
   },
   "warnings": [
-   "לא נמצאה כותרת נושאים במסמך — הנושאים המוצגים הם פתיחת המסמך; לקרוא את קובץ הטקסט",
-   "הסילבוס החדש ביותר באתר הפקולטה הוא משנת 2024",
-   "במסמך יש טבלת שבועות/שיעורים שלא פוענחה אוטומטית (עמודות מעורבבות) — לקרוא את ה-PDF בעין ולהזין את הסדר"
+   "הסילבוס החדש ביותר באתר הפקולטה הוא משנת 2024"
   ]
  },
  "biu-cell": {
@@ -1375,45 +1847,155 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "fetchedAt": "2026-11-11",
   "source": "biu-pdf",
   "sourceUrl": "https://life-sciences.biu.ac.il/sites/life-sciences/files/shared/Med%20Mechina/Sylabi25/%D7%A1%D7%99%D7%9C%D7%91%D7%95%D7%A1-%D7%92%D7%A8%D7%A1%D7%94-%D7%97%D7%93%D7%A9%D7%94-2025-%D7%9E%D7%95%D7%9C%D7%A7%D7%95%D7%9C%D7%A8%D7%99%D7%AA-242-30.pdf",
-  "level": "topics",
-  "contentHe": "תאריך2.25 :\nסילבוס -תוכנית הוראה לקורס\nביולוגיה מולקולרית והנדסה גנטית א׳\nפרופ' ירון שב-טל | הפקולטה למדעי החיים\nMolecular Biology and Genetic Engineering | 80-242-30\nשיעור סוג הקורס:\n2 היקף נ\"ז:\nמכינה לרפואה שנת לימודים:\nב סמסטר:\nיום ושעה\nשלישי 16:00\nשעת קבלה:\n[email] מייל מרצה:\nקישור לאתר מודל:\nתיאור הקורס ותוצרי למידה\nתקציר הקורס\nהכרות עם הטכניקות המקובלות בעבודה בביולוגיה מולקולרית וישומן בביולוגיה המודרנית .הקורס סוקר\nאת הטכניקות והמתודולוגיות הבסיסיות המשמשות חוקרים בתחום הביולוגיה המולקולרית.\nתוצרי הלמידה\nא .ידע\nהיכרות עם עובדות ,תכנים ,מושגים ,סוגיות ורעיונות מרכזיים בתחום הדעת .פעלים לדוגמה:\n.1הלומדים יתארו את שיטות הריצוף השונות\n.2הלומדים יתארו את שיטות הצביעה השונות\n.3הלומדים יתארו את שיטות הפרדת המולקולות – חומצות גרעין וחלבונים\nב .מיומנויות\n.1הלומדים יוכלו להשוות בין השיטות השונות ולהסביר את היתרונות ,החסרונות ,ומה לא ניתן\nלעשות עם כל שיטה.\n.2הלומדים יוכלו להעריך אילו בעיות היו בשיטה שגרמו לכשלון הניסוי",
+  "level": "lectures",
+  "contentHe": "שיעור 1: מבוא, חזרה על הדוגמה המרכזית של הביולוגיה המולקולרית; דנ״א - אנזימי רסטריקציה, הפרדת מולקולות דנ״א בג׳ל\nשיעור 2: שיבוט, פלסמידים, וקטורי ביטוי\nשיעור 3: סימון דנ״א, היברידיזציה, אנליזת southern, ספריה גנומית; Spectral karyotyping & DNA in situ hybridization\nשיעור 4: קביעת רצף דנ״א – משיטות בסיסיות ועד לשיטות מתקדמות לקביעת רצף של גנום\nשיעור 5: שיטות אבחון גנטי (כולל RFLP)\nשיעור 6: רנ״א - ביטוי ייחודי לרקמה; northern blot; ספריית cDNA; RNA-seq, DNA microarrays\nשיעור 7: reverse transcription-PCR; Real-Time PCR; השוואת שיטות שונות לבחינת ביטוי גנים\nשיעור 8: חלבונים - הפרדת חלבונים בג׳ל (ג׳ל חד-ממדי וג׳ל דו-ממדי); אנליזת mass spectrometry; נוגדנים; Immunostaining\nשיעור 9: western blot; epitope tagging; שימוש בחלבונים פלורסנטים\nשיעור 10: איפיון קישור בין חלבונים (כולל GST-fusion, Yeast Two-Hybrid, FRET); השקעת חלבונים בעזרת נוגדנים, IP-WB; protein microarrays\nשיעור 11: עבודה עם תאים: הפרדת תאים, גידול תאים בתרבית, FACS; ביטוי גנים בתאים לטווח זמן קצר ויצירת שורות תאים יציבות; גנים מדווחים\nשיעור 12: אפיון קישור חלבון-דנ״א; מוטגנזה מכוונת\nשיעור 13: חיות טרנסגניות; שיטות להשתקת פעילות של גן; החסרת גן מחיה שלמה - יצירת עכברי knock out; CRISPR",
   "topicsHe": [
-   "תאריך2.25 :",
-   "סילבוס -תוכנית הוראה לקורס",
-   "ביולוגיה מולקולרית והנדסה גנטית א׳",
-   "פרופ' ירון שב-טל | הפקולטה למדעי החיים",
-   "Molecular Biology and Genetic Engineering | 80-242-30",
-   "שיעור סוג הקורס:",
-   "2 היקף נ\"ז:",
-   "מכינה לרפואה שנת לימודים:",
-   "ב סמסטר:",
-   "יום ושעה",
-   "שלישי 16:00",
-   "שעת קבלה:",
-   "[email] מייל מרצה:",
-   "קישור לאתר מודל:",
-   "תיאור הקורס ותוצרי למידה",
-   "תקציר הקורס",
-   "הכרות עם הטכניקות המקובלות בעבודה בביולוגיה מולקולרית וישומן בביולוגיה המודרנית .הקורס סוקר",
-   "את הטכניקות והמתודולוגיות הבסיסיות המשמשות חוקרים בתחום הביולוגיה המולקולרית.",
-   "תוצרי הלמידה",
-   "א .ידע",
-   "היכרות עם עובדות ,תכנים ,מושגים ,סוגיות ורעיונות מרכזיים בתחום הדעת .פעלים לדוגמה:",
-   ".1הלומדים יתארו את שיטות הריצוף השונות",
-   ".2הלומדים יתארו את שיטות הצביעה השונות",
-   ".3הלומדים יתארו את שיטות הפרדת המולקולות – חומצות גרעין וחלבונים",
-   "ב .מיומנויות",
-   ".1הלומדים יוכלו להשוות בין השיטות השונות ולהסביר את היתרונות ,החסרונות ,ומה לא ניתן",
-   "לעשות עם כל שיטה.",
-   ".2הלומדים יוכלו להעריך אילו בעיות היו בשיטה שגרמו לכשלון הניסוי"
+   "מבוא, חזרה על הדוגמה המרכזית של הביולוגיה המולקולרית",
+   "דנ״א - אנזימי רסטריקציה, הפרדת מולקולות דנ״א בג׳ל",
+   "שיבוט, פלסמידים, וקטורי ביטוי",
+   "סימון דנ״א, היברידיזציה, אנליזת southern, ספריה גנומית",
+   "Spectral karyotyping & DNA in situ hybridization",
+   "קביעת רצף דנ״א – משיטות בסיסיות ועד לשיטות מתקדמות לקביעת רצף של גנום",
+   "שיטות אבחון גנטי (כולל RFLP)",
+   "רנ״א - ביטוי ייחודי לרקמה",
+   "northern blot",
+   "ספריית cDNA",
+   "RNA-seq, DNA microarrays",
+   "reverse transcription-PCR",
+   "Real-Time PCR",
+   "השוואת שיטות שונות לבחינת ביטוי גנים",
+   "חלבונים - הפרדת חלבונים בג׳ל (ג׳ל חד-ממדי וג׳ל דו-ממדי)",
+   "אנליזת mass spectrometry",
+   "נוגדנים",
+   "Immunostaining",
+   "western blot",
+   "epitope tagging",
+   "שימוש בחלבונים פלורסנטים",
+   "איפיון קישור בין חלבונים (כולל GST-fusion, Yeast Two-Hybrid, FRET)",
+   "השקעת חלבונים בעזרת נוגדנים, IP-WB",
+   "protein microarrays",
+   "עבודה עם תאים: הפרדת תאים, גידול תאים בתרבית, FACS",
+   "ביטוי גנים בתאים לטווח זמן קצר ויצירת שורות תאים יציבות",
+   "גנים מדווחים",
+   "אפיון קישור חלבון-דנ״א",
+   "מוטגנזה מכוונת",
+   "חיות טרנסגניות",
+   "שיטות להשתקת פעילות של גן",
+   "החסרת גן מחיה שלמה - יצירת עכברי knock out",
+   "CRISPR"
+  ],
+  "sessions": [
+   {
+    "lectures": "1",
+    "topicsHe": [
+     "מבוא, חזרה על הדוגמה המרכזית של הביולוגיה המולקולרית",
+     "דנ״א - אנזימי רסטריקציה, הפרדת מולקולות דנ״א בג׳ל"
+    ]
+   },
+   {
+    "lectures": "2",
+    "topicsHe": [
+     "שיבוט, פלסמידים, וקטורי ביטוי"
+    ]
+   },
+   {
+    "lectures": "3",
+    "topicsHe": [
+     "סימון דנ״א, היברידיזציה, אנליזת southern, ספריה גנומית",
+     "Spectral karyotyping & DNA in situ hybridization"
+    ]
+   },
+   {
+    "lectures": "4",
+    "topicsHe": [
+     "קביעת רצף דנ״א – משיטות בסיסיות ועד לשיטות מתקדמות לקביעת רצף של גנום"
+    ]
+   },
+   {
+    "lectures": "5",
+    "topicsHe": [
+     "שיטות אבחון גנטי (כולל RFLP)"
+    ]
+   },
+   {
+    "lectures": "6",
+    "topicsHe": [
+     "רנ״א - ביטוי ייחודי לרקמה",
+     "northern blot",
+     "ספריית cDNA",
+     "RNA-seq, DNA microarrays"
+    ]
+   },
+   {
+    "lectures": "7",
+    "topicsHe": [
+     "reverse transcription-PCR",
+     "Real-Time PCR",
+     "השוואת שיטות שונות לבחינת ביטוי גנים"
+    ]
+   },
+   {
+    "lectures": "8",
+    "topicsHe": [
+     "חלבונים - הפרדת חלבונים בג׳ל (ג׳ל חד-ממדי וג׳ל דו-ממדי)",
+     "אנליזת mass spectrometry",
+     "נוגדנים",
+     "Immunostaining"
+    ]
+   },
+   {
+    "lectures": "9",
+    "topicsHe": [
+     "western blot",
+     "epitope tagging",
+     "שימוש בחלבונים פלורסנטים"
+    ]
+   },
+   {
+    "lectures": "10",
+    "topicsHe": [
+     "איפיון קישור בין חלבונים (כולל GST-fusion, Yeast Two-Hybrid, FRET)",
+     "השקעת חלבונים בעזרת נוגדנים, IP-WB",
+     "protein microarrays"
+    ]
+   },
+   {
+    "lectures": "11",
+    "topicsHe": [
+     "עבודה עם תאים: הפרדת תאים, גידול תאים בתרבית, FACS",
+     "ביטוי גנים בתאים לטווח זמן קצר ויצירת שורות תאים יציבות",
+     "גנים מדווחים"
+    ]
+   },
+   {
+    "lectures": "12",
+    "topicsHe": [
+     "אפיון קישור חלבון-דנ״א",
+     "מוטגנזה מכוונת"
+    ]
+   },
+   {
+    "lectures": "13",
+    "topicsHe": [
+     "חיות טרנסגניות",
+     "שיטות להשתקת פעילות של גן",
+     "החסרת גן מחיה שלמה - יצירת עכברי knock out",
+     "CRISPR"
+    ]
+   }
   ],
   "books": [
    "חובה -פרק 8בספר \"ביולוגיה מולקולרית של התא\" -מהדורה 6"
   ],
   "assessmentHe": [
-   "בחינה 100%"
+   "בחינה 100%",
+   "בחנים באופן ספורדי במהלך הקורס — משימות בונוס לציון",
+   "לקורס ישנו תרגול"
   ],
-  "hasUnparsedSchedule": true,
+  "manual": {
+   "readAt": "2026-11-11",
+   "noteHe": "קריאת חובה: פרק 8 בספר \"ביולוגיה מולקולרית של התא\", מהדורה 6. המסמך מתוארך 2.25 (מכינה לרפואה, סמסטר ב')."
+  },
   "evidence": {
    "textFile": "content/syllabi/text/biu-molecular-a.txt",
    "sha256": "901802224e17852c07a57eb20624aeec318ae09c5f92a82664f6dab663bf05c3",
@@ -1422,9 +2004,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
    ]
   },
   "warnings": [
-   "לא נמצאה כותרת נושאים במסמך — הנושאים המוצגים הם פתיחת המסמך; לקרוא את קובץ הטקסט",
-   "הסילבוס החדש ביותר באתר הפקולטה הוא משנת 2025",
-   "במסמך יש טבלת שבועות/שיעורים שלא פוענחה אוטומטית (עמודות מעורבבות) — לקרוא את ה-PDF בעין ולהזין את הסדר"
+   "הסילבוס החדש ביותר באתר הפקולטה הוא משנת 2025"
   ]
  },
  "biu-molecular-b": {
@@ -1436,28 +2016,92 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "fetchedAt": "2026-11-11",
   "source": "biu-pdf",
   "sourceUrl": "https://life-sciences.biu.ac.il/sites/life-sciences/files/shared/Med%20Mechina/Sylabi24/80-377-30%D7%91%D7%99%D7%95%D7%9C%D7%95%D7%92%D7%99%D7%94-%D7%9E%D7%95%D7%9C%D7%A7%D7%95%D7%9C%D7%A8%D7%99%D7%AA-%D7%95%D7%94%D7%A0%D7%93%D7%A1%D7%94-%D7%92%D7%A0%D7%98%D7%99%D7%AA-%D7%91_0.pdf",
-  "level": "topics",
-  "contentHe": "ביולוגיה מולקולרית והנדסה גנטית -ב' 80377-30\nMolecular Biology and Genetic Engineering\nמרצה :ד\"ר איל הנדל\nד\"ר איתי קורן\nתאור הקורס:\nהחלק הראשון של הקורס עוסק במבנה הדנ\"א ,מבנה הגנום ומבנה הכרומטין ,בקרה של ביטוי גנים,\nהנדסה גנטית ,עריכה גנטית ועריכה אפיגנטית.\nהחלק השני יתמקד בהצגת שיטות חדשניות של סקרין גנומי כלל מערכתי ()genome wide screens\nכולל הכנת ספריות של קריספר ,פפטידים ותרופות ( .)small molecules drugsנסביר כיצד שיטות\nאלו תורמות לאיפיון התפקוד של גנים בהקשר של מחלות כגון סרטן.\nכמו כן ,נלמד על שיטות Omicsשונות כולל גנומיקה ,פרוטאומיקה וsingle cell RNA -\n.sequencing\nלסיום נלמד על מנגנוני בקרה המווסתים את רמות החלבונים בתא הן בשלב הסינתזה והן בשלב\nהפירוק.",
+  "level": "lectures",
+  "contentHe": "שיעור 1: דנ\"א, כרומוזומים, גנום ואפיגנטיקה\nשיעור 2: כיצד תאים קוראים את הגנום ובקרה של ביטוי גנים\nשיעור 3: [ע]ריכה גנטית בעזרת מערכת הקריספר\nשיעור 4: שיטות למדידת דיוק של עריכה גנטית\nשיעור 5: עריכה אפיגנטית ומה עוד אפשר לעשות עם הגנום\nשיעור 6: סוגים שונים של סקרין מערכתי כלל גנומי (genome wide screens)\nשיעור 7: Omics I - Genomics\nשיעור 8: Omics II - Transcriptomics including single cell RNA sequencing\nשיעור 9: Omics III - Ribosome display and Proteomics\nשיעור 10: בקרה על רמות חלבונים בתא (שלבי התרגום ופירוק)",
   "topicsHe": [
-   "ביולוגיה מולקולרית והנדסה גנטית -ב' 80377-30",
-   "Molecular Biology and Genetic Engineering",
-   "מרצה :ד\"ר איל הנדל",
-   "ד\"ר איתי קורן",
-   "תאור הקורס:",
-   "החלק הראשון של הקורס עוסק במבנה הדנ\"א ,מבנה הגנום ומבנה הכרומטין ,בקרה של ביטוי גנים,",
-   "הנדסה גנטית ,עריכה גנטית ועריכה אפיגנטית.",
-   "החלק השני יתמקד בהצגת שיטות חדשניות של סקרין גנומי כלל מערכתי ()genome wide screens",
-   "כולל הכנת ספריות של קריספר ,פפטידים ותרופות ( .)small molecules drugsנסביר כיצד שיטות",
-   "אלו תורמות לאיפיון התפקוד של גנים בהקשר של מחלות כגון סרטן.",
-   "כמו כן ,נלמד על שיטות Omicsשונות כולל גנומיקה ,פרוטאומיקה וsingle cell RNA -",
-   ".sequencing",
-   "לסיום נלמד על מנגנוני בקרה המווסתים את רמות החלבונים בתא הן בשלב הסינתזה והן בשלב",
-   "הפירוק."
+   "דנ\"א, כרומוזומים, גנום ואפיגנטיקה",
+   "כיצד תאים קוראים את הגנום ובקרה של ביטוי גנים",
+   "[ע]ריכה גנטית בעזרת מערכת הקריספר",
+   "שיטות למדידת דיוק של עריכה גנטית",
+   "עריכה אפיגנטית ומה עוד אפשר לעשות עם הגנום",
+   "סוגים שונים של סקרין מערכתי כלל גנומי (genome wide screens)",
+   "Omics I - Genomics",
+   "Omics II - Transcriptomics including single cell RNA sequencing",
+   "Omics III - Ribosome display and Proteomics",
+   "בקרה על רמות חלבונים בתא (שלבי התרגום ופירוק)"
+  ],
+  "sessions": [
+   {
+    "lectures": "1",
+    "topicsHe": [
+     "דנ\"א, כרומוזומים, גנום ואפיגנטיקה"
+    ]
+   },
+   {
+    "lectures": "2",
+    "topicsHe": [
+     "כיצד תאים קוראים את הגנום ובקרה של ביטוי גנים"
+    ]
+   },
+   {
+    "lectures": "3",
+    "topicsHe": [
+     "[ע]ריכה גנטית בעזרת מערכת הקריספר"
+    ]
+   },
+   {
+    "lectures": "4",
+    "topicsHe": [
+     "שיטות למדידת דיוק של עריכה גנטית"
+    ]
+   },
+   {
+    "lectures": "5",
+    "topicsHe": [
+     "עריכה אפיגנטית ומה עוד אפשר לעשות עם הגנום"
+    ]
+   },
+   {
+    "lectures": "6",
+    "topicsHe": [
+     "סוגים שונים של סקרין מערכתי כלל גנומי (genome wide screens)"
+    ]
+   },
+   {
+    "lectures": "7",
+    "topicsHe": [
+     "Omics I - Genomics"
+    ]
+   },
+   {
+    "lectures": "8",
+    "topicsHe": [
+     "Omics II - Transcriptomics including single cell RNA sequencing"
+    ]
+   },
+   {
+    "lectures": "9",
+    "topicsHe": [
+     "Omics III - Ribosome display and Proteomics"
+    ]
+   },
+   {
+    "lectures": "10",
+    "topicsHe": [
+     "בקרה על רמות חלבונים בתא (שלבי התרגום ופירוק)"
+    ]
+   }
   ],
   "books": [
    "Molecular Biology of the Cell , Alberts et al. Sixth Edition"
   ],
-  "hasUnparsedSchedule": true,
+  "assessmentHe": [
+   "מבחן (ציון מספרי)"
+  ],
+  "manual": {
+   "readAt": "2026-11-11",
+   "noteHe": "\"נושאים שקוצצו\" לפי המסמך: שיעורים 1, 2, 6 ו-10 כללו בשנים קודמות שני שיעורים כל אחד; השנה שיעור אחד — היקף החומר לא משתנה, אך יינתנו פחות דוגמאות. ספר: Molecular Biology of the Cell, Alberts, מהדורה 6."
+  },
   "evidence": {
    "textFile": "content/syllabi/text/biu-molecular-b.txt",
    "sha256": "b4a0a451983cef6825cd662a033119eec09eb1b7264fc81524bc9407c05557ed",
@@ -1466,10 +2110,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
    ]
   },
   "warnings": [
-   "לא נמצאה כותרת נושאים במסמך — הנושאים המוצגים הם פתיחת המסמך; לקרוא את קובץ הטקסט",
-   "הסילבוס החדש ביותר באתר הפקולטה הוא משנת 2024",
-   "במסמך יש טבלת שבועות/שיעורים שלא פוענחה אוטומטית (עמודות מעורבבות) — לקרוא את ה-PDF בעין ולהזין את הסדר",
-   "המקור לא מציין הרכב ציון"
+   "הסילבוס החדש ביותר באתר הפקולטה הוא משנת 2024"
   ]
  },
  "biu-systems-physiology": {
@@ -1481,55 +2122,149 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "fetchedAt": "2026-11-11",
   "source": "biu-pdf",
   "sourceUrl": "https://life-sciences.biu.ac.il/sites/life-sciences/files/shared/Med%20Mechina/Sylabi25/%D7%A1%D7%99%D7%9C%D7%91%D7%95%D7%A1-%D7%A4%D7%99%D7%96%D7%99%D7%95%D7%9C%D7%95%D7%92%D7%99%D7%94-%D7%A9%D7%9C-%D7%9E%D7%A2%D7%A8%D7%9B%D7%95%D7%AA-80214-%D7%AA%D7%A9%D7%A4%D7%94.pdf",
-  "level": "topics",
-  "contentHe": "תאריך10/2024 :\nסילבוס -תוכנית הוראה לקורס\nפיזיולוגיה של מערכות\nדר' יואב פז | הפקולטה למדעי החיים\nPhysiology of Human Systems | 80214\nשיעור ) 2ש\"ש( סוג הקורס:\n2 היקף נ\"ז:\nב'\nב' שנת לימודים:\nסמסטר:\nב') 14:00-16:00 ,קב' ;(10ד' ) 14:00-16:00קב' 01ו(30- יום ושעה\nיום ב' ) 16:00-17:00בתיאום מראש(\n[email] שעת קבלה:\nמייל מרצה:\nhttps://lemida.biu.ac.il/course/view.php?id=96786 קישור לאתר למדה:\nתיאור הקורס ומטרות למידה\nתקציר הקורס\nללמוד ולדעת לעומק את המבנה האנטומי והתפקוד הפיזיולוגי של המערכת הקרדיווסקולרית ומערכת\nהנשימה ברמה המולקולרית ,התאית והמערכתית ,וכיצד הן משפיעות על התפקוד של האורגניזם השלם\n)האדם(.\nמטרות/תוצרי הלמידה\nידע\n.1הלומדים ידעו ויוכלו לתאר את המבנה האנטומי של הלב וכלי הדם ,ואת הרכב הדם ותפקידיו\nהפיזיולוגיים .\n.2הלומדים ידעו ויוכלו לתאר את המבנה האנטומי של דרכי הנשימה העליונות והתחתונות,\nושרירי הנשימה.\n.3הלומדים ידעו ויוכלו לתאר כיצד מתפקדת מערכת ההולכה החשמלית של הלב והשפעתה על\nהתאים המתכווצים של הלב מבחינה חשמלית ומכנית; וזאת במנוחה ובמאמץ.\n.4הלומדים ידעו ויוכלו לתאר כיצד מתפקדות הריאות ,בית החזה ושרירי הנשימה במנוחה\nובמאמץ.\n.5הלומדים יכירו מצבים פתו-פיזיולוגיים שונים הקשורים למערכות הנ\"ל.\nמיומנויות\n.1הלומדים ינתחו את הוויסות של המערכת הקרדיווסקולרית ומערכת הנשימה ע\"י מערכת\nהעצבים והמערכת האנדוקרינית )המערכת ההורמונלית(.\n.2הלומדים ינתחו את יחסי הגומלין בין המערכת הקרדיווסקולרית ומערכת הנשימה ,בזמן\nמנוחה ובזמן במאמץ.",
+  "level": "lectures",
+  "contentHe": "שיעור 1: מבוא: רמות האירגון בגוף האדם; הומאוסטזיס; מערכות הבקרה בגוף האדם - מערכת העצבים האוטונומית והמערכת האנדוקרינית (המערכת ההורמונלית)\nהמערכת הקרדיווסקולרית (שיעורים 2-9)\nשיעור 2: מרכיבי ותפקידי הדם; אנטומיה של הלב; מחזורי הדם (הסיסטמי והריאתי); מחזור הדם בעובר\nשיעור 3: כניסת הדם אל הלב, מעבר הדם בין מדורי הלב, יציאת הדם מהלב; המעגל הכלילי; מנגנון ההתכווצות של תא שריר הלב\nשיעור 4: מערכת ההולכה החשמלית בלב ותפקודה; הקורלציה בין הפעילות החשמלית בלב לפעילות ההתכווצות וההרפיה של הלב\nשיעור 5: מחלות לב; הפרעות קצב כפי שמשתקפות ברישומי אק\"ג\nשיעור 6: הקורלציה בין הפעילות החשמלית בלב ללחצים במדורי הלב ובאבי העורקים; תפוקת הלב והגורמים המשפיעים עליה; אי-ספיקת לב\nשיעור 7: וויסות תפוקת הלב ע\"י מערכת העצבים והמערכת ההורמונלית\nשיעור 8: המבנה האנטומי של כלי הדם; מערכת הלחצים המניעה סינון וספיגה מחדש; המודינמיקה\nשיעור 9: וויסות עצבי, הורמונלי ומקומי של לחץ הדם וזרימת הדם בכלל המערכת (לב וכלי הדם); שוק היפוולמי\nמערכת הנשימה (שיעורים 10-13)\nשיעור 10: אנטומיה של דרכי הנשימה; מעבר וחילופי גזים בגוף\nשיעור 11: הסעת חמצן מהסביבה אל הרקמות; הסעת פחמן דו-חמצני מהרקמות אל הסביבה\nשיעור 12: המכניקה של הנשימה; קיבולות ריאה; תפקודי ריאה; מחלות ריאה\nשיעור 13: וויסות מערכת הנשימה ע\"י מערכת העצבים וגורמים אחרים",
   "topicsHe": [
-   "תאריך10/2024 :",
-   "סילבוס -תוכנית הוראה לקורס",
-   "פיזיולוגיה של מערכות",
-   "דר' יואב פז | הפקולטה למדעי החיים",
-   "Physiology of Human Systems | 80214",
-   "שיעור ) 2ש\"ש( סוג הקורס:",
-   "2 היקף נ\"ז:",
-   "ב' שנת לימודים:",
-   "סמסטר:",
-   "ב') 14:00-16:00 ,קב' ;(10ד' ) 14:00-16:00קב' 01ו(30- יום ושעה",
-   "יום ב' ) 16:00-17:00בתיאום מראש(",
-   "[email] שעת קבלה:",
-   "מייל מרצה:",
-   "https://lemida.biu.ac.il/course/view.php?id=96786 קישור לאתר למדה:",
-   "תיאור הקורס ומטרות למידה",
-   "תקציר הקורס",
-   "ללמוד ולדעת לעומק את המבנה האנטומי והתפקוד הפיזיולוגי של המערכת הקרדיווסקולרית ומערכת",
-   "הנשימה ברמה המולקולרית ,התאית והמערכתית ,וכיצד הן משפיעות על התפקוד של האורגניזם השלם",
-   ")האדם(.",
-   "מטרות/תוצרי הלמידה",
-   ".1הלומדים ידעו ויוכלו לתאר את המבנה האנטומי של הלב וכלי הדם ,ואת הרכב הדם ותפקידיו",
-   "הפיזיולוגיים .",
-   ".2הלומדים ידעו ויוכלו לתאר את המבנה האנטומי של דרכי הנשימה העליונות והתחתונות,",
-   "ושרירי הנשימה.",
-   ".3הלומדים ידעו ויוכלו לתאר כיצד מתפקדת מערכת ההולכה החשמלית של הלב והשפעתה על",
-   "התאים המתכווצים של הלב מבחינה חשמלית ומכנית; וזאת במנוחה ובמאמץ.",
-   ".4הלומדים ידעו ויוכלו לתאר כיצד מתפקדות הריאות ,בית החזה ושרירי הנשימה במנוחה",
-   "ובמאמץ.",
-   ".5הלומדים יכירו מצבים פתו-פיזיולוגיים שונים הקשורים למערכות הנ\"ל.",
-   "מיומנויות",
-   ".1הלומדים ינתחו את הוויסות של המערכת הקרדיווסקולרית ומערכת הנשימה ע\"י מערכת",
-   "העצבים והמערכת האנדוקרינית )המערכת ההורמונלית(.",
-   ".2הלומדים ינתחו את יחסי הגומלין בין המערכת הקרדיווסקולרית ומערכת הנשימה ,בזמן",
-   "מנוחה ובזמן במאמץ."
+   "מבוא: רמות האירגון בגוף האדם; הומאוסטזיס",
+   "מערכות הבקרה בגוף האדם - מערכת העצבים האוטונומית והמערכת האנדוקרינית (המערכת ההורמונלית)",
+   "מרכיבי ותפקידי הדם",
+   "אנטומיה של הלב",
+   "מחזורי הדם (הסיסטמי והריאתי); מחזור הדם בעובר",
+   "כניסת הדם אל הלב, מעבר הדם בין מדורי הלב, יציאת הדם מהלב",
+   "המעגל הכלילי",
+   "מנגנון ההתכווצות של תא שריר הלב",
+   "מערכת ההולכה החשמלית בלב ותפקודה",
+   "הקורלציה בין הפעילות החשמלית בלב לפעילות ההתכווצות וההרפיה של הלב",
+   "מחלות לב",
+   "הפרעות קצב כפי שמשתקפות ברישומי אק\"ג",
+   "הקורלציה בין הפעילות החשמלית בלב ללחצים במדורי הלב ובאבי העורקים",
+   "תפוקת הלב והגורמים המשפיעים עליה",
+   "אי-ספיקת לב",
+   "וויסות תפוקת הלב ע\"י מערכת העצבים והמערכת ההורמונלית",
+   "המבנה האנטומי של כלי הדם",
+   "מערכת הלחצים המניעה סינון וספיגה מחדש",
+   "המודינמיקה",
+   "וויסות עצבי, הורמונלי ומקומי של לחץ הדם וזרימת הדם בכלל המערכת (לב וכלי הדם)",
+   "שוק היפוולמי",
+   "אנטומיה של דרכי הנשימה",
+   "מעבר וחילופי גזים בגוף",
+   "הסעת חמצן מהסביבה אל הרקמות",
+   "הסעת פחמן דו-חמצני מהרקמות אל הסביבה",
+   "המכניקה של הנשימה; קיבולות ריאה; תפקודי ריאה",
+   "מחלות ריאה",
+   "וויסות מערכת הנשימה ע\"י מערכת העצבים וגורמים אחרים"
+  ],
+  "sessions": [
+   {
+    "lectures": "1",
+    "topicsHe": [
+     "מבוא: רמות האירגון בגוף האדם; הומאוסטזיס",
+     "מערכות הבקרה בגוף האדם - מערכת העצבים האוטונומית והמערכת האנדוקרינית (המערכת ההורמונלית)"
+    ]
+   },
+   {
+    "lectures": "2",
+    "partHe": "המערכת הקרדיווסקולרית (שיעורים 2-9)",
+    "topicsHe": [
+     "מרכיבי ותפקידי הדם",
+     "אנטומיה של הלב",
+     "מחזורי הדם (הסיסטמי והריאתי); מחזור הדם בעובר"
+    ]
+   },
+   {
+    "lectures": "3",
+    "topicsHe": [
+     "כניסת הדם אל הלב, מעבר הדם בין מדורי הלב, יציאת הדם מהלב",
+     "המעגל הכלילי",
+     "מנגנון ההתכווצות של תא שריר הלב"
+    ]
+   },
+   {
+    "lectures": "4",
+    "topicsHe": [
+     "מערכת ההולכה החשמלית בלב ותפקודה",
+     "הקורלציה בין הפעילות החשמלית בלב לפעילות ההתכווצות וההרפיה של הלב"
+    ]
+   },
+   {
+    "lectures": "5",
+    "topicsHe": [
+     "מחלות לב",
+     "הפרעות קצב כפי שמשתקפות ברישומי אק\"ג"
+    ]
+   },
+   {
+    "lectures": "6",
+    "topicsHe": [
+     "הקורלציה בין הפעילות החשמלית בלב ללחצים במדורי הלב ובאבי העורקים",
+     "תפוקת הלב והגורמים המשפיעים עליה",
+     "אי-ספיקת לב"
+    ]
+   },
+   {
+    "lectures": "7",
+    "topicsHe": [
+     "וויסות תפוקת הלב ע\"י מערכת העצבים והמערכת ההורמונלית"
+    ]
+   },
+   {
+    "lectures": "8",
+    "topicsHe": [
+     "המבנה האנטומי של כלי הדם",
+     "מערכת הלחצים המניעה סינון וספיגה מחדש",
+     "המודינמיקה"
+    ]
+   },
+   {
+    "lectures": "9",
+    "topicsHe": [
+     "וויסות עצבי, הורמונלי ומקומי של לחץ הדם וזרימת הדם בכלל המערכת (לב וכלי הדם)",
+     "שוק היפוולמי"
+    ]
+   },
+   {
+    "lectures": "10",
+    "partHe": "מערכת הנשימה (שיעורים 10-13)",
+    "topicsHe": [
+     "אנטומיה של דרכי הנשימה",
+     "מעבר וחילופי גזים בגוף"
+    ]
+   },
+   {
+    "lectures": "11",
+    "topicsHe": [
+     "הסעת חמצן מהסביבה אל הרקמות",
+     "הסעת פחמן דו-חמצני מהרקמות אל הסביבה"
+    ]
+   },
+   {
+    "lectures": "12",
+    "topicsHe": [
+     "המכניקה של הנשימה; קיבולות ריאה; תפקודי ריאה",
+     "מחלות ריאה"
+    ]
+   },
+   {
+    "lectures": "13",
+    "topicsHe": [
+     "וויסות מערכת הנשימה ע\"י מערכת העצבים וגורמים אחרים"
+    ]
+   }
   ],
   "books": [
    "Principles of ANATOMY & PHYSIOLOGY, Gerard J. Tortora & Bryan Derrickson",
-   "th Edition, 2017, John Wiley & Sons, Inc., USA .",
+   "15th Edition, 2017, John Wiley & Sons, Inc., USA .",
    "תמלול מצגות הקורס.",
    "צפייה בסרטונים שיועלו ללמדה ,ובסרטונים אשר להם יש הפנייה לאתר אינטרנט בגוף מצגות הקורס."
   ],
   "assessmentHe": [
-   "100%מהציון הסופי",
-   "נוכחות – חובה ב 80%-מהשיעורים."
+   "מבחן מסכם — 100% מהציון הסופי",
+   "נוכחות – חובה ב-80% מהשיעורים"
   ],
-  "hasUnparsedSchedule": true,
+  "manual": {
+   "readAt": "2026-11-11",
+   "noteHe": "קריאה לפי הטבלה (Tortora & Derrickson, מהדורה 15): שיעור 1 – פרקים 1, 15, 18; שיעור 2 – 19, 20, 21; שיעורים 3–7 – פרק 20; שיעורים 8–9 – פרק 21; שיעורים 10–13 – פרק 23."
+  },
   "evidence": {
    "textFile": "content/syllabi/text/biu-systems-physiology.txt",
    "sha256": "5579458065993d2df782611ecbc940763e7dc2e27cd024ec99a2a8311c3f9621",
@@ -1538,9 +2273,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
    ]
   },
   "warnings": [
-   "לא נמצאה כותרת נושאים במסמך — הנושאים המוצגים הם פתיחת המסמך; לקרוא את קובץ הטקסט",
-   "הסילבוס החדש ביותר באתר הפקולטה הוא משנת 2025",
-   "במסמך יש טבלת שבועות/שיעורים שלא פוענחה אוטומטית (עמודות מעורבבות) — לקרוא את ה-PDF בעין ולהזין את הסדר"
+   "הסילבוס החדש ביותר באתר הפקולטה הוא משנת 2025"
   ]
  },
  "biu-virology": {
@@ -1552,18 +2285,82 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "fetchedAt": "2026-11-11",
   "source": "biu-pdf",
   "sourceUrl": "https://life-sciences.biu.ac.il/sites/life-sciences/files/shared/Med%20Mechina/Sylabi23/80204-%D7%9E%D7%91%D7%95%D7%90-%D7%9C%D7%95%D7%99%D7%A8%D7%95%D7%9C%D7%95%D7%92%D7%99%D7%94.pdf",
-  "level": "topics",
-  "contentHe": "נכון לשנת לימודים :תשפ\"ג 2022\nשם ומספר הקורס :מבוא לוירולוגיה 80204\nשם המרצה :פרופ' רונית שריד\nהיקף שעות 1 :שעה סוג הקורס :הרצאה\nשנת לימודים :תשע\"ט סמסטר :ב\nאתר הקורס:\nמטרות הקורס /תוצרי הלמידה:\nהכרת עולם הנגיפים ומושגים בסיסיים בתהליכי ההדבקה והתרבות הנגיפים.\nתיאור הקורס:",
+  "level": "lectures",
+  "contentHe": "שיעור 1: ההיסטוריה של חקר הנגיפים; הגדרת הנגיפים; עקרונות המבנה וגנום הנגיפים; קריטריונים למיון נגיפים\nשיעור 2: שלבי ההדבקה הנגיפית: ספיחה, הצמדות, חדירה, הפשטה, התרבות, הבשלה ושחרור נגיפים; דרכי ההעברה של נגיפים; קולטנים תאיים המתווכים הצמדות וכניסת נגיפים לתא וחשיבותם\nשיעור 3: מנגנוני התרבות של נגיפים בעלי גנום DNA דו-גדילי ו-DNA חד-גדילי; סקירה קצרה של מספר משפחות מייצגות\nשיעור 4: מנגנוני התרבות של נגיפים בעלי גנום RNA בפולאריות חיובית, נגיף הפוליו כדוגמא; מנגנוני התרבות של נגיפים בעלי גנום RNA בפולאריות שלילית, נגיף השפעת כדוגמא\nשיעור 5: מאפייני ומנגנוני ההתרבות של נגיפי משפחת ה-Retroviridae; HIV והתכשירים האנטי-נגיפיים המשמשים לעיכוב התרבותו\nשיעור 6: הרכבה והבשלה של נגיפים; סוגי הדבקות נגיפיות: פרודוקטיבית, עקרה, מתמשכת וחבויה; מערכות לריבוי ואפיון נגיפים (תרביות תאים, organ culture, ביצי עוף מופרות, וחיות מודל), אפקטים ציטופאתיים; מושגים כלליים: רגישות, מתירנות; אמצעים לכימות נגיפים, PFU ו-MOI; ניסוי גידול חד שלבי\nשיעור 7: נגיפים וסרטן; נגיפים וריפוי גני; דיון ביחסי הגומלין בין הנגיפים לבין התאים המאכסנים",
   "topicsHe": [
-   "נכון לשנת לימודים :תשפ\"ג 2022",
-   "שם ומספר הקורס :מבוא לוירולוגיה 80204",
-   "שם המרצה :פרופ' רונית שריד",
-   "היקף שעות 1 :שעה סוג הקורס :הרצאה",
-   "שנת לימודים :תשע\"ט סמסטר :ב",
-   "אתר הקורס:",
-   "מטרות הקורס /תוצרי הלמידה:",
-   "הכרת עולם הנגיפים ומושגים בסיסיים בתהליכי ההדבקה והתרבות הנגיפים.",
-   "תיאור הקורס:"
+   "ההיסטוריה של חקר הנגיפים; הגדרת הנגיפים; עקרונות המבנה וגנום הנגיפים; קריטריונים למיון נגיפים",
+   "שלבי ההדבקה הנגיפית: ספיחה, הצמדות, חדירה, הפשטה, התרבות, הבשלה ושחרור נגיפים",
+   "דרכי ההעברה של נגיפים",
+   "קולטנים תאיים המתווכים הצמדות וכניסת נגיפים לתא וחשיבותם",
+   "מנגנוני התרבות של נגיפים בעלי גנום DNA דו-גדילי ו-DNA חד-גדילי",
+   "סקירה קצרה של מספר משפחות מייצגות",
+   "מנגנוני התרבות של נגיפים בעלי גנום RNA בפולאריות חיובית, נגיף הפוליו כדוגמא",
+   "מנגנוני התרבות של נגיפים בעלי גנום RNA בפולאריות שלילית, נגיף השפעת כדוגמא",
+   "מאפייני ומנגנוני ההתרבות של נגיפי משפחת ה-Retroviridae",
+   "HIV והתכשירים האנטי-נגיפיים המשמשים לעיכוב התרבותו",
+   "הרכבה והבשלה של נגיפים",
+   "סוגי הדבקות נגיפיות: פרודוקטיבית, עקרה, מתמשכת וחבויה",
+   "מערכות לריבוי ואפיון נגיפים (תרביות תאים, organ culture, ביצי עוף מופרות, וחיות מודל), אפקטים ציטופאתיים",
+   "מושגים כלליים: רגישות, מתירנות",
+   "אמצעים לכימות נגיפים, PFU ו-MOI; ניסוי גידול חד שלבי",
+   "נגיפים וסרטן",
+   "נגיפים וריפוי גני",
+   "דיון ביחסי הגומלין בין הנגיפים לבין התאים המאכסנים"
+  ],
+  "sessions": [
+   {
+    "lectures": "1",
+    "topicsHe": [
+     "ההיסטוריה של חקר הנגיפים; הגדרת הנגיפים; עקרונות המבנה וגנום הנגיפים; קריטריונים למיון נגיפים"
+    ]
+   },
+   {
+    "lectures": "2",
+    "topicsHe": [
+     "שלבי ההדבקה הנגיפית: ספיחה, הצמדות, חדירה, הפשטה, התרבות, הבשלה ושחרור נגיפים",
+     "דרכי ההעברה של נגיפים",
+     "קולטנים תאיים המתווכים הצמדות וכניסת נגיפים לתא וחשיבותם"
+    ]
+   },
+   {
+    "lectures": "3",
+    "topicsHe": [
+     "מנגנוני התרבות של נגיפים בעלי גנום DNA דו-גדילי ו-DNA חד-גדילי",
+     "סקירה קצרה של מספר משפחות מייצגות"
+    ]
+   },
+   {
+    "lectures": "4",
+    "topicsHe": [
+     "מנגנוני התרבות של נגיפים בעלי גנום RNA בפולאריות חיובית, נגיף הפוליו כדוגמא",
+     "מנגנוני התרבות של נגיפים בעלי גנום RNA בפולאריות שלילית, נגיף השפעת כדוגמא"
+    ]
+   },
+   {
+    "lectures": "5",
+    "topicsHe": [
+     "מאפייני ומנגנוני ההתרבות של נגיפי משפחת ה-Retroviridae",
+     "HIV והתכשירים האנטי-נגיפיים המשמשים לעיכוב התרבותו"
+    ]
+   },
+   {
+    "lectures": "6",
+    "topicsHe": [
+     "הרכבה והבשלה של נגיפים",
+     "סוגי הדבקות נגיפיות: פרודוקטיבית, עקרה, מתמשכת וחבויה",
+     "מערכות לריבוי ואפיון נגיפים (תרביות תאים, organ culture, ביצי עוף מופרות, וחיות מודל), אפקטים ציטופאתיים",
+     "מושגים כלליים: רגישות, מתירנות",
+     "אמצעים לכימות נגיפים, PFU ו-MOI; ניסוי גידול חד שלבי"
+    ]
+   },
+   {
+    "lectures": "7",
+    "topicsHe": [
+     "נגיפים וסרטן",
+     "נגיפים וריפוי גני",
+     "דיון ביחסי הגומלין בין הנגיפים לבין התאים המאכסנים"
+    ]
+   }
   ],
   "books": [
    "האוניברסיטה הפתוחה- עולם הנגיפים",
@@ -1573,7 +2370,13 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
    "Leonard C. Norkin. 2010. Virology, Molecular Biology and Pathogenesis. ASM Press,",
    "Washington, D.C."
   ],
-  "hasUnparsedSchedule": true,
+  "assessmentHe": [
+   "מבחן (עמידה בבחינה מסכמת)"
+  ],
+  "manual": {
+   "readAt": "2026-11-11",
+   "noteHe": "המסמך: \"נכון לשנת לימודים תשפ\"ג 2022\", 1 ש\"ס הרצאה; סדר השיעורים נתון לשינוי. בשיעור 6 המקור כותב \"IPFU ו-MO\" (שיבוש של PFU ו-MOI)."
+  },
   "evidence": {
    "textFile": "content/syllabi/text/biu-virology.txt",
    "sha256": "6162dcfa9b90b6e40dfb1156f985518a95c962066a996c18d8ec25cbb70ab9a3",
@@ -1582,10 +2385,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
    ]
   },
   "warnings": [
-   "לא נמצאה כותרת נושאים במסמך — הנושאים המוצגים הם פתיחת המסמך; לקרוא את קובץ הטקסט",
-   "הסילבוס החדש ביותר באתר הפקולטה הוא משנת 2023",
-   "במסמך יש טבלת שבועות/שיעורים שלא פוענחה אוטומטית (עמודות מעורבבות) — לקרוא את ה-PDF בעין ולהזין את הסדר",
-   "המקור לא מציין הרכב ציון"
+   "הסילבוס החדש ביותר באתר הפקולטה הוא משנת 2023"
   ]
  },
  "haifa-biochem-a": {
@@ -1894,6 +2694,10 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
    "סטודנטים שיש ברשותם מכתב התאמות מהאוניברסיטה וזקוקים להנגשה בקורס מוזמנים לפנות אליי",
    "בשעות הקבלה או במייל בסמוך לתחילת הקורס."
   ],
+  "books": [
+   "Genes XII by B. Lewin, Jones and Bartlett Publishers, 2017.",
+   "סטודנטים יקרים,"
+  ],
   "assessmentHe": [
    "דרישות הקורס :נוכחות חובה ( ,)80%ציון עובר בבחינה בסוף הקורס."
   ],
@@ -1905,8 +2709,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
    ]
   },
   "warnings": [
-   "הסילבוס הועלה לאתר החוג ב-2021 ולא הוחלף מאז",
-   "המקור לא מציין ספרים"
+   "הסילבוס הועלה לאתר החוג ב-2021 ולא הוחלף מאז"
   ]
  },
  "huji-biochem-adv": {
@@ -4398,7 +5201,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   },
   "evidence": {
    "textFile": "content/syllabi/text/technion-biology-1.txt",
-   "sha256": "2d9ebd840d539067d30a5e215040cee29bd47fdb34dc7eb1c7b345d7a9bcc2a0",
+   "sha256": "df3ae2640572fb1304650ed1040513fa39b72e0987d805e411f5885dba423b51",
    "rawFiles": [
     "technion-134058-portal.html",
     "technion-134058-sap-2026-200.json"

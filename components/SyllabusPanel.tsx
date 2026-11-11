@@ -36,9 +36,10 @@ export default function SyllabusPanel({ s, children }: { s: SyllabusRecord; chil
         <div className="border-t border-line px-4 py-4 text-sm leading-7">
           {s.sessions?.length ? (
             <ol className="space-y-3">
-              {s.sessions.map((x) => (
-                <li key={x.lectures}>
-                  <p className="font-bold text-brand">{x.lectures.includes("–") ? "הרצאות" : "הרצאה"} {x.lectures}</p>
+              {s.sessions.map((x, n) => (
+                <li key={n}>
+                  {x.partHe ? <p className={`mb-2 border-b border-line pb-1 font-bold ${n ? "mt-5" : ""}`}><bdi>{x.partHe}</bdi></p> : null}
+                  <p className="font-bold text-brand">{s.sessionLabelHe ?? (x.lectures.includes("–") ? "הרצאות" : "הרצאה")} {x.lectures}</p>
                   <ul className="mt-1 list-disc ps-5">{x.topicsHe.map((t, i) => <li key={i}><bdi>{t}</bdi></li>)}</ul>
                 </li>
               ))}
@@ -46,6 +47,7 @@ export default function SyllabusPanel({ s, children }: { s: SyllabusRecord; chil
           ) : (
             <ul className="list-disc space-y-1 ps-5">{s.topicsHe.map((t, i) => <li key={i}><bdi>{t}</bdi></li>)}</ul>
           )}
+          {s.manual?.noteHe ? <p className="mt-3 text-xs text-muted"><bdi>{s.manual.noteHe}</bdi></p> : null}
           {s.notTaughtHe?.length ? (
             <div className="mt-4 rounded-lg bg-amber-tint px-3 py-2">
               <p className="font-bold text-amber">לא נלמד השנה, לפי הסילבוס</p>

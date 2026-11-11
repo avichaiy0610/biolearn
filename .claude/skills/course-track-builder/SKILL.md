@@ -67,7 +67,8 @@ The record also carries what the source says about **staff, semester, grading an
 and `warnings`. Then **read the full source text** `content/syllabi/text/<course>.txt`: it holds
 everything the university published, including parts no parser understood. If the record has
 `hasUnparsedSchedule`, open the PDF in `Project One/syllabuses/_fetched/<course>/` with the Read tool
-and take the lesson order from the table by eye. After changing a parser run
+and enter the lesson table in `content/syllabi/manual.ts` (rules at the top of that file), then re-run the
+sync for that course — never leave a table that exists unread, and never guess one from interleaved text. After changing a parser run
 `npx tsx scripts/syllabus-parse.test.ts`.
 
 ### 2. Discover — this is the main step, not an extra

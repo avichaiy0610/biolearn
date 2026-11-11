@@ -141,15 +141,21 @@ export function topicSection(lines: string[]): { lines: string[]; found: boolean
 
 // Bibliography of a PDF syllabus: the lines after a "ספרות / ביבליוגרפיה / Bibliography" heading.
 export function pdfBooks(lines: string[]): string[] | undefined {
-  const h = lines.findIndex((l) => l.length < 80 && /(?:^|\s|:)(?:ספרות|ביבליוגרפיה|ספרי (?:לימוד|הקורס)|רשימת קריאה|Bibliography|Reading (?:list|material)|Textbooks?)(?:\s|:|$)/i.test(l));
+  // The heading opens the line ("ד. ביבליוגרפיה:", "Reading material:") — a sentence that merely contains
+  // the word ("סיכום ספרות מדעית") is not a heading.
+  // (pdftotext may put an RTL heading's words in reverse order, so "next to its colon" also counts.)
+  const KW = /(?:ספרות|ביבליוגרפיה|רשימה ביבליוגרפית|ספרי (?:לימוד|הקורס)|רשימת קריאה|Bibliography|Reading (?:list|material)|Textbooks?)/.source;
+  const HEAD = new RegExp(/^(?:[א-ת]\s?[.)]\s*)?/.source + KW + /(?:\s|:|\(|$)/.source + "|" + /:\s?/.source + KW + "|" + KW + /\s?:/.source, "i");
+  // Template icons and stray marks often sit before the heading — test the line from its first letter.
+  const h = lines.findIndex((l) => l.length < 80 && HEAD.test(l.replace(/^[^\p{L}\p{N}]+/u, "")));
   if (h < 0) return undefined;
   const out: string[] = [];
   for (const l of lines.slice(h + 1, h + 30)) {
     // Next section, or the page footer (Haifa letterhead), or the Bar-Ilan template appendix.
     if (/מטלות|דרישות|הרכב הציון|ציון|הערכ|נוכחות|שעות קבלה|מבנה הקורס|לוח זמנים|מטרות|תוצרי|הרחבה, הצעות|Mount Carmel|הר הכרמל|E-mail|Faculty|החוג ל|הפקולטה|tests:|reports:|exam:/.test(l)) break;
     // Library shelf marks ("שמור סוציולוגיה …") and headings like "ספר הקורס:".
-    if (/^\d+$/.test(l) || l.length < 6 || /שמור |בספרי[יה]ת|^ספר(?:י)? הקורס:?$/.test(l)) continue;
-    out.push(l.replace(/^[\d.\-•*)]+\s*/, ""));
+    if (/^\d+$/.test(l) || l.length < 6 || /שמור |בספרי[יה]?ת |^ספר(?:י)? הקורס:?$/.test(l)) continue;
+    out.push(l.replace(/^(?:\.?\d{1,2}\s?[.)]\s*|\.\d{1,2}\s*|\d{1,2}(?=[א-ת"״])|[.•*\-]+\s*)/, "")); // a list marker, not the "15" of "15th Edition"
   }
   return out.length ? out : undefined;
 }

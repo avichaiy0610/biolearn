@@ -1,6 +1,6 @@
 # Syllabus sync report — 2026-11-11
 
-101 targets: 0 new, 0 changed, 88 same, 12 failed, 1 rejected, 148 warnings
+101 targets: 0 new, 7 changed, 81 same, 12 failed, 1 rejected, 131 warnings
 
 ```
 same     huji      72128     topics   huji-organism
@@ -136,47 +136,31 @@ FAILED   biu       80101              biu-general-a   (no PDF syllabus on the fa
 FAILED   biu       80102              biu-general-b   (no PDF syllabus on the faculty page)
 same     biu       80103     lectures biu-cell
            ⚠ הסילבוס החדש ביותר באתר הפקולטה הוא משנת 2025
-same     biu       80150     topics   biu-biostatistics
-           ⚠ לא נמצאה כותרת נושאים במסמך — הנושאים המוצגים הם פתיחת המסמך; לקרוא את קובץ הטקסט
+same     biu       80150     lectures biu-biostatistics
            ⚠ הסילבוס החדש ביותר באתר הפקולטה הוא משנת 2024
-           ⚠ במסמך יש טבלת שבועות/שיעורים שלא פוענחה אוטומטית (עמודות מעורבבות) — לקרוא את ה-PDF בעין ולהזין את הסדר
-same     biu       80201     lectures biu-biochem-a
+CHANGED  biu       80201     lectures biu-biochem-a
            ⚠ שנת הסילבוס לא ידועה (תיקייה בלי שנה באתר הפקולטה)
-           ⚠ המקור לא מציין ספרים
-same     biu       80206     topics   biu-animal-physiology
-           ⚠ לא נמצאה כותרת נושאים במסמך — הנושאים המוצגים הם פתיחת המסמך; לקרוא את קובץ הטקסט
+same     biu       80206     lectures biu-animal-physiology
            ⚠ הסילבוס החדש ביותר באתר הפקולטה הוא משנת 2025
-           ⚠ במסמך יש טבלת שבועות/שיעורים שלא פוענחה אוטומטית (עמודות מעורבבות) — לקרוא את ה-PDF בעין ולהזין את הסדר
 FAILED   biu       80207              biu-ecology   (no PDF syllabus on the faculty page)
 same     biu       80208     lectures biu-genetics
            ⚠ הסילבוס החדש ביותר באתר הפקולטה הוא משנת 2024
-same     biu       80202     topics   biu-biochem-b
+CHANGED  biu       80202     lectures biu-biochem-b
            ⚠ שנת הסילבוס לא ידועה (תיקייה בלי שנה באתר הפקולטה)
-           ⚠ במסמך יש טבלת שבועות/שיעורים שלא פוענחה אוטומטית (עמודות מעורבבות) — לקרוא את ה-PDF בעין ולהזין את הסדר
 same     biu       80203     topics   biu-microbiology
            ⚠ לא נמצאה כותרת נושאים במסמך — הנושאים המוצגים הם פתיחת המסמך; לקרוא את קובץ הטקסט
            ⚠ הסילבוס החדש ביותר באתר הפקולטה הוא משנת 2023
            ⚠ המקור לא מציין ספרים
-same     biu       80204     topics   biu-virology
-           ⚠ לא נמצאה כותרת נושאים במסמך — הנושאים המוצגים הם פתיחת המסמך; לקרוא את קובץ הטקסט
+same     biu       80204     lectures biu-virology
            ⚠ הסילבוס החדש ביותר באתר הפקולטה הוא משנת 2023
-           ⚠ במסמך יש טבלת שבועות/שיעורים שלא פוענחה אוטומטית (עמודות מעורבבות) — לקרוא את ה-PDF בעין ולהזין את הסדר
-           ⚠ המקור לא מציין הרכב ציון
 FAILED   biu       80210              biu-immunology   (no PDF syllabus on the faculty page)
-same     biu       80214     topics   biu-systems-physiology
-           ⚠ לא נמצאה כותרת נושאים במסמך — הנושאים המוצגים הם פתיחת המסמך; לקרוא את קובץ הטקסט
+CHANGED  biu       80214     lectures biu-systems-physiology
            ⚠ הסילבוס החדש ביותר באתר הפקולטה הוא משנת 2025
-           ⚠ במסמך יש טבלת שבועות/שיעורים שלא פוענחה אוטומטית (עמודות מעורבבות) — לקרוא את ה-PDF בעין ולהזין את הסדר
 FAILED   biu       80223              biu-plant-physiology   (no PDF syllabus on the faculty page)
-same     biu       80242     topics   biu-molecular-a
-           ⚠ לא נמצאה כותרת נושאים במסמך — הנושאים המוצגים הם פתיחת המסמך; לקרוא את קובץ הטקסט
+CHANGED  biu       80242     lectures biu-molecular-a
            ⚠ הסילבוס החדש ביותר באתר הפקולטה הוא משנת 2025
-           ⚠ במסמך יש טבלת שבועות/שיעורים שלא פוענחה אוטומטית (עמודות מעורבבות) — לקרוא את ה-PDF בעין ולהזין את הסדר
-same     biu       80377     topics   biu-molecular-b
-           ⚠ לא נמצאה כותרת נושאים במסמך — הנושאים המוצגים הם פתיחת המסמך; לקרוא את קובץ הטקסט
+same     biu       80377     lectures biu-molecular-b
            ⚠ הסילבוס החדש ביותר באתר הפקולטה הוא משנת 2024
-           ⚠ במסמך יש טבלת שבועות/שיעורים שלא פוענחה אוטומטית (עמודות מעורבבות) — לקרוא את ה-PDF בעין ולהזין את הסדר
-           ⚠ המקור לא מציין הרכב ציון
 same     biu       80548     topics   biu-cell-function
            ⚠ הסילבוס החדש ביותר באתר הפקולטה הוא משנת 2024
            ⚠ המקור לא מציין ספרים
@@ -212,7 +196,7 @@ same     bgu       205.1.3171 topics   bgu-evolution
            ⚠ המקור לא מציין ספרים
 same     bgu       205.1.9531 topics   bgu-bioinformatics
            ⚠ השנתון נותן רק תקציר; סילבוס מפורט (לוח הרצאות, הרכב ציון) אינו ציבורי
-same     haifa     ביולוגיה של התא ב topics   haifa-cell-b
+CHANGED  haifa     ביולוגיה של התא ב topics   haifa-cell-b
            ⚠ הסילבוס הועלה לאתר החוג ב-2021 ולא הוחלף מאז
            ⚠ המקור לא מציין הרכב ציון
 same     haifa     מבוא לאקולוגיה ואבולוציה topics   haifa-ecology-evolution
@@ -224,10 +208,9 @@ same     haifa     ביוכימיה א topics   haifa-biochem-a
 same     haifa     ביוכימיה ב topics   haifa-biochem-b
            ⚠ הסילבוס הועלה לאתר החוג ב-2021 ולא הוחלף מאז
            ⚠ המקור לא מציין ספרים
-same     haifa     ביולוגיה מולקולארית topics   haifa-molecular
+CHANGED  haifa     ביולוגיה מולקולארית topics   haifa-molecular
            ⚠ הסילבוס הועלה לאתר החוג ב-2021 ולא הוחלף מאז
-           ⚠ המקור לא מציין ספרים
-same     haifa     גנטיקה כללית topics   haifa-genetics
+CHANGED  haifa     גנטיקה כללית topics   haifa-genetics
            ⚠ הסילבוס הועלה לאתר החוג ב-2021 ולא הוחלף מאז
 same     haifa     מיקרוביולוגיה כללית topics   haifa-microbiology
            ⚠ לא נמצאה כותרת נושאים במסמך — הנושאים המוצגים הם פתיחת המסמך; לקרוא את קובץ הטקסט
