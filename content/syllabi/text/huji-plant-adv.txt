@@ -1,0 +1,190 @@
+===== HUJI syllabus API · course 72346 · year 2027 =====
+{
+ "courseCode": "72346",
+ "year": 2027,
+ "courseName": {
+  "he": "מדעי הצמח מורחב ",
+  "en": "PLANT PHYSIOLOGY AND BIOCHEMISTRY"
+ },
+ "periodName": {
+  "he": "סמסטר ב",
+  "en": "Semester B"
+ },
+ "ectsCredits": null,
+ "degreeLevel": null,
+ "creditPoints": "5",
+ "academicYear": null,
+ "semester": "2",
+ "department": {
+  "he": "מדעי החיים",
+  "en": "Life Sciences"
+ },
+ "facultyCode": null,
+ "campusName": {
+  "he": "אדמונד י' ספרא",
+  "en": "Edmond J. Safra"
+ },
+ "building": null,
+ "room": null,
+ "courseCoordinator": {
+  "he": null,
+  "en": null
+ },
+ "coordinatorEmail": null,
+ "teachers": {
+  "he": "פרופ ניר קרן\nפרופ רחל גרין\nגב איילת ציון בן עמי\nמר נדב בןאליעזר\nתמר ויגודני",
+  "en": "Prof. Nir Keren\nProf. Rachel Green\nMs. Ayelet Zion\nMr. Nadav Beneliezer\nTamar Wygodny"
+ },
+ "officeHours": {
+  "he": null,
+  "en": null
+ },
+ "contactHours": null,
+ "teachingLanguage": {
+  "he": "עברית",
+  "en": "Hebrew"
+ },
+ "courseDescription": {
+  "he": "הקורס מקנה ידע מורחב לגבי מספר תהליכים פיזיולוגים וביוכימיים המתרחשים בצמחים באופן פרטני וכתוצאה מיחסי גומלין שלהם עם סביבת גידולם.",
+  "en": "The course deals with the diverse physiological and biochemical processes that occur in plants and their implications for plant interactions with the environment."
+ },
+ "courseAims": {
+  "he": "להקנות ידע פיזיולוגי, ביוכימי ומולקולרי על תהליכים מרכזיים המתרחשים בצמחים.",
+  "en": "Understand key physiological, biochemical and molecular biological processes that occur in plants."
+ },
+ "learningOutcomes": {
+  "he": "להסביר ולנתח מנגנונים פיזיולוגיים, ביוכימיים ומולקולריים של תהליכים מרכזיים המתרחשים בצמחים.",
+  "en": "Explain and analyze physiological, biochemical and molecular mechanisms of key processes that occur in plants."
+ },
+ "courseContent": {
+  "he": "1. Embryogenesis: מקורה של אדריכלות צמחים\r\n2. נביטה והתבססות\r\n3. בקרה על פריחה והתפתחות פרחונית\r\n4. התפתחות גמטופיטים, האבקה ופיתוח פירות\r\n5. פוטוסינתזה: שיקולים פיזיולוגיים ואקולוגיים\r\n6. אותות והעברת אותות\r\n7. הובלה מומסת\r\n8. טרנסלוקציה בפלואם\r\n9. נשימה ומטבוליזם של שומנים\r\n10. אינטראקציות ביוטיות: פתוגנים ואינטראקציות בין צמחים",
+  "en": "1. Embryogenesis: The Origin of Plant Architecture\r\n2. Germination and Establishment\r\n3. Control of Flowering and Floral Development\r\n4. Gametophyte Development, Pollination, and Fruit Development\r\n5. Photosynthesis: Physiological and Ecological Considerations\r\n6.  Signals and Signal Transduction\r\n7.  Solute Transport\r\n8. Translocation in the Phloem\r\n9. Respiration and Lipid Metabolism\r\n10. Biotic Interactions: Pathogens and interplant interactions"
+ },
+ "attendanceRequirements": {
+  "he": "במעבדה- 100%  הרצאה- 80%",
+  "en": "Lab attendance:100% Lecture attendance 80%"
+ },
+ "teachingMethod": {
+  "he": "הוראה פרונטלית, מצגות סטודנטים, עבודה במעבדה ומפגשים עם מורים",
+  "en": "Frontal teaching, student presentations, lab work and meetings with teachers"
+ },
+ "requiredReading": {
+  "he": "מאמרים המשתנים כל שנה הניתנים ע\"י המורות במהלך ההרצאות",
+  "en": "Different articles each year provided by teachers during the lectures"
+ },
+ "additionalReading": {
+  "he": "",
+  "en": ""
+ },
+ "evaluation": {
+  "he": null,
+  "en": null
+ },
+ "additionalInfo": {
+  "he": "מבחן בית – 45%\r\nהצעת מחקר – 15%\r\nמצגת – 15%\r\nדו\"ח מסכם – 20%\r\nנוכחות - 5%",
+  "en": "-"
+ },
+ "degreeName": {
+  "he": "תואר ראשון",
+  "en": "First degree"
+ },
+ "grade1Description": {
+  "he": null,
+  "en": null
+ },
+ "writtenExamPercentage": null,
+ "oralExamPercentage": null,
+ "presentationPercentage": null,
+ "activeParticipationPercentage": null,
+ "midtermExamsPercentage": null,
+ "assignmentPercentage": null,
+ "grade7Percentage": null,
+ "grade8Percentage": null,
+ "grade9Percentage": null,
+ "grade10Percentage": null,
+ "grade11Percentage": null,
+ "otherGradeDescription": null,
+ "grades": [
+  {
+   "code": "13",
+   "name": {
+    "he": "מבחן בית (לא מקוון)",
+    "en": "Home Exam(Offline)"
+   },
+   "groupUniqueName": "final_exam",
+   "groupName": {
+    "he": "מבחן סופי",
+    "en": "Final exam"
+   },
+   "weight": 40,
+   "assWithFeedback": null,
+   "assWithoutFeedback": null
+  },
+  {
+   "code": "22",
+   "name": {
+    "he": "פרויקט גמר",
+    "en": "Final Project"
+   },
+   "groupUniqueName": "final_essay",
+   "groupName": {
+    "he": "עבודת סיכום",
+    "en": "Final Essay"
+   },
+   "weight": 20,
+   "assWithFeedback": null,
+   "assWithoutFeedback": null
+  },
+  {
+   "code": "24",
+   "name": {
+    "he": "הצעת מחקר",
+    "en": "Research Proposal"
+   },
+   "groupUniqueName": "final_essay",
+   "groupName": {
+    "he": "עבודת סיכום",
+    "en": "Final Essay"
+   },
+   "weight": 15,
+   "assWithFeedback": null,
+   "assWithoutFeedback": null
+  },
+  {
+   "code": "30",
+   "name": {
+    "he": "הרצאה",
+    "en": "Lecture"
+   },
+   "groupUniqueName": "final_presentation",
+   "groupName": {
+    "he": "הצגה מסכמת",
+    "en": "Final Presentation"
+   },
+   "weight": 20,
+   "assWithFeedback": null,
+   "assWithoutFeedback": null
+  },
+  {
+   "code": "90",
+   "name": {
+    "he": "נוכחות",
+    "en": "Attendance"
+   },
+   "groupUniqueName": "attendance",
+   "groupName": {
+    "he": "נוכחות",
+    "en": "Attendance"
+   },
+   "weight": 5,
+   "assWithFeedback": null,
+   "assWithoutFeedback": null
+  }
+ ],
+ "gradesOther": [],
+ "syllabusApiVersion": "v2",
+ "updatedBy": null,
+ "levelUpdated": null,
+ "timesUpdated": null,
+ "updateDate": "2026-09-22T12:54:48"
+}

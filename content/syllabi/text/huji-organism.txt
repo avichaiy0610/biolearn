@@ -1,0 +1,220 @@
+===== HUJI syllabus API · course 72128 · year 2027 =====
+{
+ "courseCode": "72128",
+ "year": 2027,
+ "courseName": {
+  "he": "מבוא לביולוגיה של האורגניזם",
+  "en": "-Introduction to Biology and Evolution of Organisms"
+ },
+ "periodName": {
+  "he": "סמסטר א",
+  "en": "Semester A"
+ },
+ "ectsCredits": null,
+ "degreeLevel": null,
+ "creditPoints": "5",
+ "academicYear": null,
+ "semester": "1",
+ "department": {
+  "he": "מדעי החיים",
+  "en": "Life Sciences"
+ },
+ "facultyCode": null,
+ "campusName": {
+  "he": "אדמונד י' ספרא",
+  "en": "Edmond J. Safra"
+ },
+ "building": null,
+ "room": null,
+ "courseCoordinator": {
+  "he": null,
+  "en": null
+ },
+ "coordinatorEmail": null,
+ "teachers": {
+  "he": "פרופ אריאל צ'יפמן\nמר אלעד מילין\nמר אריאל בר-לב-ויטרבו\nאהרון מהל\nאורפז צרפתי\nאיתי פיין\nדנה חנוכה\nמתן לוי\nעמית קליין\nתום ג'ו קומר",
+  "en": "Prof. Ariel Chipman\nMr. Elad Meilin\nMr. Ariel Bar Lev Viterbo\nAaron Mehl\nOrpaz Zarfati\nItai Fein\nDana Hanuka\nMatan Levy\nAmit Klein\nTom Joe Komar"
+ },
+ "officeHours": {
+  "he": null,
+  "en": null
+ },
+ "contactHours": null,
+ "teachingLanguage": {
+  "he": "עברית",
+  "en": "Hebrew"
+ },
+ "courseDescription": {
+  "he": "קורס מבוא להכרת מגוון עולם החי ועקרונות הביולוגיה האורגניזמית. הקורס מציג את הקבוצות הטקסונומיות השונות ומאפייניהן, תוך שימוש בקבוצות השונות להדגמת עקרונות כלליים של ארגון הגוף ומערכותיו. הקורס המורחב כולל גם מעבדה, המשמשת להדגמה מעשית של הרעיונות הנלמדים בשיעור.",
+  "en": "An introductory to the diversity of the animal kingdom and to princiles of organismic biology. The course presents the various taxonomic groups and their characteristics, while using the different groups to demonstrate general principles of organization of the body and its systems. The full course includes a lab module which serves for practical demonstration of principles learned in the lectures."
+ },
+ "courseAims": {
+  "he": "מתן בסיס אורגניזמי למדע הביולוגיה בכלל. הקניית עקרונות חשיבה אבולוציונית ואורגניזמית.",
+  "en": "To give an organismic basis to the study of biology in general. To develop organismioc and evolutionary thinking."
+ },
+ "learningOutcomes": {
+  "he": "- לזהות את הקבוצות העיקריות של בעלי החיים עד רמת מערכה (Phylum) ומחלקה (Class).\r\n- לנבא תפקוד של בעלי חיים בלתי מוכרים על סמך מאפיינים מורפולוגיים.\r\n- למקם בעלי חיים שונים בעץ הפילוגנטי של עולם החי.\r\n- להעריך את חשיבות הבנת האורגניזם השלם בכל ענפי מדעי החיים.\r\n- לתאר חתכים היסטולוגיים של רקמות שונות וניתוחים של נציגים נבחרים מקבוצות שונות של בעלי חיים.",
+  "en": "- To identify the main animal taxa at the Phylum and Class levels.\r\n- To predict organismic function based on morphology.\r\n- To place various organisms on teh phylogenetic tree of teh animal kingdom.\r\n- To appreciate the importance of understanding the whole organism in all branches of Life Sciences\r\n- To describe histological sections of different tissues and dissections of select members of different animal taxa."
+ },
+ "courseContent": {
+  "he": "1) הייררכיה בביולוגיה. רמות שונות של מורכבות בביולוגיה. רמות טקסונומיות ומינוח טקסונומי. הגדות שונות למושג המין (species). מעורבות של גנים ברמות מורכבות שונות. עקרונות היסוד של אבולוציה - שונות וסלקציה. מנגנון הפעולה של האבולוציה הוא דרך שינויים בגנים המעורבים ברמות שונות.\r\n\r\n2) שינוי במינים: אנאגנזה (anagenesis) לעומת קלדוגנזה (cladogenesis). ספציאציה. עצים פילוגנטיים - מבנה ומשמעות. מונחי יסוד באבולוציה: הומולוגיה, קונברגנציה (אבולוציה מתכנסת), פרלליזם (אבולוציה מקבילה), דיברגנציה (אבולוציה מתבזרת).\r\n\r\n3) מבוא לתפקוד ולצרכים הבסיסיים של האורגניזם. אילו מערכות נחוצות לאורגניזם כדי להתקיים. אורגניזמים חד-תאיים. רב-תאיות. ספוגים (Porifera). רביה מינית לעומת רביה אל-מינית. האם רביה מינית היא רעיון טוב?\r\n\r\n4) שכבות נבט. בעלי חיים בעלי שתי שכבות נבט (diploblasts). כיסוי הגוף - תפקיד ומבנה. מערכת העיכול - תפקיד ומבנה.\r\n\r\n5) חיות סוליטריות לעומת חיות מושבתיות. תחרות. אברי חוש ומערכות עצבים. צורבים (Cnidaria).\r\n\r\n6) חיות ישיבות לעומת חיות קבועות לעומת ניידות. צפליזציה. האבולוציה של סימטריה דו-צדית ושל שלוש שכבות נבט (triploblasts). מה זו תולעת? הפיצוץ הקמברי. סקאלת הזמן הגיאולוגית.\r\n\r\n7) מגוון בעלי החיים הבילטריים. אבולוציה מתקדמת (progressive evolution) לעומת הפשטה משנית         (secondary simplification). אבולוציה של טפילות. תולעים שטוחות (Platyheliminthes).\r\n\r\n8) מערכות נשימה והובלה. חשיבותו של הגודל הנכון. הצלום כאיבר תמיכה מרכזי. רכיכות (Mollusca).\r\n\r\n9) סגמנטציה. תולעים טבעתיות (Annelida) וקרוביהן. שרירים ותנועה. פגיות (larvae) לעומת התפתחות ישירה. מחזורי חיים.\r\n\r\n10) המעבר לסביבה יבשתית. שלד חיצוני - שלד פנימי. בעלי חיים מתנשלים. פרוקי רגליים (Arthropoda).\r\n\r\n11) חרקים (Insecta) - מבנה, מגוון והצלחה אבולוציונית. מערכות הפרשה.\r\n\r\n12) עקרונות בסיסיים של התפתחות עוברית. סוגי התלמות. סוגי גסטרולציה. דאוטורוסטומיה (Deuterosomia) -קבוצות ואבולוציה.\r\n\r\n13) מבוא לאקולוגיה (הרצאת אורח)\r\n\r\n14) ארגון הגוף בחוליתנים. אמבריולוגיה של חוליתנים ומעבר לדגם הגוף הבוגר.\r\n\r\n\r\n\r\nמעבדה מס' 1 - בעלי חיים חד-תאיים (Protozoa):     Paramecium, Euglena, Peridinium, Phaeodactylum. מגוון העולם האאוקריוטי. אינטראקציות עם הסביבה.\r\nמעבדה מס' 2 - היסטולוגיה של רקמות: שימוש במיקרוסקופ אור. רקמת אפיתל ורקמת חיבור. סוגי שריר. איבר מורכב: מעי, עור. יחס בין מבנה לתפקוד.\r\nמעבדה מס' 3 - בעלי-חיים רב-תאיים פשוטים, בעיקר צורבים (Cnidaria): רקע כללי על ספוגים. קבוצות עיקריות בצורבים. התנהגות אכילה ב-Hydra. מבוא לתזונה בבעלי חיים. מחזורי חיים בצורבים.\r\n מעבדה מס' 4 - Lophotrochozoa I: תולעים שטוחות                    (Platyhelminthes). רגנרציה בפלנריה. מערכות חוש. מבוא לבעלי חיים מורכבים     (Bilateria). טפילות. רכיכות    (Mollusca). מבנה הצלום וחשיבותו. \r\n מעבדה מס' 5 - Lophotrochozoa II: תולעים טבעתיות (Annelida). לתנועה. סגמנטציה.\r\nמעבדה מס' 6: Ecdysozoa I: תולעים עגולות (Nematoda). מבוא לפרוקי רגליים (Arthropoda).\r\nמעבדה מס' 7: Ecdysozoa II: חרקים/ ניתוח חגב.\r\nמעבדה מס' 8: Deuterostomia I: קווצי עור (Echinodermata). הפריה והתפתחות בקיפודי ים.\r\n מעבדה מס' 9: Deuterostomia II: חוליתנים. ניתוח כריש / דג.",
+  "en": "Lectures\r\n1)\tBiological hierarchies. Different levels of complexity in biology. Taxonomic levels and taxonomical nomenclature. Different definitions of species. Genes are involved at different levels of complexity. Evolution acts through changes in genes at different levels.\r\n2)\tChanges in species: Speciation. Phylogenetic trees – structure and meaning. Basic evolutionary terminology: homology, convergence, parallelism, divergence.\r\n3)\tAn introduction to organismic function and basic needs. What systems does an organism need to survive? Unicellular organisms. Multicellularity. Sponges (Porifera). Sexual vs. asexual reproduction. Is sexual reproduction a good idea?\r\n4)\tGerm layers. Animals with two germ layers (diploblasts). Cnidaria and Ctenophora. Integument – structure and function. Digestive system – structure and function.\r\n5)\tSolitary vs. colonial organisms. Examples from cnidarians. Sessile vs. sedentary vs. motile organisms. \r\n6)\tSensory organs and nervous systems. Cephalization. The evolution of bilateral symmetry and of triploblasty. What is a worm? The Cambrian explosion. The diversity of Bilateria.\r\n7)\tProgressive evolution vs. secondary simplification. The evolution of parasitism. Platyhelminthes.\r\n8)\tRespiratory systems and circulatory systems. The importance of being the right size. The coelom as a major support system. Annelida and other worms. Segmentation. \r\n9)\tMollusca. Larvae vs. direct development. Life history. Internal and external skeletons. Muscles and movement.\r\n10)\tEcdysozoa. Arthropoda. The diversity of arthropods. The evolution of segmentation.\r\n11)\tThe move to terrestrial life. Excretory systems. Insecta – structure, diversity and evolutionary success.\r\n12)\tBasic principles of embryonic development. Cleavage patterns. Gastrulation patterns. Deuterostomia – major groups and evolution.\r\n13) Introduction to Ecology (guest lecture)\r\n14)\tBody organization in vertebrates. Vertebrate embryology and the transition to the adult body plan. Main body systems in vertebrates.\r\n\r\nLabs\r\n1)\tProtists: Diversity, structure, behavior.\r\n2)\tHistology. Use of a light microscope. Epithelia and connective tissues. Muscle types. Compound organs: intestine, skin.\r\n3)\tSimple multicellular organisms. Introduction to Porifera. Major groups in Cnidaria. Feeding behavior in Hydra. Cnidarian life cycles.\r\n4)\tLophotrochozoa I: Platyhelminthes. Parasitic groups. Regeneration in Planaria. Mollusca. \r\n5)\tLophotrochozoa II: Annelida. Earthworm dissection. \r\n6)\tEcdysozoa I: Nematodes, tardigrades. Arthropod diversity.\r\n7)\tEcdysozoa II: Insects. Grasshopper dissection.\r\n8)\tDeuterostomia I: Echinoderms. Fertilization and development in sea urchins.\r\n9)\tDeuterostomia II: Vertebrates. Dogfish / fish"
+ },
+ "attendanceRequirements": {
+  "he": "שיעור - 75%. מעבדה 90%",
+  "en": "lectures - 75%. Labs 90%"
+ },
+ "teachingMethod": {
+  "he": "פרונטלי + מעבדה",
+  "en": "Lectures + labs"
+ },
+ "requiredReading": {
+  "he": "ספר הקורס באתר הקורס",
+  "en": "Course book available on the course website"
+ },
+ "additionalReading": {
+  "he": "",
+  "en": ""
+ },
+ "evaluation": {
+  "he": null,
+  "en": null
+ },
+ "additionalInfo": {
+  "he": "אין",
+  "en": "None"
+ },
+ "degreeName": {
+  "he": "תואר ראשון",
+  "en": "First degree"
+ },
+ "grade1Description": {
+  "he": null,
+  "en": null
+ },
+ "writtenExamPercentage": null,
+ "oralExamPercentage": null,
+ "presentationPercentage": null,
+ "activeParticipationPercentage": null,
+ "midtermExamsPercentage": null,
+ "assignmentPercentage": null,
+ "grade7Percentage": null,
+ "grade8Percentage": null,
+ "grade9Percentage": null,
+ "grade10Percentage": null,
+ "grade11Percentage": null,
+ "otherGradeDescription": null,
+ "grades": [
+  {
+   "code": "10",
+   "name": {
+    "he": "מבחן בכתב",
+    "en": "Written Exam"
+   },
+   "groupUniqueName": "final_exam",
+   "groupName": {
+    "he": "מבחן סופי",
+    "en": "Final exam"
+   },
+   "weight": 50,
+   "assWithFeedback": null,
+   "assWithoutFeedback": null
+  },
+  {
+   "code": "50",
+   "name": {
+    "he": "תרגילים",
+    "en": "Exercises"
+   },
+   "groupUniqueName": "routine_assignments",
+   "groupName": {
+    "he": "מטלות שוטפות",
+    "en": "Routine Assignments"
+   },
+   "weight": 15,
+   "assWithFeedback": 3,
+   "assWithoutFeedback": 0
+  },
+  {
+   "code": "51",
+   "name": {
+    "he": "מבדקים עצמיים",
+    "en": "Self-tests"
+   },
+   "groupUniqueName": "routine_assignments",
+   "groupName": {
+    "he": "מטלות שוטפות",
+    "en": "Routine Assignments"
+   },
+   "weight": 2,
+   "assWithFeedback": 0,
+   "assWithoutFeedback": 11
+  },
+  {
+   "code": "53",
+   "name": {
+    "he": "דוחות",
+    "en": "Reports"
+   },
+   "groupUniqueName": "routine_assignments",
+   "groupName": {
+    "he": "מטלות שוטפות",
+    "en": "Routine Assignments"
+   },
+   "weight": 20,
+   "assWithFeedback": 9,
+   "assWithoutFeedback": 0
+  },
+  {
+   "code": "78",
+   "name": {
+    "he": "ע\"י המדריכ/ה",
+    "en": "by Tutor"
+   },
+   "groupUniqueName": "personal_assessment",
+   "groupName": {
+    "he": "הערכה אישית",
+    "en": "Personal Assessment"
+   },
+   "weight": 8,
+   "assWithFeedback": 0,
+   "assWithoutFeedback": 0
+  },
+  {
+   "code": "86",
+   "name": {
+    "he": "הרצאה",
+    "en": "Lecture"
+   },
+   "groupUniqueName": "presentations",
+   "groupName": {
+    "he": "מצגות",
+    "en": "Presentations"
+   },
+   "weight": 5,
+   "assWithFeedback": 1,
+   "assWithoutFeedback": 0
+  },
+  {
+   "code": "94",
+   "name": {
+    "he": "בונוס - מעבר לסיכום של 100%",
+    "en": "Bonus"
+   },
+   "groupUniqueName": "bonus",
+   "groupName": {
+    "he": "אחוזי בונוס",
+    "en": "Bonus"
+   },
+   "weight": 3,
+   "assWithFeedback": null,
+   "assWithoutFeedback": null
+  }
+ ],
+ "gradesOther": [],
+ "syllabusApiVersion": "v2",
+ "updatedBy": null,
+ "levelUpdated": null,
+ "timesUpdated": null,
+ "updateDate": "2026-09-22T10:47:48"
+}

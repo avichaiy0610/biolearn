@@ -1,0 +1,151 @@
+===== HUJI syllabus API · course 72155 · year 2027 =====
+{
+ "courseCode": "72155",
+ "year": 2027,
+ "courseName": {
+  "he": "יסודות הגנטיקה",
+  "en": "Fundamentals of Genetics"
+ },
+ "periodName": {
+  "he": "סמסטר ב",
+  "en": "Semester B"
+ },
+ "ectsCredits": null,
+ "degreeLevel": null,
+ "creditPoints": "5",
+ "academicYear": null,
+ "semester": "2",
+ "department": {
+  "he": "מדעי החיים",
+  "en": "Life Sciences"
+ },
+ "facultyCode": null,
+ "campusName": {
+  "he": "אדמונד י' ספרא",
+  "en": "Edmond J. Safra"
+ },
+ "building": null,
+ "room": null,
+ "courseCoordinator": {
+  "he": "ד\"ר אמיר עדן",
+  "en": "ד\"ר Amir Eden"
+ },
+ "coordinatorEmail": "[email]",
+ "teachers": {
+  "he": "פרופ איתמר הראל\nפרופ נסים בן-אריה\nד\"ר אמיר עדן\nגב יובל דסקל\nגב יובל-רבקה שלם\nגב נטע איפרגן\nגב תמר פרמינגר\nאביטל פושט\nאורי כהן\nבן טולר\nיוגב שכטר\nעהד סלים\nשיראל שרייבר",
+  "en": "Prof. Itamar Harel\nProf. Nissim Ben-Arie\nDr. Amir Eden\nMs. Yuval Daskal\nMs. Yuval Shalem\nMs. Neta Ifergan\nMs. Tamar Preminger\nAvital Pushett\nOri Cohen\nBen Towler\nYogev Schechter\nAhd Salim\nShirel Schreiber"
+ },
+ "officeHours": {
+  "he": null,
+  "en": null
+ },
+ "contactHours": null,
+ "teachingLanguage": {
+  "he": "עברית",
+  "en": "Hebrew"
+ },
+ "courseDescription": {
+  "he": "הקורס מבוא לגנטיקה עוסק בדרכי ההורשה של תכונות ברמת האורגניזם והאוכלוסייה, ובמנגנונים המולקולריים המאפשרים הורשה וביטוי של תכונות.",
+  "en": "GENERAL GENETICS A is an introduction course to Genetics. The course deals with inheritance of traits at the organism and population level, and the molecular mechanisms that allow inheritance and expression of specific traits."
+ },
+ "courseAims": {
+  "he": "מטרת הקורס היא להפגיש את התלמידים עם עקרונות הגנטיקה הקלאסית והמלקולרית ולספק להם הבנה כיצד נחקרות תכונות ביולוגיות באמצעות כלים גנטיים.",
+  "en": "The purpose of the course is to introduce the students to the principles of classical and molecular genetics, and to provide them with an understanding of how biological properties are investigated using genetic tools."
+ },
+ "learningOutcomes": {
+  "he": "להגדיר ולתאר מושגים גנטיים הקשורים בהורשה של תכונות ברמת האורגניזם וברמה המולקולרית.\n\nלפתור בעיות בגנטיקה קלאסית, לזהות דרכי הורשת תכונה/תכונות, ולנתח עצי משפחה. להסביר מיפוי גנים, גנטיקה של אוכלוסיות וגנטיקה כמותית.\n\nלהשתמש בכלים בסיסיים בתחום של גנטיקה מולקולרית ומערכות מידע גנומיים.",
+  "en": "Define and describe concepts related to inheritance of genetic traits at the organism and molecular levels.\r\n\r\nSolve computational problems of classical genetics, gene mapping, genetics of bacteria, population genetics and quantitative genetics.\r\n\r\nUse the basic tools in the field of molecular genetics and genomic information systems.\r\n\r\nWrite a scientific report describes an experiment and its results."
+ },
+ "courseContent": {
+  "he": "חוקי מנדל; התיאוריה הכומוזומלית של ההורשה; הורשה אימהית; אינטראקציה בין גנים; תאחיזה, שחלוף ושיטות למיפוי גנים; שינויים במבנה כרומוזומים ובמספרם; מבנה הדנ״א ותפקודו; שעתוק ובקרה על ביטוי גנים; תרגום והקוד הגנטי; גישות גנומיות לחקר מבנה ותפקוד של גנים; גנטיקה של אוכלוסיות; גנטיקה של תכונות כמותיות.",
+  "en": "Mendel's laws; The chromosomal theory of inheritance; maternal inheritance; interaction between genes; linkage, recombination and gene mapping; changes in the structure and number of chromosomes ; structure of DNA and its function; transcription, translation and the genetic code; population genetics; genetics of quantitative trait; genomic approaches to study the structure and function of genes."
+ },
+ "attendanceRequirements": {
+  "he": "80% מההרצאות\n100% המעבדות",
+  "en": "80% of Lectures\r\n100% of Labs"
+ },
+ "teachingMethod": {
+  "he": null,
+  "en": null
+ },
+ "requiredReading": {
+  "he": "Introduction to Genetic Analysis\nby Anthony J. F. Griffiths; Susan Wessler; Sean B Carroll; John Doebley",
+  "en": "Introduction to Genetic Analysis\r\nby Anthony J. F. Griffiths; Susan Wessler; Sean B Carroll; John Doebley"
+ },
+ "additionalReading": {
+  "he": null,
+  "en": null
+ },
+ "evaluation": {
+  "he": null,
+  "en": null
+ },
+ "additionalInfo": {
+  "he": "תנאיo לקבלת ציון עובר בקורס: \nציון עובר של 60/100 ומעלה בכל אחד משלושת המרכיבים של הציון הסופי בנפרד: במעבדה, בתרגילים ובבחינה.\nציון עובר של 60/100 ומעלה בשקלול.",
+  "en": "To pass the course, a minimum grade of 60/100 in each of 3 components of the final grade is required: Labs, Tutorials and the final exam.\r\n Final grade of 60/100 and above"
+ },
+ "degreeName": {
+  "he": "תואר ראשון",
+  "en": "First degree"
+ },
+ "grade1Description": {
+  "he": null,
+  "en": null
+ },
+ "writtenExamPercentage": null,
+ "oralExamPercentage": null,
+ "presentationPercentage": null,
+ "activeParticipationPercentage": null,
+ "midtermExamsPercentage": null,
+ "assignmentPercentage": null,
+ "grade7Percentage": null,
+ "grade8Percentage": null,
+ "grade9Percentage": null,
+ "grade10Percentage": null,
+ "grade11Percentage": null,
+ "otherGradeDescription": null,
+ "grades": [
+  {
+   "code": "14",
+   "name": {
+    "he": "מבחן ממוחשב בחווה",
+    "en": "Computerized Exam at the computer farm"
+   },
+   "groupUniqueName": "final_exam",
+   "groupName": {
+    "he": "מבחן סופי",
+    "en": "Final exam"
+   },
+   "weight": 75,
+   "assWithFeedback": null,
+   "assWithoutFeedback": null
+  },
+  {
+   "code": "50",
+   "name": {
+    "he": "תרגילים",
+    "en": "Exercises"
+   },
+   "groupUniqueName": "routine_assignments",
+   "groupName": {
+    "he": "מטלות שוטפות",
+    "en": "Routine Assignments"
+   },
+   "weight": 5,
+   "assWithFeedback": null,
+   "assWithoutFeedback": null
+  }
+ ],
+ "gradesOther": [
+  {
+   "type": "מעבדה",
+   "weight": 20,
+   "description": null
+  }
+ ],
+ "syllabusApiVersion": "v2",
+ "updatedBy": null,
+ "levelUpdated": null,
+ "timesUpdated": null,
+ "updateDate": "2026-02-15T19:18:00"
+}

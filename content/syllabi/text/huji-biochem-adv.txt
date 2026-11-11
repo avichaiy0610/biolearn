@@ -1,0 +1,145 @@
+===== HUJI syllabus API · course 72339 · year 2027 =====
+{
+ "courseCode": "72339",
+ "year": 2027,
+ "courseName": {
+  "he": "ביוכימיה מורחב",
+  "en": "BIOCHEMISTRY : ADVANCED LEVEL"
+ },
+ "periodName": {
+  "he": "סמסטר ב",
+  "en": "Semester B"
+ },
+ "ectsCredits": null,
+ "degreeLevel": null,
+ "creditPoints": "5",
+ "academicYear": null,
+ "semester": "2",
+ "department": {
+  "he": "מדעי החיים",
+  "en": "Life Sciences"
+ },
+ "facultyCode": null,
+ "campusName": {
+  "he": "אדמונד י' ספרא",
+  "en": "Edmond J. Safra"
+ },
+ "building": null,
+ "room": null,
+ "courseCoordinator": {
+  "he": null,
+  "en": null
+ },
+ "coordinatorEmail": null,
+ "teachers": {
+  "he": "פרופ איתן לרנר\nגב פז דרורי\nיהל לנדאו",
+  "en": "Prof. Eitan Lerner\nMs. Paz Drori\nYahel Landau"
+ },
+ "officeHours": {
+  "he": null,
+  "en": null
+ },
+ "contactHours": null,
+ "teachingLanguage": {
+  "he": "עברית",
+  "en": "Hebrew"
+ },
+ "courseDescription": {
+  "he": "הקורס מיועד להעמקה והרחבה של הידע הביוכמי שנרכש בקורס המבוא. הן העמקה ברמת מנגנוני הפעולה והמיבנה של מולקולות חלבון בודדות, והן ברמה של הבסיס הביוכימי של תהליכים פיזיולוגים מורכבים. ברמת מולקולת החלבון נתייחס לחלבונים מקופלים היטב, לדינמיקה המבנית שלהם, ואיך אלו קשורים ליכולת של חלבון לבצע את פעילותו. כמו כן, נלמד על בעיית קיפול החלבונים, על פתרונות קיפול אלטרנטיביים, על חלבונים בלתי מסודרים, פונקציונליים פיזיולוגית ופתופיזיולוגית במגוון מחלות. בנוסף, נקדיש תשומת לב רבה לקיפול חלבונים בתא בעזרת שפרונים' לבקרת קיפול החלבונים, כמו גם לפתרונות חלופיים עבור חלבונים שאינם מתקפלים בתא, כגון חלבון חסרי סדר שעוברים תהליך קיפול לאחר כתוצאה מקישור לביומולקולות אחרות, או חלבונים אשר יוצרים גופיפים מופרדי פאזה. בנוסף, הקורס יציג שיטות ביוכימיות מתקדמות ופורצות דרך",
+  "en": "The course aims at deepening the knowledge acquired at the introductory course. Looking in depth at the mechanism of action and at structure-function relationships of single proteins as well as at the biochemical basis of complex processes. At the protein molecule level we shall look into well-folded proteins, their structural dynamics, and how all that facilitates their function. Additionally, we will focus on the protein folding problem, on alternative folding solutions, on intrinsically disordered proteins that are functional physiologically and pathophysiologically in several diseases. In addition, we will pay attention to protein folding in the cell using chaperones,  the protein folding quality control system, as well as for alternative solutions for proteins that do not fold in the cell, such as disordered proteins that fold upon interacting with other biomolecules or proteins that form phase-separated condensates. The course will also present groundbreaking biochemical techniques."
+ },
+ "courseAims": {
+  "he": "מטרת הקורס להקנות ידע מתקדם בתחום חקר חלבונים והבסיס הביוכימי של תהליכי החיים. מטרה נוספת היא להכיר את הגישות הניסויות המודרניות למחקר ביוכימי.",
+  "en": "The purpose of the course is to provide deep and advanced knowledge in protein function and in the biochemical basis of life. Another goal is to become familiar with advanced modern experimental approaches."
+ },
+ "learningOutcomes": {
+  "he": "הבנה מעמיקה של הבסיס הביוכימי של תהליכי החיים. הכרות עם שיטות המחקר הביוכימיות המתקדמות ביותר.",
+  "en": "Deep understanding of the biochemical basis of life.\r\nBecome familiar with the most advanced biochemical technologies."
+ },
+ "courseContent": {
+  "he": "1. מבנה חלבונים מקופלים, הקשר בין מבנה לתפקוד\n2. מערכת פרוטאוסטטית במצב בריא ובמחלות\n3. חלבונים חסרי מבנה\n4. שיטות במדידת דינמיקה מבנית בחלבונים ומדידת אגריגציה של חלבונים במבחנה ובתאים \n5. protein self association מומס ושוקע, הפרדת פאזות\n6. אלפא סינוקלאין כדוגמא למחלת חלבונים\n7. עקה חמצונית ובקרת קיפול חלבונים בתפקוד פיסיולוגי ובמחלות\n8. סיכום ושאלות",
+  "en": "1. Biochemical principles and approached to investigate protein structure and function.\r\n2. Proteostasis in health and disease.\r\n3. Intrinsically disordered proteins\r\n4. Methods for measuring structural dynamics, protein aggregation in-vitro and in-vivo\r\n5. Alpha Synuclein as an example of proteinopathies\r\n6. Oxidative stress and regulation in health and disease\r\n7. Nonspecific biomolecular interactions and phase separation\r\n8. summery and questions"
+ },
+ "attendanceRequirements": {
+  "he": "יש בונוס נוכחות",
+  "en": "will be attendance bonus"
+ },
+ "teachingMethod": {
+  "he": null,
+  "en": null
+ },
+ "requiredReading": {
+  "he": "מאמרים נבחרים יינתנו במהלך הקורס",
+  "en": "Selected papers will be given during the course."
+ },
+ "additionalReading": {
+  "he": null,
+  "en": null
+ },
+ "evaluation": {
+  "he": null,
+  "en": null
+ },
+ "additionalInfo": {
+  "he": "אין",
+  "en": "None"
+ },
+ "degreeName": {
+  "he": "תואר ראשון",
+  "en": "First degree"
+ },
+ "grade1Description": {
+  "he": null,
+  "en": null
+ },
+ "writtenExamPercentage": null,
+ "oralExamPercentage": null,
+ "presentationPercentage": null,
+ "activeParticipationPercentage": null,
+ "midtermExamsPercentage": null,
+ "assignmentPercentage": null,
+ "grade7Percentage": null,
+ "grade8Percentage": null,
+ "grade9Percentage": null,
+ "grade10Percentage": null,
+ "grade11Percentage": null,
+ "otherGradeDescription": null,
+ "grades": [
+  {
+   "code": "10",
+   "name": {
+    "he": "מבחן בכתב",
+    "en": "Written Exam"
+   },
+   "groupUniqueName": "final_exam",
+   "groupName": {
+    "he": "מבחן סופי",
+    "en": "Final exam"
+   },
+   "weight": 80,
+   "assWithFeedback": null,
+   "assWithoutFeedback": null
+  },
+  {
+   "code": "50",
+   "name": {
+    "he": "תרגילים",
+    "en": "Exercises"
+   },
+   "groupUniqueName": "routine_assignments",
+   "groupName": {
+    "he": "מטלות שוטפות",
+    "en": "Routine Assignments"
+   },
+   "weight": 20,
+   "assWithFeedback": null,
+   "assWithoutFeedback": null
+  }
+ ],
+ "gradesOther": [],
+ "syllabusApiVersion": "v2",
+ "updatedBy": null,
+ "levelUpdated": null,
+ "timesUpdated": null,
+ "updateDate": "2025-10-18T12:49:45"
+}

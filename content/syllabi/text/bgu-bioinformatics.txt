@@ -1,0 +1,52 @@
+===== Ben-Gurion annual course catalog · 205.1.9531 · year 2027 =====
+2027 פרטי קורס בשנה"ל
+
+
+מדעי החיים
+	:מחלקת אם
+205.1.9531
+	:מספר קורס
+מבוא לביואינפורמטיקה
+	:שם קורס
+Introduction to Bioinformatics
+	:שם לועזי
+ 
+	:סטטוס
+4.00
+	:שעות שבועיות
+3.00
+	:נקודות זכות
+2027
+	:עדכון אחרון בשנת
+שעור  -    2.00 שעות, 2.00 נק"ז
+מעבדה  -    2.00 שעות, 1.00 נק"ז
+
+	:אופני הוראה
+
+	:ציון מעבר
+
+
+	:מטלות בקורס
+205.1.9501    מבוא לתכנות בשפת PYTHON   קורס קדם
+
+	:קורסים קשורים
+אוניברסיטת בן-גוריון בנגב
+
+	:מוסדות לימוד
+  סתו תשפ"ז       באוניברסיטת בן-גוריון בנגב
+
+	פרטי הקורס בסמסטר
+(שעות, בחינות, סילבוס ועוד)
+
+הקורס מציג מבוא למאגרי מידע ותוכנות אשר משמשים לאנליזה ודליית מידע ביולוגי, תוך תאור עיקרי האלגוריתמים שבבסיסם והדגמת השימוש בהם. להלן רשימת הנושאים שיידונו בקורס: - מאגרי מידע של דנ"א, רנ"א, גנים, חלבונים ומסלולים ביולוגיים - מפות של גנומים שלמים - ניתוח רצפים - השוואת רצפים וחיפוש במאגרי מידע של רצפים - Multiple Alignment - בלוקים ופרופילים של גנים - אנליזה פילוגנטית - אנליזת תוצאות של נסיונות בשבבי דנ"א
+
+	:תקציר
+
+
+The course introduces the main databases and software tools for retrieval and analysis of biological information. It includes basic explanations of algorithms as well as demonstrations and practice. Topics covered: gene, protein and sequences databases; genome browsers; sequence analysis; pairwise and multiple sequence alignment; sequence-based database searches; protein family, domain and motif databases; DNA microarray analysis; structural bioinformatics. Bibliography 1. J. Pevsner, Bioinformatics and Functional Genomics, Wiley-Liss, 2003. 2. D. W. Mount, Bioinformatics: Sequence and Genome Analysis. CSHL Press, 2001. 3. C.A. Orengo, D.T. Jones and J.M. Thornton, Bioinformatics: Genes, Proteins & Computers, BIOS Scientific Publishers, 2003. 4. D. Stekel, Microarray Bioinformatics, Cambridge University Press, 2003.
+
+	:תקציר לועזי
+
+1. J. Pevsner, Bioinformatics and Functional Genomics, Wiley-Liss, 2003. 2. D. W. Mount, Bioinformatics: Sequence and Genome Analysis. CSHL Press, 2001. 3. C.A. Orengo, D.T. Jones and J.M. Thornton, Bioinformatics: Genes, Proteins & Computers, BIOS Scientific Publishers, 2003. 4. D. Stekel, Microarray Bioinformatics, Cambridge University Press, 2003.
+
+	:ביבליוגרפיה

@@ -1,0 +1,151 @@
+===== HUJI syllabus API · course 72345 · year 2027 =====
+{
+ "courseCode": "72345",
+ "year": 2027,
+ "courseName": {
+  "he": "גנטיקה מורחב ",
+  "en": "TOPICS IN CLASSICAL AND MOLECULAR GENETICS"
+ },
+ "periodName": {
+  "he": "סמסטר ב",
+  "en": "Semester B"
+ },
+ "ectsCredits": null,
+ "degreeLevel": null,
+ "creditPoints": "5",
+ "academicYear": null,
+ "semester": "2",
+ "department": {
+  "he": "מדעי החיים",
+  "en": "Life Sciences"
+ },
+ "facultyCode": null,
+ "campusName": {
+  "he": "אדמונד י' ספרא",
+  "en": "Edmond J. Safra"
+ },
+ "building": null,
+ "room": null,
+ "courseCoordinator": {
+  "he": null,
+  "en": null
+ },
+ "coordinatorEmail": null,
+ "teachers": {
+  "he": "פרופ יהודה צפתי\nפרופ מיכל עיני גולדברג\nגב ליה ידידיה\nגב לינוי בר\nזיו ברודי",
+  "en": "Prof. Yehuda Tzfati\nProf. Michal Goldberg\nMs. Lia Yedidia\nMs. Linoy Bar\nZiv Brodie"
+ },
+ "officeHours": {
+  "he": null,
+  "en": null
+ },
+ "contactHours": null,
+ "teachingLanguage": {
+  "he": "עברית",
+  "en": "Hebrew"
+ },
+ "courseDescription": {
+  "he": "לימוד נושאים שונים בגנטיקה מולקולרית, כולל מחזור התא, התגובה התאית לנזקי דנ\"א, הורשה חוץ-גרעינית, סרטן, אפיגנטיקה, גנומיקה, טלומרים וטלומרז, עולם הרנ׳׳א הלא מקודד ומחלות גנטיות נדירות הקשורות לנושאי הלימוד. השעורים ינתנו במגוון נושאים ובמקביל תערכנה מעבדות המדגימות באופן ניסויי את נושאי הלימוד.",
+  "en": "The course covers various topics in molecular genetics, including the cell cycle, cellular response to DNA damage, extranuclear inheritance, cancer, epigenetics, genomics, telomeres and telomerase, the world of non-coding RNA, and rare genetic diseases related to the subject matter. Lectures will address a range of topics, accompanied by laboratory sessions that provide experimental demonstrations of the material."
+ },
+ "courseAims": {
+  "he": "הבנת מגוון נושאים בגנטיקה מולקולרית ורכישת יכולת לבצע נסיונות במעבדות מחקר המדגימים ומעמיקים את הנלמד בכיתה.",
+  "en": "Understanding various subjects in molecular genetics and acquiring the skills to perform experiments in research laboratories, which demonstrate and deepen the material taught in class."
+ },
+ "learningOutcomes": {
+  "he": "1. לנתח ולהעריך מאמרים מדעיים בתחומים הנלמדים בקורס. \r\n2. לתכנן ולבצע ניסויים בגנטיקה מולקולרית.\r\n3. לנתח תוצאות של ניסויים באופן מבוקר. \r\n4. לישם יכולת חשיבה מדעית בעת התמודדות עם נושאים גנטיים שונים.",
+  "en": "1. Analyze and evaluate scientific publications in areas taught in in the course. \r\n2. Design and perform experiments in molecular genetics. \r\n3. Critically analyze experimental results. \r\n4. Implement critical scientific thinking for analysis of various Genetic subjects."
+ },
+ "courseContent": {
+  "he": "מחזור התא, התגובה התאית לנזקי דנ\"א, החלפת הזוויג בשמר, תחילת הכפלת הדנ׳׳א, טלומרים, טלומרז, צנטרומרים, גנטיקה של הסרטן, מחלות גנטיות, הנדסה גנומית, שינויים שלאחר התרגום, אפיגנטיקה, רנ\"א לא מקודד, עולם הרנ\"א.",
+  "en": "Cell cycle, the cellular response to DNA damage, mating type switch in yeast, initiation of DNA replication, telomeres, telomerase, centromeres, cancer genetics, genetic diseases, genome editing, post-translational modifications, epigenetics, non-coding RNA, the RNA world."
+ },
+ "attendanceRequirements": {
+  "he": "100% נוכחות במעבדות; מומלץ להגיע לשיעורים",
+  "en": "100% attendance in laboratories; we recommend attendance requirement in class."
+ },
+ "teachingMethod": {
+  "he": "הרצאות, דיונים בכיתה וניסויי מעבדה",
+  "en": "Lectures, discussion in class and laboratory experiments"
+ },
+ "requiredReading": {
+  "he": "אין חובת קריאה, פרט למאמרים הניתנים במהלך הקורס וחומר הרלוונטי למעבדה.",
+  "en": "No required reading, except for papers given during the course and lab related material."
+ },
+ "additionalReading": {
+  "he": "",
+  "en": ""
+ },
+ "evaluation": {
+  "he": null,
+  "en": null
+ },
+ "additionalInfo": {
+  "he": "30% מהציון ניתן על ההשתתפות במעבדה - דוחות, נוכחות, התרשמות מדריך, ציוני בחנים וכדומה. שאלות ספציפיות במבחן בהיקף 10% מהציון יהיו על חומר המעבדה.\r\nחובה לעבור את המעבדה על מנת לקבל ציון בקורס.\r\nחובה לקבל לפחות ציון 60 במבחן הסופי על מנת לקבל ציון בקורס.\r\nכדי לעודד נוכחות תלמידים, במהלך חלק מהשעורים יהיו בחנים קצרים וקלים באמצעות המודל על חומר שרק נלמד בכתה באותו השיעור. קבלת ציון עובר בבוחן תקנה 1 נקודת בונוס בציון הסופי. מקסימום נקודות הבונוס שניתן לקבל הוא 6.",
+  "en": "30% of the grade is based on laboratory participation—including reports, attendance, the instructor's assessment, quiz scores, and the like. Specific exam questions accounting for 10% of the grade will cover the laboratory material.\r\nPassing the laboratory component is mandatory to receive a final course grade.\r\nAchieving a score of at least 60 on the final exam is mandatory to receive a final course grade.\r\nTo encourage student attendance, short, simple quizzes will be administered via Moodle during some classes, covering material taught during that specific session. Passing a quiz earns a 1-point bonus toward the final grade. A maximum of 6 bonus points can be earned."
+ },
+ "degreeName": {
+  "he": "תואר ראשון",
+  "en": "First degree"
+ },
+ "grade1Description": {
+  "he": null,
+  "en": null
+ },
+ "writtenExamPercentage": null,
+ "oralExamPercentage": null,
+ "presentationPercentage": null,
+ "activeParticipationPercentage": null,
+ "midtermExamsPercentage": null,
+ "assignmentPercentage": null,
+ "grade7Percentage": null,
+ "grade8Percentage": null,
+ "grade9Percentage": null,
+ "grade10Percentage": null,
+ "grade11Percentage": null,
+ "otherGradeDescription": null,
+ "grades": [
+  {
+   "code": "10",
+   "name": {
+    "he": "מבחן בכתב",
+    "en": "Written Exam"
+   },
+   "groupUniqueName": "final_exam",
+   "groupName": {
+    "he": "מבחן סופי",
+    "en": "Final exam"
+   },
+   "weight": 80,
+   "assWithFeedback": null,
+   "assWithoutFeedback": null
+  },
+  {
+   "code": "53",
+   "name": {
+    "he": "דוחות",
+    "en": "Reports"
+   },
+   "groupUniqueName": "routine_assignments",
+   "groupName": {
+    "he": "מטלות שוטפות",
+    "en": "Routine Assignments"
+   },
+   "weight": 16,
+   "assWithFeedback": null,
+   "assWithoutFeedback": null
+  }
+ ],
+ "gradesOther": [
+  {
+   "type": "בחנים + הערכת מדריך",
+   "weight": 4,
+   "description": "בחנים נחשבים כבחנים על ההכנה למעבדה. משקל הציון על הדוחות (16%) כולל בחנים על המעבדות ומבדקים בעל פה. הערכת המדריך היא על השתתפות והבנת החומר."
+  }
+ ],
+ "syllabusApiVersion": "v2",
+ "updatedBy": null,
+ "levelUpdated": null,
+ "timesUpdated": null,
+ "updateDate": "2026-10-01T09:12:54"
+}

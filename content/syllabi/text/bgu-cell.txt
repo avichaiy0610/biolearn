@@ -1,0 +1,53 @@
+===== Ben-Gurion annual course catalog · 205.1.9011 · year 2027 =====
+2027 פרטי קורס בשנה"ל
+
+
+מדעי החיים
+	:מחלקת אם
+205.1.9011
+	:מספר קורס
+התא
+	:שם קורס
+The Cell
+	:שם לועזי
+ 
+	:סטטוס
+2.00
+	:שעות שבועיות
+2.00
+	:נקודות זכות
+2026
+	:עדכון אחרון בשנת
+שעור  -    2.00 שעות, 2.00 נק"ז
+
+	:אופני הוראה
+
+	:ציון מעבר
+
+
+	:מטלות בקורס
+205.1.9811   התא   קורס זהה
+
+	:קורסים קשורים
+אוניברסיטת בן-גוריון בנגב
+מכללה האקדמית אחווה
+מכללה האקדמית ספיר
+אוניברסיטת בן-גוריון בנגב, קמפוס אילת
+
+	:מוסדות לימוד
+  סתו תשפ"ז       באוניברסיטת בן-גוריון בנגב
+
+	פרטי הקורס בסמסטר
+(שעות, בחינות, סילבוס ועוד)
+
+קורס התא הינו קורס מבוא במדעי החיים המפגיש את הסטודנטים עם תהליכים מרכזיים ומנגנוני בקרה בתא. הקורס עוסק בנושאים הבאים: אבולוציה והמבנה של התא. המולקולות העיקריות במערכת התאית. הגרעין והקוד הגנטי (מבנה הדנ?א, הכפלת דנ?א, שעתוק ותרגום). גנים וגנומים. ממברנות התא ומעבר חומרים דרך ממברנה. דופן התא. הכוונה והעברה של חלבונים בתא (מערכת ההפרשה התאית). חלוקת התא (מיטוזה, ומחזור התא). רבייה תאית (מיוזה ותאי גזע). שלד התא ותנועתיות. תקשורת בין תאים והעברת סיגנלים.
+
+	:תקציר
+
+
+The Cell is an introductory course in Life Sciences that introduces students to central processes and regulatory mechanisms of the cell. The course covers the following topics: Evolution and structure of the cell. The molecules of life. The nucleus and the genetic code (DNA structure, DNA replication, transcription, and translation). Genes and genomes. . Cell membranes and membrane crossing. Cell wall. Protein targeting and transport (the cellular secretion system). Cell division (Mitosis and cell cycle). Cell reproduction (Meiosis and stem cells). Cytoskeleton and motility. Communication between cells and signal transduction.
+
+	:תקציר לועזי
+
+
+	:ביבליוגרפיה

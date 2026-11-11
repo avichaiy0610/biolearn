@@ -1,0 +1,145 @@
+===== HUJI syllabus API · course 72343 · year 2027 =====
+{
+ "courseCode": "72343",
+ "year": 2027,
+ "courseName": {
+  "he": "פיזיולוגיה של מערכת העצבים",
+  "en": "Nervous system physiology"
+ },
+ "periodName": {
+  "he": "סמסטר ב",
+  "en": "Semester B"
+ },
+ "ectsCredits": null,
+ "degreeLevel": null,
+ "creditPoints": "5",
+ "academicYear": null,
+ "semester": "2",
+ "department": {
+  "he": "מדעי החיים",
+  "en": "Life Sciences"
+ },
+ "facultyCode": null,
+ "campusName": {
+  "he": "אדמונד י' ספרא",
+  "en": "Edmond J. Safra"
+ },
+ "building": null,
+ "room": null,
+ "courseCoordinator": {
+  "he": null,
+  "en": null
+ },
+ "coordinatorEmail": null,
+ "teachers": {
+  "he": "פרופ יפעת פרוט\nפרופ מתתיהו יהושע\nמר רותם קיפר",
+  "en": "Prof. Yifat Prut\nProf. Mati Joshua\nMr. Rotem Kipper"
+ },
+ "officeHours": {
+  "he": null,
+  "en": null
+ },
+ "contactHours": null,
+ "teachingLanguage": {
+  "he": "עברית",
+  "en": "Hebrew"
+ },
+ "courseDescription": {
+  "he": "נושאים מתקדמים בפזיולוגיה של מערכת העצבים ביונקים.",
+  "en": "Advanced topics in the physiology of the mammalian central nervous system."
+ },
+ "courseAims": {
+  "he": "להעניק ולהרחיב את הידע לסטודנטים בנושאים מתקדמים בפיזיולוגיה של מערכת העצבים תוך חשיפה לחזית הידע בתחום",
+  "en": "To equip the students with broad knowledge in physiology of the nervous system and expose them to the most current research"
+ },
+ "learningOutcomes": {
+  "he": "1. לתאר את המבנה האנטומי של מבנים בסיסיים במערכת העצבים\r\n2. להבין לתאר ולהסביר כיצד מערכות חוש קולטות ומעבדות מידע חיצוני ומייצגות אותו במוח\r\n3. להבין ולהסביר כיצד המוח יוצר תנועה ושולט בה\r\n4. להבין ולתאר שיטות מתקדמות במדעי המוח",
+  "en": "1. Describe the anatomical structure of fundamental components of the nervous system\r\n2. Understand, describe, and explain how sensory systems receive and process external information and represent it in the brain\r\n3. Understand and explain how the brain generates and controls movement\r\n4. Understand and describe advanced methods in neuroscience"
+ },
+ "courseContent": {
+  "he": "מבוא: מבנה מערכת העצבים מנוירון ועד המוח\r\nמבוא למערכות סנסוריות\r\nמערכות הראיה, מישוש,  שווי משקל, כאב, ריח \r\nמערכת אוטונומית\r\nמבוא למערכות מוטוריות\r\nחוט שידרה\r\nהקורטקס המוטורי \r\nהגרעינים הבזאליים \r\nצרבלום",
+  "en": "Introduction: Structure of the nervous system—from neuron to brain\r\nIntroduction to sensory systems\r\nVisual, somatosensory, vestibular, pain, and olfactory systems\r\nAutonomic nervous system\r\nIntroduction to motor systems\r\nSpinal cord\r\nMotor cortex\r\nBasal ganglia\r\nCerebellum"
+ },
+ "attendanceRequirements": {
+  "he": "70",
+  "en": "70"
+ },
+ "teachingMethod": {
+  "he": "הוראה פרונטלית",
+  "en": "Frontal teaching"
+ },
+ "requiredReading": {
+  "he": "",
+  "en": ""
+ },
+ "additionalReading": {
+  "he": "",
+  "en": ""
+ },
+ "evaluation": {
+  "he": null,
+  "en": null
+ },
+ "additionalInfo": {
+  "he": "1.מומלץ אמפירית להשתתף בתרגולים לשם העמקת והטמעת הידע. בנוסף, כל המבחנים יכללו גם שאלות המתייחסות לחומר שמועבר בתרגולים ולא בהכרח בהרצאות בכיתה.\r\n\r\n2. במהלך הקורס ינתנו 3 תרגילי בית ממוחשבות ב-moodle. אלו יורכבו בעיקר משאלות חזרה ושאלות על מאמר שיינתן לקריאה. הציון של כל תרגילים אלו יחד מהווה 10 נקודות מהציון הסופי בקורס. בכל תרגיל יש לקבל ציון סף של 70 כדי לקבל את הנקודות. \r\n\r\n3. המבחן יכלול שאלות סגורות ופתוחות קצרות. אין אפשרות להביא חומר כתוב לבחינה.",
+  "en": "1. It has been shown over the years that active participation in ALL the tutorials results in significantly higher test scores. \r\nIn addition, all tests will contain questions regarding material discussed during the tutorials.\r\n\r\n2. During the course there will be 3 online home exercise on moodle composed mostly on questions on class material, or on a paper that will be given to read. The total mark on all the exercise will be 10 points on the final course grade. Every homework require to pass by a mark above 70 in order to obtain the score. \r\n\r\n3. The exam will be composed of multiple choice and open questions. There is no written material allowed on the exam."
+ },
+ "degreeName": {
+  "he": "תואר ראשון",
+  "en": "First degree"
+ },
+ "grade1Description": {
+  "he": null,
+  "en": null
+ },
+ "writtenExamPercentage": null,
+ "oralExamPercentage": null,
+ "presentationPercentage": null,
+ "activeParticipationPercentage": null,
+ "midtermExamsPercentage": null,
+ "assignmentPercentage": null,
+ "grade7Percentage": null,
+ "grade8Percentage": null,
+ "grade9Percentage": null,
+ "grade10Percentage": null,
+ "grade11Percentage": null,
+ "otherGradeDescription": null,
+ "grades": [
+  {
+   "code": "10",
+   "name": {
+    "he": "מבחן בכתב",
+    "en": "Written Exam"
+   },
+   "groupUniqueName": "final_exam",
+   "groupName": {
+    "he": "מבחן סופי",
+    "en": "Final exam"
+   },
+   "weight": 90,
+   "assWithFeedback": null,
+   "assWithoutFeedback": null
+  },
+  {
+   "code": "51",
+   "name": {
+    "he": "מבדקים עצמיים",
+    "en": "Self-tests"
+   },
+   "groupUniqueName": "routine_assignments",
+   "groupName": {
+    "he": "מטלות שוטפות",
+    "en": "Routine Assignments"
+   },
+   "weight": 10,
+   "assWithFeedback": 3,
+   "assWithoutFeedback": null
+  }
+ ],
+ "gradesOther": [],
+ "syllabusApiVersion": "v2",
+ "updatedBy": null,
+ "levelUpdated": null,
+ "timesUpdated": null,
+ "updateDate": "2026-10-05T09:49:15"
+}

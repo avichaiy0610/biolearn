@@ -1,0 +1,130 @@
+===== HUJI syllabus API · course 72665 · year 2027 =====
+{
+ "courseCode": "72665",
+ "year": 2027,
+ "courseName": {
+  "he": "אימונולוגיה",
+  "en": "IMMUNOLOGY"
+ },
+ "periodName": {
+  "he": "סמסטר א",
+  "en": "Semester A"
+ },
+ "ectsCredits": null,
+ "degreeLevel": null,
+ "creditPoints": "4",
+ "academicYear": null,
+ "semester": "1",
+ "department": {
+  "he": "מדעי החיים",
+  "en": "Life Sciences"
+ },
+ "facultyCode": null,
+ "campusName": {
+  "he": "אדמונד י' ספרא",
+  "en": "Edmond J. Safra"
+ },
+ "building": null,
+ "room": null,
+ "courseCoordinator": {
+  "he": null,
+  "en": null
+ },
+ "coordinatorEmail": null,
+ "teachers": {
+  "he": "פרופ אורן פרנס\nפרופ עופר מנדלבאום\nד\"ר ענבל בנהר בר-און\nד\"ר שלמה אליאס",
+  "en": "Prof. Oren Parnas\nProf. Ofer Mandelboim\nDr. Inbal Benhar\nDr. Shlomo Elias"
+ },
+ "officeHours": {
+  "he": null,
+  "en": null
+ },
+ "contactHours": null,
+ "teachingLanguage": {
+  "he": "עברית",
+  "en": "Hebrew"
+ },
+ "courseDescription": {
+  "he": "קורס מתקדם באימונולוגיה ללימוד התפתחות, מבנה ותפקוד תאי ומולקולרי של מערכת החיסון המולדת והנרכשת במצבים נורמלים או פתולוגים שונים כגון: סרטן, מחלות זיהומיות, מחלות אוטואימוניות, מחלות מטבוליות ומחלות דלקתיות.",
+  "en": "Advanced immunology course introducing the development, structure,  molecular and cellular function of the innate and adaptive immune system under normal and pathological conditions as: cancer, infectious, autoimmune, metabolic and inflammatory diseases."
+ },
+ "courseAims": {
+  "he": "להקנות לסטודנטים הכרות בסיסית ומתקדמת עם מערכת החיסון ולהציג בפניהם את חשיבותה במצבים של בריאות וחולי.",
+  "en": "To provide the students with the basic and advanced acquaintance of the immune system, and present to them its significance under healthy and pathological conditions."
+ },
+ "learningOutcomes": {
+  "he": "להבין מאמרים אימונולוגיים, להעריך את איכותם וחשיבותם, לנתח ולהסביר את המימצאים ולהעלות רעיונות להמשך מחקרים.",
+  "en": "Understand immunological publications, evaluate their significance, dissect and explain the described data and raise new ideas for the studies’ continuation."
+ },
+ "courseContent": {
+  "he": "מערכות החיסון המולדת והנרכשת והתפתחותן, מרכיביהן ותיפקודן במצבי בריאות וחולי כגון: סרטן, חסר חיסוני מולד ונירכש, מחלות אוטואימוניות, זיהומיות ודלקתיות ובמצבי אלרגיה.",
+  "en": "The innate and adaptive immune systems; their development, structure and function under normal/healthy conditions and pathological disorders as: cancer, inborn and acquired immunodeficiencies, infectious, inflammatory and autoimmune diseases as well as allergy."
+ },
+ "attendanceRequirements": {
+  "he": "80% נוכחות חובה",
+  "en": "80% obligatory participation"
+ },
+ "teachingMethod": {
+  "he": null,
+  "en": null
+ },
+ "requiredReading": {
+  "he": "אין",
+  "en": "None"
+ },
+ "additionalReading": {
+  "he": null,
+  "en": null
+ },
+ "evaluation": {
+  "he": null,
+  "en": null
+ },
+ "additionalInfo": {
+  "he": "בהתאם לשיקול דעת המרצים ינתנו בחנים\t\n\t\t\nסטודנטים שיעדרו יותר מ 20% מהקורס לא יוכלו לגשת לבחינה",
+  "en": "Upon the decision of the teachers quizzes will be given\r\n\r\nStudents that will miss more than 20% of the lectures will not be able to attend the exam"
+ },
+ "degreeName": {
+  "he": "תואר ראשון",
+  "en": "First degree"
+ },
+ "grade1Description": {
+  "he": null,
+  "en": null
+ },
+ "writtenExamPercentage": null,
+ "oralExamPercentage": null,
+ "presentationPercentage": null,
+ "activeParticipationPercentage": null,
+ "midtermExamsPercentage": null,
+ "assignmentPercentage": null,
+ "grade7Percentage": null,
+ "grade8Percentage": null,
+ "grade9Percentage": null,
+ "grade10Percentage": null,
+ "grade11Percentage": null,
+ "otherGradeDescription": null,
+ "grades": [
+  {
+   "code": "10",
+   "name": {
+    "he": "מבחן בכתב",
+    "en": "Written Exam"
+   },
+   "groupUniqueName": "final_exam",
+   "groupName": {
+    "he": "מבחן סופי",
+    "en": "Final exam"
+   },
+   "weight": 100,
+   "assWithFeedback": null,
+   "assWithoutFeedback": null
+  }
+ ],
+ "gradesOther": [],
+ "syllabusApiVersion": "v2",
+ "updatedBy": null,
+ "levelUpdated": null,
+ "timesUpdated": null,
+ "updateDate": "2025-11-02T09:45:05"
+}

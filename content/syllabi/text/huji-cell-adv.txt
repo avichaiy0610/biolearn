@@ -1,0 +1,145 @@
+===== HUJI syllabus API · course 72373 · year 2027 =====
+{
+ "courseCode": "72373",
+ "year": 2027,
+ "courseName": {
+  "he": "ביולוגיה של התא מורחב",
+  "en": " CELL BIOLOGY"
+ },
+ "periodName": {
+  "he": "סמסטר א",
+  "en": "Semester A"
+ },
+ "ectsCredits": null,
+ "degreeLevel": null,
+ "creditPoints": "5",
+ "academicYear": null,
+ "semester": "1",
+ "department": {
+  "he": "מדעי החיים",
+  "en": "Life Sciences"
+ },
+ "facultyCode": null,
+ "campusName": {
+  "he": "אדמונד י' ספרא",
+  "en": "Edmond J. Safra"
+ },
+ "building": null,
+ "room": null,
+ "courseCoordinator": {
+  "he": "פרופסור דוד אנגלברג",
+  "en": "פרופסור David Engelberg"
+ },
+ "coordinatorEmail": "[email]",
+ "teachers": {
+  "he": "פרופ דוד אנגלברג\nליאן חאיכ\nנטע מנדל",
+  "en": "Prof. David Engelberg\nLayan Hayek\nNeta Mandel"
+ },
+ "officeHours": {
+  "he": null,
+  "en": null
+ },
+ "contactHours": null,
+ "teachingLanguage": {
+  "he": "עברית",
+  "en": "Hebrew"
+ },
+ "courseDescription": {
+  "he": "קורס מתקדם בביולוגיה של התא העוסק בתהליכים המרכזיים בתפקוד של תאים אאוקריוטים, תוך התייחסות למנגנונים מולקולארים ומנגנוני בקרה ולתפקוד התא השלם בסביבתו. בשיעורים ישולבו דוגמאות לשיטות עדכניות בחקר תהליכים בתאים חיים, ולשאלות מחקר הרלוונטיות לבריאות האדם.",
+  "en": "Advanced course in  cell biology. The course will cover central processes in eukaryotic cell function and will focus on molecular mechanisms and on cell function in its environment. Examples for current methods for study of live functioning cells will be incorporated and will relate to research topics with relevance to human health."
+ },
+ "courseAims": {
+  "he": "להקנות היכרות ושליטה בתהליכים תאיים, מנגנונים מולקולריים ושיטות מחקר בביולוגיה של התא.",
+  "en": "Impart understanding of cellular processes at the molecular and mechanistic levels, as well as current methods in study of cells."
+ },
+ "learningOutcomes": {
+  "he": "לתאר ולנתח תהליכים מולקולרים תאיים\r\nלתאר ולנתח מנגנוני בקרה תאית\r\nלזהות חלבונים מרכזיים המעורבים בתהליכים תאיים ולהסביר את אופן פעולתם\r\nלהסביר תופעות ותהליכים בתא\r\nלהציע הסבר מנגנוני לתופעה תאית\r\nלהכיר את השלבים השונים של מחזור התא, התהליכים המתרחשים בהם ודרכי הבקרה שלהם \r\nלהציע שיטת ניסוי לחקר תופעה תאית",
+  "en": "Describe and analyze cellular processes at the molecular level\r\nDescribe and analyze cellular regulatory mechanisms\r\nRecall  key players in cellular processes and explain their mode of action\r\nExplain cellular phenomena\r\nPropose mechanistic explanation to cellular behaviors\r\nUnderstand the different phases of the cell cycle, the processes that take place during these phases and their modes of regulation\r\nPropose experimental approaches to study cellular behaviors"
+ },
+ "courseContent": {
+  "he": "אנגלברג:\r\nהארגון המבני של ממברנות התא, אסימטריה ממברנלית, lipid rafts, דינמיקה בתוך הדו-שכבה הליפידית (lipid bilayer), cell junctions.\r\nהשלד התוך-תאי\r\n\r\nבקרת מחזור התא \r\nאנדוציטוזה, אקסוציטוזה.\r\nמוות תאי",
+  "en": "The structural organization of cell membranes; membrane asymmetry, lipid rafts, dynamics within the lipid bilayer. Cell junctions.\r\nBiosynthesis of membrane proteins \r\n\r\nThe cytoskeleton \r\nCell Polarity.\r\n\r\n\r\nThe logic of the cell cycle \r\n\r\nCell death"
+ },
+ "attendanceRequirements": {
+  "he": "מומלץ מאוד. חלק מהחומר לא ניתן למצוא בספרי הלימוד. בונוס של 4 נקודות לסטודנט/ית הנוכח/ת בכל השיעורים",
+  "en": "4 points bonus to students who attend all lectures."
+ },
+ "teachingMethod": {
+  "he": "פרונטלית",
+  "en": "Frontal lectures"
+ },
+ "requiredReading": {
+  "he": "פרקי קריאה נבחרים מתוך\r\n Alberts et.al  Molecular Biology of the Cell \r\nאו\r\n Lodish et. al.  Molecular Cell Biology",
+  "en": "Weekly reading chapters from :\r\n Alberts et.al  Molecular Biology of the Cell \r\nor:\r\n Lodish et. al.  Molecular Cell Biology"
+ },
+ "additionalReading": {
+  "he": "",
+  "en": ""
+ },
+ "evaluation": {
+  "he": null,
+  "en": null
+ },
+ "additionalInfo": {
+  "he": "-",
+  "en": "-"
+ },
+ "degreeName": {
+  "he": "תואר ראשון",
+  "en": "First degree"
+ },
+ "grade1Description": {
+  "he": null,
+  "en": null
+ },
+ "writtenExamPercentage": null,
+ "oralExamPercentage": null,
+ "presentationPercentage": null,
+ "activeParticipationPercentage": null,
+ "midtermExamsPercentage": null,
+ "assignmentPercentage": null,
+ "grade7Percentage": null,
+ "grade8Percentage": null,
+ "grade9Percentage": null,
+ "grade10Percentage": null,
+ "grade11Percentage": null,
+ "otherGradeDescription": null,
+ "grades": [
+  {
+   "code": "10",
+   "name": {
+    "he": "מבחן בכתב",
+    "en": "Written Exam"
+   },
+   "groupUniqueName": "final_exam",
+   "groupName": {
+    "he": "מבחן סופי",
+    "en": "Final exam"
+   },
+   "weight": 70,
+   "assWithFeedback": null,
+   "assWithoutFeedback": null
+  },
+  {
+   "code": "88",
+   "name": {
+    "he": "מבחני אמצע",
+    "en": "Mid-term Exams"
+   },
+   "groupUniqueName": "mid_terms",
+   "groupName": {
+    "he": "מבחני/בחני אמצע",
+    "en": "Mid-Terms"
+   },
+   "weight": 30,
+   "assWithFeedback": null,
+   "assWithoutFeedback": null
+  }
+ ],
+ "gradesOther": [],
+ "syllabusApiVersion": "v2",
+ "updatedBy": null,
+ "levelUpdated": null,
+ "timesUpdated": null,
+ "updateDate": "2026-10-13T16:30:24"
+}

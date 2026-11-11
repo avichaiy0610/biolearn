@@ -1,0 +1,175 @@
+===== HUJI syllabus API · course 72604 · year 2027 =====
+{
+ "courseCode": "72604",
+ "year": 2027,
+ "courseName": {
+  "he": "אקולוגיה מורחב",
+  "en": "ECOLOGY - ADVANCED LEVEL"
+ },
+ "periodName": {
+  "he": "שנתי",
+  "en": "Yearly"
+ },
+ "ectsCredits": null,
+ "degreeLevel": null,
+ "creditPoints": "5",
+ "academicYear": null,
+ "semester": "5",
+ "department": {
+  "he": "מדעי החיים",
+  "en": "Life Sciences"
+ },
+ "facultyCode": null,
+ "campusName": {
+  "he": "אדמונד י' ספרא",
+  "en": "Edmond J. Safra"
+ },
+ "building": null,
+ "room": null,
+ "courseCoordinator": {
+  "he": null,
+  "en": null
+ },
+ "coordinatorEmail": null,
+ "teachers": {
+  "he": "ד\"ר אייל בן-חור\nד\"ר מיכאל קלוז'ני\nנגה אסתר גולדשטיין",
+  "en": "Dr. Eyal Ben-Hur\nDr. Michael Kalyuzhny\nNoga Goldstein"
+ },
+ "officeHours": {
+  "he": null,
+  "en": null
+ },
+ "contactHours": null,
+ "teachingLanguage": {
+  "he": "עברית",
+  "en": "Hebrew"
+ },
+ "courseDescription": {
+  "he": "הקורס מתעמק בשאלות מרכזיות באקולוגיה ברמת האוכלוסיה והחברה וכן מדגים מחקר שדה של שאלות אלו. לצד למידה ותרגול של חומר עיוני,  יערכו שתי מעבדות שדה בהן התלמידים יתכנו ויבצעו מחקר שדה בזעיר אנפין וכן ינתחו את תוצאותיו.",
+  "en": "The course focuses on central questions in ecology at the level of the population and the community, and demonstrates a field study of these questions. Along with learning and practicing theoretical concepts, two field labs will be conducted, where students will plan and perform a mini field study and analyze it's results."
+ },
+ "courseAims": {
+  "he": "להקנות לתלמידים הבנה של יסודות האקולוגיה ברמת האוכלוסייה והחברה, בדגש על תפיסות תיאורטיות וגישות המחקר המקובלות בתחום.",
+  "en": "Introduce the students to the    principles of ecology at the population and community level, with emphasis on theoretical concepts and research approaches."
+ },
+ "learningOutcomes": {
+  "he": "1. להסביר את המנגנונים שמכתיבים גדלים של אוכלוסיות בטבע ואת השינויים בהן.\r\n2. להבין את המנגנונים העיקריים שאחראים על קיום יחדיו בין מינים ושמכתיבים את מגוון המינים במערכות אקולוגיות שונות.\r\n3. לתאר באופן כמותני מבנה ודינאמיקה של אוכלוסיות וחברות אקולוגיות.\r\n4. לתכנן ולבצע דיגום בסיסי בשדה.\r\n5. לנתח באופן בסיסי נתונים מורכבים ורבי מימדיים וכן להציג את תוצאות הניתוח.",
+  "en": "1. Explain the mechanisms that determine the size of natural populations and their changes\r\n2 .Understand the mechanisms maintaining coexistence and determining species diversity in various ecosystems.\r\n3. Quantitatively describe the structure and dynamics of populations and communities. \r\n4. Plan and conduct a basic field study\r\n5. Perform a basic analysis of multidimensional and complex data."
+ },
+ "courseContent": {
+  "he": "אקולוגיה של אוכלוסיות:\r\nנישה אקולוגית והקשר בינה לבין תפוצה גיאוגרפית.\r\nדמוגרפיה, בקרה תלוית צפיפות ותנודות אקראיות כגורמים שמכתיבים גדלי אוכלוסיות.\r\n\r\nאקולוגיה של חברות:\r\nארבעת הכוחות הבסיסיים הפועלים בחברות אקולוגיות.\r\nההשפעה של שטח, פרודוקטיביות, הטרוגניות והפרעה על מגון מינים.\r\nתיאוריית הקיום יחדיו.\r\nההשפעה של היסטוריה על חברות אקולוגיות.\r\nמצבי שיווי משקל חלופיים וקטסטרופות.\r\nההשפעה של מגוון מינים על תפקוד של אקוסיסטמות.\r\nמודלי אפס.\r\n\r\nמעבדת השדה:\r\nהבנת העקרונות של תכנון מחקר, משאלה מדעית אל פרדיקציות.\r\nתכנון ודיגום של נתונים אקולוגים בהתאם לשאלה מחקרית.\r\nארגון, ניתוח והצגה של נתוני דיגום ברמת אוכלוסייה וחברה.\r\n\r\nבכל הנושאים יודגשו גישות מחקר שונות (תיאורטית, תצפיתית וניסויית) וכן השלכות לשמירת טבע ולממשק.",
+  "en": "Population ecology:\r\nEcological niches and how they are related with spatial distribution;\r\nDemography, density-dependent regulation and random fluctuations as factors determining population size.\r\n\r\nCommunity ecology:\r\nThe four basic forces acting in ecological communities\r\nThe effect of area, heterogeneity, productivity and disturbance on species diversity;\r\nCoexistence theory;\r\nThe influence of history on ecological communities;\r\nAlternative stable-states and catastrophes;\r\nThe effect of species diversity on ecosystem functioning;\r\nNull models\r\n\r\nField lab:\r\nUnderstanding the principles of a research plan, from a research question to predictions.\r\nLearn how to plan and conduct field research.\r\nOrganize, analyze, and publish data at the population and community level.\r\n\r\nIn all topics we will emphasize a variety of research topics (theoretical, observational, experimental) as well as the relevance to nature conservation and management."
+ },
+ "attendanceRequirements": {
+  "he": "נוכחות חובה במעבדות השדה ובהצגות של תוצאות מעבדות השדה. בונוס ינתן על נוכחות.",
+  "en": "Field labs and presentations of field lab results are obligatory. A bonus will be given for presence."
+ },
+ "teachingMethod": {
+  "he": "",
+  "en": ""
+ },
+ "requiredReading": {
+  "he": "יוגדר בשיעור",
+  "en": "To be defined in class"
+ },
+ "additionalReading": {
+  "he": "",
+  "en": ""
+ },
+ "evaluation": {
+  "he": null,
+  "en": null
+ },
+ "additionalInfo": {
+  "he": "בסמסטר א, השיעורים יתקיימו מדי שבוע, והתרגול מדי שבועיים בערך. \r\nבסמסטר ב יתקיימו מפגשי הכנה מרוכזים בשעות השיעור והתרגול סביב מעבדות השדה, ולאחר מכן יתקיימו עוד 2-3 פגישות עם הצוות לדיון על הדו״ח הסופי.\r\nמעבדות השדה (יום שלם) יתקיימו בתאריכים 18/3 ו-1/4.",
+  "en": "In Semester 1, classes will be held weekly, and TA sessions will be held approximately every two weeks.\r\nIn Semester 2, concentrated preparation sessions will be held during class and TA hours around the field labs, followed by 2-3 more meetings with the team to discuss the final report before submission."
+ },
+ "degreeName": {
+  "he": "תואר ראשון",
+  "en": "First degree"
+ },
+ "grade1Description": {
+  "he": null,
+  "en": null
+ },
+ "writtenExamPercentage": null,
+ "oralExamPercentage": null,
+ "presentationPercentage": null,
+ "activeParticipationPercentage": null,
+ "midtermExamsPercentage": null,
+ "assignmentPercentage": null,
+ "grade7Percentage": null,
+ "grade8Percentage": null,
+ "grade9Percentage": null,
+ "grade10Percentage": null,
+ "grade11Percentage": null,
+ "otherGradeDescription": null,
+ "grades": [
+  {
+   "code": "10",
+   "name": {
+    "he": "מבחן בכתב",
+    "en": "Written Exam"
+   },
+   "groupUniqueName": "final_exam",
+   "groupName": {
+    "he": "מבחן סופי",
+    "en": "Final exam"
+   },
+   "weight": 40,
+   "assWithFeedback": null,
+   "assWithoutFeedback": null
+  },
+  {
+   "code": "20",
+   "name": {
+    "he": "עבודה מסכמת",
+    "en": "Final Essay"
+   },
+   "groupUniqueName": "final_essay",
+   "groupName": {
+    "he": "עבודת סיכום",
+    "en": "Final Essay"
+   },
+   "weight": 40,
+   "assWithFeedback": null,
+   "assWithoutFeedback": null
+  },
+  {
+   "code": "50",
+   "name": {
+    "he": "תרגילים",
+    "en": "Exercises"
+   },
+   "groupUniqueName": "routine_assignments",
+   "groupName": {
+    "he": "מטלות שוטפות",
+    "en": "Routine Assignments"
+   },
+   "weight": 20,
+   "assWithFeedback": 5,
+   "assWithoutFeedback": null
+  },
+  {
+   "code": "94",
+   "name": {
+    "he": "בונוס - מעבר לסיכום של 100%",
+    "en": "Bonus"
+   },
+   "groupUniqueName": "bonus",
+   "groupName": {
+    "he": "אחוזי בונוס",
+    "en": "Bonus"
+   },
+   "weight": 2,
+   "assWithFeedback": null,
+   "assWithoutFeedback": null
+  }
+ ],
+ "gradesOther": [],
+ "syllabusApiVersion": "v2",
+ "updatedBy": null,
+ "levelUpdated": null,
+ "timesUpdated": null,
+ "updateDate": "2026-10-15T12:30:21"
+}

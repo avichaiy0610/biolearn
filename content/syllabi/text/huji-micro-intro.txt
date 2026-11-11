@@ -1,0 +1,130 @@
+===== HUJI syllabus API · course 72362 · year 2027 =====
+{
+ "courseCode": "72362",
+ "year": 2027,
+ "courseName": {
+  "he": "מבוא למיקרוביולוגיה - שיעור",
+  "en": "INT. TO MICROBIOLOGY - HONOR'S PROG."
+ },
+ "periodName": {
+  "he": "סמסטר א",
+  "en": "Semester A"
+ },
+ "ectsCredits": null,
+ "degreeLevel": null,
+ "creditPoints": "5",
+ "academicYear": null,
+ "semester": "1",
+ "department": {
+  "he": "מדעי החיים",
+  "en": "Life Sciences"
+ },
+ "facultyCode": null,
+ "campusName": {
+  "he": "אדמונד י' ספרא",
+  "en": "Edmond J. Safra"
+ },
+ "building": null,
+ "room": null,
+ "courseCoordinator": {
+  "he": "ד\"ר יעל ליטבק",
+  "en": "ד\"ר Yael Litvak"
+ },
+ "coordinatorEmail": "[email]",
+ "teachers": {
+  "he": "ד\"ר יעל ליטבק\nד\"ר עמרי-מרק פינקל\nגב מעין רחימי\nמר ערן גוטמן",
+  "en": "Dr. Yael Litvak\nDr. Omri Finkel\nMs. Maayan Rachimi\nMr. Eran Gutman"
+ },
+ "officeHours": {
+  "he": null,
+  "en": null
+ },
+ "contactHours": null,
+ "teachingLanguage": {
+  "he": "עברית",
+  "en": "Hebrew"
+ },
+ "courseDescription": {
+  "he": "הקורס מהווה בסיס למיקרוביולוגיה הבסיסית והרפואית. נושאים בולטים הנלמדים הם: אנטומיה ומורפולוגיה של התא הפרוקריוטי, מערכת היחסים הפיסיולוגית  בין החיידק לסביבה החיצונית, וכן גנטיקה, גנומיקה ומטא-גנומיקה של חיידקים.",
+  "en": "Introduction to various topics in fundumental and medicinal microbiology: prokaryotic cell structure, physiology and genetics of bacteria and viruses."
+ },
+ "courseAims": {
+  "he": "הענקת ידע בסיסי בתחום המיקרוביולוגיה.",
+  "en": "Preliminary introduction to various topics in fundamental microbiology"
+ },
+ "learningOutcomes": {
+  "he": "להכיר מונחים בסיסיים במיקרוביולוגיה\nלהכיר את מבנה התא הפרוקריוטי ותכונותיו\nלהכיר תכונות מטבולויות של חיידקים שונים\nלהכיר גנטיקה וגנומיקה של מיקרואורגניזמים",
+  "en": "To know basic term in microbiology\r\nTo be familiar with the structure of the prokaryotic cell and its functions\r\nTo be familiar with bacterial metabolism \r\nTo understand bacterial genetics and genomics"
+ },
+ "courseContent": {
+  "he": "הקורס מהווה בסיס למיקרוביולוגיה הבסיסית והרפואית. נושאים בולטים הנלמדים הם: \nעולם המיקרואורגניזמים\nההיסטוריה של המיקרוביולוגיה\nמבנה ותפקוד התא הפרוקריוטי\nגדילת חיידקים וכימות\nמטבוליזם של חיידקים\nגיוון מטבולי של מיקרואורגניזמים\nמיקרואורגניזמים אאוקריוטים\nגנטיקה של חיידקים\nוירוסים ובקטריופאגים\nגנומיקה ומטא-גנומיקה של חיידקים\nסימביוזיה והמיקרוביוטה\nמחוללי מחלות זיהומיות\nאינטראקציות בין חיידק לחיידק",
+  "en": "The microbial world\r\nThe history of microbiology\r\nCell structure and function\r\nMicrobial Growth & enumeration\r\nMicrobial metabolism\r\nMetabolic diversity of microorganisms\r\nMicrobial eukaryotes\r\nBacterial genetics\r\nViruses & Bacteriophages\r\nBacterial genomics & metagenomics\r\nSymbiosis & microbiota\r\nInfectious disease\r\nMicrobe-microbe interactions"
+ },
+ "attendanceRequirements": {
+  "he": "אין",
+  "en": "None"
+ },
+ "teachingMethod": {
+  "he": null,
+  "en": null
+ },
+ "requiredReading": {
+  "he": "Brock Biology of Microorganisms, Global Edition\nMichael Madigan, David Stahl, Jennifer Aiyer, Daniel Buckley, W. Sattley, David Stahl, Michael Madigan, Jennifer Aiyer, Daniel Buckley, and W. Sattley",
+  "en": "Brock Biology of Microorganisms, Global Edition\r\nMichael Madigan, David Stahl, Jennifer Aiyer, Daniel Buckley, W. Sattley, David Stahl, Michael Madigan, Jennifer Aiyer, Daniel Buckley, and W. Sattley"
+ },
+ "additionalReading": {
+  "he": null,
+  "en": null
+ },
+ "evaluation": {
+  "he": null,
+  "en": null
+ },
+ "additionalInfo": {
+  "he": "אין",
+  "en": "None"
+ },
+ "degreeName": {
+  "he": "תואר ראשון",
+  "en": "First degree"
+ },
+ "grade1Description": {
+  "he": null,
+  "en": null
+ },
+ "writtenExamPercentage": null,
+ "oralExamPercentage": null,
+ "presentationPercentage": null,
+ "activeParticipationPercentage": null,
+ "midtermExamsPercentage": null,
+ "assignmentPercentage": null,
+ "grade7Percentage": null,
+ "grade8Percentage": null,
+ "grade9Percentage": null,
+ "grade10Percentage": null,
+ "grade11Percentage": null,
+ "otherGradeDescription": null,
+ "grades": [
+  {
+   "code": "10",
+   "name": {
+    "he": "מבחן בכתב",
+    "en": "Written Exam"
+   },
+   "groupUniqueName": "final_exam",
+   "groupName": {
+    "he": "מבחן סופי",
+    "en": "Final exam"
+   },
+   "weight": 100,
+   "assWithFeedback": null,
+   "assWithoutFeedback": null
+  }
+ ],
+ "gradesOther": [],
+ "syllabusApiVersion": "v2",
+ "updatedBy": null,
+ "levelUpdated": null,
+ "timesUpdated": null,
+ "updateDate": "2025-11-10T09:22:24"
+}

@@ -1,0 +1,145 @@
+===== HUJI syllabus API · course 72336 · year 2027 =====
+{
+ "courseCode": "72336",
+ "year": 2027,
+ "courseName": {
+  "he": "מבוא לפיסיולוגיה",
+  "en": "INTRODUCTION TO PHYSIOLOGY"
+ },
+ "periodName": {
+  "he": "סמסטר א",
+  "en": "Semester A"
+ },
+ "ectsCredits": null,
+ "degreeLevel": null,
+ "creditPoints": "5",
+ "academicYear": null,
+ "semester": "1",
+ "department": {
+  "he": "מדעי החיים",
+  "en": "Life Sciences"
+ },
+ "facultyCode": null,
+ "campusName": {
+  "he": "אדמונד י' ספרא",
+  "en": "Edmond J. Safra"
+ },
+ "building": null,
+ "room": null,
+ "courseCoordinator": {
+  "he": null,
+  "en": null
+ },
+ "coordinatorEmail": null,
+ "teachers": {
+  "he": "פרופ יעקב נחמיאס\nפרופ עדי מזרחי\nפרופ עידן שגב\nגב הדר שגיא\nיערה ויינשטיין",
+  "en": "Prof. Yaakov Nahmias\nProf. Adi Mizrahi\nProf. Idan Segev\nMs. Hadar Sagi\nYaara Aram"
+ },
+ "officeHours": {
+  "he": null,
+  "en": null
+ },
+ "contactHours": null,
+ "teachingLanguage": {
+  "he": "עברית",
+  "en": "Hebrew"
+ },
+ "courseDescription": {
+  "he": "הפיזיולוגיה היא ענף של ביולוגיה המתאר את המנגנון והתפקוד של אורגניזמים חיים. מבוא לפיזיולוגיה ידון במנגנונים הפיזיקליים והכימיים התומכים בהישרדותם ובפעולתם של אורגניזמים מורכבים. נדון בתפקוד של תאים, רקמות ואיברים (מעיים, כבד, ריאה, מוח) והקשרים ביניהם. הקורס יתמקד בפונקציות מטבוליות וחישוביות המתבטאות בארגון ותפקוד מסלול העיכול, כולל הומאוסטזיס מטבולית, ומערכת העצבים המרכזית, כולל איתותים חשמליים וכימיים, תהליכי תקשורת ולמידה במעגלים עצביים.",
+  "en": "Physiology is a branch of biology that describes the mechanism and function of living organisms. Introduction to physiology will discuss the physical and chemical mechanisms that support the survival and function of complex organisms. We will discuss the function of cells, tissues and organs (Heart, kidney, gut, liver, lung, brain) and the relationships between them. The course will focus on metabolic and computational functions exemplified in the organization and function of the digestive track, including metabolic homeostasis, and the central nervous system, including electrical and chemical signaling, communication and learning processes in neurons and neuronal circuits."
+ },
+ "courseAims": {
+  "he": "בסוף הקורס יכירו התלמידים ביסודיות את הבסיס התאי לתופעות פיזיולוגיות שונות. כמו כן, יכירו התלמידים מספר מערכות פיזיולוגיות ומנגנוני הפעולה שלהן.",
+  "en": "By the end of the course, students will have a thorough understanding of the cellular basis for various physiological phenomena. Additionally, they will be familiar with several physiological systems and their mechanisms of action."
+ },
+ "learningOutcomes": {
+  "he": "התלמידים ידעו לחשב מדדים פיזיולוגים שונים של תאים בודדים ושל מערכות פיזיולוגיות.",
+  "en": "The students will know how to calculate various physiological parameters in  cellular physiology as well as to analyze physiological readouts of a physiological system."
+ },
+ "courseContent": {
+  "he": "קורס זה מורכב מהרצאות חזיתיות, ונתמך על ידי תרגולים פרונטליים. \r\n\r\nהקורס מחולק לשלושה חלקים כאשר החלק הראשון מתמקד בתהליכים פיזיולוגיים בסיסיים.  החלק השני מתמקד במערכות אקסיטביליות עם דגש על מערכת העצבים. החלק השלישי מתמקד במערכות פיזיולוגיות בגוף האדם.\r\n\r\nסילבוס מורחב נמצא באתר הקורס.",
+  "en": "This course consists of frontal lectures, supported by TA sessions.\r\n\r\nThe course is divided into three parts: the first part focuses on basic physiological processes, the second part focuses on excitable systems with an emphasis on the nervous system, and the third part focuses on physiological systems in the human body.\r\n\r\nA detailed syllabus can be found on the course website"
+ },
+ "attendanceRequirements": {
+  "he": "אין חובת נוכחות",
+  "en": "No"
+ },
+ "teachingMethod": {
+  "he": "הוראה פרונטלית",
+  "en": "Frontal teaching"
+ },
+ "requiredReading": {
+  "he": "ספר לימוד: Vander's Human Physiology \r\nפרק 1 - הומיאוסטזיס: מסגרת לפיזיולוגיה אנושית\r\nפרק 2-5 - סקירת ביולוגיה של התא\r\nפרק 15 - עיכול וקליטה של מזון\r\nפרק 13 - פיזיולוגיה נשימתית\r\nפרק 16 רגולציה של מטבוליזם אורגני ואיזון אנרגטי\r\n\r\nפרק 9 ו 12 שרירי פיזיולוגיה קרדיווסקולרית\r\nפרק 6 - איתות נוירוני ומבנה מערכת העצבים\r\nפרק 8 - תודעה, המוח והתנהגות",
+  "en": "Textbook: Vander's Human Physiology\r\nChapter 2-5 Cell Biology Review \r\n\r\nChapter 1 Homeostasis: A Framework for Human Physiology\r\nChapter 4 Movement of Molecules Across Cell Membranes\r\nChapter 15 The Digestion and Absorption of Food \r\nChapter 13 Respiratory Physiology \r\nChapter 16 Regulation of Organic Metabolism and Energy Balance \r\n \r\nChapter 9, 12 Myscle and Cardiovascular Physiology \r\nChapter 6 Neuronal Signaling and the Structure of the Nervous System \r\nChapter 8 Consciousness, the Brain, and Behavior"
+ },
+ "additionalReading": {
+  "he": "",
+  "en": ""
+ },
+ "evaluation": {
+  "he": null,
+  "en": null
+ },
+ "additionalInfo": {
+  "he": "עוזרי ההוראה\r\nשאלות והערות יש להפנות למייל המתרגלים:\r\n\r\nהדר שגיא:\r\[email]\r\n\r\nיערה ארם:\r\[email]\r\n\r\nהבחינה הסופית תכלול את כל הנושאים שנדונו בהרצאות וחומר למידה עצמי.",
+  "en": "Teaching Assistants\r\nFor questions and comments, please contact the TA email adress: \r\n\r\n\r\nHadar Sagi:\r\[email]\r\n\r\nYaara Aram:\r\[email]\r\n\r\n\r\nThe final exam will cover all topics discussed in the lectures and self-study material."
+ },
+ "degreeName": {
+  "he": "תואר ראשון",
+  "en": "First degree"
+ },
+ "grade1Description": {
+  "he": null,
+  "en": null
+ },
+ "writtenExamPercentage": null,
+ "oralExamPercentage": null,
+ "presentationPercentage": null,
+ "activeParticipationPercentage": null,
+ "midtermExamsPercentage": null,
+ "assignmentPercentage": null,
+ "grade7Percentage": null,
+ "grade8Percentage": null,
+ "grade9Percentage": null,
+ "grade10Percentage": null,
+ "grade11Percentage": null,
+ "otherGradeDescription": null,
+ "grades": [
+  {
+   "code": "10",
+   "name": {
+    "he": "מבחן בכתב",
+    "en": "Written Exam"
+   },
+   "groupUniqueName": "final_exam",
+   "groupName": {
+    "he": "מבחן סופי",
+    "en": "Final exam"
+   },
+   "weight": 85,
+   "assWithFeedback": null,
+   "assWithoutFeedback": null
+  },
+  {
+   "code": "88",
+   "name": {
+    "he": "מבחני אמצע",
+    "en": "Mid-term Exams"
+   },
+   "groupUniqueName": "mid_terms",
+   "groupName": {
+    "he": "מבחני/בחני אמצע",
+    "en": "Mid-Terms"
+   },
+   "weight": 15,
+   "assWithFeedback": null,
+   "assWithoutFeedback": null
+  }
+ ],
+ "gradesOther": [],
+ "syllabusApiVersion": "v2",
+ "updatedBy": null,
+ "levelUpdated": null,
+ "timesUpdated": null,
+ "updateDate": "2026-10-08T17:49:45"
+}

@@ -1,0 +1,160 @@
+===== HUJI syllabus API · course 72121 · year 2027 =====
+{
+ "courseCode": "72121",
+ "year": 2027,
+ "courseName": {
+  "he": "ביוכימיה של התא לתלמידי מדעי החיים",
+  "en": "BIOCHEMISTRY OF THE CELL"
+ },
+ "periodName": {
+  "he": "סמסטר א",
+  "en": "Semester A"
+ },
+ "ectsCredits": null,
+ "degreeLevel": null,
+ "creditPoints": "6",
+ "academicYear": null,
+ "semester": "1",
+ "department": {
+  "he": "מדעי החיים",
+  "en": "Life Sciences"
+ },
+ "facultyCode": null,
+ "campusName": {
+  "he": "אדמונד י' ספרא",
+  "en": "Edmond J. Safra"
+ },
+ "building": null,
+ "room": null,
+ "courseCoordinator": {
+  "he": null,
+  "en": null
+ },
+ "coordinatorEmail": null,
+ "teachers": {
+  "he": "פרופ יוליה שיפמן\nפרופ עודד ליבנה\nד\"ר עינב טייב-פליגלמן\nגב עופרי רבני\nגב תרצה גולדנברג\nארבל זעירא\nעידן אבשלום פרץ",
+  "en": "Prof. Julia Shifman\nProf. Oded Livnah\nDr. Einav Tayeb-Fligelman\nMs. Ofri Rabani\nMs. Tirtsa Goldenberg\nArbel Zeira\nIdan Avshalo Peretz"
+ },
+ "officeHours": {
+  "he": null,
+  "en": null
+ },
+ "contactHours": null,
+ "teachingLanguage": {
+  "he": "עברית",
+  "en": "Hebrew"
+ },
+ "courseDescription": {
+  "he": "חומצות אמינו, מבנה ותכונות (ראשוני-רבעוני), קינטיקה אנזימטית, חלבונים: מבנה ותפקוד, ליפידים, ממברנות וטרנספורט, מבוא לסוכרים, נוקליאוטידים, גליקוליזה, גלוקונאוגנזה, מעגל קרבס, חמצון חומצות שומן, זרחון חמצוני, פוטוסינתזה, אינטגרציה ובקרה של מטבוליזם.",
+  "en": "amino acids, protien structure (primary-quaternary), Enzymatic kinetics, Protiens structure and function, Lipids, membranes and transport, carbohydrates, nucleotides, glycolysis, krebs cycle, fatty acids, oxdidative phosphorylation, photosynthesis, integration and metabolism."
+ },
+ "courseAims": {
+  "he": "להקנות עקרונות בסיסיים בביוכימיה.",
+  "en": "Provide basic guidelines in Biochemistry."
+ },
+ "learningOutcomes": {
+  "he": "1. לתאר ולהסביר מושגי יסוד בביוכימיה \r\n2. לזהות מבנים ותכונות של חומצות אמינו, חומצות גרעין, ליפידים , סוכרים \r\n3. לתאר מסלולים מטאבוליים ולהסביר מנגנוני בקרה המווסתים אותם. \r\n4. להכין את הסטודנטים לקורסים מתקדמים בביוכימיה.",
+  "en": "1. Describe and explain key concepts in biochemistry. \r\n2. Identify structures and describe amino acids, nucleic acids, lipids and sugars. \r\n3. Describe metabolic pathways and regulatory mechanisms modulating them. \r\n4. Prepare students for advanced courses in biochemistry."
+ },
+ "courseContent": {
+  "he": "חומצות אמינו, מבנה ותכונות (ראשוני-רבעוני), קינטיקה אנזימטית, חלבונים: מבנה ותפקוד, ליפידים, ממברנות וטרנספורט, מבוא לסוכרים, נוקליאוטידים, גליקוליזה, גלוקונאוגנזה, מעגל קרבס, חמצון חומצות שומן, זרחון חמצוני, פוטוסינתזה, אינטגרציה ובקרה של מטבוליזם.",
+  "en": "amino acids, protien structure (primary-quaternary), Enzymatic kinetics, Protiens structure and function, Lipids, membranes and transport, carbohydrates, nucleotides, glycolysis, krebs cycle, fatty acids, oxdidative phosphorylation, photosynthesis, integration and metabolism."
+ },
+ "attendanceRequirements": {
+  "he": "אין",
+  "en": "None"
+ },
+ "teachingMethod": {
+  "he": "",
+  "en": ""
+ },
+ "requiredReading": {
+  "he": "ספרי לימוד בביוכימיה.\r\n1. Lehninger, Principles of Biochemistry.\r\n2. Stryer, Biochemistry.",
+  "en": "Biochemistry Textbooks.\r\n1. Lehninger, Principles of Biochemistry.\r\n2. Stryer, Biochemistry."
+ },
+ "additionalReading": {
+  "he": "",
+  "en": ""
+ },
+ "evaluation": {
+  "he": null,
+  "en": null
+ },
+ "additionalInfo": {
+  "he": "במנלך הקורס יועברו 4 בחנים (שלושת הציונים הגבוהים יילקחו לחישוב הציון של חלק זה):\r\n1.\tחומצות אמינו\t\t\t\r\n2.\tסוכרים ונוקלאוטידים\t\t\r\n3.\tקינטיקה, תרמו' וביואנרגטיקה\t\r\n4.\tחמצון חיזור",
+  "en": "Four quizzes will be held during the semester dates (3 highest grades will serve to calculate the grade of this part):\r\n1. Amino acids, \r\n2. Sugars & nucleotides, \r\n3. Kinetics, thermodynamics & bioenergetics \r\n4. Redox"
+ },
+ "degreeName": {
+  "he": "תואר ראשון",
+  "en": "First degree"
+ },
+ "grade1Description": {
+  "he": null,
+  "en": null
+ },
+ "writtenExamPercentage": null,
+ "oralExamPercentage": null,
+ "presentationPercentage": null,
+ "activeParticipationPercentage": null,
+ "midtermExamsPercentage": null,
+ "assignmentPercentage": null,
+ "grade7Percentage": null,
+ "grade8Percentage": null,
+ "grade9Percentage": null,
+ "grade10Percentage": null,
+ "grade11Percentage": null,
+ "otherGradeDescription": null,
+ "grades": [
+  {
+   "code": "21",
+   "name": {
+    "he": "מטלות סיכום",
+    "en": "Final Assignment"
+   },
+   "groupUniqueName": "final_essay",
+   "groupName": {
+    "he": "עבודת סיכום",
+    "en": "Final Essay"
+   },
+   "weight": 75,
+   "assWithFeedback": null,
+   "assWithoutFeedback": null
+  },
+  {
+   "code": "50",
+   "name": {
+    "he": "תרגילים",
+    "en": "Exercises"
+   },
+   "groupUniqueName": "routine_assignments",
+   "groupName": {
+    "he": "מטלות שוטפות",
+    "en": "Routine Assignments"
+   },
+   "weight": 10,
+   "assWithFeedback": 10,
+   "assWithoutFeedback": null
+  },
+  {
+   "code": "89",
+   "name": {
+    "he": "בחני אמצע",
+    "en": "Quizzes"
+   },
+   "groupUniqueName": "mid_terms",
+   "groupName": {
+    "he": "מבחני/בחני אמצע",
+    "en": "Mid-Terms"
+   },
+   "weight": 15,
+   "assWithFeedback": 3,
+   "assWithoutFeedback": 0
+  }
+ ],
+ "gradesOther": [],
+ "syllabusApiVersion": "v2",
+ "updatedBy": null,
+ "levelUpdated": null,
+ "timesUpdated": null,
+ "updateDate": "2026-09-23T13:48:58"
+}

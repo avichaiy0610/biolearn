@@ -1,0 +1,160 @@
+===== HUJI syllabus API · course 72320 · year 2027 =====
+{
+ "courseCode": "72320",
+ "year": 2027,
+ "courseName": {
+  "he": "ביולוגיה התפתחותית: מתא בודד לעובר ולאורגניזם",
+  "en": " DEVELOPMENTAL BIOLOGY"
+ },
+ "periodName": {
+  "he": "סמסטר ב",
+  "en": "Semester B"
+ },
+ "ectsCredits": null,
+ "degreeLevel": null,
+ "creditPoints": "5",
+ "academicYear": null,
+ "semester": "2",
+ "department": {
+  "he": "מדעי החיים",
+  "en": "Life Sciences"
+ },
+ "facultyCode": null,
+ "campusName": {
+  "he": "אדמונד י' ספרא",
+  "en": "Edmond J. Safra"
+ },
+ "building": null,
+ "room": null,
+ "courseCoordinator": {
+  "he": "פרופסור איתמר הראל",
+  "en": "פרופסור Itamar Harel"
+ },
+ "coordinatorEmail": "[email]",
+ "teachers": {
+  "he": "פרופ איתמר הראל\nפרופ נסים בן-אריה\nגב מור מרגולין\nעומר בן-דור",
+  "en": "Prof. Itamar Harel\nProf. Nissim Ben-Arie\nMs. Mor Margolin\nOmer Ben Dor"
+ },
+ "officeHours": {
+  "he": null,
+  "en": null
+ },
+ "contactHours": null,
+ "teachingLanguage": {
+  "he": "עברית",
+  "en": "Hebrew"
+ },
+ "courseDescription": {
+  "he": "הביולוגיה ההתפתחותית הינה אחת מחזיתות המחקר החשובות כיום במדעי החיים והיא עוסקת בפענוח מכלול התהליכים המתרחשים תוך כדי הפיכתו של תא בודד, הביצית המופרית, לעובר והתפתחותו לאורגניזם בוגר. בקורס נעקוב אחר השלבים המתארים את תהליכי ההתפתחות המוקדמים ובהמשך נדון בהתפתחות מערכות גוף שונות, כמערכת העצבים המרכזית וההיקפית, העין והשלד. בקורס נתאר את ההתפתחות ברמה הגנטית והמולקולרית, דרך ההיבטים התאיים ועד לחיה השלמה. נתעמק בהתפתחות נורמלית ונלמד גם על מחלות הנובעות מהתפתחות לא תקינה. כמו כן נכיר את חיות המודל המשמשות במחקר ואת הכלים והטכניקות שבאמצעותם ניתן לחקור את שלבי ומנגנוני ההתפתחות השונים.",
+  "en": "Developmental biology is the forefront of research in the life sciences today and is engaged in deciphering the processes occurring during the transformation of a single cell , the fertilized egg, into an embryo and a mature organism . The course will follow the steps that describe the processes of early development and later discussed the development of various body systems, the central and peripheral nervous systems , the eye and skeleton. The course will describe the development of genetic and molecular level through cellular aspects to the whole animal. We will explore both normal development and diseases resulting from abnormal development. Students will become familiar with various animal models, as well as the tools and techniques through which one can explore stages and mechanisms acting during development."
+ },
+ "courseAims": {
+  "he": "הקורס נועד לפרוס בפני התלמידים את המנגנונים הרבים המעורבים ביצירת אורגניזם. יחודו בהסתכלות במגוון רמות: מהיצור השלם, דרך הרקמה והתא, ועד למולקולות ולגנים.",
+  "en": "The course is designed to expose students to various mechanisms involved in the creation of an organism. This course is unique as it examines development at a variety of levels form a whole organism, through tissue and cell, to molecules and genes."
+ },
+ "learningOutcomes": {
+  "he": "1. לזהות מבנים ושלבי התפתחות במגוון יצורים. 2. לתאר את מסלולי העברת האות הפועלים בהתפתחות ולנתח מצבים בהם הם לא פועלים כראוי. 3. לקשר בין מחלות להפרעות גנטיות או התפתחותיות.",
+  "en": "1. Identify structures and stages of development in different organisms. 2. Describe the signal transduction pathways operating in the development and analyze situations in which they are not working properly. 3. Correlate diseases with genetic or developmental abnormalities."
+ },
+ "courseContent": {
+  "he": "מבוא לביולוגיה התפתחותית, איך באים תינוקות לעולם?\r\nהתפתחות תאי זרע\r\nכשזרע פוגש ביצית - התהליך המופלא של ההפרייה\r\nמבוא לגנטיקה התפתחותית - הדרוזופילה והתפתחות מולקולרית\r\nבקרה גנטית על התפתחות צירי העובר בזבוב הפירות - א'\r\nבקרה גנטית על התפתחות צירי העובר בזבוב הפירות - ב'\r\nהתפתחות בעלי חוליות א' - מחזורי חיים ושיטות ביולוגיות\r\nהתפתחות בעלי חוליות ב' - צירי הגוף והמארגן של שפימן\r\nהתפתחות בעלי חוליות ג' - השלמת צירי הגוף\r\nגדילה, התפחות שלאחר הלידה ורגנרציה א'\r\nגדילה, התפחות שלאחר הלידה ורגנרציה ב'\r\nהזדקנות, סיום ההתפחות? \r\nהזדקנות, מודלים גנטים\r\nאמבריולוגיה של תאומים\r\nגנטיקה של תאומים\r\nמבנה והתפתחות מערכת העצבים המרכזית - א'\r\nמבנה והתפתחות מערכת העצבים המרכזית  - ב'\r\nבקרה על התפתחות חוט השידרה\r\nמבנה והתפתחות מערכת העצבים ההיקפית - א'\r\nמבנה והתפתחות מערכת העצבים ההיקפית - ב'\r\nבקרה גנטית על נוירוגנזה: לקחים מזבוב הפירות - Notch\r\nבקרה גנטית על נוירוגנזה: לקחים מזבוב הפירות - Numb\r\nלהרוס כדי לבנות: התפתחות השלד בעובר\r\nלהרוס כדי לבנות: השלד בילד, במתבגר, בבוגר, בקשיש ובפצוע\r\nסיכום: מבט גלובלי על מנגנוני ההתפתחות שנלמדו בקורס",
+  "en": "Introduction to Developmental Biology, stages of embryonic development\r\nWhen a sperm meets an egg – the magnificent process of fertilization\r\nHistory of developmental biology - from Aristotle through embryologists to Developmental Biology\r\nPrinciples and mechanisms of early embryonic development\r\nIntroduction to Developmental Genetics - Drosophila and molecular evolution\r\nGenetic control of the development of the fruit fly’s embryo axes\r\nSea urchin and the network of developmental control genes\r\nAmphibians: form a zygote to a gastrula in the frog\r\nSpemann’s organizer and the determining the body axis in the frog\r\nTransition to land : the early development of the chicken embryo\r\nMammals and invention of the placenta\r\nEarly development in man : embryology and genetics of twins\r\nStructure and development of the central nervous system\r\nStructure and development of the spinal cord\r\nNeural crest and the development of the peripheral nervous system \r\nGenetic control of neurogenesis : lessons from the fruit fly (Notch and asymmetrical cleavage)\r\nNormal development of the cortex , mutants and disease, OR molecular evolution of eye development\r\nDestroy to build : skeletal development in the embryo , child , adolescent, adult and injured organisms."
+ },
+ "attendanceRequirements": {
+  "he": "",
+  "en": ""
+ },
+ "teachingMethod": {
+  "he": "פרונטלית",
+  "en": "In person"
+ },
+ "requiredReading": {
+  "he": "Principles of Development, Lewis Wolpert  and Cheryll Tickle, Oxford\r\nDevelopmental Biology, Scott Gilbert, Sinauer",
+  "en": "Principles of Development, Lewis Wolpert  and Cheryll Tickle, Oxford\r\nDevelopmental Biology, Scott Gilbert, Sinauer"
+ },
+ "additionalReading": {
+  "he": "",
+  "en": ""
+ },
+ "evaluation": {
+  "he": null,
+  "en": null
+ },
+ "additionalInfo": {
+  "he": "על מנת לסייע בהבנת החומר יש בקורס תרגיל פרונטלי ותרגילי Moodle (חובה ורשות) המעניקים בונוס לציון.\r\n\r\nנוכחות מלאה מומלצת. \r\nבמהלך הקורס יתקיימו בכיתה מספר \"בחני פתע\" קלים. מעבר בוחן בהצלחה הוא רק מיטיב -  מקנה בונוס לציון, אך לא מוריד למי שנכשל או נעדר.",
+  "en": "Frontal exercises with a tutor, Moodle assignments (bonus to the final gradeץ\r\n\r\nIn class quizzes, which may provide an extra bonus."
+ },
+ "degreeName": {
+  "he": "תואר ראשון",
+  "en": "First degree"
+ },
+ "grade1Description": {
+  "he": null,
+  "en": null
+ },
+ "writtenExamPercentage": null,
+ "oralExamPercentage": null,
+ "presentationPercentage": null,
+ "activeParticipationPercentage": null,
+ "midtermExamsPercentage": null,
+ "assignmentPercentage": null,
+ "grade7Percentage": null,
+ "grade8Percentage": null,
+ "grade9Percentage": null,
+ "grade10Percentage": null,
+ "grade11Percentage": null,
+ "otherGradeDescription": null,
+ "grades": [
+  {
+   "code": "10",
+   "name": {
+    "he": "מבחן בכתב",
+    "en": "Written Exam"
+   },
+   "groupUniqueName": "final_exam",
+   "groupName": {
+    "he": "מבחן סופי",
+    "en": "Final exam"
+   },
+   "weight": 94,
+   "assWithFeedback": null,
+   "assWithoutFeedback": null
+  },
+  {
+   "code": "50",
+   "name": {
+    "he": "תרגילים",
+    "en": "Exercises"
+   },
+   "groupUniqueName": "routine_assignments",
+   "groupName": {
+    "he": "מטלות שוטפות",
+    "en": "Routine Assignments"
+   },
+   "weight": 6,
+   "assWithFeedback": 6,
+   "assWithoutFeedback": null
+  },
+  {
+   "code": "94",
+   "name": {
+    "he": "בונוס - מעבר לסיכום של 100%",
+    "en": "Bonus"
+   },
+   "groupUniqueName": "bonus",
+   "groupName": {
+    "he": "אחוזי בונוס",
+    "en": "Bonus"
+   },
+   "weight": 4,
+   "assWithFeedback": null,
+   "assWithoutFeedback": null
+  }
+ ],
+ "gradesOther": [],
+ "syllabusApiVersion": "v2",
+ "updatedBy": null,
+ "levelUpdated": null,
+ "timesUpdated": null,
+ "updateDate": "2026-10-20T14:00:03"
+}

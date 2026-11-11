@@ -1,0 +1,60 @@
+===== Ben-Gurion annual course catalog · 205.1.1611 · year 2027 =====
+2027 פרטי קורס בשנה"ל
+
+
+מדעי החיים
+	:מחלקת אם
+205.1.1611
+	:מספר קורס
+יסודות הגנטיקה
+	:שם קורס
+Genetics A
+	:שם לועזי
+ 
+	:סטטוס
+4.00
+	:שעות שבועיות
+3.00
+	:נקודות זכות
+1998
+	:עדכון אחרון בשנת
+שעור  -    2.00 שעות, 2.00 נק"ז
+תרגיל  -    2.00 שעות, 1.00 נק"ז
+
+	:אופני הוראה
+
+	:ציון מעבר
+
+
+	:מטלות בקורס
+205.1.9011   התא   קורס קדם
+205.1.9401   מבוא לסטטיסטיקה ב'   קורס קדם
+205.1.9811   התא   קורס קדם
+
+תואר ראשון, מדעי הקוגניציה והמח, חד מחלקתי, מדעי העצב
+214.1.9921   הסתברות 1 לסטטיסטיקה   קורס קדם
+
+	:קורסים קשורים
+אוניברסיטת בן-גוריון בנגב
+מכללה האקדמית אחווה
+אוניברסיטת בן-גוריון בנגב, קמפוס אילת
+
+	:מוסדות לימוד
+  סתו תשפ"ז       באוניברסיטת בן-גוריון בנגב
+  סתו תשפ"ז       באוניברסיטת בן-גוריון בנגב, קמפוס אילת
+
+	פרטי הקורס בסמסטר
+(שעות, בחינות, סילבוס ועוד)
+
+גן יחיד: העקרון המנדלי הראשון; דומיננטיות-רצסיביות ורב אלליות; קביעת המין ותאחיזה לכרומוזומי המין; אפקט אמהי והורשה ציטופלסמטית; גן באוכלוסיה; גן וסביבה וקביעת הפינוטיפ. שני גנים ויותר: העקרון המנדלי השני; אינטראקציה פונקציונלית בין גנים; אינטראקציה פיסית בין גנים (תאחיזה, כיאסמה, שחלוף ורקומבינציה באורגניזמים דיפלואידים) הורשת תכונות כמותיות.
+
+	:תקציר
+
+
+Mendel's Principles. Dominant, Reccessive and many Alelles; Sex Determination and Sex-Linked Genes; Maternal Effects and Cytoplasmic Inheritance; Interactions between Genes (Genotype) and Environment to yield Phenotype; Interactions between Genes; Inheritance of Quantitative Characters; Genetic Recombination and Linkage in Diploids; Genes in Populations
+
+	:תקציר לועזי
+
+ספרות מומלצת: 1. Strickberger, M.W.: Genetics. Macmillan . New-York, 1985, 1976, or 1968. 2. nthony J.F.; Wessler, Susan R.; Lewontin, Richard C.; Gelbart, Willi Griffiths (Author) Introduction to Genetic Analysis -- Eighth 8th Edition (2009 San Fransisco)
+
+	:ביבליוגרפיה

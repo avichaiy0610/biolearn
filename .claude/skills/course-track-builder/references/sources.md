@@ -1,11 +1,32 @@
-# Where each university publishes what (checked 2026-10-18)
+# Where each university publishes what (checked 2026-10-18; fetcher findings 2026-11-11)
+
+## What the sync keeps for every course (since 2026-11-11)
+`scripts/syllabus-fetch.ts` no longer keeps only a topic list. Per course it writes:
+- the record (`content/syllabi/data.generated.ts`): topics, books, and — when the source has them —
+  `sessions` (lesson by lesson), `teachers`, `semesterHe`, `assessmentHe` (grading lines), `examDates`,
+  `outcomesHe`, `detail` (TAU), `hasUnparsedSchedule`, `warnings`;
+- the **full extracted text** of the source: `content/syllabi/text/<slug>.txt` (read this before searching
+  the web — it holds everything the university published, including what no parser understood);
+- the raw download (PDF/HTML/JSON): `Project One/syllabuses/_fetched/<slug>/` (local only).
+`content/syllabi/report.generated.md` lists every warning of the last full run. A record with
+`hasUnparsedSchedule` has a weekly table in its PDF whose columns pdftotext interleaves → open the PDF
+from `_fetched` with the Read tool and enter the order by hand (it is `official` / `official-past`).
+A document that does not name the course is REJECTED (Haifa links a Medical Microbiology file under
+"מבוא לנוירוביולוגיה מערכתית"). Parsers: `scripts/syllabus-parse.ts`, tests `npx tsx scripts/syllabus-parse.test.ts`.
 
 Update this file whenever a source is found, moves, or stops working.
 
 ## Technion
 - **Official topics:** students portal `students.technion.ac.il/local/technionsearch/course/<6-digit>`
-  (+ `/<YYYY0S>` for a past semester). Has: faculty, lecturer, TA names, "מקצועות ללא זיכוי נוסף"
-  (content-overlap pairs), books. No weekly plan. Adapter: `technion-portal`.
+  Has: faculty, "מקצועות ללא זיכוי נוסף" (content-overlap pairs), books. No weekly plan. Adapter: `technion-portal`.
+  **The portal's semester block is stale:** its tabs stop at spring 2023/24 and a `/<YYYY0S>` suffix is
+  ignored (same page for every code, checked 2026-11-11) — do not take lecturers or exam dates from it.
+- **Current semester (lecturer, TAs, exam dates, is the course offered):** the SAP catalog as JSON, published by
+  the Cheesefork project: `michael-maltsev.github.io/technion-sap-info-fetcher/last_semesters.json` and
+  `courses_<year>_<200 winter|201 spring|202 summer>.json` (course key = 8 digits, 134020 → `01340020`).
+  The sync reads the newest semester in which the course appears. Example: 134020 is taught in winter
+  2026/27 by a different lecturer than in spring 2025/26 — a new lecturer means a new lecturer profile (step 2b).
+  A course missing from the last three semesters gets a warning (not offered, or the code changed).
 - **Catalog (programs, electives):** `ugportal.technion.ac.il/wp-content/uploads/2025/11/catalog2025-26.pdf`.
 - **Moodle:** `moodle.technion.ac.il` → `moodle26` (תשפ"ז), `moodle25` (תשפ"ו), `moodle24` (תשפ"ה).
   Guest login works (`guest/guest`); course search by 8-digit code (e.g. 01340020). Biology courses
@@ -19,7 +40,11 @@ Update this file whenever a source is found, moves, or stops working.
 - Biology faculty site lists courses but points to the portal for syllabi.
 
 ## Hebrew University (HUJI)
-- **API:** `shnaton.huji.ac.il/api/syllabus?courseCode=X&year=Y` (many fields often null).
+- **API:** `shnaton.huji.ac.il/api/syllabus?courseCode=X&year=Y`. Besides `courseContent` it returns the
+  grading split (`grades`, `gradesOther` with weights), `teachers`, `courseCoordinator`, `learningOutcomes`,
+  `additionalInfo` (pass conditions), attendance, reading — all kept by the sync. `updateDate` shows whether
+  the syllabus was revised for the year it is served under (the 2027 record of 72155 was last edited in
+  Feb 2026 → carried over; warned).
 - **Full page:** `shnaton.huji.ac.il/course/<code>/syllabus/year/<Y>` (JS-rendered; old
   `index.php/NewSyl/<code>/1/<Y>/` redirects here). PDF: `index.php/NewSyl/<code>/1/<Y>/pdf/`.
   Some courses include a weekly table (e.g. 71091); 72155 יסודות הגנטיקה has topics only.
@@ -27,6 +52,9 @@ Update this file whenever a source is found, moves, or stops working.
 ## Tel Aviv University (TAU)
 - **Official:** IMS `www.ims.tau.ac.il/Tal/Syllabus/Syllabus_L.aspx?course=<8-digit>01&year=<autumn year>`
   — lecturers, topics paragraph (often more detailed than Technion's), no weekly plan seen.
+- **The sync follows the detailed file automatically** when the page links one, and records
+  `detail.state`: `file` (public — 3 of 8 courses in 2026-11: 0455-1514, 0455-1809, 0455-3066, all with a
+  13-lesson table and grading), `students-only`, or `none`.
 - **Detailed syllabus PDF ("לסילבוס המפורט"):** the syllabus page links
   `/Tal/Scans/Syllabus_Download.aspx?kurs=<8-digit>&syllabus=<file>.pdf`. Download it from
   **`www.ims.tau.ac.il`** (the same path on `www30.tau.ac.il` returns 404). For 0455-2526 the 2022-23
@@ -39,16 +67,20 @@ Update this file whenever a source is found, moves, or stops working.
   lecture + tutorial groups, lecturers, topics; newer years 404.
 
 ## Bar-Ilan (BIU)
-- Faculty PDFs (`life-sciences.biu.ac.il/sites/life-sciences/files/shared/...`) — several have
-  lecture ranges ("שיעורים 1-7") and "לא ילמדו השנה". 7 more synced records show weekly markers
-  not yet parsed into lectures.
+- Faculty PDFs (`life-sciences.biu.ac.il/sites/life-sciences/files/shared/...`). Three shapes:
+  lecture ranges ("הנושאים שילמדו בשיעורים 1-7") and "לא ילמדו השנה" (genetics); a one-column lesson table
+  1…N (parsed: 80103 14 lessons, 80201 25 lessons, 80202); a table with extra columns (reading, dates,
+  homework) that pdftotext interleaves (80150, 80214, 80377 … → `hasUnparsedSchedule`, read the PDF by eye).
+  Most files state the grading split. The newest file per course is 1-3 years old (warned).
 
 ## Ben-Gurion (BGU)
 - bgu4u catalog via Playwright (`!sc.AnnualCoursesAdv` → `goCourseDetails`). Topics only; some
   descriptions are decades old (shown on the site).
 
 ## Haifa
-- Department course-list page → PDFs from 2021. Topics only.
+- Department course-list page → PDFs from 2021. Biochemistry A/B have a lesson table (parsed); the rest are
+  topics. Some files are in English. The link "מבוא לנוירוביולוגיה מערכתית" serves a Medical Microbiology
+  syllabus → rejected by the identity check; Haifa neurobiology has no public syllabus.
 
 ## Student material (lowest tier, verify everything)
 - underwar.co.il (one old summary for 134020), Studocu, Scribd — almost nothing useful.

@@ -1,0 +1,2166 @@
+<!DOCTYPE html>
+
+<html  dir="rtl" lang="he" xml:lang="he" class="">
+<style>
+    .usermenu .login a{
+        color: orange;
+    }
+</style>
+<head>
+    <title>134020 - גנטיקה כללית | my.technion</title>
+    <link rel="shortcut icon" href="https://students.technion.ac.il/theme/image.php/technionv2/theme/1794388698/favicon" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="moodle, 134020 - גנטיקה כללית | my.technion" />
+<link rel="stylesheet" type="text/css" href="https://students.technion.ac.il/theme/yui_combo.php?rollup/3.18.1/yui-moodlesimple-min.css" /><script id="firstthemesheet" type="text/css">/** Required in order to fix style inclusion problems in IE with YUI **/</script><link rel="stylesheet" type="text/css" href="https://students.technion.ac.il/theme/styles.php/technionv2/1794388698_1761217373/all-rtl" />
+<link rel="stylesheet" type="text/css" href="https://students.technion.ac.il/local/technionsearch/js/rateit/rateit.css" />
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+<script>
+//<![CDATA[
+var M = {}; M.yui = {};
+M.pageloadstarttime = new Date();
+M.cfg = {"wwwroot":"https:\/\/students.technion.ac.il","apibase":"https:\/\/students.technion.ac.il\/r.php\/api","homeurl":{},"sesskey":"0CGKIzFGWS","sessiontimeout":"7200","sessiontimeoutwarning":1200,"themerev":"1794388698","slasharguments":1,"theme":"technionv2","iconsystemmodule":"core\/icon_system_fontawesome","jsrev":-1,"admin":"admin","svgicons":true,"usertimezone":"\u05d0\u05e1\u05d9\u05d4, \u05d9\u05e8\u05d5\u05e9\u05dc\u05d9\u05dd","language":"he","courseId":1,"courseContextId":2,"contextid":1,"contextInstanceId":0,"langrev":1794388698,"templaterev":"1794388698","siteId":1,"userId":0};var yui1ConfigFn = function(me) {if(/-skin|reset|fonts|grids|base/.test(me.name)){me.type='css';me.path=me.path.replace(/\.js/,'.css');me.path=me.path.replace(/\/yui2-skin/,'/assets/skins/sam/yui2-skin')}};
+var yui2ConfigFn = function(me) {var parts=me.name.replace(/^moodle-/,'').split('-'),component=parts.shift(),module=parts[0],min='-min';if(/-(skin|core)$/.test(me.name)){parts.pop();me.type='css';min=''}
+if(module){var filename=parts.join('-');me.path=component+'/'+module+'/'+filename+min+'.'+me.type}else{me.path=component+'/'+component+'.'+me.type}};
+YUI_config = {"debug":false,"base":"https:\/\/students.technion.ac.il\/lib\/yuilib\/3.18.1\/","comboBase":"https:\/\/students.technion.ac.il\/theme\/yui_combo.php?","combine":true,"filter":null,"insertBefore":"firstthemesheet","groups":{"yui2":{"base":"https:\/\/students.technion.ac.il\/lib\/yuilib\/2in3\/2.9.0\/build\/","comboBase":"https:\/\/students.technion.ac.il\/theme\/yui_combo.php?","combine":true,"ext":false,"root":"2in3\/2.9.0\/build\/","patterns":{"yui2-":{"group":"yui2","configFn":yui1ConfigFn}}},"moodle":{"name":"moodle","base":"https:\/\/students.technion.ac.il\/theme\/yui_combo.php?m\/-1\/","combine":true,"comboBase":"https:\/\/students.technion.ac.il\/theme\/yui_combo.php?","ext":false,"root":"m\/-1\/","patterns":{"moodle-":{"group":"moodle","configFn":yui2ConfigFn}},"filter":null,"modules":{"moodle-core-actionmenu":{"requires":["base","event","node-event-simulate"]},"moodle-core-chooserdialogue":{"requires":["base","panel","moodle-core-notification"]},"moodle-core-maintenancemodetimer":{"requires":["base","node"]},"moodle-core-lockscroll":{"requires":["plugin","base-build"]},"moodle-core-notification":{"requires":["moodle-core-notification-dialogue","moodle-core-notification-alert","moodle-core-notification-confirm","moodle-core-notification-exception","moodle-core-notification-ajaxexception"]},"moodle-core-notification-dialogue":{"requires":["base","node","panel","escape","event-key","dd-plugin","moodle-core-widget-focusafterclose","moodle-core-lockscroll"]},"moodle-core-notification-alert":{"requires":["moodle-core-notification-dialogue"]},"moodle-core-notification-confirm":{"requires":["moodle-core-notification-dialogue"]},"moodle-core-notification-exception":{"requires":["moodle-core-notification-dialogue"]},"moodle-core-notification-ajaxexception":{"requires":["moodle-core-notification-dialogue"]},"moodle-core-dragdrop":{"requires":["base","node","io","dom","dd","event-key","event-focus","moodle-core-notification"]},"moodle-core-event":{"requires":["event-custom"]},"moodle-core-blocks":{"requires":["base","node","io","dom","dd","dd-scroll","moodle-core-dragdrop","moodle-core-notification"]},"moodle-core-handlebars":{"condition":{"trigger":"handlebars","when":"after"}},"moodle-core_availability-form":{"requires":["base","node","event","event-delegate","panel","moodle-core-notification-dialogue","json"]},"moodle-course-categoryexpander":{"requires":["node","event-key"]},"moodle-course-management":{"requires":["base","node","io-base","moodle-core-notification-exception","json-parse","dd-constrain","dd-proxy","dd-drop","dd-delegate","node-event-delegate"]},"moodle-course-dragdrop":{"requires":["base","node","io","dom","dd","dd-scroll","moodle-core-dragdrop","moodle-core-notification","moodle-course-coursebase","moodle-course-util"]},"moodle-course-util":{"requires":["node"],"use":["moodle-course-util-base"],"submodules":{"moodle-course-util-base":{},"moodle-course-util-section":{"requires":["node","moodle-course-util-base"]},"moodle-course-util-cm":{"requires":["node","moodle-course-util-base"]}}},"moodle-form-dateselector":{"requires":["base","node","overlay","calendar"]},"moodle-form-shortforms":{"requires":["node","base","selector-css3"]},"moodle-question-chooser":{"requires":["moodle-core-chooserdialogue"]},"moodle-question-searchform":{"requires":["base","node"]},"moodle-availability_completion-form":{"requires":["base","node","event","moodle-core_availability-form"]},"moodle-availability_date-form":{"requires":["base","node","event","io","moodle-core_availability-form"]},"moodle-availability_grade-form":{"requires":["base","node","event","moodle-core_availability-form"]},"moodle-availability_group-form":{"requires":["base","node","event","moodle-core_availability-form"]},"moodle-availability_grouping-form":{"requires":["base","node","event","moodle-core_availability-form"]},"moodle-availability_profile-form":{"requires":["base","node","event","moodle-core_availability-form"]},"moodle-mod_assign-history":{"requires":["node","transition"]},"moodle-mod_quiz-quizbase":{"requires":["base","node"]},"moodle-mod_quiz-toolboxes":{"requires":["base","node","event","event-key","io","moodle-mod_quiz-quizbase","moodle-mod_quiz-util-slot","moodle-core-notification-ajaxexception"]},"moodle-mod_quiz-questionchooser":{"requires":["moodle-core-chooserdialogue","moodle-mod_quiz-util","querystring-parse"]},"moodle-mod_quiz-modform":{"requires":["base","node","event"]},"moodle-mod_quiz-autosave":{"requires":["base","node","event","event-valuechange","node-event-delegate","io-form","datatype-date-format"]},"moodle-mod_quiz-dragdrop":{"requires":["base","node","io","dom","dd","dd-scroll","moodle-core-dragdrop","moodle-core-notification","moodle-mod_quiz-quizbase","moodle-mod_quiz-util-base","moodle-mod_quiz-util-page","moodle-mod_quiz-util-slot","moodle-course-util"]},"moodle-mod_quiz-util":{"requires":["node","moodle-core-actionmenu"],"use":["moodle-mod_quiz-util-base"],"submodules":{"moodle-mod_quiz-util-base":{},"moodle-mod_quiz-util-slot":{"requires":["node","moodle-mod_quiz-util-base"]},"moodle-mod_quiz-util-page":{"requires":["node","moodle-mod_quiz-util-base"]}}},"moodle-message_airnotifier-toolboxes":{"requires":["base","node","io"]},"moodle-editor_atto-editor":{"requires":["node","transition","io","overlay","escape","event","event-simulate","event-custom","node-event-html5","node-event-simulate","yui-throttle","moodle-core-event","moodle-core-notification-dialogue","moodle-editor_atto-rangy","handlebars","timers","querystring-stringify"]},"moodle-editor_atto-plugin":{"requires":["node","base","escape","event","event-outside","handlebars","event-custom","timers","moodle-editor_atto-menu"]},"moodle-editor_atto-menu":{"requires":["moodle-core-notification-dialogue","node","event","event-custom"]},"moodle-editor_atto-rangy":{"requires":[]},"moodle-report_eventlist-eventfilter":{"requires":["base","event","node","node-event-delegate","datatable","autocomplete","autocomplete-filters"]},"moodle-report_loglive-fetchlogs":{"requires":["base","event","node","io","node-event-delegate"]},"moodle-gradereport_history-userselector":{"requires":["escape","event-delegate","event-key","handlebars","io-base","json-parse","moodle-core-notification-dialogue"]},"moodle-qbank_editquestion-chooser":{"requires":["moodle-core-chooserdialogue"]},"moodle-tool_lp-dragdrop-reorder":{"requires":["moodle-core-dragdrop"]},"moodle-assignfeedback_editpdf-editor":{"requires":["base","event","node","io","graphics","json","event-move","event-resize","transition","querystring-stringify-simple","moodle-core-notification-dialog","moodle-core-notification-alert","moodle-core-notification-warning","moodle-core-notification-exception","moodle-core-notification-ajaxexception"]},"moodle-atto_accessibilitychecker-button":{"requires":["color-base","moodle-editor_atto-plugin"]},"moodle-atto_accessibilityhelper-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_align-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_bold-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_charmap-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_clear-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_collapse-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_emojipicker-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_emoticon-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_equation-button":{"requires":["moodle-editor_atto-plugin","moodle-core-event","io","event-valuechange","tabview","array-extras"]},"moodle-atto_h5p-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_html-button":{"requires":["promise","moodle-editor_atto-plugin","moodle-atto_html-beautify","moodle-atto_html-codemirror","event-valuechange"]},"moodle-atto_html-codemirror":{"requires":["moodle-atto_html-codemirror-skin"]},"moodle-atto_html-beautify":{},"moodle-atto_image-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_indent-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_italic-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_link-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_managefiles-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_managefiles-usedfiles":{"requires":["node","escape"]},"moodle-atto_media-button":{"requires":["moodle-editor_atto-plugin","moodle-form-shortforms"]},"moodle-atto_noautolink-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_orderedlist-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_recordrtc-recording":{"requires":["moodle-atto_recordrtc-button"]},"moodle-atto_recordrtc-button":{"requires":["moodle-editor_atto-plugin","moodle-atto_recordrtc-recording"]},"moodle-atto_rtl-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_strike-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_subscript-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_superscript-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_table-button":{"requires":["moodle-editor_atto-plugin","moodle-editor_atto-menu","event","event-valuechange"]},"moodle-atto_title-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_underline-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_undo-button":{"requires":["moodle-editor_atto-plugin"]},"moodle-atto_unorderedlist-button":{"requires":["moodle-editor_atto-plugin"]}}},"gallery":{"name":"gallery","base":"https:\/\/students.technion.ac.il\/lib\/yuilib\/gallery\/","combine":true,"comboBase":"https:\/\/students.technion.ac.il\/theme\/yui_combo.php?","ext":false,"root":"gallery\/-1\/","patterns":{"gallery-":{"group":"gallery"}}}},"modules":{"core_filepicker":{"name":"core_filepicker","fullpath":"https:\/\/students.technion.ac.il\/lib\/javascript.php\/-1\/repository\/filepicker.js","requires":["base","node","node-event-simulate","json","async-queue","io-base","io-upload-iframe","io-form","yui2-treeview","panel","cookie","datatable","datatable-sort","resize-plugin","dd-plugin","escape","moodle-core_filepicker","moodle-core-notification-dialogue"]},"core_comment":{"name":"core_comment","fullpath":"https:\/\/students.technion.ac.il\/lib\/javascript.php\/-1\/comment\/comment.js","requires":["base","io-base","node","json","yui2-animation","overlay","escape"]}},"logInclude":[],"logExclude":[],"logLevel":null};
+M.yui.loader = {modules: {}};
+
+//]]>
+</script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body  id="page-local-technionsearch-course-134020-202502" class="format-site  path-local path-local-technionsearch path-local-technionsearch-course path-local-technionsearch-course-134020 dir-rtl lang-he yui-skin-sam yui3-skin-sam students-technion-ac-il pagelayout-standard course-1 context-1 notloggedin theme ">
+
+<div id="page-wrapper" class="d-print-block">
+
+
+
+    <div>
+    <a class="sr-only sr-only-focusable" href="#maincontent">דילוג לתוכן הראשי</a>
+</div><script src="https://students.technion.ac.il/lib/javascript.php/-1/lib/polyfills/polyfill.js"></script>
+<script src="https://students.technion.ac.il/theme/yui_combo.php?rollup/3.18.1/yui-moodlesimple-min.js"></script><script src="https://students.technion.ac.il/lib/javascript.php/-1/lib/javascript-static.js"></script>
+<script>
+//<![CDATA[
+document.body.className += ' jsenabled';
+//]]>
+</script>
+
+
+
+
+    <div id="page" class="container-fluid d-print-block">
+
+        <header id="page-header" class="row">
+    <div class="col-12 pt-3 pb-3">
+        <div class="card ">
+            <div class="card-body ">
+                <div class="d-flex align-items-center">
+                    <div class="mr-auto">
+                        <div class="page-context-header d-flex flex-wrap align-items-center mb-2">
+    <div class="page-header-headings">
+        <h1 class="h2 mb-0">פורטל הסטודנטים</h1>
+    </div>
+</div>
+                    </div>
+                    <div class="header-actions-container flex-shrink-0" data-region="header-actions-container">
+                    </div>
+                </div>
+                <div class="d-flex flex-wrap">
+                        <div id="page-navbar">
+                            <nav aria-label="סרגל ניווט">
+    <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="https://students.technion.ac.il/"
+                        
+                        
+                        
+                    >
+                        ראשי
+                    </a>
+                </li>
+        
+                <li class="breadcrumb-item">
+                    <a href="https://students.technion.ac.il/local/technionsearch/search"
+                        
+                        
+                        
+                    >
+                        חיפוש מקצועות בטכניון
+                    </a>
+                </li>
+        
+                <li class="breadcrumb-item">
+                    <a href="https://students.technion.ac.il/local/technionsearch/course/134020/202502"
+                        aria-current="page"
+                        
+                        
+                    >
+                        134020 - גנטיקה כללית
+                    </a>
+                </li>
+        </ol>
+</nav>
+                        </div>
+                    <div class="ml-auto d-flex">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+        <div class="card ">
+            <div class="card-body ">
+                <div id="page-content" class="row   d-print-block">
+                    <div id="region-main-box" class="region-main">
+                        <section id="region-main" class="region-main-content" aria-label="תוכן">
+                            <span class="notifications" id="user-notifications"></span>
+                                <span id="maincontent" tabindex="-1"></span>
+                                <div class="activity-header" data-for="page-activity-header"></div>
+                            <div role="main"><span id="maincontent" tabindex="-1"></span><style>
+    a.foldable[aria-expanded="false"]:after{
+        font-family: 'FontAwesome', serif;
+        content: "\f078";
+        float: right;
+        color: darkblue;
+    }
+    a.foldable[aria-expanded="true"]:after{
+        font-family: 'FontAwesome', serif;
+        content: "\f077";
+        float: right;
+        color: darkblue;
+    }
+    .data-enriched:hover:after{
+        font-family: 'FontAwesome', serif;
+        content: "\f129";
+        padding: 0 4px;
+        color: darkblue;
+    }
+    .data-enriched:hover{
+        cursor: pointer;
+    }
+    .tooltip-inner {
+        max-width: 600px;
+        text-align: unset;
+        direction: unset;
+    }
+    .tooltip .arrow {
+        display: none;
+    }
+</style>
+<div class="hero-unit">
+    <h3 class="card-title">
+        <a data-toggle="collapse" class="foldable" href="#general_information" role="button" aria-expanded="false" aria-controls="general_information">
+            מידע כללי
+        </a>
+    </h3>
+    <div class="card-body collapse" id="general_information">
+        <p class="card-text" style="white-space: pre-wrap;">בסמסטר א&#039; הקורס מיועד להנ.ביוטכנולוגיה ומזון והשאר על בסיס פנוי.
+בסמסטר ב&#039; הקורס מיועד לביולוגיה ומסלוליה והוראת המדעים בלבד.
+נושאי הקורס: חוקי התורשה המנדליים והלא מנדליים, מהות הגן,
+ניתוח שושלות, התיאוריה הכרומוזומלית של ההורשה, קביעת מין,
+תאחיזה, שחלוף ושיטות למיפוי גנים באדם ובאורגניזמים שונים,
+מוטציות ושינויים במבנה הכרומוזומים ובמספרם, אינטראקציה
+בין גנים.
+הערה: הקורס פתוח לסטודנטים מפקולטות אחרות. ידרשו מקצועות קדם
+מקבילים בתאום עם מורה הקורס.</p>
+        <h6 class="card-subtitle mb-2 text-muted">
+            פקולטה: ביולוגיה
+            <br/>
+                |תואר ראשון
+        </h6>
+        <hr>
+            <h5 class="card-title">מקצועות קדם</h5>
+            <p class="card-text">
+                <a href="/local/technionsearch/course/134058" data-course="134058" class="badge badge-light badge-pill" >134058 - ביולוגיה 1</a> או <a href="/local/technionsearch/course/134127" data-course="134127" class="badge badge-light badge-pill" >134127 - נושאים בביולוגיה</a>
+            </p>
+            <hr>
+            <h5 class="card-title">מקצועות צמודים</h5>
+            <p class="card-text">
+                        <a href="/local/technionsearch/course/134144" data-course="134144" class="badge badge-light badge-pill" >134144 - מעבדה בפיזיולוגיה של הצמח</a>
+            </p>
+            <hr>
+            <h5 class="card-title">מקצועות ללא זיכוי נוסף</h5>
+            <p class="card-text">
+                        <a href="/local/technionsearch/course/274165" data-course="274165" class="badge badge-light badge-pill" >274165 - גנטיקה כללית לרפואנים</a>
+                        <a href="/local/technionsearch/course/274223" data-course="274223" class="badge badge-light badge-pill" >274223 - תורשת האדם</a>
+            </p>
+            <hr>
+            <h5 class="card-title">מקצועות ללא זיכוי נוסף (מוכלים)</h5>
+            <p class="card-text">
+                        <a href="/local/technionsearch/course/274010" data-course="274010" class="badge badge-light badge-pill" >274010 - מבוא לגנטיקה לרפ&quot;ע</a>
+            </p>
+            <hr>
+    </div>
+        <h3 class="card-title">
+            <a data-toggle="collapse" class="foldable" href="#study_material" role="button" aria-expanded="false" aria-controls="study_material">
+                ספרי המקצוע
+            </a>
+        </h3>
+        <div class="card-body collapse" id="study_material">
+            <ul>
+                    <li>
+                        <a href="https://technion.primo.exlibrisgroup.com/permalink/972TEC_INST/17d0lpa/alma9926496790303971" target="_blank">Concepts of genetics - Klug, William S.</a>
+                    </li>
+                    <li>
+                        <a href="https://technion.primo.exlibrisgroup.com/permalink/972TEC_INST/17d0lpa/alma990023338290203971" target="_blank">Concepts of genetics / William S. Klug ... [et al.].</a>
+                    </li>
+                    <li>
+                        <a href="https://technion.primo.exlibrisgroup.com/permalink/972TEC_INST/17d0lpa/alma990026148670203971" target="_blank">Concepts of genetics : William S. Klug, The College of New Jersey, Michael R. Cummings, Illinois Institute of Technology, Charlotte A. Spencer, University of Alberta, Michael A. Palladino, Monmouth University ; with contributions by Darrell Killian, Colorado College. - Klug, William S.</a>
+                    </li>
+                    <li>
+                        <a href="https://technion.primo.exlibrisgroup.com/permalink/972TEC_INST/17d0lpa/alma990023088760203971" target="_blank">Essentials of genetics / by William S. Klug ... [et al.].</a>
+                    </li>
+                    <li>
+                        <a href="https://technion.primo.exlibrisgroup.com/permalink/972TEC_INST/17d0lpa/alma990026148720203971" target="_blank">Essentials of genetics / William S. Klug, The College of New Jersey, Michael R. Cummings, Illinois Institute of Technology, Charlotte A. Spencer, University of Alderta, Michael A. Palladino, Monmouth University ; with contributions by Darrell Killian, Colorado College. - Klug, William S.</a>
+                    </li>
+                    <li>
+                        <a href="https://technion.primo.exlibrisgroup.com/permalink/972TEC_INST/17d0lpa/alma990023338320203971" target="_blank">Genetics : from genes to genomes / Leland H. Hartwell ... [et al.].</a>
+                    </li>
+                    <li>
+                        <a href="https://technion.primo.exlibrisgroup.com/permalink/972TEC_INST/17d0lpa/alma990026148760203971" target="_blank">Genetics : from genes to genomes / Leland H. Hartwell, Michael l. Goldberg, Janice A. Fischer, Leroy Hood, Charles F. Aquadro. - Hartwell, Leland H.</a>
+                    </li>
+                    <li>
+                        <a href="https://technion.primo.exlibrisgroup.com/permalink/972TEC_INST/17d0lpa/alma9926652789303971" target="_blank">Introduction to genetic analysis - Griffiths, Anthony J. F.</a>
+                    </li>
+                    <li>
+                        <a href="https://technion.primo.exlibrisgroup.com/permalink/972TEC_INST/17d0lpa/alma990023160540203971" target="_blank">Introduction to genetic analysis / Anthony J.F. Griffiths ... [et al.].</a>
+                    </li>
+                    <li>
+                        <a href="https://technion.primo.exlibrisgroup.com/permalink/972TEC_INST/17d0lpa/alma990025310580203971" target="_blank">Introduction to genetic analysis / Anthony J.F. Griffiths, University of British Columbia, Susan R. Wessler, University of California, Riverside; Sean B. Carroll, Howard Hughes Medical Institute, University of Wisconsin--Madison, John Doebley, University of Wisconsin--Madison.</a>
+                    </li>
+                    <li>
+                        <a href="https://technion.primo.exlibrisgroup.com/permalink/972TEC_INST/17d0lpa/alma990022909760203971" target="_blank">Thompson &amp; Thompson genetics in medicine / Robert L. Nussbaum, Roderick R. McInnes, Huntington F. Willard ; with clinical case studies updated and new cases prepared by Ada Hamosh. - Nussbaum, Robert L.,</a>
+                    </li>
+                    <li>
+                        <a href="https://technion.primo.exlibrisgroup.com/permalink/972TEC_INST/17d0lpa/alma990025318210203971" target="_blank">Thompson &amp; Thompson genetics in medicine / Robert L. Nussbaum,MD, FACP, FACMG, Holly Smith Chair of Medicine and Science, Professor of Medicine, Neurology, Pediatrics and Pathology, Department of Medicine and Institute for Human Genetics, University of California San Francisco, San Francisco, California, Roderick R. McInnes, CM, MD, PhD, FRS(C), FCAHS, FCCMG, Alva Chair in Human Genetics, Canada Ressearch Chair in Neurogenetics, Professor of Human Genetics and Biochemistry, Director, Lady Davis Institute, Jewish General Hospital, McGill University, Montreal, Quebec, Canada, Huntington F. Willard, PhD, President and Director, The Marine Biological Laboratory, Woods Hole, Massachusetts, and Professor of Human Genetics, University of Chicago, Chicago, Illinois ; with clinical cases updated by Ada Hamosh, MD, MPH, Professor of Pediatrics, McKusick-Nathans Institute of Genetic Medicine, Scientific Director, OMIM, Johns Hopkins University School of Medicine, Baltimore, Maryland. - Nussbaum, Robert L.,</a>
+                    </li>
+                    <li>
+                        <a href="https://technion.primo.exlibrisgroup.com/permalink/972TEC_INST/17d0lpa/alma990023262990203971" target="_blank">מבוא לאנליזה גנטית / א&#039; גריפיתס ... [ואחרים].</a>
+                    </li>
+            </ul>
+        </div>
+        <h3 class="card-title">
+            <a data-toggle="collapse" class="foldable" href="#semester_information" role="button" aria-expanded="true" aria-controls="semester_information">
+                מידע סמסטריאלי
+            </a>
+        </h3>
+        <div class="card-body collapse show" id="semester_information">
+            <nav>
+                <div class="nav nav-tabs" id="myTab" role="tablist">
+                        <a class="nav-link active" id="s_202302-tab" data-toggle="tab" aria-controls="s_202302" href="#s_202302" role="tab" aria-selected="true">
+                            אביב 2023/24 (תשפ&quot;ד)  
+                        </a>
+                        <a class="nav-link " id="s_202301-tab" data-toggle="tab" aria-controls="s_202301" href="#s_202301" role="tab" aria-selected="false">
+                            חורף 2023/24 (תשפ&quot;ד)  
+                        </a>
+                        <a class="nav-link " id="s_202203-tab" data-toggle="tab" aria-controls="s_202203" href="#s_202203" role="tab" aria-selected="false">
+                            קיץ 2022/23 (תשפ&quot;ג)  
+                        </a>
+                </div>
+            </nav>
+            <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="s_202302" role="tabpanel" aria-labelledby="s_202302-tab" style="padding: 16px;">
+                        <h5 class="card-title">שעות שבועיות</h5>
+                        <p class="card-text">
+                            3.5 נקודות אקדמיות
+                             • 3 שעות הרצאה
+                             • 1 שעות תרגול
+                            
+                            
+                        </p>
+                            <h5 class="card-title">אחראים</h5>
+                            <p class="card-text">
+                                <span tabindex="0" data-person="5090">פרופ. איוב נביה</span>                            </p>
+                            <h5 class="card-title">הערות</h5>
+                            <ul>
+                                    <li>
+                                        <div class="w-100">המקצוע מיועד לביולוגיה ומסלוליה
+והוראה המדעים בלבד.</div>
+                                    </li>
+                            </ul>
+                            <br/>
+                        <h5 class="card-title">מבחנים</h5>
+                                <span style="display: flex; flex-direction: column;"><strong>מועד א: 20-09-2024 </strong></span>
+                                <span style="display: flex; flex-direction: column;"><strong>מועד ב: 15-10-2024 </strong></span>
+                            <br/>
+                            <h5 class="card-title" style="margin-top: 16px;">קבוצות רישום</h5>
+                            <div class="list-group">
+                                    <span class="flex-column list-group-item w-100 group_item m-0 p-0">
+                                        <div class="d-flex w-100 justify-content-between m-0 p-0">
+                                            <table class="table m-0 p-0 table-sm" style="width: 100%">
+                                                <tbody>
+                                                    <tr>
+                                                        <td style="width: 15%;">
+                                                             <table>
+                                                                 <tr>
+                                                                    <td style="width: 30%!important; padding: 8px;">
+                                                                        <span style="font-size: 250%;">11</span>
+                                                                    </td>
+                                                                     <td style="width: 70%!important; padding: 8px;">
+                                                                             <div class="text" role="alert">שפת לימוד:  עברית</div>
+                                                                         
+                                                                        </td>
+                                                                 </tr>
+                                                                 
+                                                             </table>
+                                                        </td>
+                                                        <td style="width: 85%;">
+                                                            <table class="table m-0 p-0 table-striped table-sm" style="width: 100%">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td style="width: 96px;">הרצאה</td>
+                                                                        <td style="width: 96px;">ראשון</td>
+                                                                        <td style="width: 128px;">09:30 - 12:30</td>
+                                                                        <td style="width: 128px;"><span
+                                                                                data-building="34">ביולוגיה</span> 1</td>
+                                                                        <td style="width: 200px;">
+                                                                                <span href="javascript:void();" tabindex="0" data-person="5090"
+                                                                                      style="width: 256px;">| פרופ. איוב נביה</span>
+                                                                        </td>
+                                                                        <td><br></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="width: 96px;">תרגול</td>
+                                                                        <td style="width: 96px;">ראשון</td>
+                                                                        <td style="width: 128px;">12:30 - 13:30</td>
+                                                                        <td style="width: 128px;"><span
+                                                                                data-building="34">ביולוגיה</span> 1</td>
+                                                                        <td style="width: 200px;">
+                                                                                <span href="javascript:void();" tabindex="0" data-person="19827"
+                                                                                      style="width: 256px;">| גב. בשארה לילא</span>
+                                                                        </td>
+                                                                        <td><br></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </span>                                        <!--                -->
+                                    <!--                    <span class="flex-column list-group-item w-100 group_item m-0 p-0">
+    <div class="d-flex w-100 justify-content-between m-0 p-0">
+        <table class="table m-0 p-0 table-sm" style="width: 100%">
+            <tbody>
+                <tr>
+                    <td style="width: 15%;">
+                         <table>
+                             <tr>
+                                <td style="width: 30%!important; padding: 8px;">
+                                    <span style="font-size: 250%;">11</span>
+                                </td>
+                                 <td style="width: 70%!important; padding: 8px;">
+                                         <div class="text" role="alert">שפת לימוד:  עברית</div>
+                                     
+                                    </td>
+                             </tr>
+                             
+                         </table>
+                    </td>
+                    <td style="width: 85%;">
+                        <table class="table m-0 p-0 table-striped table-sm" style="width: 100%">
+                            <tbody>
+                                <tr>
+                                    <td style="width: 96px;">הרצאה</td>
+                                    <td style="width: 96px;">ראשון</td>
+                                    <td style="width: 128px;">09:30 - 12:30</td>
+                                    <td style="width: 128px;"><span
+                                            data-building="34">ביולוגיה</span> 1</td>
+                                    <td style="width: 200px;">
+                                            <span href="javascript:void();" tabindex="0" data-person="5090"
+                                                  style="width: 256px;">| פרופ. איוב נביה</span>
+                                    </td>
+                                    <td><br></td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 96px;">תרגול</td>
+                                    <td style="width: 96px;">ראשון</td>
+                                    <td style="width: 128px;">12:30 - 13:30</td>
+                                    <td style="width: 128px;"><span
+                                            data-building="34">ביולוגיה</span> 1</td>
+                                    <td style="width: 200px;">
+                                            <span href="javascript:void();" tabindex="0" data-person="19827"
+                                                  style="width: 256px;">| גב. בשארה לילא</span>
+                                    </td>
+                                    <td><br></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</span>-->
+                                        <!--                -->
+                                        <!--                -->
+                                    <span class="flex-column list-group-item w-100 group_item m-0 p-0">
+                                        <div class="d-flex w-100 justify-content-between m-0 p-0">
+                                            <table class="table m-0 p-0 table-sm" style="width: 100%">
+                                                <tbody>
+                                                    <tr>
+                                                        <td style="width: 15%;">
+                                                             <table>
+                                                                 <tr>
+                                                                    <td style="width: 30%!important; padding: 8px;">
+                                                                        <span style="font-size: 250%;">12</span>
+                                                                    </td>
+                                                                     <td style="width: 70%!important; padding: 8px;">
+                                                                             <div class="text" role="alert">שפת לימוד:  עברית</div>
+                                                                         
+                                                                        </td>
+                                                                 </tr>
+                                                                 
+                                                             </table>
+                                                        </td>
+                                                        <td style="width: 85%;">
+                                                            <table class="table m-0 p-0 table-striped table-sm" style="width: 100%">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td style="width: 96px;">הרצאה</td>
+                                                                        <td style="width: 96px;">ראשון</td>
+                                                                        <td style="width: 128px;">09:30 - 12:30</td>
+                                                                        <td style="width: 128px;"><span
+                                                                                data-building="34">ביולוגיה</span> 1</td>
+                                                                        <td style="width: 200px;">
+                                                                                <span href="javascript:void();" tabindex="0" data-person="5090"
+                                                                                      style="width: 256px;">| פרופ. איוב נביה</span>
+                                                                        </td>
+                                                                        <td><br></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="width: 96px;">תרגול</td>
+                                                                        <td style="width: 96px;">שני</td>
+                                                                        <td style="width: 128px;">14:30 - 15:30</td>
+                                                                        <td style="width: 128px;"><span
+                                                                                data-building="14">אולמן</span> 301</td>
+                                                                        <td style="width: 200px;">
+                                                                                <span href="javascript:void();" tabindex="0" data-person="21201"
+                                                                                      style="width: 256px;">| גב. בר יצחק עלמה סופיה</span>
+                                                                        </td>
+                                                                        <td><br></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </span>                                        <!--                -->
+                                    <!--                    <span class="flex-column list-group-item w-100 group_item m-0 p-0">
+    <div class="d-flex w-100 justify-content-between m-0 p-0">
+        <table class="table m-0 p-0 table-sm" style="width: 100%">
+            <tbody>
+                <tr>
+                    <td style="width: 15%;">
+                         <table>
+                             <tr>
+                                <td style="width: 30%!important; padding: 8px;">
+                                    <span style="font-size: 250%;">12</span>
+                                </td>
+                                 <td style="width: 70%!important; padding: 8px;">
+                                         <div class="text" role="alert">שפת לימוד:  עברית</div>
+                                     
+                                    </td>
+                             </tr>
+                             
+                         </table>
+                    </td>
+                    <td style="width: 85%;">
+                        <table class="table m-0 p-0 table-striped table-sm" style="width: 100%">
+                            <tbody>
+                                <tr>
+                                    <td style="width: 96px;">הרצאה</td>
+                                    <td style="width: 96px;">ראשון</td>
+                                    <td style="width: 128px;">09:30 - 12:30</td>
+                                    <td style="width: 128px;"><span
+                                            data-building="34">ביולוגיה</span> 1</td>
+                                    <td style="width: 200px;">
+                                            <span href="javascript:void();" tabindex="0" data-person="5090"
+                                                  style="width: 256px;">| פרופ. איוב נביה</span>
+                                    </td>
+                                    <td><br></td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 96px;">תרגול</td>
+                                    <td style="width: 96px;">שני</td>
+                                    <td style="width: 128px;">14:30 - 15:30</td>
+                                    <td style="width: 128px;"><span
+                                            data-building="14">אולמן</span> 301</td>
+                                    <td style="width: 200px;">
+                                            <span href="javascript:void();" tabindex="0" data-person="21201"
+                                                  style="width: 256px;">| גב. בר יצחק עלמה סופיה</span>
+                                    </td>
+                                    <td><br></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</span>-->
+                                        <!--                -->
+                                        <!--                -->
+                                    <span class="flex-column list-group-item w-100 group_item m-0 p-0">
+                                        <div class="d-flex w-100 justify-content-between m-0 p-0">
+                                            <table class="table m-0 p-0 table-sm" style="width: 100%">
+                                                <tbody>
+                                                    <tr>
+                                                        <td style="width: 15%;">
+                                                             <table>
+                                                                 <tr>
+                                                                    <td style="width: 30%!important; padding: 8px;">
+                                                                        <span style="font-size: 250%;">13</span>
+                                                                    </td>
+                                                                     <td style="width: 70%!important; padding: 8px;">
+                                                                             <div class="text" role="alert">שפת לימוד:  עברית</div>
+                                                                         
+                                                                        </td>
+                                                                 </tr>
+                                                                 
+                                                             </table>
+                                                        </td>
+                                                        <td style="width: 85%;">
+                                                            <table class="table m-0 p-0 table-striped table-sm" style="width: 100%">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td style="width: 96px;">הרצאה</td>
+                                                                        <td style="width: 96px;">ראשון</td>
+                                                                        <td style="width: 128px;">09:30 - 12:30</td>
+                                                                        <td style="width: 128px;"><span
+                                                                                data-building="34">ביולוגיה</span> 1</td>
+                                                                        <td style="width: 200px;">
+                                                                                <span href="javascript:void();" tabindex="0" data-person="5090"
+                                                                                      style="width: 256px;">| פרופ. איוב נביה</span>
+                                                                        </td>
+                                                                        <td><br></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="width: 96px;">תרגול</td>
+                                                                        <td style="width: 96px;">רביעי</td>
+                                                                        <td style="width: 128px;">14:30 - 15:30</td>
+                                                                        <td style="width: 128px;"><span
+                                                                                data-building="34">ביולוגיה</span> 1</td>
+                                                                        <td style="width: 200px;">
+                                                                                <span href="javascript:void();" tabindex="0" data-person="21203"
+                                                                                      style="width: 256px;">| גב. דראושה מלק</span>
+                                                                        </td>
+                                                                        <td><br></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </span>                                        <!--                -->
+                                    <!--                    <span class="flex-column list-group-item w-100 group_item m-0 p-0">
+    <div class="d-flex w-100 justify-content-between m-0 p-0">
+        <table class="table m-0 p-0 table-sm" style="width: 100%">
+            <tbody>
+                <tr>
+                    <td style="width: 15%;">
+                         <table>
+                             <tr>
+                                <td style="width: 30%!important; padding: 8px;">
+                                    <span style="font-size: 250%;">13</span>
+                                </td>
+                                 <td style="width: 70%!important; padding: 8px;">
+                                         <div class="text" role="alert">שפת לימוד:  עברית</div>
+                                     
+                                    </td>
+                             </tr>
+                             
+                         </table>
+                    </td>
+                    <td style="width: 85%;">
+                        <table class="table m-0 p-0 table-striped table-sm" style="width: 100%">
+                            <tbody>
+                                <tr>
+                                    <td style="width: 96px;">הרצאה</td>
+                                    <td style="width: 96px;">ראשון</td>
+                                    <td style="width: 128px;">09:30 - 12:30</td>
+                                    <td style="width: 128px;"><span
+                                            data-building="34">ביולוגיה</span> 1</td>
+                                    <td style="width: 200px;">
+                                            <span href="javascript:void();" tabindex="0" data-person="5090"
+                                                  style="width: 256px;">| פרופ. איוב נביה</span>
+                                    </td>
+                                    <td><br></td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 96px;">תרגול</td>
+                                    <td style="width: 96px;">רביעי</td>
+                                    <td style="width: 128px;">14:30 - 15:30</td>
+                                    <td style="width: 128px;"><span
+                                            data-building="34">ביולוגיה</span> 1</td>
+                                    <td style="width: 200px;">
+                                            <span href="javascript:void();" tabindex="0" data-person="21203"
+                                                  style="width: 256px;">| גב. דראושה מלק</span>
+                                    </td>
+                                    <td><br></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</span>-->
+                                        <!--                -->
+                                        <!--                -->
+                                    <span class="flex-column list-group-item w-100 group_item m-0 p-0">
+                                        <div class="d-flex w-100 justify-content-between m-0 p-0">
+                                            <table class="table m-0 p-0 table-sm" style="width: 100%">
+                                                <tbody>
+                                                    <tr>
+                                                        <td style="width: 15%;">
+                                                             <table>
+                                                                 <tr>
+                                                                    <td style="width: 30%!important; padding: 8px;">
+                                                                        <span style="font-size: 250%;">14</span>
+                                                                    </td>
+                                                                     <td style="width: 70%!important; padding: 8px;">
+                                                                             <div class="text" role="alert">שפת לימוד:  עברית</div>
+                                                                         
+                                                                        </td>
+                                                                 </tr>
+                                                                 
+                                                             </table>
+                                                        </td>
+                                                        <td style="width: 85%;">
+                                                            <table class="table m-0 p-0 table-striped table-sm" style="width: 100%">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td style="width: 96px;">הרצאה</td>
+                                                                        <td style="width: 96px;">ראשון</td>
+                                                                        <td style="width: 128px;">09:30 - 12:30</td>
+                                                                        <td style="width: 128px;"><span
+                                                                                data-building="34">ביולוגיה</span> 1</td>
+                                                                        <td style="width: 200px;">
+                                                                                <span href="javascript:void();" tabindex="0" data-person="5090"
+                                                                                      style="width: 256px;">| פרופ. איוב נביה</span>
+                                                                        </td>
+                                                                        <td><br></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="width: 96px;">תרגול</td>
+                                                                        <td style="width: 96px;">ראשון</td>
+                                                                        <td style="width: 128px;">12:30 - 13:30</td>
+                                                                        <td style="width: 128px;"><span
+                                                                                data-building="73">אמרסון</span> 417</td>
+                                                                        <td style="width: 200px;">
+                                                                                <span href="javascript:void();" tabindex="0" data-person="21201"
+                                                                                      style="width: 256px;">| גב. בר יצחק עלמה סופיה</span>
+                                                                        </td>
+                                                                        <td><br></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </span>                                        <!--                -->
+                                    <!--                    <span class="flex-column list-group-item w-100 group_item m-0 p-0">
+    <div class="d-flex w-100 justify-content-between m-0 p-0">
+        <table class="table m-0 p-0 table-sm" style="width: 100%">
+            <tbody>
+                <tr>
+                    <td style="width: 15%;">
+                         <table>
+                             <tr>
+                                <td style="width: 30%!important; padding: 8px;">
+                                    <span style="font-size: 250%;">14</span>
+                                </td>
+                                 <td style="width: 70%!important; padding: 8px;">
+                                         <div class="text" role="alert">שפת לימוד:  עברית</div>
+                                     
+                                    </td>
+                             </tr>
+                             
+                         </table>
+                    </td>
+                    <td style="width: 85%;">
+                        <table class="table m-0 p-0 table-striped table-sm" style="width: 100%">
+                            <tbody>
+                                <tr>
+                                    <td style="width: 96px;">הרצאה</td>
+                                    <td style="width: 96px;">ראשון</td>
+                                    <td style="width: 128px;">09:30 - 12:30</td>
+                                    <td style="width: 128px;"><span
+                                            data-building="34">ביולוגיה</span> 1</td>
+                                    <td style="width: 200px;">
+                                            <span href="javascript:void();" tabindex="0" data-person="5090"
+                                                  style="width: 256px;">| פרופ. איוב נביה</span>
+                                    </td>
+                                    <td><br></td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 96px;">תרגול</td>
+                                    <td style="width: 96px;">ראשון</td>
+                                    <td style="width: 128px;">12:30 - 13:30</td>
+                                    <td style="width: 128px;"><span
+                                            data-building="73">אמרסון</span> 417</td>
+                                    <td style="width: 200px;">
+                                            <span href="javascript:void();" tabindex="0" data-person="21201"
+                                                  style="width: 256px;">| גב. בר יצחק עלמה סופיה</span>
+                                    </td>
+                                    <td><br></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</span>-->
+                                        <!--                -->
+                                        <!--                -->
+                                    <span class="flex-column list-group-item w-100 group_item m-0 p-0">
+                                        <div class="d-flex w-100 justify-content-between m-0 p-0">
+                                            <table class="table m-0 p-0 table-sm" style="width: 100%">
+                                                <tbody>
+                                                    <tr>
+                                                        <td style="width: 15%;">
+                                                             <table>
+                                                                 <tr>
+                                                                    <td style="width: 30%!important; padding: 8px;">
+                                                                        <span style="font-size: 250%;">69</span>
+                                                                    </td>
+                                                                     <td style="width: 70%!important; padding: 8px;">
+                                                                             <div class="text" role="alert">שפת לימוד:  עברית</div>
+                                                                         
+                                                                        </td>
+                                                                 </tr>
+                                                                 
+                                                             </table>
+                                                        </td>
+                                                        <td style="width: 85%;">
+                                                            <table class="table m-0 p-0 table-striped table-sm" style="width: 100%">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td style="width: 96px;">קבוצת רישום</td>
+                                                                        <td style="width: 96px;"></td>
+                                                                        <td style="width: 128px;">אין מידע אודות שעות לימוד</td>
+                                                                        <td style="width: 128px;"></td>
+                                                                        <td style="width: 200px;">
+                                                                        </td>
+                                                                        <td></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </span>                                        <!--                -->
+                                        <!--                -->
+                                    <!--                    <span class="flex-column list-group-item w-100 group_item m-0 p-0">
+    <div class="d-flex w-100 justify-content-between m-0 p-0">
+        <table class="table m-0 p-0 table-sm" style="width: 100%">
+            <tbody>
+                <tr>
+                    <td style="width: 15%;">
+                         <table>
+                             <tr>
+                                <td style="width: 30%!important; padding: 8px;">
+                                    <span style="font-size: 250%;">69</span>
+                                </td>
+                                 <td style="width: 70%!important; padding: 8px;">
+                                         <div class="text" role="alert">שפת לימוד:  עברית</div>
+                                     
+                                    </td>
+                             </tr>
+                             
+                         </table>
+                    </td>
+                    <td style="width: 85%;">
+                        <table class="table m-0 p-0 table-striped table-sm" style="width: 100%">
+                            <tbody>
+                                <tr>
+                                    <td style="width: 96px;">קבוצת רישום</td>
+                                    <td style="width: 96px;"></td>
+                                    <td style="width: 128px;">אין מידע אודות שעות לימוד</td>
+                                    <td style="width: 128px;"></td>
+                                    <td style="width: 200px;">
+                                    </td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</span>-->
+                                        <!--                -->
+                                    <span class="flex-column list-group-item w-100 group_item m-0 p-0">
+                                        <div class="d-flex w-100 justify-content-between m-0 p-0">
+                                            <table class="table m-0 p-0 table-sm" style="width: 100%">
+                                                <tbody>
+                                                    <tr>
+                                                        <td style="width: 15%;">
+                                                             <table>
+                                                                 <tr>
+                                                                    <td style="width: 30%!important; padding: 8px;">
+                                                                        <span style="font-size: 250%;">77</span>
+                                                                    </td>
+                                                                     <td style="width: 70%!important; padding: 8px;">
+                                                                             <div class="text" role="alert">שפת לימוד:  עברית</div>
+                                                                         
+                                                                        </td>
+                                                                 </tr>
+                                                                 
+                                                             </table>
+                                                        </td>
+                                                        <td style="width: 85%;">
+                                                            <table class="table m-0 p-0 table-striped table-sm" style="width: 100%">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td style="width: 96px;">קבוצת רישום</td>
+                                                                        <td style="width: 96px;"></td>
+                                                                        <td style="width: 128px;">אין מידע אודות שעות לימוד</td>
+                                                                        <td style="width: 128px;"></td>
+                                                                        <td style="width: 200px;">
+                                                                        </td>
+                                                                        <td></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </span>                                        <!--                -->
+                                        <!--                -->
+                                    <!--                    <span class="flex-column list-group-item w-100 group_item m-0 p-0">
+    <div class="d-flex w-100 justify-content-between m-0 p-0">
+        <table class="table m-0 p-0 table-sm" style="width: 100%">
+            <tbody>
+                <tr>
+                    <td style="width: 15%;">
+                         <table>
+                             <tr>
+                                <td style="width: 30%!important; padding: 8px;">
+                                    <span style="font-size: 250%;">77</span>
+                                </td>
+                                 <td style="width: 70%!important; padding: 8px;">
+                                         <div class="text" role="alert">שפת לימוד:  עברית</div>
+                                     
+                                    </td>
+                             </tr>
+                             
+                         </table>
+                    </td>
+                    <td style="width: 85%;">
+                        <table class="table m-0 p-0 table-striped table-sm" style="width: 100%">
+                            <tbody>
+                                <tr>
+                                    <td style="width: 96px;">קבוצת רישום</td>
+                                    <td style="width: 96px;"></td>
+                                    <td style="width: 128px;">אין מידע אודות שעות לימוד</td>
+                                    <td style="width: 128px;"></td>
+                                    <td style="width: 200px;">
+                                    </td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</span>-->
+                                        <!--                -->
+                            </div>
+                    </div>                    <div class="tab-pane fade show " id="s_202301" role="tabpanel" aria-labelledby="s_202301-tab" style="padding: 16px;">
+                        <h5 class="card-title">שעות שבועיות</h5>
+                        <p class="card-text">
+                            3.5 נקודות אקדמיות
+                             • 3 שעות הרצאה
+                             • 1 שעות תרגול
+                            
+                            
+                        </p>
+                            <h5 class="card-title">אחראים</h5>
+                            <p class="card-text">
+                                <span tabindex="0" data-person="15203">דר. בן-עוז בלה</span>                            </p>
+                            <br/>
+                        <h5 class="card-title">מבחנים</h5>
+                                <span style="display: flex; flex-direction: column;"><strong>מועד א: 03-05-2024 09:00 - 12:00</strong></span>
+                                <ul>
+                                        <li>
+                                            <span data-building="14">אולמן</span> 600. 601. 602. 603. 604. 605. 700. 701. 702. 703. 704. 705. 706. 
+                                        </li>
+                                </ul>
+                                <span style="display: flex; flex-direction: column;"><strong>מועד ב: 30-05-2024 17:00 - 20:00</strong></span>
+                                <ul>
+                                        <li>
+                                            <span data-building="14">אולמן</span> 605. 700. 701. 702. 703. 704. 705. 706. 707. 708. 
+                                        </li>
+                                </ul>
+                            <br/>
+                            <h5 class="card-title" style="margin-top: 16px;">קבוצות רישום</h5>
+                            <div class="list-group">
+                                    <span class="flex-column list-group-item w-100 group_item m-0 p-0">
+                                        <div class="d-flex w-100 justify-content-between m-0 p-0">
+                                            <table class="table m-0 p-0 table-sm" style="width: 100%">
+                                                <tbody>
+                                                    <tr>
+                                                        <td style="width: 15%;">
+                                                             <table>
+                                                                 <tr>
+                                                                    <td style="width: 30%!important; padding: 8px;">
+                                                                        <span style="font-size: 250%;">11</span>
+                                                                    </td>
+                                                                     <td style="width: 70%!important; padding: 8px;">
+                                                                             <div class="text" role="alert">שפת לימוד:  עברית</div>
+                                                                         
+                                                                        </td>
+                                                                 </tr>
+                                                                 
+                                                             </table>
+                                                        </td>
+                                                        <td style="width: 85%;">
+                                                            <table class="table m-0 p-0 table-striped table-sm" style="width: 100%">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td style="width: 96px;">הרצאה</td>
+                                                                        <td style="width: 96px;">חמישי</td>
+                                                                        <td style="width: 128px;">12:30 - 15:30</td>
+                                                                        <td style="width: 128px;"><span
+                                                                                data-building="69">טאוב</span> 1</td>
+                                                                        <td style="width: 200px;">
+                                                                                <span href="javascript:void();" tabindex="0" data-person="15203"
+                                                                                      style="width: 256px;">| דר. בן-עוז בלה</span>
+                                                                        </td>
+                                                                        <td><br></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="width: 96px;">תרגול</td>
+                                                                        <td style="width: 96px;">שלישי</td>
+                                                                        <td style="width: 128px;">14:30 - 15:30</td>
+                                                                        <td style="width: 128px;"><span
+                                                                                data-building="14">אולמן</span> 705</td>
+                                                                        <td style="width: 200px;">
+                                                                                <span href="javascript:void();" tabindex="0" data-person="19827"
+                                                                                      style="width: 256px;">| גב. בשארה לילא</span>
+                                                                        </td>
+                                                                        <td><br></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </span>                                        <!--                -->
+                                    <!--                    <span class="flex-column list-group-item w-100 group_item m-0 p-0">
+    <div class="d-flex w-100 justify-content-between m-0 p-0">
+        <table class="table m-0 p-0 table-sm" style="width: 100%">
+            <tbody>
+                <tr>
+                    <td style="width: 15%;">
+                         <table>
+                             <tr>
+                                <td style="width: 30%!important; padding: 8px;">
+                                    <span style="font-size: 250%;">11</span>
+                                </td>
+                                 <td style="width: 70%!important; padding: 8px;">
+                                         <div class="text" role="alert">שפת לימוד:  עברית</div>
+                                     
+                                    </td>
+                             </tr>
+                             
+                         </table>
+                    </td>
+                    <td style="width: 85%;">
+                        <table class="table m-0 p-0 table-striped table-sm" style="width: 100%">
+                            <tbody>
+                                <tr>
+                                    <td style="width: 96px;">הרצאה</td>
+                                    <td style="width: 96px;">חמישי</td>
+                                    <td style="width: 128px;">12:30 - 15:30</td>
+                                    <td style="width: 128px;"><span
+                                            data-building="69">טאוב</span> 1</td>
+                                    <td style="width: 200px;">
+                                            <span href="javascript:void();" tabindex="0" data-person="15203"
+                                                  style="width: 256px;">| דר. בן-עוז בלה</span>
+                                    </td>
+                                    <td><br></td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 96px;">תרגול</td>
+                                    <td style="width: 96px;">שלישי</td>
+                                    <td style="width: 128px;">14:30 - 15:30</td>
+                                    <td style="width: 128px;"><span
+                                            data-building="14">אולמן</span> 705</td>
+                                    <td style="width: 200px;">
+                                            <span href="javascript:void();" tabindex="0" data-person="19827"
+                                                  style="width: 256px;">| גב. בשארה לילא</span>
+                                    </td>
+                                    <td><br></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</span>-->
+                                        <!--                -->
+                                        <!--                -->
+                                    <span class="flex-column list-group-item w-100 group_item m-0 p-0">
+                                        <div class="d-flex w-100 justify-content-between m-0 p-0">
+                                            <table class="table m-0 p-0 table-sm" style="width: 100%">
+                                                <tbody>
+                                                    <tr>
+                                                        <td style="width: 15%;">
+                                                             <table>
+                                                                 <tr>
+                                                                    <td style="width: 30%!important; padding: 8px;">
+                                                                        <span style="font-size: 250%;">12</span>
+                                                                    </td>
+                                                                     <td style="width: 70%!important; padding: 8px;">
+                                                                             <div class="text" role="alert">שפת לימוד:  עברית</div>
+                                                                         
+                                                                        </td>
+                                                                 </tr>
+                                                                 
+                                                             </table>
+                                                        </td>
+                                                        <td style="width: 85%;">
+                                                            <table class="table m-0 p-0 table-striped table-sm" style="width: 100%">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td style="width: 96px;">הרצאה</td>
+                                                                        <td style="width: 96px;">חמישי</td>
+                                                                        <td style="width: 128px;">12:30 - 15:30</td>
+                                                                        <td style="width: 128px;"><span
+                                                                                data-building="69">טאוב</span> 1</td>
+                                                                        <td style="width: 200px;">
+                                                                                <span href="javascript:void();" tabindex="0" data-person="15203"
+                                                                                      style="width: 256px;">| דר. בן-עוז בלה</span>
+                                                                        </td>
+                                                                        <td><br></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="width: 96px;">תרגול</td>
+                                                                        <td style="width: 96px;">ראשון</td>
+                                                                        <td style="width: 128px;">12:30 - 13:30</td>
+                                                                        <td style="width: 128px;"><span
+                                                                                data-building="14">אולמן</span> 703</td>
+                                                                        <td style="width: 200px;">
+                                                                                <span href="javascript:void();" tabindex="0" data-person="21201"
+                                                                                      style="width: 256px;">| גב. בר יצחק עלמה סופיה</span>
+                                                                        </td>
+                                                                        <td><br></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </span>                                        <!--                -->
+                                    <!--                    <span class="flex-column list-group-item w-100 group_item m-0 p-0">
+    <div class="d-flex w-100 justify-content-between m-0 p-0">
+        <table class="table m-0 p-0 table-sm" style="width: 100%">
+            <tbody>
+                <tr>
+                    <td style="width: 15%;">
+                         <table>
+                             <tr>
+                                <td style="width: 30%!important; padding: 8px;">
+                                    <span style="font-size: 250%;">12</span>
+                                </td>
+                                 <td style="width: 70%!important; padding: 8px;">
+                                         <div class="text" role="alert">שפת לימוד:  עברית</div>
+                                     
+                                    </td>
+                             </tr>
+                             
+                         </table>
+                    </td>
+                    <td style="width: 85%;">
+                        <table class="table m-0 p-0 table-striped table-sm" style="width: 100%">
+                            <tbody>
+                                <tr>
+                                    <td style="width: 96px;">הרצאה</td>
+                                    <td style="width: 96px;">חמישי</td>
+                                    <td style="width: 128px;">12:30 - 15:30</td>
+                                    <td style="width: 128px;"><span
+                                            data-building="69">טאוב</span> 1</td>
+                                    <td style="width: 200px;">
+                                            <span href="javascript:void();" tabindex="0" data-person="15203"
+                                                  style="width: 256px;">| דר. בן-עוז בלה</span>
+                                    </td>
+                                    <td><br></td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 96px;">תרגול</td>
+                                    <td style="width: 96px;">ראשון</td>
+                                    <td style="width: 128px;">12:30 - 13:30</td>
+                                    <td style="width: 128px;"><span
+                                            data-building="14">אולמן</span> 703</td>
+                                    <td style="width: 200px;">
+                                            <span href="javascript:void();" tabindex="0" data-person="21201"
+                                                  style="width: 256px;">| גב. בר יצחק עלמה סופיה</span>
+                                    </td>
+                                    <td><br></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</span>-->
+                                        <!--                -->
+                                        <!--                -->
+                                    <span class="flex-column list-group-item w-100 group_item m-0 p-0">
+                                        <div class="d-flex w-100 justify-content-between m-0 p-0">
+                                            <table class="table m-0 p-0 table-sm" style="width: 100%">
+                                                <tbody>
+                                                    <tr>
+                                                        <td style="width: 15%;">
+                                                             <table>
+                                                                 <tr>
+                                                                    <td style="width: 30%!important; padding: 8px;">
+                                                                        <span style="font-size: 250%;">13</span>
+                                                                    </td>
+                                                                     <td style="width: 70%!important; padding: 8px;">
+                                                                             <div class="text" role="alert">שפת לימוד:  עברית</div>
+                                                                         
+                                                                        </td>
+                                                                 </tr>
+                                                                 
+                                                             </table>
+                                                        </td>
+                                                        <td style="width: 85%;">
+                                                            <table class="table m-0 p-0 table-striped table-sm" style="width: 100%">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td style="width: 96px;">הרצאה</td>
+                                                                        <td style="width: 96px;">חמישי</td>
+                                                                        <td style="width: 128px;">12:30 - 15:30</td>
+                                                                        <td style="width: 128px;"><span
+                                                                                data-building="69">טאוב</span> 1</td>
+                                                                        <td style="width: 200px;">
+                                                                                <span href="javascript:void();" tabindex="0" data-person="15203"
+                                                                                      style="width: 256px;">| דר. בן-עוז בלה</span>
+                                                                        </td>
+                                                                        <td><br></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="width: 96px;">תרגול</td>
+                                                                        <td style="width: 96px;">שלישי</td>
+                                                                        <td style="width: 128px;">13:30 - 14:30</td>
+                                                                        <td style="width: 128px;"><span
+                                                                                data-building="14">אולמן</span> 705</td>
+                                                                        <td style="width: 200px;">
+                                                                                <span href="javascript:void();" tabindex="0" data-person="21201"
+                                                                                      style="width: 256px;">| גב. בר יצחק עלמה סופיה</span>
+                                                                        </td>
+                                                                        <td><br></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </span>                                        <!--                -->
+                                    <!--                    <span class="flex-column list-group-item w-100 group_item m-0 p-0">
+    <div class="d-flex w-100 justify-content-between m-0 p-0">
+        <table class="table m-0 p-0 table-sm" style="width: 100%">
+            <tbody>
+                <tr>
+                    <td style="width: 15%;">
+                         <table>
+                             <tr>
+                                <td style="width: 30%!important; padding: 8px;">
+                                    <span style="font-size: 250%;">13</span>
+                                </td>
+                                 <td style="width: 70%!important; padding: 8px;">
+                                         <div class="text" role="alert">שפת לימוד:  עברית</div>
+                                     
+                                    </td>
+                             </tr>
+                             
+                         </table>
+                    </td>
+                    <td style="width: 85%;">
+                        <table class="table m-0 p-0 table-striped table-sm" style="width: 100%">
+                            <tbody>
+                                <tr>
+                                    <td style="width: 96px;">הרצאה</td>
+                                    <td style="width: 96px;">חמישי</td>
+                                    <td style="width: 128px;">12:30 - 15:30</td>
+                                    <td style="width: 128px;"><span
+                                            data-building="69">טאוב</span> 1</td>
+                                    <td style="width: 200px;">
+                                            <span href="javascript:void();" tabindex="0" data-person="15203"
+                                                  style="width: 256px;">| דר. בן-עוז בלה</span>
+                                    </td>
+                                    <td><br></td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 96px;">תרגול</td>
+                                    <td style="width: 96px;">שלישי</td>
+                                    <td style="width: 128px;">13:30 - 14:30</td>
+                                    <td style="width: 128px;"><span
+                                            data-building="14">אולמן</span> 705</td>
+                                    <td style="width: 200px;">
+                                            <span href="javascript:void();" tabindex="0" data-person="21201"
+                                                  style="width: 256px;">| גב. בר יצחק עלמה סופיה</span>
+                                    </td>
+                                    <td><br></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</span>-->
+                                        <!--                -->
+                                        <!--                -->
+                                    <span class="flex-column list-group-item w-100 group_item m-0 p-0">
+                                        <div class="d-flex w-100 justify-content-between m-0 p-0">
+                                            <table class="table m-0 p-0 table-sm" style="width: 100%">
+                                                <tbody>
+                                                    <tr>
+                                                        <td style="width: 15%;">
+                                                             <table>
+                                                                 <tr>
+                                                                    <td style="width: 30%!important; padding: 8px;">
+                                                                        <span style="font-size: 250%;">14</span>
+                                                                    </td>
+                                                                     <td style="width: 70%!important; padding: 8px;">
+                                                                             <div class="text" role="alert">שפת לימוד:  עברית</div>
+                                                                         
+                                                                        </td>
+                                                                 </tr>
+                                                                 
+                                                             </table>
+                                                        </td>
+                                                        <td style="width: 85%;">
+                                                            <table class="table m-0 p-0 table-striped table-sm" style="width: 100%">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td style="width: 96px;">הרצאה</td>
+                                                                        <td style="width: 96px;">חמישי</td>
+                                                                        <td style="width: 128px;">12:30 - 15:30</td>
+                                                                        <td style="width: 128px;"><span
+                                                                                data-building="69">טאוב</span> 1</td>
+                                                                        <td style="width: 200px;">
+                                                                                <span href="javascript:void();" tabindex="0" data-person="15203"
+                                                                                      style="width: 256px;">| דר. בן-עוז בלה</span>
+                                                                        </td>
+                                                                        <td><br></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="width: 96px;">תרגול</td>
+                                                                        <td style="width: 96px;">חמישי</td>
+                                                                        <td style="width: 128px;">10:30 - 11:30</td>
+                                                                        <td style="width: 128px;"><span
+                                                                                data-building="14">אולמן</span> 705</td>
+                                                                        <td style="width: 200px;">
+                                                                                <span href="javascript:void();" tabindex="0" data-person="19827"
+                                                                                      style="width: 256px;">| גב. בשארה לילא</span>
+                                                                        </td>
+                                                                        <td><br></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </span>                                        <!--                -->
+                                    <!--                    <span class="flex-column list-group-item w-100 group_item m-0 p-0">
+    <div class="d-flex w-100 justify-content-between m-0 p-0">
+        <table class="table m-0 p-0 table-sm" style="width: 100%">
+            <tbody>
+                <tr>
+                    <td style="width: 15%;">
+                         <table>
+                             <tr>
+                                <td style="width: 30%!important; padding: 8px;">
+                                    <span style="font-size: 250%;">14</span>
+                                </td>
+                                 <td style="width: 70%!important; padding: 8px;">
+                                         <div class="text" role="alert">שפת לימוד:  עברית</div>
+                                     
+                                    </td>
+                             </tr>
+                             
+                         </table>
+                    </td>
+                    <td style="width: 85%;">
+                        <table class="table m-0 p-0 table-striped table-sm" style="width: 100%">
+                            <tbody>
+                                <tr>
+                                    <td style="width: 96px;">הרצאה</td>
+                                    <td style="width: 96px;">חמישי</td>
+                                    <td style="width: 128px;">12:30 - 15:30</td>
+                                    <td style="width: 128px;"><span
+                                            data-building="69">טאוב</span> 1</td>
+                                    <td style="width: 200px;">
+                                            <span href="javascript:void();" tabindex="0" data-person="15203"
+                                                  style="width: 256px;">| דר. בן-עוז בלה</span>
+                                    </td>
+                                    <td><br></td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 96px;">תרגול</td>
+                                    <td style="width: 96px;">חמישי</td>
+                                    <td style="width: 128px;">10:30 - 11:30</td>
+                                    <td style="width: 128px;"><span
+                                            data-building="14">אולמן</span> 705</td>
+                                    <td style="width: 200px;">
+                                            <span href="javascript:void();" tabindex="0" data-person="19827"
+                                                  style="width: 256px;">| גב. בשארה לילא</span>
+                                    </td>
+                                    <td><br></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</span>-->
+                                        <!--                -->
+                                        <!--                -->
+                                    <span class="flex-column list-group-item w-100 group_item m-0 p-0">
+                                        <div class="d-flex w-100 justify-content-between m-0 p-0">
+                                            <table class="table m-0 p-0 table-sm" style="width: 100%">
+                                                <tbody>
+                                                    <tr>
+                                                        <td style="width: 15%;">
+                                                             <table>
+                                                                 <tr>
+                                                                    <td style="width: 30%!important; padding: 8px;">
+                                                                        <span style="font-size: 250%;">15</span>
+                                                                    </td>
+                                                                     <td style="width: 70%!important; padding: 8px;">
+                                                                             <div class="text" role="alert">שפת לימוד:  עברית</div>
+                                                                         
+                                                                        </td>
+                                                                 </tr>
+                                                                 
+                                                             </table>
+                                                        </td>
+                                                        <td style="width: 85%;">
+                                                            <table class="table m-0 p-0 table-striped table-sm" style="width: 100%">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td style="width: 96px;">הרצאה</td>
+                                                                        <td style="width: 96px;">חמישי</td>
+                                                                        <td style="width: 128px;">12:30 - 15:30</td>
+                                                                        <td style="width: 128px;"><span
+                                                                                data-building="69">טאוב</span> 1</td>
+                                                                        <td style="width: 200px;">
+                                                                                <span href="javascript:void();" tabindex="0" data-person="15203"
+                                                                                      style="width: 256px;">| דר. בן-עוז בלה</span>
+                                                                        </td>
+                                                                        <td><br></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="width: 96px;">תרגול</td>
+                                                                        <td style="width: 96px;">ראשון</td>
+                                                                        <td style="width: 128px;">10:30 - 11:30</td>
+                                                                        <td style="width: 128px;"><span
+                                                                                data-building="14">אולמן</span> 704</td>
+                                                                        <td style="width: 200px;">
+                                                                                <span href="javascript:void();" tabindex="0" data-person="20661"
+                                                                                      style="width: 256px;">| גב. עמיכאן ירדן</span>
+                                                                        </td>
+                                                                        <td><br></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </span>                                        <!--                -->
+                                    <!--                    <span class="flex-column list-group-item w-100 group_item m-0 p-0">
+    <div class="d-flex w-100 justify-content-between m-0 p-0">
+        <table class="table m-0 p-0 table-sm" style="width: 100%">
+            <tbody>
+                <tr>
+                    <td style="width: 15%;">
+                         <table>
+                             <tr>
+                                <td style="width: 30%!important; padding: 8px;">
+                                    <span style="font-size: 250%;">15</span>
+                                </td>
+                                 <td style="width: 70%!important; padding: 8px;">
+                                         <div class="text" role="alert">שפת לימוד:  עברית</div>
+                                     
+                                    </td>
+                             </tr>
+                             
+                         </table>
+                    </td>
+                    <td style="width: 85%;">
+                        <table class="table m-0 p-0 table-striped table-sm" style="width: 100%">
+                            <tbody>
+                                <tr>
+                                    <td style="width: 96px;">הרצאה</td>
+                                    <td style="width: 96px;">חמישי</td>
+                                    <td style="width: 128px;">12:30 - 15:30</td>
+                                    <td style="width: 128px;"><span
+                                            data-building="69">טאוב</span> 1</td>
+                                    <td style="width: 200px;">
+                                            <span href="javascript:void();" tabindex="0" data-person="15203"
+                                                  style="width: 256px;">| דר. בן-עוז בלה</span>
+                                    </td>
+                                    <td><br></td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 96px;">תרגול</td>
+                                    <td style="width: 96px;">ראשון</td>
+                                    <td style="width: 128px;">10:30 - 11:30</td>
+                                    <td style="width: 128px;"><span
+                                            data-building="14">אולמן</span> 704</td>
+                                    <td style="width: 200px;">
+                                            <span href="javascript:void();" tabindex="0" data-person="20661"
+                                                  style="width: 256px;">| גב. עמיכאן ירדן</span>
+                                    </td>
+                                    <td><br></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</span>-->
+                                        <!--                -->
+                                        <!--                -->
+                                    <span class="flex-column list-group-item w-100 group_item m-0 p-0">
+                                        <div class="d-flex w-100 justify-content-between m-0 p-0">
+                                            <table class="table m-0 p-0 table-sm" style="width: 100%">
+                                                <tbody>
+                                                    <tr>
+                                                        <td style="width: 15%;">
+                                                             <table>
+                                                                 <tr>
+                                                                    <td style="width: 30%!important; padding: 8px;">
+                                                                        <span style="font-size: 250%;">16</span>
+                                                                    </td>
+                                                                     <td style="width: 70%!important; padding: 8px;">
+                                                                             <div class="text" role="alert">שפת לימוד:  עברית</div>
+                                                                         
+                                                                        </td>
+                                                                 </tr>
+                                                                 
+                                                             </table>
+                                                        </td>
+                                                        <td style="width: 85%;">
+                                                            <table class="table m-0 p-0 table-striped table-sm" style="width: 100%">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td style="width: 96px;">הרצאה</td>
+                                                                        <td style="width: 96px;">חמישי</td>
+                                                                        <td style="width: 128px;">12:30 - 15:30</td>
+                                                                        <td style="width: 128px;"><span
+                                                                                data-building="69">טאוב</span> 1</td>
+                                                                        <td style="width: 200px;">
+                                                                                <span href="javascript:void();" tabindex="0" data-person="15203"
+                                                                                      style="width: 256px;">| דר. בן-עוז בלה</span>
+                                                                        </td>
+                                                                        <td><br></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="width: 96px;">תרגול</td>
+                                                                        <td style="width: 96px;">שלישי</td>
+                                                                        <td style="width: 128px;">14:30 - 15:30</td>
+                                                                        <td style="width: 128px;"><span
+                                                                                data-building="14">אולמן</span> 704</td>
+                                                                        <td style="width: 200px;">
+                                                                                <span href="javascript:void();" tabindex="0" data-person="20661"
+                                                                                      style="width: 256px;">| גב. עמיכאן ירדן</span>
+                                                                        </td>
+                                                                        <td><br></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </span>                                        <!--                -->
+                                    <!--                    <span class="flex-column list-group-item w-100 group_item m-0 p-0">
+    <div class="d-flex w-100 justify-content-between m-0 p-0">
+        <table class="table m-0 p-0 table-sm" style="width: 100%">
+            <tbody>
+                <tr>
+                    <td style="width: 15%;">
+                         <table>
+                             <tr>
+                                <td style="width: 30%!important; padding: 8px;">
+                                    <span style="font-size: 250%;">16</span>
+                                </td>
+                                 <td style="width: 70%!important; padding: 8px;">
+                                         <div class="text" role="alert">שפת לימוד:  עברית</div>
+                                     
+                                    </td>
+                             </tr>
+                             
+                         </table>
+                    </td>
+                    <td style="width: 85%;">
+                        <table class="table m-0 p-0 table-striped table-sm" style="width: 100%">
+                            <tbody>
+                                <tr>
+                                    <td style="width: 96px;">הרצאה</td>
+                                    <td style="width: 96px;">חמישי</td>
+                                    <td style="width: 128px;">12:30 - 15:30</td>
+                                    <td style="width: 128px;"><span
+                                            data-building="69">טאוב</span> 1</td>
+                                    <td style="width: 200px;">
+                                            <span href="javascript:void();" tabindex="0" data-person="15203"
+                                                  style="width: 256px;">| דר. בן-עוז בלה</span>
+                                    </td>
+                                    <td><br></td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 96px;">תרגול</td>
+                                    <td style="width: 96px;">שלישי</td>
+                                    <td style="width: 128px;">14:30 - 15:30</td>
+                                    <td style="width: 128px;"><span
+                                            data-building="14">אולמן</span> 704</td>
+                                    <td style="width: 200px;">
+                                            <span href="javascript:void();" tabindex="0" data-person="20661"
+                                                  style="width: 256px;">| גב. עמיכאן ירדן</span>
+                                    </td>
+                                    <td><br></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</span>-->
+                                        <!--                -->
+                                        <!--                -->
+                                    <span class="flex-column list-group-item w-100 group_item m-0 p-0">
+                                        <div class="d-flex w-100 justify-content-between m-0 p-0">
+                                            <table class="table m-0 p-0 table-sm" style="width: 100%">
+                                                <tbody>
+                                                    <tr>
+                                                        <td style="width: 15%;">
+                                                             <table>
+                                                                 <tr>
+                                                                    <td style="width: 30%!important; padding: 8px;">
+                                                                        <span style="font-size: 250%;">69</span>
+                                                                    </td>
+                                                                     <td style="width: 70%!important; padding: 8px;">
+                                                                             <div class="text" role="alert">שפת לימוד:  עברית</div>
+                                                                         
+                                                                        </td>
+                                                                 </tr>
+                                                                 
+                                                             </table>
+                                                        </td>
+                                                        <td style="width: 85%;">
+                                                            <table class="table m-0 p-0 table-striped table-sm" style="width: 100%">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td style="width: 96px;">קבוצת רישום</td>
+                                                                        <td style="width: 96px;"></td>
+                                                                        <td style="width: 128px;">אין מידע אודות שעות לימוד</td>
+                                                                        <td style="width: 128px;"></td>
+                                                                        <td style="width: 200px;">
+                                                                        </td>
+                                                                        <td></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </span>                                        <!--                -->
+                                        <!--                -->
+                                    <!--                    <span class="flex-column list-group-item w-100 group_item m-0 p-0">
+    <div class="d-flex w-100 justify-content-between m-0 p-0">
+        <table class="table m-0 p-0 table-sm" style="width: 100%">
+            <tbody>
+                <tr>
+                    <td style="width: 15%;">
+                         <table>
+                             <tr>
+                                <td style="width: 30%!important; padding: 8px;">
+                                    <span style="font-size: 250%;">69</span>
+                                </td>
+                                 <td style="width: 70%!important; padding: 8px;">
+                                         <div class="text" role="alert">שפת לימוד:  עברית</div>
+                                     
+                                    </td>
+                             </tr>
+                             
+                         </table>
+                    </td>
+                    <td style="width: 85%;">
+                        <table class="table m-0 p-0 table-striped table-sm" style="width: 100%">
+                            <tbody>
+                                <tr>
+                                    <td style="width: 96px;">קבוצת רישום</td>
+                                    <td style="width: 96px;"></td>
+                                    <td style="width: 128px;">אין מידע אודות שעות לימוד</td>
+                                    <td style="width: 128px;"></td>
+                                    <td style="width: 200px;">
+                                    </td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</span>-->
+                                        <!--                -->
+                            </div>
+                    </div>                    <div class="tab-pane fade show " id="s_202203" role="tabpanel" aria-labelledby="s_202203-tab" style="padding: 16px;">
+                        <h5 class="card-title">שעות שבועיות</h5>
+                        <p class="card-text">
+                            3.5 נקודות אקדמיות
+                             • 3 שעות הרצאה
+                             • 1 שעות תרגול
+                            
+                            
+                        </p>
+                            <h5 class="card-title">אחראים</h5>
+                            <p class="card-text">
+                                <span tabindex="0" data-person="15203">דר. בן-עוז בלה</span>                            </p>
+                            <br/>
+                        <h5 class="card-title">מבחנים</h5>
+                                <span style="display: flex; flex-direction: column;"><strong>מועד א: 23-10-2023 13:00 - 16:00</strong></span>
+                                <span style="display: flex; flex-direction: column;"><strong>מועד ב: 30-11-2023 15:30 - 18:30</strong></span>
+                                <ul>
+                                        <li>
+                                            <span data-building="14">אולמן</span> 303. 310. 
+                                        </li>
+                                </ul>
+                            <br/>
+                            <h5 class="card-title" style="margin-top: 16px;">קבוצות רישום</h5>
+                            <div class="list-group">
+                                    <span class="flex-column list-group-item w-100 group_item m-0 p-0">
+                                        <div class="d-flex w-100 justify-content-between m-0 p-0">
+                                            <table class="table m-0 p-0 table-sm" style="width: 100%">
+                                                <tbody>
+                                                    <tr>
+                                                        <td style="width: 15%;">
+                                                             <table>
+                                                                 <tr>
+                                                                    <td style="width: 30%!important; padding: 8px;">
+                                                                        <span style="font-size: 250%;">11</span>
+                                                                    </td>
+                                                                     <td style="width: 70%!important; padding: 8px;">
+                                                                             <div class="text" role="alert">שפת לימוד:  עברית</div>
+                                                                         
+                                                                        </td>
+                                                                 </tr>
+                                                                 
+                                                             </table>
+                                                        </td>
+                                                        <td style="width: 85%;">
+                                                            <table class="table m-0 p-0 table-striped table-sm" style="width: 100%">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td style="width: 96px;">הרצאה</td>
+                                                                        <td style="width: 96px;">ראשון</td>
+                                                                        <td style="width: 128px;">15:30 - 18:30</td>
+                                                                        <td style="width: 128px;"><span
+                                                                                data-building="14">אולמן</span> 604</td>
+                                                                        <td style="width: 200px;">
+                                                                                <span href="javascript:void();" tabindex="0" data-person="15203"
+                                                                                      style="width: 256px;">| דר. בן-עוז בלה</span>
+                                                                        </td>
+                                                                        <td><br></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="width: 96px;">הרצאה</td>
+                                                                        <td style="width: 96px;">שלישי</td>
+                                                                        <td style="width: 128px;">15:30 - 18:30</td>
+                                                                        <td style="width: 128px;"><span
+                                                                                data-building="14">אולמן</span> 604</td>
+                                                                        <td style="width: 200px;">
+                                                                                <span href="javascript:void();" tabindex="0" data-person="15203"
+                                                                                      style="width: 256px;">| דר. בן-עוז בלה</span>
+                                                                        </td>
+                                                                        <td><br></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td style="width: 96px;">תרגול</td>
+                                                                        <td style="width: 96px;">רביעי</td>
+                                                                        <td style="width: 128px;">10:30 - 12:30</td>
+                                                                        <td style="width: 128px;"><span
+                                                                                data-building="14">אולמן</span> 603</td>
+                                                                        <td style="width: 200px;">
+                                                                                <span href="javascript:void();" tabindex="0" data-person="19827"
+                                                                                      style="width: 256px;">| גב. בשארה לילא</span>
+                                                                        </td>
+                                                                        <td><br></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </span>                                        <!--                -->
+                                    <!--                    <span class="flex-column list-group-item w-100 group_item m-0 p-0">
+    <div class="d-flex w-100 justify-content-between m-0 p-0">
+        <table class="table m-0 p-0 table-sm" style="width: 100%">
+            <tbody>
+                <tr>
+                    <td style="width: 15%;">
+                         <table>
+                             <tr>
+                                <td style="width: 30%!important; padding: 8px;">
+                                    <span style="font-size: 250%;">11</span>
+                                </td>
+                                 <td style="width: 70%!important; padding: 8px;">
+                                         <div class="text" role="alert">שפת לימוד:  עברית</div>
+                                     
+                                    </td>
+                             </tr>
+                             
+                         </table>
+                    </td>
+                    <td style="width: 85%;">
+                        <table class="table m-0 p-0 table-striped table-sm" style="width: 100%">
+                            <tbody>
+                                <tr>
+                                    <td style="width: 96px;">הרצאה</td>
+                                    <td style="width: 96px;">ראשון</td>
+                                    <td style="width: 128px;">15:30 - 18:30</td>
+                                    <td style="width: 128px;"><span
+                                            data-building="14">אולמן</span> 604</td>
+                                    <td style="width: 200px;">
+                                            <span href="javascript:void();" tabindex="0" data-person="15203"
+                                                  style="width: 256px;">| דר. בן-עוז בלה</span>
+                                    </td>
+                                    <td><br></td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 96px;">הרצאה</td>
+                                    <td style="width: 96px;">שלישי</td>
+                                    <td style="width: 128px;">15:30 - 18:30</td>
+                                    <td style="width: 128px;"><span
+                                            data-building="14">אולמן</span> 604</td>
+                                    <td style="width: 200px;">
+                                            <span href="javascript:void();" tabindex="0" data-person="15203"
+                                                  style="width: 256px;">| דר. בן-עוז בלה</span>
+                                    </td>
+                                    <td><br></td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 96px;">תרגול</td>
+                                    <td style="width: 96px;">רביעי</td>
+                                    <td style="width: 128px;">10:30 - 12:30</td>
+                                    <td style="width: 128px;"><span
+                                            data-building="14">אולמן</span> 603</td>
+                                    <td style="width: 200px;">
+                                            <span href="javascript:void();" tabindex="0" data-person="19827"
+                                                  style="width: 256px;">| גב. בשארה לילא</span>
+                                    </td>
+                                    <td><br></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</span>-->
+                                        <!--                -->
+                                        <!--                -->
+                            </div>
+                    </div>            </div>
+        </div>
+</div></div>
+                            
+                            
+                        </section>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <nav class="fixed-top navbar navbar-bootswatch navbar-expand moodle-has-zindex" style="min-height: 60px;">
+        <style>
+            .fa-sun:before{content:"\f185"}
+            .fa-moon:before{content:"\f186"}
+    
+            .navbar-light .navbar-nav .nav-link {
+                color: rgba(248,249,250) !important;
+            }
+    
+    
+    
+            .navbar-nav .popover-region
+            {
+                padding-left: 12px;
+            }
+    
+            .navbar-nav .popover-region .icon
+            {
+                zoom:1.3 !important;
+            }
+        </style>
+    
+        <div data-region="drawer-toggle" class="d-inline-block mr-3">
+            <button aria-expanded="false" aria-controls="nav-drawer" type="button" class="btn nav-link float-sm-left mr-1 btn-light bg-gray" data-action="toggle-drawer" data-side="left" data-preference="drawer-open-nav"><i class="icon fa fa-bars fa-fw " aria-hidden="true" ></i><span class="sr-only">חלון סקירה צדדי</span></button>
+        </div>
+    
+        
+        <div style="margin-top:10px;" id="nav-drawer" data-region="drawer" class="d-print-none moodle-has-zindex closed" aria-hidden="true" tabindex="-1">
+            
+                <nav class="list-group m-0 p-0" aria-label="">
+                <ul>
+                        <li style="list-style-type: none">
+                            <a class="list-group-item list-group-item-action active" href="https://students.technion.ac.il/" data-key="home" data-isexpandable="0" data-indent="0" data-showdivider="0" data-type="1" data-nodetype="1" data-collapse="0" data-forceopen="1" data-isactive="1" data-hidden="0" data-preceedwithhr="0">
+                                <div class="ml-0">
+                                    <div class="media">
+                                                    <span class="media-left icon_bl" style="color:black">
+                                                        <i class="icon fa fa-home fa-fw "  title="ראשי" role="img" aria-label="ראשי"></i>
+                                                    </span>
+                                        <span class="media-body ">ראשי</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                </ul>
+                </nav>
+                <nav class="list-group m-0 p-0" aria-label="">
+                <ul>
+                        <li style="list-style-type: none">
+                            <a class="list-group-item list-group-item-action " href="https://portalex.technion.ac.il/ovv/?sap-theme=sap_belize#/studyfields" data-key="technionsearch_search" data-isexpandable="0" data-indent="0" data-showdivider="0" data-type="1" data-nodetype="1" data-collapse="0" data-forceopen="1" data-isactive="0" data-hidden="0" data-preceedwithhr="0">
+                                <div class="ml-0">
+                                    <div class="media">
+                                                    <span class="media-left icon_bl" style="color:black">
+                                                        <i class="icon fa fa-search fa-fw "  title="חיפוש מקצועות בטכניון" role="img" aria-label="חיפוש מקצועות בטכניון"></i>
+                                                    </span>
+                                        <span class="media-body ">חיפוש מקצועות בטכניון</span>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                </ul>
+                </nav>
+            
+        </div>
+        
+        
+        
+        
+    
+    
+    
+    
+        <a href="https://students.technion.ac.il/" class="navbar-brand d-flex align-items-center m-1 p-0 aabtn" >
+                    <img src="https://students.technion.ac.il/theme/technionv2/media/technion_logo_heb_white.png" class="logo" alt="my.technion">
+    
+        </a>
+    
+    
+        <!-- navbar_language_select_bar -->
+        <ul class="navbar-nav d-none d-md-flex mr-auto pl-4">
+            <!-- custom_menu -->
+            <li class="dropdown nav-item">
+    <a class="dropdown-toggle nav-link" id="drop-down-6af473db9ba826af473db995704" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" href="#" title="שפת ממשק" aria-controls="drop-down-menu-6af473db9ba826af473db995704">
+        עברית ‎(he)‎
+    </a>
+    <div class="dropdown-menu" role="menu" id="drop-down-menu-6af473db9ba826af473db995704" aria-labelledby="drop-down-6af473db9ba826af473db995704">
+                <a class="dropdown-item" role="menuitem" href="https://students.technion.ac.il/local/technionsearch/course/134020/202502?lang=he"  >עברית ‎(he)‎</a>
+                <a class="dropdown-item" role="menuitem" href="https://students.technion.ac.il/local/technionsearch/course/134020/202502?lang=en"  lang="en" >English ‎(en)‎</a>
+    </div>
+</li>
+            <!-- page_heading_menu -->
+            
+        </ul>
+    
+    
+        <div id="usernavigation" class="navbar-nav my-1 ml-auto">
+    
+                <div class="float-right" style="
+                    scale: 1.5;
+                    top: 17px;
+                    position: relative;">
+                    <a id="activate_dark_mode" data-dark_mode="0" class="nav-link d-inline-block position-relative" role="button" style="cursor: pointer;">
+                        <i class="icon fa  fa-moon-o fa-fw " title="הפעל או בטל מצב מוחשך" aria-label="הפעל או בטל מצב מוחשך"></i>
+                    </a>
+                </div>
+                
+    
+    
+            <div class="border-left h-50 align-self-center mx-1"></div>
+                
+            <div class="d-flex align-items-stretch usermenu-container" data-region="usermenu">
+                    <div class="usermenu"><span class="login nav-link">התחברו למערכת (<a href="https://students.technion.ac.il/login/index.php">התחברות</a>)</span></div>
+    
+            </div>
+    
+        </div>
+    
+    
+    </nav>
+
+<div  class="drawer drawer-left drawer-primary d-print-none not-initialized" data-region="fixed-drawer" id="theme_boost-drawers-primary" data-preference="" data-state="show-drawer-primary" data-forceopen="0" data-close-on-resize="1">
+    <div class="drawerheader">
+        <button
+            class="btn drawertoggle icon-no-margin hidden"
+            data-toggler="drawers"
+            data-action="closedrawer"
+            data-target="theme_boost-drawers-primary"
+            data-toggle="tooltip"
+            data-placement="right"
+            title="סגירת סרגל ניווט צדדי"
+        >
+            <i class="icon fa fa-xmark fa-fw " aria-hidden="true" ></i>
+        </button>
+    </div>
+    <div class="drawercontent drag-container" data-usertour="scroller">
+                <div class="list-group">
+                <a href="https://students.technion.ac.il/" class="list-group-item list-group-item-action active " aria-current="true">
+                    ראשי
+                </a>
+        </div>
+
+    </div>
+</div>
+    
+    <!--<div id="page-wrapper"><nav>-->
+    <footer id="page-footer" class="navbar-bootswatch py-3 text-light page-footer-dark">
+        <div class="container footer-dark-inner float-left">
+            <div id="course-footer"></div>
+    
+            <div class="pb-3">
+            </div>
+    
+            
+            <div class="tool_usertours-resettourcontainer"></div>
+            <style>
+                #rever_color{
+                    color: #00000;
+                    -webkit-filter: invert(100%);
+                    filter: invert(100%);
+                }
+            </style>
+            <div class="home_link_css">
+                <div class="sitelink" id=""><a title="Technion Institute of Technology" href="https://students.technion.ac.il"><img src="https://students.technion.ac.il\theme\technionv2\media\technion_logo_heb_white.png" alt="The Technion Institute of Technology" /></a></div>
+            </div>
+    
+    
+            <nav class="nav navbar-nav d-md-none" aria-label="תפריט מותאם אישית">
+                    <ul class="list-unstyled pt-3">
+                                        <li><a href="#" title="שפת ממשק">עברית ‎(he)‎</a></li>
+                                    <li>
+                                        <ul class="list-unstyled ml-3">
+                                                            <li><a href="https://students.technion.ac.il/local/technionsearch/course/134020/202502?lang=he" title="שפת ממשק">עברית ‎(he)‎</a></li>
+                                                            <li><a href="https://students.technion.ac.il/local/technionsearch/course/134020/202502?lang=en" title="שפת ממשק">English ‎(en)‎</a></li>
+                                        </ul>
+                                    </li>
+                    </ul>
+            </nav>
+            
+            
+            
+<br>
+<ul class="footer_lang">
+<li><a style="color: white;" href="https://www.technion.ac.il/%d7%9e%d7%93%d7%99%d7%a0%d7%99%d7%95%d7%aa-%d7%a4%d7%a8%d7%98%d7%99%d7%95%d7%aa/" target="_blank" rel="noopener">
+מדיניות הפרטיות</li>
+<li></a><a style="color: white;" href="https://www.technion.ac.il/%d7%94%d7%a6%d7%94%d7%a8%d7%aa-%d7%a0%d7%92%d7%99%d7%a9%d7%95%d7%aa/" target="_blank" rel="noopener">
+הצהרת נגישות</a></li>
+</ul><script>
+//<![CDATA[
+var require = {
+    baseUrl : 'https://students.technion.ac.il/lib/requirejs.php/-1/',
+    // We only support AMD modules with an explicit define() statement.
+    enforceDefine: true,
+    skipDataMain: true,
+    waitSeconds : 0,
+
+    paths: {
+        jquery: 'https://students.technion.ac.il/lib/javascript.php/-1/lib/jquery/jquery-3.7.1',
+        jqueryui: 'https://students.technion.ac.il/lib/javascript.php/-1/lib/jquery/ui-1.13.2/jquery-ui',
+        jqueryprivate: 'https://students.technion.ac.il/lib/javascript.php/-1/lib/requirejs/jquery-private'
+    },
+
+    // Custom jquery config map.
+    map: {
+      // '*' means all modules will get 'jqueryprivate'
+      // for their 'jquery' dependency.
+      '*': { jquery: 'jqueryprivate' },
+
+      // 'jquery-private' wants the real jQuery module
+      // though. If this line was not here, there would
+      // be an unresolvable cyclic dependency.
+      jqueryprivate: { jquery: 'jquery' }
+    }
+};
+
+//]]>
+</script>
+<script src="https://students.technion.ac.il/lib/javascript.php/-1/lib/requirejs/require.js"></script>
+<script>
+//<![CDATA[
+M.util.js_pending("core/first");
+require(['core/first'], function() {
+require(['core/prefetch'])
+;
+M.util.js_pending('local_technionsearch/object_enrichment'); require(['local_technionsearch/object_enrichment'], function(amd) {amd.course_enrichment(); M.util.js_complete('local_technionsearch/object_enrichment');});;
+M.util.js_pending('local_technionsearch/gtag_source'); require(['local_technionsearch/gtag_source'], function(amd) {M.util.js_complete('local_technionsearch/gtag_source');});;
+M.util.js_pending('filter_mathjaxloader/loader'); require(['filter_mathjaxloader/loader'], function(amd) {amd.configure({"mathjaxconfig":"\nMathJax.Hub.Config({\n    config: [\"Accessible.js\", \"Safe.js\"],\n    errorSettings: { message: [\"!\"] },\n    skipStartupTypeset: true,\n    messageStyle: \"none\"\n});\n","lang":"he"}); M.util.js_complete('filter_mathjaxloader/loader');});;
+require(["media_videojs/loader"], function(loader) {
+    loader.setUp('he');
+});;
+M.util.js_pending('theme_technionv2/exception_override'); require(['theme_technionv2/exception_override'], function(amd) {amd.init(); M.util.js_complete('theme_technionv2/exception_override');});;
+M.util.js_pending('theme_technionv2/cookie_and_consent'); require(['theme_technionv2/cookie_and_consent'], function(amd) {amd.init(); M.util.js_complete('theme_technionv2/cookie_and_consent');});;
+M.util.js_pending('theme_technionv2/drawerpreference'); require(['theme_technionv2/drawerpreference'], function(amd) {amd.init(); M.util.js_complete('theme_technionv2/drawerpreference');});;
+M.util.js_pending('theme_technionv2/dark_mode'); require(['theme_technionv2/dark_mode'], function(amd) {M.util.js_complete('theme_technionv2/dark_mode');});;
+
+require(['jquery', 'core/custom_interaction_events'], function($, CustomEvents) {
+    CustomEvents.define('#single_select6af473db995703', [CustomEvents.events.accessibleChange]);
+    $('#single_select6af473db995703').on(CustomEvents.events.accessibleChange, function() {
+        var ignore = $(this).find(':selected').attr('data-ignore');
+        if (typeof ignore === typeof undefined) {
+            $('#single_select_f6af473db995702').submit();
+        }
+    });
+});
+;
+
+require(['theme_boost/drawers']);
+;
+
+    require([], function() {
+    const link = document.getElementById('theme_technionv2_login_link');
+    if (!link) {
+    return;
+    }
+    try {
+    const loginUrl = new URL(link.getAttribute('href'), window.location.origin);
+    if (!loginUrl.searchParams.get('wantsurl')) {
+    loginUrl.searchParams.set('wantsurl', window.location.pathname + window.location.search + window.location.hash);
+    }
+    link.setAttribute('href', loginUrl.toString());
+    } catch (e) {
+    }
+    });
+;
+
+require(['jquery', 'core/custom_interaction_events'], function($, CustomEvents) {
+    CustomEvents.define('#single_select6af473db995706', [CustomEvents.events.accessibleChange]);
+    $('#single_select6af473db995706').on(CustomEvents.events.accessibleChange, function() {
+        var ignore = $(this).find(':selected').attr('data-ignore');
+        if (typeof ignore === typeof undefined) {
+            $('#single_select_f6af473db995705').submit();
+        }
+    });
+});
+;
+
+    M.util.js_pending('theme_boost/loader');
+    require(['theme_boost/loader', 'theme_technionv2/drawer'], function(Loader, Drawer) {
+    Drawer.init();
+    M.util.js_complete('theme_boost/loader');
+    try {
+        let navt = document.querySelectorAll('[data-action="toggle-drawer"]')[0];
+            navt.setAttribute('aria-expanded','false');
+    }catch (e) {
+        console.log('Err: navt');
+    }
+    });
+;
+M.util.js_pending('core/notification'); require(['core/notification'], function(amd) {amd.init(1, []); M.util.js_complete('core/notification');});;
+M.util.js_pending('core/log'); require(['core/log'], function(amd) {amd.setConfig({"level":"warn"}); M.util.js_complete('core/log');});;
+M.util.js_pending('core/page_global'); require(['core/page_global'], function(amd) {amd.init(); M.util.js_complete('core/page_global');});;
+M.util.js_pending('core/utility'); require(['core/utility'], function(amd) {M.util.js_complete('core/utility');});;
+M.util.js_pending('core/storage_validation'); require(['core/storage_validation'], function(amd) {amd.init(null); M.util.js_complete('core/storage_validation');});
+    M.util.js_complete("core/first");
+});
+//]]>
+</script>
+<script src="https://cdn.jsdelivr.net/npm/[email]/MathJax.js?delayStartupUntil=configured"></script>
+<script>
+//<![CDATA[
+M.str = {"moodle":{"lastmodified":"\u05e9\u05d9\u05e0\u05d5\u05d9 \u05d0\u05d7\u05e8\u05d5\u05df","name":"\u05e9\u05dd","error":"\u05d8\u05e2\u05d5\u05ea","info":"\u05de\u05d9\u05d3\u05e2","yes":"\u05db\u05df","no":"\u05dc\u05d0","cancel":"\u05d1\u05d9\u05d8\u05d5\u05dc","confirm":"\u05d0\u05d9\u05e9\u05d5\u05e8","areyousure":"\u05d4\u05d0\u05dd \u05d0\u05ea\/\u05d4 \u05d1\u05d8\u05d5\u05d7\/\u05d4?","closebuttontitle":"\u05e1\u05d2\u05d9\u05e8\u05d4","unknownerror":"\u05e9\u05d2\u05d9\u05d0\u05d4 \u05dc\u05d0 \u05d9\u05d3\u05d5\u05e2\u05d4","file":"\u05e7\u05d5\u05d1\u05e5","url":"URL","collapseall":"\u05ea\u05e6\u05d5\u05d2\u05d4 \u05de\u05e6\u05d5\u05de\u05e6\u05de\u05ea","expandall":"\u05ea\u05e6\u05d5\u05d2\u05d4 \u05de\u05d5\u05e8\u05d7\u05d1\u05ea"},"repository":{"type":"\u05e1\u05d5\u05d2","size":"\u05d2\u05d5\u05d3\u05dc","invalidjson":"\u05ea\u05e7\u05dc\u05ea \u05ea\u05e7\u05e9\u05d5\u05e8\u05ea. \u05d0\u05e0\u05d0 \u05d4\u05ea\u05d7\u05d1\u05e8\u05d5 \u05e9\u05d5\u05d1 \u05dc\u05de\u05e2\u05e8\u05db\u05ea.","nofilesattached":"\u05dc\u05d0 \u05e0\u05d1\u05d7\u05e8\u05d5 \u05e7\u05d1\u05e6\u05d9\u05dd","filepicker":"\u05d1\u05d7\u05d9\u05e8\u05ea \u05e7\u05d5\u05d1\u05e5","logout":"\u05d4\u05ea\u05e0\u05ea\u05e7\u05d5\u05ea","nofilesavailable":"\u05de\u05d0\u05d2\u05e8 \u05d4\u05e7\u05d1\u05e6\u05d9\u05dd \u05e8\u05d9\u05e7","norepositoriesavailable":"\u05de\u05e6\u05d8\u05e2\u05e8\u05d9\u05dd, \u05d0\u05e3 \u05d0\u05d7\u05d3 \u05de\u05d4\u05de\u05d0\u05d2\u05e8\u05d9\u05dd \u05d4\u05e0\u05d5\u05db\u05d7\u05d9\u05d9\u05dd \u05e9\u05dc\u05da \u05d9\u05db\u05d5\u05dc \u05dc\u05d4\u05d7\u05d6\u05d9\u05e8 \u05e7\u05d1\u05e6\u05d9\u05dd \u05d1\u05ea\u05d1\u05e0\u05d9\u05ea \u05d4\u05de\u05d1\u05d5\u05e7\u05e9\u05ea","fileexistsdialogheader":"\u05e7\u05d1\u05e6\u05d9\u05dd \u05e7\u05d9\u05d9\u05de\u05d9\u05dd","fileexistsdialog_editor":"\u05e7\u05d5\u05d1\u05e5 \u05d1\u05e2\u05dc \u05e9\u05dd \u05d6\u05d4\u05d4 \u05e6\u05d5\u05e8\u05e3 \u05db\u05d1\u05e8 \u05dc\u05ea\u05d5\u05db\u05df \u05e9\u05d4\u05d9\u05e0\u05da \u05e2\u05d5\u05de\u05d3\/\u05ea \u05dc\u05e2\u05e8\u05d5\u05da.","fileexistsdialog_filemanager":"\u05e7\u05d5\u05d1\u05e5 \u05d1\u05e2\u05dc \u05e9\u05dd \u05d6\u05d4\u05d4 \u05e7\u05d9\u05d9\u05dd \u05d1\u05de\u05e2\u05e8\u05db\u05ea","renameto":"\u05e9\u05d9\u05e0\u05d5\u05d9 \u05e9\u05dd \u05dc: \"{$a}\"","referencesexist":"{$a} \u05e7\u05d1\u05e6\u05d9\u05dd \u05de\u05e7\u05d5\u05e9\u05e8\u05d9\u05dd \u05dc\u05e7\u05d5\u05d1\u05e5 \u05d6\u05d4, \u05d4\u05de\u05e9\u05de\u05e9 \u05db\u05de\u05e7\u05d5\u05e8 \u05e9\u05dc\u05d4\u05dd","select":"\u05d1\u05d7\u05d9\u05e8\u05d4"},"admin":{"confirmdeletecomments":"\u05d4\u05d9\u05e0\u05da \u05e2\u05d5\u05de\u05d3 \u05dc\u05de\u05d7\u05d5\u05e7 \u05d4\u05e2\u05e8\u05d5\u05ea, \u05d4\u05d0\u05dd \u05d0\u05ea\u05d4 \u05d1\u05d8\u05d5\u05d7?","confirmation":"\u05d0\u05d9\u05e9\u05d5\u05e8"},"debug":{"debuginfo":"Debug info","line":"Line","stacktrace":"Stack trace"},"langconfig":{"labelsep":":"}};
+//]]>
+</script>
+<script>
+//<![CDATA[
+(function() {M.util.help_popups.setup(Y);
+ M.util.js_pending('random6af473db995707'); Y.on('domready', function() { M.util.js_complete("init");  M.util.js_complete('random6af473db995707'); });
+})();
+//]]>
+</script>
+<script>document.documentElement.dataset.technionAllowAgreeOnForm = '0';</script>
+        </div>
+    </footer>
+    
+    <div id="technion-cookie-banner-root"
+         class="technion-cookie-banner"
+         data-technion-cookie-banner-root="1"
+         aria-live="polite"
+         aria-atomic="true"></div>
+    <!--
+    </nav>
+    </div>-->
+</div>
+
+
+
+<style>
+    #frontpage-available-course-list{
+        display: none;
+    }
+    section[data-block="navigation"] {
+        display: none !important;
+    }
+</style>
+<div class="block_settings block_tree" id="settingsnav"></div></body></html>

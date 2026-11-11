@@ -1,0 +1,56 @@
+===== Ben-Gurion annual course catalog · 205.1.1071 · year 2027 =====
+2027 פרטי קורס בשנה"ל
+
+
+מדעי החיים
+	:מחלקת אם
+205.1.1071
+	:מספר קורס
+מיקרוביולוגיה
+	:שם קורס
+Microbiology
+	:שם לועזי
+ 
+	:סטטוס
+2.00
+	:שעות שבועיות
+2.00
+	:נקודות זכות
+2021
+	:עדכון אחרון בשנת
+שעור  -    2.00 שעות, 2.00 נק"ז
+
+	:אופני הוראה
+
+	:ציון מעבר
+
+
+	:מטלות בקורס
+204.1.5081   כימיה כללית ואנליטית   קורס קדם
+205.1.9011   התא   קורס קדם
+
+	:קורסים קשורים
+אוניברסיטת בן-גוריון בנגב
+מכללה האקדמית אחווה
+מכללה האקדמית ספיר
+אוניברסיטת בן-גוריון בנגב, קמפוס אילת
+
+	:מוסדות לימוד
+  סתו תשפ"ז       באוניברסיטת בן-גוריון בנגב
+  סתו תשפ"ז       באוניברסיטת בן-גוריון בנגב, קמפוס אילת
+
+	פרטי הקורס בסמסטר
+(שעות, בחינות, סילבוס ועוד)
+
+מטרת הקורס היא ללמד מהם חיידקים ולהתעכב על נושאים נבחרים במיקרוביולוגיהכפי שבא לידי ביטוי בנושאי ההרצאות: 1. הקדמה - מהי מיקרוביולוגיה? הגדרות מיקרואורגניזמים: פרוקריוטים, אאוקריוטים ונגיפים. תפקיד החיידקים בטבע ובתעשייה. חשיבות החיידקים במחקר מדעי. מיקרואורגניזמים ותיאוריית ההיווצרות הספונטנית. תרומתם של מפלסי הדרך. 2. מעטפות החיידקים: ממברנה ציטופלסמית - מבנה ותפקיד; הפפטידוגליקן ? ביוסינתזה, מבנה בחיידקים שונים ותפקיד; הממברנה החיצונית (LPS) - מבנה ותפקיד. 3. דרישות תזונתיות של חיידקים: פוטוטרופ, כמוטרופ, כמוליתוטרופ, פוטוליתוטרופ, כמואורגנוטרופ. נשימה בחיידקים: נשימה אאירובית; נשימה אנאאירובית (מסתגלת ומוחלטת). מצעי גידול. 4. גידול חיידקים: שלבי גידול; העברות ממצע למצע; אפיון התקופה הסטציונרית; כימוסטט וטורבידוסטט; סינכרוניזציה - חשיבותה במדע. 5. מחזור התא הפרוקריוטי ? The bacterial cell cycle. 6. נגיפים ובקטריואג'ים: גידול וכימות נגיפים; מגוון ומבנה של נגיפים ובקטריופאג'ים; התרבות תוך תאית; בקטריופאג'ים אלימים ומתונים ומחזורי החיים שלהם; וירוסים ובקטריופאג'ים ? כלי חדשני בטיפול במחלות. 7. רקומבינציה בחיידקים ? העברה אופקית של גנים בחיידקים. קוניוגציה, טרנסדוקציה וטרנספורמציה. 8. תרופות אנטיביוטיות ? מנגנוני פעולה; מנגנוני עמידות; Resistance Transfer Factor; תפקיד התרופות האנטיביוטיות במחקר המדעי. 9. החיידקים כגורמי מחלות ? חיידקים מחוללי מחלות; מנגנוני אלימות; יחסי פרזיט-מאכסן. 10. בקרת ביטוי גנים בחיידקים (Genes: expression and regulation) 11. אוכלוסיות של חיידקים: ביופילם (biofilm), תקשורת בין החיידקים (quorum sensing). 12. יחסי גומלין בין חיידקי המיקרוביום ובינם לבין המאכסן
+
+	:תקציר
+
+
+Topics of the lessons: 1. Introduction: What is microbiology, basic definitions, the importance of bacteria in science and industry, historical milestones in microbiological research. 2. Bacterial cell envelope: Cytoplasmic membrane, cell wall, peptidoglycan, outer membrane. 3. Nutritional requirements of bacteria and growth media. 4. Bacterial growth 5. The bacterial cell cycle. 6. Bacteriophages: Structure and composition, growth, quantification. 7. Bacterial genetics: horizontal gene transfer (transformation, transduction, conjugation). 8. Antibiotics: historical perspectives, types of antibiotics, mechanisms of action. 9. Pathogenic bacteria: Pathogen-host relationships, virulence mechanisms. 10. Regulation of gene expression 11. Bacterial communities: Biofilm formation and quorum sensing. 12. Interactions among the microbiome bacteria and the host
+
+	:תקציר לועזי
+
+ספרות: 1. General Microbiology. Stanier, R.Y., Doudoroff, M. and Adelberg, A.E., Macmillan and Co. Ltd., London. 2. Microbiology, Davis, B.D., Dulbecco, R., Eeisen, H.N., Ginsberg, H.S. and Wood, W.B. Jr. Harper and Row, New York. 3. Biology of Microorganisms, Brock. T.D., Prentice Hall Inc. Englewood Cliffs, New-Jersey. 4. Microbiology, Prescott, L.M., Harley, J.P., and Klein,D.A. McGrow-Hill Co., Inc. Boston. 5. עולם החיידקים, הוצאת האוניברסיטה הפתוחה.
+
+	:ביבליוגרפיה

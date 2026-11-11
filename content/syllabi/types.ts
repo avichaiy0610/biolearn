@@ -24,4 +24,22 @@ export type SyllabusRecord = {
   sessions?: { lectures: string; topicsHe: string[] }[]; // e.g. { lectures: "1–7", ... }
   notTaughtHe?: string[]; // "לא ילמדו השנה"
   books?: string[];
+
+  // What the source also states (kept so nothing the university published is thrown away).
+  semesterHe?: string; // the semester the source describes, e.g. "חורף 2026/27"
+  teachers?: { role: string; name: string }[];
+  assessmentHe?: string[]; // grading / requirements lines, verbatim
+  examDates?: string[];
+  outcomesHe?: string; // learning outcomes
+  descriptionHe?: string; // course description, when separate from the topic list
+  /** TAU: is there a detailed syllabus file, and can the public read it? */
+  detail?: { state: "file" | "students-only" | "none"; url?: string };
+  /** A weekly/lesson table exists in the document but could not be parsed reliably — read textFile by eye. */
+  hasUnparsedSchedule?: boolean;
+  /** Second official source used for the current semester (Technion SAP catalog). */
+  extraSource?: { nameHe: string; url: string };
+  /** Proof: the full extracted text (in git) and its hash; raw files stay local (syllabuses/_fetched). */
+  evidence?: { textFile: string; sha256: string; rawFiles?: string[] };
+  /** Things a person must look at (stale source, unparsed table, nothing about grading…). Not shown on the site. */
+  warnings?: string[];
 };

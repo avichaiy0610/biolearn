@@ -1,0 +1,145 @@
+===== HUJI syllabus API · course 72369 · year 2027 =====
+{
+ "courseCode": "72369",
+ "year": 2027,
+ "courseName": {
+  "he": "נוירוביולוגיה ומדעי המח",
+  "en": "NEUROBIOLOGY AND BRAIN SCIENCES"
+ },
+ "periodName": {
+  "he": "סמסטר ב",
+  "en": "Semester B"
+ },
+ "ectsCredits": null,
+ "degreeLevel": null,
+ "creditPoints": "4",
+ "academicYear": null,
+ "semester": "2",
+ "department": {
+  "he": "מדעי החיים",
+  "en": "Life Sciences"
+ },
+ "facultyCode": null,
+ "campusName": {
+  "he": "אדמונד י' ספרא",
+  "en": "Edmond J. Safra"
+ },
+ "building": null,
+ "room": null,
+ "courseCoordinator": {
+  "he": null,
+  "en": null
+ },
+ "coordinatorEmail": null,
+ "teachers": {
+  "he": "פרופ עידן שגב\nד\"ר ערן בלכר\nגב נועה מונטיפיורי",
+  "en": "Prof. Idan Segev\nDr. Eran Blacher\nMs. Noa Montefiore"
+ },
+ "officeHours": {
+  "he": null,
+  "en": null
+ },
+ "contactHours": null,
+ "teachingLanguage": {
+  "he": "עברית",
+  "en": "Hebrew"
+ },
+ "courseDescription": {
+  "he": "הקורס דן בעקרונות בסיסיים בפעילות מערכת העצבים: חלוקת מערכת העצבים המרכזית וההיקפית, מבנה המוח וחוט השדרה, נוירונים ותאי גלייה, הולכה חשמלית ותקשורת סינפטית, וכן על פלסטיות עצבית ומנגנוני זיכרון.",
+  "en": "The course discusses fundamental principles of nervous system function, including the organization of the central and peripheral nervous systems, the structure of the brain and spinal cord, neurons and glial cells, electrical signaling and synaptic communication, as well as neural plasticity and mechanisms of memory."
+ },
+ "courseAims": {
+  "he": "הכרה והבנה של עקרונות בסיסיים בפעילות מערכת העצבים.",
+  "en": "Provide basic  understanding of the nervous system activity"
+ },
+ "learningOutcomes": {
+  "he": "לקרוא ולהעריך מאמרים מדעיים העוסקים במגוון תחומים בחקר המוח.",
+  "en": "Critically read and evaluate scientific papers related to brain research"
+ },
+ "courseContent": {
+  "he": "מבוא לחקר המוח\r\nמבוא למבנה המוח\r\nרפלקסים\r\nתפקוד של מערכת העצבים\r\nמערכת העצבים המרכזית וההיקפית\r\nנוירונים ותאי גלייה\r\nהולכה חשמלית ותקשורת סינפטית\r\nפלסטיות עצבית ומנגנוני זיכרון\r\nהתפתחות המוח\r\nבמחסום הדם־מוח \r\nהקשרים בין מערכת העצבים, מערכת החיסון, והמיקרוביום\r\nמודלים של תא בודד.",
+  "en": "Introduction to brain research\r\nintroduction to brain structure\r\nreflexes\r\nnervous system function\r\nthe central and peripheral nervous systems\r\nneurons and glial cells\r\nelectrical signaling and synaptic communication\r\nneural plasticity and mechanisms of memory\r\nbrain development\r\nthe blood–brain barrier\r\ninteractions between the nervous system\r\nthe immune system, and the microbiome\r\nsingle-cell models."
+ },
+ "attendanceRequirements": {
+  "he": "אין",
+  "en": "None"
+ },
+ "teachingMethod": {
+  "he": "",
+  "en": ""
+ },
+ "requiredReading": {
+  "he": "אין",
+  "en": "None"
+ },
+ "additionalReading": {
+  "he": "",
+  "en": ""
+ },
+ "evaluation": {
+  "he": null,
+  "en": null
+ },
+ "additionalInfo": {
+  "he": "",
+  "en": "None"
+ },
+ "degreeName": {
+  "he": "תואר ראשון",
+  "en": "First degree"
+ },
+ "grade1Description": {
+  "he": null,
+  "en": null
+ },
+ "writtenExamPercentage": null,
+ "oralExamPercentage": null,
+ "presentationPercentage": null,
+ "activeParticipationPercentage": null,
+ "midtermExamsPercentage": null,
+ "assignmentPercentage": null,
+ "grade7Percentage": null,
+ "grade8Percentage": null,
+ "grade9Percentage": null,
+ "grade10Percentage": null,
+ "grade11Percentage": null,
+ "otherGradeDescription": null,
+ "grades": [
+  {
+   "code": "10",
+   "name": {
+    "he": "מבחן בכתב",
+    "en": "Written Exam"
+   },
+   "groupUniqueName": "final_exam",
+   "groupName": {
+    "he": "מבחן סופי",
+    "en": "Final exam"
+   },
+   "weight": 90,
+   "assWithFeedback": null,
+   "assWithoutFeedback": null
+  },
+  {
+   "code": "50",
+   "name": {
+    "he": "תרגילים",
+    "en": "Exercises"
+   },
+   "groupUniqueName": "routine_assignments",
+   "groupName": {
+    "he": "מטלות שוטפות",
+    "en": "Routine Assignments"
+   },
+   "weight": 10,
+   "assWithFeedback": 0,
+   "assWithoutFeedback": null
+  }
+ ],
+ "gradesOther": [],
+ "syllabusApiVersion": "v2",
+ "updatedBy": null,
+ "levelUpdated": null,
+ "timesUpdated": null,
+ "updateDate": "2026-09-24T09:06:59"
+}

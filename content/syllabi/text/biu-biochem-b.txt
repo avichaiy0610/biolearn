@@ -1,0 +1,698 @@
+===== Bar-Ilan faculty syllabus PDF · https://life-sciences.biu.ac.il/sites/life-sciences/files/shared/Med BSc/ביוכימיה-ב'-80202.pdf =====
+ביוכימיה ב' 80202 -
+
+              סוג הקורס :שיעור
+
+היקף שעות4 :  סמסטר :ב'            שנת לימודים :תשפ"ה
+
+                                   אתר הקורס באינטרנט:
+
+                                   מודל  -אתר מלווה קורס
+
+                                   פרונטלי
+
+              א .מטרות הקורס (מטרות על  /מטרות ספציפיות):
+
+ .1הבנת תהליכים מטבוליים מרכזיים :הסטודנטים יסבירו את המסלולים הביוכימיים
+העיקריים ,כולל גליקוליזה ,מעגל קרבס ,זרחון חמצוני ,וחילוף חומרים של ליפידים
+
+                                                                                         וחלבונים.
+
+ .2ניתוח מנגנוני בקרה מטבולית :הסטודנטים ינתחו את מנגנוני הבקרה ,כולל ויסות
+                                        הורמונלי ,המשפיעים על המטבוליזם התאי והאורגני.
+
+ .3יישום כלים מבוססי  LLMבמחקר ביוכימי :הסטודנטים ישתמשו בכלים מבוססי
+מודלים שפתיים גדולים לניתוח נתונים ,סיכום ספרות מדעית והפקת תובנות בתחום
+
+                                                                                       הביוכימיה.
+
+ .4פיתוח חשיבה ביקורתית ומודעות אתית :הסטודנטים יפתחו גישה ביקורתית לניתוח
+תהליכים ביוכימיים ויבחנו את ההשלכות האתיות של מחקר ופיתוח בתחום הביוכימיה,
+
+                                                             במיוחד בהקשר לשימוש בכלי .AI
+
+ .5שיתוף פעולה בין-תחומי :הסטודנטים יפגינו יכולת לעבוד בצוותים רב-תחומיים ,תוך
+                שילוב ידע ביוכימי עם כלים טכנולוגיים מתקדמים לפתרון בעיות מורכבות.
+
+                                                                                                   ידע:
+
+• הסטודנטים יסבירו את המבנה והתפקוד של מולקולות ביולוגיות מרכזיות ,כגון חלבונים,
+                                                             ליפידים ,פחמימות וחומצות גרעין.
+
+• הסטודנטים יתארו את המסלולים המטבוליים העיקריים ואת מנגנוני הבקרה שלהם
+                                                                  בתאים ובאורגניזמים שלמים.
+
+• הסטודנטים יזהו את התהליכים הביוכימיים המעורבים בהפרעות מטבוליות ויקשרו בין
+                                                    שינויים במטבוליזם לבין מצבים פתולוגיים.
+
+                                                                                            מיומנויות:
+• הסטודנטים ינתחו נתונים ניסויים בתחום הביוכימיה ויפרשו את משמעותם בהקשר
+                                                                    של תהליכים מטבוליים.
+
+• הסטודנטים יתכננו ויבצעו ניסויים ביוכימיים ,תוך שימוש בטכניקות מעבדה
+                                                       מתקדמות ,ויעריכו את תוצאותיהם.
+
+• הסטודנטים ישתמשו בכלים מבוססי  LLMלסיכום ספרות מדעית ,זיהוי מגמות
+                                                    והפקת תובנות רלוונטיות למחקריהם.
+
+                                                                                           ערכים:
+
+• הסטודנטים יפתחו מודעות לחשיבות הביוכימיה בהבנת תהליכים פיזיולוגיים
+                                ופתולוגיים ,ויעריכו את תרומתה לרפואה ולמדעי החיים.
+
+• הסטודנטים יגבׁשו גישה אתית ואחראית בביצוע מחקר ביוכימי ,תוך התחשבות
+בהשלכות החברתיות והסביבתיות של עבודתם ,במיוחד בהקשר לשימוש
+
+                                                                           בטכנולוגיות . AI
+
+• הסטודנטים יפגינו סקרנות מדעית ורצון להעמיק את הידע בתחום הביוכימיה ,מתוך
+         הבנה לחשיבות הלמידה המתמשכת ושילוב טכנולוגיות חדשות במחקריהם.
+
+מטרות ותוצרי למידה אלו נועדו להבטיח שהסטודנטים ירכשו הבנה מעמיקה של
+הביוכימיה של חילוף החומרים ,יפתחו מיומנויות מחקריות ,יכירו וישתמשו בכלים
+טכנולוגיים מתקדמים ,ויגבשו ערכים אתיים ומדעיים שינחו אותם בקריירה העתידית
+
+                                                                       שלהם כחוקרים ורופאים.
+
+                                                                  ב .תוכן הקורס( :רציונל ,נושאים)
+
+הקורס עוסק בביוכימיה של חילוף חומרים באנרגיה ובמנגנוני הבקרה שלה ,כולל ויסות
+הורמונלי .הדגש המרכזי הוא על חילוף חומרים של פחמימות ,חילוף חומרים של שומנים,
+סינתזת חלבונים והפרעות מטבוליות קשורות .הנושאים המרכזיים כוללים )1( :יצירת , ATP
+מגליקוליזה למעגל קרבס ועד זרחון חמצוני ,המבנה הביולוגי של ממברנות ותפקידן
+בהעברה ובאיתות תאי ,וכן קטבוליזם של שומנים לצורך הפקת אנרגיה וסינתזת חומצות
+שומן; ( )2חילוף חומרים של תרכובות חנקן ,כולל ניצול אמוניה לביוסינתזה של תרכובות
+אורגניות המכילות חנקן ,סינתזת חומצות אמינו ,פירוק חלבונים וחומצות אמינו ,חילוף
+חומרים של פורפירינים ושל נוירוטרנסמיטרים ,וחילוף חומרים של נוקלאוטידים; ( )3מסלולי
+חילוף החומרים העיקריים בגוף ,עם דגש על גלוקונאוגנזה ,שיתוף פעולה בין איברי הגוף
+בנוגע לניצול ושימור אנרגיה ,ומסלולי האיתות החוץ-תאי וההורמונים .החומר המועבר
+בקורס זה חיוני לכל היבט בביולוגיה .כל תהליך ביולוגי מלווה בצורך אנרגטי אקוטי או כרוני,
+
+            כך שהבנת המטבוליזם התאי קריטית לעתיד המקצועי של כל חוקר ורופא לעתיד.
+בהתבסס על תקציר הקורס שלך ועל שילוב כלים מבוססי מודלים שפתיים גדולים ()LLMs
+בהוראה ,בלמידה ובמטלות הקורס ,להלן מטרות ותוצרי למידה מומלצים ,המחולקים
+
+                                                              לקטגוריות של ידע ,מיומנויות וערכים:
+
+                   מהלך השיעורים( :שיטות ההוראה ,שימוש בטכנולוגיה ,מרצים אורחים)
+
+               תכנית הוראה מפורטת לכל השיעורים( :רשימה או טבלה כדוגמת המצ"ב)
+
+את הקורס מעבירים  4מרצים ברצף .החומר הרלוונטי לפי סדר ההוראה מופיע
+                                                                                  בטבלאות הבאות:
+
+                         חלק א׳  :ד״ר מורן דבלה-לויט
+
+           קריאה נדרשת   נושא השיעור             שיעור למידה                  הערכה
+                                                 פרונטלי פעילה     תהליכית/מעצבת
+מס' יחידה  בספר הלימוד
+            (מס׳ פרק או                                  או מקוון
+
+           שם מאמר)
+
+1                        Course introduction            פרונטלי
+
+2 Chapter 3              Introduction to         מקוון סרטון       .1מטלות Persual
+                          Biochemistry
+                                                                    .2פודקאסטים  +שאלות
+                         Introduction to
+                         ,Bioenergetics                             .3בוטים עם תרחישים
+
+3 9 Chapter              Carbohydrates                  מקוון
+
+                         structure
+
+                         :Glycoconjugates                                .1מטלות Persual
+                                                                    .2פודקאסטים  +שאלות
+                         importance ,function
+                                                                      .3בוטים עם תרחישים
+                         to cellular biology
+
+                         and research
+
+                         strategies
+
+4                        Overview of cellular    תוכנת  מקוון
+                                                 לימוד
+                         respiration and major                       .1מטלות Persual
+                                                               .2פודקאסטים  +שאלות
+                         metabolic pathways
+                                                                 .3בוטים עם תרחישים
+                         ( Glycolysis, PDC,
+
+                         Kreb's cycle,
+
+                         Electron transport
+
+                         chain, and anaerobic
+
+                         )pathways
+
+5          Pages         Glycolysis                     מקוון      .1מטלות Persual
+
+           519-535       Lactic acid and                            .2פודקאסטים  +שאלות
+
+                         Ethanol fermentation                       .3בוטים עם תרחישים
+
+6                        Regulation on                  פרונטלי
+
+                         enzymatic function
+
+7                        ,Glycolysis regulation         מקוון      .1מטלות Persual
+                  reactions and                              .2פודקאסטים  +שאלות
+                                                               .3בוטים עם תרחישים
+                  regulation
+
+8 Pages 597-      Pyruvate                           מקוון    .1מטלות Persual
+
+       604        Dehydrogenase                              .2פודקאסטים  +שאלות
+
+                  principles :complex                        .3בוטים עם תרחישים
+
+                  and reactions
+
+9 Pages 592- main :Krebs cycle                       מקוון    .1מטלות Persual
+
+       617        principles and                             .2פודקאסטים  +שאלות
+
+                  reactions                                  .3בוטים עם תרחישים
+
+10                                      פרונטלי
+
+                  Krebs cycle
+
+                  regulation and
+
+                  integration of the
+
+                  cellular
+
+                  respiration pathways
+
+       קריאה       חלק ב׳ :פרופ׳ ניסן יששכר                              הערכה
+                                                              תהליכית/מעצבת
+  מס'    נדרשת    שיעור למידה פעילה נושא השיעור
+יחידה  (מס׳ פרק                                     פרונטלי
+                                                    או מקוון
+           או שם
+
+       מאמר)
+
+    1  15         Oxidative             מקוון סרטונים
+
+                  ברשת ,שאלות phosphorylation,
+
+                  אנוטו ,פרקים Membrane Structure,
+
+                  Membrane Transport    בספר,                 .1מטלות Persual
+
+                  - Fundamental         סיכומים                .2פודקאסטים +
+
+                  Concepts              אישיים                שאלות
+
+                                        (סכמות),               .3בוטים עם תרחישים
+
+                                        שאלות לקראת
+
+                                        השיעור
+
+                                        הפרונטלי
+
+    2  15 Electron Transport            .1מטלות  Persualמקוון סרטונים
+
+                  ברשת ,שאלות Chain and Chemical               .2פודקאסטים +
+
+                  אנוטו ,פרקים Variations                     שאלות
+                                     בספר,             .3בוטים עם תרחישים
+                                   סיכומים
+                                     אישיים
+                                  (סכמות),
+                            שאלות לקראת
+                                    השיעור
+                                  הפרונטלי
+
+3      איך כל מה שלמדנו                      פרונטלי
+
+       מתבטא במציאות
+
+4  10  Biological           מקוון סרטונים
+
+       ברשת ,שאלות Membranes
+
+                            אנוטו ,פרקים
+
+                            בספר,                     .1מטלות Persual
+
+                            סיכומים                    .2פודקאסטים +
+
+                            אישיים                    שאלות
+
+                            (סכמות),                   .3בוטים עם תרחישים
+
+                            שאלות לקראת
+
+                            השיעור
+
+                            הפרונטלי
+
+5  17  Fatty acids          סרטונים          מקוון
+
+       ברשת ,שאלות metabolism                            .1מטלות Persual
+                                                            .2פודקאסטים +
+                            אנוטו ,פרקים                               שאלות
+
+                            בספר,                     .3בוטים עם תרחישים
+
+                            סיכומים
+
+                            אישיים
+
+                            (סכמות),
+
+                            שאלות לקראת
+
+                            השיעור
+
+                            הפרונטלי
+
+6  17 Fatty acid oxidation  מקוון סרטונים
+
+                            ברשת ,שאלות
+
+                            אנוטו ,פרקים
+
+                            בספר,                     .1מטלות Persual
+
+                            סיכומים                    .2פודקאסטים +
+
+                            אישיים                    שאלות
+
+                            (סכמות),                   .3בוטים עם תרחישים
+
+                            שאלות לקראת
+
+                            השיעור
+
+                            הפרונטלי
+
+7      איך כל מה שלמדנו                      פרונטלי
+
+       מתבטא במציאות
+                     ד״ר יואב פז:חלק ג׳
+
+             (מס׳   שיעור למידה פעילה נושא השיעור       הערכה
+           פרק או
+מס' יחידה                                     מעצבת פרונטלי/תהליכית
+               שם
+           )מאמר                              או מקוון  )(להרחבה
+
+1 20 פרק            Metabolism of              מקווןPersual מטלות.1
+                                                      +  פודקאסטים.2
+                    Nitrogenous                                  שאלות
+                                                            בוטים עם.3
+           עמודים   Compounds I:                               תרחישים
+
+           820-831  Principles of
+
+                    Biosynthesis,
+
+                    Utilization, and
+
+                    Turnover
+
+                    Utilization of Inorganic
+
+                    Nitrogen: The Nitrogen
+
+                    Cycle; Utilization of
+
+                    Ammonia: Biogenesis
+
+                    of Organic Nitrogen.
+
+2 20 פרק            Metabolism of סרטון הסבר   מקווןPersual מטלות.1
+                                                      +  פודקאסטים.2
+                    Nitrogenous Turnover על                      שאלות
+                                                            בוטים עם.3
+           עמודים   Compounds I: של חלבונים                    תרחישים
+
+           832-859  Principles of
+
+                    Biosynthesis,
+
+                    Utilization, and
+
+                    Turnover.
+
+                    The Nitrogen
+
+                    Economy: Aspects of
+
+                    Amino Acid Synthesis
+
+                    and Degradation;
+
+                    Protein Turnover;
+
+                    Amino Acid
+
+                    Degradation and
+
+                    Metabolism of
+
+                    Nitrogenous End
+
+                    Products; Coenzymes
+
+                    Involved in Nitrogen
+
+                    Metabolism.
+
+3 21 פרק            Metabolism of              מקווןPersual מטלות.1
+                                                      +  פודקאסטים.2
+                    Nitrogenous                                  שאלות
+                                                            בוטים עם.3
+            עמודיםCompounds II: Amino                          תרחישים
+
+           862-888 Acids, Porphyrins, and
+
+                    Neurotransmitters
+
+                    Pathways of Amino
+
+                    Acid Degradation;
+
+                    Amino Acids as
+
+                    Biosynthetic
+           Precursors.
+
+4          Regulation of                       פרונטלי
+
+           Glutamine Synthetase
+
+5 21 פרק   Metabolism of  מקוון סרטון הסברPersual מטלות.1
+
+           Nitrogenous על תהליך                         +  פודקאסטים.2
+
+    עמודיםCompounds II: Amino ההסעה של                  שאלות
+
+   889-913 Acids, Porphyrins, and אמוניה לכבד            בוטים עם.3
+
+           Neurotransmitters לשם הפיכתה                 תרחישים
+
+           Porphyrin and Heme      לאוריאה
+
+           Metabolism; Amino
+
+           Acids and Their
+
+           Metabolites as
+
+           Neurotransmitters
+
+           and Biological
+
+           Regulators; Amino
+
+           Acid Biosynthesis.
+
+6 22  פרקNucleotide Metabolism סרטון על         מקווןPersual מטלות.1
+                                                       +  פודקאסטים.2
+           Outlines of Pathways    מחלות                          שאלות
+                                                             בוטים עם.3
+   עמודים  in Nucleotide הקשורות                                תרחישים
+
+   917-930 Metabolism; De Novo למטבוליזם של
+
+           Biosynthesis of Purine  פורינים
+
+           Nucleotides; Purine
+
+           Degradation and
+
+           Clinical Disorders of
+
+           Purine Metabolism.
+
+7 22  פרקNucleotide Metabolism                  מקווןPersual מטלות.1
+
+           Pyrimidine Nucleotide                        +  פודקאסטים.2
+
+   עמודים  Metabolism;                                  שאלות
+
+   931-955 Glutamine-Dependent                           בוטים עם.3
+
+           Amidotransferases;                           תרחישים
+
+           Deoxyribonucleotide
+
+           Biosynthesis and
+
+           Metabolism.
+
+8          Heme Metabolism:                    פרונטלי
+
+           Synthesis &
+
+           Catabolism
+                       חלק ד׳ :פרופ׳ איתן אוקון
+
+  מס'  קריאה נדרשת     שיעור למידה פעילה נושא השיעור           הערכה
+יחידה     (מס׳ פרק או
+            שם מאמר)                                 תהליכית/מעצבת פרונטלי
+
+                                                     או מקוון  (להרחבה)
+
+1      .1מטלות  Persualמקוון סרטון על 13 Gluconeogenesis:
+
+                       רגולציה של Substrates,                   .2פודקאסטים +
+
+                       enzymes,           תהליך                שאלות
+
+                       הגלוקונאוגנזה regulation                 .3בוטים עם
+
+                                           +שאלות              תרחישים
+
+2      13              .1מטלות  Persualמקוון סרטון הסבר Glycogen
+
+                       synthesis and      על בנייה              .2פודקאסטים +
+
+                       ופירוק של breakdown                     שאלות
+
+                                          גליקוגן +             .3בוטים עם
+
+                                          שאלות                תרחישים
+
+3      13              Lactate                       .1מטלות  Persualמקוון
+                                                              .2פודקאסטים +
+                       metabolism                                       שאלות
+                                                                   .3בוטים עם
+                                                                      תרחישים
+
+4      13 Gluconeogenesis                            .1מטלות  Persualמקוון
+                                                              .2פודקאסטים +
+                       substrates                                       שאלות
+                                                                   .3בוטים עם
+                                                                      תרחישים
+
+5      20              Amino Acid                    .1מטלות  Persualמקוון
+                                                              .2פודקאסטים +
+                       Degradation and                                  שאלות
+                                                                   .3בוטים עם
+                       Metabolism                                     תרחישים
+
+                       of Nitrogenous
+
+                       End Products
+
+6      13              Metabolic                     .1מטלות  Persualמקוון
+                                                              .2פודקאסטים +
+                       diseases: Defects                                שאלות
+                                                                   .3בוטים עם
+                       of Glycogen                                    תרחישים
+
+                       metabolism
+
+7      לא רלוונטי      The effect of                 פרונטלי
+
+                       mutations in
+
+                       metabolism
+
+                       related enzyme
+
+                       on diseases
+
+8      18 Metabolic Division                         .1מטלות  Persualמקוון
+                                                              .2פודקאסטים +
+                       of Labor Among                                   שאלות
+                                                                   .3בוטים עם
+                       the Major Organs
+                                                   תרחישים
+
+9   18 Coordination of                    .1מטלות  Persualמקוון
+                                                   .2פודקאסטים +
+                    Energy                                   שאלות
+                                                        .3בוטים עם
+                    Homeostasis                            תרחישים
+
+10  18              Diabetes              .1מטלות  Persualמקוון
+                                                   .2פודקאסטים +
+                                                             שאלות
+                                                        .3בוטים עם
+                                                           תרחישים
+
+11  לא רלוונטי      Treatment             פרונטלי
+
+                    strategies for type
+
+                    1 and 2 diabetes
+
+12  23              Signal                .1מטלות  Persualמקוון
+                                                   .2פודקאסטים +
+                    transduction                             שאלות
+                                                        .3בוטים עם
+                    mechanisms of                          תרחישים
+
+                    metabolism-
+
+                    related hormones
+
+13  23              GPCRs                 .1מטלות  Persualמקוון
+                                                   .2פודקאסטים +
+                                                             שאלות
+                                                        .3בוטים עם
+                                                           תרחישים
+
+14  23              Secondary             מטלות  Persualמקוון
+                                                   .2פודקאסטים +
+                    messengers                               שאלות
+                                                        .3בוטים עם
+                                                           תרחישים
+
+15  23              סרטון המסביר RTK      מטלות  Persualמקוון
+                               את פעילות           .2פודקאסטים +
+                                                             שאלות
+                          קולטני ה RTK                  .3בוטים עם
+                                  +שאלות                   תרחישים
+
+16  23 Steroid hormones                   מטלות  Persualמקוון
+                                                   .2פודקאסטים +
+                                                             שאלות
+                                                        .3בוטים עם
+                                                           תרחישים
+
+17 Paper #1: Caloric restriction,         מטלות  Persualמקוון
+      International lifespan extention             .2פודקאסטים +
+                                                             שאלות
+    consensus on and autophagy                          .3בוטים עם
+              fasting                                      תרחיש ים
+
+       terminology
+
+    Paper #2: The
+       Association
+    Between
+      Regular
+     Physical
+    Exercise,
+
+        Sleep
+    Patterns,
+Fasting, and
+  Autophagy
+
+Paper #3: The
+
+ups and
+
+downs of
+
+caloric
+
+restrictionand
+
+fasting
+
+18 Paper: Brain Metabolic fueling   .1מטלות  Persualמקוון
+                                             .2פודקאסטים +
+energetics           .of the brain                     שאלות
+                                                  .3בוטים עם
+19 Paper #1:         Caffeine and                    תרחישים
+      Caffeine and          energy
+         the CNS                    .1מטלות  Persualמקוון
+                      metabolism             .2פודקאסטים +
+          Paper #2:                                    שאלות
+    Caffeiene and                                 .3בוטים עם
+    the brain                                        תרחישים
+
+          Paper #3:                        ג .חובות הקורס:
+    Caffeiene and
+    diabetes                                דרישות קדם:
+
+                     שם הקורס       מס' הקורס
+                     ביוכימיה א׳
+                                    80-201-01
+                                               או
+
+                                    80-201-10
+
+                                    חובות/דרישות/מטלות:
+
+הקורס מחולק ל  4חלקים המועברים על ידי  4מרצים .חומר הקורס מועבר בצורה
+היברידית ,כלומר ,החומר מחולק ליחידות לימוד נפרדות ,כאשר כל יחידת לימוד משולבת
+בלמידה פעילה על ידי  3אפליקציות שונות באופן מקוון .יש להשלים את כל המטלות בכל
+היחידות .בכל אחד מ 4חלקי הקורס יתקיימו כ  2מפגשים פרונטליים ,בהם הנוכחות הינה
+                                                                                               חובה.
+
+                                                  מרכיבי הציון הסופי (ציון מספרי/ציון עובר):
+
+                                                                                          רכיבי הציון:
+                                                                  25%מענה על מטלות ה Perusal
+
+                                                                       25%מענה על מטלות האנוטו
+                                                                            25%בוטים עם תרחישים
+                                                                                    25%מבחן מסכם
+
+משקל בציון הסופי                 תיאור התוצר
+ 25%מהציון הסופי              מטלות perusal
+ 25%מהציון הסופי              מטלות Annoto
+ 25%מהציון הסופי  מטלות בוטים עם תרחישים
+ 25%מהציון הסופי
+                                     מבחן סופי
+
+                     ד .ביבליוגרפיה( :חובה/רשות)
+
+ספרי הלימוד ( )Textbooksוספרי עזר נוספים:
+                    ספר הלימוד של הקורס נקרא:
+
+       Biochemistry (Van Holde) 4th edition
+                        הפרקים הרלוונטיים מתוכו:
+
+                      חלק א׳ :פרקים 14 ,13 , 9 ,3
+                        חלק ב׳ :פרקים 17 ,15 ,10
+                        חלק ג׳ :פרקים 22 ,21 ,20
+
+                   חלק ד׳ :פרקים 23 ,20 ,18 ,13
+                     תכני חובה (מאמרים) נוספים:
+1. The energetic brain – A review from students to Students. (Journal of
+    Neurochemistry, 2020)
+
+2. Impact of coffee and its bioactive compounds on the risks of type 2
+    diabetes and its complications: A comprehensive review (Diabetes &
+    Metabolic Syndrome: Clinical Research & Reviews, 2024)
+
+3. Effects of coffee/caffeine on brain health and disease: What should I
+    tell my patients? (Practical Neurology, 2015)
+
+4. Molecular targets of caffeine In the central nervous system (Progress in
+    Brain Research, Volume 288, 2024)
+
+5. International consensus on fasting terminology (Cell metbolism, 2024)
+6. The Association Between Regular Physical Exercise, Sleep Patterns,
+
+    Fasting, and Autophagy for Healthy Longevity and Well-Being: A
+    Narrative Review (Frontiers in Psychology, 2021)
+7. The ups and downs of caloric restriction and fasting: from molecular
+    effects to clinical application (EMBO molecular medicine, 2022)

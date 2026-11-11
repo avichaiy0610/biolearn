@@ -1,0 +1,52 @@
+===== Ben-Gurion annual course catalog · 205.1.3171 · year 2027 =====
+2027 פרטי קורס בשנה"ל
+
+
+מדעי החיים
+	:מחלקת אם
+205.1.3171
+	:מספר קורס
+אבולוציה
+	:שם קורס
+Evolution
+	:שם לועזי
+ 
+	:סטטוס
+4.00
+	:שעות שבועיות
+3.00
+	:נקודות זכות
+2003
+	:עדכון אחרון בשנת
+שעור  -    2.00 שעות, 2.00 נק"ז
+תרגיל  -    2.00 שעות, 1.00 נק"ז
+
+	:אופני הוראה
+
+	:ציון מעבר
+
+
+	:מטלות בקורס
+205.1.9181   ביוכימיה ב   קורס קדם
+205.1.9171   ביוכימיה א   קורס קדם
+
+	:קורסים קשורים
+אוניברסיטת בן-גוריון בנגב
+
+	:מוסדות לימוד
+  סתו תשפ"ז       באוניברסיטת בן-גוריון בנגב
+
+	פרטי הקורס בסמסטר
+(שעות, בחינות, סילבוס ועוד)
+
+מטרת הקורס הינה לבסס יסודות של חשיבה והבנה אבולוציוניים אצל תלמידי בוגר בביולוגיה. במהלך הקורס התלמידים יתמודדו עם שאלות מרכזיות באבולוציה תוך שימוש בדוגמאות ממחקרים קלאסיים וחדשים. הקורס יכלול תרגילים שבועיים בהם התלמידים ידונו ויתרגלו נושאים הנלמדים במהלך ההרצאות וחומר הקריאה. הנושאים העיקריים שייסקרו במהלך הקורס: 1. הקדמה: הדגמת החשיבות וההתפתחות ההיסטורית של רעיון האבולוציה על הקשריה השונים. 2. המנגגנונים האבולוציוניים: הסינתיזה המודרנית וגנטיקה של אוכלוסיות; השונות הגנטית; הברירה הטבעית; הגירה; סחיפה גנטית אקראית וכוחות אבולוציונים אחרים. 3. ההיסטוריה של החיים: תהליכים המביאים להיווצרות חידושים אבולוציוניים ומינים חדשים; ניתוח והבנה של תסריטים אבולוציוניים (פילוגנזה); מוצא החיים והיסטוריה של קבוצות אבולוציוניות עיקריות. 4. נושאים חמים באבולוציה: אקלוגיה מולקולרית; אבולוציה של סקס ויחסי זוויגים; אבולוציה של האדם. חומרי עזר קריאה: התלמידים יתבקשו לקרוא פרקים נבחרים מתוך הספר: Freeman, S. & Herron, J.C. (2001) Evolutionary Analysis, 2nd and 3rd editions, Prentice Hall, Upper Saddle River, NJ, USA. ISBN 0-13-017291-X ומאמרים נוספים שיחולקו במהלך הקורס. תלמידים מחוץ לתוכנית במדעי החיים יידרשו להשלים חומר נוסף. אתר הקורס: מערכי ההרצאות וקישורים לחומרי עזר נוספים יפורסמו במהלך הקורס באתר הבא: ecology/Novoplansky/evolution/Main.htmhttp://www.bgu.ac.il/desert
+
+	:תקציר
+
+
+The purpose of the course is to develop foundations for evolutionary thinking. The course will expose the students to central problems in evolution using examples from classic and modern studies. The course includes weekly exercises in which the students will discuss and deepen their knowledge on selected topics raised in the lectures and readings. Main topics covered in the course: 1. Introduction: demonstrating the importance and history of the concept of evolution and evolutionary thinking. 2. Evolutionary forces: the modern synthesis and population genetics; genetic variance; natural selection; migration; genetic drift; other evolutionary forces. 3. History of life: novelties in evolution; speciation; phylogeny and evolutionary scenarios; origin of life; history of some major taxonomic groups. 4. Hot topics in evolution: molecular evolution; evolution of sex; sexual selection; human evolution. Main text Freeman, S. & Herron, J.C. (2001) Evolutionary Analysis, 2nd and 3rd editions, Prentice Hall, Upper Saddle River, NJ, USA. ISBN 0-13-017291-X Non-biology majors will be required to study additional material. Course homepage http://www.bgu.ac.il/desert ecology/Novoplansky/evolution/Main.htm
+
+	:תקציר לועזי
+
+
+	:ביבליוגרפיה

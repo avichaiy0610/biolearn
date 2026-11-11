@@ -216,8 +216,9 @@ def cmd_discover(a) -> None:
     probes = []
     pats: list[str] = []
     code, name = a.code or "", a.name or ""
-    if a.university == "technion":
-        pats += [f"https://students.technion.ac.il/local/technionsearch/course/{code}/{y}0{s}" for y in range(2026, 2021, -1) for s in (1, 2)]
+    # Technion: no per-semester probes. The portal ignores a /YYYY0S suffix and always serves the same page
+    # (its semester tabs stop at 2023/24, checked 2026-11-11); the current lecturer, TAs and exam dates are in
+    # the synced record (`syllabus` → teachers / semesterHe / examDates, from the SAP catalog).
     if a.university == "tau":
         pats += [f"https://lifesci.tau.ac.il/yedion/{y}-{str(y + 1)[2:]}/course{code}" for y in range(2025, 2016, -1)]
         pats += [f"https://www.ims.tau.ac.il/Tal/Syllabus/Syllabus_L.aspx?course={code}01&year={y}" for y in range(2026, 2022, -1)]

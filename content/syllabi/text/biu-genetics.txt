@@ -1,0 +1,181 @@
+===== Bar-Ilan faculty syllabus PDF · https://life-sciences.biu.ac.il/sites/life-sciences/files/shared/Med Mechina/Sylabi24/80-208-30-גנטיקה-תשפד.pdf =====
+גנטיקה
+
+                                                               הנושאים שילמדו בשיעורים ( 1-7גלית)
+                                                                                        המהפכה הגנטית.
+
+                                                 מגרגור מנדל לדוגמה המרכזית בביולוגיה מולקולרית
+                                                                                     מוטציות וסריקה גנית
+
+                                                             הורשה של גן בודד -חוק הסגרגציה השווה
+                                                                   הבסיס הכרומוזומלי להורשה מנדלית
+                                                                         הורשה בהאפלודים ודיפלואידים
+                                                                               אללים ברמה המולקולרית
+                                                                                             מיטוזה ומיוזה
+
+                                                                 חישוב תדירויות סגרגציה עבור גן בודד
+                                                                גילוי הגן הראשון ע״י תומס האנס מורגן
+
+                                                                                 תאחיזה לכרומוזום איקס
+                                                                                        שושלות בבני אדם
+
+                                                                          הורשה של מחלות אוטוזומליות
+                                                            הורשה של מחלות אחוזות לכרומוזום איקס
+
+                                                                               חישוב תדירויות בשושלות
+                                                      חוק ההתפלגות העצמאית -החוק השני של מנדל
+
+                                                                                              הכלאת מבחן
+                                                              הבסיס הכרומוזומלי לחוק השני של מנדל
+
+                                                                                                     שחלוף
+                                                                             מיפוי גנים באמצעות שחלוף
+                                                                    מיפוי באמצעות מרקרים מולקולריים
+
+                                                                                        דומיננטיות חלקית
+                                                                                             קו-דומיננטיות
+
+                                                                          אללים בעלי רצסיביות לתאלית
+                                                                                     מבחני קומפלמנטציה
+                                                                                                אפיסטטיות
+                                                                                          גנים סופרסוריים
+
+                                                                   סריקה גנטית לזיהוי גנים סופרסורים
+                                                                                                 מודיפיירים
+
+                                                                                               Penetrance
+
+                                                                                      הנושאים שצומצמו:
+                                            צמצום :החומר הנלמד במיטוזה ומיוזה למינימום ההכרחי
+                              אצמצם גם את ההסברים על המנגנונים המולקולריים שבבסיס שחלוף
+
+                                                                                         לא ילמדו השנה:
+                                                                   סריקה גנטית לזיהוי גנים סופרסורים
+
+                                                                                        לתאליות סינתטית
+                                                                                              Expressivity
+
+                                             ההיסטוריה שמאחורי גנטיקה של סכיזופרניה והתמכרות
+                                                         פתרון בכיתה של תרגילים ושאלות מהבחינות
+
+                                                                הנושאים שילמדו בשיעורים ( 7-14שי)
+
+1. Genetic mapping in eukaryotes using unordered tetrads.
+    2. Genetic Mapping in prokaryotes:
+Conjugation: Interrupted mating conjugation experiments, and fine scale mapping by
+recombinant frequency.
+
+    3. Molecular Genetics:
+Conceptual basis of the connection between mutation and phenotype.
+Mutations and biochemical pathways.
+Mutations and biological discovery.
+Mutations as the driving force of evolution (will be mentioned briefly).
+
+    4. Genetic interactions:
+Additive interaction, Suppression, synergism, Synthetic lethality
+
+    5. Mutations at the molecular level:
+The effect of the following mutations on protein function: Nonsense, synonymous, missense,
+frameshift, insertions, deletions, inversions, intergenic and intragenic suppression.
+
+                                                                                               :לא ילמדו השנה
+Genetic mapping:
+
+    1. Mapping in eukaryotes using ordered tetrads.
+Genetic mapping in prokaryotes:
+
+    1. Transformation and transduction
+Molecular genetics:
+
+    1. The experiments proving that DNA (and not proteins) is the genetic material.
+    2. Mutagens and their mechanism of action.
+
+                                                                ) (חיים14-20 הנושאים שילמדו בשיעורים
+
+                                                                                                :יציבות גנומית
+
+                                                              :יציבות גנומית ברמת הנוקלאוטידים הבודדים
+                                                                                        – רצפים חוזרים בגנום
+
+                                              מחלות נלוות ומנגנון השינוי במספר החזרות-שלשות חוזרות
+                                                                                                  :טרנספוזונים
+
+                                                                                      טרנספוזון פשוט ומורכב
+                                                                       טרנספוזונים בחיידקים ובאאוקריוטים
+
+                                                                                          טרנספוזונים ביונקים
+                                                                           מנגנוני יצירה ותנועת טרנספוזונים
+                                                      כיצד משפיעים טרנספוזונים על יציבות הגנום וזיקנה
+
+                                                                            :יציבות גנומית ברמת הכרומוזום
+                                                                                      -ארגון מחדש של הגנום
+
+                                                                                     קריוטיפ-מיפוי כרומוזומלי
+                                                                חסרים deletion
+                                                             מיפוי על ידי חסרים
+
+                                                               -Inversionהפכים
+        – paracentric inversionמנגנון ותוצאה ,השפעה על פוריות ומיוזה
+         - pericentric inversionמנגנון ותוצאה ,השפעה על פוריות ומיוזה
+
+                                                           הכפלת קטעים בגנום
+                                           טרנסלוקציות מנגנון יצירה והשפעה
+                      מיוזה של כרומוזומים עם טרנסלוקציה -מנגנון ותוצאה
+
+                                                                       טריזומיות-
+                                                  מנגנון יצירה ומחלות קשורות
+
+                                                                  אנאפלואידיות-
+        פוליפלואידיות ,מונופלואידיות ,תסמונת טרנר ותסמונת קליינפלטר
+
+                                                            השתקת כרומוזום X
+                                                                  מנגנון והשפעה
+
+                                                            תורשה חוץ גרעינית:
+תורשה אמהית -מיטוכונדריה ,כלורופלאסט  ,מנגנון הורשה ומחלות נילוות
+
+                     השפעה אמהית ,מנגנון הורשה והשפעה על התפתחות
+                                                                       הפלוטיפים
+
+                                                                 החתמה גנומית:
+                                                            מנגנון ןמחלות נילוות
+
+                                                          גנטיקה של אוכלוסיות:
+                                                      תדירות אללים באוכלוסיה
+                                                   תדירות גנוטיפים באוכלוסיה
+
+                                                                חוק הרדי ויינברג
+                                                                 שיווי משקל גנטי
+
+                                                   תיקון  DNAעל קצה המזלג :
+                                              רקומבינציה ורקומבינציה מיוטית
+
+                                                             מבוא לאפיגנטיקה :
+                                                                 מהי אפיגנטיקה,
+                                                                         מתילציה
+
+                                                  מודיפיקציות על גבי היסטונים
+
+                                                            הנושאים שצומצמו:
+                   צמצום :החומר הנלמד ביציבות גנומית למינימום ההכרחי
+
+                                                                         לא ילמד
+                                                                      קביעת המין
+                                                         אנאפלואידיות בצמחים
+                                                                    נדידת אללים
+                                                              תיקון  DNAמורחב
+                                             פתרון בכיתה של בעיות ממבחנים
+                                                     חובות  /דרישות  /מטלות:
+
+                                                                            15%אחוז הגשת תרגולים  85%בחינה
+
+                                                             מרכיב הציון הסופי :בבחינה
+
+                                                                            15%אחוז הגשת תרגולים  85%בחינה
+
+                                                                               ביבליוגרפיה:
+
+                                                                                                 ספר הקורס:
+An Introduction to Genetic Analysis -12th Edition,, Griffiths, A.J.F., Wessler, S.R., Carroll,
+
+                                                                                          S.B., Doebley, J.

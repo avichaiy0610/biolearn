@@ -1,0 +1,57 @@
+===== Ben-Gurion annual course catalog · 205.1.3111 · year 2027 =====
+2027 פרטי קורס בשנה"ל
+
+
+מדעי החיים
+	:מחלקת אם
+205.1.3111
+	:מספר קורס
+מבוא לאקולוגיה
+	:שם קורס
+Introduction to Ecology
+	:שם לועזי
+ 
+	:סטטוס
+6.00
+	:שעות שבועיות
+3.50
+	:נקודות זכות
+2027
+	:עדכון אחרון בשנת
+שעור  -    2.00 שעות, 2.00 נק"ז
+מעבדה  -    2.00 שעות, 1.00 נק"ז
+סיור  -    2.00 שעות, 0.50 נק"ז
+
+	:אופני הוראה
+
+	:ציון מעבר
+
+
+	:מטלות בקורס
+201.1.9101   מבוא להסתברות ב   קורס קדם
+205.1.9401   מבוא לסטטיסטיקה ב'   קורס קדם
+
+	:קורסים קשורים
+אוניברסיטת בן-גוריון בנגב
+מכללה האקדמית אחווה
+אוניברסיטת בן-גוריון בנגב, קמפוס אילת
+
+	:מוסדות לימוד
+  סתו תשפ"ז       באוניברסיטת בן-גוריון בנגב
+  סתו תשפ"ז       באוניברסיטת בן-גוריון בנגב, קמפוס אילת
+
+	פרטי הקורס בסמסטר
+(שעות, בחינות, סילבוס ועוד)
+
+1. הקדמה: אורגניזמים, סביבות גידול, אסטרטגיות חיים. רמות אירגון ותפקוד של יצורים חיים המתמודדים עם סביבתם. 2. אוכלוסיות: גידול אוכלוסיות, דמוגרפיה, תנודות אוכלוסייתיות, אסטרטגיות מהלך חיים. 3. יחסי גומלין בין אוכלוסיות: תחרות, יחסי טורף-נטרף, הרביווריה, הדדיות. 4. חברות: הנישה, הבסיס לתאוריה הקלסית והמודרנית, קיום יחדיו ומגוון מינים, מבנה חברה. 5. מקרואקולוגיה: תבנות רחבות ידיים בזמן ובמרחב. 6. אקו-סיסטמות: זרימת אנרגיה, שרשראות מזון, סוקסציה, מחזורי חומרים בטבע. 7. בעיות בשמירת טבע: כריתת יערות, מידבור, שינויים עולמיים (Global changes). הקורס יכלול מעבדות מחשב ותרגילים להרחבת החומר הנלמד בהרצאות.
+
+	:תקציר
+
+
+'Introductory Ecology' introduces students with basic principles and foundations of the modern ecology theory. The course gives an overview on diversity of ecological subjects, including: 1) History of ecology; 2) Physical environment, evolution, adaptations and fitness; 3) Models of population dynamics and life tables; 4) Populations in a heterogeneous world; 5) Species interactions - competition, predation and mutualism; 6) Ecological community - species diversity, community structure and assembly rules; 7) Macroecology and large-scale patterns and processes; 8) ecosystem function, energy flow and nutrient cycles. The course also deals with current issues of human ecology and conservation biology. Throughout the course, basic conceptual issues in ecology and science are discussed: use of modelling; effects of density dependent and density independent processes; differences between stochasticity and determinism; need for null models. Students are required to read selected literature. Lectures are followed by lab and field exercises that include both computer simulations and practical games. The course grade includes lab quizzes, reports and a final exam. Literature: Stiling, P.D. 2002 (4th Edition). Ecology: Theories and Applications. Prentice Hall, Upper Saddle River, NJ Krebs, C.J. 1994 (5th Edition). Ecology. Benjamin and Cummings, San Francisco, CA Molles, M.C. 2002 (2nd Edition). Ecology: Concepts and Applicatins. McGraw-Hill, NY Ricklefs, R.E. and Miller, G.L. 2004 (4th Edition). Ecology. Freeman and Company, NY
+
+	:תקציר לועזי
+
+ספרות מומלצת: 1. Stiling, P.D. 1999. Ecology. Prentice Hall. 2. Rickles, R.E. and Miller, G.L. 2000. Ecology. W.H. Freeman & Company. 3. Krebs, C.J. 1994. Ecology. Bnjamin and Cummings. 4. פרבולוצקי, א. ופולק, ג. 2001. אקולוגיה: התיאוריה והמציאות הישראלית, כרטא.
+
+	:ביבליוגרפיה

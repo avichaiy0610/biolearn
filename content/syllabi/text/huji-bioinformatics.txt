@@ -1,0 +1,145 @@
+===== HUJI syllabus API · course 94510 · year 2027 =====
+{
+ "courseCode": "94510",
+ "year": 2027,
+ "courseName": {
+  "he": "מבוא לביואינפורמטיקה- מורחב",
+  "en": "Introduction to Bioinformatics"
+ },
+ "periodName": {
+  "he": "סמסטר א",
+  "en": "Semester A"
+ },
+ "ectsCredits": null,
+ "degreeLevel": null,
+ "creditPoints": "5",
+ "academicYear": null,
+ "semester": "1",
+ "department": {
+  "he": "מדעים ביו-רפואיים",
+  "en": "Bio-Medical Sciences"
+ },
+ "facultyCode": null,
+ "campusName": {
+  "he": "עין כרם",
+  "en": "Ein Kerem"
+ },
+ "building": null,
+ "room": null,
+ "courseCoordinator": {
+  "he": "ד\"ר יותם-נתן דרייאר",
+  "en": "ד\"ר Yotam Drier"
+ },
+ "coordinatorEmail": "[email]",
+ "teachers": {
+  "he": "ד\"ר יותם-נתן דרייאר\nאיתי מזרחי\nהודיה כוממי-צדוק\nיאיר אוסטר\nרותם הומינר",
+  "en": "Dr. Yotam Drier\nItai Mizrahi\nHodaya Komemi-Tzadok\nYair Oster\nRotem Huminer"
+ },
+ "officeHours": {
+  "he": null,
+  "en": null
+ },
+ "contactHours": null,
+ "teachingLanguage": {
+  "he": "עברית",
+  "en": "Hebrew"
+ },
+ "courseDescription": {
+  "he": "בקורס נלמד שיטות בסיסיות ומתקדמות לניתוח רצפים במחשב, כגון: שימוש במסדי הנתונים, השוואת רצפים, אפיון מוטיבים משותפים, נבוי מבני של חלבון, אפיון משפחות חלבונים, אנליזות של שיטות גנומיות מבוססות ריצוף. שיטות אלה ייושמו על שאלות ביולוגיות ספציפיות כגון אפיון מינים חדשים ומחקר סרטן.\r\nבהרצאות יינתן הבסיס לשיטות החישוביות תוך הדגמתן על שאלות ביולוגיות ספציפיות, ובתרגילים ייערך התרגול המעשי של שיטות אלה. הקורס מתקדם בהדרגה משיטות בסיסיות להשוואת רצפי גנים ומציאת מוטיבים רצפיים עד לאנליזות מתקדמות של מידע גנומי.",
+  "en": "The course focuses on understanding the information encoded in nucleic acids and protein sequences, using bioinformatic approaches. We will learn basic and advanced approaches for computational sequence analysis, such as sequence alignment, identification of common motifs, protein structure prediction, characterization of protein families and analysis of sequencing based data. These approaches will be applied to specific biological questions, such as characterization of new species and cancer research. The lectures will provide the basis for these approaches while demonstrating their application to specific biological questions. Practicing these approaches will be carried out in the accompanying exercise class. The course advances gradually from basic sequence comparison approaches to advanced analysis of genomic data."
+ },
+ "courseAims": {
+  "he": "המהפכה הגנומית והשיטות הניסוייות עתירות הנתונים שפותחו בעקבותיה הביאו לכך שהביואינפורמטיקה הפכה לחלק אינטגרלי מהמחקר הביולוגי. מחקרים רבים מייצרים כמות עצומה של נתונים המחייבים ניתוח ממוחשב. כמו כן קיים מידע רב בבסיסי נתונים שעיבודו מצריך שיטות ממוחשבות.\r\nיידע בגישות חישוביות לעיבוד מידע ביולוגי הוא חיוני במחקר הביולוגי המודרני. מטרתו של הקורס ללמד את השיטות החישוביות הללו, תוך כדי הדגמתן על נושאים ביולוגיים ספציפיים. בהרצאות יוצג הבסיס התאורטי של השיטות ויודגם השימוש בהן במחקר, כאשר תשומת לב מיוחדת תוקדש להערכה ביקורתית של התוצאות, והבנת האתגרים בפיתוח ויישום שיטות ביואינפורמטיות. התרגול המעשי של השיטות ייעשה בשיעור התרגיל.\r\nמטרת הקורס להקנות לסטודנטים את היכולת לנצל את הכלים החישוביים הרלוונטיים ולשלבם במחקר ביולוגי באופן מושכל.",
+  "en": "The genomic revolution and high throughput technologies developed following it have turned bioinformatics to be an integral part of biological research. Modern biological studies produce vast amounts of data that necessitate computational analysis by appropriate algorithms and tools. Likewise, there is a vast amount of biological information of various types in electronic databases, which requires computational tools for its processing and interpretation. Knowledge of computational approaches for analyzing biological data is essential in modern biological research. The aim of the course is to introduce these computational approaches, while demonstrating their application to specific biological questions.\r\nThe lecture will present the basis of these approaches, and special attention will be paid to critical assessment of the results, and understanding the challenges of developing and applying bioinformatic methods. The practicing of these approaches will be done in the accompanying exercise class. The main aim of the course is to enable the students to exploit the relevant computational tools and to integrate them skillfully in their biological research."
+ },
+ "learningOutcomes": {
+  "he": "להפעיל כלים ביואינפורמטיים מתאימים לשאלה הביולוגית אותה הם חוקרים ולנתח את התוצאות באופן מושכל. בפרט, הסטודנטים ילמדו: להתמצא ולשלוף ממאגרי מידע ממוחשבים מידע מסוגים שונים, כגון מידע גנומי, נתוני ביטוי גנים, מידע אפיגנטי, נתונים על גידולים סרטניים וכו׳; להשות בין שני רצפים ובין רצף למאגרי רצפים; לאפיין רצף של חלבון, להשוות בין חלבונים, לזהות מוטיבים חוזרים; לאפיין אתרי קשירה של חלבונים לדנ״א ולזהות גנים סמוכים; להשוות ביטוי גנים בין תנאים שונים; לאתר גנים שמשתנים בסרטן, לזהות תתי סוגים של סרטן ולהשוות ביניהם, לקשר בין שינויים גנומים ומאפיינים קלינים וכו׳; לנתח תוצאות של ניסויים עתירי נתונים (RNA-seq, ChIP-seq וכו׳); לזהות העשרה בין קבוצות גנים ולחזות תהליכים ביולוגים קשורים; לנתח שמירות אבלוציונית ולאפיין מינים חדשים; לאפיין חלבונים לפי הרכב הדומיינים בחלבון, לנבא מבנה של חלבון וקשר פונקציונלי בין חלבונים; ועוד.",
+  "en": "To apply suitable bioinformatic tools to the biological question they study and to skillfully interpret the results. Specifically, the students will be able to extract data from various data sources (genomic, epigenomic, gene expression, etc.); to annotate protein sequences, compare and align DNA and protein sequences; to identify gene that are altered in a given cancer type, identifying cancer subtypes and compare them, link genomic alterations and clinical attributes, etc.; analyze results of high throughput experiments (such as RNA-seq and ChIP-seq); to identify common motifs in DNA and protein sequences, and find these motifs in other sequences; to characterize transcription factor binding sites and predict gene targets; to compare gene expression profiles between two conditions; to find functional enrichment in a set of genes; to analyze evolutionary conservation between proteins, characterize protein families, and protein predict the structure; and more."
+ },
+ "courseContent": {
+  "he": "מהפכת הריצוף, ביולוגיה עתירת נתונים ומאגרי מידע.\r\nהשוואת שני רצפים והשוואה כנגד בנק רצפים.\r\nניתוח נתוני ביטוי גנים ושחבור חלופי.\r\nאפיון אפיגנטי - מתילציה של דנ״א ושינויים בזנבות היסטונים.\r\nניתוח מוטיבים ואתרי קישור של חלבונים לדנ\"א.\r\nביואנפורמטיקה במחקר סרטן ורפואה מותאמת אישית.\r\nניתוח רצפי חלבונים, קשר פונקציונלי בין חלבונים וניבוי מבנה חלבונים.\r\nשמירות אבולוציונית ואבולוציה מולקולרית.",
+  "en": "High throughput sequencing, genomic databases and the “omics” revolution.\r\nSequence alignment,.\r\nAnalysing gene expression and splicing with RNA-seq.\r\nCharacterizing the epigenetic landscape - DNA methylation and chromatin modifications.\r\nAnalysis of DNA binding sites and motifs.\r\nUsing bioinformatic analysis and databases for cancer research and precision medicine.\r\nProtein function and domains, protein structure prediction.\r\nMolecular evolution and conservation."
+ },
+ "attendanceRequirements": {
+  "he": "",
+  "en": ""
+ },
+ "teachingMethod": {
+  "he": "",
+  "en": ""
+ },
+ "requiredReading": {
+  "he": "אין",
+  "en": "None"
+ },
+ "additionalReading": {
+  "he": "",
+  "en": ""
+ },
+ "evaluation": {
+  "he": null,
+  "en": null
+ },
+ "additionalInfo": {
+  "he": "מלבד ארבע מטלות בית שמהוות 40% מהציון הסופי, יהיו גם מטלות כיתה. ניתן לבצע את מטלות הכיתה בסיוע ובהנחיית המתרגלים. כל מטלות הכיתה חייבות להימסר; אחרת בחינת הגמר לא תיבדק.",
+  "en": "Other than four home assignments which will constitute 40% of the final grade, there will also be class assignments. Class assignments can be done with help and guidance from the TAs. All class assignments must be submitted, or else final exam will not be graded"
+ },
+ "degreeName": {
+  "he": "תואר ראשון",
+  "en": "First degree"
+ },
+ "grade1Description": {
+  "he": null,
+  "en": null
+ },
+ "writtenExamPercentage": null,
+ "oralExamPercentage": null,
+ "presentationPercentage": null,
+ "activeParticipationPercentage": null,
+ "midtermExamsPercentage": null,
+ "assignmentPercentage": null,
+ "grade7Percentage": null,
+ "grade8Percentage": null,
+ "grade9Percentage": null,
+ "grade10Percentage": null,
+ "grade11Percentage": null,
+ "otherGradeDescription": null,
+ "grades": [
+  {
+   "code": "14",
+   "name": {
+    "he": "מבחן ממוחשב בחווה",
+    "en": "Computerized Exam at the computer farm"
+   },
+   "groupUniqueName": "final_exam",
+   "groupName": {
+    "he": "מבחן סופי",
+    "en": "Final exam"
+   },
+   "weight": 60,
+   "assWithFeedback": null,
+   "assWithoutFeedback": null
+  },
+  {
+   "code": "50",
+   "name": {
+    "he": "תרגילים",
+    "en": "Exercises"
+   },
+   "groupUniqueName": "routine_assignments",
+   "groupName": {
+    "he": "מטלות שוטפות",
+    "en": "Routine Assignments"
+   },
+   "weight": 40,
+   "assWithFeedback": 4,
+   "assWithoutFeedback": 13
+  }
+ ],
+ "gradesOther": [],
+ "syllabusApiVersion": "v2",
+ "updatedBy": null,
+ "levelUpdated": null,
+ "timesUpdated": null,
+ "updateDate": "2026-09-17T12:26:10"
+}

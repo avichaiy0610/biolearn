@@ -1,0 +1,50 @@
+===== Ben-Gurion annual course catalog · 205.1.1821 · year 2027 =====
+2027 פרטי קורס בשנה"ל
+
+
+מדעי החיים
+	:מחלקת אם
+205.1.1821
+	:מספר קורס
+ביולוגיה של ייצורים חיים
+	:שם קורס
+Biology of Living Organisms
+	:שם לועזי
+ 
+	:סטטוס
+3.50
+	:שעות שבועיות
+3.50
+	:נקודות זכות
+2025
+	:עדכון אחרון בשנת
+שעור  -    3.50 שעות, 3.50 נק"ז
+
+	:אופני הוראה
+
+	:ציון מעבר
+
+
+	:מטלות בקורס
+
+	:קורסים קשורים
+אוניברסיטת בן-גוריון בנגב
+
+	:מוסדות לימוד
+  סתו תשפ"ז       באוניברסיטת בן-גוריון בנגב
+
+	פרטי הקורס בסמסטר
+(שעות, בחינות, סילבוס ועוד)
+
+סיסטמאטיקה ומיון של האורגניזם. מבוא לאבולציה ולאבולציה של אוכלוסיות. הצגת הקבוצות העיקריות של חסרי החוליות: פרוטוזואה, ספוגים, צורבים, תולעים (שטוחות, נימיות וטבעתיות); רכיכות; פרוקי רגלים. מאפיינים פיזיולוגים ואנטומים; מחזורי חיים, צורות רבייה ומסלולי התפתחות. מוצא החולייתנים וההיפותיזות לגבי המעבר בין חסרי החוליות לחולייתנים,. התפתחות עוברית ? מבנה ותפקוד חלקי העובר בשלבים השונים של התפתחותו והשוואות בין הקבוצות השונות
+
+	:תקציר
+
+
+: Lectures: Systematics and classification of organisms. Introduction to evolution and the evolution of populations. Presentation of major groups of invertebrates: Protozoa, sponges, cnidarians, flatworms, nematodes, annelids; mollusks; arthropods. Physiological and anatomical characteristics; life cycles, reproductive strategies, and developmental pathways. Origin of invertebrates and hypotheses regarding the transition from invertebrates to vertebrates
+
+	:תקציר לועזי
+
+Hickman CP, Roberts LS, Larson A & I'Anson H 2004. Integrated principles of Zoology; 12th edition.
+
+	:ביבליוגרפיה

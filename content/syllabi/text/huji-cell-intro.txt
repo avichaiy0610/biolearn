@@ -1,0 +1,145 @@
+===== HUJI syllabus API · course 72153 · year 2027 =====
+{
+ "courseCode": "72153",
+ "year": 2027,
+ "courseName": {
+  "he": "מבוא לביולוגיה של התא לתלמידי ביולוגיה",
+  "en": "Introduction to Cell Biology"
+ },
+ "periodName": {
+  "he": "סמסטר א",
+  "en": "Semester A"
+ },
+ "ectsCredits": null,
+ "degreeLevel": null,
+ "creditPoints": "4",
+ "academicYear": null,
+ "semester": "1",
+ "department": {
+  "he": "מדעי החיים",
+  "en": "Life Sciences"
+ },
+ "facultyCode": null,
+ "campusName": {
+  "he": "אדמונד י' ספרא",
+  "en": "Edmond J. Safra"
+ },
+ "building": null,
+ "room": null,
+ "courseCoordinator": {
+  "he": null,
+  "en": null
+ },
+ "coordinatorEmail": null,
+ "teachers": {
+  "he": "ד\"ר אוריה אלקולומברי\nד\"ר ערן בלכר\nאבינעם גלוק\nחן שיבר",
+  "en": "Dr. Uria Alcolombri\nDr. Eran Blacher\nAvinoam Gluck\nChen Schieber"
+ },
+ "officeHours": {
+  "he": null,
+  "en": null
+ },
+ "contactHours": null,
+ "teachingLanguage": {
+  "he": "עברית",
+  "en": "Hebrew"
+ },
+ "courseDescription": {
+  "he": "הקורס נועד להקנות הבנה בסיסית של הביולוגיה התאית, וכלים בסיסיים המשמשים חוקרים בחקר התא. הקורס יכלול נושאים הנוגעים למרכיבים השונים של התא, סוגי תאים ותפקידם הביולוגי, הארגון התאי, ותהליכים דינמיים המתחוללים בתא.",
+  "en": "The course is designed to provide a basic understanding of cell biology and the basic tools used in cell biology research. The course refers to various cell types and organelles, and their role in cellular organization and in the dynamic processes occurring in the cell."
+ },
+ "courseAims": {
+  "he": "הקנית הבנה בסיסית של הביולוגיה התאית, וכלים בסיסיים המשמשים חוקרים בחקר התא.",
+  "en": "Acquiring a basic understanding of cell biology and the fundamental tools used by researchers in the study of the cell."
+ },
+ "learningOutcomes": {
+  "he": "לתאר את מבנה התא תוך השוואה בין תאים פרוקריוטים ליוקריוטים ובין תאים אנימליים לתאי צמח, ולהסביר את יסודות פעילותו. להשתמש במושגים בסיסיים במחקר הביולוגי.",
+  "en": "Describe the cell structure (while comparing prokaryotic and eukaryotic cells and animal and plant cells) and explain the basics of cellular function. Use basic terminology in Life sciences"
+ },
+ "courseContent": {
+  "he": "ד\"ר אוריה אלקולומברי -\r\nהגדרת החיים, יסודות החיים, מקרומולקולות (חלבונים, סוכרים, חומצות גרעין וליפידים), סוגי תאים וארגון התא, שיטות מחקר בביולוגיה תאית. \r\nדר' ערן בלכר - הדוגמה המרכזית של הביולוגיה המולקולרית, שעתוק, תרגום, ממברנת התא וטרנספורט דרך הממברנה, שלד התא, ממברנות פנימיות ותפקידיהן, צמתים בין תאים, אנזימים, נשימה תאית: גליקוליזה, מעגל קרבס ושרשרת מעבר האלקטרונים במיטוכונדריה, מוות תאי מתוכנן",
+  "en": "Dr. Uriah Alcolombri –\r\nDefinition of life, fundamentals of life, macromolecules (proteins, carbohydrates, nucleic acids, and lipids), cell types and cellular organization, research methods in cell biology.\r\nDr. Eran Blecher – The central dogma of molecular biology, transcription, translation, cell membrane and membrane transport, cytoskeleton, internal membranes and their functions, cell junctions, enzymes, cellular respiration: glycolysis, the Krebs cycle, and the mitochondrial electron transport chain, programmed cell death."
+ },
+ "attendanceRequirements": {
+  "he": "אין",
+  "en": "None"
+ },
+ "teachingMethod": {
+  "he": "הוראה פרונטלית (ההרצאות מוקלטות)",
+  "en": "Frontal instruction (lectures are recorded)"
+ },
+ "requiredReading": {
+  "he": "פרקים נבחרים בספרים הבאים: \r\n(1)\tPurves, B., Orians, G., Heller, C., Sadava, D. (2004)\r\nLife. The Science of Biology (7th, 9th or 12th ed) Sinauer and Freeman.\r\n\r\n(2)\tCampell, A. N., Reece, J.B., Urry, A.L., Cain, L.M., Wasserman, A.S., Minorsky, V. P., Jacson, B.R. Biology (9th ed or 12th ed. a global approach) Pearson International Edition.\r\n\r\n(3)\tAlberts, Bray, Hopkin, Johnson, Lewis, Raff, Roberts, Walter (2010) Essential Cell Biology (ECB 3rd ed) Garland Science.",
+  "en": "Selected chapters in the following books:\r\n(1)\tPurves, B., Orians, G., Heller, C., Sadava, D. (2004)\r\nLife. The Science of Biology (7th 9th or 12th ed) Sinauer and Freeman.\r\n\r\n(2)\tCampell, A. N., Reece, J.B., Urry, A.L., Cain, L.M., Wasserman, A.S., Minorsky, V. P., Jacson, B.R. Biology (9th ed or 12th ad, a global approach) Pearson International Edition.\r\n\r\n(3)\tAlberts, Bray, Hopkin, Johnson, Lewis, Raff, Roberts, Walter (2010) Essential Cell Biology (ECB 3rd ed) Garland Science."
+ },
+ "additionalReading": {
+  "he": "",
+  "en": ""
+ },
+ "evaluation": {
+  "he": null,
+  "en": null
+ },
+ "additionalInfo": {
+  "he": "אין",
+  "en": "None"
+ },
+ "degreeName": {
+  "he": "תואר ראשון",
+  "en": "First degree"
+ },
+ "grade1Description": {
+  "he": null,
+  "en": null
+ },
+ "writtenExamPercentage": null,
+ "oralExamPercentage": null,
+ "presentationPercentage": null,
+ "activeParticipationPercentage": null,
+ "midtermExamsPercentage": null,
+ "assignmentPercentage": null,
+ "grade7Percentage": null,
+ "grade8Percentage": null,
+ "grade9Percentage": null,
+ "grade10Percentage": null,
+ "grade11Percentage": null,
+ "otherGradeDescription": null,
+ "grades": [
+  {
+   "code": "10",
+   "name": {
+    "he": "מבחן בכתב",
+    "en": "Written Exam"
+   },
+   "groupUniqueName": "final_exam",
+   "groupName": {
+    "he": "מבחן סופי",
+    "en": "Final exam"
+   },
+   "weight": 80,
+   "assWithFeedback": null,
+   "assWithoutFeedback": null
+  },
+  {
+   "code": "50",
+   "name": {
+    "he": "תרגילים",
+    "en": "Exercises"
+   },
+   "groupUniqueName": "routine_assignments",
+   "groupName": {
+    "he": "מטלות שוטפות",
+    "en": "Routine Assignments"
+   },
+   "weight": 20,
+   "assWithFeedback": null,
+   "assWithoutFeedback": null
+  }
+ ],
+ "gradesOther": [],
+ "syllabusApiVersion": "v2",
+ "updatedBy": null,
+ "levelUpdated": null,
+ "timesUpdated": null,
+ "updateDate": "2026-10-26T15:31:56"
+}

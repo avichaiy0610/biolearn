@@ -1,0 +1,130 @@
+===== HUJI syllabus API · course 72342 · year 2027 =====
+{
+ "courseCode": "72342",
+ "year": 2027,
+ "courseName": {
+  "he": "מיקרוביולוגיה מורחב",
+  "en": "MICROBIOLOGY:ADVANCED LEVEL"
+ },
+ "periodName": {
+  "he": "סמסטר ב",
+  "en": "Semester B"
+ },
+ "ectsCredits": null,
+ "degreeLevel": null,
+ "creditPoints": "5",
+ "academicYear": null,
+ "semester": "2",
+ "department": {
+  "he": "מדעי החיים",
+  "en": "Life Sciences"
+ },
+ "facultyCode": null,
+ "campusName": {
+  "he": "אדמונד י' ספרא",
+  "en": "Edmond J. Safra"
+ },
+ "building": null,
+ "room": null,
+ "courseCoordinator": {
+  "he": "ד\"ר גדעון-יעקב מאמו",
+  "en": "ד\"ר Gideon Mamou"
+ },
+ "coordinatorEmail": "[email]",
+ "teachers": {
+  "he": "פרופ אלברט טרבלוס\nפרופ חיים רוזן\nפרופ סיגל בן-יהודה\nד\"ר גדעון-יעקב מאמו\nד\"ר ענת פלורנטין",
+  "en": "Prof. Albert Taraboulos\nProf. Haim Rosen\nProf. Sigal Ben-Yehuda\nDr. Gideon Mamou\nDr. Anat Florentin"
+ },
+ "officeHours": {
+  "he": null,
+  "en": null
+ },
+ "contactHours": null,
+ "teachingLanguage": {
+  "he": "עברית",
+  "en": "Hebrew"
+ },
+ "courseDescription": {
+  "he": "הקורס עוסק בעולם החיים המיקרוסקופי של נגיפים, פרוקריוטים ואאוקריוטים ואת יחסי הגומלין בין פתוגנים ומאכסנים. זהו קורס המשך לקורס מבוא למיקרוביולוגיה, המתמקד במספר נושאים ספציפיים.  דגש יושם על אספקטים מבניים, מנגנוני שכפול וביטוי של החומר הגנטי, מנגנוני הדבקה וחדירה לתאים, פתולוגיה ומחלות. נלמד על מנגנוני ספורולציה בחידיקים. נדון גם במיקרוביום האנושי והשפעותיו על בריאות וחולי. הקורס כולל גם פרק הכרות על מלריה.",
+  "en": "Advanced Microbiology deals with the microscopic world of viruses, prokaryotes and eukaryotes; and the interaction between pathogens and their hosts. It is a continuation of course Introduction to Microbiology, examining several topics in detail. We will deal with structural aspects, modes of replication, mechanisms of attachment and entry, disease pathologies, as well as mechanisms of bacterial sporulation. Prions are also discussed. Metagenomics: microbiomes and their analysis; changes in the human microbiome: and effects on human health and obesity.  The mechanism of viral, prokaryotic and eukaryotic translation is examined and compared. Students are introduced to the field of Malaria."
+ },
+ "courseAims": {
+  "he": "ללמוד על אינטראקציות בין פתוגנים ומאכסן; על מנגנוני הישרדות של הפתוגנים; על פתוגנים ספציפיים – פריונים, נגיפים, חיידקים וטפילים והמחלות שנגרם ע״י הם. ללמוד על מנגנוני שכפול וביטוי של החומר הגנטי. ללמוד על המערכת חיסון ופעולתה נגד פתוגנים.",
+  "en": "To teach about: 1. host – pathogen interactions, 2. mechanisms of pathogen survival, 3. specific viral, bacterial and parasitic pathogens discussed in the course, and 4. the diseases they cause, as well as 5. about bacterial sporulation. Instill a basic understanding of how the host immune system handles pathogen infection."
+ },
+ "learningOutcomes": {
+  "he": "1. לתאר ולהסביר יחסי גומלין בין פתוגנים והמאכסן.\n2. לתאר ולהסביר את המערכת החיסונית - נוגדנים ותאים.\n3. לתאר ולהסביר את הביולוגיה של פתוגנים שונים והמחלות שהם מחוללים.\n4. לתאר, להסביר ולהשוות את מנגנוני השכפול והביטוי של החומר הגנטי באורגניזמים שונים.\n5. להסביר מנגנוני ספורולציה בחידקים.\n6. להסביר את תפקיד המיקרוביום האנושי בבריאות וחולי.",
+  "en": "1. Describe and explain host – pathogen interactions; 2. Describe and explain mechanisms of pathogen survival; 3. Describe and explain cell -mediated and humoral responses of the immune system to pathogen infection;  4. Describe, explain and compare life cycles and/or structure of specific viral, bacterial and parasitic pathogens, and the diseases they cause. 5. Describe and explain the role of the human microbiome in health and disease."
+ },
+ "courseContent": {
+  "he": "וירולוגיה\nפרזיטולוגיה\nתגובת מערכת החיסון לפתוגנים\nנושאים בפיזיולוגיה של חידקים\nמיקרוביום\nמיקרוסקופיה של מיקרואורגניזמים",
+  "en": "Virology\r\nParasitology\r\nThe immune response to microorganisms\r\nBacterial physiology\r\nMicrobiome\r\nMicroscopy and microorganisms"
+ },
+ "attendanceRequirements": {
+  "he": "100%",
+  "en": "100% mandatory"
+ },
+ "teachingMethod": {
+  "he": null,
+  "en": null
+ },
+ "requiredReading": {
+  "he": "מאמרים נבחרים כפי שיינתנו במהלך ההרצאות.",
+  "en": "Assigned scientific publications"
+ },
+ "additionalReading": {
+  "he": null,
+  "en": null
+ },
+ "evaluation": {
+  "he": null,
+  "en": null
+ },
+ "additionalInfo": {
+  "he": "\"בחינת מגן\" תתקיים בהמשך הסמסטר על הנושאים שילמדו עד אותו מועד (\"חלק א\" של הקורס). אין חובה לגשת לבחינה זו.\nתלמידים/ות שירצו בכך יוכלו להשתתף בבחינת המגן. אם יהיו שבעי רצון מציון המגן – יוכלו להחליט שלא להבחן שוב על חלק א' בסוף הסמסטר.  אם לאו, ציון המגן לא יחשב להם והן/ם יוכלו להבחן על שני חלקי הקורס בסוף הסמסטר.",
+  "en": "The \"bhinat magen\" is an optional mid-term exam.  \r\nDetails will be provided in the Course Introduction lecture."
+ },
+ "degreeName": {
+  "he": "תואר ראשון",
+  "en": "First degree"
+ },
+ "grade1Description": {
+  "he": null,
+  "en": null
+ },
+ "writtenExamPercentage": null,
+ "oralExamPercentage": null,
+ "presentationPercentage": null,
+ "activeParticipationPercentage": null,
+ "midtermExamsPercentage": null,
+ "assignmentPercentage": null,
+ "grade7Percentage": null,
+ "grade8Percentage": null,
+ "grade9Percentage": null,
+ "grade10Percentage": null,
+ "grade11Percentage": null,
+ "otherGradeDescription": null,
+ "grades": [
+  {
+   "code": "10",
+   "name": {
+    "he": "מבחן בכתב",
+    "en": "Written Exam"
+   },
+   "groupUniqueName": "final_exam",
+   "groupName": {
+    "he": "מבחן סופי",
+    "en": "Final exam"
+   },
+   "weight": 100,
+   "assWithFeedback": null,
+   "assWithoutFeedback": null
+  }
+ ],
+ "gradesOther": [],
+ "syllabusApiVersion": "v2",
+ "updatedBy": null,
+ "levelUpdated": null,
+ "timesUpdated": null,
+ "updateDate": "2026-03-04T12:50:39"
+}

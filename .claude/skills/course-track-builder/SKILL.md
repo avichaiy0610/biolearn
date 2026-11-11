@@ -62,6 +62,13 @@ uv run $S coverage --course tau-genetics --output $O/cov.json
 ### 1. Official syllabus
 Run `syllabus`. Note `level` (topics / lectures), the books, and the source URL. If the record
 only lists topics, the rest of the workflow must find the order.
+The record also carries what the source says about **staff, semester, grading and exam dates**
+(`teachers`, `semesterHe`, `assessmentHe`, `examDates`) — use them for steps 2a/2b before searching —
+and `warnings`. Then **read the full source text** `content/syllabi/text/<course>.txt`: it holds
+everything the university published, including parts no parser understood. If the record has
+`hasUnparsedSchedule`, open the PDF in `Project One/syllabuses/_fetched/<course>/` with the Read tool
+and take the lesson order from the table by eye. After changing a parser run
+`npx tsx scripts/syllabus-parse.test.ts`.
 
 ### 2. Discover — this is the main step, not an extra
 Run `related`, `staff` (Technion), then `discover` with `--staff` (lecturer names add the

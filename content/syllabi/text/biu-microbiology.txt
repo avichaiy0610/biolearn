@@ -1,0 +1,78 @@
+===== Bar-Ilan faculty syllabus PDF · https://life-sciences.biu.ac.il/sites/life-sciences/files/shared/Med Mechina/Sylabi23/80-203-מיקרוביולוגיה-כללית.pdf =====
+Last updated: December  Basic Microbiology
+15, 2023
+
+                        8020301, 8020310, 8020330
+
+                        Prof. Ehud Banin and Dr. Lior
+                                        Lobel
+
+          [email] [email]
+
+Academic year: 2023-2024 Semester: B Hours/credits: 2 hours lecture / 1
+credit Mandatory
+Prerequisites: None
+Year in program & how often given, if relevant: 2nd year undergraduates course given
+once a year
+
+Course Overview – Short abstract: Introduction to basic aspects of microbiology
+related to physiology and its impact on health and disease.
+
+Learning outcomes – The course aims to provide the students with a basic
+understanding of the major physiological traits of microorganisms and their
+impact on our environment and health.
+
+Assessment: Coursework and Grade structure: 100% exam. Students must
+get 60 or more in the final exam to pass the course.
+
+Week-by-week content, assignments, and reading
+
+Lesson #  Subject
+1
+          The structure of the prokaryotic cell in
+          comparison to eukaryotic cells. Bacterial
+          growth, parameters, measuring methods,
+          growth in extreme environments
+2   The bacterial cell wall biosynthesis and the
+
+    composition of Gram+/- cell walls. Bacterial
+
+    inclusions (gas vesicles, carbon storage),
+
+    Bacteria motility, flagella pili, chemotaxis
+
+3   Bacterial nutrition anabolism and catabolism,
+
+    fermentation, respiration.
+
+4   Carbon, Nitrogen, Sulfate cycles, microbial mats
+
+5   Antimicrobials, Antibiotics and Antibiotic
+
+    resistance
+
+6   Bacterial gene regulation, repression,
+
+    induction, global regulation, two-component
+
+    systems
+
+7   Bacterial genetic programs - Sporulation,
+
+    stringent response and
+
+    SOS repair
+
+8   Bacterial genetics-transformation,
+
+    transduction, conjugation, plasmids
+
+9   Bacterial immunity – Restriction enzymes, abortive
+
+    infection, CBASS, CRISPR
+
+10  Bacterial virulence and Host-Microbiome interactions
+
+Required text:
+Brock Biology of Microorganisms edited by M.T. Madigan, J.M. Martinko, J.
+Parker Prentice-Hall-Pearson Education International

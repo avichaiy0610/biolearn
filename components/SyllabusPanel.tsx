@@ -38,7 +38,7 @@ export default function SyllabusPanel({ s, children }: { s: SyllabusRecord; chil
             <ol className="space-y-3">
               {s.sessions.map((x) => (
                 <li key={x.lectures}>
-                  <p className="font-bold text-brand">הרצאות {x.lectures}</p>
+                  <p className="font-bold text-brand">{x.lectures.includes("–") ? "הרצאות" : "הרצאה"} {x.lectures}</p>
                   <ul className="mt-1 list-disc ps-5">{x.topicsHe.map((t, i) => <li key={i}><bdi>{t}</bdi></li>)}</ul>
                 </li>
               ))}

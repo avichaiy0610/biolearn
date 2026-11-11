@@ -1,0 +1,130 @@
+===== HUJI syllabus API · course 72368 · year 2027 =====
+{
+ "courseCode": "72368",
+ "year": 2027,
+ "courseName": {
+  "he": "מבוא לאבולוציה ",
+  "en": "Introduction to Evolutionary Biology"
+ },
+ "periodName": {
+  "he": "סמסטר ב",
+  "en": "Semester B"
+ },
+ "ectsCredits": null,
+ "degreeLevel": null,
+ "creditPoints": "4",
+ "academicYear": null,
+ "semester": "2",
+ "department": {
+  "he": "מדעי החיים",
+  "en": "Life Sciences"
+ },
+ "facultyCode": null,
+ "campusName": {
+  "he": "אדמונד י' ספרא",
+  "en": "Edmond J. Safra"
+ },
+ "building": null,
+ "room": null,
+ "courseCoordinator": {
+  "he": null,
+  "en": null
+ },
+ "coordinatorEmail": null,
+ "teachers": {
+  "he": "פרופ יהוא מורן\nסיון בן-דרור\nעומר שלמה סטי",
+  "en": "Prof. Yehu Moran\nSivan Ben Dror\nOmer Setty"
+ },
+ "officeHours": {
+  "he": null,
+  "en": null
+ },
+ "contactHours": null,
+ "teachingLanguage": {
+  "he": "עברית",
+  "en": "Hebrew"
+ },
+ "courseDescription": {
+  "he": "קורס מבוא לביולוגיה אבולוציונית. הקורס יציג את העקרונות של האבולוציה מרמת המולקולה ועד רמת האורגניזם השלם בסביבתו. בקורס יוצגו תחומי המחקר השונים באבולוציה והשיטות העיקריות בהן משתמשים. נדון בגישות שונות לשאלות אבולוציוניות ונציג סקירה היסטורית של התפתחות הרעיונות. במהלך התרגיל יילמדו כלים מחקריים באבולוציה.",
+  "en": "An introduction to evolutionary biology. The course will present the principles of evolution from the molecular level to the whole organism in its environment. the different disciplines and methodologies within evolutionary biology will be presented. The course will discuss different approaches to evolutionary questions, with an historical overview of how ideas and approaches developed. The course will cover basic research tools in evolutionary biology."
+ },
+ "courseAims": {
+  "he": "הבנה של תורת האבולוציה ומקומה המרכזי בחשיבה ביולוגית.",
+  "en": "To understand the evolutionary theory and its central place in biological thinking."
+ },
+ "learningOutcomes": {
+  "he": "- לתאר ולהסביר את עיקרון הברירה הטבעית וכיצד הוא מתבטא ברמות ביולוגיות שונות.\n- למצוא עדויות לפעולת האבולוציה בכל תחום מחקר ביולוגי.\n- להסביר את העקרונות האבולוציוניים העומדים מאחורי תופעות ביולוגיות.\n- להבין את משמעותו של עץ פילוגנטי\n- להבין ברמה כללית את האבולוציה של החיים על כדור הארץ ושל האדם",
+  "en": "- To describe and explain the principle of natural selection and its manifestations at different biological levels.\r\n- To find evidence for the action of evolution in all areas of biological research\r\n- To explain the evolutionary principles behind biological phenomena\r\n- To understand the meaning behind a phylogenetic tree\r\n- To understand the basics of the evolution of life on Earth and of humans"
+ },
+ "courseContent": {
+  "he": "עקרונות האבולוציה\nהעדויות לקיום האבולוציה\nגנטיקה אבולוציונית\nעצים פילוגנטיים ושחזור אבולוציוני\nאבולוציה של התנהגות\nברירה מינית\nאבולוציה והתפתחות\nקצב וזמן באבולוציה\nאבולוציה ניסויית\nמינים והתמיינותם\nאבולוציה אנושית",
+  "en": "Principles of Evolutionary Biology\r\nThe Evidence for Evolution\r\nEvolutionary genetics \r\nMolecular Evolution\r\nPhylogenetic trees and evolutionary reconstructions\r\nEvolution of behavior\r\nSexual selection\r\nAdvanced Evolutionary Genetics \r\nEvolutionary Developmental Biology\r\nTempo and Mode in Evolution\r\nExperimental evolution\r\nSpecies and Speciation\r\nHuman Evolution"
+ },
+ "attendanceRequirements": {
+  "he": "אין דרישה. 2 נקודות בונוס לנוכחים בשיעור ו-2 נוספות לנוכחים בתרגיל.",
+  "en": "No requirement. 2 bonus points will be given to participants in lectures and 2 more bonus points to those present in the teaching exercises."
+ },
+ "teachingMethod": {
+  "he": null,
+  "en": null
+ },
+ "requiredReading": {
+  "he": "Herron & Freeman \"Evolutionary Analysis\" 5th Edition",
+  "en": "Herron & Freeman \"Evolutionary Analysis\" 5th Edition"
+ },
+ "additionalReading": {
+  "he": null,
+  "en": null
+ },
+ "evaluation": {
+  "he": null,
+  "en": null
+ },
+ "additionalInfo": {
+  "he": "תרגיל ייערך בכל שבוע החל מן השבוע הראשון.\nסטודנטים שיגיעו ל-11 שיעורים יקבלו 2 נקודות בונוס. סטודנטים שיגיעו ל-10 תרגילים יקבלו בונוס של 2 נקודות נוספות.",
+  "en": "Weekly tutorials will be held from the first week. Studenst who are present at 11 lectures will get a 2 point bonus. Students who are present at 10 tutorials will get an additional 2 point bonus/"
+ },
+ "degreeName": {
+  "he": "תואר ראשון",
+  "en": "First degree"
+ },
+ "grade1Description": {
+  "he": null,
+  "en": null
+ },
+ "writtenExamPercentage": null,
+ "oralExamPercentage": null,
+ "presentationPercentage": null,
+ "activeParticipationPercentage": null,
+ "midtermExamsPercentage": null,
+ "assignmentPercentage": null,
+ "grade7Percentage": null,
+ "grade8Percentage": null,
+ "grade9Percentage": null,
+ "grade10Percentage": null,
+ "grade11Percentage": null,
+ "otherGradeDescription": null,
+ "grades": [
+  {
+   "code": "10",
+   "name": {
+    "he": "מבחן בכתב",
+    "en": "Written Exam"
+   },
+   "groupUniqueName": "final_exam",
+   "groupName": {
+    "he": "מבחן סופי",
+    "en": "Final exam"
+   },
+   "weight": 100,
+   "assWithFeedback": null,
+   "assWithoutFeedback": null
+  }
+ ],
+ "gradesOther": [],
+ "syllabusApiVersion": "v2",
+ "updatedBy": null,
+ "levelUpdated": null,
+ "timesUpdated": null,
+ "updateDate": "2026-02-22T15:55:42"
+}

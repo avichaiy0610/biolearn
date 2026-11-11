@@ -1,0 +1,175 @@
+===== HUJI syllabus API · course 72334 · year 2027 =====
+{
+ "courseCode": "72334",
+ "year": 2027,
+ "courseName": {
+  "he": "מבוא למדעי הצמח",
+  "en": "INTRODUCTION TO PLANT SCIENCE"
+ },
+ "periodName": {
+  "he": "סמסטר א",
+  "en": "Semester A"
+ },
+ "ectsCredits": null,
+ "degreeLevel": null,
+ "creditPoints": "5",
+ "academicYear": null,
+ "semester": "1",
+ "department": {
+  "he": "מדעי החיים",
+  "en": "Life Sciences"
+ },
+ "facultyCode": null,
+ "campusName": {
+  "he": "אדמונד י' ספרא",
+  "en": "Edmond J. Safra"
+ },
+ "building": null,
+ "room": null,
+ "courseCoordinator": {
+  "he": null,
+  "en": null
+ },
+ "coordinatorEmail": null,
+ "teachers": {
+  "he": "ד\"ר בעז ניגן\nד\"ר תמר אבין-ויטנברג\nגב איילת ציון בן עמי\nמר רון מזרחי\nרועי מתן\nשירה ליזה ברנד",
+  "en": "Dr. Boaz Negin\nDr. Tamar Avin-Wittenberg\nMs. Ayelet Zion\nMr. Ron Mizrahi\nRoei Matan\nShira Brand"
+ },
+ "officeHours": {
+  "he": null,
+  "en": null
+ },
+ "contactHours": null,
+ "teachingLanguage": {
+  "he": "עברית",
+  "en": "Hebrew"
+ },
+ "courseDescription": {
+  "he": "הקורס מעניק לסטודנטים בסיס רחב במדעי הצמח, תוך שילוב בין ידע עיוני לבין התנסות מעשית. הקורס עוסק במבנה, בתפקוד ובפיתוח של הצמח, החל ממבנה התא ודופן התא, דרך יחסי מים בצמח, מורפולוגיה, צמיחה ראשונית ומשנית, ועד לאינטראקציות עם הסביבה.\r\n\r\nההרצאות השבועיות מציגות את עקרונות היסוד, ובמקביל מתקיימות מעבדות המאפשרות לסטודנטים ליישם את הידע בעבודה ניסויית ותצפיות מודרכות. השילוב בין למידה בכיתה לבין חוויה מעשית מדגיש את הקשר בין תהליכים תאיים ומולקולריים לבין פיזיולוגיה של הצמח השלם.",
+  "en": "The course provides students with a comprehensive foundation in plant biology, integrating both theoretical knowledge and practical experience. The course covers the fundamental aspects of plant structure, function, and development, beginning with cell architecture and cell walls, and progressing through water relations, morphology, primary and secondary growth, and interactions with the environment.\r\n\r\nWeekly lectures introduce core concepts, complemented by laboratory sessions that enable students to apply knowledge through hands-on experimentation and guided observations. The combination of classroom instruction and experiential learning emphasizes the integration of cellular and molecular processes with whole-plant physiology."
+ },
+ "courseAims": {
+  "he": "מטרת הקורס היא הכרת הצמח, הן ברמת האורגניזם השלם והן ברמה התאית והמולקולרית, והבנת תהליכים עיקריים המתרחשים בו. בהרצאות ישולבו היבטים אנטומיים, פיזיולוגיים, מולקולריים, אקולוגיים ואבולוציוניים.",
+  "en": "The purpose of the course is to understand plant life at the level of the organism, and at the cellular and the molecular levels. The lectures will introduce anatomical, physiological, molecular, ecological and evolutionary principles."
+ },
+ "learningOutcomes": {
+  "he": "1. לתאר ולהסביר תהליכי התפתחות בצמחים על צירי הזמן והמרחב. \r\n2. לתאר ולמיין את המגוון של עולם הצומח. \r\n3. לבצע אינטגרציה של ידע על מסלולים ביוכמיים בצמחים (פוטוסינטזה) ולנתח את הקשר שלהם לפיזיולוגיה של הצמח. \r\n4. לתאר ולהשוות את מחזורים ביוגאוכימיים (חנקן פחמן) אותם מניעים צמחים. \r\n5. לנתח ולהעריך את הפוטנציאל הביוטכנולוגי של הצמחים.",
+  "en": "1. Describe and explain plant development in space and time. \r\n2. Describe and classify plant diversity.\r\n3. Describe and compare different biochemical pathways and analyse physiological responses.\r\n4. Analyze and evaluate potentials of plant biotechnology."
+ },
+ "courseContent": {
+  "he": "בקורס ילמדו הנושאים הבאים:  תכונות שמאפיינות צמחי יבשה וסקירה קצרה של עולם הצמחים; התפתחות אברי הצמח ורקמותיו; מבנה אנטומי של הצמח; שלבים עיקריים בתהליך הפוטוסינתיזה והנשימה; צמחי C3, C4 ו CAM; קליטת מינרלים ומחזורי פחמן וחנקן, צמחים כביוראקטורים של ייצור חומרי טבע (מטבוליטים); התמודדות צמחים עם אתגרים שמציבים חיי היבשה; תגובות צמחים לאותות סביבה (תוך התמקדות בהארה) והכרת הבסיס המולקולרי לכך; מחקרים יישומיים ושיטות עיקריות בביוטכנולוגיה של צמחים.",
+  "en": "The course presents the following topics:\r\nProperties of land plants\r\nSurvey of the plant kingdom\r\nPlant development and organs\r\nPlant & cell Architecture\r\nCell walls\r\nWater and plant cells\r\nMineral nutrition\r\nPhotosynthesis\r\nEnvironmental stress and stress response.\r\nSignal transduction\r\nSignals from sunlight\r\nBiotech & Ag-tech"
+ },
+ "attendanceRequirements": {
+  "he": "ההרצאות מוקלטות ואין חובת נוכחות, אך מומלץ מאוד לכלל התלמידים והתלמידות להיות נוכחים/ות בשיעורים.ישנה חובה לנוכחות של 100% בכל המעבדות, תרגולים ובסיור.",
+  "en": "The lectures are recorded with no obligatory attendance. However, we highly recommend joining the lectures. 100% attendance is required in labs, field tour and exercises"
+ },
+ "teachingMethod": {
+  "he": "ההוראה פרונטלית וכוללת מעבדות וסיור",
+  "en": "The teaching includes lectures, labs, and a tour of the botanical garden."
+ },
+ "requiredReading": {
+  "he": "Plant Physiology and Development\r\nLincoln Taiz, Ian Max Møller, Angus Murphy, and Eduardo Zeiger\r\nOxford University press",
+  "en": "Plant Physiology and Development\r\nLincoln Taiz, Ian Max Møller, Angus Murphy, and Eduardo Zeiger\r\nOxford University press"
+ },
+ "additionalReading": {
+  "he": "",
+  "en": ""
+ },
+ "evaluation": {
+  "he": null,
+  "en": null
+ },
+ "additionalInfo": {
+  "he": "הרכב הציון הסופי : \r\nמבחן מסכם בכתב: 60% \r\nנוכחות ומוכנות למעבדות (כולל בחנים מקדימים): 12%\r\nדו״חות מעבדה: 20%\r\nהרצאת נושא אישי: 8% \r\n(תתקיים בזמן הסיור או לקראת סיום הסמסטר)",
+  "en": "Final grade is structured as follows:\r\n\r\nFinal exam: 60%.\r\n\r\nPreparation and presence in labs: 12%\r\n\r\nLab reports: 20%\r\n\r\nPersonal short talk: 8%"
+ },
+ "degreeName": {
+  "he": "תואר ראשון",
+  "en": "First degree"
+ },
+ "grade1Description": {
+  "he": null,
+  "en": null
+ },
+ "writtenExamPercentage": null,
+ "oralExamPercentage": null,
+ "presentationPercentage": null,
+ "activeParticipationPercentage": null,
+ "midtermExamsPercentage": null,
+ "assignmentPercentage": null,
+ "grade7Percentage": null,
+ "grade8Percentage": null,
+ "grade9Percentage": null,
+ "grade10Percentage": null,
+ "grade11Percentage": null,
+ "otherGradeDescription": null,
+ "grades": [
+  {
+   "code": "10",
+   "name": {
+    "he": "מבחן בכתב",
+    "en": "Written Exam"
+   },
+   "groupUniqueName": "final_exam",
+   "groupName": {
+    "he": "מבחן סופי",
+    "en": "Final exam"
+   },
+   "weight": 60,
+   "assWithFeedback": null,
+   "assWithoutFeedback": null
+  },
+  {
+   "code": "41",
+   "name": {
+    "he": "סיור לימודי שכולל השתתפות פעילה",
+    "en": "Field excursion involving active participation"
+   },
+   "groupUniqueName": "active_participation",
+   "groupName": {
+    "he": "השתתפות פעילה",
+    "en": "Active Participation"
+   },
+   "weight": 8,
+   "assWithFeedback": null,
+   "assWithoutFeedback": null
+  },
+  {
+   "code": "53",
+   "name": {
+    "he": "דוחות",
+    "en": "Reports"
+   },
+   "groupUniqueName": "routine_assignments",
+   "groupName": {
+    "he": "מטלות שוטפות",
+    "en": "Routine Assignments"
+   },
+   "weight": 20,
+   "assWithFeedback": null,
+   "assWithoutFeedback": null
+  },
+  {
+   "code": "46",
+   "name": {
+    "he": "מעבדה",
+    "en": "Lab Work"
+   },
+   "groupUniqueName": "practical_work",
+   "groupName": {
+    "he": "עבודה מעשית",
+    "en": "Practical work"
+   },
+   "weight": 12,
+   "assWithFeedback": null,
+   "assWithoutFeedback": null
+  }
+ ],
+ "gradesOther": [],
+ "syllabusApiVersion": "v2",
+ "updatedBy": null,
+ "levelUpdated": null,
+ "timesUpdated": null,
+ "updateDate": "2026-09-27T10:01:23"
+}

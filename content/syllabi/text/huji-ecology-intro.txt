@@ -1,0 +1,145 @@
+===== HUJI syllabus API · course 72107 · year 2027 =====
+{
+ "courseCode": "72107",
+ "year": 2027,
+ "courseName": {
+  "he": "מבוא לאקולוגיה",
+  "en": "Introduction to Ecology"
+ },
+ "periodName": {
+  "he": "סמסטר א",
+  "en": "Semester A"
+ },
+ "ectsCredits": null,
+ "degreeLevel": null,
+ "creditPoints": "5",
+ "academicYear": null,
+ "semester": "1",
+ "department": {
+  "he": "מדעי החיים",
+  "en": "Life Sciences"
+ },
+ "facultyCode": null,
+ "campusName": {
+  "he": "אדמונד י' ספרא",
+  "en": "Edmond J. Safra"
+ },
+ "building": null,
+ "room": null,
+ "courseCoordinator": {
+  "he": "פרופסור דרור הבלנה",
+  "en": "פרופסור Dror Hawlena"
+ },
+ "coordinatorEmail": "[email]",
+ "teachers": {
+  "he": "פרופ דרור הבלנה\nד\"ר אורן קולודני\nנופר בסיל\nשחר רון",
+  "en": "Prof. Dror Hawlena\nDr. Oren Kolodny\nNofar Basil\nShahar Ron"
+ },
+ "officeHours": {
+  "he": null,
+  "en": null
+ },
+ "contactHours": null,
+ "teachingLanguage": {
+  "he": "עברית",
+  "en": "Hebrew"
+ },
+ "courseDescription": {
+  "he": "הקורס מתמקד בתהליכים אקולוגיים מרכזיים ברמות הארגון של הפרט,האוכלוסיה, החברה, המערכת האקולוגית והביוספירה תוך שימת דגש על היחסים שבין ייצורים לבין סביבתם הביוטית והא- ביוטית ומותאמות תכונותיהם לסביבות אלה.",
+  "en": "The course focuses on principal processes in ecology at levels ranging from individuals, through populations and communities  through the global biosphere. Emphasis is given to relationships between organisms and their biotic and abiotic environment and their adaptation to the ambient conditions."
+ },
+ "courseAims": {
+  "he": "הכרה בסיסית עם הסביבה הא-ביוטית והביוטית ביבשה ובים והבנת עקרונותיהם של תהליכים אקולוגיים מרכזיים הקובעים את שיפעתם ותפוצתם של ייצורים",
+  "en": "Basic knowledge of the biotic and abiotic environment on Earth and the understanding of key ecological processes that determine the abundance and distribution of organisms."
+ },
+ "learningOutcomes": {
+  "he": "1. לזהות תנאים ביוטיים וא-ביוטיים ביבשה ובים, \n2. לנתח את מהותם של תהליכים אקולוגיים עיקריים  ואת מכלול השפעת התנאים הסביבתיים על אורגניזמים בסקאלות זמן אבולוציוניות ואקולוגיות.",
+  "en": "1. To identify biotic and abiotic environment on Earth\r\n2. To analyze ecological processes and effects of environmental conditions on organisms from the scale of the individual to the biosphere."
+ },
+ "courseContent": {
+  "he": "הנושאים הנלמדים כוללים התשתית הסביבתית ביבשה ובים, מעברי חומר אנרגיה במערכות אקולוגיות, מחזורים ביוגיאוכימיים,אקולוגיה מיקרוביאלית, אקולוגיה של תזונה, דמוגרפיה, תחרות, מהלכי חיים, אסטרטגיות יציבות אבולוציונית (ESS), טריפה ורעייה, ביוגיאוכימיה, דגמי מפזר, המגוון הביולוגי, סוקצסיה, השפעות האדם על אקוסיסטמות, שימור טבע.",
+  "en": "Environmental conditions on land, in lakes, and in the ocean. Limiting factors. Trophic structure and dynamics. Microbial ecology. Nutritional ecology. Competition. Predator-prey relationships. Predation risk. Direct and indirect effects of predators. Fundamentals of biogeochemistry. Global changes. Human effects on ecosystems."
+ },
+ "attendanceRequirements": {
+  "he": "אין חובת נוכחות",
+  "en": "Attendance is not mandatory"
+ },
+ "teachingMethod": {
+  "he": null,
+  "en": null
+ },
+ "requiredReading": {
+  "he": "פרקים מספרם של BEGON וחובריו ECOLOGY, פרקים מספרים אחרים, ומאמרים נבחרים.",
+  "en": "Begon, Harper and Townsend/ Ecology.\r\nRicklefs/ Ecology.\r\nSelected papers."
+ },
+ "additionalReading": {
+  "he": null,
+  "en": null
+ },
+ "evaluation": {
+  "he": null,
+  "en": null
+ },
+ "additionalInfo": {
+  "he": "במהלך הקורס יידרש כל תלמיד להגיש 4 תרגילים כתובים. הדו\"ח הינו אישי – וחייב להיכתב על ידי כל תלמיד בנפרד. לא יתקבלו דוחות משותפים. הדוחות יוגשו באופן אלקטרוני דרך אתר הקורס ב- Moodle. על הדו\"ח להיות מוגש כקובץ Word או PDF.הדו\"ח ייבדק על המתרגלים ויינתן עליו ציון בדרוג שבין 0 ל- 110 (10 הנקודות מעל 100 יינתנו כבונוס לתרגילים מושקעים ומעולים על מנת להגדיל את הסיכוי לקבל ציון 100% על חלק התרגילים בציון הכללי). התרגילים הבדוקים יוחזרו לתלמידים עם הערות הבודקים.",
+  "en": "During the course, each student should submit 4 written assignments. The assignment must be written independently by each student and submitted electronically in Word or PDF format through the course's Moodle site. The assignments will be checked and graded by the TAs, with a maximum grade of 110% (to increase the chances of getting a grade of 100% for the excercises' part)."
+ },
+ "degreeName": {
+  "he": "תואר ראשון",
+  "en": "First degree"
+ },
+ "grade1Description": {
+  "he": null,
+  "en": null
+ },
+ "writtenExamPercentage": null,
+ "oralExamPercentage": null,
+ "presentationPercentage": null,
+ "activeParticipationPercentage": null,
+ "midtermExamsPercentage": null,
+ "assignmentPercentage": null,
+ "grade7Percentage": null,
+ "grade8Percentage": null,
+ "grade9Percentage": null,
+ "grade10Percentage": null,
+ "grade11Percentage": null,
+ "otherGradeDescription": null,
+ "grades": [
+  {
+   "code": "10",
+   "name": {
+    "he": "מבחן בכתב",
+    "en": "Written Exam"
+   },
+   "groupUniqueName": "final_exam",
+   "groupName": {
+    "he": "מבחן סופי",
+    "en": "Final exam"
+   },
+   "weight": 80,
+   "assWithFeedback": null,
+   "assWithoutFeedback": null
+  },
+  {
+   "code": "50",
+   "name": {
+    "he": "תרגילים",
+    "en": "Exercises"
+   },
+   "groupUniqueName": "routine_assignments",
+   "groupName": {
+    "he": "מטלות שוטפות",
+    "en": "Routine Assignments"
+   },
+   "weight": 20,
+   "assWithFeedback": null,
+   "assWithoutFeedback": null
+  }
+ ],
+ "gradesOther": [],
+ "syllabusApiVersion": "v2",
+ "updatedBy": null,
+ "levelUpdated": null,
+ "timesUpdated": null,
+ "updateDate": "2025-11-18T09:42:33"
+}
