@@ -3,11 +3,13 @@
 import type { ComponentType } from "react";
 import TranscriptionScene from "./TranscriptionScene";
 import TransportScene from "./TransportScene";
+import RespirationScene from "./RespirationScene";
 import type { SceneId } from "./registry";
 
 const SCENES: Record<SceneId, ComponentType<{ lang?: string; processName?: string }>> = {
   transcription: TranscriptionScene,
   "membrane-transport": TransportScene,
+  "cellular-respiration": RespirationScene,
 };
 
 export default function ProcessScene({
