@@ -10,3 +10,12 @@
 
 `code/<Name>.tsx.txt` — הפונקציה הישנה בדיוק כפי שהייתה; `svg/` — רינדור בהיר/כהה.
 שחזור: להחזיר את הפונקציה לקובץ המקור, למחוק את שורת `import { <Name> } from "./redraws/<Name>"` ואת `components/lesson/redraws/<Name>.tsx`.
+
+## סבב 7 (עדיפות 2) — אישור אביחי 11.11
+- `cellFigures.tsx`: JunctionsEpithelium (`junctions-epithelium`, יחידה cell-junctions)
+- `cellFigures.tsx`: EcmOverview (`ecm-overview`, יחידה cell-ecm)
+- `cellFigures.tsx`: ReceptorClasses (`receptor-classes`, יחידה cell-signaling-principles)
+- `cellFigures.tsx`: PlcPathway (`plc-pathway`, יחידה cell-gpcr)
+- `cellFigures.tsx`: RtkActivation (`rtk-activation`, יחידה cell-rtk)
+- `developmentalFigures.tsx`: MorphogenesisMechanics (`dv-morphogenesis-mechanics`, יחידה dv-principles)
+אותו מבנה ואותו שחזור כמו למעלה.

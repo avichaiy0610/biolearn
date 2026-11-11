@@ -13,6 +13,11 @@ import { CalnexinCycle } from "./redraws/CalnexinCycle";
 import { GolgiSorting } from "./redraws/GolgiSorting";
 import { RanCycle } from "./redraws/RanCycle";
 import { CytoskeletonTypes } from "./redraws/CytoskeletonTypes";
+import { JunctionsEpithelium } from "./redraws/JunctionsEpithelium";
+import { EcmOverview } from "./redraws/EcmOverview";
+import { ReceptorClasses } from "./redraws/ReceptorClasses";
+import { PlcPathway } from "./redraws/PlcPathway";
+import { RtkActivation } from "./redraws/RtkActivation";
 const PURPLE = "#7c3aed";
 const RED = "#b91c1c";
 const FILL = { blue: "#dbeafe", green: "#dcfce7", orange: "#ffedd5", purple: "#ede9fe", yellow: "#fef3c7", gray: "#f1f5f9", red: "#fee2e2", sky: "#e0f2fe" };
@@ -190,132 +195,13 @@ function DynamicInstability() {
 // MotorProteins: redrawn at textbook level (2026-11-05) — see ./redraws/MotorProteins.tsx; old code in archive/figures/2026-11-05/.
 
 // ── cell-junctions ───────────────────────────────────────────────────────────
-function JunctionsEpithelium() {
-  const top = 54, bot = 276, xa = 74, xb = 350, mid = 212;
-  const lbl = (y: number, t: string, c = INK) => (
-    <g>
-      <line x1={mid + 6} y1={y} x2={352} y2={y} stroke={LINE} strokeWidth={1.2} />
-      <He x={474} y={y + 4} size={11.5} anchor="end" bold color={c}>{t}</He>
-    </g>
-  );
-  return (
-    <Svg h={330} label="שני תאי אפיתל שכנים מלמעלה למטה: קשר הדוק סמוך לצד האפיקלי, צמת נצמד עם חגורת אקטין, דסמוזום שמחובר לסיבי ביניים, צמת פער עם תעלות בין התאים; ובבסיס המי-דסמוזום שמעגן את התא ללמינה הבזלית">
-      {/* cells */}
-      <rect x={xa} y={top} width={mid - 2 - xa} height={bot - top} rx={6} fill={FILL.sky} stroke={BLUE} strokeWidth={1.6} />
-      <rect x={mid + 2} y={top} width={xb - mid - 2} height={bot - top} rx={6} fill={FILL.sky} stroke={BLUE} strokeWidth={1.6} />
-      {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((i) => <rect key={i} x={xa + 6 + i * 25} y={top - 16} width={8} height={18} rx={4} fill={FILL.sky} stroke={BLUE} strokeWidth={1.2} />)}
-      <He x={38} y={60} size={11} color={MUTED}>אפיקלי</He>
-      <He x={38} y={276} size={11} color={MUTED}>בזלי</He>
-      {/* basal lamina */}
-      <rect x={xa - 6} y={bot + 6} width={xb - xa + 12} height={10} rx={3} fill={FILL.yellow} stroke={ORANGE} strokeWidth={1.2} />
-      {/* tight junction */}
-      {[64, 72, 80].map((y) => <circle key={y} cx={mid} cy={y} r={3.2} fill={INK} />)}
-      {lbl(72, "קשר הדוק")}
-      {/* adherens with actin belt */}
-      {[100, 106, 112].map((y) => <line key={y} x1={mid - 6} x2={mid + 6} y1={y} y2={y} stroke={PURPLE} strokeWidth={1.6} />)}
-      <circle cx={mid - 14} cy={106} r={5} fill={RED} /><circle cx={mid + 14} cy={106} r={5} fill={RED} />
-      {lbl(106, "צמת נצמד — אקטין", RED)}
-      {/* desmosome */}
-      <rect x={mid - 14} y={150} width={6} height={30} fill={INK} /><rect x={mid + 8} y={150} width={6} height={30} fill={INK} />
-      {[156, 165, 174].map((y) => <line key={y} x1={mid - 8} x2={mid + 8} y1={y} y2={y} stroke={PURPLE} strokeWidth={1.4} />)}
-      {[[-1, 140], [-1, 165], [-1, 190], [1, 140], [1, 165], [1, 190]].map(([s, y], i) => (
-        <path key={i} d={`M${mid + s * 14} 165 Q${mid + s * 50} ${y} ${mid + s * 90} ${y + (y - 165) * 0.4}`} fill="none" stroke={GREEN} strokeWidth={1.8} />
-      ))}
-      {lbl(165, "דסמוזום — סיבי ביניים", GREEN)}
-      {/* gap junction */}
-      {[212, 222, 232].map((y) => <rect key={y} x={mid - 7} y={y - 3} width={14} height={6} rx={2} fill={FILL.orange} stroke={ORANGE} strokeWidth={1.2} />)}
-      {lbl(222, "צמת פער", ORANGE)}
-      {/* hemidesmosome */}
-      <rect x={290} y={bot - 8} width={26} height={6} fill={INK} />
-      {[-1, 0, 1].map((s) => <path key={s} d={`M${303 + s * 8} ${bot - 8} q${s * 10} -24 ${s * 24} -40`} fill="none" stroke={GREEN} strokeWidth={1.8} />)}
-      {[294, 303, 312].map((x) => <line key={x} x1={x} x2={x} y1={bot - 2} y2={bot + 6} stroke={PURPLE} strokeWidth={1.6} />)}
-      <line x1={322} y1={bot - 5} x2={374} y2={262} stroke={LINE} strokeWidth={1.2} />
-      <He x={474} y={266} size={11.5} anchor="end" bold color={GREEN}>המי-דסמוזום</He>
-      <He x={474} y={300} size={11.5} anchor="end" bold color={ORANGE}>למינה בזלית</He>
-    </Svg>
-  );
-}
+
 
 // ── cell-ecm ─────────────────────────────────────────────────────────────────
-function EcmOverview() {
-  let elastin = "";
-  for (let x = 30; x <= 250; x += 4) elastin += `${x === 30 ? "M" : "L"}${x} ${(150 + 10 * Math.sin(x / 9)).toFixed(1)}`;
-  let elastin2 = "";
-  for (let x = 30; x <= 250; x += 4) elastin2 += `${x === 30 ? "M" : "L"}${x} ${(166 + 10 * Math.sin(x / 9 + 2)).toFixed(1)}`;
-  const cores = [318, 344, 370, 396, 422, 448];
-  return (
-    <Svg h={300} label="המטריקס החוץ-תאי: פיברובלסט מפריש סיבי קולגן (חוזק במתיחה), סיבי אלסטין (גמישות), ופרוטאוגליקנים שקשורים לחומצה היאלורונית (מושכים מים ועומדים בלחץ); פיברונקטין מחבר את הקולגן לאינטגרינים בממברנת התא">
-      {/* collagen */}
-      {[62, 76, 90].map((y) => <line key={y} x1={26} x2={300} y1={y} y2={y - 14} stroke={ORANGE} strokeWidth={7} strokeDasharray="14 3" strokeLinecap="round" />)}
-      <He x={160} y={38} size={12} bold color={ORANGE}>סיבי קולגן — עמידות במתיחה</He>
-      {/* elastin */}
-      <path d={elastin} fill="none" stroke={GREEN} strokeWidth={3} />
-      <path d={elastin2} fill="none" stroke={GREEN} strokeWidth={3} />
-      {[66, 122, 178, 234].map((x) => <line key={x} x1={x} x2={x} y1={150 + 10 * Math.sin(x / 9)} y2={166 + 10 * Math.sin(x / 9 + 2)} stroke={GREEN} strokeWidth={2} />)}
-      <He x={140} y={128} size={12} bold color={GREEN}>אלסטין — גמישות</He>
-      {/* proteoglycan aggregate */}
-      <Line x1={306} y1={150} x2={462} y2={150} c={PURPLE} w={3} />
-      {cores.map((x) => (
-        <g key={x}>
-          <Line x1={x} y1={112} x2={x} y2={188} c={BLUE} w={2} />
-          {[118, 128, 138, 162, 172, 182].map((y) => <line key={y} x1={x - 7} x2={x + 7} y1={y} y2={y - 4} stroke={PURPLE} strokeWidth={1.2} />)}
-        </g>
-      ))}
-      <He x={384} y={92} size={12} bold color={PURPLE}>פרוטאוגליקנים</He>
-      <He x={384} y={210} size={11} color={MUTED}>על חומצה היאלורונית</He>
-      <He x={384} y={226} size={11} color={MUTED}>מושכים מים — עמידות בלחץ</He>
-      {/* cell, integrin, fibronectin */}
-      <ellipse cx={110} cy={262} rx={92} ry={30} fill={FILL.sky} stroke={BLUE} strokeWidth={1.6} />
-      <He x={92} y={270} size={12} bold color={BLUE}>פיברובלסט</He>
-      <path d="M176 238 L176 222 M170 214 L176 222 L182 214" fill="none" stroke={PURPLE} strokeWidth={2.4} />
-      <path d="M176 212 L196 150 L214 96" fill="none" stroke={BLUE} strokeWidth={2.6} strokeDasharray="8 3" />
-      <He x={234} y={210} size={11.5} color={BLUE} anchor="start">פיברונקטין</He>
-      <He x={194} y={250} size={11.5} color={PURPLE} anchor="start">אינטגרין</He>
-    </Svg>
-  );
-}
+
 
 // ── cell-signaling-principles ────────────────────────────────────────────────
-function ReceptorClasses() {
-  const my = 112, mh = 30;
-  const lig = (x: number, y: number) => <path d={`M${x} ${y} l8 14 l-16 0 z`} fill={ORANGE} />;
-  return (
-    <Svg h={280} label="שלוש משפחות של קולטני פני התא: קולטן-תעלה שהליגנד פותח ויונים עוברים בו; קולטן מצומד חלבון G שעובר את הממברנה שבע פעמים ומפעיל חלבון G; וקולטן מצומד אנזים, לרוב קינאז, שהליגנד מקרב שני עותקים שלו והם מזרחנים זה את זה">
-      <He x={240} y={20} size={12} color={MUTED}>מחוץ לתא</He>
-      <Membrane y={my} h={mh} />
-      {/* ion channel */}
-      <rect x={60} y={my - 18} width={18} height={mh + 36} rx={6} fill={FILL.purple} stroke={PURPLE} strokeWidth={1.5} />
-      <rect x={92} y={my - 18} width={18} height={mh + 36} rx={6} fill={FILL.purple} stroke={PURPLE} strokeWidth={1.5} />
-      {lig(69, 70)}
-      {[60, 86, 112].map((y, i) => <circle key={y} cx={85} cy={y + 10 + i * 18} r={4} fill={BLUE} />)}
-      <Arrow x1={85} y1={162} x2={85} y2={186} color={BLUE} />
-      {/* GPCR */}
-      {[0, 1, 2, 3, 4, 5, 6].map((i) => <rect key={i} x={206 + i * 10} y={my - 4} width={8} height={mh + 8} rx={3} fill={FILL.purple} stroke={PURPLE} strokeWidth={1.1} />)}
-      {lig(240, 84)}
-      <ellipse cx={226} cy={my + mh + 18} rx={16} ry={11} fill={FILL.green} stroke={GREEN} strokeWidth={1.4} />
-      <ellipse cx={254} cy={my + mh + 16} rx={11} ry={9} fill={FILL.blue} stroke={BLUE} strokeWidth={1.4} />
-      <ellipse cx={270} cy={my + mh + 10} rx={6} ry={6} fill={FILL.blue} stroke={BLUE} strokeWidth={1.4} />
-      <La x={226} y={my + mh + 22} size={10.5} bold color={GREEN}>α</La>
-      <La x={254} y={my + mh + 20} size={10.5} bold color={BLUE}>β</La>
-      {/* enzyme-coupled */}
-      {[378, 410].map((x) => (
-        <g key={x}>
-          <rect x={x - 9} y={58} width={18} height={my - 58} rx={6} fill={FILL.purple} stroke={PURPLE} strokeWidth={1.4} />
-          <Line x1={x} y1={my} x2={x} y2={my + mh} c={PURPLE} w={3} />
-          <rect x={x - 12} y={my + mh} width={24} height={36} rx={6} fill={FILL.blue} stroke={BLUE} strokeWidth={1.4} />
-          <Tag x={x + (x < 394 ? -20 : 20)} y={my + mh + 24} t="P" r={8} />
-        </g>
-      ))}
-      <path d="M394 56 l8 14 l-16 0 z" fill={ORANGE} />
-      {([[85, "קולטן-תעלה", "הליגנד פותח תעלה"], [240, "GPCR", "מפעיל חלבון G"], [394, "מצומד אנזים", "לרוב קינאז (RTK)"]] as [number, string, string][]).map(([x, a, b]) => (
-        <g key={x}>
-          {/[A-Z]/.test(a) ? <La x={x} y={232} size={13} bold>{a}</La> : <He x={x} y={232} size={13} bold>{a}</He>}
-          <He x={x} y={252} size={11.5} color={MUTED}>{b}</He>
-        </g>
-      ))}
-    </Svg>
-  );
-}
+
 
 function MolecularSwitches() {
   const cyc = (cx: number, title: string, off: string, on: string, down: string, downSub: string, up: string, upSub: string, tag: string) => (
@@ -341,76 +227,10 @@ function MolecularSwitches() {
 }
 
 // ── cell-gpcr ────────────────────────────────────────────────────────────────
-function PlcPathway() {
-  const my = 70, mh = 28;
-  return (
-    <Svg h={300} label="מסלול Gq ו-PLC: הליגנד מפעיל GPCR, חלבון Gq מפעיל פוספוליפאזה C-β, שחותכת PIP₂ ל-DAG שנשאר בממברנה ול-IP₃ שמתפזר ופותח תעלות Ca²⁺ ב-ER; Ca²⁺ ו-DAG מפעילים יחד את PKC, ו-Ca²⁺ פועל גם דרך קלמודולין">
-      <Membrane y={my} h={mh} />
-      <path d="M48 36 l8 14 l-16 0 z" fill={ORANGE} />
-      {[0, 1, 2, 3, 4].map((i) => <rect key={i} x={30 + i * 9} y={my - 4} width={7} height={mh + 8} rx={3} fill={FILL.purple} stroke={PURPLE} strokeWidth={1.1} />)}
-      <La x={52} y={my + mh + 22} size={11.5} bold color={PURPLE}>GPCR</La>
-      <LBox x={118} y={my + mh + 4} w={50} h={26} label="Gαq" c={GREEN} fill={FILL.green} size={12} />
-      <Arrow x1={144} y1={my + mh + 17} x2={170} y2={my + mh + 17} color={GREEN} />
-      <LBox x={204} y={my + mh + 4} w={64} h={26} label="PLCβ" c={BLUE} fill={FILL.blue} size={12} bold />
-      <La x={268} y={my + 19} size={12} bold>PIP₂</La>
-      <Arrow x1={232} y1={my + mh + 6} x2={256} y2={my + mh - 2} color={BLUE} />
-      {/* DAG */}
-      <Arrow x1={290} y1={my + 14} x2={340} y2={my + 14} color={INK} />
-      <La x={362} y={my + 19} size={12} bold color={ORANGE}>DAG</La>
-      <LBox x={400} y={my + mh + 34} w={64} h={28} label="PKC" c={ORANGE} fill={FILL.orange} size={13} bold />
-      <Arrow x1={370} y1={my + mh + 2} x2={390} y2={my + mh + 32} color={ORANGE} />
-      {/* IP3 */}
-      <Arrow x1={270} y1={my + mh + 4} x2={270} y2={my + mh + 50} color={INK} />
-      <Tag x={270} y={my + mh + 64} t="IP₃" c={PURPLE} fill={FILL.purple} r={14} size={10.5} />
-      <Arrow x1={270} y1={my + mh + 80} x2={270} y2={212} color={PURPLE} />
-      {/* ER */}
-      <rect x={150} y={218} width={240} height={52} rx={20} fill={FILL.sky} stroke={BLUE} strokeWidth={1.6} />
-      <rect x={258} y={212} width={9} height={18} rx={2} fill={FILL.purple} stroke={PURPLE} strokeWidth={1.2} />
-      <rect x={273} y={212} width={9} height={18} rx={2} fill={FILL.purple} stroke={PURPLE} strokeWidth={1.2} />
-      <La x={196} y={250} size={14} bold color={BLUE}>ER</La>
-      {[[300, 248], [330, 240], [355, 252]].map(([x, y]) => <Tag key={x} x={x} y={y} t="Ca" c={RED} fill={FILL.red} r={9} size={9} />)}
-      {/* Ca release */}
-      {[[292, 198], [312, 184], [334, 196]].map(([x, y]) => <Tag key={x} x={x} y={y} t="Ca" c={RED} fill={FILL.red} r={9} size={9} />)}
-      <Arrow x1={346} y1={186} x2={388} y2={164} color={RED} />
-      <Arrow x1={350} y1={200} x2={418} y2={210} color={RED} />
-      <He x={436} y={226} size={11.5} bold color={RED}>קלמודולין</He>
-      <He x={110} y={190} size={11} color={MUTED}>IP₃ מתפזר בציטוזול</He>
-      <He x={110} y={206} size={11} color={MUTED}>ופותח תעלות Ca²⁺ ב-ER</He>
-      <He x={420} y={52} size={11} color={MUTED}>DAG נשאר בממברנה</He>
-    </Svg>
-  );
-}
+
 
 // ── cell-rtk ─────────────────────────────────────────────────────────────────
-function RtkActivation() {
-  const my = 112, mh = 26;
-  const rec = (x: number, active: boolean, side: number) => (
-    <g key={x}>
-      <rect x={x - 10} y={50} width={20} height={my - 50} rx={7} fill={FILL.purple} stroke={PURPLE} strokeWidth={1.4} />
-      <Line x1={x} y1={my} x2={x} y2={my + mh} c={PURPLE} w={3} />
-      <rect x={x - 13} y={my + mh} width={26} height={54} rx={7} fill={active ? FILL.green : FILL.blue} stroke={active ? GREEN : BLUE} strokeWidth={1.4} />
-      {active && [my + mh + 14, my + mh + 40].map((y) => <Tag key={y} x={x + side * 22} y={y} t="P" r={8} />)}
-    </g>
-  );
-  return (
-    <Svg h={270} label="הפעלה של קולטן טירוזין-קינאז: משמאל — שני קולטנים נפרדים בלי ליגנד, הקינאזות לא פעילות; מימין — הליגנד מקרב אותם, הקינאזות מזרחנות זו את זו על טירוזינים, והטירוזינים המזורחנים משמשים אתרי עגינה לחלבון עם אזור SH2">
-      <Membrane y={my} h={mh} />
-      {rec(84, false, 0)}{rec(150, false, 0)}
-      <He x={117} y={236} size={12} bold>בלי ליגנד</He>
-      <He x={117} y={254} size={11} color={MUTED}>מונומרים, קינאז לא פעיל</He>
-      <Arrow x1={196} y1={186} x2={250} y2={186} width={2.4} />
-      {rec(330, true, -1)}{rec(370, true, 1)}
-      <ellipse cx={350} cy={40} rx={22} ry={12} fill={ORANGE} />
-      <He x={350} y={24} size={11.5} color={ORANGE} bold>ליגנד</He>
-      <path d={`M336 ${my + mh + 22} q14 -10 28 0`} fill="none" stroke={INK} strokeWidth={1.4} markerEnd="url(#bfArrowS)" />
-      <path d={`M364 ${my + mh + 34} q-14 10 -28 0`} fill="none" stroke={INK} strokeWidth={1.4} markerEnd="url(#bfArrowS)" />
-      <ellipse cx={424} cy={my + mh + 40} rx={22} ry={14} fill={FILL.yellow} stroke={ORANGE} strokeWidth={1.4} />
-      <La x={424} y={my + mh + 44} size={11} bold color={ORANGE}>SH2</La>
-      <He x={350} y={236} size={12} bold>דימר, זרחון הדדי</He>
-      <He x={350} y={254} size={11} color={MUTED}>טירוזינים מזורחנים = אתרי עגינה</He>
-    </Svg>
-  );
-}
+
 
 function RasMapk() {
   const my = 30, mh = 22, x = 330;

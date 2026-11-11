@@ -1,0 +1,39 @@
+function PlcPathway() {
+  const my = 70, mh = 28;
+  return (
+    <Svg h={300} label="מסלול Gq ו-PLC: הליגנד מפעיל GPCR, חלבון Gq מפעיל פוספוליפאזה C-β, שחותכת PIP₂ ל-DAG שנשאר בממברנה ול-IP₃ שמתפזר ופותח תעלות Ca²⁺ ב-ER; Ca²⁺ ו-DAG מפעילים יחד את PKC, ו-Ca²⁺ פועל גם דרך קלמודולין">
+      <Membrane y={my} h={mh} />
+      <path d="M48 36 l8 14 l-16 0 z" fill={ORANGE} />
+      {[0, 1, 2, 3, 4].map((i) => <rect key={i} x={30 + i * 9} y={my - 4} width={7} height={mh + 8} rx={3} fill={FILL.purple} stroke={PURPLE} strokeWidth={1.1} />)}
+      <La x={52} y={my + mh + 22} size={11.5} bold color={PURPLE}>GPCR</La>
+      <LBox x={118} y={my + mh + 4} w={50} h={26} label="Gαq" c={GREEN} fill={FILL.green} size={12} />
+      <Arrow x1={144} y1={my + mh + 17} x2={170} y2={my + mh + 17} color={GREEN} />
+      <LBox x={204} y={my + mh + 4} w={64} h={26} label="PLCβ" c={BLUE} fill={FILL.blue} size={12} bold />
+      <La x={268} y={my + 19} size={12} bold>PIP₂</La>
+      <Arrow x1={232} y1={my + mh + 6} x2={256} y2={my + mh - 2} color={BLUE} />
+      {/* DAG */}
+      <Arrow x1={290} y1={my + 14} x2={340} y2={my + 14} color={INK} />
+      <La x={362} y={my + 19} size={12} bold color={ORANGE}>DAG</La>
+      <LBox x={400} y={my + mh + 34} w={64} h={28} label="PKC" c={ORANGE} fill={FILL.orange} size={13} bold />
+      <Arrow x1={370} y1={my + mh + 2} x2={390} y2={my + mh + 32} color={ORANGE} />
+      {/* IP3 */}
+      <Arrow x1={270} y1={my + mh + 4} x2={270} y2={my + mh + 50} color={INK} />
+      <Tag x={270} y={my + mh + 64} t="IP₃" c={PURPLE} fill={FILL.purple} r={14} size={10.5} />
+      <Arrow x1={270} y1={my + mh + 80} x2={270} y2={212} color={PURPLE} />
+      {/* ER */}
+      <rect x={150} y={218} width={240} height={52} rx={20} fill={FILL.sky} stroke={BLUE} strokeWidth={1.6} />
+      <rect x={258} y={212} width={9} height={18} rx={2} fill={FILL.purple} stroke={PURPLE} strokeWidth={1.2} />
+      <rect x={273} y={212} width={9} height={18} rx={2} fill={FILL.purple} stroke={PURPLE} strokeWidth={1.2} />
+      <La x={196} y={250} size={14} bold color={BLUE}>ER</La>
+      {[[300, 248], [330, 240], [355, 252]].map(([x, y]) => <Tag key={x} x={x} y={y} t="Ca" c={RED} fill={FILL.red} r={9} size={9} />)}
+      {/* Ca release */}
+      {[[292, 198], [312, 184], [334, 196]].map(([x, y]) => <Tag key={x} x={x} y={y} t="Ca" c={RED} fill={FILL.red} r={9} size={9} />)}
+      <Arrow x1={346} y1={186} x2={388} y2={164} color={RED} />
+      <Arrow x1={350} y1={200} x2={418} y2={210} color={RED} />
+      <He x={436} y={226} size={11.5} bold color={RED}>קלמודולין</He>
+      <He x={110} y={190} size={11} color={MUTED}>IP₃ מתפזר בציטוזול</He>
+      <He x={110} y={206} size={11} color={MUTED}>ופותח תעלות Ca²⁺ ב-ER</He>
+      <He x={420} y={52} size={11} color={MUTED}>DAG נשאר בממברנה</He>
+    </Svg>
+  );
+}

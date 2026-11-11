@@ -1,0 +1,29 @@
+function RtkActivation() {
+  const my = 112, mh = 26;
+  const rec = (x: number, active: boolean, side: number) => (
+    <g key={x}>
+      <rect x={x - 10} y={50} width={20} height={my - 50} rx={7} fill={FILL.purple} stroke={PURPLE} strokeWidth={1.4} />
+      <Line x1={x} y1={my} x2={x} y2={my + mh} c={PURPLE} w={3} />
+      <rect x={x - 13} y={my + mh} width={26} height={54} rx={7} fill={active ? FILL.green : FILL.blue} stroke={active ? GREEN : BLUE} strokeWidth={1.4} />
+      {active && [my + mh + 14, my + mh + 40].map((y) => <Tag key={y} x={x + side * 22} y={y} t="P" r={8} />)}
+    </g>
+  );
+  return (
+    <Svg h={270} label="הפעלה של קולטן טירוזין-קינאז: משמאל — שני קולטנים נפרדים בלי ליגנד, הקינאזות לא פעילות; מימין — הליגנד מקרב אותם, הקינאזות מזרחנות זו את זו על טירוזינים, והטירוזינים המזורחנים משמשים אתרי עגינה לחלבון עם אזור SH2">
+      <Membrane y={my} h={mh} />
+      {rec(84, false, 0)}{rec(150, false, 0)}
+      <He x={117} y={236} size={12} bold>בלי ליגנד</He>
+      <He x={117} y={254} size={11} color={MUTED}>מונומרים, קינאז לא פעיל</He>
+      <Arrow x1={196} y1={186} x2={250} y2={186} width={2.4} />
+      {rec(330, true, -1)}{rec(370, true, 1)}
+      <ellipse cx={350} cy={40} rx={22} ry={12} fill={ORANGE} />
+      <He x={350} y={24} size={11.5} color={ORANGE} bold>ליגנד</He>
+      <path d={`M336 ${my + mh + 22} q14 -10 28 0`} fill="none" stroke={INK} strokeWidth={1.4} markerEnd="url(#bfArrowS)" />
+      <path d={`M364 ${my + mh + 34} q-14 10 -28 0`} fill="none" stroke={INK} strokeWidth={1.4} markerEnd="url(#bfArrowS)" />
+      <ellipse cx={424} cy={my + mh + 40} rx={22} ry={14} fill={FILL.yellow} stroke={ORANGE} strokeWidth={1.4} />
+      <La x={424} y={my + mh + 44} size={11} bold color={ORANGE}>SH2</La>
+      <He x={350} y={236} size={12} bold>דימר, זרחון הדדי</He>
+      <He x={350} y={254} size={11} color={MUTED}>טירוזינים מזורחנים = אתרי עגינה</He>
+    </Svg>
+  );
+}

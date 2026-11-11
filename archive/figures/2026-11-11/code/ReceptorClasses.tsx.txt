@@ -1,0 +1,40 @@
+function ReceptorClasses() {
+  const my = 112, mh = 30;
+  const lig = (x: number, y: number) => <path d={`M${x} ${y} l8 14 l-16 0 z`} fill={ORANGE} />;
+  return (
+    <Svg h={280} label="שלוש משפחות של קולטני פני התא: קולטן-תעלה שהליגנד פותח ויונים עוברים בו; קולטן מצומד חלבון G שעובר את הממברנה שבע פעמים ומפעיל חלבון G; וקולטן מצומד אנזים, לרוב קינאז, שהליגנד מקרב שני עותקים שלו והם מזרחנים זה את זה">
+      <He x={240} y={20} size={12} color={MUTED}>מחוץ לתא</He>
+      <Membrane y={my} h={mh} />
+      {/* ion channel */}
+      <rect x={60} y={my - 18} width={18} height={mh + 36} rx={6} fill={FILL.purple} stroke={PURPLE} strokeWidth={1.5} />
+      <rect x={92} y={my - 18} width={18} height={mh + 36} rx={6} fill={FILL.purple} stroke={PURPLE} strokeWidth={1.5} />
+      {lig(69, 70)}
+      {[60, 86, 112].map((y, i) => <circle key={y} cx={85} cy={y + 10 + i * 18} r={4} fill={BLUE} />)}
+      <Arrow x1={85} y1={162} x2={85} y2={186} color={BLUE} />
+      {/* GPCR */}
+      {[0, 1, 2, 3, 4, 5, 6].map((i) => <rect key={i} x={206 + i * 10} y={my - 4} width={8} height={mh + 8} rx={3} fill={FILL.purple} stroke={PURPLE} strokeWidth={1.1} />)}
+      {lig(240, 84)}
+      <ellipse cx={226} cy={my + mh + 18} rx={16} ry={11} fill={FILL.green} stroke={GREEN} strokeWidth={1.4} />
+      <ellipse cx={254} cy={my + mh + 16} rx={11} ry={9} fill={FILL.blue} stroke={BLUE} strokeWidth={1.4} />
+      <ellipse cx={270} cy={my + mh + 10} rx={6} ry={6} fill={FILL.blue} stroke={BLUE} strokeWidth={1.4} />
+      <La x={226} y={my + mh + 22} size={10.5} bold color={GREEN}>α</La>
+      <La x={254} y={my + mh + 20} size={10.5} bold color={BLUE}>β</La>
+      {/* enzyme-coupled */}
+      {[378, 410].map((x) => (
+        <g key={x}>
+          <rect x={x - 9} y={58} width={18} height={my - 58} rx={6} fill={FILL.purple} stroke={PURPLE} strokeWidth={1.4} />
+          <Line x1={x} y1={my} x2={x} y2={my + mh} c={PURPLE} w={3} />
+          <rect x={x - 12} y={my + mh} width={24} height={36} rx={6} fill={FILL.blue} stroke={BLUE} strokeWidth={1.4} />
+          <Tag x={x + (x < 394 ? -20 : 20)} y={my + mh + 24} t="P" r={8} />
+        </g>
+      ))}
+      <path d="M394 56 l8 14 l-16 0 z" fill={ORANGE} />
+      {([[85, "קולטן-תעלה", "הליגנד פותח תעלה"], [240, "GPCR", "מפעיל חלבון G"], [394, "מצומד אנזים", "לרוב קינאז (RTK)"]] as [number, string, string][]).map(([x, a, b]) => (
+        <g key={x}>
+          {/[A-Z]/.test(a) ? <La x={x} y={232} size={13} bold>{a}</La> : <He x={x} y={232} size={13} bold>{a}</He>}
+          <He x={x} y={252} size={11.5} color={MUTED}>{b}</He>
+        </g>
+      ))}
+    </Svg>
+  );
+}
