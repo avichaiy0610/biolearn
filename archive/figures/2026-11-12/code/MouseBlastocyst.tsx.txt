@@ -1,0 +1,30 @@
+function MouseBlastocyst() {
+  return (
+    <Svg h={196} label="ההתפתחות המוקדמת של העכבר: 8 תאים; דחיסה — תאים חיצוניים (טרופואקטודרם, Cdx2) ופנימיים; בלסטוציסט — דופן של טרופואקטודרם, מסת התאים הפנימית (ICM) וחלל; כוס העובר — אפיבלסט (ירוק) עטוף אנדודרם, וה-AVE (אדום) בצד שיהיה קדמי, והפס נוצר בצד הנגדי.">
+      {[[48, 83], [72, 83], [48, 107], [72, 107]].map(([x, y]) => <circle key={`${x}-${y}`} cx={x} cy={y} r={13} fill={FILL.gray} stroke={MUTED} strokeWidth={1.2} />)}
+      <Arrow x1={92} y1={95} x2={142} y2={95} color={MUTED} />
+      <circle cx={180} cy={95} r={32} fill={FILL.sky} stroke="#0284c7" strokeWidth={1.4} />
+      {[[172, 90], [190, 92], [180, 106]].map(([x, y]) => <circle key={`${x}-${y}`} cx={x} cy={y} r={8} fill={FILL.green} stroke={GREEN} strokeWidth={1} />)}
+      <Arrow x1={216} y1={95} x2={256} y2={95} color={MUTED} />
+      <circle cx={300} cy={95} r={38} fill="white" stroke="#7dd3fc" strokeWidth={7} />
+      <ellipse cx={300} cy={72} rx={20} ry={12} fill={FILL.green} stroke={GREEN} strokeWidth={1} />
+      <La x={300} y={75} size={9} color={GREEN} bold>ICM</La>
+      <He x={300} y={110} size={9}>חלל</He>
+      <Arrow x1={344} y1={95} x2={382} y2={95} color={MUTED} />
+      <path d="M392 46 L392 108 Q392 140 420 140 Q448 140 448 108 L448 46" fill={FILL.yellow} stroke={GOLD} strokeWidth={1.2} />
+      <path d="M402 56 L402 106 Q402 128 420 128 Q438 128 438 106 L438 56" fill={FILL.green} stroke={GREEN} strokeWidth={1.2} />
+      <ellipse cx={394} cy={118} rx={7} ry={12} fill="#fca5a5" />
+      <rect x={442} y={92} width={5} height={24} fill={ORANGE} />
+      <La x={372} y={128} size={9.5} color={RED} anchor="end">AVE</La>
+      <He x={466} y={108} size={9.5} color={ORANGE} anchor="start">פס</He>
+
+      <He x={60} y={166} size={10} bold>8 תאים</He>
+      <He x={180} y={166} size={10} bold>דחיסה</He>
+      <He x={300} y={166} size={10} bold>בלסטוציסט</He>
+      <He x={420} y={166} size={10} bold>כוס העובר</He>
+      <He x={180} y={184} size={9} color={MUTED}>חוץ — Cdx2</He>
+      <He x={300} y={184} size={9} color={MUTED}>דופן — טרופואקטודרם</He>
+      <He x={420} y={184} size={9} color={MUTED}>AVE — הצד הקדמי</He>
+    </Svg>
+  );
+}

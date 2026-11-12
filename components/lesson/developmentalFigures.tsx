@@ -7,6 +7,12 @@ import { FusionStages } from "./developmentalFusionFigure";
 import { ArrowDefs, BLUE, GREEN, INK, MUTED, ORANGE, He, La } from "./biochemFigures";
 import { Arrow } from "./metabolicFigures";
 import { MorphogenesisMechanics } from "./redraws/MorphogenesisMechanics";
+import { ImaginalDiscs } from "./redraws/ImaginalDiscs";
+import { EyeOmmatidium } from "./redraws/EyeOmmatidium";
+import { WormGonad } from "./redraws/WormGonad";
+import { ChickStreak } from "./redraws/ChickStreak";
+import { MouseBlastocyst } from "./redraws/MouseBlastocyst";
+import { NodalFlow } from "./redraws/NodalFlow";
 
 const PURPLE = "#7c3aed";
 const RED = "#b91c1c";
@@ -309,41 +315,7 @@ function HoxCluster() {
 }
 
 // ── dv-fly-organs ────────────────────────────────────────────────────────────
-function ImaginalDiscs() {
-  return (
-    <Svg h={226} label="הדיסקות הדמיוניות בזחל הזבוב: זוגות של דיסקות עין-מחוש, כנף ומשקולת ושלושה זוגות של דיסקות רגל; דיסקת איברי המין בודדת. בגלגול, בהשפעת אקדיזון, כל דיסקה יוצרת את החלק המתאים בבוגר — בצבע זהה.">
-      <ellipse cx={140} cy={110} rx={116} ry={52} fill={FILL.cyto} stroke={ORANGE} strokeWidth={1.4} />
-      <ellipse cx={52} cy={110} rx={12} ry={8} fill={FILL.red} stroke={RED} strokeWidth={1} />
-      <ellipse cx={128} cy={84} rx={13} ry={8} fill={FILL.blue} stroke={BLUE} strokeWidth={1} />
-      <ellipse cx={170} cy={86} rx={7} ry={5} fill={FILL.purple} stroke={PURPLE} strokeWidth={1} />
-      {[104, 128, 152].map((x) => <circle key={x} cx={x} cy={134} r={7} fill={FILL.green} stroke={GREEN} strokeWidth={1} />)}
-      <ellipse cx={232} cy={110} rx={8} ry={6} fill={FILL.yellow} stroke={GOLD} strokeWidth={1} />
-      <He x={46} y={30} size={10}>עין-מחוש</He>
-      <Lead x1={48} y1={36} x2={52} y2={100} />
-      <He x={124} y={30} size={10}>כנף</He>
-      <Lead x1={124} y1={36} x2={127} y2={74} />
-      <He x={180} y={30} size={10}>משקולת</He>
-      <Lead x1={178} y1={36} x2={171} y2={80} />
-      <He x={128} y={190} size={10}>רגליים</He>
-      <Lead x1={128} y1={180} x2={128} y2={142} />
-      <He x={236} y={190} size={10}>איברי מין</He>
-      <Lead x1={236} y1={180} x2={232} y2={117} />
 
-      <Arrow x1={262} y1={112} x2={290} y2={112} color={MUTED} />
-      <He x={276} y={98} size={9.5} color={MUTED}>גלגול</He>
-
-      <ellipse cx={352} cy={66} rx={38} ry={11} fill={FILL.blue} stroke={BLUE} strokeWidth={1} transform="rotate(-18 352 66)" />
-      {[[332, 126], [346, 128], [360, 126]].map(([x, y], i) => <line key={i} x1={x} y1={120} x2={x - 8 + i * 8} y2={y + 26} stroke={GREEN} strokeWidth={2.4} />)}
-      <circle cx={308} cy={108} r={14} fill={FILL.red} stroke={RED} strokeWidth={1.2} />
-      <ellipse cx={344} cy={110} rx={22} ry={15} fill={FILL.gray} stroke={MUTED} strokeWidth={1.2} />
-      <circle cx={368} cy={96} r={4} fill={FILL.purple} stroke={PURPLE} strokeWidth={1} />
-      <ellipse cx={398} cy={114} rx={32} ry={14} fill={FILL.gray} stroke={MUTED} strokeWidth={1.2} />
-      <circle cx={430} cy={116} r={6} fill={FILL.yellow} stroke={GOLD} strokeWidth={1} />
-      <He x={140} y={214} size={9.5} color={MUTED}>זחל</He>
-      <He x={370} y={214} size={9.5} color={MUTED}>בוגר</He>
-    </Svg>
-  );
-}
 
 function WingDisc() {
   const pts: string[] = [];
@@ -381,42 +353,7 @@ function WingDisc() {
   );
 }
 
-function EyeOmmatidium() {
-  const dots: [number, number][] = [];
-  for (let x = 134; x <= 210; x += 14) for (let y = 70; y <= 160; y += 14) if (((x - 120) / 100) ** 2 + ((y - 115) / 68) ** 2 < 0.85) dots.push([x, y]);
-  const cells: [string, number, number, string, string][] = [
-    ["R8", 360, 115, RED, FILL.red], ["R2", 338, 88, ORANGE, FILL.orange], ["R5", 338, 142, ORANGE, FILL.orange],
-    ["R3", 310, 76, GOLD, FILL.yellow], ["R4", 310, 154, GOLD, FILL.yellow], ["R1", 386, 84, GREEN, FILL.green],
-    ["R6", 386, 146, GREEN, FILL.green], ["R7", 394, 115, BLUE, FILL.blue],
-  ];
-  return (
-    <Svg h={236} label="משמאל: דיסקת העין — התלם המורפוגנטי נע מהחלק האחורי קדימה, ומאחוריו נוצרות שורות של אומטידיות. מימין: אומטידיום אחד — R8 נקבע ראשון, ואחריו מגויסים בזוגות R2 ו-R5, R3 ו-R4, R1 ו-R6, ולבסוף R7, כל אחד בצבע לפי סדר הגיוס.">
-      <defs>
-        <clipPath id="dvEyeClip"><ellipse cx={120} cy={115} rx={100} ry={68} /></clipPath>
-      </defs>
-      <ellipse cx={120} cy={115} rx={100} ry={68} fill={FILL.cyto} />
-      <g clipPath="url(#dvEyeClip)">
-        <rect x={112} y={40} width={12} height={160} fill="#cbd5e1" />
-      </g>
-      {dots.map(([x, y]) => <circle key={`${x}-${y}`} cx={x} cy={y} r={4} fill={FILL.red} stroke={RED} strokeWidth={0.8} />)}
-      <ellipse cx={120} cy={115} rx={100} ry={68} fill="none" stroke={ORANGE} strokeWidth={1.4} />
-      <Arrow x1={150} y1={34} x2={92} y2={34} color={MUTED} />
-      <He x={120} y={24} size={9.5} color={MUTED}>התלם נע קדימה</He>
-      <He x={60} y={200} size={10}>קדמי</He>
-      <He x={180} y={200} size={10}>אחורי</He>
 
-      {cells.map(([t, x, y, c, f]) => (
-        <g key={t}>
-          <circle cx={x} cy={y} r={13} fill={f} stroke={c} strokeWidth={1.4} />
-          <La x={x} y={y + 3.5} size={9.5} bold color={c}>{t}</La>
-        </g>
-      ))}
-      <He x={352} y={192} size={9.5}>סדר הגיוס (משמאל לימין):</He>
-      <La x={352} y={208} size={9.5}>R8 → R2,R5 → R3,R4 → R1,R6 → R7</La>
-      <He x={352} y={226} size={9.5} color={MUTED}>R7 נקבע בעזרת Boss (על R8) ו-Sevenless</He>
-    </Svg>
-  );
-}
 
 // ── dv-worm ──────────────────────────────────────────────────────────────────
 function WormPar() {
@@ -449,34 +386,7 @@ function WormPar() {
   );
 }
 
-function WormGonad() {
-  const oocytes = [104, 126, 148, 170, 192, 214];
-  return (
-    <Svg h={226} label="הגונדה של הרמפרודיט: שתי זרועות בצורת U שנפגשות ברחם במרכז, מעל הפות. בקצה כל זרוע — תא הקצה (DTC); לידו תאי גזע (ירוק), בהמשך תאים במיוזה (סגול), ובחלק הבטני ביציות שהולכות וגדלות לכיוון הרחם.">
-      <ellipse cx={240} cy={120} rx={222} ry={80} fill="#fafaf9" stroke={MUTED} strokeWidth={1} />
-      <path d="M230 142 L96 142 Q62 142 62 116 Q62 90 96 90 L150 90" fill="none" stroke="#c4b5fd" strokeWidth={12} />
-      <path d="M150 90 L192 90" fill="none" stroke="#86efac" strokeWidth={12} />
-      <path d="M250 142 L384 142 Q418 142 418 116 Q418 90 384 90 L330 90" fill="none" stroke="#c4b5fd" strokeWidth={12} />
-      <path d="M330 90 L288 90" fill="none" stroke="#86efac" strokeWidth={12} />
-      {oocytes.map((x, i) => <circle key={x} cx={x} cy={142} r={4 + i * 0.6} fill={FILL.orange} stroke={ORANGE} strokeWidth={0.8} />)}
-      {oocytes.map((x, i) => <circle key={`r${x}`} cx={480 - x} cy={142} r={4 + i * 0.6} fill={FILL.orange} stroke={ORANGE} strokeWidth={0.8} />)}
-      <circle cx={198} cy={90} r={7} fill={RED} />
-      <circle cx={282} cy={90} r={7} fill={RED} />
-      <ellipse cx={240} cy={142} rx={16} ry={11} fill={FILL.yellow} stroke={GOLD} strokeWidth={1.2} />
-      <path d="M232 154 L240 168 L248 154" fill="none" stroke={INK} strokeWidth={1.4} />
 
-      <He x={240} y={60} size={10} color={RED}>תא הקצה (DTC)</He>
-      <Lead x1={226} y1={64} x2={203} y2={84} />
-      <Lead x1={254} y1={64} x2={277} y2={84} />
-      <He x={166} y={74} size={9.5} color={GREEN}>תאי גזע</He>
-      <He x={104} y={74} size={9.5} color={PURPLE}>מיוזה</He>
-      <He x={150} y={170} size={9.5} color={ORANGE}>ביציות</He>
-      <He x={240} y={124} size={9.5} color={GOLD}>רחם</He>
-      <He x={240} y={186} size={9.5}>פות</He>
-      <He x={240} y={218} size={9} color={MUTED}>צד גבי — למעלה · צד בטני — למטה</He>
-    </Svg>
-  );
-}
 
 function VulvaInduction() {
   const P = [30, 100, 170, 240, 310, 380];
@@ -508,102 +418,11 @@ function VulvaInduction() {
 }
 
 // ── dv-vertebrate-axes ───────────────────────────────────────────────────────
-function ChickStreak() {
-  const disc = (cx: number) => (
-    <g>
-      <ellipse cx={cx} cy={105} rx={66} ry={80} fill={FILL.yellow} stroke={GOLD} strokeWidth={1.2} />
-      <ellipse cx={cx} cy={105} rx={44} ry={58} fill="white" stroke={GOLD} strokeWidth={1} />
-    </g>
-  );
-  return (
-    <Svg h={250} label="עובר העוף במבט מלמעלה (למעלה — קדמי): לפני הפס — אזור שולי אחורי שמבטא Vg1 ו-Nodal; הפס מתארך קדימה, ותאים זורמים מהצדדים לקו האמצע; בפס המלא — קשר הנסן בקצה הקדמי.">
-      {disc(80)}
-      <path d="M46 150 Q80 176 114 150 Q80 166 46 150 Z" fill="#fdba74" />
-      <He x={80} y={208} size={9.5} color={ORANGE}>אזור שולי אחורי</He>
-      <Lead x1={80} y1={198} x2={80} y2={166} />
 
-      {disc(240)}
-      <rect x={237} y={122} width={6} height={42} fill={RED} />
-      <path d="M210 160 Q216 138 232 128" fill="none" stroke={MUTED} strokeWidth={1.2} markerEnd="url(#bfArrow)" />
-      <path d="M270 160 Q264 138 248 128" fill="none" stroke={MUTED} strokeWidth={1.2} markerEnd="url(#bfArrow)" />
-      <He x={240} y={208} size={9.5} color={MUTED}>תאים זורמים לקו האמצע</He>
 
-      {disc(400)}
-      <rect x={397} y={70} width={6} height={94} fill={RED} />
-      <circle cx={400} cy={66} r={7} fill={PURPLE} />
-      <He x={400} y={14} size={9.5} color={PURPLE}>קשר הנסן</He>
-      <Lead x1={400} y1={18} x2={400} y2={58} />
-      <He x={400} y={208} size={9.5} color={RED}>הפס הקדמון</He>
-      <Lead x1={400} y1={198} x2={400} y2={168} />
 
-      <He x={80} y={234} size={10} bold>לפני הפס</He>
-      <He x={240} y={234} size={10} bold>הפס מתארך</He>
-      <He x={400} y={234} size={10} bold>פס מלא</He>
-    </Svg>
-  );
-}
 
-function MouseBlastocyst() {
-  return (
-    <Svg h={196} label="ההתפתחות המוקדמת של העכבר: 8 תאים; דחיסה — תאים חיצוניים (טרופואקטודרם, Cdx2) ופנימיים; בלסטוציסט — דופן של טרופואקטודרם, מסת התאים הפנימית (ICM) וחלל; כוס העובר — אפיבלסט (ירוק) עטוף אנדודרם, וה-AVE (אדום) בצד שיהיה קדמי, והפס נוצר בצד הנגדי.">
-      {[[48, 83], [72, 83], [48, 107], [72, 107]].map(([x, y]) => <circle key={`${x}-${y}`} cx={x} cy={y} r={13} fill={FILL.gray} stroke={MUTED} strokeWidth={1.2} />)}
-      <Arrow x1={92} y1={95} x2={142} y2={95} color={MUTED} />
-      <circle cx={180} cy={95} r={32} fill={FILL.sky} stroke="#0284c7" strokeWidth={1.4} />
-      {[[172, 90], [190, 92], [180, 106]].map(([x, y]) => <circle key={`${x}-${y}`} cx={x} cy={y} r={8} fill={FILL.green} stroke={GREEN} strokeWidth={1} />)}
-      <Arrow x1={216} y1={95} x2={256} y2={95} color={MUTED} />
-      <circle cx={300} cy={95} r={38} fill="white" stroke="#7dd3fc" strokeWidth={7} />
-      <ellipse cx={300} cy={72} rx={20} ry={12} fill={FILL.green} stroke={GREEN} strokeWidth={1} />
-      <La x={300} y={75} size={9} color={GREEN} bold>ICM</La>
-      <He x={300} y={110} size={9}>חלל</He>
-      <Arrow x1={344} y1={95} x2={382} y2={95} color={MUTED} />
-      <path d="M392 46 L392 108 Q392 140 420 140 Q448 140 448 108 L448 46" fill={FILL.yellow} stroke={GOLD} strokeWidth={1.2} />
-      <path d="M402 56 L402 106 Q402 128 420 128 Q438 128 438 106 L438 56" fill={FILL.green} stroke={GREEN} strokeWidth={1.2} />
-      <ellipse cx={394} cy={118} rx={7} ry={12} fill="#fca5a5" />
-      <rect x={442} y={92} width={5} height={24} fill={ORANGE} />
-      <La x={372} y={128} size={9.5} color={RED} anchor="end">AVE</La>
-      <He x={466} y={108} size={9.5} color={ORANGE} anchor="start">פס</He>
 
-      <He x={60} y={166} size={10} bold>8 תאים</He>
-      <He x={180} y={166} size={10} bold>דחיסה</He>
-      <He x={300} y={166} size={10} bold>בלסטוציסט</He>
-      <He x={420} y={166} size={10} bold>כוס העובר</He>
-      <He x={180} y={184} size={9} color={MUTED}>חוץ — Cdx2</He>
-      <He x={300} y={184} size={9} color={MUTED}>דופן — טרופואקטודרם</He>
-      <He x={420} y={184} size={9} color={MUTED}>AVE — הצד הקדמי</He>
-    </Svg>
-  );
-}
-
-function NodalFlow() {
-  const cilia = [52, 82, 112, 142, 172];
-  return (
-    <Svg h={226} label="קביעת צד שמאל בעכבר: משמאל — בבור הקשר ריסים נוטים אחורה ומסתובבים, ויוצרים זרימה של נוזל לצד שמאל. מימין — העובר: Nodal ו-Pitx2 נדלקים בלוחית הצדית השמאלית בלבד, ו-Lefty בקו האמצע משמש מחסום. בציור, השמאל של העובר משמאל.">
-      <He x={118} y={20} size={11} bold>הקשר: זרימה שמאלה</He>
-      <Arrow x1={200} y1={62} x2={40} y2={62} color={BLUE} width={2.6} />
-      <path d="M24 84 L24 120 Q24 136 44 136 L196 136 Q214 136 214 120 L214 84" fill="none" stroke={INK} strokeWidth={1.4} />
-      {cilia.map((x) => (
-        <g key={x}>
-          <line x1={x} y1={134} x2={x + 10} y2={100} stroke={PURPLE} strokeWidth={2} />
-          <ellipse cx={x + 10} cy={98} rx={8} ry={3} fill="none" stroke={PURPLE} strokeWidth={1} />
-        </g>
-      ))}
-      <He x={118} y={160} size={9.5} color={PURPLE}>ריסים נוטים ומסתובבים</He>
-      <He x={32} y={186} size={10} bold>שמאל</He>
-      <He x={206} y={186} size={10} bold>ימין</He>
-
-      <ellipse cx={360} cy={112} rx={60} ry={86} fill={FILL.cyto} stroke={INK} strokeWidth={1.4} />
-      <rect x={357} y={40} width={6} height={144} fill="#c4b5fd" />
-      <ellipse cx={326} cy={120} rx={11} ry={48} fill="#fca5a5" />
-      <path d="M330 52 Q318 60 326 72 Q338 70 336 58 Z" fill={RED} />
-      <He x={288} y={34} size={9.5} color={RED}>Nodal ← Pitx2</He>
-      <Lead x1={300} y1={40} x2={322} y2={84} />
-      <He x={440} y={34} size={9.5} color={PURPLE}>Lefty (מחסום)</He>
-      <Lead x1={430} y1={40} x2={364} y2={74} />
-      <He x={326} y={216} size={10} bold>שמאל</He>
-      <He x={400} y={216} size={10} bold>ימין</He>
-    </Svg>
-  );
-}
 
 // ── dv-limb ──────────────────────────────────────────────────────────────────
 function LimbAxes() {

@@ -1,0 +1,35 @@
+function ImaginalDiscs() {
+  return (
+    <Svg h={226} label="הדיסקות הדמיוניות בזחל הזבוב: זוגות של דיסקות עין-מחוש, כנף ומשקולת ושלושה זוגות של דיסקות רגל; דיסקת איברי המין בודדת. בגלגול, בהשפעת אקדיזון, כל דיסקה יוצרת את החלק המתאים בבוגר — בצבע זהה.">
+      <ellipse cx={140} cy={110} rx={116} ry={52} fill={FILL.cyto} stroke={ORANGE} strokeWidth={1.4} />
+      <ellipse cx={52} cy={110} rx={12} ry={8} fill={FILL.red} stroke={RED} strokeWidth={1} />
+      <ellipse cx={128} cy={84} rx={13} ry={8} fill={FILL.blue} stroke={BLUE} strokeWidth={1} />
+      <ellipse cx={170} cy={86} rx={7} ry={5} fill={FILL.purple} stroke={PURPLE} strokeWidth={1} />
+      {[104, 128, 152].map((x) => <circle key={x} cx={x} cy={134} r={7} fill={FILL.green} stroke={GREEN} strokeWidth={1} />)}
+      <ellipse cx={232} cy={110} rx={8} ry={6} fill={FILL.yellow} stroke={GOLD} strokeWidth={1} />
+      <He x={46} y={30} size={10}>עין-מחוש</He>
+      <Lead x1={48} y1={36} x2={52} y2={100} />
+      <He x={124} y={30} size={10}>כנף</He>
+      <Lead x1={124} y1={36} x2={127} y2={74} />
+      <He x={180} y={30} size={10}>משקולת</He>
+      <Lead x1={178} y1={36} x2={171} y2={80} />
+      <He x={128} y={190} size={10}>רגליים</He>
+      <Lead x1={128} y1={180} x2={128} y2={142} />
+      <He x={236} y={190} size={10}>איברי מין</He>
+      <Lead x1={236} y1={180} x2={232} y2={117} />
+
+      <Arrow x1={262} y1={112} x2={290} y2={112} color={MUTED} />
+      <He x={276} y={98} size={9.5} color={MUTED}>גלגול</He>
+
+      <ellipse cx={352} cy={66} rx={38} ry={11} fill={FILL.blue} stroke={BLUE} strokeWidth={1} transform="rotate(-18 352 66)" />
+      {[[332, 126], [346, 128], [360, 126]].map(([x, y], i) => <line key={i} x1={x} y1={120} x2={x - 8 + i * 8} y2={y + 26} stroke={GREEN} strokeWidth={2.4} />)}
+      <circle cx={308} cy={108} r={14} fill={FILL.red} stroke={RED} strokeWidth={1.2} />
+      <ellipse cx={344} cy={110} rx={22} ry={15} fill={FILL.gray} stroke={MUTED} strokeWidth={1.2} />
+      <circle cx={368} cy={96} r={4} fill={FILL.purple} stroke={PURPLE} strokeWidth={1} />
+      <ellipse cx={398} cy={114} rx={32} ry={14} fill={FILL.gray} stroke={MUTED} strokeWidth={1.2} />
+      <circle cx={430} cy={116} r={6} fill={FILL.yellow} stroke={GOLD} strokeWidth={1} />
+      <He x={140} y={214} size={9.5} color={MUTED}>זחל</He>
+      <He x={370} y={214} size={9.5} color={MUTED}>בוגר</He>
+    </Svg>
+  );
+}

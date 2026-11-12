@@ -1,0 +1,34 @@
+function ChickStreak() {
+  const disc = (cx: number) => (
+    <g>
+      <ellipse cx={cx} cy={105} rx={66} ry={80} fill={FILL.yellow} stroke={GOLD} strokeWidth={1.2} />
+      <ellipse cx={cx} cy={105} rx={44} ry={58} fill="white" stroke={GOLD} strokeWidth={1} />
+    </g>
+  );
+  return (
+    <Svg h={250} label="עובר העוף במבט מלמעלה (למעלה — קדמי): לפני הפס — אזור שולי אחורי שמבטא Vg1 ו-Nodal; הפס מתארך קדימה, ותאים זורמים מהצדדים לקו האמצע; בפס המלא — קשר הנסן בקצה הקדמי.">
+      {disc(80)}
+      <path d="M46 150 Q80 176 114 150 Q80 166 46 150 Z" fill="#fdba74" />
+      <He x={80} y={208} size={9.5} color={ORANGE}>אזור שולי אחורי</He>
+      <Lead x1={80} y1={198} x2={80} y2={166} />
+
+      {disc(240)}
+      <rect x={237} y={122} width={6} height={42} fill={RED} />
+      <path d="M210 160 Q216 138 232 128" fill="none" stroke={MUTED} strokeWidth={1.2} markerEnd="url(#bfArrow)" />
+      <path d="M270 160 Q264 138 248 128" fill="none" stroke={MUTED} strokeWidth={1.2} markerEnd="url(#bfArrow)" />
+      <He x={240} y={208} size={9.5} color={MUTED}>תאים זורמים לקו האמצע</He>
+
+      {disc(400)}
+      <rect x={397} y={70} width={6} height={94} fill={RED} />
+      <circle cx={400} cy={66} r={7} fill={PURPLE} />
+      <He x={400} y={14} size={9.5} color={PURPLE}>קשר הנסן</He>
+      <Lead x1={400} y1={18} x2={400} y2={58} />
+      <He x={400} y={208} size={9.5} color={RED}>הפס הקדמון</He>
+      <Lead x1={400} y1={198} x2={400} y2={168} />
+
+      <He x={80} y={234} size={10} bold>לפני הפס</He>
+      <He x={240} y={234} size={10} bold>הפס מתארך</He>
+      <He x={400} y={234} size={10} bold>פס מלא</He>
+    </Svg>
+  );
+}

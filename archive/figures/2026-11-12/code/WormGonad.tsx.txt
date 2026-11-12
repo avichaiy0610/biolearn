@@ -1,0 +1,28 @@
+function WormGonad() {
+  const oocytes = [104, 126, 148, 170, 192, 214];
+  return (
+    <Svg h={226} label="הגונדה של הרמפרודיט: שתי זרועות בצורת U שנפגשות ברחם במרכז, מעל הפות. בקצה כל זרוע — תא הקצה (DTC); לידו תאי גזע (ירוק), בהמשך תאים במיוזה (סגול), ובחלק הבטני ביציות שהולכות וגדלות לכיוון הרחם.">
+      <ellipse cx={240} cy={120} rx={222} ry={80} fill="#fafaf9" stroke={MUTED} strokeWidth={1} />
+      <path d="M230 142 L96 142 Q62 142 62 116 Q62 90 96 90 L150 90" fill="none" stroke="#c4b5fd" strokeWidth={12} />
+      <path d="M150 90 L192 90" fill="none" stroke="#86efac" strokeWidth={12} />
+      <path d="M250 142 L384 142 Q418 142 418 116 Q418 90 384 90 L330 90" fill="none" stroke="#c4b5fd" strokeWidth={12} />
+      <path d="M330 90 L288 90" fill="none" stroke="#86efac" strokeWidth={12} />
+      {oocytes.map((x, i) => <circle key={x} cx={x} cy={142} r={4 + i * 0.6} fill={FILL.orange} stroke={ORANGE} strokeWidth={0.8} />)}
+      {oocytes.map((x, i) => <circle key={`r${x}`} cx={480 - x} cy={142} r={4 + i * 0.6} fill={FILL.orange} stroke={ORANGE} strokeWidth={0.8} />)}
+      <circle cx={198} cy={90} r={7} fill={RED} />
+      <circle cx={282} cy={90} r={7} fill={RED} />
+      <ellipse cx={240} cy={142} rx={16} ry={11} fill={FILL.yellow} stroke={GOLD} strokeWidth={1.2} />
+      <path d="M232 154 L240 168 L248 154" fill="none" stroke={INK} strokeWidth={1.4} />
+
+      <He x={240} y={60} size={10} color={RED}>תא הקצה (DTC)</He>
+      <Lead x1={226} y1={64} x2={203} y2={84} />
+      <Lead x1={254} y1={64} x2={277} y2={84} />
+      <He x={166} y={74} size={9.5} color={GREEN}>תאי גזע</He>
+      <He x={104} y={74} size={9.5} color={PURPLE}>מיוזה</He>
+      <He x={150} y={170} size={9.5} color={ORANGE}>ביציות</He>
+      <He x={240} y={124} size={9.5} color={GOLD}>רחם</He>
+      <He x={240} y={186} size={9.5}>פות</He>
+      <He x={240} y={218} size={9} color={MUTED}>צד גבי — למעלה · צד בטני — למטה</He>
+    </Svg>
+  );
+}

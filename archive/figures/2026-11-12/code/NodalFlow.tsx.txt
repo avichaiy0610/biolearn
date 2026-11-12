@@ -1,0 +1,30 @@
+function NodalFlow() {
+  const cilia = [52, 82, 112, 142, 172];
+  return (
+    <Svg h={226} label="קביעת צד שמאל בעכבר: משמאל — בבור הקשר ריסים נוטים אחורה ומסתובבים, ויוצרים זרימה של נוזל לצד שמאל. מימין — העובר: Nodal ו-Pitx2 נדלקים בלוחית הצדית השמאלית בלבד, ו-Lefty בקו האמצע משמש מחסום. בציור, השמאל של העובר משמאל.">
+      <He x={118} y={20} size={11} bold>הקשר: זרימה שמאלה</He>
+      <Arrow x1={200} y1={62} x2={40} y2={62} color={BLUE} width={2.6} />
+      <path d="M24 84 L24 120 Q24 136 44 136 L196 136 Q214 136 214 120 L214 84" fill="none" stroke={INK} strokeWidth={1.4} />
+      {cilia.map((x) => (
+        <g key={x}>
+          <line x1={x} y1={134} x2={x + 10} y2={100} stroke={PURPLE} strokeWidth={2} />
+          <ellipse cx={x + 10} cy={98} rx={8} ry={3} fill="none" stroke={PURPLE} strokeWidth={1} />
+        </g>
+      ))}
+      <He x={118} y={160} size={9.5} color={PURPLE}>ריסים נוטים ומסתובבים</He>
+      <He x={32} y={186} size={10} bold>שמאל</He>
+      <He x={206} y={186} size={10} bold>ימין</He>
+
+      <ellipse cx={360} cy={112} rx={60} ry={86} fill={FILL.cyto} stroke={INK} strokeWidth={1.4} />
+      <rect x={357} y={40} width={6} height={144} fill="#c4b5fd" />
+      <ellipse cx={326} cy={120} rx={11} ry={48} fill="#fca5a5" />
+      <path d="M330 52 Q318 60 326 72 Q338 70 336 58 Z" fill={RED} />
+      <He x={288} y={34} size={9.5} color={RED}>Nodal ← Pitx2</He>
+      <Lead x1={300} y1={40} x2={322} y2={84} />
+      <He x={440} y={34} size={9.5} color={PURPLE}>Lefty (מחסום)</He>
+      <Lead x1={430} y1={40} x2={364} y2={74} />
+      <He x={326} y={216} size={10} bold>שמאל</He>
+      <He x={400} y={216} size={10} bold>ימין</He>
+    </Svg>
+  );
+}
