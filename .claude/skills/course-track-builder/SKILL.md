@@ -52,7 +52,9 @@ uv run $S coverage --course tau-genetics --output $O/cov.json
 | `related --course --university [--code] [--name]` | Technion: reads the portal's **"מקצועות ללא זיכוי נוסף" / "(מוכלים)"** pairs and each pair's faculty (`sameFaculty`). All universities: same-name courses in the synced syllabi. |
 | `staff --university technion --code 0134xxxx --years 2027,2026` | Moodle **guest login**: the course's pages per year, lecturer/TA names, guest open/closed, section names if open. |
 | `discover --course --university --code --name [--staff "a,b"]` | Probes known public URL patterns (old TAU yedion, TAU IMS, HUJI NewSyl PDF, Technion per-semester portal) and emits site-scoped search queries. |
-| `extract --url --workdir` | Downloads page/PDF (real-browser fallback for bot walls), extracts text, lists weekly-row candidates, flags `needsVisualRead` when Hebrew did not extract. |
+| `local --course` | **Run first.** What is already on this machine: official files mapped to the course in `Project One/syllabuses/_manifest.json`, the student drive by kind and year, scans that need a visual read, files not yet in the manifest. |
+| `ledger [--course]` | Completeness per course: lesson order, grading split, current staff, recent exams, fresh syllabus — and where each comes from. All courses → `content/syllabi/ledger.generated.md`. |
+| `extract (--url \| --file) --workdir [--code --name --name-en]` | A page / PDF / DOCX from the web (real-browser fallback for bot walls, Internet Archive fallback for dead links) or from disk. Full text → `<workdir>/source.txt`; reports text quality (`needsVisualRead` for scans and reversed Hebrew — not for English), an **identity check** against the document itself, years named, grading lines, weekly-row candidates. |
 | `order --input` | Validates the curated order file: confidence names, **identity checks** (a different course can never be official), tutorials without a source. Writes a Markdown report. |
 | `coverage --course` | Plan ↔ lessons: unresolved sections/problems, "soon" placeholders, topics with no full unit, drafts. |
 | `scope --course (--suggest [--evidence kind=path ...] \| --check)` | Is each lesson section part of the course? `--suggest` matches `references/section-keywords.json` against the course's own documents (synced syllabus + `exam`/`reading`/`staff-material` files) → core / likely / extension with the matched words. `--check` validates `content/course-scope/<course>.ts` (every plan section has an entry; level matches evidence). |
@@ -70,6 +72,23 @@ everything the university published, including parts no parser understood. If th
 and enter the lesson table in `content/syllabi/manual.ts` (rules at the top of that file), then re-run the
 sync for that course — never leave a table that exists unread, and never guess one from interleaved text. After changing a parser run
 `npx tsx scripts/syllabus-parse.test.ts`.
+
+### 1a. Local material before the web
+Run `local`. Read the newest official file of the course (lecturers hand these to students; they are
+`official` / `official-past` and usually hold the weekly table and the grading split), then the newest
+exams and homework. A file's own heading can be wrong (the 134117 syllabus is headed 134147) — the
+manifest row, written after reading the file, is what maps it. A file with no row gets one before use.
+Run `ledger --course` to see what is still missing; that list is what step 2 has to find.
+
+### 1b. A PDF is checked only after a visual read
+Text extracted from a PDF can drop table rows, interleave columns or reorder mixed Hebrew/English
+lines **without any sign of it**: on 2026-11-11 two Bar-Ilan lesson tables were absent from the
+extracted record and nothing flagged them. So every PDF-based record must have an entry in
+`content/syllabi/manual.ts`, written after opening the PDF with the Read tool: the lesson table or
+topic list when extraction got it wrong or missed it, or an entry with only `readAt` / `noteHe` when the
+extracted record is right. The sync warns for a PDF with no entry, and for an entry whose PDF was
+replaced (hash changed) — then read the new file. The same holds for PDFs you `extract` yourself: take a
+table from the page image, never from interleaved text.
 
 ### 2. Discover — this is the main step, not an extra
 Run `related`, `staff` (Technion), then `discover` with `--staff` (lecturer names add the
@@ -231,6 +250,15 @@ No documented limits for these university sites → **1 request per second per h
 across processes with a lock + timestamp file in the temp dir. 5xx/network errors retry with
 exponential backoff (logged to stderr); HTTP 429 raises `RateLimitError` and stops. Technion
 WordPress sites block bots — `extract` falls back to a real browser (Playwright).
+
+## Accuracy rules for sources (2026-11)
+- Nothing is dropped silently: keep the whole source text; what cannot be parsed for sure is flagged.
+- A numbered list is "lessons" only under a lesson/week heading; otherwise it is a topic list (or a reading list).
+- A network error is never "the university has no syllabus this year" — the sync fails that course and keeps
+  the previous record; only a real "not found" falls back to last year, with a warning.
+- `order` checks declared identity against the document (`textFile`); a document that does not name its
+  course needs `identityConfirmedBy` saying who read it and what ties it to the course.
+- In `discover` output fill `searchLog` (ran / hits / note) so "every query was run" is recorded.
 
 ## Common Mistakes
 - Using a parallel course's order or content as if it were this course's (it is evidence only).

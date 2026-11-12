@@ -47,7 +47,7 @@ const PURE = new RegExp(`^${PREFIX}?\\s*(?:מס'?\\s*)?(\\d{1,2})[.):]?$`, "i");
 const LEAD = new RegExp(`^${PREFIX}?\\s*(\\d{1,2})(?![\\d%])(?:[.):\\-–](?!\\d))?\\s*([^\\d\\s.,%)(].*)$`, "i");
 const TRAIL = new RegExp(`^(\\S.*?)\\s+${PREFIX}?\\s*(\\d{1,2})$`, "i");
 // A section heading, with or without its letter ("ג. חובות הקורס:").
-const STOP = /^(?:[א-ת]s?[.)]s*)?(?:ספרות|ביבליוגרפיה|מטלות|דרישות|הרכב הציון|חובות|ציון סופי|משקל בציון|Bibliography|Reading|Final exam|Final composition|Requirements|Grading|Textbooks?)/i;
+const STOP = /^(?:[א-ת]\s?[.)]\s*)?(?:ספרות|ביבליוגרפיה|רשימה ביבליוגרפית|רשימת קריאה|מטלות|דרישות|הרכב הציון|חובות|ציון סופי|משקל בציון|מטרות הקורס|מבנה הקורס|Bibliography|Reading|Final exam|Final composition|Requirements|Grading|Textbooks?)/i;
 
 function numbered(cells: string[]): { n: number; text: string } | null {
   if (cells.length === 1) {
@@ -116,7 +116,7 @@ export function numberedSessions(rawLines: string[]): { sessions: Session[] | nu
 export const hasScheduleMarkers = (text: string) => {
   const t = text.replace(BIDI, "");
   return (t.match(new RegExp(`${PREFIX}\\s*(?:מס'?\\s*)?\\d{1,2}`, "gi")) ?? []).length >= 4
-    || /נושא השיעור|מס'\s*השיעור|תכנית הוראה מפורטת|לוח (?:ה?הרצאות|ה?שיעורים)|נושא ההרצאה|Course schedule|Lecture schedule|Weekly schedule/i.test(t);
+    || /נושא השיעור|מס'\s*השיעור|תכנית הוראה מפורטת|לוח (?:ה?הרצאות|ה?שיעורים)|נושא ההרצאה|מהלך ההרצאות|שיעור\s*=|Lesson\s*#|Lecture\s*#|Week-by-week|Course schedule|Lecture schedule|Weekly schedule/i.test(t);
 };
 
 /** Grading lines, verbatim: every line that states a percentage. */
@@ -131,7 +131,9 @@ const TOPICS_HEAD = /נושאי (?:הקורס|השיעורים|הלימוד)|ת�
 export function topicSection(lines: string[]): { lines: string[]; found: boolean } {
   const body = lines.filter((l) => !NOISE.test(l));
   const start = body.findIndex((l) => TOPICS_HEAD.test(l));
-  const rest = start >= 0 ? body.slice(start + 1) : body;
+  // "נושאי הקורס: כרומטין ומבנה הכרומוזום; דנ"א; …" — the list may begin on the heading's own line.
+  const sameLine = start >= 0 ? clean(body[start].slice(body[start].search(TOPICS_HEAD)).replace(TOPICS_HEAD, "").replace(/^[\s:,\-–]+/, "")) : "";
+  const rest = start >= 0 ? [...(sameLine.length > 8 ? [sameLine] : []), ...body.slice(start + 1)] : body;
   // The topics end at the next section — or where the lesson table begins (its rows are not topic lines).
   const stop = rest.findIndex((l, i) => i > 0 && (STOP.test(l) || /מהלך השיעורים|תכנית הוראה מפורטת|נושא השיעור/.test(l)));
   const out = stop > 0 ? rest.slice(0, stop) : rest;

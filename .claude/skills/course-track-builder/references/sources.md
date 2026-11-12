@@ -19,6 +19,22 @@ A document that does not name the course is REJECTED (Haifa links a Medical Micr
 
 Update this file whenever a source is found, moves, or stops working.
 
+## Local material (read before the web)
+- `Project One/syllabuses/` — official syllabi and schedules handed out by lecturers (Technion, 2021-2026),
+  text in `_text/`, mapped to courses in `_manifest.json` (30 files; 5 belong to lab courses not on the
+  site). `course_sources.py local --course <slug>` lists them with schedule and grading hints.
+- `Project One/biology drive/` — student drive (exams 2007-2025, homework, summaries), index in
+  `_text/index.json`. Evidence of scope and exam format only; never copied to the site.
+- `content/syllabi/ledger.generated.md` — what each course has and lacks (2026-11-12: Technion 16/31 with a
+  lesson order, 16 with grading, 25 with current staff, 13 with recent exams; no other university has exams).
+
+## Reading PDFs by eye (2026-11-11/12)
+All 22 PDF sources of the sync were opened and compared with their records. Found this way, and invisible in
+the extracted text: two Bar-Ilan lesson tables (80548, 80203), a third "לא ילמד" list in 80208, scrambled
+Hebrew/Latin topic lines in Haifa genetics, a reading list taken for the book list in 80202, flipped
+parentheses in a TAU table. Haifa's seven files have no lesson tables (numbered topic lists at most); Haifa
+microbiology has no topic list at all. Entries: `content/syllabi/manual.ts`.
+
 ## Technion
 - **Official topics:** students portal `students.technion.ac.il/local/technionsearch/course/<6-digit>`
   Has: faculty, "מקצועות ללא זיכוי נוסף" (content-overlap pairs), books. No weekly plan. Adapter: `technion-portal`.

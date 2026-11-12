@@ -9,7 +9,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "nameHe": "ביוכימיה א",
   "year": 2027,
   "updatedHe": "תיאור הקורס עודכן לאחרונה ב-2002",
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "bgu-catalog",
   "sourceUrl": "https://bgu4u.bgu.ac.il/html/annual/",
   "level": "topics",
@@ -47,7 +47,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "nameHe": "מבוא לביואינפורמטיקה",
   "year": 2027,
   "updatedHe": "תיאור הקורס עודכן לאחרונה ב-2027",
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "bgu-catalog",
   "sourceUrl": "https://bgu4u.bgu.ac.il/html/annual/",
   "level": "topics",
@@ -78,7 +78,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "nameHe": "התא",
   "year": 2027,
   "updatedHe": "תיאור הקורס עודכן לאחרונה ב-2026",
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "bgu-catalog",
   "sourceUrl": "https://bgu4u.bgu.ac.il/html/annual/",
   "level": "topics",
@@ -117,7 +117,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "nameHe": "מבוא לאקולוגיה",
   "year": 2027,
   "updatedHe": "תיאור הקורס עודכן לאחרונה ב-2027",
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "bgu-catalog",
   "sourceUrl": "https://bgu4u.bgu.ac.il/html/annual/",
   "level": "topics",
@@ -161,7 +161,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "nameHe": "אבולוציה",
   "year": 2027,
   "updatedHe": "תיאור הקורס עודכן לאחרונה ב-2003",
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "bgu-catalog",
   "sourceUrl": "https://bgu4u.bgu.ac.il/html/annual/",
   "level": "topics",
@@ -217,7 +217,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "nameHe": "יסודות הגנטיקה",
   "year": 2027,
   "updatedHe": "תיאור הקורס עודכן לאחרונה ב-1998",
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "bgu-catalog",
   "sourceUrl": "https://bgu4u.bgu.ac.il/html/annual/",
   "level": "topics",
@@ -257,7 +257,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "nameHe": "מיקרוביולוגיה",
   "year": 2027,
   "updatedHe": "תיאור הקורס עודכן לאחרונה ב-2021",
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "bgu-catalog",
   "sourceUrl": "https://bgu4u.bgu.ac.il/html/annual/",
   "level": "topics",
@@ -330,7 +330,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "nameHe": "ביולוגיה מולקולרית",
   "year": 2027,
   "updatedHe": "תיאור הקורס עודכן לאחרונה ב-2021",
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "bgu-catalog",
   "sourceUrl": "https://bgu4u.bgu.ac.il/html/annual/",
   "level": "topics",
@@ -362,7 +362,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "nameHe": "ביולוגיה של ייצורים חיים",
   "year": 2027,
   "updatedHe": "תיאור הקורס עודכן לאחרונה ב-2025",
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "bgu-catalog",
   "sourceUrl": "https://bgu4u.bgu.ac.il/html/annual/",
   "level": "topics",
@@ -399,7 +399,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "code": "80206",
   "nameHe": "מבוא לפיזיולוגיה של החי",
   "year": 2025,
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "biu-pdf",
   "sourceUrl": "https://life-sciences.biu.ac.il/sites/life-sciences/files/shared/Med%20Mechina/Sylabi25/%D7%A1%D7%99%D7%9C%D7%91%D7%95%D7%A1-%D7%9E%D7%91%D7%95%D7%90-%D7%9C%D7%A4%D7%99%D7%96%D7%99%D7%95%D7%9C%D7%95%D7%92%D7%99%D7%94-%D7%A9%D7%9C-%D7%94%D7%97%D7%99-80206-%D7%AA%D7%A9%D7%A4%D7%94.pdf",
   "level": "lectures",
@@ -529,43 +529,42 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "university": "biu",
   "code": "80201",
   "nameHe": "ביוכימיה א'",
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "biu-pdf",
   "sourceUrl": "https://life-sciences.biu.ac.il/sites/life-sciences/files/shared/Med%20BSc/%D7%91%D7%99%D7%95%D7%9B%D7%99%D7%9E%D7%99%D7%94-%D7%90'-80201.pdf",
   "level": "lectures",
-  "contentHe": "שיעור 1: מבנה DNA\nשיעור 2: מבנה DNA\nשיעור 3: הגנום ,אנזימי רסטריקציה ,אפיגנטיקה ,החתמה ()imprinting\nשיעור 4: הגנום ,אנזימי רסטריקציה ,אפיגנטיקה ,החתמה ()imprinting\nשיעור 5: הכפלת DNAבפרוקריוטים וביוקריוטים ,טלומרים וטלומראז.\nשיעור 6: תיקון נזקים ב.DNA-\nשיעור 7: שעתוק\nשיעור 8: שעתוק\nשיעור 9: שעתוק.\nשיעור 10: שעתוק.\nשיעור 11: תרגום.\nשיעור 12: תרגום.\nשיעור 13: חלבונים -מבנה ותפקוד של חלבונים סטרוקטורליים ,גלובולריים,; וממברנליים.; תרמודינמיקה של קיפול חלבונים.\nשיעור 14: תרמודינמיקה של קיפול חלבונים.\nשיעור 15: מבנה ראשוני של חלבון.\nשיעור 16: מבנה שניוני של חלבון.\nשיעור 17: מבנה שלישוני של חלבון.\nשיעור 18: מבנה רבעוני של חלבון.\nשיעור 19: המוגלובין -מבנה ומחלות.\nשיעור 20: קואופרטיביות.\nשיעור 21: אנזימולוגיה -מבוא.\nשיעור 22: אנזימולוגיה -משוואות מיכאליס מנטן.\nשיעור 23: מעכבים אנזימטים.\nשיעור 24: מבוא לבקרה אנזימטית.\nשיעור 25: אלוסטריות.",
+  "contentHe": "ביולוגיה מולקולרית\nשיעור 1: מבנה DNA\nשיעור 2: מבנה DNA\nשיעור 3: הגנום, אנזימי רסטריקציה, אפיגנטיקה, החתמה (imprinting)\nשיעור 4: הגנום, אנזימי רסטריקציה, אפיגנטיקה, החתמה (imprinting)\nשיעור 5: הכפלת DNA בפרוקריוטים וביוקריוטים, טלומרים וטלומראז\nשיעור 6: תיקון נזקים ב-DNA\nשיעור 7: שעתוק\nשיעור 8: שעתוק\nשיעור 9: שעתוק\nשיעור 10: שעתוק\nשיעור 11: תרגום\nשיעור 12: תרגום\nחלבונים - מבנה ותפקוד של חלבונים סטרוקטורליים, גלובולריים וממברנליים\nשיעור 13: תרמודינמיקה של קיפול חלבונים\nשיעור 14: תרמודינמיקה של קיפול חלבונים\nשיעור 15: מבנה ראשוני של חלבון\nשיעור 16: מבנה שניוני של חלבון\nשיעור 17: מבנה שלישוני של חלבון\nשיעור 18: מבנה רבעוני של חלבון\nשיעור 19: המוגלובין - מבנה ומחלות\nשיעור 20: קואופרטיביות\nשיעור 21: אנזימולוגיה - מבוא\nשיעור 22: אנזימולוגיה - משוואות מיכאליס מנטן\nשיעור 23: מעכבים אנזימטים\nשיעור 24: מבוא לבקרה אנזימטית\nשיעור 25: אלוסטריות",
   "topicsHe": [
    "מבנה DNA",
    "מבנה DNA",
-   "הגנום ,אנזימי רסטריקציה ,אפיגנטיקה ,החתמה ()imprinting",
-   "הגנום ,אנזימי רסטריקציה ,אפיגנטיקה ,החתמה ()imprinting",
-   "הכפלת DNAבפרוקריוטים וביוקריוטים ,טלומרים וטלומראז.",
-   "תיקון נזקים ב.DNA-",
+   "הגנום, אנזימי רסטריקציה, אפיגנטיקה, החתמה (imprinting)",
+   "הגנום, אנזימי רסטריקציה, אפיגנטיקה, החתמה (imprinting)",
+   "הכפלת DNA בפרוקריוטים וביוקריוטים, טלומרים וטלומראז",
+   "תיקון נזקים ב-DNA",
    "שעתוק",
    "שעתוק",
-   "שעתוק.",
-   "שעתוק.",
-   "תרגום.",
-   "תרגום.",
-   "חלבונים -מבנה ותפקוד של חלבונים סטרוקטורליים ,גלובולריים,",
-   "וממברנליים.",
-   "תרמודינמיקה של קיפול חלבונים.",
-   "תרמודינמיקה של קיפול חלבונים.",
-   "מבנה ראשוני של חלבון.",
-   "מבנה שניוני של חלבון.",
-   "מבנה שלישוני של חלבון.",
-   "מבנה רבעוני של חלבון.",
-   "המוגלובין -מבנה ומחלות.",
-   "קואופרטיביות.",
-   "אנזימולוגיה -מבוא.",
-   "אנזימולוגיה -משוואות מיכאליס מנטן.",
-   "מעכבים אנזימטים.",
-   "מבוא לבקרה אנזימטית.",
-   "אלוסטריות."
+   "שעתוק",
+   "שעתוק",
+   "תרגום",
+   "תרגום",
+   "תרמודינמיקה של קיפול חלבונים",
+   "תרמודינמיקה של קיפול חלבונים",
+   "מבנה ראשוני של חלבון",
+   "מבנה שניוני של חלבון",
+   "מבנה שלישוני של חלבון",
+   "מבנה רבעוני של חלבון",
+   "המוגלובין - מבנה ומחלות",
+   "קואופרטיביות",
+   "אנזימולוגיה - מבוא",
+   "אנזימולוגיה - משוואות מיכאליס מנטן",
+   "מעכבים אנזימטים",
+   "מבוא לבקרה אנזימטית",
+   "אלוסטריות"
   ],
   "sessions": [
    {
     "lectures": "1",
+    "partHe": "ביולוגיה מולקולרית",
     "topicsHe": [
      "מבנה DNA"
     ]
@@ -579,25 +578,25 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
    {
     "lectures": "3",
     "topicsHe": [
-     "הגנום ,אנזימי רסטריקציה ,אפיגנטיקה ,החתמה ()imprinting"
+     "הגנום, אנזימי רסטריקציה, אפיגנטיקה, החתמה (imprinting)"
     ]
    },
    {
     "lectures": "4",
     "topicsHe": [
-     "הגנום ,אנזימי רסטריקציה ,אפיגנטיקה ,החתמה ()imprinting"
+     "הגנום, אנזימי רסטריקציה, אפיגנטיקה, החתמה (imprinting)"
     ]
    },
    {
     "lectures": "5",
     "topicsHe": [
-     "הכפלת DNAבפרוקריוטים וביוקריוטים ,טלומרים וטלומראז."
+     "הכפלת DNA בפרוקריוטים וביוקריוטים, טלומרים וטלומראז"
     ]
    },
    {
     "lectures": "6",
     "topicsHe": [
-     "תיקון נזקים ב.DNA-"
+     "תיקון נזקים ב-DNA"
     ]
    },
    {
@@ -615,128 +614,118 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
    {
     "lectures": "9",
     "topicsHe": [
-     "שעתוק."
+     "שעתוק"
     ]
    },
    {
     "lectures": "10",
     "topicsHe": [
-     "שעתוק."
+     "שעתוק"
     ]
    },
    {
     "lectures": "11",
     "topicsHe": [
-     "תרגום."
+     "תרגום"
     ]
    },
    {
     "lectures": "12",
     "topicsHe": [
-     "תרגום."
+     "תרגום"
     ]
    },
    {
     "lectures": "13",
+    "partHe": "חלבונים - מבנה ותפקוד של חלבונים סטרוקטורליים, גלובולריים וממברנליים",
     "topicsHe": [
-     "חלבונים -מבנה ותפקוד של חלבונים סטרוקטורליים ,גלובולריים,",
-     "וממברנליים.",
-     "תרמודינמיקה של קיפול חלבונים."
+     "תרמודינמיקה של קיפול חלבונים"
     ]
    },
    {
     "lectures": "14",
     "topicsHe": [
-     "תרמודינמיקה של קיפול חלבונים."
+     "תרמודינמיקה של קיפול חלבונים"
     ]
    },
    {
     "lectures": "15",
     "topicsHe": [
-     "מבנה ראשוני של חלבון."
+     "מבנה ראשוני של חלבון"
     ]
    },
    {
     "lectures": "16",
     "topicsHe": [
-     "מבנה שניוני של חלבון."
+     "מבנה שניוני של חלבון"
     ]
    },
    {
     "lectures": "17",
     "topicsHe": [
-     "מבנה שלישוני של חלבון."
+     "מבנה שלישוני של חלבון"
     ]
    },
    {
     "lectures": "18",
     "topicsHe": [
-     "מבנה רבעוני של חלבון."
+     "מבנה רבעוני של חלבון"
     ]
    },
    {
     "lectures": "19",
     "topicsHe": [
-     "המוגלובין -מבנה ומחלות."
+     "המוגלובין - מבנה ומחלות"
     ]
    },
    {
     "lectures": "20",
     "topicsHe": [
-     "קואופרטיביות."
+     "קואופרטיביות"
     ]
    },
    {
     "lectures": "21",
     "topicsHe": [
-     "אנזימולוגיה -מבוא."
+     "אנזימולוגיה - מבוא"
     ]
    },
    {
     "lectures": "22",
     "topicsHe": [
-     "אנזימולוגיה -משוואות מיכאליס מנטן."
+     "אנזימולוגיה - משוואות מיכאליס מנטן"
     ]
    },
    {
     "lectures": "23",
     "topicsHe": [
-     "מעכבים אנזימטים."
+     "מעכבים אנזימטים"
     ]
    },
    {
     "lectures": "24",
     "topicsHe": [
-     "מבוא לבקרה אנזימטית."
+     "מבוא לבקרה אנזימטית"
     ]
    },
    {
     "lectures": "25",
     "topicsHe": [
-     "אלוסטריות."
+     "אלוסטריות"
     ]
    }
   ],
   "books": [
-   ":) וספרי עזר נוספיםtextbooks( ספרי הלימוד",
-   "Biochemistry, 3rd or 4th ed. Mathews and van Holde",
-   "First Part ()חלק ראשון",
-   "Chapter 4: Pages 90 –122",
-   "Chapter 24: Pages 1002 – 1031",
-   "Chapter 25: Pages 1036 – 1074",
-   "Chapter 26: Pages 1079 – 1106",
-   "Chapter 27: Pages 1125 – 1164",
-   "Chapter 28: Pages 1173 – 1224",
-   "Second Part ()חלק שני",
-   "Chapter 3: Pages 58 – 77",
-   "Chapter 6: Pages 177 – 215",
-   "Chapter 7: Pages 234 – 254 ; 277 – 278",
-   "Chapter 11: Pages 410 – 445 ; 454 – 461"
+   "Biochemistry, 3rd or 4th ed. — Mathews and van Holde. חלק ראשון: פרקים 4, 24, 25, 26, 27, 28; חלק שני: פרקים 3, 6, 7, 11 (עמודים מפורטים במסמך)"
   ],
   "assessmentHe": [
-   "בחינה90%",
-   "בחנים+ תרגילים10%"
+   "90% בחינה",
+   "10% תרגילים + בחנים"
   ],
+  "manual": {
+   "readAt": "2026-11-11",
+   "noteHe": "סילבוס תשפ\"ה, סמסטר א', 4 שעות. הסדר זהה למה שחולץ; ההזנה הידנית מוסיפה את שתי כותרות החלקים שבטבלה."
+  },
   "evidence": {
    "textFile": "content/syllabi/text/biu-biochem-a.txt",
    "sha256": "63fb9b9d5da49ea4229ac7b08bb2d8de6ed3dfc3f84821c0a972d64b36db5c89",
@@ -753,7 +742,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "university": "biu",
   "code": "80202",
   "nameHe": "ביוכימיה ב'",
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "biu-pdf",
   "sourceUrl": "https://life-sciences.biu.ac.il/sites/life-sciences/files/shared/Med%20BSc/%D7%91%D7%99%D7%95%D7%9B%D7%99%D7%9E%D7%99%D7%94-%D7%91'-80202.pdf",
   "level": "lectures",
@@ -1147,7 +1136,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "code": "80150",
   "nameHe": "ביוסטטיסטיקה",
   "year": 2024,
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "biu-pdf",
   "sourceUrl": "https://life-sciences.biu.ac.il/sites/life-sciences/files/shared/Med%20Mechina/Sylabi24/%D7%91%D7%99%D7%95%D7%A1%D7%98%D7%98%D7%99%D7%A1%D7%98%D7%99%D7%A7%D7%94-80-150-30-1).pdf",
   "level": "lectures",
@@ -1298,7 +1287,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "code": "80103",
   "nameHe": "",
   "year": 2025,
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "biu-pdf",
   "sourceUrl": "https://life-sciences.biu.ac.il/sites/life-sciences/files/shared/Med%20Mechina/Sylabi25/80103-%D7%A1%D7%99%D7%9C%D7%91%D7%95%D7%A1-%D7%A2%D7%93%D7%9B%D7%A0%D7%99-%D7%AA%D7%A9%D7%A4%D7%94.pdf",
   "level": "lectures",
@@ -1425,9 +1414,13 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
    "אם נשאל סטודנטים מה הם למדו או במה הם התחדשו בקורס הזה ,מה היית רוצה שיאמרו?"
   ],
   "assessmentHe": [
-   "מהציון הסופי90%",
-   "מהציון הסופי10% תיאור התוצר"
+   "בחינה סופית על החומר הנלמד — 90% מהציון הסופי",
+   "משימת למידה עצמאית במהלך הקורס — 10% מהציון הסופי"
   ],
+  "manual": {
+   "readAt": "2026-11-11",
+   "noteHe": "סילבוס תשפ\"ה, סמסטר ב', מתוארך 11/2024. 14 השיעורים שחולצו זהים לטבלה במסמך."
+  },
   "evidence": {
    "textFile": "content/syllabi/text/biu-cell.txt",
    "sha256": "598dadd09c47b29ac1d660c25a0dfa10ce01053fbd685e7cf397a4d290d9d031",
@@ -1445,80 +1438,122 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "code": "80548",
   "nameHe": "התא מבנה ותפקוד",
   "year": 2024,
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "biu-pdf",
   "sourceUrl": "https://life-sciences.biu.ac.il/sites/life-sciences/files/shared/Med%20Mechina/Sylabi24/11.2023-80-548-30-%D7%A1%D7%99%D7%9C%D7%91%D7%95%D7%A1-%D7%A7%D7%95%D7%A8%D7%A1-%D7%94%D7%AA%D7%90-%D7%9E%D7%91%D7%A0%D7%94-%D7%95%D7%AA%D7%A4%D7%A7%D7%95%D7%93.pdf",
-  "level": "topics",
-  "contentHe": "הקשר בין המערכות התאיות :גרעין ,גולג'י ,אנדופלסמיק רטיקולום ,ליזוזום ,פרוקסיוזום ,מיטוכונדריה\nושלד התא לבין תפקוד התא והיווצרות מצבים פתולוגיים.\nמהלך ההרצאות:\nבעוד שרוב ההרצאות מבוססות על\"Molecular Biology of the Cell\" Alberts et al. fifth edition :\nהרי שחלק מהחומר נסמך על פרסומים עדכניים מהספרות המדעית.\nהערות קריאה נדרשת מרצה שיעור = 3נושא\nהשיעור שעות\nצ'פרונים יוביקויטין, Molecular biology of the קיפול ופירוק פרופ' ירדן .1\nליזוזום ,מבנה ותפקוד cell Fifth Edition 387-396 ,\n397-400-voluntary אופטובסקי חלבונים\nהפרוטאוזום . http://www.nobelprize.or\ng/nobel_prizes/chemistry/ ב 25.12.23\nמבנה ה ,ERכניסת laureates/2004/ciechanov\nחלבונים ל ,ER er-lecture.pdf פרופ' ירדן ER 2\nPapers אופטובסקי\nטרנסלוקון ,חלבונים Molecular biology of the ב 2.01.24\nטרנס-ממברנלים, cell Fifth Edition P.723-\nהתמרות כימיות. 745\nPapers\nERAD, ER stress, Molecular biology of the פרופ' ירדן כשל בקיפול 3\nUnfolded Protein cell Fifth Edition p.739- אופטובסקי החלבונים, ב 8.01.24\n742, 766-779 מעבר\n)Response (UPR Papers חלבונים מ\nERלגולג'י\nמנגנון שיווי משקל בין Molecular biology of the כשל בקיפול פרופ' ירדן 4\nהתמודדות התא cell Fifth Edition p.721-\n723 ב 15.01.24חלבונים ,אופטובסקי\nלאפופטוזיס ,מבנה Papers\nהפרוקסיזום פרוקסיזום\nPapersתוצג כדוגמה למחלות פרופ' ירדן סיסטיק 5\nהנובעות מכשל בקיפול אופטובסקי\nב 22.01.24פיברוזיס\nחלבונים\nכיצד משתמש התא Molecular biology of the פרופ' ירדן איתות 6\nביוני סידן לתקשורת cell Fifth Edition p.912- אופטובסקי\n916 ב 29.01.24באמצעות\nמורכבת. Papers\nיוני סידן\nסקירה של הידע פרופ' ירדן ממאמרים מחלות 7\nהעדכני על מחלות ב 5.02.24\nאלצהיימר ,פרקינסון ו אופטובסקי נוירו-\nALS דגנרטיביות\nמבנה-תפקוד של פרופ' ירדן פרק 13 מבנה 8\nמנגנוני Vesicular אופטובסקי ותפקוד של ב 12.02.24\nTransport מנגנוני\nהולכת\nאקטין ,מיקרוטובולין ו וזיקולות\nIF\nמבנה שלד פרופ' ירדן פרק 16 9\nאופטובסקי ב 19.02.24התא\nמנגנוני הפעלת RTKs פרופ' ירדן פרק 15 איתות תאי 10\nו GPCRsבתהליכי אופטובסקי Receptor ב 26.02.24\nאיתות תאיים Tyrosine\nפרופ' ירדן פרקים 12,17\nארגון הגרעין בשלבי אופטובסקי Kinases\nמחזור התא השונים. (RTKs),\nמבנה ותפקוד שוערי\nהגרעין .שלד הגרעין. גרעין התא 11\nב 4.03.24\nמרכיבי הציון הסופי\nציון מספרי שיתבסס על בחנים בחומר סגור ( )100%במהלך הסמסטר.\nסטודנט שלא נכח בבוחן מסיבה מוצדקת יוכל להבחן במועד מיוחד ,עם הצגת אישור לפי\nהקריטריונים של זכאות למועד מיוחד ,בשעות מחלקה בשבוע האחרון בסמסטר.\nחומר לבחנים\nחומר הנלמד בכיתה בשני השיעורים האחרונים וכן קריאת החובה",
+  "level": "lectures",
+  "contentHe": "שיעור 1: קיפול ופירוק חלבונים; צ'פרונים, יוביקויטין, ליזוזום, מבנה ותפקוד הפרוטאוזום\nשיעור 2: ER; מבנה ה-ER, כניסת חלבונים ל-ER, טרנסלוקון, חלבונים טרנס-ממברנלים, התמרות כימיות\nשיעור 3: כשל בקיפול החלבונים, מעבר חלבונים מ-ER לגולג'י; ERAD, ER stress, Unfolded Protein Response (UPR)\nשיעור 4: כשל בקיפול חלבונים, פרוקסיזום; מנגנון שיווי משקל בין התמודדות התא לאפופטוזיס, מבנה הפרוקסיזום\nשיעור 5: סיסטיק פיברוזיס; תוצג כדוגמה למחלות הנובעות מכשל בקיפול חלבונים\nשיעור 6: איתות באמצעות יוני סידן; כיצד משתמש התא ביוני סידן לתקשורת מורכבת\nשיעור 7: מחלות נוירו-דגנרטיביות; סקירה של הידע העדכני על מחלות אלצהיימר, פרקינסון ו-ALS\nשיעור 8: מבנה ותפקוד של מנגנוני הולכת וזיקולות; מבנה-תפקוד של מנגנוני Vesicular Transport\nשיעור 9: מבנה שלד התא; אקטין, מיקרוטובולין ו-IF\nשיעור 10: איתות תאי – Receptor Tyrosine Kinases (RTKs); מנגנוני הפעלת RTKs ו-GPCRs בתהליכי איתות תאיים\nשיעור 11: גרעין התא; ארגון הגרעין בשלבי מחזור התא השונים. מבנה ותפקוד שוערי הגרעין. שלד הגרעין",
   "topicsHe": [
-   "הקשר בין המערכות התאיות :גרעין ,גולג'י ,אנדופלסמיק רטיקולום ,ליזוזום ,פרוקסיוזום ,מיטוכונדריה",
-   "ושלד התא לבין תפקוד התא והיווצרות מצבים פתולוגיים.",
-   "מהלך ההרצאות:",
-   "בעוד שרוב ההרצאות מבוססות על\"Molecular Biology of the Cell\" Alberts et al. fifth edition :",
-   "הרי שחלק מהחומר נסמך על פרסומים עדכניים מהספרות המדעית.",
-   "הערות קריאה נדרשת מרצה שיעור = 3נושא",
-   "השיעור שעות",
-   "צ'פרונים יוביקויטין, Molecular biology of the קיפול ופירוק פרופ' ירדן .1",
-   "ליזוזום ,מבנה ותפקוד cell Fifth Edition 387-396 ,",
-   "397-400-voluntary אופטובסקי חלבונים",
-   "הפרוטאוזום . http://www.nobelprize.or",
-   "g/nobel_prizes/chemistry/ ב 25.12.23",
-   "מבנה ה ,ERכניסת laureates/2004/ciechanov",
-   "חלבונים ל ,ER er-lecture.pdf פרופ' ירדן ER 2",
-   "Papers אופטובסקי",
-   "טרנסלוקון ,חלבונים Molecular biology of the ב 2.01.24",
-   "טרנס-ממברנלים, cell Fifth Edition P.723-",
-   "התמרות כימיות. 745",
-   "Papers",
-   "ERAD, ER stress, Molecular biology of the פרופ' ירדן כשל בקיפול 3",
-   "Unfolded Protein cell Fifth Edition p.739- אופטובסקי החלבונים, ב 8.01.24",
-   "742, 766-779 מעבר",
-   ")Response (UPR Papers חלבונים מ",
-   "ERלגולג'י",
-   "מנגנון שיווי משקל בין Molecular biology of the כשל בקיפול פרופ' ירדן 4",
-   "התמודדות התא cell Fifth Edition p.721-",
-   "723 ב 15.01.24חלבונים ,אופטובסקי",
-   "לאפופטוזיס ,מבנה Papers",
-   "הפרוקסיזום פרוקסיזום",
-   "Papersתוצג כדוגמה למחלות פרופ' ירדן סיסטיק 5",
-   "הנובעות מכשל בקיפול אופטובסקי",
-   "ב 22.01.24פיברוזיס",
-   "חלבונים",
-   "כיצד משתמש התא Molecular biology of the פרופ' ירדן איתות 6",
-   "ביוני סידן לתקשורת cell Fifth Edition p.912- אופטובסקי",
-   "916 ב 29.01.24באמצעות",
-   "מורכבת. Papers",
-   "יוני סידן",
-   "סקירה של הידע פרופ' ירדן ממאמרים מחלות 7",
-   "העדכני על מחלות ב 5.02.24",
-   "אלצהיימר ,פרקינסון ו אופטובסקי נוירו-",
-   "ALS דגנרטיביות",
-   "מבנה-תפקוד של פרופ' ירדן פרק 13 מבנה 8",
-   "מנגנוני Vesicular אופטובסקי ותפקוד של ב 12.02.24",
-   "Transport מנגנוני",
-   "הולכת",
-   "אקטין ,מיקרוטובולין ו וזיקולות",
-   "מבנה שלד פרופ' ירדן פרק 16 9",
-   "אופטובסקי ב 19.02.24התא",
-   "מנגנוני הפעלת RTKs פרופ' ירדן פרק 15 איתות תאי 10",
-   "ו GPCRsבתהליכי אופטובסקי Receptor ב 26.02.24",
-   "איתות תאיים Tyrosine",
-   "פרופ' ירדן פרקים 12,17",
-   "ארגון הגרעין בשלבי אופטובסקי Kinases",
-   "מחזור התא השונים. (RTKs),",
-   "מבנה ותפקוד שוערי",
-   "הגרעין .שלד הגרעין. גרעין התא 11",
-   "ב 4.03.24",
-   "מרכיבי הציון הסופי",
-   "ציון מספרי שיתבסס על בחנים בחומר סגור ( )100%במהלך הסמסטר.",
-   "סטודנט שלא נכח בבוחן מסיבה מוצדקת יוכל להבחן במועד מיוחד ,עם הצגת אישור לפי",
-   "הקריטריונים של זכאות למועד מיוחד ,בשעות מחלקה בשבוע האחרון בסמסטר.",
-   "חומר לבחנים",
-   "חומר הנלמד בכיתה בשני השיעורים האחרונים וכן קריאת החובה"
+   "קיפול ופירוק חלבונים",
+   "צ'פרונים, יוביקויטין, ליזוזום, מבנה ותפקוד הפרוטאוזום",
+   "ER",
+   "מבנה ה-ER, כניסת חלבונים ל-ER, טרנסלוקון, חלבונים טרנס-ממברנלים, התמרות כימיות",
+   "כשל בקיפול החלבונים, מעבר חלבונים מ-ER לגולג'י",
+   "ERAD, ER stress, Unfolded Protein Response (UPR)",
+   "כשל בקיפול חלבונים, פרוקסיזום",
+   "מנגנון שיווי משקל בין התמודדות התא לאפופטוזיס, מבנה הפרוקסיזום",
+   "סיסטיק פיברוזיס",
+   "תוצג כדוגמה למחלות הנובעות מכשל בקיפול חלבונים",
+   "איתות באמצעות יוני סידן",
+   "כיצד משתמש התא ביוני סידן לתקשורת מורכבת",
+   "מחלות נוירו-דגנרטיביות",
+   "סקירה של הידע העדכני על מחלות אלצהיימר, פרקינסון ו-ALS",
+   "מבנה ותפקוד של מנגנוני הולכת וזיקולות",
+   "מבנה-תפקוד של מנגנוני Vesicular Transport",
+   "מבנה שלד התא",
+   "אקטין, מיקרוטובולין ו-IF",
+   "איתות תאי – Receptor Tyrosine Kinases (RTKs)",
+   "מנגנוני הפעלת RTKs ו-GPCRs בתהליכי איתות תאיים",
+   "גרעין התא",
+   "ארגון הגרעין בשלבי מחזור התא השונים. מבנה ותפקוד שוערי הגרעין. שלד הגרעין"
+  ],
+  "sessions": [
+   {
+    "lectures": "1",
+    "topicsHe": [
+     "קיפול ופירוק חלבונים",
+     "צ'פרונים, יוביקויטין, ליזוזום, מבנה ותפקוד הפרוטאוזום"
+    ]
+   },
+   {
+    "lectures": "2",
+    "topicsHe": [
+     "ER",
+     "מבנה ה-ER, כניסת חלבונים ל-ER, טרנסלוקון, חלבונים טרנס-ממברנלים, התמרות כימיות"
+    ]
+   },
+   {
+    "lectures": "3",
+    "topicsHe": [
+     "כשל בקיפול החלבונים, מעבר חלבונים מ-ER לגולג'י",
+     "ERAD, ER stress, Unfolded Protein Response (UPR)"
+    ]
+   },
+   {
+    "lectures": "4",
+    "topicsHe": [
+     "כשל בקיפול חלבונים, פרוקסיזום",
+     "מנגנון שיווי משקל בין התמודדות התא לאפופטוזיס, מבנה הפרוקסיזום"
+    ]
+   },
+   {
+    "lectures": "5",
+    "topicsHe": [
+     "סיסטיק פיברוזיס",
+     "תוצג כדוגמה למחלות הנובעות מכשל בקיפול חלבונים"
+    ]
+   },
+   {
+    "lectures": "6",
+    "topicsHe": [
+     "איתות באמצעות יוני סידן",
+     "כיצד משתמש התא ביוני סידן לתקשורת מורכבת"
+    ]
+   },
+   {
+    "lectures": "7",
+    "topicsHe": [
+     "מחלות נוירו-דגנרטיביות",
+     "סקירה של הידע העדכני על מחלות אלצהיימר, פרקינסון ו-ALS"
+    ]
+   },
+   {
+    "lectures": "8",
+    "topicsHe": [
+     "מבנה ותפקוד של מנגנוני הולכת וזיקולות",
+     "מבנה-תפקוד של מנגנוני Vesicular Transport"
+    ]
+   },
+   {
+    "lectures": "9",
+    "topicsHe": [
+     "מבנה שלד התא",
+     "אקטין, מיקרוטובולין ו-IF"
+    ]
+   },
+   {
+    "lectures": "10",
+    "topicsHe": [
+     "איתות תאי – Receptor Tyrosine Kinases (RTKs)",
+     "מנגנוני הפעלת RTKs ו-GPCRs בתהליכי איתות תאיים"
+    ]
+   },
+   {
+    "lectures": "11",
+    "topicsHe": [
+     "גרעין התא",
+     "ארגון הגרעין בשלבי מחזור התא השונים. מבנה ותפקוד שוערי הגרעין. שלד הגרעין"
+    ]
+   }
   ],
   "assessmentHe": [
-   "ציון מספרי שיתבסס על בחנים בחומר סגור ( )100%במהלך הסמסטר."
+   "ציון מספרי שיתבסס על בחנים בחומר סגור (100%) במהלך הסמסטר",
+   "חומר לבחנים: החומר הנלמד בכיתה בשני השיעורים האחרונים וכן קריאת החובה"
   ],
+  "manual": {
+   "readAt": "2026-11-11",
+   "noteHe": "תוכנית לשנת תשפ\"ד, סמסטר א'; שיעור = 3 שעות, 45 שעות. בכל שיעור: נושא השיעור ואחריו עמודת ההערות. תאריכי השיעורים בטבלה: 25.12.23 עד 4.03.24. קריאה: Molecular Biology of the Cell (Alberts), מהדורה 5 — שיעורים 8–11: פרקים 13, 16, 15, 12 ו-17; שיעורים 5 ו-7 ממאמרים."
+  },
   "evidence": {
    "textFile": "content/syllabi/text/biu-cell-function.txt",
    "sha256": "e1815c41af626c190c0d2ae1520817af1db3be96a4b00a179f1b28f13b271c7a",
@@ -1537,16 +1572,16 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "code": "80208",
   "nameHe": "גנטיקה",
   "year": 2024,
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "biu-pdf",
   "sourceUrl": "https://life-sciences.biu.ac.il/sites/life-sciences/files/shared/Med%20Mechina/Sylabi24/80-208-30-%D7%92%D7%A0%D7%98%D7%99%D7%A7%D7%94-%D7%AA%D7%A9%D7%A4%D7%93.pdf",
   "level": "lectures",
-  "contentHe": "שיעורים 1–7: המהפכה הגנטית.; מגרגור מנדל לדוגמה המרכזית בביולוגיה מולקולרית; מוטציות וסריקה גנית; הורשה של גן בודד -חוק הסגרגציה השווה; הבסיס הכרומוזומלי להורשה מנדלית; הורשה בהאפלודים ודיפלואידים; אללים ברמה המולקולרית; מיטוזה ומיוזה; חישוב תדירויות סגרגציה עבור גן בודד; גילוי הגן הראשון ע״י תומס האנס מורגן; תאחיזה לכרומוזום איקס; שושלות בבני אדם; הורשה של מחלות אוטוזומליות; הורשה של מחלות אחוזות לכרומוזום איקס; חישוב תדירויות בשושלות; חוק ההתפלגות העצמאית -החוק השני של מנדל; הכלאת מבחן; הבסיס הכרומוזומלי לחוק השני של מנדל; שחלוף; מיפוי גנים באמצעות שחלוף; מיפוי באמצעות מרקרים מולקולריים; דומיננטיות חלקית; קו-דומיננטיות; אללים בעלי רצסיביות לתאלית; מבחני קומפלמנטציה; אפיסטטיות; גנים סופרסוריים; סריקה גנטית לזיהוי גנים סופרסורים; מודיפיירים; Penetrance\nשיעורים 7–14: Genetic mapping in eukaryotes using unordered tetrads.; Genetic Mapping in prokaryotes:; Conjugation: Interrupted mating conjugation experiments, and fine scale mapping by; recombinant frequency.; Molecular Genetics:; Conceptual basis of the connection between mutation and phenotype.; Mutations and biochemical pathways.; Mutations and biological discovery.; Mutations as the driving force of evolution (will be mentioned briefly).; Genetic interactions:; Additive interaction, Suppression, synergism, Synthetic lethality; Mutations at the molecular level:; The effect of the following mutations on protein function: Nonsense, synonymous, missense,; frameshift, insertions, deletions, inversions, intergenic and intragenic suppression.\nשיעורים 14–20: יציבות גנומית; יציבות גנומית ברמת הנוקלאוטידים הבודדים; – רצפים חוזרים בגנום; מחלות נלוות ומנגנון השינוי במספר החזרות-שלשות חוזרות; טרנספוזונים; טרנספוזון פשוט ומורכב; טרנספוזונים בחיידקים ובאאוקריוטים; טרנספוזונים ביונקים; מנגנוני יצירה ותנועת טרנספוזונים; כיצד משפיעים טרנספוזונים על יציבות הגנום וזיקנה; יציבות גנומית ברמת הכרומוזום; ארגון מחדש של הגנום; קריוטיפ-מיפוי כרומוזומלי; חסרים deletion; מיפוי על ידי חסרים; Inversionהפכים; – paracentric inversionמנגנון ותוצאה ,השפעה על פוריות ומיוזה; pericentric inversionמנגנון ותוצאה ,השפעה על פוריות ומיוזה; הכפלת קטעים בגנום; טרנסלוקציות מנגנון יצירה והשפעה; מיוזה של כרומוזומים עם טרנסלוקציה -מנגנון ותוצאה; טריזומיות-; מנגנון יצירה ומחלות קשורות; אנאפלואידיות-; פוליפלואידיות ,מונופלואידיות ,תסמונת טרנר ותסמונת קליינפלטר; השתקת כרומוזום X; מנגנון והשפעה; תורשה חוץ גרעינית:; תורשה אמהית -מיטוכונדריה ,כלורופלאסט ,מנגנון הורשה ומחלות נילוות; השפעה אמהית ,מנגנון הורשה והשפעה על התפתחות; הפלוטיפים; החתמה גנומית:; מנגנון ןמחלות נילוות; גנטיקה של אוכלוסיות:; תדירות אללים באוכלוסיה; תדירות גנוטיפים באוכלוסיה; חוק הרדי ויינברג; שיווי משקל גנטי; תיקון DNAעל קצה המזלג :; רקומבינציה ורקומבינציה מיוטית; מבוא לאפיגנטיקה :; מהי אפיגנטיקה,; מתילציה; מודיפיקציות על גבי היסטונים",
+  "contentHe": "(גלית)\nשיעורים 1–7: המהפכה הגנטית; מגרגור מנדל לדוגמה המרכזית בביולוגיה מולקולרית; מוטציות וסריקה גנית; הורשה של גן בודד - חוק הסגרגציה השווה; הבסיס הכרומוזומלי להורשה מנדלית; הורשה בהאפלודים ודיפלואידים; אללים ברמה המולקולרית; מיטוזה ומיוזה; חישוב תדירויות סגרגציה עבור גן בודד; גילוי הגן הראשון ע״י תומס האנס מורגן; תאחיזה לכרומוזום איקס; שושלות בבני אדם; הורשה של מחלות אוטוזומליות; הורשה של מחלות אחוזות לכרומוזום איקס; חישוב תדירויות בשושלות; חוק ההתפלגות העצמאית - החוק השני של מנדל; הכלאת מבחן; הבסיס הכרומוזומלי לחוק השני של מנדל; שחלוף; מיפוי גנים באמצעות שחלוף; מיפוי באמצעות מרקרים מולקולריים; דומיננטיות חלקית; קו-דומיננטיות; אללים בעלי רצסיביות לתאלית; מבחני קומפלמנטציה; אפיסטטיות; גנים סופרסוריים; סריקה גנטית לזיהוי גנים סופרסורים; מודיפיירים; Penetrance\n(שי)\nשיעורים 7–14: 1. Genetic mapping in eukaryotes using unordered tetrads; 2. Genetic Mapping in prokaryotes: Conjugation — interrupted mating conjugation experiments, and fine scale mapping by recombinant frequency; 3. Molecular Genetics: conceptual basis of the connection between mutation and phenotype; mutations and biochemical pathways; mutations and biological discovery; mutations as the driving force of evolution (will be mentioned briefly); 4. Genetic interactions: additive interaction, suppression, synergism, synthetic lethality; 5. Mutations at the molecular level: the effect of the following mutations on protein function — nonsense, synonymous, missense, frameshift, insertions, deletions, inversions, intergenic and intragenic suppression\n(חיים)\nשיעורים 14–20: יציבות גנומית ברמת הנוקלאוטידים הבודדים: רצפים חוזרים בגנום – שלשות חוזרות: מחלות נלוות ומנגנון השינוי במספר החזרות; טרנספוזונים: טרנספוזון פשוט ומורכב; טרנספוזונים בחיידקים ובאאוקריוטים; טרנספוזונים ביונקים; מנגנוני יצירה ותנועת טרנספוזונים; כיצד משפיעים טרנספוזונים על יציבות הגנום וזיקנה; יציבות גנומית ברמת הכרומוזום: ארגון מחדש של הגנום – מיפוי כרומוזומלי, קריוטיפ; חסרים (deletion); מיפוי על ידי חסרים; הפכים (inversion): paracentric inversion ו-pericentric inversion – מנגנון ותוצאה, השפעה על פוריות ומיוזה; הכפלת קטעים בגנום; טרנסלוקציות – מנגנון יצירה והשפעה; מיוזה של כרומוזומים עם טרנסלוקציה - מנגנון ותוצאה; טריזומיות - מנגנון יצירה ומחלות קשורות; אנאפלואידיות - פוליפלואידיות, מונופלואידיות, תסמונת טרנר ותסמונת קליינפלטר; השתקת כרומוזום X - מנגנון והשפעה; תורשה חוץ גרעינית: תורשה אמהית - מיטוכונדריה, כלורופלאסט, מנגנון הורשה ומחלות נילוות; השפעה אמהית, מנגנון הורשה והשפעה על התפתחות; הפלוטיפים; החתמה גנומית: מנגנון ומחלות נילוות; גנטיקה של אוכלוסיות: תדירות אללים באוכלוסיה; תדירות גנוטיפים באוכלוסיה; חוק הרדי ויינברג; שיווי משקל גנטי; תיקון DNA על קצה המזלג: רקומבינציה ורקומבינציה מיוטית; מבוא לאפיגנטיקה: מהי אפיגנטיקה, מתילציה, מודיפיקציות על גבי היסטונים",
   "topicsHe": [
-   "המהפכה הגנטית.",
+   "המהפכה הגנטית",
    "מגרגור מנדל לדוגמה המרכזית בביולוגיה מולקולרית",
    "מוטציות וסריקה גנית",
-   "הורשה של גן בודד -חוק הסגרגציה השווה",
+   "הורשה של גן בודד - חוק הסגרגציה השווה",
    "הבסיס הכרומוזומלי להורשה מנדלית",
    "הורשה בהאפלודים ודיפלואידים",
    "אללים ברמה המולקולרית",
@@ -1558,7 +1593,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
    "הורשה של מחלות אוטוזומליות",
    "הורשה של מחלות אחוזות לכרומוזום איקס",
    "חישוב תדירויות בשושלות",
-   "חוק ההתפלגות העצמאית -החוק השני של מנדל",
+   "חוק ההתפלגות העצמאית - החוק השני של מנדל",
    "הכלאת מבחן",
    "הבסיס הכרומוזומלי לחוק השני של מנדל",
    "שחלוף",
@@ -1573,73 +1608,36 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
    "סריקה גנטית לזיהוי גנים סופרסורים",
    "מודיפיירים",
    "Penetrance",
-   "Genetic mapping in eukaryotes using unordered tetrads.",
-   "Genetic Mapping in prokaryotes:",
-   "Conjugation: Interrupted mating conjugation experiments, and fine scale mapping by",
-   "recombinant frequency.",
-   "Molecular Genetics:",
-   "Conceptual basis of the connection between mutation and phenotype.",
-   "Mutations and biochemical pathways.",
-   "Mutations and biological discovery.",
-   "Mutations as the driving force of evolution (will be mentioned briefly).",
-   "Genetic interactions:",
-   "Additive interaction, Suppression, synergism, Synthetic lethality",
-   "Mutations at the molecular level:",
-   "The effect of the following mutations on protein function: Nonsense, synonymous, missense,",
-   "frameshift, insertions, deletions, inversions, intergenic and intragenic suppression.",
-   "יציבות גנומית",
-   "יציבות גנומית ברמת הנוקלאוטידים הבודדים",
-   "– רצפים חוזרים בגנום",
-   "מחלות נלוות ומנגנון השינוי במספר החזרות-שלשות חוזרות",
-   "טרנספוזונים",
-   "טרנספוזון פשוט ומורכב",
-   "טרנספוזונים בחיידקים ובאאוקריוטים",
-   "טרנספוזונים ביונקים",
-   "מנגנוני יצירה ותנועת טרנספוזונים",
-   "כיצד משפיעים טרנספוזונים על יציבות הגנום וזיקנה",
-   "יציבות גנומית ברמת הכרומוזום",
-   "ארגון מחדש של הגנום",
-   "קריוטיפ-מיפוי כרומוזומלי",
-   "חסרים deletion",
-   "מיפוי על ידי חסרים",
-   "Inversionהפכים",
-   "– paracentric inversionמנגנון ותוצאה ,השפעה על פוריות ומיוזה",
-   "pericentric inversionמנגנון ותוצאה ,השפעה על פוריות ומיוזה",
+   "1. Genetic mapping in eukaryotes using unordered tetrads",
+   "2. Genetic Mapping in prokaryotes: Conjugation — interrupted mating conjugation experiments, and fine scale mapping by recombinant frequency",
+   "3. Molecular Genetics: conceptual basis of the connection between mutation and phenotype; mutations and biochemical pathways; mutations and biological discovery; mutations as the driving force of evolution (will be mentioned briefly)",
+   "4. Genetic interactions: additive interaction, suppression, synergism, synthetic lethality",
+   "5. Mutations at the molecular level: the effect of the following mutations on protein function — nonsense, synonymous, missense, frameshift, insertions, deletions, inversions, intergenic and intragenic suppression",
+   "יציבות גנומית ברמת הנוקלאוטידים הבודדים: רצפים חוזרים בגנום – שלשות חוזרות: מחלות נלוות ומנגנון השינוי במספר החזרות",
+   "טרנספוזונים: טרנספוזון פשוט ומורכב; טרנספוזונים בחיידקים ובאאוקריוטים; טרנספוזונים ביונקים; מנגנוני יצירה ותנועת טרנספוזונים; כיצד משפיעים טרנספוזונים על יציבות הגנום וזיקנה",
+   "יציבות גנומית ברמת הכרומוזום: ארגון מחדש של הגנום – מיפוי כרומוזומלי, קריוטיפ",
+   "חסרים (deletion); מיפוי על ידי חסרים",
+   "הפכים (inversion): paracentric inversion ו-pericentric inversion – מנגנון ותוצאה, השפעה על פוריות ומיוזה",
    "הכפלת קטעים בגנום",
-   "טרנסלוקציות מנגנון יצירה והשפעה",
-   "מיוזה של כרומוזומים עם טרנסלוקציה -מנגנון ותוצאה",
-   "טריזומיות-",
-   "מנגנון יצירה ומחלות קשורות",
-   "אנאפלואידיות-",
-   "פוליפלואידיות ,מונופלואידיות ,תסמונת טרנר ותסמונת קליינפלטר",
-   "השתקת כרומוזום X",
-   "מנגנון והשפעה",
-   "תורשה חוץ גרעינית:",
-   "תורשה אמהית -מיטוכונדריה ,כלורופלאסט ,מנגנון הורשה ומחלות נילוות",
-   "השפעה אמהית ,מנגנון הורשה והשפעה על התפתחות",
-   "הפלוטיפים",
-   "החתמה גנומית:",
-   "מנגנון ןמחלות נילוות",
-   "גנטיקה של אוכלוסיות:",
-   "תדירות אללים באוכלוסיה",
-   "תדירות גנוטיפים באוכלוסיה",
-   "חוק הרדי ויינברג",
-   "שיווי משקל גנטי",
-   "תיקון DNAעל קצה המזלג :",
-   "רקומבינציה ורקומבינציה מיוטית",
-   "מבוא לאפיגנטיקה :",
-   "מהי אפיגנטיקה,",
-   "מתילציה",
-   "מודיפיקציות על גבי היסטונים"
+   "טרנסלוקציות – מנגנון יצירה והשפעה; מיוזה של כרומוזומים עם טרנסלוקציה - מנגנון ותוצאה",
+   "טריזומיות - מנגנון יצירה ומחלות קשורות",
+   "אנאפלואידיות - פוליפלואידיות, מונופלואידיות, תסמונת טרנר ותסמונת קליינפלטר",
+   "השתקת כרומוזום X - מנגנון והשפעה",
+   "תורשה חוץ גרעינית: תורשה אמהית - מיטוכונדריה, כלורופלאסט, מנגנון הורשה ומחלות נילוות; השפעה אמהית, מנגנון הורשה והשפעה על התפתחות; הפלוטיפים",
+   "החתמה גנומית: מנגנון ומחלות נילוות",
+   "גנטיקה של אוכלוסיות: תדירות אללים באוכלוסיה; תדירות גנוטיפים באוכלוסיה; חוק הרדי ויינברג; שיווי משקל גנטי",
+   "תיקון DNA על קצה המזלג: רקומבינציה ורקומבינציה מיוטית",
+   "מבוא לאפיגנטיקה: מהי אפיגנטיקה, מתילציה, מודיפיקציות על גבי היסטונים"
   ],
   "sessions": [
    {
     "lectures": "1–7",
+    "partHe": "(גלית)",
     "topicsHe": [
-     "המהפכה הגנטית.",
+     "המהפכה הגנטית",
      "מגרגור מנדל לדוגמה המרכזית בביולוגיה מולקולרית",
      "מוטציות וסריקה גנית",
-     "הורשה של גן בודד -חוק הסגרגציה השווה",
+     "הורשה של גן בודד - חוק הסגרגציה השווה",
      "הבסיס הכרומוזומלי להורשה מנדלית",
      "הורשה בהאפלודים ודיפלואידים",
      "אללים ברמה המולקולרית",
@@ -1651,7 +1649,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
      "הורשה של מחלות אוטוזומליות",
      "הורשה של מחלות אחוזות לכרומוזום איקס",
      "חישוב תדירויות בשושלות",
-     "חוק ההתפלגות העצמאית -החוק השני של מנדל",
+     "חוק ההתפלגות העצמאית - החוק השני של מנדל",
      "הכלאת מבחן",
      "הבסיס הכרומוזומלי לחוק השני של מנדל",
      "שחלוף",
@@ -1670,94 +1668,55 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
    },
    {
     "lectures": "7–14",
+    "partHe": "(שי)",
     "topicsHe": [
-     "Genetic mapping in eukaryotes using unordered tetrads.",
-     "Genetic Mapping in prokaryotes:",
-     "Conjugation: Interrupted mating conjugation experiments, and fine scale mapping by",
-     "recombinant frequency.",
-     "Molecular Genetics:",
-     "Conceptual basis of the connection between mutation and phenotype.",
-     "Mutations and biochemical pathways.",
-     "Mutations and biological discovery.",
-     "Mutations as the driving force of evolution (will be mentioned briefly).",
-     "Genetic interactions:",
-     "Additive interaction, Suppression, synergism, Synthetic lethality",
-     "Mutations at the molecular level:",
-     "The effect of the following mutations on protein function: Nonsense, synonymous, missense,",
-     "frameshift, insertions, deletions, inversions, intergenic and intragenic suppression."
+     "1. Genetic mapping in eukaryotes using unordered tetrads",
+     "2. Genetic Mapping in prokaryotes: Conjugation — interrupted mating conjugation experiments, and fine scale mapping by recombinant frequency",
+     "3. Molecular Genetics: conceptual basis of the connection between mutation and phenotype; mutations and biochemical pathways; mutations and biological discovery; mutations as the driving force of evolution (will be mentioned briefly)",
+     "4. Genetic interactions: additive interaction, suppression, synergism, synthetic lethality",
+     "5. Mutations at the molecular level: the effect of the following mutations on protein function — nonsense, synonymous, missense, frameshift, insertions, deletions, inversions, intergenic and intragenic suppression"
     ]
    },
    {
     "lectures": "14–20",
+    "partHe": "(חיים)",
     "topicsHe": [
-     "יציבות גנומית",
-     "יציבות גנומית ברמת הנוקלאוטידים הבודדים",
-     "– רצפים חוזרים בגנום",
-     "מחלות נלוות ומנגנון השינוי במספר החזרות-שלשות חוזרות",
-     "טרנספוזונים",
-     "טרנספוזון פשוט ומורכב",
-     "טרנספוזונים בחיידקים ובאאוקריוטים",
-     "טרנספוזונים ביונקים",
-     "מנגנוני יצירה ותנועת טרנספוזונים",
-     "כיצד משפיעים טרנספוזונים על יציבות הגנום וזיקנה",
-     "יציבות גנומית ברמת הכרומוזום",
-     "ארגון מחדש של הגנום",
-     "קריוטיפ-מיפוי כרומוזומלי",
-     "חסרים deletion",
-     "מיפוי על ידי חסרים",
-     "Inversionהפכים",
-     "– paracentric inversionמנגנון ותוצאה ,השפעה על פוריות ומיוזה",
-     "pericentric inversionמנגנון ותוצאה ,השפעה על פוריות ומיוזה",
+     "יציבות גנומית ברמת הנוקלאוטידים הבודדים: רצפים חוזרים בגנום – שלשות חוזרות: מחלות נלוות ומנגנון השינוי במספר החזרות",
+     "טרנספוזונים: טרנספוזון פשוט ומורכב; טרנספוזונים בחיידקים ובאאוקריוטים; טרנספוזונים ביונקים; מנגנוני יצירה ותנועת טרנספוזונים; כיצד משפיעים טרנספוזונים על יציבות הגנום וזיקנה",
+     "יציבות גנומית ברמת הכרומוזום: ארגון מחדש של הגנום – מיפוי כרומוזומלי, קריוטיפ",
+     "חסרים (deletion); מיפוי על ידי חסרים",
+     "הפכים (inversion): paracentric inversion ו-pericentric inversion – מנגנון ותוצאה, השפעה על פוריות ומיוזה",
      "הכפלת קטעים בגנום",
-     "טרנסלוקציות מנגנון יצירה והשפעה",
-     "מיוזה של כרומוזומים עם טרנסלוקציה -מנגנון ותוצאה",
-     "טריזומיות-",
-     "מנגנון יצירה ומחלות קשורות",
-     "אנאפלואידיות-",
-     "פוליפלואידיות ,מונופלואידיות ,תסמונת טרנר ותסמונת קליינפלטר",
-     "השתקת כרומוזום X",
-     "מנגנון והשפעה",
-     "תורשה חוץ גרעינית:",
-     "תורשה אמהית -מיטוכונדריה ,כלורופלאסט ,מנגנון הורשה ומחלות נילוות",
-     "השפעה אמהית ,מנגנון הורשה והשפעה על התפתחות",
-     "הפלוטיפים",
-     "החתמה גנומית:",
-     "מנגנון ןמחלות נילוות",
-     "גנטיקה של אוכלוסיות:",
-     "תדירות אללים באוכלוסיה",
-     "תדירות גנוטיפים באוכלוסיה",
-     "חוק הרדי ויינברג",
-     "שיווי משקל גנטי",
-     "תיקון DNAעל קצה המזלג :",
-     "רקומבינציה ורקומבינציה מיוטית",
-     "מבוא לאפיגנטיקה :",
-     "מהי אפיגנטיקה,",
-     "מתילציה",
-     "מודיפיקציות על גבי היסטונים"
+     "טרנסלוקציות – מנגנון יצירה והשפעה; מיוזה של כרומוזומים עם טרנסלוקציה - מנגנון ותוצאה",
+     "טריזומיות - מנגנון יצירה ומחלות קשורות",
+     "אנאפלואידיות - פוליפלואידיות, מונופלואידיות, תסמונת טרנר ותסמונת קליינפלטר",
+     "השתקת כרומוזום X - מנגנון והשפעה",
+     "תורשה חוץ גרעינית: תורשה אמהית - מיטוכונדריה, כלורופלאסט, מנגנון הורשה ומחלות נילוות; השפעה אמהית, מנגנון הורשה והשפעה על התפתחות; הפלוטיפים",
+     "החתמה גנומית: מנגנון ומחלות נילוות",
+     "גנטיקה של אוכלוסיות: תדירות אללים באוכלוסיה; תדירות גנוטיפים באוכלוסיה; חוק הרדי ויינברג; שיווי משקל גנטי",
+     "תיקון DNA על קצה המזלג: רקומבינציה ורקומבינציה מיוטית",
+     "מבוא לאפיגנטיקה: מהי אפיגנטיקה, מתילציה, מודיפיקציות על גבי היסטונים"
     ]
    }
   ],
   "notTaughtHe": [
-   "סריקה גנטית לזיהוי גנים סופרסורים",
-   "לתאליות סינתטית",
-   "Expressivity",
-   "ההיסטוריה שמאחורי גנטיקה של סכיזופרניה והתמכרות",
-   "פתרון בכיתה של תרגילים ושאלות מהבחינות",
-   "Genetic mapping:",
-   "Mapping in eukaryotes using ordered tetrads.",
-   "Genetic mapping in prokaryotes:",
-   "Transformation and transduction",
-   "Molecular genetics:",
-   "The experiments proving that DNA (and not proteins) is the genetic material.",
-   "Mutagens and their mechanism of action."
+   "שיעורים 1–7: סריקה גנטית לזיהוי גנים סופרסורים; לתאליות סינתטית; Expressivity; ההיסטוריה שמאחורי גנטיקה של סכיזופרניה והתמכרות; פתרון בכיתה של תרגילים ושאלות מהבחינות",
+   "שיעורים 7–14: Mapping in eukaryotes using ordered tetrads; Transformation and transduction; the experiments proving that DNA (and not proteins) is the genetic material; mutagens and their mechanism of action",
+   "שיעורים 14–20: קביעת המין; אנאפלואידיות בצמחים; נדידת אללים; תיקון DNA מורחב; פתרון בכיתה של בעיות ממבחנים"
   ],
   "books": [
    "An Introduction to Genetic Analysis -12th Edition,, Griffiths, A.J.F., Wessler, S.R., Carroll,",
    "S.B., Doebley, J."
   ],
   "assessmentHe": [
-   "15%אחוז הגשת תרגולים 85%בחינה"
+   "15% הגשת תרגולים",
+   "85% בחינה"
   ],
+  "sessionLabelHe": "שיעורים",
+  "manual": {
+   "readAt": "2026-11-11",
+   "noteHe": "במסמך גם \"נושאים שצומצמו\": מיטוזה ומיוזה למינימום ההכרחי; ההסברים על המנגנונים המולקולריים של שחלוף; יציבות גנומית למינימום ההכרחי. \"סריקה גנטית לזיהוי גנים סופרסורים\" מופיע במסמך גם ברשימת הנושאים וגם ב\"לא ילמדו השנה\". הרשימה השלישית של \"לא ילמד\" לא חולצה אוטומטית והושלמה מהקריאה."
+  },
   "evidence": {
    "textFile": "content/syllabi/text/biu-genetics.txt",
    "sha256": "26ed2209e276425f98db77a226dfabc04bffd08f045063a612d140500de0fc84",
@@ -1775,56 +1734,98 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "code": "80203",
   "nameHe": "מיקרוביולוגיה כללית",
   "year": 2023,
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "biu-pdf",
   "sourceUrl": "https://life-sciences.biu.ac.il/sites/life-sciences/files/shared/Med%20Mechina/Sylabi23/80-203-%D7%9E%D7%99%D7%A7%D7%A8%D7%95%D7%91%D7%99%D7%95%D7%9C%D7%95%D7%92%D7%99%D7%94-%D7%9B%D7%9C%D7%9C%D7%99%D7%AA.pdf",
-  "level": "topics",
-  "contentHe": "Last updated: December Basic Microbiology\n15, 2023\n8020301, 8020310, 8020330\nProf. Ehud Banin and Dr. Lior\nLobel\n[email] [email]\nAcademic year: 2023-2024 Semester: B Hours/credits: 2 hours lecture / 1\ncredit Mandatory\nPrerequisites: None\nYear in program & how often given, if relevant: 2nd year undergraduates course given\nonce a year\nCourse Overview – Short abstract: Introduction to basic aspects of microbiology\nrelated to physiology and its impact on health and disease.\nLearning outcomes – The course aims to provide the students with a basic\nunderstanding of the major physiological traits of microorganisms and their\nimpact on our environment and health.\nAssessment: Coursework and Grade structure: 100% exam. Students must\nget 60 or more in the final exam to pass the course.\nWeek-by-week content, assignments, and reading\nLesson # Subject\nThe structure of the prokaryotic cell in\ncomparison to eukaryotic cells. Bacterial\ngrowth, parameters, measuring methods,\ngrowth in extreme environments\n2 The bacterial cell wall biosynthesis and the\ncomposition of Gram+/- cell walls. Bacterial\ninclusions (gas vesicles, carbon storage),\nBacteria motility, flagella pili, chemotaxis\n3 Bacterial nutrition anabolism and catabolism,\nfermentation, respiration.\n4 Carbon, Nitrogen, Sulfate cycles, microbial mats\n5 Antimicrobials, Antibiotics and Antibiotic\nresistance\n6 Bacterial gene regulation, repression,\ninduction, global regulation, two-component\nsystems\n7 Bacterial genetic programs - Sporulation,\nstringent response and\nSOS repair\n8 Bacterial genetics-transformation,",
+  "level": "lectures",
+  "contentHe": "שיעור 1: The structure of the prokaryotic cell in comparison to eukaryotic cells; Bacterial growth, parameters, measuring methods, growth in extreme environments\nשיעור 2: The bacterial cell wall biosynthesis and the composition of Gram+/- cell walls; Bacterial inclusions (gas vesicles, carbon storage); Bacteria motility, flagella pili, chemotaxis\nשיעור 3: Bacterial nutrition anabolism and catabolism, fermentation, respiration\nשיעור 4: Carbon, Nitrogen, Sulfate cycles, microbial mats\nשיעור 5: Antimicrobials, Antibiotics and Antibiotic resistance\nשיעור 6: Bacterial gene regulation, repression, induction, global regulation, two-component systems\nשיעור 7: Bacterial genetic programs - Sporulation, stringent response and SOS repair\nשיעור 8: Bacterial genetics - transformation, transduction, conjugation, plasmids\nשיעור 9: Bacterial immunity – Restriction enzymes, abortive infection, CBASS, CRISPR\nשיעור 10: Bacterial virulence and Host-Microbiome interactions",
   "topicsHe": [
-   "Last updated: December Basic Microbiology",
-   "15, 2023",
-   "8020301, 8020310, 8020330",
-   "Prof. Ehud Banin and Dr. Lior",
-   "Lobel",
-   "[email] [email]",
-   "Academic year: 2023-2024 Semester: B Hours/credits: 2 hours lecture / 1",
-   "credit Mandatory",
-   "Prerequisites: None",
-   "Year in program & how often given, if relevant: 2nd year undergraduates course given",
-   "once a year",
-   "Course Overview – Short abstract: Introduction to basic aspects of microbiology",
-   "related to physiology and its impact on health and disease.",
-   "Learning outcomes – The course aims to provide the students with a basic",
-   "understanding of the major physiological traits of microorganisms and their",
-   "impact on our environment and health.",
-   "Assessment: Coursework and Grade structure: 100% exam. Students must",
-   "get 60 or more in the final exam to pass the course.",
-   "Week-by-week content, assignments, and reading",
-   "Lesson # Subject",
-   "The structure of the prokaryotic cell in",
-   "comparison to eukaryotic cells. Bacterial",
-   "growth, parameters, measuring methods,",
-   "growth in extreme environments",
-   "2 The bacterial cell wall biosynthesis and the",
-   "composition of Gram+/- cell walls. Bacterial",
-   "inclusions (gas vesicles, carbon storage),",
+   "The structure of the prokaryotic cell in comparison to eukaryotic cells",
+   "Bacterial growth, parameters, measuring methods, growth in extreme environments",
+   "The bacterial cell wall biosynthesis and the composition of Gram+/- cell walls",
+   "Bacterial inclusions (gas vesicles, carbon storage)",
    "Bacteria motility, flagella pili, chemotaxis",
-   "3 Bacterial nutrition anabolism and catabolism,",
-   "fermentation, respiration.",
-   "4 Carbon, Nitrogen, Sulfate cycles, microbial mats",
-   "5 Antimicrobials, Antibiotics and Antibiotic",
-   "resistance",
-   "6 Bacterial gene regulation, repression,",
-   "induction, global regulation, two-component",
-   "systems",
-   "7 Bacterial genetic programs - Sporulation,",
-   "stringent response and",
-   "SOS repair",
-   "8 Bacterial genetics-transformation,"
+   "Bacterial nutrition anabolism and catabolism, fermentation, respiration",
+   "Carbon, Nitrogen, Sulfate cycles, microbial mats",
+   "Antimicrobials, Antibiotics and Antibiotic resistance",
+   "Bacterial gene regulation, repression, induction, global regulation, two-component systems",
+   "Bacterial genetic programs - Sporulation, stringent response and SOS repair",
+   "Bacterial genetics - transformation, transduction, conjugation, plasmids",
+   "Bacterial immunity – Restriction enzymes, abortive infection, CBASS, CRISPR",
+   "Bacterial virulence and Host-Microbiome interactions"
+  ],
+  "sessions": [
+   {
+    "lectures": "1",
+    "topicsHe": [
+     "The structure of the prokaryotic cell in comparison to eukaryotic cells",
+     "Bacterial growth, parameters, measuring methods, growth in extreme environments"
+    ]
+   },
+   {
+    "lectures": "2",
+    "topicsHe": [
+     "The bacterial cell wall biosynthesis and the composition of Gram+/- cell walls",
+     "Bacterial inclusions (gas vesicles, carbon storage)",
+     "Bacteria motility, flagella pili, chemotaxis"
+    ]
+   },
+   {
+    "lectures": "3",
+    "topicsHe": [
+     "Bacterial nutrition anabolism and catabolism, fermentation, respiration"
+    ]
+   },
+   {
+    "lectures": "4",
+    "topicsHe": [
+     "Carbon, Nitrogen, Sulfate cycles, microbial mats"
+    ]
+   },
+   {
+    "lectures": "5",
+    "topicsHe": [
+     "Antimicrobials, Antibiotics and Antibiotic resistance"
+    ]
+   },
+   {
+    "lectures": "6",
+    "topicsHe": [
+     "Bacterial gene regulation, repression, induction, global regulation, two-component systems"
+    ]
+   },
+   {
+    "lectures": "7",
+    "topicsHe": [
+     "Bacterial genetic programs - Sporulation, stringent response and SOS repair"
+    ]
+   },
+   {
+    "lectures": "8",
+    "topicsHe": [
+     "Bacterial genetics - transformation, transduction, conjugation, plasmids"
+    ]
+   },
+   {
+    "lectures": "9",
+    "topicsHe": [
+     "Bacterial immunity – Restriction enzymes, abortive infection, CBASS, CRISPR"
+    ]
+   },
+   {
+    "lectures": "10",
+    "topicsHe": [
+     "Bacterial virulence and Host-Microbiome interactions"
+    ]
+   }
   ],
   "assessmentHe": [
-   "Assessment: Coursework and Grade structure: 100% exam. Students must"
+   "100% exam. Students must get 60 or more in the final exam to pass the course."
   ],
+  "manual": {
+   "readAt": "2026-11-11",
+   "noteHe": "Basic Microbiology 80203, שנת 2023-2024 סמסטר ב', עודכן 15.12.2023. ספר: Brock Biology of Microorganisms."
+  },
   "evidence": {
    "textFile": "content/syllabi/text/biu-microbiology.txt",
    "sha256": "0d6ff39b07b8709e0c6bd6bc23c646b37bc8345f990347039a9a16a3be249bfb",
@@ -1833,7 +1834,6 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
    ]
   },
   "warnings": [
-   "לא נמצאה כותרת נושאים במסמך — הנושאים המוצגים הם פתיחת המסמך; לקרוא את קובץ הטקסט",
    "הסילבוס החדש ביותר באתר הפקולטה הוא משנת 2023",
    "המקור לא מציין ספרים"
   ]
@@ -1844,7 +1844,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "code": "80242",
   "nameHe": "מולקולרית",
   "year": 2025,
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "biu-pdf",
   "sourceUrl": "https://life-sciences.biu.ac.il/sites/life-sciences/files/shared/Med%20Mechina/Sylabi25/%D7%A1%D7%99%D7%9C%D7%91%D7%95%D7%A1-%D7%92%D7%A8%D7%A1%D7%94-%D7%97%D7%93%D7%A9%D7%94-2025-%D7%9E%D7%95%D7%9C%D7%A7%D7%95%D7%9C%D7%A8%D7%99%D7%AA-242-30.pdf",
   "level": "lectures",
@@ -2013,7 +2013,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "code": "80377",
   "nameHe": "ביולוגיה מולקולרית והנדסה גנטית ב",
   "year": 2024,
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "biu-pdf",
   "sourceUrl": "https://life-sciences.biu.ac.il/sites/life-sciences/files/shared/Med%20Mechina/Sylabi24/80-377-30%D7%91%D7%99%D7%95%D7%9C%D7%95%D7%92%D7%99%D7%94-%D7%9E%D7%95%D7%9C%D7%A7%D7%95%D7%9C%D7%A8%D7%99%D7%AA-%D7%95%D7%94%D7%A0%D7%93%D7%A1%D7%94-%D7%92%D7%A0%D7%98%D7%99%D7%AA-%D7%91_0.pdf",
   "level": "lectures",
@@ -2119,7 +2119,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "code": "80214",
   "nameHe": "פיזיולוגיה של מערכות",
   "year": 2025,
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "biu-pdf",
   "sourceUrl": "https://life-sciences.biu.ac.il/sites/life-sciences/files/shared/Med%20Mechina/Sylabi25/%D7%A1%D7%99%D7%9C%D7%91%D7%95%D7%A1-%D7%A4%D7%99%D7%96%D7%99%D7%95%D7%9C%D7%95%D7%92%D7%99%D7%94-%D7%A9%D7%9C-%D7%9E%D7%A2%D7%A8%D7%9B%D7%95%D7%AA-80214-%D7%AA%D7%A9%D7%A4%D7%94.pdf",
   "level": "lectures",
@@ -2282,7 +2282,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "code": "80204",
   "nameHe": "מבוא לוירולוגיה",
   "year": 2023,
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "biu-pdf",
   "sourceUrl": "https://life-sciences.biu.ac.il/sites/life-sciences/files/shared/Med%20Mechina/Sylabi23/80204-%D7%9E%D7%91%D7%95%D7%90-%D7%9C%D7%95%D7%99%D7%A8%D7%95%D7%9C%D7%95%D7%92%D7%99%D7%94.pdf",
   "level": "lectures",
@@ -2393,7 +2393,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "university": "haifa",
   "code": "ביוכימיה א",
   "nameHe": "ביוכימיה א׳",
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "haifa-pdf",
   "sourceUrl": "https://biology.haifa.ac.il/wp-content/uploads/2021/03/%D7%A1%D7%99%D7%9C%D7%91%D7%95%D7%A1-%D7%91%D7%99%D7%95%D7%9B%D7%99%D7%9E%D7%99%D7%94-%D7%90.pdf",
   "updatedHe": "הסילבוס הועלה לאתר ב-03/2021",
@@ -2412,11 +2412,19 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
    "Lab: Protein separation",
    "guest lecturer: Application of biochemistry in medical laboratories"
   ],
-  "assessmentHe": [
-   "פעילויות נוספות במהלך השיעור .הגשת מטלות שבועיות בהתאם ללוח הזמנים שיפורסם .חובת הגשת 80%",
-   "ב .סטודנט שלא ישלים 80%מהנוכחות בתרגולים וגם מהגשות התרגול יאבד 5נקודות מהציון הסופי בקורס",
-   "מעבדה20% , בחינה80% :הרכב הציון הסופי"
+  "books": [
+   "Biochemistry — Berg, Tymoczko and Stryer, 6th Edition",
+   "Molecular Biology of the Cell, 4th Edition — Alberts et al.",
+   "Principles of Biochemistry, 4th Edition — Lehninger"
   ],
+  "assessmentHe": [
+   "80% בחינה, 20% מעבדה",
+   "חובת הגשת 80% מתרגילי הבית; מי שלא ישלים 80% נוכחות בתרגולים והגשות יאבד 5 נקודות מהציון הסופי"
+  ],
+  "manual": {
+   "readAt": "2026-11-11",
+   "noteHe": "11 הנושאים שחולצו (\"סילבוס כללי\") זהים למסמך; זו רשימת נושאים ממוספרת, לא טבלת שיעורים. בנושא 4 המסמך מעיר: \"איחוד של שני שיעורים\"."
+  },
   "evidence": {
    "textFile": "content/syllabi/text/haifa-biochem-a.txt",
    "sha256": "ebc91c42036315d4c6cdbb32f5a509a8b49591d58d49a6d74df0f61a7af9cb35",
@@ -2425,8 +2433,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
    ]
   },
   "warnings": [
-   "הסילבוס הועלה לאתר החוג ב-2021 ולא הוחלף מאז",
-   "המקור לא מציין ספרים"
+   "הסילבוס הועלה לאתר החוג ב-2021 ולא הוחלף מאז"
   ]
  },
  "haifa-biochem-b": {
@@ -2434,7 +2441,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "university": "haifa",
   "code": "ביוכימיה ב",
   "nameHe": "ביוכימיה ב׳",
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "haifa-pdf",
   "sourceUrl": "https://biology.haifa.ac.il/wp-content/uploads/2021/03/%D7%A1%D7%99%D7%9C%D7%91%D7%95%D7%A1-%D7%91%D7%99%D7%95%D7%9B%D7%99%D7%9E%D7%99%D7%94-%D7%91.pdf",
   "updatedHe": "הסילבוס הועלה לאתר ב-03/2021",
@@ -2454,9 +2461,19 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
    "The integration of Metabolism",
    "summary"
   ],
-  "assessmentHe": [
-   "סטודנט שלא ישלים 80%מהנוכחות בתרגולים וגם מהגשות התרגול יאבד 5נקודות מהציון הסופי בקורס"
+  "books": [
+   "Biochemistry — Berg, Tymoczko and Stryer, 6th Edition",
+   "Molecular Biology of the Cell, 4th Edition — Alberts et al.",
+   "Principles of Biochemistry, 4th Edition — Lehninger"
   ],
+  "assessmentHe": [
+   "ציון הבחינה (הקובע הוא הציון במבחן האחרון, ולא הגבוה מבין השניים)",
+   "נוכחות חובה בתרגולים; מי שלא ישלים 80% נוכחות והגשות יאבד 5 נקודות מהציון הסופי"
+  ],
+  "manual": {
+   "readAt": "2026-11-11",
+   "noteHe": "12 הנושאים שחולצו (\"סילבוס כללי\") זהים למסמך; רשימת נושאים ממוספרת, לא טבלת שיעורים."
+  },
   "evidence": {
    "textFile": "content/syllabi/text/haifa-biochem-b.txt",
    "sha256": "c50b8fe108313de25bf1d1aeb34b7bb0d668a7242fbffb79e438152e000abb77",
@@ -2465,8 +2482,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
    ]
   },
   "warnings": [
-   "הסילבוס הועלה לאתר החוג ב-2021 ולא הוחלף מאז",
-   "המקור לא מציין ספרים"
+   "הסילבוס הועלה לאתר החוג ב-2021 ולא הוחלף מאז"
   ]
  },
  "haifa-cell-b": {
@@ -2474,38 +2490,37 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "university": "haifa",
   "code": "ביולוגיה של התא ב",
   "nameHe": "ביולוגיה של התא ב’",
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "haifa-pdf",
   "sourceUrl": "https://biology.haifa.ac.il/wp-content/uploads/2021/03/%D7%91%D7%99%D7%95%D7%9C%D7%95%D7%92%D7%99%D7%94-%D7%A9%D7%9C-%D7%94%D7%AA%D7%90.pdf",
   "updatedHe": "הסילבוס הועלה לאתר ב-03/2021",
   "level": "topics",
-  "contentHe": ".1מאפייני התא החי – שוני ודמיון בין תאים.\n.2ציוני דרך בביולוגיה של התא.\n.3מבנה התא – מוצא ,אברונים ,גנומים ואבולוציה.\n.4שכפול דנ\"א ומנגנוני תיקון.\n.5מדנ\"א לחלבונים – כיצד התאים מתרגמים את הגנום.\n.6ממברנת התא -מבנה ותפקוד.\n.7הובלת חומרים דרך ממברנת התא.\n.8מידור תוך תאי והובלה בין אברונים תוך תאיים.\n.9יצירת אנרגיה במיטוכונדריה ובכלורופלסט.\n.10שלד התא.\n.11מחזור התא ,חלוקת התא ,הזדקנות ומוות תאי.\n.12תקשורת תוך ובין-תאית.\nרשימת קריאה של הקורס:\n*Essential cell biology 5th edition- Alberts, Hopkin, Johnson, Morgan, Raff,\nRoberts, Walter.\nMolecular biology of the cell 5th Edition- Alberts, Johnson, Lewis, Raff,\nRoberts, Walter.\n*חובה",
+  "contentHe": "מאפייני התא החי – שוני ודמיון בין תאים\nציוני דרך בביולוגיה של התא\nמבנה התא – מוצא, אברונים, גנומים ואבולוציה\nשכפול דנ\"א ומנגנוני תיקון\nמדנ\"א לחלבונים – כיצד התאים מתרגמים את הגנום\nממברנת התא - מבנה ותפקוד\nהובלת חומרים דרך ממברנת התא\nמידור תוך תאי והובלה בין אברונים תוך תאיים\nיצירת אנרגיה במיטוכונדריה ובכלורופלסט\nשלד התא\nמחזור התא, חלוקת התא, הזדקנות ומוות תאי\nתקשורת תוך ובין-תאית",
   "topicsHe": [
-   "מאפייני התא החי – שוני ודמיון בין תאים.",
-   "ציוני דרך בביולוגיה של התא.",
-   "מבנה התא – מוצא ,אברונים ,גנומים ואבולוציה.",
-   "שכפול דנ\"א ומנגנוני תיקון.",
-   "מדנ\"א לחלבונים – כיצד התאים מתרגמים את הגנום.",
-   "ממברנת התא -מבנה ותפקוד.",
-   "הובלת חומרים דרך ממברנת התא.",
-   "מידור תוך תאי והובלה בין אברונים תוך תאיים.",
-   "יצירת אנרגיה במיטוכונדריה ובכלורופלסט.",
-   "שלד התא.",
-   "מחזור התא ,חלוקת התא ,הזדקנות ומוות תאי.",
-   "תקשורת תוך ובין-תאית.",
-   "רשימת קריאה של הקורס:",
-   "Essential cell biology 5th edition- Alberts, Hopkin, Johnson, Morgan, Raff,",
-   "Roberts, Walter.",
-   "Molecular biology of the cell 5th Edition- Alberts, Johnson, Lewis, Raff,",
-   "Roberts, Walter.",
-   "חובה"
+   "מאפייני התא החי – שוני ודמיון בין תאים",
+   "ציוני דרך בביולוגיה של התא",
+   "מבנה התא – מוצא, אברונים, גנומים ואבולוציה",
+   "שכפול דנ\"א ומנגנוני תיקון",
+   "מדנ\"א לחלבונים – כיצד התאים מתרגמים את הגנום",
+   "ממברנת התא - מבנה ותפקוד",
+   "הובלת חומרים דרך ממברנת התא",
+   "מידור תוך תאי והובלה בין אברונים תוך תאיים",
+   "יצירת אנרגיה במיטוכונדריה ובכלורופלסט",
+   "שלד התא",
+   "מחזור התא, חלוקת התא, הזדקנות ומוות תאי",
+   "תקשורת תוך ובין-תאית"
   ],
   "books": [
-   "Essential cell biology 5th edition- Alberts, Hopkin, Johnson, Morgan, Raff,",
-   "Roberts, Walter.",
-   "Molecular biology of the cell 5th Edition- Alberts, Johnson, Lewis, Raff,",
-   "Roberts, Walter."
+   "Essential Cell Biology, 5th edition — Alberts, Hopkin, Johnson, Morgan, Raff, Roberts, Walter (חובה)",
+   "Molecular Biology of the Cell, 5th edition — Alberts, Johnson, Lewis, Raff, Roberts, Walter"
   ],
+  "assessmentHe": [
+   "מבחן סופי"
+  ],
+  "manual": {
+   "readAt": "2026-11-11",
+   "noteHe": "רשימה ממוספרת של 12 נושאים (\"סילבוס, נושאי הקורס\") — לא טבלת שיעורים. המסמך קורא לקורס \"ביולוגיה של התא\", סמסטר ב'."
+  },
   "evidence": {
    "textFile": "content/syllabi/text/haifa-cell-b.txt",
    "sha256": "ec55091e5a6660585a4c985f6aa658b849763e5277fd44a9aacd294de1cab32d",
@@ -2514,8 +2529,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
    ]
   },
   "warnings": [
-   "הסילבוס הועלה לאתר החוג ב-2021 ולא הוחלף מאז",
-   "המקור לא מציין הרכב ציון"
+   "הסילבוס הועלה לאתר החוג ב-2021 ולא הוחלף מאז"
   ]
  },
  "haifa-ecology-evolution": {
@@ -2523,29 +2537,32 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "university": "haifa",
   "code": "מבוא לאקולוגיה ואבולוציה",
   "nameHe": "מבוא לאקולוגיה ואבולוציה",
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "haifa-pdf",
   "sourceUrl": "https://biology.haifa.ac.il/wp-content/uploads/2021/03/%D7%9E%D7%91%D7%95%D7%90-%D7%9C%D7%90%D7%A7%D7%95%D7%9C%D7%95%D7%92%D7%99%D7%94-%D7%95%D7%90%D7%91%D7%95%D7%9C%D7%95%D7%A6%D7%99%D7%94.pdf",
   "updatedHe": "הסילבוס הועלה לאתר ב-03/2021",
   "level": "topics",
-  "contentHe": "מטרת הקורס להקנות בסיס רחב בתחומי האקולוגיה ,האבולוציה והקשר\nביניהן .נסקור מושגי יסוד באקולוגיה כגון :מדרג אקולוגי ,כושר נשיאה ,מגוון\nאקולוגי ,מארג מזון (צמחים ,אוכלי עשב ,טורפים) ,מחזור המים ,הפחמן\nוהחנקן ,רביה וכשירות ,היסטורית חיים ,דינמיקה של אוכלוסיות .מכאן נמשיך\nעם יסודות האבולוציה :שונות באוכלוסיה ,גנטיקה של אוכלוסיות ,מהו מין\nביולוגי? עץ החיים ,יחסי גנוטיפ-פנוטיפ ,ברירה טבעית ,סחיפה גנטית ,שחזור\nעצים פילוגנטיים מרצפי דנ״א.\nמטרות הקורס:\nלהקנות בסיס רחב בתחומי האקולוגיה ,האבולוציה והקשר ביניהן.\nמבנה הקורס:\nשיעורים",
+  "contentHe": "מושגי יסוד באקולוגיה: מדרג אקולוגי, כושר נשיאה, מגוון אקולוגי\nמארג מזון (צמחים, אוכלי עשב, טורפים)\nמחזור המים, הפחמן והחנקן\nרביה וכשירות, היסטורית חיים\nדינמיקה של אוכלוסיות\nיסודות האבולוציה: שונות באוכלוסיה, גנטיקה של אוכלוסיות\nמהו מין ביולוגי? עץ החיים\nיחסי גנוטיפ-פנוטיפ\nברירה טבעית, סחיפה גנטית\nשחזור עצים פילוגנטיים מרצפי דנ״א",
   "topicsHe": [
-   "מטרת הקורס להקנות בסיס רחב בתחומי האקולוגיה ,האבולוציה והקשר",
-   "ביניהן .נסקור מושגי יסוד באקולוגיה כגון :מדרג אקולוגי ,כושר נשיאה ,מגוון",
-   "אקולוגי ,מארג מזון (צמחים ,אוכלי עשב ,טורפים) ,מחזור המים ,הפחמן",
-   "והחנקן ,רביה וכשירות ,היסטורית חיים ,דינמיקה של אוכלוסיות .מכאן נמשיך",
-   "עם יסודות האבולוציה :שונות באוכלוסיה ,גנטיקה של אוכלוסיות ,מהו מין",
-   "ביולוגי? עץ החיים ,יחסי גנוטיפ-פנוטיפ ,ברירה טבעית ,סחיפה גנטית ,שחזור",
-   "עצים פילוגנטיים מרצפי דנ״א.",
-   "מטרות הקורס:",
-   "להקנות בסיס רחב בתחומי האקולוגיה ,האבולוציה והקשר ביניהן.",
-   "מבנה הקורס:",
-   "שיעורים"
+   "מושגי יסוד באקולוגיה: מדרג אקולוגי, כושר נשיאה, מגוון אקולוגי",
+   "מארג מזון (צמחים, אוכלי עשב, טורפים)",
+   "מחזור המים, הפחמן והחנקן",
+   "רביה וכשירות, היסטורית חיים",
+   "דינמיקה של אוכלוסיות",
+   "יסודות האבולוציה: שונות באוכלוסיה, גנטיקה של אוכלוסיות",
+   "מהו מין ביולוגי? עץ החיים",
+   "יחסי גנוטיפ-פנוטיפ",
+   "ברירה טבעית, סחיפה גנטית",
+   "שחזור עצים פילוגנטיים מרצפי דנ״א"
   ],
   "books": [
-   "Ecology / William D. Bowman, Sally D. Hacker, and Michael L.",
-   "Evolutionary Analysis / Jon C. Herron, Scott Freeman"
+   "Ecology — William D. Bowman, Sally D. Hacker, Michael L. Cain",
+   "Evolutionary Analysis — Jon C. Herron, Scott Freeman"
   ],
+  "manual": {
+   "readAt": "2026-11-11",
+   "noteHe": "במסמך פסקת \"נושאי הקורס\" אחת (2 ש\"ש, 2 נ\"ז); הנושאים כאן הם הפסקה מחולקת לפי הסדר שלה. אין במסמך הרכב ציון ואין טבלת שיעורים."
+  },
   "evidence": {
    "textFile": "content/syllabi/text/haifa-ecology-evolution.txt",
    "sha256": "648ac70f7af9a00cefaf319f0ac52f01af093ef0cad1fc27763d37005d57c541",
@@ -2563,20 +2580,20 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "university": "haifa",
   "code": "גנטיקה כללית",
   "nameHe": "גנטיקה כללית",
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "haifa-pdf",
   "sourceUrl": "https://biology.haifa.ac.il/wp-content/uploads/2021/03/%D7%92%D7%A0%D7%98%D7%99%D7%A7%D7%94-%D7%9B%D7%9C%D7%9C%D7%99%D7%AA.pdf",
   "updatedHe": "הסילבוס הועלה לאתר ב-03/2021",
   "level": "topics",
-  "contentHe": "DNA כחומר התורשתי ,מבנה ה ,DNA -הכפלת ה DNA -וחלוקת התא ,התיאוריה הכרומוסומלית של\nההורשה ,מהות הגן ,הבקרה על התבטאות הגן ,תרגום ה RNA -השליח לחלבון ,חוקי מנדל ,רקומבינציה\nומיפוי גנטי ,מוטציות בגנים והקוד הגנטי ,מחלות גנטיות אצל האדם ,גנטיקה ומחלת הסרטן ,חישובי\nהסתברות בייעוץ גנטי ,מבוא לגנטיקה של אוכלוסיות.\nהמעבדה תתמקד בהפקת PCR ,DNA וגילוי מוטציות באמצעות אנזימי רסטריקציה ,תאחיזה למין\nורקומבינציה בזבובים.",
+  "contentHe": "DNA כחומר התורשתי\nמבנה ה-DNA\nהכפלת ה-DNA וחלוקת התא\nהתיאוריה הכרומוסומלית של ההורשה\nמהות הגן\nהבקרה על התבטאות הגן\nתרגום ה-RNA השליח לחלבון\nחוקי מנדל\nרקומבינציה ומיפוי גנטי\nמוטציות בגנים והקוד הגנטי\nמחלות גנטיות אצל האדם\nגנטיקה ומחלת הסרטן\nחישובי הסתברות בייעוץ גנטי\nמבוא לגנטיקה של אוכלוסיות\nהמעבדה: הפקת DNA, PCR וגילוי מוטציות באמצעות אנזימי רסטריקציה, תאחיזה למין ורקומבינציה בזבובים",
   "topicsHe": [
    "DNA כחומר התורשתי",
-   "מבנה ה",
-   "DNA -הכפלת ה DNA -וחלוקת התא",
+   "מבנה ה-DNA",
+   "הכפלת ה-DNA וחלוקת התא",
    "התיאוריה הכרומוסומלית של ההורשה",
    "מהות הגן",
    "הבקרה על התבטאות הגן",
-   "תרגום ה RNA -השליח לחלבון",
+   "תרגום ה-RNA השליח לחלבון",
    "חוקי מנדל",
    "רקומבינציה ומיפוי גנטי",
    "מוטציות בגנים והקוד הגנטי",
@@ -2584,19 +2601,23 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
    "גנטיקה ומחלת הסרטן",
    "חישובי הסתברות בייעוץ גנטי",
    "מבוא לגנטיקה של אוכלוסיות",
-   "המעבדה תתמקד בהפקת PCR",
-   "DNA וגילוי מוטציות באמצעות אנזימי רסטריקציה",
-   "תאחיזה למין ורקומבינציה בזבובים."
+   "המעבדה: הפקת DNA, PCR וגילוי מוטציות באמצעות אנזימי רסטריקציה, תאחיזה למין ורקומבינציה בזבובים"
   ],
   "books": [
    "Benjamin Lewin 2014, Genes XI, Oxford University Press.",
    "Peter J. Russell, Genetics, a Molecular Approach, 3rd Edition, 2011."
   ],
   "assessmentHe": [
-   "דו\"חות מעבדה ( + )20%בחנים ( + )5%השתתפות במעבדה (.30% = )5%",
-   "פרוייקט.10% :",
-   "בחינה סופית.60% :"
+   "דו\"חות מעבדה (20%) + בחנים (5%) + השתתפות במעבדה (5%) = 30%",
+   "פרוייקט: 10% (שאלת מחקר עם רציונל ושיטות)",
+   "בחינה סופית: 60%",
+   "תרגילים: הגשה חובה, בלי בדיקה; אי הגשה מורידה 2 נק' מהציון הסופי לכל תרגיל",
+   "בחני מעבדה – חובה לקבל ציון עובר; נוכחות במעבדות חובה"
   ],
+  "manual": {
+   "readAt": "2026-11-11",
+   "noteHe": "במסמך אין טבלת שיעורים — רק פסקת \"תוכן הקורס\". 3 שעות הרצאה + 3 שעות מעבדה; קורס חובה שנה ב'."
+  },
   "evidence": {
    "textFile": "content/syllabi/text/haifa-genetics.txt",
    "sha256": "8f3c2f2bfa90c0c2d732e81e04d25c4dc51820303da93de875431f428c99dc66",
@@ -2613,48 +2634,30 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "university": "haifa",
   "code": "מיקרוביולוגיה כללית",
   "nameHe": "מיקרוביולוגיה כללית",
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "haifa-pdf",
   "sourceUrl": "https://biology.haifa.ac.il/wp-content/uploads/2021/03/%D7%9E%D7%99%D7%A7%D7%A8%D7%95%D7%91%D7%99%D7%95%D7%9C%D7%95%D7%92%D7%99%D7%94.pdf",
   "updatedHe": "הסילבוס הועלה לאתר ב-03/2021",
   "level": "topics",
-  "contentHe": "Name of course: Microbiology\nCourse number: 223.200301\nPoints: 6\nLecturers: Dr. Laura Steindler and Dr. Tal Luzzatto Knaan, Department of\nMarine Biology\nEmail contacts, Lecturers:\nDr. Laura Steindler: [email]\nDr. Tal Luzzatto Knaan: [email]\nEmail contacts TAs: will be announced\nAim of the course:\nThe course will provide students with a solid grounding in all aspects of basic\nmicrobiology. We will discuss microbes at a cellular level, learning about\nphysiological (e.g., metabolism), molecular (e.g., gene regulation),\nbiotechnological (e.g., antibiotics) and ecological (e.g., microbial interactions\nin nature) aspects.\nFrontal classes will be complemented by laboratory practical sessions that will\nenable a more in depth understanding of complex topics.\nDue to limitations of maximum participants at laboratories practices, the\nstudents will be divided in two groups, and the labs will be repeated twice, one\nfor each group. During the time a group is not doing the lab, it will receive\neither frontal demonstrations or online practice material.\nRequisites for the course:\nPrerequisite courses include basic cell biology and biochemistry classes.\nParticipation in all laboratories is mandatory.",
+  "contentHe": "Microbes at a cellular level — physiological aspects (e.g., metabolism)\nMolecular aspects (e.g., gene regulation)\nBiotechnological aspects (e.g., antibiotics)\nEcological aspects (e.g., microbial interactions in nature)\nLaboratory practical sessions; an online laboratory on bioinformatics in microbiology (16S ribosomal sequences)",
   "topicsHe": [
-   "Name of course: Microbiology",
-   "Course number: 223.200301",
-   "Points: 6",
-   "Lecturers: Dr. Laura Steindler and Dr. Tal Luzzatto Knaan, Department of",
-   "Marine Biology",
-   "Email contacts, Lecturers:",
-   "Dr. Laura Steindler: [email]",
-   "Dr. Tal Luzzatto Knaan: [email]",
-   "Email contacts TAs: will be announced",
-   "Aim of the course:",
-   "The course will provide students with a solid grounding in all aspects of basic",
-   "microbiology. We will discuss microbes at a cellular level, learning about",
-   "physiological (e.g., metabolism), molecular (e.g., gene regulation),",
-   "biotechnological (e.g., antibiotics) and ecological (e.g., microbial interactions",
-   "in nature) aspects.",
-   "Frontal classes will be complemented by laboratory practical sessions that will",
-   "enable a more in depth understanding of complex topics.",
-   "Due to limitations of maximum participants at laboratories practices, the",
-   "students will be divided in two groups, and the labs will be repeated twice, one",
-   "for each group. During the time a group is not doing the lab, it will receive",
-   "either frontal demonstrations or online practice material.",
-   "Requisites for the course:",
-   "Prerequisite courses include basic cell biology and biochemistry classes.",
-   "Participation in all laboratories is mandatory."
+   "Microbes at a cellular level — physiological aspects (e.g., metabolism)",
+   "Molecular aspects (e.g., gene regulation)",
+   "Biotechnological aspects (e.g., antibiotics)",
+   "Ecological aspects (e.g., microbial interactions in nature)",
+   "Laboratory practical sessions; an online laboratory on bioinformatics in microbiology (16S ribosomal sequences)"
   ],
   "books": [
-   "Much (but not all) of the material is found in “Brock Biology of",
-   "Microorganisms”. References to additional reading material will be provided",
-   "during the course (will be made available on moodle)."
+   "Brock Biology of Microorganisms (\"much, but not all, of the material\")"
   ],
   "assessmentHe": [
-   "The grade for these tests will comprise 20% of the laboratory grade.",
-   "Final exam: 50%",
-   "Laboratories: 50% (this grade includes laboratory tests, laboratory reports,"
+   "Final exam: 50% (multiple choice)",
+   "Laboratories: 50% (laboratory tests, laboratory reports, evaluation of the student by TAs); pre-laboratory tests are 20% of the laboratory grade"
   ],
+  "manual": {
+   "readAt": "2026-11-11",
+   "noteHe": "במסמך אין רשימת נושאים ואין טבלת שיעורים — רק פסקת מטרות (Aim of the course); הנושאים כאן הם ארבעת ההיבטים שהיא מונה. המסמך באנגלית, 6 נקודות, קורס 223.2003."
+  },
   "evidence": {
    "textFile": "content/syllabi/text/haifa-microbiology.txt",
    "sha256": "a39e25545d4a3becf4d300a55f66cce154cb4ea09a94ea3025192bff74ca6602",
@@ -2663,7 +2666,6 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
    ]
   },
   "warnings": [
-   "לא נמצאה כותרת נושאים במסמך — הנושאים המוצגים הם פתיחת המסמך; לקרוא את קובץ הטקסט",
    "הסילבוס הועלה לאתר החוג ב-2021 ולא הוחלף מאז"
   ]
  },
@@ -2672,35 +2674,37 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "university": "haifa",
   "code": "ביולוגיה מולקולארית",
   "nameHe": "ביולוגיה מולקולארית",
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "haifa-pdf",
   "sourceUrl": "https://biology.haifa.ac.il/wp-content/uploads/2021/03/%D7%A1%D7%99%D7%9C%D7%91%D7%95%D7%A1-%D7%91%D7%99%D7%95%D7%9C%D7%95%D7%92%D7%99%D7%94-%D7%9E%D7%95%D7%9C%D7%A7%D7%95%D7%9C%D7%A8%D7%99%D7%AA.pdf",
   "updatedHe": "הסילבוס הועלה לאתר ב-03/2021",
   "level": "topics",
-  "contentHe": "מוטציה ,רקומבינציה ,טרנספוזיציה ושינויים נוספים במולקולת הדנ\"א; מנגנוני\nתיקון דנ\"א; מבנה הגן; שיעתוק והבקרה על השיעתוק ,רנ\"א לסוגיו; עיבוד\nהרנ\"א השליח; תרגום לחלבון והבקרה עליו; ארגון ואינפורמציה בגנום; שיטות\nמחקר בביולוגיה מולקולארית.\nרשימה ביבליוגרפית :קריאה מומלצת –\nGenes XII by B. Lewin, Jones and Bartlett Publishers, 2017.\nסטודנטים יקרים,\nאם יש לכם לקות למידה או מוגבלות/בעיה רפואית שעשויה להשפיע על לימודיכם ,ושבגינה אתם זקוקים\nלהתאמות אנא פנן לדיקנאט הסטודנטים למדור נגישות ולקויות למידה:\nדוא\"ל >[email]<mailto:[email] טל04-8249265 :\nלאבחון והתאמות בגין לקות למידה ו/או הפרעת קשב יש לפנות ליה\"ל:\nדוא\"ל >[email]<mailto:[email] טל04-8249022 :\nסטודנטים שיש ברשותם מכתב התאמות מהאוניברסיטה וזקוקים להנגשה בקורס מוזמנים לפנות אליי\nבשעות הקבלה או במייל בסמוך לתחילת הקורס.",
+  "contentHe": "כרומטין ומבנה הכרומוזום\nדנ\"א\nשכפול והבקרה על השכפול\nמוטציה, רקומבינציה, טרנספוזיציה ושינויים נוספים במולקולת הדנ\"א\nמנגנוני תיקון דנ\"א\nמבנה הגן\nשיעתוק והבקרה על השיעתוק, רנ\"א לסוגיו\nעיבוד הרנ\"א השליח\nתרגום לחלבון והבקרה עליו\nארגון ואינפורמציה בגנום\nשיטות מחקר בביולוגיה מולקולארית",
   "topicsHe": [
-   "מוטציה ,רקומבינציה ,טרנספוזיציה ושינויים נוספים במולקולת הדנ\"א; מנגנוני",
-   "תיקון דנ\"א; מבנה הגן; שיעתוק והבקרה על השיעתוק ,רנ\"א לסוגיו; עיבוד",
-   "הרנ\"א השליח; תרגום לחלבון והבקרה עליו; ארגון ואינפורמציה בגנום; שיטות",
-   "מחקר בביולוגיה מולקולארית.",
-   "רשימה ביבליוגרפית :קריאה מומלצת –",
-   "Genes XII by B. Lewin, Jones and Bartlett Publishers, 2017.",
-   "סטודנטים יקרים,",
-   "אם יש לכם לקות למידה או מוגבלות/בעיה רפואית שעשויה להשפיע על לימודיכם ,ושבגינה אתם זקוקים",
-   "להתאמות אנא פנן לדיקנאט הסטודנטים למדור נגישות ולקויות למידה:",
-   "דוא\"ל >[email]<mailto:[email] טל04-8249265 :",
-   "לאבחון והתאמות בגין לקות למידה ו/או הפרעת קשב יש לפנות ליה\"ל:",
-   "דוא\"ל >[email]<mailto:[email] טל04-8249022 :",
-   "סטודנטים שיש ברשותם מכתב התאמות מהאוניברסיטה וזקוקים להנגשה בקורס מוזמנים לפנות אליי",
-   "בשעות הקבלה או במייל בסמוך לתחילת הקורס."
+   "כרומטין ומבנה הכרומוזום",
+   "דנ\"א",
+   "שכפול והבקרה על השכפול",
+   "מוטציה, רקומבינציה, טרנספוזיציה ושינויים נוספים במולקולת הדנ\"א",
+   "מנגנוני תיקון דנ\"א",
+   "מבנה הגן",
+   "שיעתוק והבקרה על השיעתוק, רנ\"א לסוגיו",
+   "עיבוד הרנ\"א השליח",
+   "תרגום לחלבון והבקרה עליו",
+   "ארגון ואינפורמציה בגנום",
+   "שיטות מחקר בביולוגיה מולקולארית"
   ],
   "books": [
    "Genes XII by B. Lewin, Jones and Bartlett Publishers, 2017.",
    "סטודנטים יקרים,"
   ],
   "assessmentHe": [
-   "דרישות הקורס :נוכחות חובה ( ,)80%ציון עובר בבחינה בסוף הקורס."
+   "הציון בבחינה הוא הציון בקורס; נוכחות מלאה מוסיפה 5 נקודות",
+   "נוכחות חובה (80%), ציון עובר בבחינה בסוף הקורס"
   ],
+  "manual": {
+   "readAt": "2026-11-11",
+   "noteHe": "במסמך אין טבלת שיעורים — רק רשימת \"נושאי הקורס\". קורס 223.2004, סמסטר א', 4 נ\"ז. קריאה מומלצת: Genes XII (Lewin, 2017)."
+  },
   "evidence": {
    "textFile": "content/syllabi/text/haifa-molecular.txt",
    "sha256": "bcf62a516c5030f2b12ec83da1eb096e630dbc187b2e33bffa33872dc8af846b",
@@ -2719,7 +2723,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "nameHe": "ביוכימיה מורחב",
   "year": 2027,
   "updatedHe": "2025-10-18T12:49:45",
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "huji-api",
   "sourceUrl": "https://shnaton.huji.ac.il/course/72339/syllabus/year/2027",
   "level": "topics",
@@ -2778,7 +2782,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "nameHe": "ביוכימיה של התא לתלמידי מדעי החיים",
   "year": 2027,
   "updatedHe": "2026-09-23T13:48:58",
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "huji-api",
   "sourceUrl": "https://shnaton.huji.ac.il/course/72121/syllabus/year/2027",
   "level": "topics",
@@ -2851,7 +2855,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "nameHe": "מבוא לביואינפורמטיקה- מורחב",
   "year": 2027,
   "updatedHe": "2026-09-17T12:26:10",
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "huji-api",
   "sourceUrl": "https://shnaton.huji.ac.il/course/94510/syllabus/year/2027",
   "level": "topics",
@@ -2914,7 +2918,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "nameHe": "ביולוגיה של התא מורחב",
   "year": 2027,
   "updatedHe": "2026-10-13T16:30:24",
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "huji-api",
   "sourceUrl": "https://shnaton.huji.ac.il/course/72373/syllabus/year/2027",
   "level": "topics",
@@ -2972,7 +2976,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "nameHe": "מבוא לביולוגיה של התא לתלמידי ביולוגיה",
   "year": 2027,
   "updatedHe": "2026-10-26T15:31:56",
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "huji-api",
   "sourceUrl": "https://shnaton.huji.ac.il/course/72153/syllabus/year/2027",
   "level": "topics",
@@ -3027,7 +3031,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "nameHe": "ביולוגיה התפתחותית: מתא בודד לעובר ולאורגניזם",
   "year": 2027,
   "updatedHe": "2026-10-20T14:00:03",
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "huji-api",
   "sourceUrl": "https://shnaton.huji.ac.il/course/72320/syllabus/year/2027",
   "level": "topics",
@@ -3110,7 +3114,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "nameHe": "אקולוגיה מורחב",
   "year": 2027,
   "updatedHe": "2026-10-15T12:30:21",
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "huji-api",
   "sourceUrl": "https://shnaton.huji.ac.il/course/72604/syllabus/year/2027",
   "level": "topics",
@@ -3178,7 +3182,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "nameHe": "מבוא לאקולוגיה",
   "year": 2027,
   "updatedHe": "2025-11-18T09:42:33",
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "huji-api",
   "sourceUrl": "https://shnaton.huji.ac.il/course/72107/syllabus/year/2027",
   "level": "topics",
@@ -3239,7 +3243,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "nameHe": "מבוא לאבולוציה",
   "year": 2027,
   "updatedHe": "2026-02-22T15:55:42",
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "huji-api",
   "sourceUrl": "https://shnaton.huji.ac.il/course/72368/syllabus/year/2027",
   "level": "topics",
@@ -3301,7 +3305,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "nameHe": "גנטיקה מורחב",
   "year": 2027,
   "updatedHe": "2026-10-01T09:12:54",
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "huji-api",
   "sourceUrl": "https://shnaton.huji.ac.il/course/72345/syllabus/year/2027",
   "level": "topics",
@@ -3365,7 +3369,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "nameHe": "יסודות הגנטיקה",
   "year": 2027,
   "updatedHe": "2026-02-15T19:18:00",
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "huji-api",
   "sourceUrl": "https://shnaton.huji.ac.il/course/72155/syllabus/year/2027",
   "level": "topics",
@@ -3472,7 +3476,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "nameHe": "אימונולוגיה",
   "year": 2027,
   "updatedHe": "2025-11-02T09:45:05",
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "huji-api",
   "sourceUrl": "https://shnaton.huji.ac.il/course/72665/syllabus/year/2027",
   "level": "topics",
@@ -3529,7 +3533,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "nameHe": "מיקרוביולוגיה מורחב",
   "year": 2027,
   "updatedHe": "2026-03-04T12:50:39",
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "huji-api",
   "sourceUrl": "https://shnaton.huji.ac.il/course/72342/syllabus/year/2027",
   "level": "topics",
@@ -3594,7 +3598,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "nameHe": "מבוא למיקרוביולוגיה - שיעור",
   "year": 2027,
   "updatedHe": "2025-11-10T09:22:24",
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "huji-api",
   "sourceUrl": "https://shnaton.huji.ac.il/course/72362/syllabus/year/2027",
   "level": "topics",
@@ -3663,7 +3667,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "nameHe": "ביולוגיה מולקולרית",
   "year": 2027,
   "updatedHe": "2026-10-22T13:11:35",
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "huji-api",
   "sourceUrl": "https://shnaton.huji.ac.il/course/72332/syllabus/year/2027",
   "level": "topics",
@@ -3741,7 +3745,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "nameHe": "נוירוביולוגיה ומדעי המח",
   "year": 2027,
   "updatedHe": "2026-09-24T09:06:59",
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "huji-api",
   "sourceUrl": "https://shnaton.huji.ac.il/course/72369/syllabus/year/2027",
   "level": "topics",
@@ -3800,7 +3804,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "nameHe": "פיזיולוגיה של מערכת העצבים",
   "year": 2027,
   "updatedHe": "2026-10-05T09:49:15",
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "huji-api",
   "sourceUrl": "https://shnaton.huji.ac.il/course/72343/syllabus/year/2027",
   "level": "topics",
@@ -3859,7 +3863,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "nameHe": "מבוא לביולוגיה של האורגניזם",
   "year": 2027,
   "updatedHe": "2026-09-22T10:47:48",
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "huji-api",
   "sourceUrl": "https://shnaton.huji.ac.il/course/72128/syllabus/year/2027",
   "level": "topics",
@@ -4027,7 +4031,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "nameHe": "מבוא לפיסיולוגיה",
   "year": 2027,
   "updatedHe": "2026-10-08T17:49:45",
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "huji-api",
   "sourceUrl": "https://shnaton.huji.ac.il/course/72336/syllabus/year/2027",
   "level": "topics",
@@ -4094,7 +4098,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "nameHe": "מדעי הצמח מורחב",
   "year": 2027,
   "updatedHe": "2026-09-22T12:54:48",
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "huji-api",
   "sourceUrl": "https://shnaton.huji.ac.il/course/72346/syllabus/year/2027",
   "level": "topics",
@@ -4167,7 +4171,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "nameHe": "מבוא למדעי הצמח",
   "year": 2027,
   "updatedHe": "2026-09-27T10:01:23",
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "huji-api",
   "sourceUrl": "https://shnaton.huji.ac.il/course/72334/syllabus/year/2027",
   "level": "topics",
@@ -4242,7 +4246,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "code": "04551512",
   "nameHe": "מבוא לביולוגיה א'",
   "year": 2026,
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "tau-ims",
   "sourceUrl": "https://www.ims.tau.ac.il/Tal/Syllabus/Syllabus_L.aspx?course=0455151201&year=2026",
   "level": "topics",
@@ -4300,7 +4304,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "code": "04551513",
   "nameHe": "מבוא לביולוגיה ב'",
   "year": 2026,
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "tau-ims",
   "sourceUrl": "https://www.ims.tau.ac.il/Tal/Syllabus/Syllabus_L.aspx?course=0455151301&year=2026",
   "level": "topics",
@@ -4351,7 +4355,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "code": "04551514",
   "nameHe": "מבוא לביולוגיה ג'",
   "year": 2026,
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "tau-ims",
   "sourceUrl": "https://www.ims.tau.ac.il/Tal/Syllabus/Syllabus_L.aspx?course=0455151401&year=2026",
   "level": "lectures",
@@ -4377,9 +4381,6 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
    }
   ],
   "assessmentHe": [
-   "בחינה סופית",
-   "ייתכנו מטלות נוספות",
-   "רשימת המטלות המלאה תופיע בסילבוס המפורט של הקורס.",
    "Final exam (90%), four quizzes (10%)"
   ],
   "detail": {
@@ -4467,10 +4468,12 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
    }
   ],
   "books": [
-   "Biology, A Global Approach, 10th Edition (2014) Pearson Publishers, chapters 40-56.",
-   "Older editions are also suitable.",
-   "The order of lectures may change."
+   "Biology, A Global Approach, 10th Edition (2014), Pearson — chapters 40-56 (older editions are also suitable)"
   ],
+  "manual": {
+   "readAt": "2026-11-11",
+   "noteHe": "13 השיעורים שחולצו זהים לטבלה בסילבוס המפורט. במסמך: \"The order of lectures may change\"."
+  },
   "evidence": {
    "textFile": "content/syllabi/text/tau-bio-intro-c.txt",
    "sha256": "6f0f81dd259d9278fdddcd148d163eaf07ba76deaf9f10129d6729365b34a9b3",
@@ -4486,25 +4489,25 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "code": "04553066",
   "nameHe": "מבוא לביואינפורמטיקה",
   "year": 2026,
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "tau-ims",
   "sourceUrl": "https://www.ims.tau.ac.il/Tal/Syllabus/Syllabus_L.aspx?course=0455306601&year=2026",
   "level": "lectures",
-  "contentHe": "מטרת הקורס היא לחשוף תלמידים לתחום הביואינפורמטיקה והרעיונות המרכזיים אשר נמצאים בשימוש נרחב ולפתח את יכולות הניתוח הכמותי של נתונים ביולוגים",
+  "contentHe": "שיעור 1: מבוא לתחום, למידה חישובית – מסווגים (פרופ' בורשטיין)\nשיעור 2: למידה חישובית – מסווגים נוספים והערכת ביצועים (פרופ' בורשטיין)\nשיעור 3: למידה חישובית – שיטות קיבוץ ומחקר לדוגמה (פרופ' בורשטיין)\nשיעור 4: ריצוף הדור הבא – שיטות ואלגוריתמים (פרופ' בורשטיין)\nשיעור 5: מבוא לעימוד רצפים (פרופ' פופקו)\nשיעור 6: עימוד רצפים (פרופ' פופקו)\nשיעור 7: עימוד רצפים / שחזור עצים פילוגנטיים (פרופ' פופקו)\nשיעור 8: שחזור עצים פילוגנטיים (פרופ' פופקו)\nשיעור 9: רשתות בביולוגיה – מבנה גלובלי, תכונות (פרופ' נחמן)\nשיעור 10: רשתות בביולוגיה – מוטיבי רשת, מעגלי משוב (פרופ' נחמן)\nשיעור 11: מוטיבי רשת / אנליזת ביטוי מתאים בודדים (פרופ' נחמן)\nשיעור 12: אנליזת ביטוי מתאים בודדים, אנליזת מיקרוסקופיה של תאים (פרופ' נחמן)\nשיעור 13: חזרה על החומר (כל מרצי הקורס)",
   "topicsHe": [
-   "מבוא לתחום ,למידה חישובית – מסווגים )פרופ' בורשטיין(",
-   "למידה חישובית – מסווגים נוספים והערכת ביצועים )פרופ' בורשטיין(",
-   "למידה חישובית – שיטות קיבוץ ומחקר לדוגמה )פרופ' בורשטיין(",
-   "ריצוף הדור הבא – שיטות ואלגוריתמים ) פרופ' בורשטיין(",
-   "מבוא לעימוד רצפים )פרופ' פופקו(",
-   "עימוד רצפים )פרופ' פופקו(",
-   "עימוד רצפים /שחזור עצים פילוגנטיים )פרופ' פופקו(",
-   "שחזור עצים פילוגנטיים )פרופ' פופקו(",
-   "רשתות בביולוגיה – מבנה גלובלי ,תכונות ) פרופ' נחמן(",
-   "רשתות בביולוגיה – מוטיבי רשת ,מעגלי משוב ) פרופ' נחמן(",
-   "מוטיבי רשת /אנליזת ביטוי מתאים בודדים ) פרופ' נחמן(",
-   "אנליזת ביטוי מתאים בודדים ,אנליזת מיקרוסקופיה של תאים ) פרופ' נחמן(",
-   "חזרה על החומר )כל מרצי הקורס("
+   "מבוא לתחום, למידה חישובית – מסווגים (פרופ' בורשטיין)",
+   "למידה חישובית – מסווגים נוספים והערכת ביצועים (פרופ' בורשטיין)",
+   "למידה חישובית – שיטות קיבוץ ומחקר לדוגמה (פרופ' בורשטיין)",
+   "ריצוף הדור הבא – שיטות ואלגוריתמים (פרופ' בורשטיין)",
+   "מבוא לעימוד רצפים (פרופ' פופקו)",
+   "עימוד רצפים (פרופ' פופקו)",
+   "עימוד רצפים / שחזור עצים פילוגנטיים (פרופ' פופקו)",
+   "שחזור עצים פילוגנטיים (פרופ' פופקו)",
+   "רשתות בביולוגיה – מבנה גלובלי, תכונות (פרופ' נחמן)",
+   "רשתות בביולוגיה – מוטיבי רשת, מעגלי משוב (פרופ' נחמן)",
+   "מוטיבי רשת / אנליזת ביטוי מתאים בודדים (פרופ' נחמן)",
+   "אנליזת ביטוי מתאים בודדים, אנליזת מיקרוסקופיה של תאים (פרופ' נחמן)",
+   "חזרה על החומר (כל מרצי הקורס)"
   ],
   "semesterHe": "ב' תשפ\"ז",
   "teachers": [
@@ -4522,10 +4525,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
    }
   ],
   "assessmentHe": [
-   "בחינה סופית",
-   "ייתכנו מטלות נוספות",
-   "רשימת המטלות המלאה תופיע בסילבוס המפורט של הקורס.",
-   "90%בחינה 10% +תרגיל"
+   "90% בחינה + 10% תרגיל"
   ],
   "detail": {
    "state": "file",
@@ -4535,82 +4535,86 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
    {
     "lectures": "1",
     "topicsHe": [
-     "מבוא לתחום ,למידה חישובית – מסווגים )פרופ' בורשטיין("
+     "מבוא לתחום, למידה חישובית – מסווגים (פרופ' בורשטיין)"
     ]
    },
    {
     "lectures": "2",
     "topicsHe": [
-     "למידה חישובית – מסווגים נוספים והערכת ביצועים )פרופ' בורשטיין("
+     "למידה חישובית – מסווגים נוספים והערכת ביצועים (פרופ' בורשטיין)"
     ]
    },
    {
     "lectures": "3",
     "topicsHe": [
-     "למידה חישובית – שיטות קיבוץ ומחקר לדוגמה )פרופ' בורשטיין("
+     "למידה חישובית – שיטות קיבוץ ומחקר לדוגמה (פרופ' בורשטיין)"
     ]
    },
    {
     "lectures": "4",
     "topicsHe": [
-     "ריצוף הדור הבא – שיטות ואלגוריתמים ) פרופ' בורשטיין("
+     "ריצוף הדור הבא – שיטות ואלגוריתמים (פרופ' בורשטיין)"
     ]
    },
    {
     "lectures": "5",
     "topicsHe": [
-     "מבוא לעימוד רצפים )פרופ' פופקו("
+     "מבוא לעימוד רצפים (פרופ' פופקו)"
     ]
    },
    {
     "lectures": "6",
     "topicsHe": [
-     "עימוד רצפים )פרופ' פופקו("
+     "עימוד רצפים (פרופ' פופקו)"
     ]
    },
    {
     "lectures": "7",
     "topicsHe": [
-     "עימוד רצפים /שחזור עצים פילוגנטיים )פרופ' פופקו("
+     "עימוד רצפים / שחזור עצים פילוגנטיים (פרופ' פופקו)"
     ]
    },
    {
     "lectures": "8",
     "topicsHe": [
-     "שחזור עצים פילוגנטיים )פרופ' פופקו("
+     "שחזור עצים פילוגנטיים (פרופ' פופקו)"
     ]
    },
    {
     "lectures": "9",
     "topicsHe": [
-     "רשתות בביולוגיה – מבנה גלובלי ,תכונות ) פרופ' נחמן("
+     "רשתות בביולוגיה – מבנה גלובלי, תכונות (פרופ' נחמן)"
     ]
    },
    {
     "lectures": "10",
     "topicsHe": [
-     "רשתות בביולוגיה – מוטיבי רשת ,מעגלי משוב ) פרופ' נחמן("
+     "רשתות בביולוגיה – מוטיבי רשת, מעגלי משוב (פרופ' נחמן)"
     ]
    },
    {
     "lectures": "11",
     "topicsHe": [
-     "מוטיבי רשת /אנליזת ביטוי מתאים בודדים ) פרופ' נחמן("
+     "מוטיבי רשת / אנליזת ביטוי מתאים בודדים (פרופ' נחמן)"
     ]
    },
    {
     "lectures": "12",
     "topicsHe": [
-     "אנליזת ביטוי מתאים בודדים ,אנליזת מיקרוסקופיה של תאים ) פרופ' נחמן("
+     "אנליזת ביטוי מתאים בודדים, אנליזת מיקרוסקופיה של תאים (פרופ' נחמן)"
     ]
    },
    {
     "lectures": "13",
     "topicsHe": [
-     "חזרה על החומר )כל מרצי הקורס("
+     "חזרה על החומר (כל מרצי הקורס)"
     ]
    }
   ],
+  "manual": {
+   "readAt": "2026-11-11",
+   "noteHe": "הסדר זהה למה שחולץ; ההזנה הידנית רק מתקנת סוגריים שהתהפכו בחילוץ. דרישות קדם: מבוא לביולוגיה א', קורסי המבוא במתמטיקה ובסטטיסטיקה. אין קריאת חובה."
+  },
   "evidence": {
    "textFile": "content/syllabi/text/tau-bioinformatics.txt",
    "sha256": "e45463b05946e11cf9321c479eba50538ddccd2e6f8d2ca44b3d9df8448b7110",
@@ -4629,7 +4633,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "code": "04551809",
   "nameHe": "אקולוגיה",
   "year": 2026,
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "tau-ims",
   "sourceUrl": "https://www.ims.tau.ac.il/Tal/Syllabus/Syllabus_L.aspx?course=0455180901&year=2026",
   "level": "lectures",
@@ -4656,12 +4660,8 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
    }
   ],
   "assessmentHe": [
-   "בחינה סופית",
-   "ייתכנו מטלות נוספות",
-   "רשימת המטלות המלאה תופיע בסילבוס המפורט של הקורס.",
-   "ציוני הבחנים ( ,)30%מבחן סופי ()70%",
-   "ציון הקורס מורכב מציון המבחן ( )70%וציון תרגילי סיכום החטיבה (.)30%",
-   "60%המענה למטלה עצמה על ידי הסטודנט 40% +המשוב שניתן על ידי הסטודנט לעמיתיו (באופן אנונימי)."
+   "מבחן סופי (70%)",
+   "ציוני הבחנים / תרגילי סיכום החטיבה (30%) — בשיטת בחינת עמיתים: שתי המטלות הגבוהות מתוך שלוש; בכל תרגיל 60% המענה + 40% המשוב לעמיתים; עד 300 מילים"
   ],
   "detail": {
    "state": "file",
@@ -4747,6 +4747,13 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
     ]
    }
   ],
+  "books": [
+   "Ecology — William D. Bowman, Sally D. Hacker, Michael L. Cain (קריאת חובה; בנוסף מאמרים שיינתנו במהלך הקורס וייכללו בחומר המבחן)"
+  ],
+  "manual": {
+   "readAt": "2026-11-11",
+   "noteHe": "13 השיעורים שחולצו זהים לטבלה בסילבוס המפורט."
+  },
   "evidence": {
    "textFile": "content/syllabi/text/tau-ecology.txt",
    "sha256": "d08c45379fd8c776419aa94c419720b041ee993241124b72407a763a0ad75a3d",
@@ -4754,10 +4761,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
     "tau-04551809-2026.html",
     "tau-04551809-2026-detailed.pdf"
    ]
-  },
-  "warnings": [
-   "המקור לא מציין ספרים"
-  ]
+  }
  },
  "tau-evolution": {
   "courseSlug": "tau-evolution",
@@ -4765,7 +4769,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "code": "04552536",
   "nameHe": "אבולוציה",
   "year": 2026,
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "tau-ims",
   "sourceUrl": "https://www.ims.tau.ac.il/Tal/Syllabus/Syllabus_L.aspx?course=0455253601&year=2026",
   "level": "topics",
@@ -4819,7 +4823,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "code": "04552526",
   "nameHe": "גנטיקה כללית",
   "year": 2026,
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "tau-ims",
   "sourceUrl": "https://www.ims.tau.ac.il/Tal/Syllabus/Syllabus_L.aspx?course=0455252601&year=2026",
   "level": "topics",
@@ -4883,7 +4887,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "code": "04552580",
   "nameHe": "מיקרוביולוגיה",
   "year": 2025,
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "tau-ims",
   "sourceUrl": "https://www.ims.tau.ac.il/Tal/Syllabus/Syllabus_L.aspx?course=0455258001&year=2025",
   "level": "topics",
@@ -4987,7 +4991,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "university": "technion",
   "code": "134019",
   "nameHe": "מבוא לביוכימיה ואנזימולוגיה",
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "technion-portal",
   "sourceUrl": "https://students.technion.ac.il/local/technionsearch/course/134019",
   "level": "topics",
@@ -5071,7 +5075,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "university": "technion",
   "code": "136158",
   "nameHe": "שיטות בביואינפורמטיקה למדעי החיים",
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "technion-portal",
   "sourceUrl": "https://students.technion.ac.il/local/technionsearch/course/136158",
   "level": "topics",
@@ -5128,7 +5132,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "university": "technion",
   "code": "134058",
   "nameHe": "ביולוגיה 1",
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "technion-portal",
   "sourceUrl": "https://students.technion.ac.il/local/technionsearch/course/134058",
   "level": "topics",
@@ -5216,7 +5220,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "university": "technion",
   "code": "134156",
   "nameHe": "ביופיסיקה מולקולרית",
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "technion-portal",
   "sourceUrl": "https://students.technion.ac.il/local/technionsearch/course/134156",
   "level": "topics",
@@ -5258,7 +5262,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "university": "technion",
   "code": "134154",
   "nameHe": "ביוסטטיסטיקה לביולוגים",
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "technion-portal",
   "sourceUrl": "https://students.technion.ac.il/local/technionsearch/course/134154",
   "level": "topics",
@@ -5326,7 +5330,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "university": "technion",
   "code": "134129",
   "nameHe": "הביולוגיה של מחלת הסרטן",
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "technion-portal",
   "sourceUrl": "https://students.technion.ac.il/local/technionsearch/course/134129",
   "level": "topics",
@@ -5364,7 +5368,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "university": "technion",
   "code": "134128",
   "nameHe": "ביולוגיה של התא",
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "technion-portal",
   "sourceUrl": "https://students.technion.ac.il/local/technionsearch/course/134128",
   "level": "topics",
@@ -5440,7 +5444,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "university": "technion",
   "code": "134141",
   "nameHe": "ביולוגיה חישובית",
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "technion-portal",
   "sourceUrl": "https://students.technion.ac.il/local/technionsearch/course/134141",
   "level": "topics",
@@ -5492,7 +5496,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "university": "technion",
   "code": "134069",
   "nameHe": "ביולוגיה של ההתפתחות",
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "technion-portal",
   "sourceUrl": "https://students.technion.ac.il/local/technionsearch/course/134069",
   "level": "topics",
@@ -5561,7 +5565,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "university": "technion",
   "code": "136014",
   "nameHe": "פיתוח תרופות ביולוגיות חדשניות",
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "technion-portal",
   "sourceUrl": "https://students.technion.ac.il/local/technionsearch/course/136014",
   "level": "topics",
@@ -5610,7 +5614,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "university": "technion",
   "code": "134153",
   "nameHe": "אקולוגיה",
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "technion-portal",
   "sourceUrl": "https://students.technion.ac.il/local/technionsearch/course/134153",
   "level": "topics",
@@ -5675,7 +5679,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "university": "technion",
   "code": "134155",
   "nameHe": "אנדוקרינולוגיה",
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "technion-portal",
   "sourceUrl": "https://students.technion.ac.il/local/technionsearch/course/134155",
   "level": "topics",
@@ -5737,7 +5741,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "university": "technion",
   "code": "134133",
   "nameHe": "אבולוציה",
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "technion-portal",
   "sourceUrl": "https://students.technion.ac.il/local/technionsearch/course/134133",
   "level": "topics",
@@ -5794,7 +5798,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "university": "technion",
   "code": "134119",
   "nameHe": "בקרת הביטוי הגנטי",
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "technion-portal",
   "sourceUrl": "https://students.technion.ac.il/local/technionsearch/course/134119",
   "level": "topics",
@@ -5868,7 +5872,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "university": "technion",
   "code": "134020",
   "nameHe": "גנטיקה כללית",
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "technion-portal",
   "sourceUrl": "https://students.technion.ac.il/local/technionsearch/course/134020",
   "level": "topics",
@@ -5936,7 +5940,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "university": "technion",
   "code": "136088",
   "nameHe": "גנטיקה מולקולרית של האדם",
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "technion-portal",
   "sourceUrl": "https://students.technion.ac.il/local/technionsearch/course/136088",
   "level": "topics",
@@ -5974,7 +5978,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "university": "technion",
   "code": "276413",
   "nameHe": "אימונולוגיה בסיסית",
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "technion-portal",
   "sourceUrl": "https://students.technion.ac.il/local/technionsearch/course/276413",
   "level": "topics",
@@ -6050,7 +6054,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "university": "technion",
   "code": "134113",
   "nameHe": "מסלולים מטבולים",
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "technion-portal",
   "sourceUrl": "https://students.technion.ac.il/local/technionsearch/course/134113",
   "level": "topics",
@@ -6128,7 +6132,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "university": "technion",
   "code": "134147",
   "nameHe": "מטבוליזם ומחלות באדם",
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "technion-portal",
   "sourceUrl": "https://students.technion.ac.il/local/technionsearch/course/134147",
   "level": "topics",
@@ -6182,7 +6186,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "university": "technion",
   "code": "134121",
   "nameHe": "מיקרוביולוגיה ווירולוגיה",
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "technion-portal",
   "sourceUrl": "https://students.technion.ac.il/local/technionsearch/course/134121",
   "level": "topics",
@@ -6243,7 +6247,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "university": "technion",
   "code": "134082",
   "nameHe": "ביולוגיה מולקולרית",
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "technion-portal",
   "sourceUrl": "https://students.technion.ac.il/local/technionsearch/course/134082",
   "level": "topics",
@@ -6317,7 +6321,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "university": "technion",
   "code": "134157",
   "nameHe": "מבוא לנוירוביולוגיה",
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "technion-portal",
   "sourceUrl": "https://students.technion.ac.il/local/technionsearch/course/134157",
   "level": "topics",
@@ -6372,7 +6376,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "university": "technion",
   "code": "066418",
   "nameHe": "מקרוביולוגיה של פתוגנים",
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "technion-portal",
   "sourceUrl": "https://students.technion.ac.il/local/technionsearch/course/066418",
   "level": "topics",
@@ -6419,7 +6423,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "university": "technion",
   "code": "134117",
   "nameHe": "פיזיולוגיה",
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "technion-portal",
   "sourceUrl": "https://students.technion.ac.il/local/technionsearch/course/134117",
   "level": "topics",
@@ -6497,7 +6501,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "university": "technion",
   "code": "134040",
   "nameHe": "פיזיולוגיה מוליקולרית של הצמח",
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "technion-portal",
   "sourceUrl": "https://students.technion.ac.il/local/technionsearch/course/134040",
   "level": "topics",
@@ -6558,7 +6562,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "university": "technion",
   "code": "134151",
   "nameHe": "העולם המודרני של הרנ\"א",
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "technion-portal",
   "sourceUrl": "https://students.technion.ac.il/local/technionsearch/course/134151",
   "level": "topics",
@@ -6591,7 +6595,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "university": "technion",
   "code": "134137",
   "nameHe": "תאי גזע",
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "technion-portal",
   "sourceUrl": "https://students.technion.ac.il/local/technionsearch/course/134137",
   "level": "topics",
@@ -6642,7 +6646,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "university": "technion",
   "code": "136037",
   "nameHe": "ביולוגיה מערכתית",
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "technion-portal",
   "sourceUrl": "https://students.technion.ac.il/local/technionsearch/course/136037",
   "level": "topics",
@@ -6739,7 +6743,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "university": "technion",
   "code": "134140",
   "nameHe": "יוביקוויטין ומחזור חלבונים",
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "technion-portal",
   "sourceUrl": "https://students.technion.ac.il/local/technionsearch/course/134140",
   "level": "topics",
@@ -6776,7 +6780,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "university": "technion",
   "code": "134039",
   "nameHe": "וירולוגיה מולקולרית",
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "technion-portal",
   "sourceUrl": "https://students.technion.ac.il/local/technionsearch/course/134039",
   "level": "topics",
@@ -6836,7 +6840,7 @@ export const SYLLABI: Record<string, SyllabusRecord> = {
   "university": "technion",
   "code": "134111",
   "nameHe": "זואולוגיה",
-  "fetchedAt": "2026-11-11",
+  "fetchedAt": "2026-11-12",
   "source": "technion-portal",
   "sourceUrl": "https://students.technion.ac.il/local/technionsearch/course/134111",
   "level": "topics",

@@ -49,11 +49,22 @@ const NOW = TODAY.toISOString().slice(0, 10);
 const AY = TODAY.getMonth() >= 8 ? TODAY.getFullYear() + 1 : TODAY.getFullYear();
 const UA = { "User-Agent": "Mozilla/5.0 (BioLearn syllabus sync; contact via biolearn-neon.vercel.app)" };
 
+/** GET with three attempts. A network error or 5xx is retried and then thrown as such — it must never be
+ *  mistaken for "the university has no page for this year" (that is only a 4xx, thrown as "HTTP 4xx"). */
 async function get(url: string) {
-  const res = await fetch(url, { headers: UA, redirect: "follow" });
-  if (!res.ok) throw new Error(`HTTP ${res.status}`);
-  return res;
+  let last: unknown;
+  for (let attempt = 0; attempt < 3; attempt++) {
+    if (attempt) await new Promise((r) => setTimeout(r, 2000 * attempt));
+    try {
+      const res = await fetch(url, { headers: UA, redirect: "follow" });
+      if (res.ok) return res;
+      last = new Error(`HTTP ${res.status}`);
+      if (res.status < 500) break;
+    } catch (e) { last = new Error(`network error (${e instanceof Error ? e.message : e})`); }
+  }
+  throw last;
 }
+const notFound = (e: unknown) => e instanceof Error && /^HTTP 4\d\d$/.test(e.message);
 
 // Staff e-mail addresses are on the public pages, but there is no reason to copy them into the repo.
 const EMAIL = /[\w.+-]+@[\w-]+(?:\.[\w-]+)+/g;
@@ -111,8 +122,9 @@ function schedule(rawLines: string[], raw: string): { sessions?: Session[]; unpa
 async function huji(t: SyllabusTarget, ev: Evidence): Promise<SyllabusRecord> {
   let data: Record<string, unknown> | null = null, used = AY; // HUJI year = the spring year
   for (const y of [AY, AY - 1]) {
-    const res = await get(`https://shnaton.huji.ac.il/api/syllabus?courseCode=${t.code}&year=${y}`).catch(() => null);
-    const j = res ? ((await res.json().catch(() => null)) as Record<string, unknown> | null) : null;
+    // Only "no such syllabus" may send us to the previous year; a network failure fails the course (previous record kept).
+    const res = await get(`https://shnaton.huji.ac.il/api/syllabus?courseCode=${t.code}&year=${y}`).catch((e) => { if (notFound(e)) return null; throw e; });
+    const j = res ? ((await res.json()) as Record<string, unknown> | null) : null;
     if (j && (j.courseContent as { he?: string })?.he) { data = j; used = y; break; }
   }
   if (!data) throw new Error("no syllabus in the last two years");
@@ -305,8 +317,10 @@ async function bgu(t: SyllabusTarget, ev: Evidence): Promise<SyllabusRecord> {
     const current = Number(await p.$eval("select[name=on_year] option[selected]", (o) => (o as HTMLOptionElement).value));
     let call: string | undefined;
     let year = current;
-    for (const y of [current, current - 1]) {
-      if (y !== current) await p.goto("https://bgu4u.bgu.ac.il/pls/scwp/!sc.AnnualCoursesAdv", { waitUntil: "networkidle", timeout: 90000 });
+    // The current year is searched twice before last year is accepted: the server is slow and flaky, and an
+    // empty result page from a bad moment must not pass for "not in this year's catalog".
+    for (const [i, y] of [current, current, current - 1].entries()) {
+      if (i) await p.goto("https://bgu4u.bgu.ac.il/pls/scwp/!sc.AnnualCoursesAdv", { waitUntil: "networkidle", timeout: 90000 });
       await p.fill("#on_course_department", dept);
       await p.fill("#on_course_degree_level", degree);
       await p.fill("#on_course", course);
@@ -415,6 +429,9 @@ function validate(rec: SyllabusRecord, t: SyllabusTarget, ours: { he: string; en
   if (rec.hasUnparsedSchedule) w.push("במסמך יש טבלת שבועות/שיעורים שלא פוענחה אוטומטית (עמודות מעורבבות) — לקרוא את ה-PDF בעין ולהזין את הסדר");
   if (!rec.assessmentHe?.length && rec.university !== "technion" && rec.university !== "bgu") w.push("המקור לא מציין הרכב ציון");
   if (!rec.books?.length) w.push("המקור לא מציין ספרים");
+  // Text extracted from a PDF can lose table rows or scramble mixed Hebrew/Latin lines without any sign of it
+  // (two Bar-Ilan lesson tables were missed this way) — a PDF record counts as checked only after a visual read.
+  if (ev.pdfSha16 && !rec.manual) w.push("ה-PDF עוד לא נקרא בעין מול הרשומה — לפתוח אותו (syllabuses/_fetched), לוודא שאין בו טבלה או נושאים שלא חולצו, ולהוסיף רשומה ל-content/syllabi/manual.ts");
   return {};
 }
 
@@ -427,11 +444,20 @@ function applyManual(rec: SyllabusRecord, ev: Evidence) {
     return;
   }
   const label = m.sessionLabelHe ?? "שיעור";
-  rec.sessions = m.sessions;
-  rec.sessionLabelHe = m.sessionLabelHe;
-  rec.level = "lectures";
-  rec.topicsHe = m.sessions.flatMap((s) => s.topicsHe);
-  rec.contentHe = m.sessions.map((s) => `${s.partHe ? `${s.partHe}\n` : ""}${label} ${s.lectures}: ${s.topicsHe.join("; ")}`).join("\n");
+  if (m.sessions) {
+    rec.sessions = m.sessions;
+    rec.sessionLabelHe = m.sessionLabelHe;
+    rec.level = "lectures";
+    rec.topicsHe = m.sessions.flatMap((s) => s.topicsHe);
+    rec.contentHe = m.sessions.map((s) => `${s.partHe ? `${s.partHe}\n` : ""}${label} ${s.lectures}: ${s.topicsHe.join("; ")}`).join("\n");
+  } else if (m.topicsHe) { // no lesson table in the document: only the topic list was read by eye
+    rec.sessions = undefined;
+    rec.level = "topics";
+    rec.topicsHe = m.topicsHe;
+    rec.contentHe = m.topicsHe.join("\n");
+  } // neither: the PDF was read by eye and the extracted record is right — the entry only records the check
+  rec.notTaughtHe = m.notTaughtHe ?? rec.notTaughtHe;
+  rec.books = m.books ?? rec.books;
   rec.assessmentHe = m.assessmentHe ?? rec.assessmentHe;
   rec.hasUnparsedSchedule = undefined;
   rec.manual = { readAt: m.readAt, noteHe: m.noteHe };

@@ -1,6 +1,6 @@
-# Syllabus sync report — 2026-11-11
+# Syllabus sync report — 2026-11-12
 
-101 targets: 0 new, 7 changed, 81 same, 12 failed, 1 rejected, 131 warnings
+101 targets: 0 new, 0 changed, 88 same, 12 failed, 1 rejected, 125 warnings
 
 ```
 same     huji      72128     topics   huji-organism
@@ -138,30 +138,29 @@ same     biu       80103     lectures biu-cell
            ⚠ הסילבוס החדש ביותר באתר הפקולטה הוא משנת 2025
 same     biu       80150     lectures biu-biostatistics
            ⚠ הסילבוס החדש ביותר באתר הפקולטה הוא משנת 2024
-CHANGED  biu       80201     lectures biu-biochem-a
+same     biu       80201     lectures biu-biochem-a
            ⚠ שנת הסילבוס לא ידועה (תיקייה בלי שנה באתר הפקולטה)
 same     biu       80206     lectures biu-animal-physiology
            ⚠ הסילבוס החדש ביותר באתר הפקולטה הוא משנת 2025
 FAILED   biu       80207              biu-ecology   (no PDF syllabus on the faculty page)
 same     biu       80208     lectures biu-genetics
            ⚠ הסילבוס החדש ביותר באתר הפקולטה הוא משנת 2024
-CHANGED  biu       80202     lectures biu-biochem-b
+same     biu       80202     lectures biu-biochem-b
            ⚠ שנת הסילבוס לא ידועה (תיקייה בלי שנה באתר הפקולטה)
-same     biu       80203     topics   biu-microbiology
-           ⚠ לא נמצאה כותרת נושאים במסמך — הנושאים המוצגים הם פתיחת המסמך; לקרוא את קובץ הטקסט
+same     biu       80203     lectures biu-microbiology
            ⚠ הסילבוס החדש ביותר באתר הפקולטה הוא משנת 2023
            ⚠ המקור לא מציין ספרים
 same     biu       80204     lectures biu-virology
            ⚠ הסילבוס החדש ביותר באתר הפקולטה הוא משנת 2023
 FAILED   biu       80210              biu-immunology   (no PDF syllabus on the faculty page)
-CHANGED  biu       80214     lectures biu-systems-physiology
+same     biu       80214     lectures biu-systems-physiology
            ⚠ הסילבוס החדש ביותר באתר הפקולטה הוא משנת 2025
 FAILED   biu       80223              biu-plant-physiology   (no PDF syllabus on the faculty page)
-CHANGED  biu       80242     lectures biu-molecular-a
+same     biu       80242     lectures biu-molecular-a
            ⚠ הסילבוס החדש ביותר באתר הפקולטה הוא משנת 2025
 same     biu       80377     lectures biu-molecular-b
            ⚠ הסילבוס החדש ביותר באתר הפקולטה הוא משנת 2024
-same     biu       80548     topics   biu-cell-function
+same     biu       80548     lectures biu-cell-function
            ⚠ הסילבוס החדש ביותר באתר הפקולטה הוא משנת 2024
            ⚠ המקור לא מציין ספרים
 FAILED   biu       80513              biu-bioinformatics   (no PDF syllabus on the faculty page)
@@ -196,24 +195,20 @@ same     bgu       205.1.3171 topics   bgu-evolution
            ⚠ המקור לא מציין ספרים
 same     bgu       205.1.9531 topics   bgu-bioinformatics
            ⚠ השנתון נותן רק תקציר; סילבוס מפורט (לוח הרצאות, הרכב ציון) אינו ציבורי
-CHANGED  haifa     ביולוגיה של התא ב topics   haifa-cell-b
+same     haifa     ביולוגיה של התא ב topics   haifa-cell-b
            ⚠ הסילבוס הועלה לאתר החוג ב-2021 ולא הוחלף מאז
-           ⚠ המקור לא מציין הרכב ציון
 same     haifa     מבוא לאקולוגיה ואבולוציה topics   haifa-ecology-evolution
            ⚠ הסילבוס הועלה לאתר החוג ב-2021 ולא הוחלף מאז
            ⚠ המקור לא מציין הרכב ציון
 same     haifa     ביוכימיה א topics   haifa-biochem-a
            ⚠ הסילבוס הועלה לאתר החוג ב-2021 ולא הוחלף מאז
-           ⚠ המקור לא מציין ספרים
 same     haifa     ביוכימיה ב topics   haifa-biochem-b
            ⚠ הסילבוס הועלה לאתר החוג ב-2021 ולא הוחלף מאז
-           ⚠ המקור לא מציין ספרים
-CHANGED  haifa     ביולוגיה מולקולארית topics   haifa-molecular
+same     haifa     ביולוגיה מולקולארית topics   haifa-molecular
            ⚠ הסילבוס הועלה לאתר החוג ב-2021 ולא הוחלף מאז
-CHANGED  haifa     גנטיקה כללית topics   haifa-genetics
+same     haifa     גנטיקה כללית topics   haifa-genetics
            ⚠ הסילבוס הועלה לאתר החוג ב-2021 ולא הוחלף מאז
 same     haifa     מיקרוביולוגיה כללית topics   haifa-microbiology
-           ⚠ לא נמצאה כותרת נושאים במסמך — הנושאים המוצגים הם פתיחת המסמך; לקרוא את קובץ הטקסט
            ⚠ הסילבוס הועלה לאתר החוג ב-2021 ולא הוחלף מאז
 REJECTED haifa     מבוא לנוירוביולוגיה          haifa-neurobiology   (the document does not name this course (looked for ["מבוא לנוירוביולוגיה","מבוא לנוירוביולוגיה","Introduction to Neurobiology","מבוא לנוירוביולוגיה"]) — the site links a different file)
 same     tau       04551512  topics   tau-bio-intro-a
@@ -228,7 +223,6 @@ same     tau       04552526  topics   tau-genetics
 same     tau       04552536  topics   tau-evolution
            ⚠ המקור לא מציין ספרים
 same     tau       04551809  lectures tau-ecology
-           ⚠ המקור לא מציין ספרים
 same     tau       04553066  lectures tau-bioinformatics
            ⚠ המקור לא מציין ספרים
 same     tau       04552580  topics   tau-microbiology
