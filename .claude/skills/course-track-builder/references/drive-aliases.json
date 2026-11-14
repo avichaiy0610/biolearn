@@ -1,0 +1,17 @@
+{
+  "_about": "Folder names under which student drives keep a course, when the name differs from the synced syllabus name. `drive_sources.py index` maps a file to a course when one of its path parts equals (after normalising quotes and a code in parentheses) the course's synced name or an alias here. Add an alias only after checking that the folder is this course and not a lab, a different-year course, or an elective with a similar name. Curated 2026-11-14 from the folder lists of the TAU and Bar-Ilan drives.",
+  "aliases": {
+    "tau-genetics": ["גנטיקה"],
+    "tau-bioinformatics": ["ביואינפורמטיקה"],
+    "biu-cell": ["ביולוגיה של התא", "מבוא לביולוגיה של התא"],
+    "biu-molecular-a": ["ביולוגיה מולקולרית והנדסה גנטית א", "ביולוגיה מולקולרית א"],
+    "biu-microbiology": ["מיקרוביולוגיה"],
+    "biu-virology": ["וירולוגיה"],
+    "biu-biochem-a": ["ביוכימיה א"],
+    "biu-biochem-b": ["ביוכימיה ב"]
+  },
+  "notOurs": {
+    "biu": ["מולקולרית הזדקנות", "ביוסטטיסטיקה מבוא לניסויים קליניים", "מעבדה- פיזיולוגיה של מערכות", "מבוא לביוכימיה"],
+    "tau": ["ביוכימיה", "ביולוגיה של התא", "נוירוביולוגיה", "נוירוביולוגיה מערכתית"]
+  }
+}

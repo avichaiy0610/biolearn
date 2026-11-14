@@ -1,0 +1,41 @@
+{
+ "_about": "Open web pages that list student drives (\"hubs\"). `drive_sources.py discover` crawls them for Google Drive links. Add a hub whenever a search turns up a page that lists drives; note what kind of access the page itself describes. university: tau | huji | biu | bgu | haifa | technion | any.",
+ "hubs": [
+  {
+   "url": "https://www.student.co.il/course-summaries",
+   "university": "tau",
+   "foundAt": "2026-11-12",
+   "noteHe": "אגודת הסטודנטים של אוניברסיטת תל אביב — דף \"סיכומי קורסים\": כ-30 דרייבים חוגיים לפי פקולטה, כולל \"מדעי החיים – תואר ראשון\". הדף מציין שלחלק מהדרייבים צריך לבקש גישה מהנציג החוגי."
+  },
+  {
+   "url": "https://hujibsc.wixsite.com/survivalkit/survivalkit",
+   "university": "huji",
+   "foundAt": "2026-11-12",
+   "noteHe": "\"ערכת הישרדות\" של תלמידי תואר ראשון במדעים באוניברסיטה העברית — קישורי דרייב לסיכומים; לפי האתר הגישה לקבצים דורשת חשבון של האוניברסיטה (צפוי סטטוס login)."
+  },
+  {
+   "url": "https://bgu4u.co.il/%D7%A9%D7%99%D7%A8%D7%95%D7%AA%D7%99%D7%9D-%D7%90%D7%A7%D7%93%D7%9E%D7%99%D7%99%D7%9D/%D7%A1%D7%99%D7%9B%D7%95%D7%9E%D7%99%D7%9D/",
+   "university": "bgu",
+   "foundAt": "2026-11-12",
+   "noteHe": "אגודת הסטודנטים של בן-גוריון — מאגר סיכומים באתר עצמו (לא דרייב); ב-12.11.2026 לא נמצאו בדף קישורי דרייב. נשאר כאן כדי לבדוק שוב בכל ריצה."
+  },
+  {
+   "url": "https://t.me/s/toarcliksikumim",
+   "university": "any",
+   "foundAt": "2026-11-12",
+   "noteHe": "ערוץ טלגרם \"תואר בקליק\" (תצוגה ציבורית) — מפרסם קישורי דרייב לסיכומים ומבחנים לפי תואר; ב-12.11.2026 התצוגה הציבורית לא הכילה קישורי דרייב."
+  },
+  {
+   "url": "https://www.bis.org.il/copy-of-%D7%96%D7%9B%D7%95%D7%99%D7%95%D7%AA-%D7%90%D7%A7%D7%93%D7%9E%D7%99%D7%95%D7%AA",
+   "university": "biu",
+   "foundAt": "2026-11-14",
+   "noteHe": "אגודת הסטודנטים של בר-אילן — \"מאגר סיכומים\" / דרייב מחלקות: כ-30 קישורי דרייב לפי מחלקה."
+  },
+  {
+   "url": "https://www.aguda.org.il/articles/0bytvfvkrit1674496141693",
+   "university": "huji",
+   "foundAt": "2026-11-14",
+   "noteHe": "אגודת הסטודנטים של האוניברסיטה העברית — \"הבנק האקדמי\" (סיכומים, מבחנים, תרגילים שסטודנטים מעלים); קישור דרייב אחד בדף."
+  }
+ ]
+}

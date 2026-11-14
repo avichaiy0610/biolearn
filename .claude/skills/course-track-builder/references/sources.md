@@ -28,6 +28,29 @@ Update this file whenever a source is found, moves, or stops working.
 - `content/syllabi/ledger.generated.md` — what each course has and lacks (2026-11-12: Technion 16/31 with a
   lesson order, 16 with grading, 25 with current staff, 13 with recent exams; no other university has exams).
 
+## Public student drives (found by the skill itself, 2026-11-12)
+- Hubs: `references/drive-hubs.json`. TAU's student union page `student.co.il/course-summaries` lists ~30
+  faculty drives, among them **"מדעי החיים – תואר ראשון"** (`1lqIcpz_SQAXXFqJMyEzIGpwzNw2EeWRI`) and
+  "מדעי החיים – תארים מתקדמים" (`1tEraPdq0TCPUeqHoLawKMUlmjTTdO9_E`). HUJI's "survival kit" site links
+  drives that need a university account. BGU's union hosts summaries on its own site, no drive links.
+- Registry: `Project One/drives/_registry.json`. On 2026-11-12 the machine's network (a Perimeter 81
+  filter) blocked drive.google.com (`blocked-by-network`); on 2026-11-14 it was reachable and the drives
+  below were probed and fetched.
+- **TAU:** the hub's "מדעי החיים – תואר ראשון" link is dead (404) and the life-sciences drive
+  (`1tEraPdq0TCPUeqHoLawKMUlmjTTdO9_E`) opens only after a request form → `login`. But the public
+  neuroscience drive "תואר מדעי המוח" (`17zRg9vPxS1LdM6S4e5Ad3kwhy1RkX741`, ~8,700 files, 1,829 folders)
+  holds the biology courses: `שנה א/מסלול ביולוגיה/ביולוגיות` (intro biology), `שנה ב/ביולוגיה/ביולוגיה של
+  התא`, `ביוכימיה`, `שנה ג/ביולוגיה/גנטיקה`, `קורסי בחירה/ביולוגיה 0455/` (אבולוציה, מיקרוביולוגיה,
+  ביואינפורמטיקה, אימונולוגיה, ביולוגיה מולקולרית …), `נוירוביולוגיה`.
+- **Bar-Ilan:** hub `bis.org.il` (student association) → Google Doc "מדעי החיים" → public folders
+  "מדעי החיים 2023" (`1YYXQq0ul9beAkFtc5hXv90_rMdNaSwb6`, ~730 files), "דרייב ביולוגיה/ביוטכנולוגיה"
+  (`1M5_mSnJFC2z8kw09x1gkm5wT9oSDTf2M`, ~3,300 files by year and semester), "ביוטכנולוגיה", "כימיה-ביולוגיה",
+  "מדעי המוח בר אילן"; the bioinformatics folder needs a login. The same document lists Box folders per
+  year/semester (`app.box.com/s/…`) — recorded under `otherLinks`, not fetched yet.
+- **HUJI:** the "survival kit" drives are closed (`login`) or gone; the union's "academic bank" is a site,
+  not a drive. **BGU / Haifa:** no drive found by search on 2026-11-14 — run `discover` again each semester.
+- No account is used anywhere in this skill. Moodle behind a login is out of scope.
+
 ## Reading PDFs by eye (2026-11-11/12)
 All 22 PDF sources of the sync were opened and compared with their records. Found this way, and invisible in
 the extracted text: two Bar-Ilan lesson tables (80548, 80203), a third "לא ילמד" list in 80208, scrambled

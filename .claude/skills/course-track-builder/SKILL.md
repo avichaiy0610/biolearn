@@ -80,6 +80,35 @@ exams and homework. A file's own heading can be wrong (the 134117 syllabus is he
 manifest row, written after reading the file, is what maps it. A file with no row gets one before use.
 Run `ledger --course` to see what is still missing; that list is what step 2 has to find.
 
+### 1c. Student drives — find them yourself, for every university
+The skill works **without anyone's account**: not Avichai's, not a student's. What a login would give
+(Moodle course pages) is out of scope; never ask for one and never plan around one. What replaces it is
+public material, and the richest public material is the faculty's student drive (past exams, homework,
+summaries). Finding it is the skill's job:
+```bash
+D=.claude/skills/course-track-builder/scripts/drive_sources.py
+uv run $D discover --university tau --output $O/drives.json   # hubs → Drive links → which are public
+#   → run every searchQuery it emits; a page that lists drives is a new hub (references/drive-hubs.json)
+uv run $D fetch --url <public biology folder> --output $O/fetch.json   # into Project One/drives/<uni>/<id>/
+#   a faculty drive holds thousands of files: the first run lists everything in its _manifest.json and
+#   stops at the limit; then take what matters without listing again — exams and syllabi first:
+uv run $D fetch --url <id> --resume --match 'מבח|בחינ|מועד|בוחן|שחזור|סילבוס' --max-files 600 --output $O/r.json
+uv run $D fetch --url <id> --subpath 'שנה ג/ביולוגיה/גנטיקה' --output $O/s.json   # or one course folder
+uv run $D index --output $O/dindex.json                               # text + Project One/drives/_text/index.json
+```
+How drives are really found (2026-11-14): the union's hub page often links a **Google Doc per department**
+that lists the drives (Bar-Ilan) — `discover` reads those documents two levels deep; and a department's
+drive is often reachable **inside a neighbouring department's public drive** (TAU's life-sciences courses
+sit in the public neuroscience drive, while the life-sciences drive itself is by request). So probe the
+sibling departments (neuroscience, biotechnology, chemistry-biology, medicine prep) and read the first
+run's manifest for biology course folders before concluding that a university has no public drive.
+`discover` records every drive in `Project One/drives/_registry.json` with its access: `public` (fetch it),
+`login` (closed — leave it), `not-found`, `blocked-by-network`. After `index`, `ledger` and `local` count
+the fetched exams and homework per course. Folders the index could not map to a course are listed for
+you to read and map. Drives are evidence of scope and exam format only: nothing from them is copied to
+the site or committed to git. `blocked-by-network` means this machine's network filters Google Drive —
+stop, report it, and continue with the other sources; do not look for a way around it.
+
 ### 1b. A PDF is checked only after a visual read
 Text extracted from a PDF can drop table rows, interleave columns or reorder mixed Hebrew/English
 lines **without any sign of it**: on 2026-11-11 two Bar-Ilan lesson tables were absent from the
@@ -241,7 +270,7 @@ PDFs; a new lecturer means a new lecturer profile (2b). Course numbers change (1
 search the old and new code. Student reports ("הסדר אצלכם שונה?") arrive in /admin/feedback —
 a verified report can raise a course to `students`.
 **Students are the only source for what is never public** (exact lecture order, Technion grading,
-recent exams): every exam a student uploads (`/admin/exams`) and every recurring lesson-chat gap
+recent exams) — through what they publish (drives, Scribd/Studocu, step 1c) and what they upload to the site: every exam a student uploads (`/admin/exams`) and every recurring lesson-chat gap
 (`scripts/question-gaps.ts`) re-opens step 2a and the scope check for that course. Weigh recent
 material (2022+) over old exams — a 2010 exam can describe an older version of the course.
 
