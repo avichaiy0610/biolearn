@@ -1,0 +1,33 @@
+function HeterochromatinSpreading() {
+  const nuc = (x: number, y: number, marked: boolean) => (
+    <g key={`${x}${y}`}>
+      <circle cx={x} cy={y} r={13} fill={marked ? FILL.red : FILL.yellow} stroke={marked ? RED : ORANGE} strokeWidth={1.4} />
+      {marked && <circle cx={x} cy={y - 18} r={5} fill={RED} />}
+    </g>
+  );
+  const row = (y: number, boundary: boolean) => {
+    const xs = [40, 80, 120, 160, 200, 240, 280, 320];
+    const reach = boundary ? 200 : 320;
+    return (
+      <g>
+        <Dna x0={20} x1={440} y={y} c={LINE} />
+        <rect x={20} y={y - 16} width={56} height={32} rx={6} fill="none" stroke={RED} strokeWidth={1.4} {...dash} />
+        {xs.map((x) => nuc(x, y, x <= reach))}
+        {boundary && <Seg x0={214} x1={226} y={y} c={INK} fill={INK} h={30} />}
+        <Seg x0={340} x1={430} y={y} label="white" c={boundary ? GREEN : MUTED} fill={boundary ? FILL.green : FILL.gray} />
+        <Arrow x1={60} y1={y + 30} x2={(boundary ? 200 : 320)} y2={y + 30} color={RED} width={2.4} />
+        <He x={385} y={y + 34} size={11.5} bold color={boundary ? GREEN : RED}>{boundary ? "פעיל" : "מושתק"}</He>
+      </g>
+    );
+  };
+  return (
+    <Svg h={250} label="התפשטות הטרוכרומטין מאתר הנבטה: אנזים H3K9 יחד עם HP1 מעבירים את הסימן מנוקלאוזום לנוקלאוזום. למעלה, גבול (מבודד מסוג מחסום) עוצר את ההתפשטות והגן פעיל; למטה, בלי גבול — ההטרוכרומטין מגיע לגן ומשתיק אותו, כמו באפקט המיקום המגוון">
+      <He x={240} y={22} size={12} bold>עם גבול</He>
+      {row(70, true)}
+      <He x={240} y={140} size={12} bold>בלי גבול (PEV)</He>
+      {row(188, false)}
+      <He x={48} y={240} size={10.5} color={RED}>אתר נבטה</He>
+      <circle cx={130} cy={236} r={5} fill={RED} /><La x={140} y={240} size={10.5} anchor="start">H3K9me3 + HP1</La>
+    </Svg>
+  );
+}

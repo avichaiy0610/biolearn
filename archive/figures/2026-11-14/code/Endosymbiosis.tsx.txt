@@ -1,0 +1,33 @@
+function Endosymbiosis() {
+  const X = [410, 290, 170, 50];
+  return (
+    <Svg h={230} label="אנדוסימביוזה: תא מאכסן ארכאי בולע α-פרוטאובקטריה, שהופכת למיטוכונדריון. אאוקריוט כזה בולע ציאנובקטריה, שהופכת לכלורופלסט עם שתי ממברנות — אצה. באנדוסימביוזה משנית אאוקריוט בולע אצה, ונוצר כלורופלסט עם שלוש או ארבע ממברנות ולפעמים שריד של גרעין האצה (נוקלאומורף).">
+      <circle cx={X[0]} cy={90} r={42} fill={FILL.sky} stroke={TEAL} strokeWidth={1.8} />
+      <ellipse cx={X[0] + 10} cy={84} rx={14} ry={8} fill={FILL.red} stroke={RED} strokeWidth={1.4} />
+      <circle cx={X[1]} cy={90} r={42} fill={FILL.cyto} stroke={MUTED} strokeWidth={1.8} />
+      <circle cx={X[1] - 12} cy={86} r={13} fill={FILL.purple} stroke={PURPLE} strokeWidth={1.4} />
+      <Mito x={X[1] + 18} y={104} /><Mito x={X[1] + 14} y={68} s={0.8} />
+      <ellipse cx={X[1] + 30} cy={40} rx={14} ry={7} fill={FILL.teal} stroke={TEAL} strokeWidth={1.4} />
+      <circle cx={X[2]} cy={90} r={42} fill={FILL.cyto} stroke={MUTED} strokeWidth={1.8} />
+      <circle cx={X[2] - 14} cy={98} r={11} fill={FILL.purple} stroke={PURPLE} strokeWidth={1.4} />
+      <Mito x={X[2] + 16} y={112} s={0.8} />
+      <Chloro x={X[2] + 8} y={74} />
+      <circle cx={X[3]} cy={90} r={42} fill={FILL.cyto} stroke={MUTED} strokeWidth={1.8} />
+      <circle cx={X[3] - 18} cy={104} r={10} fill={FILL.purple} stroke={PURPLE} strokeWidth={1.4} />
+      <Chloro x={X[3] + 6} y={76} rings={4} />
+      <circle cx={X[3] + 26} cy={68} r={3} fill={PURPLE} />
+      {[0, 1, 2].map((i) => <Arrow key={i} x1={X[i] - 46} y1={90} x2={X[i + 1] + 46} y2={90} width={2} />)}
+      {([[0, "מאכסן ארכאי בולע", "α-פרוטאובקטריה"], [1, "אאוקריוט עם מיטוכונדריון;", "בולע ציאנובקטריה"], [2, "אצה: כלורופלסט", "עם 2 ממברנות"], [3, "אאוקריוט בולע אצה:", "3–4 ממברנות"]] as [number, string, string][]).map(([i, a, b]) => (
+        <g key={i}>
+          <He x={X[i]} y={154} size={10.5}>{a}</He>
+          <He x={X[i]} y={170} size={10.5}>{b}</He>
+        </g>
+      ))}
+      <He x={X[0]} y={200} size={10} color={RED}>אדום — החיידק שנבלע</He>
+      <He x={X[1] + 6} y={22} size={10} color={TEAL}>ציאנובקטריה</He>
+      <He x={X[3] + 40} y={32} size={10} color={PURPLE}>נוקלאומורף</He>
+      <Lead x1={X[3] + 36} y1={38} x2={X[3] + 28} y2={64} />
+      <He x={240} y={222} size={10} color={MUTED}>ראשונית → צמחים, אצות ירוקות ואדומות; משנית → דיאטומאות, אצות חומות, אוגלנה</He>
+    </Svg>
+  );
+}

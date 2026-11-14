@@ -3,7 +3,7 @@
    Hanley, Essential Endocrinology — never copied. Labels sit beside shapes and arrows, never on a line.
    Referenced from lesson bodies as [[figure:<id>]]. */
 import type React from "react";
-import { ArrowDefs, Axes, BLUE, GREEN, INK, MUTED, ORANGE, He, La, curve, scale } from "./biochemFigures";
+import { ArrowDefs, Axes, BLUE, GREEN, MUTED, ORANGE, He, La, curve, scale } from "./biochemFigures";
 import { Arrow } from "./metabolicFigures";
 
 import { BetaCell } from "./redraws/BetaCell";
@@ -11,9 +11,9 @@ import { GpcrCascade } from "./redraws/GpcrCascade";
 import { HypothalamicPituitary } from "./redraws/HypothalamicPituitary";
 import { ThyroidSynthesis } from "./redraws/ThyroidSynthesis";
 import { ElisaFormats } from "./redraws/ElisaFormats";
+import { NuclearReceptor } from "./redraws/NuclearReceptor";
 const PURPLE = "#7c3aed";
 const RED = "#b91c1c";
-const TEAL = "#0f766e";
 const FILL = { blue: "#dbeafe", green: "#dcfce7", orange: "#ffedd5", purple: "#ede9fe", yellow: "#fef3c7", gray: "#f1f5f9", red: "#fee2e2", sky: "#e0f2fe", teal: "#ccfbf1", cyto: "#fff7ed" };
 
 const Svg = ({ w = 480, h, label, children }: { w?: number; h: number; label: string; children: React.ReactNode }) => (
@@ -25,7 +25,6 @@ const Svg = ({ w = 480, h, label, children }: { w?: number; h: number; label: st
     {children}
   </svg>
 );
-const Lead = ({ x1, y1, x2, y2 }: { x1: number; y1: number; x2: number; y2: number }) => <line x1={x1} y1={y1} x2={x2} y2={y2} stroke={MUTED} strokeWidth={1} />;
 // Dashed red feedback path with a red arrowhead.
 const Fb = ({ d }: { d: string }) => <path d={d} fill="none" stroke={RED} strokeWidth={1.6} strokeDasharray="5 4" markerEnd="url(#enArrowRed)" />;
 // Labelled box; the text sits inside the shape.
@@ -124,44 +123,7 @@ function HormoneClasses() {
 // GpcrCascade: recomposed at textbook level, one picture on desktop (2026-11-07) — see ./redraws/GpcrCascade.tsx; old code in archive/figures/2026-11-07/.
 
 // ── en-nuclear-receptor ──────────────────────────────────────────────────────
-function NuclearReceptor() {
-  const num = (x: number, y: number, n: string) => (
-    <g key={n}>
-      <circle cx={x} cy={y} r={8} fill={RED} />
-      <He x={x} y={y + 4} size={10} bold color="white">{n}</He>
-    </g>
-  );
-  return (
-    <Svg h={340} label="קולטן גרעיני לסטרואיד: ההורמון חודר את הממברנה, נקשר לקולטן בציטופלזמה ומשחרר אותו מחלבון ההלם HSP90, הקולטן עובר כדימר לגרעין, נקשר לאלמנט התגובה להורמון ב-DNA, מגייס קו-אקטיבטורים, ונוצרים mRNA וחלבון חדש.">
-      <ellipse cx={250} cy={132} rx={222} ry={104} fill={FILL.cyto} stroke={ORANGE} strokeWidth={1.4} />
-      <ellipse cx={334} cy={140} rx={110} ry={66} fill={FILL.purple} stroke={PURPLE} strokeWidth={1.4} />
-      <polygon points="54,30 64,30 68,38 59,44 50,38" fill={GREEN} />
-      <He x={86} y={28} size={10} anchor="start">הורמון</He>
-      <Arrow x1={64} y1={46} x2={96} y2={104} color={GREEN} />
-      <rect x={98} y={110} width={30} height={16} rx={5} fill={FILL.orange} stroke={ORANGE} />
-      <ellipse cx={113} cy={136} rx={20} ry={8} fill={FILL.gray} stroke={MUTED} />
-      <La x={113} y={160} size={9} color={MUTED}>HSP90</La>
-      <Arrow x1={132} y1={116} x2={232} y2={124} color={ORANGE} />
-      <rect x={240} y={118} width={22} height={16} rx={5} fill={FILL.orange} stroke={ORANGE} />
-      <rect x={264} y={118} width={22} height={16} rx={5} fill={FILL.orange} stroke={ORANGE} />
-      <line x1={232} y1={160} x2={430} y2={160} stroke={INK} strokeWidth={2.4} />
-      <rect x={240} y={156} width={48} height={8} fill={RED} />
-      <La x={264} y={180} size={9} color={RED}>HRE</La>
-      <Arrow x1={300} y1={150} x2={340} y2={150} color={PURPLE} />
-      <path d="M346 150 q8 -8 16 0 t16 0 t16 0" fill="none" stroke={PURPLE} strokeWidth={1.6} />
-      <La x={370} y={136} size={9} color={PURPLE}>mRNA</La>
-      <Arrow x1={330} y1={186} x2={230} y2={214} color={PURPLE} />
-      <circle cx={216} cy={218} r={9} fill={FILL.gray} stroke={MUTED} />
-      <path d="M200 222 q-8 6 -16 0 t-16 0" fill="none" stroke={BLUE} strokeWidth={2.4} />
-      {num(84, 74, "1")}{num(150, 102, "2")}{num(252, 102, "3")}{num(300, 176, "4")}{num(190, 200, "5")}
-      <He x={465} y={262} size={10.5} anchor="end">1 — ההורמון חודר בדיפוזיה דרך הממברנה</He>
-      <He x={465} y={278} size={10.5} anchor="end">2 — נקשר לקולטן, שמשתחרר מחלבון ההלם (HSP90)</He>
-      <He x={465} y={294} size={10.5} anchor="end">3 — הקולטן עובר לגרעין, לרוב כדימר</He>
-      <He x={465} y={310} size={10.5} anchor="end">4 — נקשר לאלמנט התגובה (HRE) ומגייס קו-אקטיבטורים</He>
-      <He x={465} y={326} size={10.5} anchor="end">5 — שעתוק ותרגום: חלבון חדש, אחרי שעות</He>
-    </Svg>
-  );
-}
+
 
 // ── en-feedback-axis ─────────────────────────────────────────────────────────
 function FeedbackAxis() {

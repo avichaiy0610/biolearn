@@ -6,6 +6,8 @@ import type React from "react";
 import { ArrowDefs, Axes, BLUE, GREEN, INK, MUTED, ORANGE, He, La, curve, dash, scale } from "./biochemFigures";
 import { Arrow } from "./metabolicFigures";
 import { DobzhanskyMuller, HaplodiploidRelatedness, RnaWorld, UpgmaTree, EmbryoHourglass } from "./evolutionExamFigures";
+import { LimbHomology } from "./redraws/LimbHomology";
+import { Endosymbiosis } from "./redraws/Endosymbiosis";
 
 const PURPLE = "#7c3aed";
 const RED = "#b91c1c";
@@ -49,45 +51,7 @@ function TreeReading() {
 }
 
 // ── ev-limb-homology ─────────────────────────────────────────────────────────
-type Limb = { x: number; name: string; h1: number; h2: number; dl: number; spread: number; w?: number; skin?: "wing" | "flipper" };
-function LimbHomology() {
-  const C = { hum: ORANGE, rad: BLUE, car: GREEN, dig: PURPLE };
-  const limbs: Limb[] = [
-    { x: 420, name: "אדם", h1: 58, h2: 50, dl: 30, spread: 26 },
-    { x: 300, name: "עטלף", h1: 38, h2: 52, dl: 62, spread: 74, skin: "wing" },
-    { x: 180, name: "לווייתן", h1: 20, h2: 22, dl: 52, spread: 18, w: 14, skin: "flipper" },
-    { x: 60, name: "חתול", h1: 50, h2: 48, dl: 14, spread: 16 },
-  ];
-  return (
-    <Svg h={262} label="הגפה הקדמית של אדם, עטלף, לווייתן וחתול: אותן עצמות באותו סדר — עצם אחת בזרוע (כתום), שתיים באמה (כחול), שורש כף היד (ירוק) ואצבעות (סגול) — בפרופורציות שונות לפי התפקיד.">
-      {limbs.map((l) => {
-        const y0 = 24, w = l.w ?? 9, y1 = y0 + l.h1 + 4, y2 = y1 + l.h2 + 2, cy = y2 + 8;
-        const digits = [-2, -1, 0, 1, 2].map((k) => {
-          const a = ((k * l.spread) / 2) * (Math.PI / 180);
-          return [l.x + Math.sin(a) * l.dl, cy + 8 + Math.cos(a) * l.dl] as [number, number];
-        });
-        return (
-          <g key={l.name}>
-            {l.skin === "wing" && <polygon points={[[l.x - 6, cy], ...digits, [l.x + 6, cy]].map((p) => p.join(",")).join(" ")} fill="#e2e8f0" stroke="none" />}
-            {l.skin === "flipper" && <ellipse cx={l.x} cy={cy + 26} rx={22} ry={40} fill="#e2e8f0" stroke="none" />}
-            <rect x={l.x - w / 2} y={y0} width={w} height={l.h1} rx={4} fill={C.hum} />
-            <rect x={l.x - w / 2 - 1} y={y1} width={w / 2} height={l.h2} rx={3} fill={C.rad} />
-            <rect x={l.x + 1} y={y1} width={w / 2} height={l.h2} rx={3} fill={C.rad} />
-            {[-6, 0, 6].map((d) => <circle key={d} cx={l.x + d} cy={cy} r={3.4} fill={C.car} />)}
-            {digits.map(([x, y], i) => <line key={i} x1={l.x + (i - 2) * 2.5} y1={cy + 5} x2={x} y2={y} stroke={C.dig} strokeWidth={3} strokeLinecap="round" />)}
-            <He x={l.x} y={214} size={12.5} bold>{l.name}</He>
-          </g>
-        );
-      })}
-      {([[430, "עצם הזרוע", C.hum], [320, "שתי עצמות האמה", C.rad], [200, "שורש כף היד", C.car], [85, "אצבעות", C.dig]] as [number, string, string][]).map(([x, t, c]) => (
-        <g key={t}>
-          <rect x={x + 4} y={236} width={10} height={10} fill={c} />
-          <He x={x} y={245} size={10.5} anchor="end">{t}</He>
-        </g>
-      ))}
-    </Svg>
-  );
-}
+
 
 // ── ev-hgt ───────────────────────────────────────────────────────────────────
 const Cell = ({ x, y, rx = 34, ry = 20, c = BLUE, f = FILL.blue }: { x: number; y: number; rx?: number; ry?: number; c?: string; f?: string }) => <ellipse cx={x} cy={y} rx={rx} ry={ry} fill={f} stroke={c} strokeWidth={1.6} />;
@@ -128,51 +92,7 @@ function Hgt() {
 }
 
 // ── ev-endosymbiosis ─────────────────────────────────────────────────────────
-const Mito = ({ x, y, s = 1 }: { x: number; y: number; s?: number }) => (
-  <g>
-    <ellipse cx={x} cy={y} rx={13 * s} ry={7 * s} fill={FILL.orange} stroke={ORANGE} strokeWidth={1.2} />
-    <path d={`M${x - 9 * s} ${y} l3 -4 l3 8 l3 -8 l3 8 l3 -4`} fill="none" stroke={ORANGE} strokeWidth={0.9} />
-  </g>
-);
-const Chloro = ({ x, y, rings = 2 }: { x: number; y: number; rings?: number }) => (
-  <g>
-    {Array.from({ length: rings }, (_, i) => <ellipse key={i} cx={x} cy={y} rx={16 + i * 3.5} ry={9 + i * 3.5} fill={i === 0 ? FILL.green : "none"} stroke={GREEN} strokeWidth={1.1} />)}
-    {[-7, 0, 7].map((d) => <rect key={d} x={x + d - 2} y={y - 5} width={4} height={10} fill={GREEN} opacity={0.6} />)}
-  </g>
-);
-function Endosymbiosis() {
-  const X = [410, 290, 170, 50];
-  return (
-    <Svg h={230} label="אנדוסימביוזה: תא מאכסן ארכאי בולע α-פרוטאובקטריה, שהופכת למיטוכונדריון. אאוקריוט כזה בולע ציאנובקטריה, שהופכת לכלורופלסט עם שתי ממברנות — אצה. באנדוסימביוזה משנית אאוקריוט בולע אצה, ונוצר כלורופלסט עם שלוש או ארבע ממברנות ולפעמים שריד של גרעין האצה (נוקלאומורף).">
-      <circle cx={X[0]} cy={90} r={42} fill={FILL.sky} stroke={TEAL} strokeWidth={1.8} />
-      <ellipse cx={X[0] + 10} cy={84} rx={14} ry={8} fill={FILL.red} stroke={RED} strokeWidth={1.4} />
-      <circle cx={X[1]} cy={90} r={42} fill={FILL.cyto} stroke={MUTED} strokeWidth={1.8} />
-      <circle cx={X[1] - 12} cy={86} r={13} fill={FILL.purple} stroke={PURPLE} strokeWidth={1.4} />
-      <Mito x={X[1] + 18} y={104} /><Mito x={X[1] + 14} y={68} s={0.8} />
-      <ellipse cx={X[1] + 30} cy={40} rx={14} ry={7} fill={FILL.teal} stroke={TEAL} strokeWidth={1.4} />
-      <circle cx={X[2]} cy={90} r={42} fill={FILL.cyto} stroke={MUTED} strokeWidth={1.8} />
-      <circle cx={X[2] - 14} cy={98} r={11} fill={FILL.purple} stroke={PURPLE} strokeWidth={1.4} />
-      <Mito x={X[2] + 16} y={112} s={0.8} />
-      <Chloro x={X[2] + 8} y={74} />
-      <circle cx={X[3]} cy={90} r={42} fill={FILL.cyto} stroke={MUTED} strokeWidth={1.8} />
-      <circle cx={X[3] - 18} cy={104} r={10} fill={FILL.purple} stroke={PURPLE} strokeWidth={1.4} />
-      <Chloro x={X[3] + 6} y={76} rings={4} />
-      <circle cx={X[3] + 26} cy={68} r={3} fill={PURPLE} />
-      {[0, 1, 2].map((i) => <Arrow key={i} x1={X[i] - 46} y1={90} x2={X[i + 1] + 46} y2={90} width={2} />)}
-      {([[0, "מאכסן ארכאי בולע", "α-פרוטאובקטריה"], [1, "אאוקריוט עם מיטוכונדריון;", "בולע ציאנובקטריה"], [2, "אצה: כלורופלסט", "עם 2 ממברנות"], [3, "אאוקריוט בולע אצה:", "3–4 ממברנות"]] as [number, string, string][]).map(([i, a, b]) => (
-        <g key={i}>
-          <He x={X[i]} y={154} size={10.5}>{a}</He>
-          <He x={X[i]} y={170} size={10.5}>{b}</He>
-        </g>
-      ))}
-      <He x={X[0]} y={200} size={10} color={RED}>אדום — החיידק שנבלע</He>
-      <He x={X[1] + 6} y={22} size={10} color={TEAL}>ציאנובקטריה</He>
-      <He x={X[3] + 40} y={32} size={10} color={PURPLE}>נוקלאומורף</He>
-      <Lead x1={X[3] + 36} y1={38} x2={X[3] + 28} y2={64} />
-      <He x={240} y={222} size={10} color={MUTED}>ראשונית → צמחים, אצות ירוקות ואדומות; משנית → דיאטומאות, אצות חומות, אוגלנה</He>
-    </Svg>
-  );
-}
+
 
 // ── ev-animal-tree ───────────────────────────────────────────────────────────
 function AnimalTree() {

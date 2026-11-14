@@ -7,6 +7,8 @@ import { Arrow } from "./metabolicFigures";
 
 import { DnaBindingMotifs } from "./redraws/DnaBindingMotifs";
 import { TadLoopExtrusion } from "./redraws/TadLoopExtrusion";
+import { HistoneMarks } from "./redraws/HistoneMarks";
+import { HeterochromatinSpreading } from "./redraws/HeterochromatinSpreading";
 const PURPLE = "#7c3aed";
 const RED = "#b91c1c";
 const FILL = { blue: "#dbeafe", green: "#dcfce7", orange: "#ffedd5", purple: "#ede9fe", yellow: "#fef3c7", gray: "#f1f5f9", red: "#fee2e2", sky: "#e0f2fe" };
@@ -25,12 +27,6 @@ const LBox = ({ x, y, w, h = 26, label, c = BLUE, fill = FILL.blue, size = 12, b
   <g>
     <rect x={x - w / 2} y={y} width={w} height={h} rx={6} fill={fill} stroke={c} strokeWidth={1.5} />
     <La x={x} y={y + h / 2 + size * 0.36} size={size} bold={bold}>{label}</La>
-  </g>
-);
-const HBox = ({ x, y, w, h = 26, label, c = BLUE, fill = FILL.blue, size = 12, bold = false }: { x: number; y: number; w: number; h?: number; label: React.ReactNode; c?: string; fill?: string; size?: number; bold?: boolean }) => (
-  <g>
-    <rect x={x - w / 2} y={y} width={w} height={h} rx={6} fill={fill} stroke={c} strokeWidth={1.5} />
-    <He x={x} y={y + h / 2 + size * 0.36} size={size} bold={bold}>{label}</He>
   </g>
 );
 // DNA drawn as a double line.
@@ -219,41 +215,7 @@ function GalSwitch() {
 }
 
 // ── gx-chromatin-modifications ───────────────────────────────────────────────
-function HistoneMarks() {
-  const marks: [number, string, string, string, string][] = [
-    [125, "K4me3", GREEN, "פרומוטור פעיל", "קורא: PHD"],
-    [215, "K9me3", RED, "הטרוכרומטין", "קורא: HP1"],
-    [305, "K27me3", RED, "Polycomb", "קורא: PRC1"],
-    [400, "K36me3", GREEN, "גוף גן פעיל", ""],
-  ];
-  return (
-    <Svg h={250} label="סימנים על זנב ההיסטון H3: אצטילציה של ליזינים קשורה לגנים פעילים; H3K4me3 בפרומוטורים פעילים; H3K36me3 בגוף גנים משועתקים; H3K9me3 בהטרוכרומטין; H3K27me3 בהשתקה של Polycomb. לכל סימן יש כותב, קורא ומוחק">
-      <ellipse cx={58} cy={92} rx={40} ry={34} fill={FILL.yellow} stroke={ORANGE} strokeWidth={1.6} />
-      <He x={58} y={96} size={11.5} bold>נוקלאוזום</He>
-      <Line x1={98} y1={92} x2={440} y2={92} c={INK} w={2.4} />
-      <La x={454} y={96} size={11} color={MUTED}>N</La>
-      <La x={440} y={78} size={11} color={MUTED}>H3</La>
-      {marks.map(([x, t, c, a, b]) => (
-        <g key={t}>
-          <Line x1={x} y1={92} x2={x} y2={116} c={c} w={1.6} />
-          <circle cx={x} cy={124} r={9} fill={c === GREEN ? FILL.green : FILL.red} stroke={c} strokeWidth={1.5} />
-          <La x={x} y={127} size={9} bold color={c}>me</La>
-          <La x={x} y={150} size={12} bold color={c}>{t}</La>
-          <He x={x} y={168} size={10.5}>{a}</He>
-          {b && <He x={x} y={184} size={10} color={MUTED}>{b}</He>}
-        </g>
-      ))}
-      {[170, 260, 350].map((x) => (
-        <g key={x}><Line x1={x} y1={92} x2={x} y2={70} c={BLUE} w={1.4} /><circle cx={x} cy={64} r={7} fill={FILL.blue} stroke={BLUE} strokeWidth={1.3} /><La x={x} y={67} size={8.5} bold color={BLUE}>ac</La></g>
-      ))}
-      <He x={260} y={44} size={10.5} color={BLUE}>אצטילציה — כרומטין פתוח</He>
-      <line x1={20} x2={460} y1={200} y2={200} stroke={LINE} strokeWidth={1} />
-      <He x={400} y={224} size={11.5} bold>כותבים</He><He x={400} y={240} size={10.5} color={MUTED}>HATs, מתילטרנספראזות</He>
-      <He x={250} y={224} size={11.5} bold>קוראים</He><He x={250} y={240} size={10.5} color={MUTED}>ברומודומיין, כרומודומיין</He>
-      <He x={100} y={224} size={11.5} bold>מוחקים</He><He x={100} y={240} size={10.5} color={MUTED}>HDACs, דה-מתילאזות</He>
-    </Svg>
-  );
-}
+
 
 function DnaMethylationMaintenance() {
   const duplex = (x: number, y: number, top: boolean, bot: boolean, newBot = false) => (
@@ -287,39 +249,7 @@ function DnaMethylationMaintenance() {
 }
 
 // ── gx-epigenetics ───────────────────────────────────────────────────────────
-function HeterochromatinSpreading() {
-  const nuc = (x: number, y: number, marked: boolean) => (
-    <g key={`${x}${y}`}>
-      <circle cx={x} cy={y} r={13} fill={marked ? FILL.red : FILL.yellow} stroke={marked ? RED : ORANGE} strokeWidth={1.4} />
-      {marked && <circle cx={x} cy={y - 18} r={5} fill={RED} />}
-    </g>
-  );
-  const row = (y: number, boundary: boolean) => {
-    const xs = [40, 80, 120, 160, 200, 240, 280, 320];
-    const reach = boundary ? 200 : 320;
-    return (
-      <g>
-        <Dna x0={20} x1={440} y={y} c={LINE} />
-        <rect x={20} y={y - 16} width={56} height={32} rx={6} fill="none" stroke={RED} strokeWidth={1.4} {...dash} />
-        {xs.map((x) => nuc(x, y, x <= reach))}
-        {boundary && <Seg x0={214} x1={226} y={y} c={INK} fill={INK} h={30} />}
-        <Seg x0={340} x1={430} y={y} label="white" c={boundary ? GREEN : MUTED} fill={boundary ? FILL.green : FILL.gray} />
-        <Arrow x1={60} y1={y + 30} x2={(boundary ? 200 : 320)} y2={y + 30} color={RED} width={2.4} />
-        <He x={385} y={y + 34} size={11.5} bold color={boundary ? GREEN : RED}>{boundary ? "פעיל" : "מושתק"}</He>
-      </g>
-    );
-  };
-  return (
-    <Svg h={250} label="התפשטות הטרוכרומטין מאתר הנבטה: אנזים H3K9 יחד עם HP1 מעבירים את הסימן מנוקלאוזום לנוקלאוזום. למעלה, גבול (מבודד מסוג מחסום) עוצר את ההתפשטות והגן פעיל; למטה, בלי גבול — ההטרוכרומטין מגיע לגן ומשתיק אותו, כמו באפקט המיקום המגוון">
-      <He x={240} y={22} size={12} bold>עם גבול</He>
-      {row(70, true)}
-      <He x={240} y={140} size={12} bold>בלי גבול (PEV)</He>
-      {row(188, false)}
-      <He x={48} y={240} size={10.5} color={RED}>אתר נבטה</He>
-      <circle cx={130} cy={236} r={5} fill={RED} /><La x={140} y={240} size={10.5} anchor="start">H3K9me3 + HP1</La>
-    </Svg>
-  );
-}
+
 
 function XInactivationSteps() {
   const chrom = (x: number, y: number, c: string, fill: string, h = 90) => <rect x={x - 9} y={y} width={18} height={h} rx={9} fill={fill} stroke={c} strokeWidth={1.5} />;

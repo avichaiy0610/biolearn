@@ -1,0 +1,35 @@
+function Blastema() {
+  const C = [60, 180, 300, 420];
+  const stump = (c: number, top = 120) => (
+    <g>
+      <rect x={c - 14} y={top} width={28} height={190 - top} fill={FILL.pink} stroke={PINK} strokeWidth={1} />
+      <rect x={c - 4} y={top + 6} width={8} height={184 - top} fill="#e2e8f0" />
+    </g>
+  );
+  return (
+    <Svg h={222} label="שלבי ההתחדשות של גפת סלמנדרה: (1) קטיעה; (2) אפידרמיס פצע מכסה את הגדם ומתעבה לכיפה (AEC); (3) תאים בגדם מאבדים מיון ויוצרים בלסטמה מתחת לכיפה — בעזרת אותות מהעצב; (4) הבלסטמה מתמיינת ובונה מחדש את החלק החסר (כתום).">
+      {stump(C[0])}
+      <line x1={C[0] - 22} y1={118} x2={C[0] + 22} y2={118} stroke={RED} strokeWidth={1.2} strokeDasharray="4 3" />
+
+      {stump(C[1])}
+      <path d={`M${C[1] - 14} 122 Q${C[1]} 106 ${C[1] + 14} 122`} fill="none" stroke={GREEN} strokeWidth={6} />
+
+      {stump(C[2])}
+      <ellipse cx={C[2]} cy={104} rx={16} ry={18} fill={FILL.orange} stroke={ORANGE} strokeWidth={1.2} />
+      <path d={`M${C[2] - 16} 100 Q${C[2]} 76 ${C[2] + 16} 100`} fill="none" stroke={GREEN} strokeWidth={6} />
+      <La x={C[2]} y={66} size={9.5} color={GREEN}>AEC</La>
+      <line x1={C[2] + 8} y1={186} x2={C[2] + 8} y2={118} stroke={GOLD} strokeWidth={1.8} />
+      <He x={C[2] + 22} y={162} size={9.5} color={GOLD} anchor="start">עצב</He>
+      <Lead x1={C[2] + 20} y1={158} x2={C[2] + 10} y2={152} />
+
+      <rect x={C[3] - 14} y={60} width={28} height={60} fill={FILL.orange} stroke={ORANGE} strokeWidth={1} />
+      {stump(C[3])}
+      {[-9, 0, 9].map((d) => <rect key={d} x={C[3] + d - 2.5} y={36} width={5} height={24} rx={2.5} fill={FILL.orange} stroke={ORANGE} strokeWidth={1} />)}
+
+      <He x={C[0]} y={210} size={9.5} bold>1. קטיעה</He>
+      <He x={C[1]} y={210} size={9.5} bold>2. אפידרמיס פצע</He>
+      <He x={C[2]} y={210} size={9.5} bold>3. בלסטמה</He>
+      <He x={C[3]} y={210} size={9.5} bold>4. בנייה מחדש</He>
+    </Svg>
+  );
+}
