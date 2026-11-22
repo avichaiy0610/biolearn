@@ -1,0 +1,26 @@
+function TwoSignals() {
+  return (
+    <Svg h={260} label="הפעלת תא T נאיבי: אות 1 — הקולטן מזהה פפטיד על MHC; אות 2 — CD28 נקשר ל-B7 על תא דנדריטי מופעל; אות 3 — ציטוקינים שמכוונים את ההתמיינות. שני האותות יחד מובילים להפרשת IL-2 ולהתרבות; אות 1 בלבד מוביל לאנרגיה. CTLA-4 מתחרה על B7 ומעכב.">
+      <path d="M40 40 L150 30 L170 80 L160 170 L120 210 L50 200 L30 120 Z" fill={FILL.orange} stroke={ORANGE} strokeWidth={1.4} />
+      <He x={92} y={120} size={11} bold>תא דנדריטי</He>
+      <He x={92} y={136} size={9} color={MUTED}>מופעל (PAMPs)</He>
+      <circle cx={330} cy={120} r={70} fill={FILL.blue} stroke={BLUE} strokeWidth={1.4} />
+      <He x={346} y={124} size={11} bold>תא T נאיבי</He>
+      <rect x={168} y={66} width={14} height={18} fill={GREEN} /><rect x={248} y={66} width={14} height={18} fill={BLUE} />
+      <line x1={182} y1={75} x2={248} y2={75} stroke={INK} strokeWidth={2} />
+      <He x={215} y={60} size={10} bold>אות 1</He>
+      <La x={160} y={98} size={8.5} color={GREEN} anchor="end">MHC+פפטיד</La>
+      <La x={255} y={98} size={8.5} color={BLUE}>TCR</La>
+      <rect x={160} y={140} width={14} height={18} fill={ORANGE} /><rect x={254} y={140} width={14} height={18} fill={PURPLE} />
+      <line x1={174} y1={149} x2={254} y2={149} stroke={INK} strokeWidth={2} />
+      <He x={215} y={134} size={10} bold>אות 2</He>
+      <La x={167} y={172} size={8.5} color={ORANGE}>B7</La>
+      <La x={261} y={172} size={8.5} color={PURPLE}>CD28</La>
+      <Arrow x1={150} y1={196} x2={262} y2={180} color={TEAL} />
+      <He x={196} y={208} size={10} color={TEAL}>אות 3: ציטוקינים</He>
+      <He x={430} y={40} size={10} color={GREEN} anchor="end">1 + 2: IL-2 והתרבות</He>
+      <He x={470} y={212} size={10} color={RED} anchor="end">1 בלבד: אנרגיה</He>
+      <He x={240} y={246} size={9.5} color={MUTED}>CTLA-4 (על תאים מופעלים ו-Treg) נקשר ל-B7 חזק יותר מ-CD28 — ומעכב</He>
+    </Svg>
+  );
+}

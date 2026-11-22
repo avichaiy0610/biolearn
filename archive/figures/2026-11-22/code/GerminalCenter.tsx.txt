@@ -1,0 +1,28 @@
+function GerminalCenter() {
+  return (
+    <Svg h={290} label="מרכז הנבט: באזור הכהה תאי B מתחלקים מהר ועוברים היפר-מוטציה; באזור הבהיר הם קושרים אנטיגן על תאים דנדריטיים זקיקיים ומציגים אותו לתאי Tfh. תאים בזיקה גבוהה מקבלים אות הישרדות וחוזרים לסבב נוסף או יוצאים כתאי פלזמה ותאי זיכרון; השאר מתים באפופטוזיס.">
+      <ellipse cx={210} cy={140} rx={170} ry={100} fill={FILL.blue} stroke={BLUE} strokeWidth={1.4} />
+      <path d="M210 40 A170 100 0 0 0 210 240 Z" fill="#bfdbfe" />
+      <He x={120} y={66} size={11} bold>אזור כהה</He>
+      <He x={290} y={76} size={11} bold>אזור בהיר</He>
+      {[[90, 110], [120, 150], [80, 180], [150, 180], [150, 104]].map(([x, y], i) => <circle key={`d${i}`} cx={x} cy={y} r={9} fill={FILL.blue} stroke={BLUE} />)}
+      <He x={112} y={210} size={9.5}>חלוקה + היפר-מוטציה</He>
+      <path d="M300 130 l8 -14 l4 14 l14 -4 l-10 10 l12 8 l-14 0 l-2 14 l-6 -12 l-12 6 l6 -12 l-12 -6 z" fill={FILL.orange} stroke={ORANGE} />
+      <He x={312} y={182} size={9} color={ORANGE}>תא דנדריטי זקיקי</He>
+      <circle cx={262} cy={150} r={9} fill={FILL.blue} stroke={BLUE} />
+      <circle cx={340} cy={108} r={10} fill={FILL.green} stroke={GREEN} />
+      <La x={340} y={92} size={9} color={GREEN}>Tfh</La>
+      <path d="M170 120 C 210 90, 230 100, 254 140" fill="none" stroke={INK} strokeWidth={1.4} markerEnd="url(#bfArrow)" />
+      <path d="M254 164 C 220 200, 190 196, 160 180" fill="none" stroke={INK} strokeWidth={1.4} markerEnd="url(#bfArrow)" />
+      <He x={210} y={92} size={9} color={MUTED}>נבחנים</He>
+      <He x={204} y={214} size={9} color={MUTED}>זיקה גבוהה — עוד סבב</He>
+      <Arrow x1={380} y1={140} x2={422} y2={124} color={PURPLE} />
+      <Arrow x1={380} y1={150} x2={430} y2={180} color={TEAL} />
+      <He x={452} y={100} size={10} color={PURPLE}>תא פלזמה</He>
+      <He x={452} y={114} size={9} color={MUTED}>(למח העצם)</He>
+      <He x={448} y={196} size={10} color={TEAL}>תא B זיכרון</He>
+      <Arrow x1={300} y1={226} x2={326} y2={262} color={RED} />
+      <He x={360} y={276} size={10} color={RED}>זיקה נמוכה — אפופטוזיס</He>
+    </Svg>
+  );
+}

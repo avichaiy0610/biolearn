@@ -1,0 +1,28 @@
+function Mucosa() {
+  return (
+    <Svg w={500} h={300} label="חסינות ברירית המעי: תא M מעביר חיידקים מחלל המעי לכתם פייר שמתחתיו, שבו תאי B עוברים החלפה ל-IgA. תאי פלזמה ברירית מפרישים IgA דימרי, שנקשר לקולטן pIgR בצד הבסיסי של תא האפיתל, עובר דרך התא ומשתחרר לחלל המעי כ-IgA מופרש, שמנטרל חיידקים ומונע היצמדות.">
+      <rect x={10} y={10} width={480} height={60} fill={FILL.yellow} />
+      <He x={60} y={30} size={10} bold>חלל המעי</He>
+      {[[120, 40], [150, 28], [330, 46], [360, 30], [420, 44]].map(([x, y]) => <ellipse key={x + y} cx={x} cy={y} rx={9} ry={4} fill={GREEN} />)}
+      {Array.from({ length: 12 }, (_, i) => i).filter((i) => i !== 3).map((i) => <rect key={i} x={20 + i * 39} y={70} width={37} height={56} rx={4} fill={FILL.pink} stroke="#db2777" strokeWidth={0.8} />)}
+      <path d="M137 70 Q156 100 137 126" fill={FILL.pink} stroke="#db2777" strokeWidth={0.8} />
+      <rect x={137} y={70} width={20} height={56} fill="white" stroke="#db2777" strokeWidth={0.8} />
+      <He x={162} y={150} size={9.5} color="#db2777" anchor="start">תא M</He>
+      <Arrow x1={150} y1={46} x2={150} y2={168} color={GREEN} />
+      <path d="M60 230 Q150 150 240 230 Z" fill={FILL.blue} stroke={BLUE} />
+      <He x={150} y={222} size={10} bold>כתם פייר</He>
+      <He x={150} y={244} size={9} color={MUTED}>החלפה ל-IgA (TGF-β)</He>
+      <circle cx={330} cy={230} r={16} fill={FILL.purple} stroke={PURPLE} />
+      <He x={330} y={264} size={9.5} color={PURPLE}>תא פלזמה</He>
+      <path d="M346 222 Q370 190 380 140" fill="none" stroke={PURPLE} strokeWidth={1.4} markerEnd="url(#bfArrow)" />
+      <La x={384} y={190} size={9} color={PURPLE} anchor="start">IgA דימרי</La>
+      <rect x={376} y={124} width={8} height={6} fill={TEAL} />
+      <Arrow x1={392} y1={124} x2={392} y2={72} color={TEAL} />
+      <La x={400} y={144} size={9} color={TEAL} anchor="start">pIgR</La>
+      <Yab x={392} y={58} color={PURPLE} rot={180} />
+      <He x={476} y={24} size={9.5} color={PURPLE} anchor="end">IgA מופרש</He>
+      
+      <He x={250} y={290} size={9.5} color={MUTED}>IgA מנטרל ומונע היצמדות — בלי משלים ובלי דלקת</He>
+    </Svg>
+  );
+}

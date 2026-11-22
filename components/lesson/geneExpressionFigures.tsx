@@ -9,6 +9,8 @@ import { DnaBindingMotifs } from "./redraws/DnaBindingMotifs";
 import { TadLoopExtrusion } from "./redraws/TadLoopExtrusion";
 import { HistoneMarks } from "./redraws/HistoneMarks";
 import { HeterochromatinSpreading } from "./redraws/HeterochromatinSpreading";
+import { XInactivationSteps } from "./redraws/XInactivationSteps";
+import { MirnaPathway } from "./redraws/MirnaPathway";
 const PURPLE = "#7c3aed";
 const RED = "#b91c1c";
 const FILL = { blue: "#dbeafe", green: "#dcfce7", orange: "#ffedd5", purple: "#ede9fe", yellow: "#fef3c7", gray: "#f1f5f9", red: "#fee2e2", sky: "#e0f2fe" };
@@ -48,9 +50,6 @@ const Blob = ({ x, y, rx = 13, ry = 9, c = RED, fill = FILL.red, t, size = 10 }:
     <ellipse cx={x} cy={y} rx={rx} ry={ry} fill={fill} stroke={c} strokeWidth={1.4} />
     {t && <La x={x} y={y + size * 0.36} size={size} bold color={c}>{t}</La>}
   </g>
-);
-const Num = ({ x, y, n }: { x: number; y: number; n: number }) => (
-  <g><circle cx={x} cy={y} r={9} fill={INK} /><La x={x} y={y + 4} size={11} bold color="#ffffff">{n}</La></g>
 );
 const Cross = ({ x, y, c = RED }: { x: number; y: number; c?: string }) => (
   <g><Line x1={x - 6} y1={y - 6} x2={x + 6} y2={y + 6} c={c} w={2.4} /><Line x1={x - 6} y1={y + 6} x2={x + 6} y2={y - 6} c={c} w={2.4} /></g>
@@ -251,31 +250,7 @@ function DnaMethylationMaintenance() {
 // ── gx-epigenetics ───────────────────────────────────────────────────────────
 
 
-function XInactivationSteps() {
-  const chrom = (x: number, y: number, c: string, fill: string, h = 90) => <rect x={x - 9} y={y} width={18} height={h} rx={9} fill={fill} stroke={c} strokeWidth={1.5} />;
-  const steps: [string, string][] = [["ספירה ובחירה", "X אחד נבחר"], ["Xist מצפה", "רק את ה-X שלו (cis)"], ["השתקה", "PRC2 — H3K27me3"], ["שימור", "גופיף בר, מתילציה"]];
-  return (
-    <Svg h={230} label="ארבעה שלבים בהשבתת X: ספירה ובחירה של X אחד; Xist משועתק מה-X הנבחר ומצפה אותו בלבד; Xist מגייס את PRC2 ונוצר H3K27me3, והשעתוק נעצר; ה-X המושבת נדחס לגופיף בר, איי CpG ממותלים, וההשתקה עוברת בכל החלוקות">
-      {steps.map(([a, b], i) => {
-        const cx = 60 + i * 120;
-        return (
-          <g key={a}>
-            <Num x={cx} y={20} n={i + 1} />
-            {chrom(cx - 18, 46, BLUE, FILL.blue)}
-            {i === 0 && chrom(cx + 18, 46, BLUE, FILL.blue)}
-            {i === 0 && <Arrow x1={cx + 18} y1={150} x2={cx + 18} y2={140} color={PURPLE} />}
-            {i === 1 && (<g>{chrom(cx + 18, 46, PURPLE, FILL.purple)}{[56, 70, 84, 98, 112, 126].map((y) => <path key={y} d={`M${cx + 6} ${y} q12 -6 24 0`} fill="none" stroke={PURPLE} strokeWidth={1.6} />)}</g>)}
-            {i === 2 && (<g>{chrom(cx + 18, 46, RED, FILL.red)}{[60, 80, 100, 120].map((y) => <circle key={y} cx={cx + 32} cy={y} r={3.5} fill={RED} />)}</g>)}
-            {i === 3 && <ellipse cx={cx + 18} cy={92} rx={14} ry={22} fill={INK} />}
-            <He x={cx} y={168} size={12} bold>{a}</He>
-            <He x={cx} y={186} size={10.5} color={MUTED}>{b}</He>
-          </g>
-        );
-      })}
-      <He x={240} y={216} size={11} color={MUTED}>כחול — X פעיל · סגול — מצופה Xist · אדום — H3K27me3 · שחור — גופיף בר</He>
-    </Svg>
-  );
-}
+
 
 // ── gx-alternative-splicing ──────────────────────────────────────────────────
 function AltSplicingTypes() {
@@ -393,47 +368,7 @@ function MrnaDecay() {
 }
 
 // ── gx-ncrna ─────────────────────────────────────────────────────────────────
-function MirnaPathway() {
-  const hp = (x: number, y: number, len: number, c = PURPLE) => (
-    <g><path d={`M${x} ${y} l${len} 0 a7 7 0 1 1 0 8 l${-len} 0`} fill="none" stroke={c} strokeWidth={2} /></g>
-  );
-  return (
-    <Svg h={320} label="ייצור miRNA ופעולתו: בגרעין גן ה-miRNA משועתק ל-pri-miRNA שמתקפל לגבעול-לולאה; Drosha חותך ל-pre-miRNA; Exportin-5 מוציא אותו לציטופלזמה; Dicer חותך את הלולאה לדופלקס; גדיל אחד נטען על Argonaute ויוצר RISC, שמזווג עם קצה ה-3′ של mRNA מטרה דרך אזור הזרע ומוביל לעיכוב תרגום ולדה-אדנילציה">
-      <rect x={10} y={10} width={460} height={110} rx={16} fill={FILL.gray} stroke={LINE} strokeWidth={1.2} />
-      <He x={460} y={30} size={11} anchor="end" color={MUTED}>גרעין</He>
-      <Line x1={30} y1={60} x2={130} y2={60} c={PURPLE} w={2} />
-      {hp(130, 56, 30)}
-      <Line x1={130} y1={64} x2={30} y2={64} c={PURPLE} w={2} />
-      <La x={90} y={90} size={11} bold>pri-miRNA</La>
-      <Arrow x1={180} y1={60} x2={240} y2={60} />
-      <La x={210} y={50} size={11} bold color={RED}>Drosha</La>
-      {hp(260, 56, 30)}
-      <La x={250} y={90} size={11} bold>pre-miRNA</La>
-      <Arrow x1={300} y1={74} x2={300} y2={148} />
-      <La x={312} y={112} size={11} anchor="start" bold color={BLUE}>Exportin-5</La>
-      {hp(270, 154, 30)}
-      <Arrow x1={260} y1={158} x2={200} y2={158} />
-      <La x={230} y={148} size={11} bold color={RED}>Dicer</La>
-      <Line x1={140} y1={154} x2={190} y2={154} c={PURPLE} w={2} />
-      <Line x1={140} y1={162} x2={190} y2={162} c={ORANGE} w={2} />
-      <He x={165} y={184} size={10.5} color={MUTED}>דופלקס של כ-22</He>
-      <Arrow x1={128} y1={170} x2={100} y2={206} />
-      <ellipse cx={100} cy={232} rx={46} ry={20} fill={FILL.green} stroke={GREEN} strokeWidth={1.5} />
-      <La x={100} y={236} size={11} bold color={GREEN}>RISC (Ago)</La>
-      {/* target */}
-      <circle cx={180} cy={282} r={5} fill={INK} />
-      <Line x1={185} y1={282} x2={460} y2={282} c={PURPLE} w={2.4} />
-      <rect x={210} y={275} width={110} height={14} rx={3} fill={FILL.purple} stroke={PURPLE} strokeWidth={1.2} />
-      <La x={265} y={286} size={10} bold>ORF</La>
-      <Line x1={360} y1={268} x2={410} y2={268} c={PURPLE} w={2.4} />
-      {[365, 372, 379, 386, 393, 400].map((x) => <line key={x} x1={x} x2={x} y1={270} y2={280} stroke={GREEN} strokeWidth={1.2} />)}
-      <He x={385} y={306} size={10.5} color={MUTED}>זרע (2–8) בקצה ה-3′</He>
-      <Arrow x1={146} y1={240} x2={350} y2={266} color={GREEN} />
-      <He x={420} y={232} size={11} bold color={RED}>תרגום ↓</He>
-      <He x={420} y={248} size={11} bold color={RED}>דה-אדנילציה ↑</He>
-    </Svg>
-  );
-}
+
 
 // ── gx-genome-structure ──────────────────────────────────────────────────────
 function CotCurve() {

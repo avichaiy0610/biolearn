@@ -11,6 +11,10 @@ import { LymphNode } from "./redraws/LymphNode";
 import { AntigenProcessing } from "./redraws/AntigenProcessing";
 import { ImmunologyAntibodyStructure } from "./redraws/ImmunologyAntibodyStructure";
 import { LeukocyteMigration } from "./redraws/LeukocyteMigration";
+import { Prr } from "./redraws/Prr";
+import { GerminalCenter } from "./redraws/GerminalCenter";
+import { TwoSignals } from "./redraws/TwoSignals";
+import { Mucosa } from "./redraws/Mucosa";
 const PURPLE = "#7c3aed";
 const RED = "#b91c1c";
 const TEAL = "#0f766e";
@@ -34,12 +38,6 @@ function Box({ x, y, w, h, fill, stroke, children, size = 11, bold }: { x: numbe
 // Small antibody icon: stem at (x, y), arms up (or rotated).
 const Yab = ({ x, y, color = BLUE, s = 1, rot = 0 }: { x: number; y: number; color?: string; s?: number; rot?: number }) => (
   <path d={`M${x} ${y} L${x} ${y - 10 * s} M${x} ${y - 10 * s} L${x - 7 * s} ${y - 18 * s} M${x} ${y - 10 * s} L${x + 7 * s} ${y - 18 * s}`} stroke={color} strokeWidth={2} strokeLinecap="round" fill="none" transform={rot ? `rotate(${rot} ${x} ${y})` : undefined} />
-);
-const num = (x: number, y: number, n: string) => (
-  <g key={`n${n}${x}`}>
-    <circle cx={x} cy={y} r={8} fill={RED} />
-    <He x={x} y={y + 4} size={10} bold color="white">{n}</He>
-  </g>
 );
 
 // ── im-hematopoiesis ─────────────────────────────────────────────────────────
@@ -80,36 +78,7 @@ function Hematopoiesis() {
 // LymphNode: recomposed at textbook level, one picture on desktop (2026-11-07) — see ./redraws/LymphNode.tsx; old code in archive/figures/2026-11-07/.
 
 // ── im-prr ───────────────────────────────────────────────────────────────────
-function Prr() {
-  const rec = (x: number, y: number, c: string) => <rect x={x - 4} y={y - 10} width={8} height={20} rx={3} fill={c} />;
-  return (
-    <Svg h={290} label="קולטנים לזיהוי דפוסים: TLR4 ו-TLR5 על פני התא מזהים LPS ופלגלין; באנדוזום TLR3, TLR7 ו-TLR9 מזהים RNA ו-DNA; בציטוזול RIG-I מזהה RNA נגיפי ו-cGAS מזהה DNA, ו-NLRP3 יוצר אינפלמזום שמפעיל IL-1β. האותות מפעילים את NF-κB ו-IRFs, וגורמים לייצור ציטוקינים דלקתיים ואינטרפרונים.">
-      <rect x={20} y={50} width={440} height={220} rx={26} fill={FILL.cyto} stroke={ORANGE} strokeWidth={1.6} />
-      {rec(90, 50, BLUE)}{rec(150, 50, TEAL)}
-      <La x={90} y={30} size={10} color={BLUE}>TLR4 · LPS</La>
-      <La x={160} y={30} size={10} color={TEAL}>TLR5 · flagellin</La>
-      <ellipse cx={110} cy={150} rx={62} ry={40} fill={FILL.purple} stroke={PURPLE} />
-      {rec(80, 150, PURPLE)}{rec(110, 150, PURPLE)}{rec(140, 150, PURPLE)}
-      <He x={110} y={206} size={10} color={PURPLE}>אנדוזום</He>
-      <La x={110} y={222} size={9} color={PURPLE}>TLR3 · TLR7/8 · TLR9 (RNA, DNA)</La>
-      <circle cx={250} cy={110} r={14} fill={FILL.green} stroke={GREEN} />
-      <La x={250} y={88} size={9.5} color={GREEN}>RIG-I · RNA</La>
-      <circle cx={250} cy={176} r={14} fill={FILL.green} stroke={GREEN} />
-      <La x={250} y={206} size={9.5} color={GREEN}>cGAS · DNA</La>
-      <circle cx={330} cy={110} r={16} fill={FILL.red} stroke={RED} />
-      <La x={330} y={88} size={9.5} color={RED}>NLRP3</La>
-      <He x={352} y={106} size={9.5} color={RED} anchor="start">אינפלמזום</He>
-      <La x={352} y={122} size={9.5} color={RED} anchor="start">IL-1β</La>
-      <ellipse cx={400} cy={210} rx={48} ry={34} fill={FILL.blue} stroke={BLUE} />
-      <La x={400} y={206} size={10} bold>NF-κB · IRF</La>
-      <He x={400} y={222} size={9.5}>גרעין</He>
-      <Arrow x1={176} y1={160} x2={352} y2={206} />
-      <Arrow x1={266} y1={180} x2={352} y2={212} />
-      <Arrow x1={264} y1={116} x2={360} y2={190} />
-      <He x={240} y={260} size={10} color={MUTED}>תוצאה: ציטוקינים דלקתיים, כמוקינים, אינטרפרונים מסוג I</He>
-    </Svg>
-  );
-}
+
 
 // ── im-complement ────────────────────────────────────────────────────────────
 function Complement() {
@@ -254,34 +223,7 @@ function BDevelopment() {
 }
 
 // ── im-germinal-center ───────────────────────────────────────────────────────
-function GerminalCenter() {
-  return (
-    <Svg h={290} label="מרכז הנבט: באזור הכהה תאי B מתחלקים מהר ועוברים היפר-מוטציה; באזור הבהיר הם קושרים אנטיגן על תאים דנדריטיים זקיקיים ומציגים אותו לתאי Tfh. תאים בזיקה גבוהה מקבלים אות הישרדות וחוזרים לסבב נוסף או יוצאים כתאי פלזמה ותאי זיכרון; השאר מתים באפופטוזיס.">
-      <ellipse cx={210} cy={140} rx={170} ry={100} fill={FILL.blue} stroke={BLUE} strokeWidth={1.4} />
-      <path d="M210 40 A170 100 0 0 0 210 240 Z" fill="#bfdbfe" />
-      <He x={120} y={66} size={11} bold>אזור כהה</He>
-      <He x={290} y={76} size={11} bold>אזור בהיר</He>
-      {[[90, 110], [120, 150], [80, 180], [150, 180], [150, 104]].map(([x, y], i) => <circle key={`d${i}`} cx={x} cy={y} r={9} fill={FILL.blue} stroke={BLUE} />)}
-      <He x={112} y={210} size={9.5}>חלוקה + היפר-מוטציה</He>
-      <path d="M300 130 l8 -14 l4 14 l14 -4 l-10 10 l12 8 l-14 0 l-2 14 l-6 -12 l-12 6 l6 -12 l-12 -6 z" fill={FILL.orange} stroke={ORANGE} />
-      <He x={312} y={182} size={9} color={ORANGE}>תא דנדריטי זקיקי</He>
-      <circle cx={262} cy={150} r={9} fill={FILL.blue} stroke={BLUE} />
-      <circle cx={340} cy={108} r={10} fill={FILL.green} stroke={GREEN} />
-      <La x={340} y={92} size={9} color={GREEN}>Tfh</La>
-      <path d="M170 120 C 210 90, 230 100, 254 140" fill="none" stroke={INK} strokeWidth={1.4} markerEnd="url(#bfArrow)" />
-      <path d="M254 164 C 220 200, 190 196, 160 180" fill="none" stroke={INK} strokeWidth={1.4} markerEnd="url(#bfArrow)" />
-      <He x={210} y={92} size={9} color={MUTED}>נבחנים</He>
-      <He x={204} y={214} size={9} color={MUTED}>זיקה גבוהה — עוד סבב</He>
-      <Arrow x1={380} y1={140} x2={422} y2={124} color={PURPLE} />
-      <Arrow x1={380} y1={150} x2={430} y2={180} color={TEAL} />
-      <He x={452} y={100} size={10} color={PURPLE}>תא פלזמה</He>
-      <He x={452} y={114} size={9} color={MUTED}>(למח העצם)</He>
-      <He x={448} y={196} size={10} color={TEAL}>תא B זיכרון</He>
-      <Arrow x1={300} y1={226} x2={326} y2={262} color={RED} />
-      <He x={360} y={276} size={10} color={RED}>זיקה נמוכה — אפופטוזיס</He>
-    </Svg>
-  );
-}
+
 
 // ── im-mhc-structure ─────────────────────────────────────────────────────────
 // MhcStructure: redrawn at textbook level (2026-11-05) — see ./redraws/MhcStructure.tsx; old code in archive/figures/2026-11-05/.
@@ -321,32 +263,7 @@ function ThymusSelection() {
 }
 
 // ── im-two-signals ───────────────────────────────────────────────────────────
-function TwoSignals() {
-  return (
-    <Svg h={260} label="הפעלת תא T נאיבי: אות 1 — הקולטן מזהה פפטיד על MHC; אות 2 — CD28 נקשר ל-B7 על תא דנדריטי מופעל; אות 3 — ציטוקינים שמכוונים את ההתמיינות. שני האותות יחד מובילים להפרשת IL-2 ולהתרבות; אות 1 בלבד מוביל לאנרגיה. CTLA-4 מתחרה על B7 ומעכב.">
-      <path d="M40 40 L150 30 L170 80 L160 170 L120 210 L50 200 L30 120 Z" fill={FILL.orange} stroke={ORANGE} strokeWidth={1.4} />
-      <He x={92} y={120} size={11} bold>תא דנדריטי</He>
-      <He x={92} y={136} size={9} color={MUTED}>מופעל (PAMPs)</He>
-      <circle cx={330} cy={120} r={70} fill={FILL.blue} stroke={BLUE} strokeWidth={1.4} />
-      <He x={346} y={124} size={11} bold>תא T נאיבי</He>
-      <rect x={168} y={66} width={14} height={18} fill={GREEN} /><rect x={248} y={66} width={14} height={18} fill={BLUE} />
-      <line x1={182} y1={75} x2={248} y2={75} stroke={INK} strokeWidth={2} />
-      <He x={215} y={60} size={10} bold>אות 1</He>
-      <La x={160} y={98} size={8.5} color={GREEN} anchor="end">MHC+פפטיד</La>
-      <La x={255} y={98} size={8.5} color={BLUE}>TCR</La>
-      <rect x={160} y={140} width={14} height={18} fill={ORANGE} /><rect x={254} y={140} width={14} height={18} fill={PURPLE} />
-      <line x1={174} y1={149} x2={254} y2={149} stroke={INK} strokeWidth={2} />
-      <He x={215} y={134} size={10} bold>אות 2</He>
-      <La x={167} y={172} size={8.5} color={ORANGE}>B7</La>
-      <La x={261} y={172} size={8.5} color={PURPLE}>CD28</La>
-      <Arrow x1={150} y1={196} x2={262} y2={180} color={TEAL} />
-      <He x={196} y={208} size={10} color={TEAL}>אות 3: ציטוקינים</He>
-      <He x={430} y={40} size={10} color={GREEN} anchor="end">1 + 2: IL-2 והתרבות</He>
-      <He x={470} y={212} size={10} color={RED} anchor="end">1 בלבד: אנרגיה</He>
-      <He x={240} y={246} size={9.5} color={MUTED}>CTLA-4 (על תאים מופעלים ו-Treg) נקשר ל-B7 חזק יותר מ-CD28 — ומעכב</He>
-    </Svg>
-  );
-}
+
 
 // ── im-leukocyte-migration ───────────────────────────────────────────────────
 
@@ -417,34 +334,7 @@ function ToleranceMechanisms() {
 }
 
 // ── im-mucosa ────────────────────────────────────────────────────────────────
-function Mucosa() {
-  return (
-    <Svg w={500} h={300} label="חסינות ברירית המעי: תא M מעביר חיידקים מחלל המעי לכתם פייר שמתחתיו, שבו תאי B עוברים החלפה ל-IgA. תאי פלזמה ברירית מפרישים IgA דימרי, שנקשר לקולטן pIgR בצד הבסיסי של תא האפיתל, עובר דרך התא ומשתחרר לחלל המעי כ-IgA מופרש, שמנטרל חיידקים ומונע היצמדות.">
-      <rect x={10} y={10} width={480} height={60} fill={FILL.yellow} />
-      <He x={60} y={30} size={10} bold>חלל המעי</He>
-      {[[120, 40], [150, 28], [330, 46], [360, 30], [420, 44]].map(([x, y]) => <ellipse key={x + y} cx={x} cy={y} rx={9} ry={4} fill={GREEN} />)}
-      {Array.from({ length: 12 }, (_, i) => i).filter((i) => i !== 3).map((i) => <rect key={i} x={20 + i * 39} y={70} width={37} height={56} rx={4} fill={FILL.pink} stroke="#db2777" strokeWidth={0.8} />)}
-      <path d="M137 70 Q156 100 137 126" fill={FILL.pink} stroke="#db2777" strokeWidth={0.8} />
-      <rect x={137} y={70} width={20} height={56} fill="white" stroke="#db2777" strokeWidth={0.8} />
-      <He x={162} y={150} size={9.5} color="#db2777" anchor="start">תא M</He>
-      <Arrow x1={150} y1={46} x2={150} y2={168} color={GREEN} />
-      <path d="M60 230 Q150 150 240 230 Z" fill={FILL.blue} stroke={BLUE} />
-      <He x={150} y={222} size={10} bold>כתם פייר</He>
-      <He x={150} y={244} size={9} color={MUTED}>החלפה ל-IgA (TGF-β)</He>
-      <circle cx={330} cy={230} r={16} fill={FILL.purple} stroke={PURPLE} />
-      <He x={330} y={264} size={9.5} color={PURPLE}>תא פלזמה</He>
-      <path d="M346 222 Q370 190 380 140" fill="none" stroke={PURPLE} strokeWidth={1.4} markerEnd="url(#bfArrow)" />
-      <La x={384} y={190} size={9} color={PURPLE} anchor="start">IgA דימרי</La>
-      <rect x={376} y={124} width={8} height={6} fill={TEAL} />
-      <Arrow x1={392} y1={124} x2={392} y2={72} color={TEAL} />
-      <La x={400} y={144} size={9} color={TEAL} anchor="start">pIgR</La>
-      <Yab x={392} y={58} color={PURPLE} rot={180} />
-      <He x={476} y={24} size={9.5} color={PURPLE} anchor="end">IgA מופרש</He>
-      
-      <He x={250} y={290} size={9.5} color={MUTED}>IgA מנטרל ומונע היצמדות — בלי משלים ובלי דלקת</He>
-    </Svg>
-  );
-}
+
 
 // ── im-hypersensitivity-types ────────────────────────────────────────────────
 function HypersensitivityTypes() {

@@ -1,0 +1,30 @@
+function Prr() {
+  const rec = (x: number, y: number, c: string) => <rect x={x - 4} y={y - 10} width={8} height={20} rx={3} fill={c} />;
+  return (
+    <Svg h={290} label="קולטנים לזיהוי דפוסים: TLR4 ו-TLR5 על פני התא מזהים LPS ופלגלין; באנדוזום TLR3, TLR7 ו-TLR9 מזהים RNA ו-DNA; בציטוזול RIG-I מזהה RNA נגיפי ו-cGAS מזהה DNA, ו-NLRP3 יוצר אינפלמזום שמפעיל IL-1β. האותות מפעילים את NF-κB ו-IRFs, וגורמים לייצור ציטוקינים דלקתיים ואינטרפרונים.">
+      <rect x={20} y={50} width={440} height={220} rx={26} fill={FILL.cyto} stroke={ORANGE} strokeWidth={1.6} />
+      {rec(90, 50, BLUE)}{rec(150, 50, TEAL)}
+      <La x={90} y={30} size={10} color={BLUE}>TLR4 · LPS</La>
+      <La x={160} y={30} size={10} color={TEAL}>TLR5 · flagellin</La>
+      <ellipse cx={110} cy={150} rx={62} ry={40} fill={FILL.purple} stroke={PURPLE} />
+      {rec(80, 150, PURPLE)}{rec(110, 150, PURPLE)}{rec(140, 150, PURPLE)}
+      <He x={110} y={206} size={10} color={PURPLE}>אנדוזום</He>
+      <La x={110} y={222} size={9} color={PURPLE}>TLR3 · TLR7/8 · TLR9 (RNA, DNA)</La>
+      <circle cx={250} cy={110} r={14} fill={FILL.green} stroke={GREEN} />
+      <La x={250} y={88} size={9.5} color={GREEN}>RIG-I · RNA</La>
+      <circle cx={250} cy={176} r={14} fill={FILL.green} stroke={GREEN} />
+      <La x={250} y={206} size={9.5} color={GREEN}>cGAS · DNA</La>
+      <circle cx={330} cy={110} r={16} fill={FILL.red} stroke={RED} />
+      <La x={330} y={88} size={9.5} color={RED}>NLRP3</La>
+      <He x={352} y={106} size={9.5} color={RED} anchor="start">אינפלמזום</He>
+      <La x={352} y={122} size={9.5} color={RED} anchor="start">IL-1β</La>
+      <ellipse cx={400} cy={210} rx={48} ry={34} fill={FILL.blue} stroke={BLUE} />
+      <La x={400} y={206} size={10} bold>NF-κB · IRF</La>
+      <He x={400} y={222} size={9.5}>גרעין</He>
+      <Arrow x1={176} y1={160} x2={352} y2={206} />
+      <Arrow x1={266} y1={180} x2={352} y2={212} />
+      <Arrow x1={264} y1={116} x2={360} y2={190} />
+      <He x={240} y={260} size={10} color={MUTED}>תוצאה: ציטוקינים דלקתיים, כמוקינים, אינטרפרונים מסוג I</He>
+    </Svg>
+  );
+}
