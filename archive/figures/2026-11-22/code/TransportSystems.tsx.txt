@@ -1,0 +1,40 @@
+function TransportSystems() {
+  const memTop = 120, memBot = 150;
+  return (
+    <Svg h={300} label="שלוש מערכות הובלה בחיידקים: הובלה פשוטה בסימפורט עם פרוטונים, העברה קבוצתית במערכת הפוספוטרנספראז שבה הסוכר מזורחן בכניסה על חשבון PEP, ומובל ABC שבו חלבון קושר בפריפלזמה מגיש את החומר והאנרגיה מגיעה מפירוק ATP">
+      <rect x={10} y={memTop} width={460} height={memBot - memTop} fill={FILL.gray} stroke={MUTED} />
+      <He x={470} y={memTop - 8} size={10.5} anchor="end" color={MUTED}>בחוץ</He>
+      <He x={470} y={memBot + 18} size={10.5} anchor="end" color={MUTED}>ציטופלזמה</He>
+      {/* simple transport */}
+      <He x={390} y={24} size={12.5} bold>הובלה פשוטה</He>
+      <rect x={374} y={memTop - 6} width={32} height={42} rx={8} fill={FILL.blue} stroke={BLUE} />
+      <La x={372} y={90} size={11.5} color={ORANGE} bold>H⁺</La>
+      <He x={412} y={90} size={11.5} bold>חומר</He>
+      <Arrow x1={380} y1={98} x2={384} y2={200} color={ORANGE} />
+      <Arrow x1={402} y1={98} x2={398} y2={200} color={BLUE} />
+      <He x={390} y={222} size={10.5} color={MUTED}>הכוח הפרוטוני</He>
+      <He x={390} y={238} size={10.5} color={MUTED}>מניע (סימפורט)</He>
+      {/* group translocation */}
+      <He x={240} y={24} size={12.5} bold>העברה קבוצתית</He>
+      <rect x={224} y={memTop - 6} width={32} height={42} rx={8} fill={FILL.green} stroke={GREEN} />
+      <He x={240} y={90} size={11.5} bold>גלוקוז</He>
+      <Arrow x1={240} y1={98} x2={240} y2={200} color={GREEN} />
+      <La x={240} y={218} size={11.5} bold color={GREEN}>glucose-6-P</La>
+      <La x={170} y={196} size={11} color={RED}>PEP → pyruvate</La>
+      <Arrow x1={190} y1={186} x2={226} y2={164} color={RED} />
+      <He x={240} y={258} size={10.5} color={MUTED}>הסוכר מזורחן בכניסה</He>
+      <He x={240} y={274} size={10.5} color={MUTED}>(מערכת PTS)</He>
+      {/* ABC */}
+      <He x={90} y={24} size={12.5} bold>מובל ABC</He>
+      <circle cx={90} cy={78} r={16} fill={FILL.yellow} stroke={ORANGE} />
+      <He x={90} y={58} size={10} color={ORANGE}>חלבון קושר</He>
+      <circle cx={90} cy={78} r={5} fill={BLUE} />
+      <rect x={72} y={memTop - 6} width={36} height={42} rx={8} fill={FILL.blue} stroke={BLUE} />
+      <Arrow x1={90} y1={98} x2={90} y2={200} color={BLUE} />
+      <La x={135} y={186} size={11} color={RED}>ATP → ADP</La>
+      <Arrow x1={130} y1={176} x2={108} y2={160} color={RED} />
+      <He x={90} y={222} size={10.5} color={MUTED}>זיקה גבוהה מאוד</He>
+      <He x={90} y={238} size={10.5} color={MUTED}>(חלבון קושר בפריפלזמה)</He>
+    </Svg>
+  );
+}

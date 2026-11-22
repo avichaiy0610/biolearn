@@ -1,0 +1,31 @@
+function EndospereStructure() {
+  const cx = 200, cy = 122;
+  const layers: [number, number, string, string, string][] = [
+    [162, 103, FILL.gray, MUTED, "6. אקסוספוריום — בחלק מהמינים"],
+    [143, 87, FILL.yellow, ORANGE, "5. מעטה — שכבות חלבון מגינות"],
+    [123, 71, FILL.sky, BLUE, "4. ממברנה חיצונית של הספורה"],
+    [104, 57, FILL.orange, ORANGE, "3. קורטקס — פפטידוגליקן"],
+    [80, 43, FILL.blue, BLUE, "2. ממברנה פנימית — מחסום חדירות"],
+    [65, 33, FILL.green, GREEN, "1. ליבה — DNA, אנזימים ומעט מים"],
+  ];
+  // Numbered markers identify layers independently of colour. The full-width legend
+  // stays readable on mobile; marker positions sit within the corresponding ring.
+  const markers = [[200, 26], [302, 69], [312, 122], [269, 159], [200, 160], [200, 122]];
+  return (
+    <Svg w={400} h={495} label="חתך סכמטי דרך אנדוספורה אחת. המספרים תואמים לרשימת השכבות בטקסט: 1 ליבה, 2 ממברנה פנימית, 3 קורטקס, 4 ממברנה חיצונית, 5 מעטה חלבוני, 6 אקסוספוריום שקיים רק בחלק מהמינים. שכבת הדופן הדקה הפנימית לקורטקס אינה מוצגת בנפרד">
+      {layers.map(([rx, ry, fill, stroke, label], i) => (
+        <ellipse key={label} cx={cx} cy={cy} rx={rx} ry={ry} fill={fill} stroke={stroke} strokeWidth={1.8} {...(i === 0 ? dash : {})} />
+      ))}
+      {markers.map(([x, y], i) => <g key={i}>
+        <circle cx={x} cy={y} r={11} fill="white" stroke={layers[i][3]} strokeWidth={1.5} />
+        <La x={x} y={y + 5} size={15} bold color={INK}>{6 - i}</La>
+      </g>)}
+      <He x={200} y={251} size={16} bold>חתך באנדוספורה אחת · מהמרכז החוצה</He>
+      {[...layers].reverse().map(([, , fill, stroke, label], i) => <g key={label}>
+        <rect x={367} y={271 + i * 31} width={16} height={16} rx={3} fill={fill} stroke={stroke} strokeWidth={1.5} />
+        <He x={356} y={285 + i * 31} size={16} anchor="end">{label}</He>
+      </g>)}
+      <He x={200} y={481} size={13} color={MUTED}>סכמטי, לא בקנה מידה; הדופן הדקה אינה מוצגת בנפרד</He>
+    </Svg>
+  );
+}

@@ -8,6 +8,10 @@ import { FlagellumMotor } from "./redraws/FlagellumMotor";
 
 import { GramEnvelopes } from "./redraws/GramEnvelopes";
 import { AntibodyStructure } from "./redraws/AntibodyStructure";
+import { EndospereStructure } from "./redraws/EndospereStructure";
+import { SporulationCycle } from "./redraws/SporulationCycle";
+import { TransportSystems } from "./redraws/TransportSystems";
+import { AntibioticTargets } from "./redraws/AntibioticTargets";
 const PURPLE = "#7c3aed";
 const RED = "#b91c1c";
 const PINK = "#db2777";
@@ -71,46 +75,7 @@ function GramStain() {
 }
 
 // ── mv-cell-envelope: transport systems ──────────────────────────────────────
-function TransportSystems() {
-  const memTop = 120, memBot = 150;
-  return (
-    <Svg h={300} label="שלוש מערכות הובלה בחיידקים: הובלה פשוטה בסימפורט עם פרוטונים, העברה קבוצתית במערכת הפוספוטרנספראז שבה הסוכר מזורחן בכניסה על חשבון PEP, ומובל ABC שבו חלבון קושר בפריפלזמה מגיש את החומר והאנרגיה מגיעה מפירוק ATP">
-      <rect x={10} y={memTop} width={460} height={memBot - memTop} fill={FILL.gray} stroke={MUTED} />
-      <He x={470} y={memTop - 8} size={10.5} anchor="end" color={MUTED}>בחוץ</He>
-      <He x={470} y={memBot + 18} size={10.5} anchor="end" color={MUTED}>ציטופלזמה</He>
-      {/* simple transport */}
-      <He x={390} y={24} size={12.5} bold>הובלה פשוטה</He>
-      <rect x={374} y={memTop - 6} width={32} height={42} rx={8} fill={FILL.blue} stroke={BLUE} />
-      <La x={372} y={90} size={11.5} color={ORANGE} bold>H⁺</La>
-      <He x={412} y={90} size={11.5} bold>חומר</He>
-      <Arrow x1={380} y1={98} x2={384} y2={200} color={ORANGE} />
-      <Arrow x1={402} y1={98} x2={398} y2={200} color={BLUE} />
-      <He x={390} y={222} size={10.5} color={MUTED}>הכוח הפרוטוני</He>
-      <He x={390} y={238} size={10.5} color={MUTED}>מניע (סימפורט)</He>
-      {/* group translocation */}
-      <He x={240} y={24} size={12.5} bold>העברה קבוצתית</He>
-      <rect x={224} y={memTop - 6} width={32} height={42} rx={8} fill={FILL.green} stroke={GREEN} />
-      <He x={240} y={90} size={11.5} bold>גלוקוז</He>
-      <Arrow x1={240} y1={98} x2={240} y2={200} color={GREEN} />
-      <La x={240} y={218} size={11.5} bold color={GREEN}>glucose-6-P</La>
-      <La x={170} y={196} size={11} color={RED}>PEP → pyruvate</La>
-      <Arrow x1={190} y1={186} x2={226} y2={164} color={RED} />
-      <He x={240} y={258} size={10.5} color={MUTED}>הסוכר מזורחן בכניסה</He>
-      <He x={240} y={274} size={10.5} color={MUTED}>(מערכת PTS)</He>
-      {/* ABC */}
-      <He x={90} y={24} size={12.5} bold>מובל ABC</He>
-      <circle cx={90} cy={78} r={16} fill={FILL.yellow} stroke={ORANGE} />
-      <He x={90} y={58} size={10} color={ORANGE}>חלבון קושר</He>
-      <circle cx={90} cy={78} r={5} fill={BLUE} />
-      <rect x={72} y={memTop - 6} width={36} height={42} rx={8} fill={FILL.blue} stroke={BLUE} />
-      <Arrow x1={90} y1={98} x2={90} y2={200} color={BLUE} />
-      <La x={135} y={186} size={11} color={RED}>ATP → ADP</La>
-      <Arrow x1={130} y1={176} x2={108} y2={160} color={RED} />
-      <He x={90} y={222} size={10.5} color={MUTED}>זיקה גבוהה מאוד</He>
-      <He x={90} y={238} size={10.5} color={MUTED}>(חלבון קושר בפריפלזמה)</He>
-    </Svg>
-  );
-}
+
 
 // ── mv-cell-envelope: Gram-positive vs Gram-negative envelopes ──────────────
 // GramEnvelopes: recomposed at textbook level, one picture on desktop (2026-11-07) — see ./redraws/GramEnvelopes.tsx; old code in archive/figures/2026-11-07/.
@@ -204,42 +169,7 @@ function OxygenTubes() {
 }
 
 // ── mv-antibiotics: targets ──────────────────────────────────────────────────
-function AntibioticTargets() {
-  return (
-    <Svg h={320} label="מטרות האנטיביוטיקה בתא החיידקי: בניית הדופן (בטא-לקטמים, ונקומיצין), הממברנה (פולימיקסינים), הריבוזום 30S (אמינוגליקוזידים, טטרציקלינים) ו-50S (מקרולידים, כלורמפניקול), הג'ירז (קווינולונים), RNA פולימראז (ריפמפין) ובניית החומצה הפולית (סולפונמידים, טרימתופרים)">
-      <rect x={100} y={60} width={280} height={190} rx={60} fill={FILL.orange} stroke={ORANGE} strokeWidth={5} />
-      <rect x={110} y={70} width={260} height={170} rx={52} fill="#ffffff" stroke={MUTED} strokeWidth={2} />
-      <path d="M180 150 C 200 120, 240 180, 260 140 S 300 120, 300 160" fill="none" stroke={PURPLE} strokeWidth={3} />
-      <He x={290} y={186} size={10.5} color={PURPLE}>DNA</He>
-      <circle cx={170} cy={200} r={12} fill={FILL.green} stroke={GREEN} /><circle cx={170} cy={216} r={8} fill={FILL.green} stroke={GREEN} />
-      <rect x={300} y={100} width={30} height={18} rx={6} fill={FILL.blue} stroke={BLUE} />
-      <He x={240} y={36} size={11.5} bold color={ORANGE}>דופן: בטא-לקטמים, ונקומיצין</He>
-      <Arrow x1={240} y1={42} x2={240} y2={60} color={ORANGE} />
-      <He x={50} y={130} size={11} color={MUTED}>ממברנה:</He>
-      <He x={50} y={146} size={11} color={MUTED}>פולימיקסינים</He>
-      <Arrow x1={70} y1={154} x2={108} y2={160} color={MUTED} />
-      <La x={50} y={196} size={10.5} bold color={GREEN}>30S</La>
-      <He x={50} y={210} size={9.5} color={GREEN}>אמינוגליקוזידים</He>
-      <He x={50} y={223} size={9.5} color={GREEN}>טטרציקלינים</He>
-      <La x={50} y={246} size={10.5} bold color={GREEN}>50S</La>
-      <He x={50} y={260} size={9.5} color={GREEN}>מקרולידים</He>
-      <He x={50} y={273} size={9.5} color={GREEN}>כלורמפניקול</He>
-      <Arrow x1={90} y1={232} x2={156} y2={214} color={GREEN} />
-      <He x={430} y={92} size={10.5} color={BLUE}>RNA פולימראז:</He>
-      <He x={430} y={108} size={10.5} color={BLUE}>ריפמפין</He>
-      <Arrow x1={400} y1={106} x2={334} y2={108} color={BLUE} />
-      <He x={430} y={156} size={10.5} color={PURPLE}>ג'ירז:</He>
-      <He x={430} y={172} size={10.5} color={PURPLE}>קווינולונים</He>
-      <Arrow x1={400} y1={164} x2={304} y2={158} color={PURPLE} />
-      <He x={430} y={226} size={10.5} color={RED}>חומצה פולית:</He>
-      <He x={430} y={242} size={10.5} color={RED}>סולפונמידים,</He>
-      <He x={430} y={258} size={10.5} color={RED}>טרימתופרים</He>
-      <Arrow x1={392} y1={236} x2={330} y2={214} color={RED} />
-      <He x={330} y={210} size={10} color={RED}>פולאט</He>
-      <He x={240} y={300} size={11} color={MUTED}>כל מטרה — מבנה שקיים בחיידק ולא בתא האדם, או שונה בו</He>
-    </Svg>
-  );
-}
+
 
 // ── mv-metabolic-diversity: redox tower ──────────────────────────────────────
 function RedoxTower() {
@@ -590,76 +520,10 @@ function InfectionStages() {
 }
 
 // ── mv-endospores: layers of the endospore ──────────────────────────────────
-function EndospereStructure() {
-  const cx = 200, cy = 122;
-  const layers: [number, number, string, string, string][] = [
-    [162, 103, FILL.gray, MUTED, "6. אקסוספוריום — בחלק מהמינים"],
-    [143, 87, FILL.yellow, ORANGE, "5. מעטה — שכבות חלבון מגינות"],
-    [123, 71, FILL.sky, BLUE, "4. ממברנה חיצונית של הספורה"],
-    [104, 57, FILL.orange, ORANGE, "3. קורטקס — פפטידוגליקן"],
-    [80, 43, FILL.blue, BLUE, "2. ממברנה פנימית — מחסום חדירות"],
-    [65, 33, FILL.green, GREEN, "1. ליבה — DNA, אנזימים ומעט מים"],
-  ];
-  // Numbered markers identify layers independently of colour. The full-width legend
-  // stays readable on mobile; marker positions sit within the corresponding ring.
-  const markers = [[200, 26], [302, 69], [312, 122], [269, 159], [200, 160], [200, 122]];
-  return (
-    <Svg w={400} h={495} label="חתך סכמטי דרך אנדוספורה אחת. המספרים תואמים לרשימת השכבות בטקסט: 1 ליבה, 2 ממברנה פנימית, 3 קורטקס, 4 ממברנה חיצונית, 5 מעטה חלבוני, 6 אקסוספוריום שקיים רק בחלק מהמינים. שכבת הדופן הדקה הפנימית לקורטקס אינה מוצגת בנפרד">
-      {layers.map(([rx, ry, fill, stroke, label], i) => (
-        <ellipse key={label} cx={cx} cy={cy} rx={rx} ry={ry} fill={fill} stroke={stroke} strokeWidth={1.8} {...(i === 0 ? dash : {})} />
-      ))}
-      {markers.map(([x, y], i) => <g key={i}>
-        <circle cx={x} cy={y} r={11} fill="white" stroke={layers[i][3]} strokeWidth={1.5} />
-        <La x={x} y={y + 5} size={15} bold color={INK}>{6 - i}</La>
-      </g>)}
-      <He x={200} y={251} size={16} bold>חתך באנדוספורה אחת · מהמרכז החוצה</He>
-      {[...layers].reverse().map(([, , fill, stroke, label], i) => <g key={label}>
-        <rect x={367} y={271 + i * 31} width={16} height={16} rx={3} fill={fill} stroke={stroke} strokeWidth={1.5} />
-        <He x={356} y={285 + i * 31} size={16} anchor="end">{label}</He>
-      </g>)}
-      <He x={200} y={481} size={13} color={MUTED}>סכמטי, לא בקנה מידה; הדופן הדקה אינה מוצגת בנפרד</He>
-    </Svg>
-  );
-}
+
 
 // ── mv-endospores: the sporulation cycle ────────────────────────────────────
-function SporulationCycle() {
-  const ys = [65, 155, 245, 335, 425];
-  const labels = [
-    ["1. חלוקה א-סימטרית", "תא אם גדול ופורספורה קטנה"],
-    ["2. בליעה", "ממברנת תא האם עוטפת את הקטנה"],
-    ["3. בניית שכבות הגנה", "קורטקס ומעטה סביב הפורספורה"],
-    ["4. הבשלה", "הליבה מאבדת מים ורוכשת עמידות"],
-    ["5. שחרור", "תא האם מתפרק; הספורה נשארת"],
-  ];
-  return (
-    <Svg w={440} h={650} label="קוראים מלמעלה למטה: חמישה שלבי בניית אנדוספורה ב-Bacillus subtilis, במשך כשמונה שעות. אפור הוא תא האם, ירוק הוא הפורספורה והליבה, כחול ממברנה עוטפת, כתום קורטקס וזהוב מעטה. בהמשך נביטה והתפתחות מחזירות תא פעיל. הזמנים משתנים לפי התנאים">
-      <He x={220} y={23} size={17} bold>בניית אנדוספורה · קוראים מלמעלה למטה</He>
-      {ys.map((y, i) => <g key={y}>
-        {i < 4 && <Rod x={88} y={y} w={124} h={56} fill={FILL.gray} stroke={MUTED} />}
-        {i === 0 ? <>
-          <path d={`M118 ${y - 26} V${y + 26}`} stroke={BLUE} strokeWidth={2} />
-          <path d={`M118 ${y - 25} a27 27 0 0 1 0 50 Z`} fill={FILL.green} stroke={GREEN} strokeWidth={1.5} />
-        </> : <>
-          {i >= 2 && <ellipse cx={i === 4 ? 88 : 108} cy={y} rx={26} ry={23} fill={FILL.yellow} stroke={ORANGE} strokeWidth={2} />}
-          <ellipse cx={i === 4 ? 88 : 108} cy={y} rx={i >= 2 ? 22 : 20} ry={i >= 2 ? 19 : 22} fill={i >= 2 ? FILL.orange : FILL.blue} stroke={BLUE} strokeWidth={1.5} />
-          <ellipse cx={i === 4 ? 88 : 108} cy={y} rx={i >= 3 ? 12 : 15} ry={i >= 3 ? 11 : 16} fill={FILL.green} stroke={GREEN} strokeWidth={1.5} />
-        </>}
-        <He x={420} y={y - 5} size={17} anchor="end" bold>{labels[i][0]}</He>
-        <He x={420} y={y + 20} size={14} anchor="end">{labels[i][1]}</He>
-        {i < 4 && <Arrow x1={88} y1={y + 34} x2={88} y2={y + 54} color={MUTED} />}
-      </g>)}
-      <He x={220} y={480} size={15} color={MUTED}>ספורולציה: שעות · במודל זה כ-8 שעות</He>
-      <line x1={20} y1={498} x2={420} y2={498} stroke={LINE_GRAY} />
-      <Arrow x1={88} y1={453} x2={88} y2={531} color={GREEN} />
-      <Rod x={88} y={558} w={110} h={40} fill={FILL.gray} />
-      <He x={420} y={550} size={17} anchor="end" bold>נביטה ואחריה התפתחות</He>
-      <He x={420} y={575} size={14} anchor="end">אובדן עמידות, ואז חזרה לגדילה</He>
-      <He x={220} y={612} size={14} color={MUTED}>אפור: תא אם · ירוק: פורספורה וליבה</He>
-      <He x={220} y={636} size={13} color={MUTED}>כחול: ממברנה · כתום: קורטקס ומעטה · סכמטי</He>
-    </Svg>
-  );
-}
+
 
 export const MICRO_FIGURES: Record<string, { el: () => React.ReactElement; captionHe: string }> = {
   "endospore-structure": { el: EndospereStructure, captionHe: "מה רואים: חתך דרך אנדוספורה אחת, והמספרים תואמים לרשימת השכבות שמעל האיור. הליבה (1) במרכז; המעטפות מקיפות אותה. האקסוספוריום (6, גבול מקווקו) קיים רק בחלק מהמינים. סכמטי, לא בקנה מידה; שכבת הדופן הדקה אינה מוצגת בנפרד." },

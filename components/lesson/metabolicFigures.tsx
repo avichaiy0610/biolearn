@@ -4,6 +4,8 @@
 import type React from "react";
 import EtcMembraneFigure from "./etcMembraneFigure";
 import { ArrowDefs, Axes, BLUE, GREEN, INK, LINE, MUTED, ORANGE, He, La, curve, dash, scale } from "./biochemFigures";
+import { FedFasted } from "./redraws/FedFasted";
+import { Lipoproteins } from "./redraws/Lipoproteins";
 
 const PURPLE = "#7c3aed";
 
@@ -356,30 +358,7 @@ function FaRegulation() {
 }
 
 // ── Integration ──────────────────────────────────────────────────────────────
-function FedFasted() {
-  const box = (x: number, y: number, w: number, l: string, c = BLUE) => <Box x={x} y={y} w={w} label={l} color={c} bold size={13} />;
-  const flow = (x1: number, y1: number, x2: number, y2: number, l: string, lx: number, ly: number, c = INK) => (
-    <g><Arrow x1={x1} y1={y1} x2={x2} y2={y2} color={c} width={2} /><He x={lx} y={ly} size={11} color={c}>{l}</He></g>
-  );
-  return (
-    <svg viewBox="0 0 480 380" className="w-full h-auto" role="img" aria-label="זרימת דלקים בין האיברים בצום: רקמת השומן משחררת חומצות שומן וגליצרול, השריר משחרר אלנין ולקטט, הכבד מייצר גלוקוז וגופי קטון למוח ולשאר הרקמות">
-      <ArrowDefs />
-      {box(240, 165, 110, "כבד", ORANGE)}
-      {box(80, 40, 120, "רקמת שומן")}
-      {box(400, 40, 100, "שריר")}
-      {box(80, 310, 100, "מוח", PURPLE)}
-      {box(400, 310, 140, "כדוריות אדומות", "#b91c1c")}
-      {flow(120, 72, 205, 163, "חומצות שומן, גליצרול", 76, 128)}
-      {flow(140, 56, 350, 56, "חומצות שומן", 245, 48)}
-      {flow(390, 72, 280, 163, "אלנין, לקטט", 376, 128)}
-      {flow(205, 197, 100, 306, "גלוקוז", 128, 245, GREEN)}
-      {flow(232, 197, 128, 306, "גופי קטון", 212, 270, PURPLE)}
-      {flow(268, 197, 368, 306, "גלוקוז", 300, 270, GREEN)}
-      {flow(398, 306, 296, 197, "לקטט", 395, 240, "#b91c1c")}
-      <He x={240} y={372} size={11.5} color={MUTED}>מצב צום (גלוקגון גבוה, אינסולין נמוך). סכמטי.</He>
-    </svg>
-  );
-}
+
 
 function StarvationFuels() {
   const s = scale(60, 460, 250, 40, 0, 40, 0, 1);
@@ -423,33 +402,7 @@ function CholesterolPathway() {
   );
 }
 
-function Lipoproteins() {
-  return (
-    <svg viewBox="0 0 480 330" className="w-full h-auto" role="img" aria-label="הובלת שומנים בדם: כילומיקרונים מהמעי, VLDL מהכבד שהופך ל-IDL ול-LDL, LDL נקלט בקולטן, ו-HDL מחזיר כולסטרול לכבד">
-      <ArrowDefs />
-      <Box x={70} y={20} w={110} label="מעי" bold />
-      <Arrow x1={125} y1={35} x2={208} y2={35} />
-      <Box x={290} y={20} w={150} label="כילומיקרונים" size={12.5} />
-      <Arrow x1={365} y1={35} x2={398} y2={35} />
-      <He x={440} y={40} size={12} bold>רקמות</He>
-      <He x={290} y={68} size={11} color={MUTED}>ליפופרוטאין ליפאז → חומצות שומן</He>
-      <Box x={70} y={130} w={110} label="כבד" bold color={ORANGE} />
-      <Arrow x1={125} y1={145} x2={170} y2={145} />
-      <Box x={205} y={130} w={66} label="VLDL" size={12} />
-      <Arrow x1={238} y1={145} x2={262} y2={145} />
-      <Box x={290} y={130} w={52} label="IDL" size={12} />
-      <Arrow x1={316} y1={145} x2={340} y2={145} />
-      <Box x={375} y={130} w={66} label="LDL" size={12} bold color="#b91c1c" fill="#fef2f2" />
-      <Arrow x1={408} y1={145} x2={430} y2={145} />
-      <He x={455} y={150} size={12} bold>רקמות</He>
-      <He x={330} y={198} size={11} color="#b91c1c" anchor="end">LDL נקלט דרך קולטן LDL</He>
-      <Box x={290} y={240} w={80} label="HDL" bold color={GREEN} fill="#f0fdf4" />
-      <Arrow x1={455} y1={168} x2={336} y2={246} color={GREEN} />
-      <Arrow x1={250} y1={255} x2={100} y2={163} color={GREEN} />
-      <He x={290} y={300} size={11.5} color={GREEN}>HDL אוסף כולסטרול מהרקמות ומחזיר לכבד</He>
-    </svg>
-  );
-}
+
 
 // ── Amino acids ──────────────────────────────────────────────────────────────
 function UreaCycle() {

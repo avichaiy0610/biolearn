@@ -10,3 +10,12 @@
 
 `code/<Name>.tsx.txt` — הפונקציה הישנה בדיוק כפי שהייתה; `svg/` — רינדור בהיר/כהה.
 שחזור: להחזיר את הפונקציה לקובץ המקור, למחוק את שורת `import { <Name> } from "./redraws/<Name>"` ואת `components/lesson/redraws/<Name>.tsx`.
+
+## סבב 11 (עדיפות 2) — אישור אביחי 22.11
+- `metabolicFigures.tsx`: FedFasted (`fed-fasted`, יחידה met-integration)
+- `metabolicFigures.tsx`: Lipoproteins (`lipoproteins`, יחידה met-lipids-cholesterol)
+- `microFigures.tsx`: EndospereStructure (`endospore-structure`, יחידה mv-endospores)
+- `microFigures.tsx`: SporulationCycle (`sporulation-cycle`, יחידה mv-endospores)
+- `microFigures.tsx`: TransportSystems (`transport-systems`, יחידה mv-cell-envelope)
+- `microFigures.tsx`: AntibioticTargets (`antibiotic-targets`, יחידה mv-antibiotics)
+אותו מבנה ואותו שחזור כמו למעלה.

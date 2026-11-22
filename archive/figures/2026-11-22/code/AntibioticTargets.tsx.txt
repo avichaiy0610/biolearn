@@ -1,0 +1,36 @@
+function AntibioticTargets() {
+  return (
+    <Svg h={320} label="מטרות האנטיביוטיקה בתא החיידקי: בניית הדופן (בטא-לקטמים, ונקומיצין), הממברנה (פולימיקסינים), הריבוזום 30S (אמינוגליקוזידים, טטרציקלינים) ו-50S (מקרולידים, כלורמפניקול), הג'ירז (קווינולונים), RNA פולימראז (ריפמפין) ובניית החומצה הפולית (סולפונמידים, טרימתופרים)">
+      <rect x={100} y={60} width={280} height={190} rx={60} fill={FILL.orange} stroke={ORANGE} strokeWidth={5} />
+      <rect x={110} y={70} width={260} height={170} rx={52} fill="#ffffff" stroke={MUTED} strokeWidth={2} />
+      <path d="M180 150 C 200 120, 240 180, 260 140 S 300 120, 300 160" fill="none" stroke={PURPLE} strokeWidth={3} />
+      <He x={290} y={186} size={10.5} color={PURPLE}>DNA</He>
+      <circle cx={170} cy={200} r={12} fill={FILL.green} stroke={GREEN} /><circle cx={170} cy={216} r={8} fill={FILL.green} stroke={GREEN} />
+      <rect x={300} y={100} width={30} height={18} rx={6} fill={FILL.blue} stroke={BLUE} />
+      <He x={240} y={36} size={11.5} bold color={ORANGE}>דופן: בטא-לקטמים, ונקומיצין</He>
+      <Arrow x1={240} y1={42} x2={240} y2={60} color={ORANGE} />
+      <He x={50} y={130} size={11} color={MUTED}>ממברנה:</He>
+      <He x={50} y={146} size={11} color={MUTED}>פולימיקסינים</He>
+      <Arrow x1={70} y1={154} x2={108} y2={160} color={MUTED} />
+      <La x={50} y={196} size={10.5} bold color={GREEN}>30S</La>
+      <He x={50} y={210} size={9.5} color={GREEN}>אמינוגליקוזידים</He>
+      <He x={50} y={223} size={9.5} color={GREEN}>טטרציקלינים</He>
+      <La x={50} y={246} size={10.5} bold color={GREEN}>50S</La>
+      <He x={50} y={260} size={9.5} color={GREEN}>מקרולידים</He>
+      <He x={50} y={273} size={9.5} color={GREEN}>כלורמפניקול</He>
+      <Arrow x1={90} y1={232} x2={156} y2={214} color={GREEN} />
+      <He x={430} y={92} size={10.5} color={BLUE}>RNA פולימראז:</He>
+      <He x={430} y={108} size={10.5} color={BLUE}>ריפמפין</He>
+      <Arrow x1={400} y1={106} x2={334} y2={108} color={BLUE} />
+      <He x={430} y={156} size={10.5} color={PURPLE}>ג'ירז:</He>
+      <He x={430} y={172} size={10.5} color={PURPLE}>קווינולונים</He>
+      <Arrow x1={400} y1={164} x2={304} y2={158} color={PURPLE} />
+      <He x={430} y={226} size={10.5} color={RED}>חומצה פולית:</He>
+      <He x={430} y={242} size={10.5} color={RED}>סולפונמידים,</He>
+      <He x={430} y={258} size={10.5} color={RED}>טרימתופרים</He>
+      <Arrow x1={392} y1={236} x2={330} y2={214} color={RED} />
+      <He x={330} y={210} size={10} color={RED}>פולאט</He>
+      <He x={240} y={300} size={11} color={MUTED}>כל מטרה — מבנה שקיים בחיידק ולא בתא האדם, או שונה בו</He>
+    </Svg>
+  );
+}

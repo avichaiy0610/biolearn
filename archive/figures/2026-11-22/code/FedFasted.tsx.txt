@@ -1,0 +1,24 @@
+function FedFasted() {
+  const box = (x: number, y: number, w: number, l: string, c = BLUE) => <Box x={x} y={y} w={w} label={l} color={c} bold size={13} />;
+  const flow = (x1: number, y1: number, x2: number, y2: number, l: string, lx: number, ly: number, c = INK) => (
+    <g><Arrow x1={x1} y1={y1} x2={x2} y2={y2} color={c} width={2} /><He x={lx} y={ly} size={11} color={c}>{l}</He></g>
+  );
+  return (
+    <svg viewBox="0 0 480 380" className="w-full h-auto" role="img" aria-label="זרימת דלקים בין האיברים בצום: רקמת השומן משחררת חומצות שומן וגליצרול, השריר משחרר אלנין ולקטט, הכבד מייצר גלוקוז וגופי קטון למוח ולשאר הרקמות">
+      <ArrowDefs />
+      {box(240, 165, 110, "כבד", ORANGE)}
+      {box(80, 40, 120, "רקמת שומן")}
+      {box(400, 40, 100, "שריר")}
+      {box(80, 310, 100, "מוח", PURPLE)}
+      {box(400, 310, 140, "כדוריות אדומות", "#b91c1c")}
+      {flow(120, 72, 205, 163, "חומצות שומן, גליצרול", 76, 128)}
+      {flow(140, 56, 350, 56, "חומצות שומן", 245, 48)}
+      {flow(390, 72, 280, 163, "אלנין, לקטט", 376, 128)}
+      {flow(205, 197, 100, 306, "גלוקוז", 128, 245, GREEN)}
+      {flow(232, 197, 128, 306, "גופי קטון", 212, 270, PURPLE)}
+      {flow(268, 197, 368, 306, "גלוקוז", 300, 270, GREEN)}
+      {flow(398, 306, 296, 197, "לקטט", 395, 240, "#b91c1c")}
+      <He x={240} y={372} size={11.5} color={MUTED}>מצב צום (גלוקגון גבוה, אינסולין נמוך). סכמטי.</He>
+    </svg>
+  );
+}

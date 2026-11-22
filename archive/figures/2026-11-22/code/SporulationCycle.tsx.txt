@@ -1,0 +1,37 @@
+function SporulationCycle() {
+  const ys = [65, 155, 245, 335, 425];
+  const labels = [
+    ["1. חלוקה א-סימטרית", "תא אם גדול ופורספורה קטנה"],
+    ["2. בליעה", "ממברנת תא האם עוטפת את הקטנה"],
+    ["3. בניית שכבות הגנה", "קורטקס ומעטה סביב הפורספורה"],
+    ["4. הבשלה", "הליבה מאבדת מים ורוכשת עמידות"],
+    ["5. שחרור", "תא האם מתפרק; הספורה נשארת"],
+  ];
+  return (
+    <Svg w={440} h={650} label="קוראים מלמעלה למטה: חמישה שלבי בניית אנדוספורה ב-Bacillus subtilis, במשך כשמונה שעות. אפור הוא תא האם, ירוק הוא הפורספורה והליבה, כחול ממברנה עוטפת, כתום קורטקס וזהוב מעטה. בהמשך נביטה והתפתחות מחזירות תא פעיל. הזמנים משתנים לפי התנאים">
+      <He x={220} y={23} size={17} bold>בניית אנדוספורה · קוראים מלמעלה למטה</He>
+      {ys.map((y, i) => <g key={y}>
+        {i < 4 && <Rod x={88} y={y} w={124} h={56} fill={FILL.gray} stroke={MUTED} />}
+        {i === 0 ? <>
+          <path d={`M118 ${y - 26} V${y + 26}`} stroke={BLUE} strokeWidth={2} />
+          <path d={`M118 ${y - 25} a27 27 0 0 1 0 50 Z`} fill={FILL.green} stroke={GREEN} strokeWidth={1.5} />
+        </> : <>
+          {i >= 2 && <ellipse cx={i === 4 ? 88 : 108} cy={y} rx={26} ry={23} fill={FILL.yellow} stroke={ORANGE} strokeWidth={2} />}
+          <ellipse cx={i === 4 ? 88 : 108} cy={y} rx={i >= 2 ? 22 : 20} ry={i >= 2 ? 19 : 22} fill={i >= 2 ? FILL.orange : FILL.blue} stroke={BLUE} strokeWidth={1.5} />
+          <ellipse cx={i === 4 ? 88 : 108} cy={y} rx={i >= 3 ? 12 : 15} ry={i >= 3 ? 11 : 16} fill={FILL.green} stroke={GREEN} strokeWidth={1.5} />
+        </>}
+        <He x={420} y={y - 5} size={17} anchor="end" bold>{labels[i][0]}</He>
+        <He x={420} y={y + 20} size={14} anchor="end">{labels[i][1]}</He>
+        {i < 4 && <Arrow x1={88} y1={y + 34} x2={88} y2={y + 54} color={MUTED} />}
+      </g>)}
+      <He x={220} y={480} size={15} color={MUTED}>ספורולציה: שעות · במודל זה כ-8 שעות</He>
+      <line x1={20} y1={498} x2={420} y2={498} stroke={LINE_GRAY} />
+      <Arrow x1={88} y1={453} x2={88} y2={531} color={GREEN} />
+      <Rod x={88} y={558} w={110} h={40} fill={FILL.gray} />
+      <He x={420} y={550} size={17} anchor="end" bold>נביטה ואחריה התפתחות</He>
+      <He x={420} y={575} size={14} anchor="end">אובדן עמידות, ואז חזרה לגדילה</He>
+      <He x={220} y={612} size={14} color={MUTED}>אפור: תא אם · ירוק: פורספורה וליבה</He>
+      <He x={220} y={636} size={13} color={MUTED}>כחול: ממברנה · כתום: קורטקס ומעטה · סכמטי</He>
+    </Svg>
+  );
+}
