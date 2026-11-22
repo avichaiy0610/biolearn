@@ -1,0 +1,38 @@
+function NucleotideStructure() {
+  const O = [240, 96], C1 = [300, 132], C2 = [278, 198], C3 = [202, 198], C4 = [180, 132];
+  const pts = [O, C1, C2, C3, C4].map((p) => p.join(",")).join(" ");
+  return (
+    <Svg h={330} label="מבנה של נוקלאוטיד: פוספט על פחמן 5 של הסוכר, בסיס על פחמן 1, OH על פחמן 3; בפחמן 2 יש H ב-DNA ו-OH ב-RNA">
+      <He x={385} y={26} size={12} bold>פורינים — שתי טבעות</He>
+      <La x={385} y={44} size={13} color={BLUE} bold>A · G</La>
+      <He x={385} y={68} size={12} bold>פירימידינים — טבעת אחת</He>
+      <La x={385} y={86} size={13} color={BLUE} bold>C · T · U</La>
+      <polygon points={pts} fill={FILL.gray} stroke={INK} strokeWidth={2} />
+      <circle cx={O[0]} cy={O[1]} r={10} fill="#ffffff" stroke={INK} strokeWidth={1.5} /><La x={O[0]} y={O[1] + 5} size={13} bold>O</La>
+      <La x={C1[0] + 16} y={C1[1] + 18} size={12} color={MUTED}>1′</La>
+      <La x={C2[0] + 16} y={C2[1] + 4} size={12} color={MUTED}>2′</La>
+      <La x={C3[0] - 16} y={C3[1] + 4} size={12} color={MUTED}>3′</La>
+      <La x={C4[0] - 14} y={C4[1] + 18} size={12} color={MUTED}>4′</La>
+      {/* 5' carbon and phosphate */}
+      <Line x1={C4[0]} y1={C4[1]} x2={150} y2={86} c={INK} w={2} />
+      <La x={150} y={108} size={12} color={MUTED}>5′</La>
+      <Line x1={150} y1={86} x2={104} y2={62} c={INK} w={2} />
+      <circle cx={86} cy={54} r={22} fill={FILL.yellow} stroke={ORANGE} strokeWidth={2} />
+      <La x={86} y={60} size={16} bold color={ORANGE}>P</La>
+      <He x={86} y={96} size={11.5} color={ORANGE}>פוספט</He>
+      {/* base */}
+      <Line x1={C1[0]} y1={C1[1]} x2={350} y2={132} c={INK} w={2} />
+      <rect x={350} y={110} width={92} height={44} rx={10} fill={FILL.blue} stroke={BLUE} strokeWidth={2} />
+      <He x={396} y={137} size={14} bold color={BLUE}>בסיס</He>
+      <He x={326} y={176} size={10.5} color={MUTED}>קשר N-גליקוזידי</He>
+      {/* 3' and 2' */}
+      <Line x1={C3[0]} y1={C3[1]} x2={192} y2={232} c={INK} w={2} />
+      <La x={186} y={250} size={13} bold>3′-OH</La>
+      <Line x1={C2[0]} y1={C2[1]} x2={290} y2={232} c={INK} w={2} />
+      <La x={300} y={250} size={12.5}>DNA: H</La>
+      <La x={300} y={268} size={12.5} color={PURPLE}>RNA: OH</La>
+      <He x={240} y={300} size={12.5}>נוקלאוזיד = בסיס + סוכר</He>
+      <He x={240} y={322} size={12.5} bold>נוקלאוטיד = בסיס + סוכר + פוספט</He>
+    </Svg>
+  );
+}

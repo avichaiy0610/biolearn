@@ -1,0 +1,33 @@
+function ConjugationHfr() {
+  const Cell = ({ x, y, label, c }: { x: number; y: number; label: string; c: string }) => (
+    <g>
+      <rect x={x - 50} y={y - 24} width={100} height={48} rx={24} fill={FILL.gray} stroke={c} strokeWidth={1.6} />
+      <La x={x} y={y + 40} size={12} bold color={c}>{label}</La>
+    </g>
+  );
+  return (
+    <Svg h={330} label="קוניוגציה: תא F+ מעביר עותק של הפלסמיד F לתא F-, ושני התאים יוצאים F+. בזן Hfr הפלסמיד משולב בכרומוזום; ההעברה מתחילה ב-oriT ומושכת את הכרומוזום גן אחר גן, ובדרך כלל נקטעת לפני ש-F עובר, ולכן המקבל נשאר F- ומקבל רק את הגנים הקרובים ל-oriT">
+      <La x={240} y={22} size={13} bold>F⁺ × F⁻</La>
+      <Cell x={360} y={70} label="F⁺" c={BLUE} />
+      <circle cx={360} cy={70} r={11} fill="none" stroke={ORANGE} strokeWidth={2.5} />
+      <line x1={310} y1={70} x2={250} y2={70} stroke={MUTED} strokeWidth={3} />
+      <Cell x={200} y={70} label="F⁻" c={MUTED} />
+      <Arrow x1={300} y1={80} x2={258} y2={80} color={ORANGE} />
+      <He x={100} y={66} size={11} color={MUTED}>שני התאים</He>
+      <La x={100} y={84} size={12} bold color={BLUE}>F⁺</La>
+      <line x1={10} y1={130} x2={470} y2={130} stroke={LINE_GRAY} />
+      <La x={240} y={156} size={13} bold>Hfr × F⁻</La>
+      <Cell x={360} y={210} label="Hfr" c={BLUE} />
+      <ellipse cx={360} cy={210} rx={34} ry={14} fill="none" stroke={PURPLE} strokeWidth={2} />
+      <rect x={322} y={202} width={10} height={16} fill={ORANGE} />
+      <line x1={310} y1={210} x2={250} y2={210} stroke={MUTED} strokeWidth={3} />
+      <Cell x={200} y={210} label="F⁻" c={MUTED} />
+      <path d="M300 220 L170 220" stroke={PURPLE} strokeWidth={3} />
+      {[["a", 176], ["b", 206], ["c", 236], ["d", 280]].map(([g, x]) => <La key={g} x={x as number} y={213} size={11} bold color={PURPLE}>{g}</La>)}
+      <La x={330} y={196} size={10} color={ORANGE}>oriT</La>
+      <He x={240} y={276} size={11} color={PURPLE}>הגנים נכנסים לפי הסדר: a ראשון, ואחר כך b, c…</He>
+      <He x={240} y={296} size={11} color={MUTED}>ההעברה נקטעת לפני ששאר F עובר — המקבל נשאר F⁻</He>
+      <He x={240} y={316} size={11} color={MUTED}>זמן הכניסה של כל גן = מיקומו (בדקות)</He>
+    </Svg>
+  );
+}

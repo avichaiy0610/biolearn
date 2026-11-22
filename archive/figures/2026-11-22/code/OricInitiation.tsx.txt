@@ -1,0 +1,26 @@
+function OricInitiation() {
+  const duplex = (y: number) => (<g><Line x1={40} y1={y - 5} x2={440} y2={y - 5} /><Line x1={40} y1={y + 5} x2={440} y2={y + 5} /></g>);
+  return (
+    <Svg h={300} label="התחלת השכפול ב-oriC: DnaA-ATP נקשר לרצפי ה-9, פותח את אזור ה-13 העשיר ב-A-T, ו-DnaC טוען שני הליקאזים (DnaB) — אחד לכל מזלג">
+      <Num x={20} y={44} n={1} />
+      {duplex(44)}
+      {[78, 116, 154].map((x) => <rect key={x} x={x - 16} y={34} width={32} height={20} rx={3} fill={FILL.red} stroke={RED} strokeWidth={1.2} />)}
+      {[232, 284, 336, 388].map((x) => <rect key={x} x={x - 16} y={34} width={32} height={20} rx={3} fill={FILL.blue} stroke={BLUE} strokeWidth={1.2} />)}
+      <He x={116} y={76} size={11} color={RED}>3 רצפים של 13 — עשירים ב-A-T</He>
+      <He x={310} y={76} size={11} color={BLUE}>4 רצפים של 9 — אתרי DnaA</He>
+      <Num x={20} y={148} n={2} />
+      <path d="M40 143 L60 143 Q116 112 172 143 L440 143" fill="none" stroke={BLUE} strokeWidth={3} />
+      <path d="M40 153 L60 153 Q116 184 172 153 L440 153" fill="none" stroke={BLUE} strokeWidth={3} />
+      {[236, 262, 288, 314, 340, 366, 392].map((x, i) => <circle key={x} cx={x} cy={i % 2 ? 128 : 166} r={12} fill={FILL.orange} stroke={ORANGE} strokeWidth={1.5} />)}
+      <He x={310} y={108} size={11} color={ORANGE}>DnaA-ATP, מולקולות רבות</He>
+      <Num x={20} y={244} n={3} />
+      <path d="M40 239 L130 239 Q240 196 350 239 L440 239" fill="none" stroke={BLUE} strokeWidth={3} />
+      <path d="M40 249 L130 249 Q240 292 350 249 L440 249" fill="none" stroke={BLUE} strokeWidth={3} />
+      <ellipse cx={165} cy={226} rx={10} ry={15} fill={FILL.yellow} stroke="#b45309" strokeWidth={2} />
+      <ellipse cx={315} cy={262} rx={10} ry={15} fill={FILL.yellow} stroke="#b45309" strokeWidth={2} />
+      <Arrow x1={150} y1={214} x2={110} y2={214} color="#b45309" />
+      <Arrow x1={330} y1={276} x2={370} y2={276} color="#b45309" />
+      <He x={240} y={196} size={11} color="#b45309">DnaB — הליקאז לכל מזלג</He>
+    </Svg>
+  );
+}

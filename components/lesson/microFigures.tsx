@@ -12,6 +12,8 @@ import { EndospereStructure } from "./redraws/EndospereStructure";
 import { SporulationCycle } from "./redraws/SporulationCycle";
 import { TransportSystems } from "./redraws/TransportSystems";
 import { AntibioticTargets } from "./redraws/AntibioticTargets";
+import { BiofilmStages } from "./redraws/BiofilmStages";
+import { ConjugationHfr } from "./redraws/ConjugationHfr";
 const PURPLE = "#7c3aed";
 const RED = "#b91c1c";
 const PINK = "#db2777";
@@ -263,27 +265,7 @@ function NitrogenCycle() {
 }
 
 // ── mv-ecology: biofilm stages ───────────────────────────────────────────────
-function BiofilmStages() {
-  const xs = [420, 330, 240, 150, 60];
-  const t: [string, string][] = [["1. היצמדות", "הפיכה"], ["2. היצמדות", "קבועה"], ["3. מיקרו-", "מושבה"], ["4. ביופילם", "בוגר ומטריקס"], ["5. התפזרות", ""]];
-  return (
-    <Svg h={250} label="שלבי הביופילם: היצמדות הפיכה של תאים בודדים למשטח, היצמדות קבועה, היווצרות מיקרו-מושבות, ביופילם בוגר עטוף מטריקס עם תעלות מים, והתפזרות של תאים שוחים שמאכלסים משטחים חדשים">
-      <rect x={10} y={180} width={460} height={14} fill={FILL.gray} stroke={MUTED} />
-      <He x={240} y={212} size={10.5} color={MUTED}>משטח</He>
-      <Rod x={xs[0]} y={150} fill={FILL.blue} stroke={BLUE} />
-      <Rod x={xs[1]} y={172} fill={FILL.blue} stroke={BLUE} /><Rod x={xs[1] + 22} y={172} w={30} fill={FILL.blue} stroke={BLUE} />
-      <ellipse cx={xs[2]} cy={164} rx={30} ry={16} fill={FILL.yellow} stroke={ORANGE} />
-      {[-14, 0, 14].map((d) => <Rod key={d} x={xs[2] + d} y={166} w={14} h={8} fill={FILL.blue} stroke={BLUE} />)}
-      <path d={`M${xs[3] - 40} 180 Q ${xs[3] - 36} 90 ${xs[3] - 10} 100 Q ${xs[3]} 140 ${xs[3] + 6} 100 Q ${xs[3] + 34} 80 ${xs[3] + 40} 180 Z`} fill={FILL.yellow} stroke={ORANGE} />
-      {[[-24, 160], [-16, 130], [16, 120], [24, 156], [-4, 170]].map(([dx, yy], i) => <Rod key={i} x={xs[3] + dx} y={yy} w={14} h={8} fill={FILL.blue} stroke={BLUE} />)}
-      <path d={`M${xs[4] - 26} 180 Q ${xs[4] - 22} 110 ${xs[4]} 120 Q ${xs[4] + 22} 110 ${xs[4] + 26} 180 Z`} fill={FILL.yellow} stroke={ORANGE} />
-      <Rod x={xs[4] - 14} y={70} w={20} h={9} fill={FILL.blue} stroke={BLUE} /><Rod x={xs[4] + 18} y={84} w={20} h={9} fill={FILL.blue} stroke={BLUE} />
-      <Arrow x1={xs[4] - 4} y1={112} x2={xs[4] - 12} y2={80} color={BLUE} />
-      {t.map(([a, b], i) => <g key={a}><He x={xs[i]} y={30} size={11} bold>{a}</He><He x={xs[i]} y={46} size={11} bold>{b}</He></g>)}
-      <He x={240} y={238} size={10.5} color={MUTED}>המטריקס: פוליסכרידים, חלבונים ו-DNA חוץ-תאי · מעבר לביופילם נשלט גם בחישת מניין</He>
-    </Svg>
-  );
-}
+
 
 // ── mv-ecology: quorum sensing (lux) ─────────────────────────────────────────
 function QuorumSensingLux() {
@@ -404,39 +386,7 @@ function LambdaSwitch() {
 }
 
 // ── mv-gene-transfer: F and Hfr conjugation ─────────────────────────────────
-function ConjugationHfr() {
-  const Cell = ({ x, y, label, c }: { x: number; y: number; label: string; c: string }) => (
-    <g>
-      <rect x={x - 50} y={y - 24} width={100} height={48} rx={24} fill={FILL.gray} stroke={c} strokeWidth={1.6} />
-      <La x={x} y={y + 40} size={12} bold color={c}>{label}</La>
-    </g>
-  );
-  return (
-    <Svg h={330} label="קוניוגציה: תא F+ מעביר עותק של הפלסמיד F לתא F-, ושני התאים יוצאים F+. בזן Hfr הפלסמיד משולב בכרומוזום; ההעברה מתחילה ב-oriT ומושכת את הכרומוזום גן אחר גן, ובדרך כלל נקטעת לפני ש-F עובר, ולכן המקבל נשאר F- ומקבל רק את הגנים הקרובים ל-oriT">
-      <La x={240} y={22} size={13} bold>F⁺ × F⁻</La>
-      <Cell x={360} y={70} label="F⁺" c={BLUE} />
-      <circle cx={360} cy={70} r={11} fill="none" stroke={ORANGE} strokeWidth={2.5} />
-      <line x1={310} y1={70} x2={250} y2={70} stroke={MUTED} strokeWidth={3} />
-      <Cell x={200} y={70} label="F⁻" c={MUTED} />
-      <Arrow x1={300} y1={80} x2={258} y2={80} color={ORANGE} />
-      <He x={100} y={66} size={11} color={MUTED}>שני התאים</He>
-      <La x={100} y={84} size={12} bold color={BLUE}>F⁺</La>
-      <line x1={10} y1={130} x2={470} y2={130} stroke={LINE_GRAY} />
-      <La x={240} y={156} size={13} bold>Hfr × F⁻</La>
-      <Cell x={360} y={210} label="Hfr" c={BLUE} />
-      <ellipse cx={360} cy={210} rx={34} ry={14} fill="none" stroke={PURPLE} strokeWidth={2} />
-      <rect x={322} y={202} width={10} height={16} fill={ORANGE} />
-      <line x1={310} y1={210} x2={250} y2={210} stroke={MUTED} strokeWidth={3} />
-      <Cell x={200} y={210} label="F⁻" c={MUTED} />
-      <path d="M300 220 L170 220" stroke={PURPLE} strokeWidth={3} />
-      {[["a", 176], ["b", 206], ["c", 236], ["d", 280]].map(([g, x]) => <La key={g} x={x as number} y={213} size={11} bold color={PURPLE}>{g}</La>)}
-      <La x={330} y={196} size={10} color={ORANGE}>oriT</La>
-      <He x={240} y={276} size={11} color={PURPLE}>הגנים נכנסים לפי הסדר: a ראשון, ואחר כך b, c…</He>
-      <He x={240} y={296} size={11} color={MUTED}>ההעברה נקטעת לפני ששאר F עובר — המקבל נשאר F⁻</He>
-      <He x={240} y={316} size={11} color={MUTED}>זמן הכניסה של כל גן = מיקומו (בדקות)</He>
-    </Svg>
-  );
-}
+
 
 // ── mv-evolution: tree of life ───────────────────────────────────────────────
 function TreeOfLife() {

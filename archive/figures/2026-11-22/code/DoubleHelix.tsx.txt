@@ -1,0 +1,45 @@
+function DoubleHelix() {
+  const pairs: [string, string][] = [["A", "T"], ["G", "C"], ["C", "G"], ["T", "A"], ["G", "C"], ["A", "T"]];
+  const col: Record<string, string> = { A: FILL.orange, T: FILL.blue, G: FILL.green, C: FILL.purple };
+  const helix = (ph: number) => { let d = ""; for (let y = 40; y <= 280; y += 4) { const x = 360 + 50 * Math.sin((2 * Math.PI * (y - 40)) / 160 + ph); d += `${y === 40 ? "M" : "L"}${x.toFixed(1)} ${y}`; } return d; };
+  const rungs = [];
+  for (let y = 44; y <= 276; y += 9) {
+    const a = (2 * Math.PI * (y - 40)) / 160;
+    rungs.push(<line key={y} x1={360 + 50 * Math.sin(a)} x2={360 + 50 * Math.sin(a + 2.2)} y1={y} y2={y} stroke={LINE} strokeWidth={2} />);
+  }
+  return (
+    <Svg h={330} label="הסליל הכפול: משמאל — שני גדילים אנטי-מקבילים עם זוגות A-T (שני קשרי מימן) ו-G-C (שלושה); מימין — סליל ימני עם חריץ גדול וחריץ קטן">
+      {/* ladder */}
+      <Line x1={60} y1={40} x2={60} y2={280} c={BLUE} w={4} />
+      <Line x1={200} y1={40} x2={200} y2={280} c={GREEN} w={4} />
+      <La x={60} y={30} size={13} bold>5′</La><La x={60} y={300} size={13} bold>3′</La>
+      <La x={200} y={30} size={13} bold>3′</La><La x={200} y={300} size={13} bold>5′</La>
+      <Arrow x1={38} y1={120} x2={38} y2={200} color={BLUE} />
+      <Arrow x1={222} y1={200} x2={222} y2={120} color={GREEN} />
+      {pairs.map(([l, r], i) => {
+        const y = 60 + i * 40;
+        const hb = l === "A" || l === "T" ? [-5, 5] : [-8, 0, 8];
+        return (
+          <g key={i}>
+            <rect x={62} y={y - 13} width={54} height={26} rx={4} fill={col[l]} stroke={INK} strokeWidth={1} />
+            <rect x={144} y={y - 13} width={54} height={26} rx={4} fill={col[r]} stroke={INK} strokeWidth={1} />
+            <La x={89} y={y + 5} size={14} bold>{l}</La>
+            <La x={171} y={y + 5} size={14} bold>{r}</La>
+            {hb.map((d) => <line key={d} x1={116} x2={144} y1={y + d} y2={y + d} stroke={INK} strokeWidth={1.4} {...dash} />)}
+          </g>
+        );
+      })}
+      <He x={130} y={322} size={11.5} color={MUTED}>מקווקו = קשר מימן</He>
+      {/* helix */}
+      {rungs}
+      <path d={helix(0)} fill="none" stroke={BLUE} strokeWidth={4} />
+      <path d={helix(2.2)} fill="none" stroke={GREEN} strokeWidth={4} />
+      <line x1={420} x2={420} y1={80} y2={184} stroke={INK} strokeWidth={1.2} />
+      <line x1={420} x2={420} y1={186} y2={240} stroke={ORANGE} strokeWidth={1.2} />
+      <He x={448} y={136} size={11.5}>חריץ</He><He x={448} y={150} size={11.5}>גדול</He>
+      <He x={448} y={210} size={11.5} color={ORANGE}>חריץ</He><He x={448} y={224} size={11.5} color={ORANGE}>קטן</He>
+      <He x={360} y={304} size={11.5}>סליל ימני · כ-10.5 זוגות לסיבוב</He>
+      <He x={360} y={322} size={11.5} color={MUTED}>קוטר כ-2 ננומטר</He>
+    </Svg>
+  );
+}

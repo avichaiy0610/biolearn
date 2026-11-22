@@ -2,7 +2,7 @@
    says so. Colors: parental/template DNA blue, new DNA green, RNA purple, highlights orange.
    Referenced from lesson bodies as [[figure:<id>]]. */
 import type React from "react";
-import { ArrowDefs, Axes, BLUE, GREEN, INK, LINE, MUTED, ORANGE, He, La, curve, dash, scale } from "./biochemFigures";
+import { ArrowDefs, Axes, BLUE, GREEN, INK, MUTED, ORANGE, He, La, curve, dash, scale } from "./biochemFigures";
 import { Arrow, Cycle, type Edge } from "./metabolicFigures";
 import { PcrPrimerDesign, SangerRead, PrimerExtensionGel, EmsaGel, FootprintLadder, ChipSteps, TweezersTrace } from "./molecularMethodsFigures";
 import { TrnaStructure } from "./redraws/TrnaStructure";
@@ -14,6 +14,10 @@ import AnatomyEmbed from "./anatomy/AnatomyEmbed";
 import { ElongationCycle } from "./redraws/ElongationCycle";
 import { RibosomeSites } from "./redraws/RibosomeSites";
 import { MolecularNucleosome } from "./redraws/MolecularNucleosome";
+import { NucleotideStructure } from "./redraws/NucleotideStructure";
+import { DoubleHelix } from "./redraws/DoubleHelix";
+import { ChromatinLevels } from "./redraws/ChromatinLevels";
+import { OricInitiation } from "./redraws/OricInitiation";
 const PURPLE = "#7c3aed";
 const RED = "#b91c1c";
 const FILL = { blue: "#dbeafe", green: "#dcfce7", orange: "#ffedd5", purple: "#ede9fe", yellow: "#fef3c7", gray: "#f1f5f9", red: "#fee2e2", sky: "#e0f2fe" };
@@ -40,95 +44,11 @@ const HBox = ({ x, y, w, h = 30, label, c = BLUE, fill = FILL.blue, size = 12.5,
     <He x={x} y={y + h / 2 + size * 0.36} size={size} bold={bold}>{label}</He>
   </g>
 );
-const Num = ({ x, y, n }: { x: number; y: number; n: number }) => (
-  <g><circle cx={x} cy={y} r={9} fill={INK} /><La x={x} y={y + 4} size={11} bold color="#ffffff">{n}</La></g>
-);
 
 // ── mol-nucleic-acids ────────────────────────────────────────────────────────
-function NucleotideStructure() {
-  const O = [240, 96], C1 = [300, 132], C2 = [278, 198], C3 = [202, 198], C4 = [180, 132];
-  const pts = [O, C1, C2, C3, C4].map((p) => p.join(",")).join(" ");
-  return (
-    <Svg h={330} label="מבנה של נוקלאוטיד: פוספט על פחמן 5 של הסוכר, בסיס על פחמן 1, OH על פחמן 3; בפחמן 2 יש H ב-DNA ו-OH ב-RNA">
-      <He x={385} y={26} size={12} bold>פורינים — שתי טבעות</He>
-      <La x={385} y={44} size={13} color={BLUE} bold>A · G</La>
-      <He x={385} y={68} size={12} bold>פירימידינים — טבעת אחת</He>
-      <La x={385} y={86} size={13} color={BLUE} bold>C · T · U</La>
-      <polygon points={pts} fill={FILL.gray} stroke={INK} strokeWidth={2} />
-      <circle cx={O[0]} cy={O[1]} r={10} fill="#ffffff" stroke={INK} strokeWidth={1.5} /><La x={O[0]} y={O[1] + 5} size={13} bold>O</La>
-      <La x={C1[0] + 16} y={C1[1] + 18} size={12} color={MUTED}>1′</La>
-      <La x={C2[0] + 16} y={C2[1] + 4} size={12} color={MUTED}>2′</La>
-      <La x={C3[0] - 16} y={C3[1] + 4} size={12} color={MUTED}>3′</La>
-      <La x={C4[0] - 14} y={C4[1] + 18} size={12} color={MUTED}>4′</La>
-      {/* 5' carbon and phosphate */}
-      <Line x1={C4[0]} y1={C4[1]} x2={150} y2={86} c={INK} w={2} />
-      <La x={150} y={108} size={12} color={MUTED}>5′</La>
-      <Line x1={150} y1={86} x2={104} y2={62} c={INK} w={2} />
-      <circle cx={86} cy={54} r={22} fill={FILL.yellow} stroke={ORANGE} strokeWidth={2} />
-      <La x={86} y={60} size={16} bold color={ORANGE}>P</La>
-      <He x={86} y={96} size={11.5} color={ORANGE}>פוספט</He>
-      {/* base */}
-      <Line x1={C1[0]} y1={C1[1]} x2={350} y2={132} c={INK} w={2} />
-      <rect x={350} y={110} width={92} height={44} rx={10} fill={FILL.blue} stroke={BLUE} strokeWidth={2} />
-      <He x={396} y={137} size={14} bold color={BLUE}>בסיס</He>
-      <He x={326} y={176} size={10.5} color={MUTED}>קשר N-גליקוזידי</He>
-      {/* 3' and 2' */}
-      <Line x1={C3[0]} y1={C3[1]} x2={192} y2={232} c={INK} w={2} />
-      <La x={186} y={250} size={13} bold>3′-OH</La>
-      <Line x1={C2[0]} y1={C2[1]} x2={290} y2={232} c={INK} w={2} />
-      <La x={300} y={250} size={12.5}>DNA: H</La>
-      <La x={300} y={268} size={12.5} color={PURPLE}>RNA: OH</La>
-      <He x={240} y={300} size={12.5}>נוקלאוזיד = בסיס + סוכר</He>
-      <He x={240} y={322} size={12.5} bold>נוקלאוטיד = בסיס + סוכר + פוספט</He>
-    </Svg>
-  );
-}
 
-function DoubleHelix() {
-  const pairs: [string, string][] = [["A", "T"], ["G", "C"], ["C", "G"], ["T", "A"], ["G", "C"], ["A", "T"]];
-  const col: Record<string, string> = { A: FILL.orange, T: FILL.blue, G: FILL.green, C: FILL.purple };
-  const helix = (ph: number) => { let d = ""; for (let y = 40; y <= 280; y += 4) { const x = 360 + 50 * Math.sin((2 * Math.PI * (y - 40)) / 160 + ph); d += `${y === 40 ? "M" : "L"}${x.toFixed(1)} ${y}`; } return d; };
-  const rungs = [];
-  for (let y = 44; y <= 276; y += 9) {
-    const a = (2 * Math.PI * (y - 40)) / 160;
-    rungs.push(<line key={y} x1={360 + 50 * Math.sin(a)} x2={360 + 50 * Math.sin(a + 2.2)} y1={y} y2={y} stroke={LINE} strokeWidth={2} />);
-  }
-  return (
-    <Svg h={330} label="הסליל הכפול: משמאל — שני גדילים אנטי-מקבילים עם זוגות A-T (שני קשרי מימן) ו-G-C (שלושה); מימין — סליל ימני עם חריץ גדול וחריץ קטן">
-      {/* ladder */}
-      <Line x1={60} y1={40} x2={60} y2={280} c={BLUE} w={4} />
-      <Line x1={200} y1={40} x2={200} y2={280} c={GREEN} w={4} />
-      <La x={60} y={30} size={13} bold>5′</La><La x={60} y={300} size={13} bold>3′</La>
-      <La x={200} y={30} size={13} bold>3′</La><La x={200} y={300} size={13} bold>5′</La>
-      <Arrow x1={38} y1={120} x2={38} y2={200} color={BLUE} />
-      <Arrow x1={222} y1={200} x2={222} y2={120} color={GREEN} />
-      {pairs.map(([l, r], i) => {
-        const y = 60 + i * 40;
-        const hb = l === "A" || l === "T" ? [-5, 5] : [-8, 0, 8];
-        return (
-          <g key={i}>
-            <rect x={62} y={y - 13} width={54} height={26} rx={4} fill={col[l]} stroke={INK} strokeWidth={1} />
-            <rect x={144} y={y - 13} width={54} height={26} rx={4} fill={col[r]} stroke={INK} strokeWidth={1} />
-            <La x={89} y={y + 5} size={14} bold>{l}</La>
-            <La x={171} y={y + 5} size={14} bold>{r}</La>
-            {hb.map((d) => <line key={d} x1={116} x2={144} y1={y + d} y2={y + d} stroke={INK} strokeWidth={1.4} {...dash} />)}
-          </g>
-        );
-      })}
-      <He x={130} y={322} size={11.5} color={MUTED}>מקווקו = קשר מימן</He>
-      {/* helix */}
-      {rungs}
-      <path d={helix(0)} fill="none" stroke={BLUE} strokeWidth={4} />
-      <path d={helix(2.2)} fill="none" stroke={GREEN} strokeWidth={4} />
-      <line x1={420} x2={420} y1={80} y2={184} stroke={INK} strokeWidth={1.2} />
-      <line x1={420} x2={420} y1={186} y2={240} stroke={ORANGE} strokeWidth={1.2} />
-      <He x={448} y={136} size={11.5}>חריץ</He><He x={448} y={150} size={11.5}>גדול</He>
-      <He x={448} y={210} size={11.5} color={ORANGE}>חריץ</He><He x={448} y={224} size={11.5} color={ORANGE}>קטן</He>
-      <He x={360} y={304} size={11.5}>סליל ימני · כ-10.5 זוגות לסיבוב</He>
-      <He x={360} y={322} size={11.5} color={MUTED}>קוטר כ-2 ננומטר</He>
-    </Svg>
-  );
-}
+
+
 
 function DnaMelting() {
   const s = scale(60, 450, 240, 40, 70, 105, 0.95, 1.45);
@@ -155,65 +75,13 @@ function DnaMelting() {
 
 // ── mol-chromatin ────────────────────────────────────────────────────────────
 
-function ChromatinLevels() {
-  const rows = [42, 108, 178, 252, 330];
-  const lbl = (i: number, t: string, s: string) => (
-    <g key={t}><He x={468} y={rows[i] - 2} size={12.5} bold anchor="end">{t}</He><He x={468} y={rows[i] + 16} size={11} color={MUTED} anchor="end">{s}</He></g>
-  );
-  const sine = (y: number, ph: number) => { let d = ""; for (let x = 30; x <= 262; x += 3) d += `${x === 30 ? "M" : "L"}${x} ${(y + 8 * Math.sin(x / 9 + ph)).toFixed(1)}`; return d; };
-  return (
-    <Svg h={370} label="רמות האריזה של ה-DNA: סליל כפול, סיב 10 ננומטר של נוקלאוזומים, סיב 30 ננומטר, לולאות ותחומים, וכרומוזום מיטוטי עם שתי כרומטידות אחיות">
-      <path d={sine(rows[0], 0)} fill="none" stroke={BLUE} strokeWidth={2.5} />
-      <path d={sine(rows[0], Math.PI * 0.7)} fill="none" stroke={GREEN} strokeWidth={2.5} />
-      {lbl(0, "סליל כפול", "קוטר 2 ננומטר")}
-      <Line x1={30} y1={rows[1]} x2={262} y2={rows[1]} c={BLUE} w={2} />
-      {[0, 1, 2, 3, 4, 5, 6].map((i) => <circle key={i} cx={44 + i * 34} cy={rows[1]} r={11} fill={FILL.yellow} stroke="#b45309" strokeWidth={1.5} />)}
-      {lbl(1, "סיב 10 ננומטר", "חרוזים על חוט — נוקלאוזומים")}
-      <rect x={28} y={rows[2] - 26} width={238} height={52} rx={26} fill="none" stroke={MUTED} strokeWidth={1.2} {...dash} />
-      {Array.from({ length: 11 }, (_, i) => <circle key={i} cx={46 + i * 20} cy={rows[2] + (i % 2 ? 9 : -9)} r={11} fill={FILL.yellow} stroke="#b45309" strokeWidth={1.5} />)}
-      {lbl(2, "סיב 30 ננומטר", "במבחנה; בתא — במחלוקת")}
-      <Line x1={30} y1={rows[3]} x2={262} y2={rows[3]} c={INK} w={2} />
-      {[0, 1, 2, 3, 4].map((i) => <ellipse key={i} cx={52 + i * 46} cy={rows[3] + (i % 2 ? 18 : -18)} rx={16} ry={20} fill="none" stroke={BLUE} strokeWidth={2} />)}
-      {lbl(3, "לולאות ותחומים", "מעוגנות בקוהזין ובקונדנסין")}
-      <path d={`M40 ${rows[4] - 22} Q160 ${rows[4] - 30} 165 ${rows[4] - 6} Q170 ${rows[4] - 30} 262 ${rows[4] - 22} L262 ${rows[4] - 4} Q170 ${rows[4] + 2} 165 ${rows[4] - 2} Q160 ${rows[4] + 2} 40 ${rows[4] - 4} Z`} fill={FILL.blue} stroke={BLUE} strokeWidth={1.8} />
-      <path d={`M40 ${rows[4] + 4} Q160 ${rows[4] + 2} 165 ${rows[4] + 2} Q170 ${rows[4] + 2} 262 ${rows[4] + 4} L262 ${rows[4] + 22} Q170 ${rows[4] + 30} 165 ${rows[4] + 6} Q160 ${rows[4] + 30} 40 ${rows[4] + 22} Z`} fill={FILL.green} stroke={GREEN} strokeWidth={1.8} />
-      <circle cx={165} cy={rows[4]} r={5} fill={ORANGE} />
-      {lbl(4, "כרומוזום מיטוטי", "2 כרומטידות; צנטרומר בכתום")}
-      {[0, 1, 2, 3].map((i) => <Arrow key={i} x1={286} y1={rows[i] + 14} x2={286} y2={rows[i + 1] - 22} color={MUTED} />)}
-    </Svg>
-  );
-}
+
 
 // ── mol-replication-fork ─────────────────────────────────────────────────────
 // ReplicationFork: redrawn at textbook level (2026-11-05) — see ./redraws/ReplicationFork.tsx; old code in archive/figures/2026-11-05/.
 
 // ── mol-replication-origins ──────────────────────────────────────────────────
-function OricInitiation() {
-  const duplex = (y: number) => (<g><Line x1={40} y1={y - 5} x2={440} y2={y - 5} /><Line x1={40} y1={y + 5} x2={440} y2={y + 5} /></g>);
-  return (
-    <Svg h={300} label="התחלת השכפול ב-oriC: DnaA-ATP נקשר לרצפי ה-9, פותח את אזור ה-13 העשיר ב-A-T, ו-DnaC טוען שני הליקאזים (DnaB) — אחד לכל מזלג">
-      <Num x={20} y={44} n={1} />
-      {duplex(44)}
-      {[78, 116, 154].map((x) => <rect key={x} x={x - 16} y={34} width={32} height={20} rx={3} fill={FILL.red} stroke={RED} strokeWidth={1.2} />)}
-      {[232, 284, 336, 388].map((x) => <rect key={x} x={x - 16} y={34} width={32} height={20} rx={3} fill={FILL.blue} stroke={BLUE} strokeWidth={1.2} />)}
-      <He x={116} y={76} size={11} color={RED}>3 רצפים של 13 — עשירים ב-A-T</He>
-      <He x={310} y={76} size={11} color={BLUE}>4 רצפים של 9 — אתרי DnaA</He>
-      <Num x={20} y={148} n={2} />
-      <path d="M40 143 L60 143 Q116 112 172 143 L440 143" fill="none" stroke={BLUE} strokeWidth={3} />
-      <path d="M40 153 L60 153 Q116 184 172 153 L440 153" fill="none" stroke={BLUE} strokeWidth={3} />
-      {[236, 262, 288, 314, 340, 366, 392].map((x, i) => <circle key={x} cx={x} cy={i % 2 ? 128 : 166} r={12} fill={FILL.orange} stroke={ORANGE} strokeWidth={1.5} />)}
-      <He x={310} y={108} size={11} color={ORANGE}>DnaA-ATP, מולקולות רבות</He>
-      <Num x={20} y={244} n={3} />
-      <path d="M40 239 L130 239 Q240 196 350 239 L440 239" fill="none" stroke={BLUE} strokeWidth={3} />
-      <path d="M40 249 L130 249 Q240 292 350 249 L440 249" fill="none" stroke={BLUE} strokeWidth={3} />
-      <ellipse cx={165} cy={226} rx={10} ry={15} fill={FILL.yellow} stroke="#b45309" strokeWidth={2} />
-      <ellipse cx={315} cy={262} rx={10} ry={15} fill={FILL.yellow} stroke="#b45309" strokeWidth={2} />
-      <Arrow x1={150} y1={214} x2={110} y2={214} color="#b45309" />
-      <Arrow x1={330} y1={276} x2={370} y2={276} color="#b45309" />
-      <He x={240} y={196} size={11} color="#b45309">DnaB — הליקאז לכל מזלג</He>
-    </Svg>
-  );
-}
+
 
 // OriginLicensing: redrawn at textbook level (2026-11-02) — see ./redraws/OriginLicensing.tsx; old code in archive/figures/2026-11-02/.
 

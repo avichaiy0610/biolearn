@@ -1,0 +1,28 @@
+function ChromatinLevels() {
+  const rows = [42, 108, 178, 252, 330];
+  const lbl = (i: number, t: string, s: string) => (
+    <g key={t}><He x={468} y={rows[i] - 2} size={12.5} bold anchor="end">{t}</He><He x={468} y={rows[i] + 16} size={11} color={MUTED} anchor="end">{s}</He></g>
+  );
+  const sine = (y: number, ph: number) => { let d = ""; for (let x = 30; x <= 262; x += 3) d += `${x === 30 ? "M" : "L"}${x} ${(y + 8 * Math.sin(x / 9 + ph)).toFixed(1)}`; return d; };
+  return (
+    <Svg h={370} label="רמות האריזה של ה-DNA: סליל כפול, סיב 10 ננומטר של נוקלאוזומים, סיב 30 ננומטר, לולאות ותחומים, וכרומוזום מיטוטי עם שתי כרומטידות אחיות">
+      <path d={sine(rows[0], 0)} fill="none" stroke={BLUE} strokeWidth={2.5} />
+      <path d={sine(rows[0], Math.PI * 0.7)} fill="none" stroke={GREEN} strokeWidth={2.5} />
+      {lbl(0, "סליל כפול", "קוטר 2 ננומטר")}
+      <Line x1={30} y1={rows[1]} x2={262} y2={rows[1]} c={BLUE} w={2} />
+      {[0, 1, 2, 3, 4, 5, 6].map((i) => <circle key={i} cx={44 + i * 34} cy={rows[1]} r={11} fill={FILL.yellow} stroke="#b45309" strokeWidth={1.5} />)}
+      {lbl(1, "סיב 10 ננומטר", "חרוזים על חוט — נוקלאוזומים")}
+      <rect x={28} y={rows[2] - 26} width={238} height={52} rx={26} fill="none" stroke={MUTED} strokeWidth={1.2} {...dash} />
+      {Array.from({ length: 11 }, (_, i) => <circle key={i} cx={46 + i * 20} cy={rows[2] + (i % 2 ? 9 : -9)} r={11} fill={FILL.yellow} stroke="#b45309" strokeWidth={1.5} />)}
+      {lbl(2, "סיב 30 ננומטר", "במבחנה; בתא — במחלוקת")}
+      <Line x1={30} y1={rows[3]} x2={262} y2={rows[3]} c={INK} w={2} />
+      {[0, 1, 2, 3, 4].map((i) => <ellipse key={i} cx={52 + i * 46} cy={rows[3] + (i % 2 ? 18 : -18)} rx={16} ry={20} fill="none" stroke={BLUE} strokeWidth={2} />)}
+      {lbl(3, "לולאות ותחומים", "מעוגנות בקוהזין ובקונדנסין")}
+      <path d={`M40 ${rows[4] - 22} Q160 ${rows[4] - 30} 165 ${rows[4] - 6} Q170 ${rows[4] - 30} 262 ${rows[4] - 22} L262 ${rows[4] - 4} Q170 ${rows[4] + 2} 165 ${rows[4] - 2} Q160 ${rows[4] + 2} 40 ${rows[4] - 4} Z`} fill={FILL.blue} stroke={BLUE} strokeWidth={1.8} />
+      <path d={`M40 ${rows[4] + 4} Q160 ${rows[4] + 2} 165 ${rows[4] + 2} Q170 ${rows[4] + 2} 262 ${rows[4] + 4} L262 ${rows[4] + 22} Q170 ${rows[4] + 30} 165 ${rows[4] + 6} Q160 ${rows[4] + 30} 40 ${rows[4] + 22} Z`} fill={FILL.green} stroke={GREEN} strokeWidth={1.8} />
+      <circle cx={165} cy={rows[4]} r={5} fill={ORANGE} />
+      {lbl(4, "כרומוזום מיטוטי", "2 כרומטידות; צנטרומר בכתום")}
+      {[0, 1, 2, 3].map((i) => <Arrow key={i} x1={286} y1={rows[i] + 14} x2={286} y2={rows[i + 1] - 22} color={MUTED} />)}
+    </Svg>
+  );
+}

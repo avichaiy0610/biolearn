@@ -1,0 +1,21 @@
+function BiofilmStages() {
+  const xs = [420, 330, 240, 150, 60];
+  const t: [string, string][] = [["1. היצמדות", "הפיכה"], ["2. היצמדות", "קבועה"], ["3. מיקרו-", "מושבה"], ["4. ביופילם", "בוגר ומטריקס"], ["5. התפזרות", ""]];
+  return (
+    <Svg h={250} label="שלבי הביופילם: היצמדות הפיכה של תאים בודדים למשטח, היצמדות קבועה, היווצרות מיקרו-מושבות, ביופילם בוגר עטוף מטריקס עם תעלות מים, והתפזרות של תאים שוחים שמאכלסים משטחים חדשים">
+      <rect x={10} y={180} width={460} height={14} fill={FILL.gray} stroke={MUTED} />
+      <He x={240} y={212} size={10.5} color={MUTED}>משטח</He>
+      <Rod x={xs[0]} y={150} fill={FILL.blue} stroke={BLUE} />
+      <Rod x={xs[1]} y={172} fill={FILL.blue} stroke={BLUE} /><Rod x={xs[1] + 22} y={172} w={30} fill={FILL.blue} stroke={BLUE} />
+      <ellipse cx={xs[2]} cy={164} rx={30} ry={16} fill={FILL.yellow} stroke={ORANGE} />
+      {[-14, 0, 14].map((d) => <Rod key={d} x={xs[2] + d} y={166} w={14} h={8} fill={FILL.blue} stroke={BLUE} />)}
+      <path d={`M${xs[3] - 40} 180 Q ${xs[3] - 36} 90 ${xs[3] - 10} 100 Q ${xs[3]} 140 ${xs[3] + 6} 100 Q ${xs[3] + 34} 80 ${xs[3] + 40} 180 Z`} fill={FILL.yellow} stroke={ORANGE} />
+      {[[-24, 160], [-16, 130], [16, 120], [24, 156], [-4, 170]].map(([dx, yy], i) => <Rod key={i} x={xs[3] + dx} y={yy} w={14} h={8} fill={FILL.blue} stroke={BLUE} />)}
+      <path d={`M${xs[4] - 26} 180 Q ${xs[4] - 22} 110 ${xs[4]} 120 Q ${xs[4] + 22} 110 ${xs[4] + 26} 180 Z`} fill={FILL.yellow} stroke={ORANGE} />
+      <Rod x={xs[4] - 14} y={70} w={20} h={9} fill={FILL.blue} stroke={BLUE} /><Rod x={xs[4] + 18} y={84} w={20} h={9} fill={FILL.blue} stroke={BLUE} />
+      <Arrow x1={xs[4] - 4} y1={112} x2={xs[4] - 12} y2={80} color={BLUE} />
+      {t.map(([a, b], i) => <g key={a}><He x={xs[i]} y={30} size={11} bold>{a}</He><He x={xs[i]} y={46} size={11} bold>{b}</He></g>)}
+      <He x={240} y={238} size={10.5} color={MUTED}>המטריקס: פוליסכרידים, חלבונים ו-DNA חוץ-תאי · מעבר לביופילם נשלט גם בחישת מניין</He>
+    </Svg>
+  );
+}

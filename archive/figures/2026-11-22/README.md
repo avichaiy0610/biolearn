@@ -19,3 +19,12 @@
 - `microFigures.tsx`: TransportSystems (`transport-systems`, יחידה mv-cell-envelope)
 - `microFigures.tsx`: AntibioticTargets (`antibiotic-targets`, יחידה mv-antibiotics)
 אותו מבנה ואותו שחזור כמו למעלה.
+
+## סבב 12 (עדיפות 2) — אישור אביחי 22.11
+- `microFigures.tsx`: BiofilmStages (`biofilm-stages`, יחידה mv-ecology)
+- `microFigures.tsx`: ConjugationHfr (`conjugation-hfr`, יחידה mv-gene-transfer)
+- `molecularFigures.tsx`: NucleotideStructure (`nucleotide-structure`, יחידה b1-dna, mol-nucleic-acids)
+- `molecularFigures.tsx`: DoubleHelix (`double-helix`, יחידה b1-dna, mol-nucleic-acids)
+- `molecularFigures.tsx`: ChromatinLevels (`chromatin-levels`, יחידה mol-chromatin)
+- `molecularFigures.tsx`: OricInitiation (`oric-initiation`, יחידה mol-replication-origins)
+אותו מבנה ואותו שחזור כמו למעלה.
