@@ -7,6 +7,7 @@ import RespirationScene from "./RespirationScene";
 import MendelianScene from "./MendelianScene";
 import NonMendelianScene from "./NonMendelianScene";
 import SecretoryScene from "./SecretoryScene";
+import PhotosynthesisScene from "./PhotosynthesisScene";
 import type { SceneId } from "./registry";
 
 const SCENES: Record<SceneId, ComponentType<{ lang?: string; processName?: string }>> = {
@@ -16,6 +17,7 @@ const SCENES: Record<SceneId, ComponentType<{ lang?: string; processName?: strin
   "mendelian-genetics": MendelianScene,
   "non-mendelian": NonMendelianScene,
   "secretory-pathway": SecretoryScene,
+  photosynthesis: PhotosynthesisScene,
 };
 
 export default function ProcessScene({
