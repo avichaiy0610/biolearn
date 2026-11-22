@@ -9,6 +9,7 @@ import NonMendelianScene from "./NonMendelianScene";
 import SecretoryScene from "./SecretoryScene";
 import PhotosynthesisScene from "./PhotosynthesisScene";
 import HemoglobinScene from "./HemoglobinScene";
+import GlucoseScene from "./GlucoseScene";
 import type { SceneId } from "./registry";
 
 const SCENES: Record<SceneId, ComponentType<{ lang?: string; processName?: string }>> = {
@@ -20,6 +21,7 @@ const SCENES: Record<SceneId, ComponentType<{ lang?: string; processName?: strin
   "secretory-pathway": SecretoryScene,
   photosynthesis: PhotosynthesisScene,
   hemoglobin: HemoglobinScene,
+  "blood-glucose": GlucoseScene,
 };
 
 export default function ProcessScene({
