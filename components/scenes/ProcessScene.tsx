@@ -10,6 +10,7 @@ import SecretoryScene from "./SecretoryScene";
 import PhotosynthesisScene from "./PhotosynthesisScene";
 import HemoglobinScene from "./HemoglobinScene";
 import GlucoseScene from "./GlucoseScene";
+import BacteriaScene from "./BacteriaScene";
 import type { SceneId } from "./registry";
 
 const SCENES: Record<SceneId, ComponentType<{ lang?: string; processName?: string }>> = {
@@ -22,6 +23,7 @@ const SCENES: Record<SceneId, ComponentType<{ lang?: string; processName?: strin
   photosynthesis: PhotosynthesisScene,
   hemoglobin: HemoglobinScene,
   "blood-glucose": GlucoseScene,
+  bacteria: BacteriaScene,
 };
 
 export default function ProcessScene({
