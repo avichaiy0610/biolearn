@@ -52,7 +52,7 @@ export function EcmOverviewScene(){return <>
  </>;}
 
 export function ReceptorClassesScene(id:string){return <>
- <He x={525} y={30} size={26} bold>קולטן־תעלה</He><He x={317} y={30} size={26} bold>מצומד חלבון ג׳י</He><He x={105} y={30} size={26} bold>מצומד אנזים</He>
+ <He x={525} y={30} size={26} bold>קולטן־תעלה</He><He x={317} y={30} size={26} bold>מצומד חלבון ⁦G⁩</He><He x={105} y={30} size={26} bold>מצומד אנזים</He>
  <Membrane/>
  {[499,535].map(x=><rect data-bio="channel" key={x} x={x} y={85} width={20} height={73} rx={7} fill="#dfd3e9" stroke={IC.purple} strokeWidth={2}/>)}<Ligand x={501} y={62}/>
  {[81,114,149,190].map(y=><circle data-bio="ion" key={y} cx={527} cy={y} r={5} fill={IC.blue}/>)}<Flow id={id} d="M527 205V244" color={IC.blueDark}/>
