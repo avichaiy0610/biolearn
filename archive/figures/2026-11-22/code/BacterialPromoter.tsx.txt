@@ -1,0 +1,27 @@
+function BacterialPromoter() {
+  const X = (p: number) => 300 + 4 * p;
+  return (
+    <Svg h={220} label="פרומוטור חיידקי: אזור −35 (TTGACA) ואזור −10 (TATAAT) במרווח של 16–18 זוגות בסיסים; פקטור סיגמא של ההולואנזים מזהה את שניהם; השעתוק מתחיל ב-+1">
+      <ellipse cx={270} cy={36} rx={110} ry={24} fill={FILL.sky} stroke={BLUE} strokeWidth={1.6} />
+      <He x={270} y={41} size={12.5}>אנזים הליבה</He>
+      <rect x={146} y={62} width={140} height={20} rx={8} fill={FILL.orange} stroke={ORANGE} strokeWidth={1.6} />
+      <La x={216} y={77} size={12} bold color={ORANGE}>σ⁷⁰</La>
+      <Line x1={170} y1={82} x2={170} y2={108} c={ORANGE} w={2} />
+      <Line x1={262} y1={82} x2={262} y2={108} c={ORANGE} w={2} />
+      <Line x1={20} y1={112} x2={460} y2={112} c={INK} />
+      <Line x1={20} y1={122} x2={460} y2={122} c={INK} />
+      <rect x={X(-60)} y={108} width={80} height={18} rx={3} fill={FILL.gray} stroke={MUTED} strokeWidth={1} />
+      <rect x={X(-35)} y={106} width={24} height={22} rx={3} fill={FILL.red} stroke={RED} strokeWidth={1.5} />
+      <rect x={X(-12)} y={106} width={24} height={22} rx={3} fill={FILL.red} stroke={RED} strokeWidth={1.5} />
+      <path d={`M${X(1)} 106 L${X(1)} 86 L${X(1) + 44} 86`} fill="none" stroke={GREEN} strokeWidth={2.5} markerEnd="url(#bfArrow)" />
+      <He x={100} y={148} size={10.5} color={MUTED}>אלמנט UP</He>
+      <La x={X(-32.5)} y={148} size={12} bold color={RED}>TTGACA</La>
+      <La x={X(-9.5)} y={148} size={12} bold color={RED}>TATAAT</La>
+      <La x={X(-32.5)} y={166} size={11.5}>−35</La>
+      <La x={X(-9.5)} y={166} size={11.5}>−10</La>
+      <La x={X(1)} y={166} size={11.5} color={GREEN} bold>+1</La>
+      <path d={`M${X(-29)} 178 L${X(-29)} 184 L${X(-13)} 184 L${X(-13)} 178`} fill="none" stroke={INK} strokeWidth={1.2} />
+      <He x={X(-21)} y={202} size={11}>16–18 ז״ב</He>
+    </Svg>
+  );
+}

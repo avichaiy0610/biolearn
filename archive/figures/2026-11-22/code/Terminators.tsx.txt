@@ -1,0 +1,31 @@
+function Terminators() {
+  return (
+    <Svg h={300} label="שתי דרכים לסיום שעתוק בחיידקים: סיום עצמי — סיכת ראש עשירה ב-G-C ב-RNA ואחריה רצף של U; סיום תלוי-Rho — Rho נקשר לאתר rut ב-RNA, נע 5′→3′ ומפריד את ה-RNA מהפולימראז המושהה">
+      <He x={240} y={20} size={13} bold>סיום עצמי</He>
+      <Line x1={30} y1={118} x2={450} y2={118} c={BLUE} />
+      <ellipse cx={360} cy={108} rx={44} ry={26} fill={FILL.sky} stroke={BLUE} strokeWidth={1.6} />
+      <He x={360} y={150} size={10.5} color={MUTED}>RNA פולימראז</He>
+      <Line x1={40} y1={98} x2={232} y2={98} c={PURPLE} />
+      <La x={32} y={102} size={11} color={PURPLE} anchor="end">5′</La>
+      <Line x1={236} y1={96} x2={236} y2={50} c={PURPLE} />
+      <Line x1={250} y1={96} x2={250} y2={50} c={PURPLE} />
+      {[60, 70, 80, 90].map((y) => <line key={y} x1={236} x2={250} y1={y} y2={y} stroke={PURPLE} strokeWidth={1.4} />)}
+      <circle cx={243} cy={42} r={10} fill="none" stroke={PURPLE} strokeWidth={3} />
+      <La x={290} y={102} size={11} color={PURPLE} bold>UUUUUU</La>
+      <He x={160} y={52} size={11} color={PURPLE}>סיכה עשירה ב-G-C</He>
+
+      <He x={240} y={180} size={13} bold>סיום תלוי-Rho</He>
+      <Line x1={30} y1={270} x2={450} y2={270} c={BLUE} />
+      <ellipse cx={380} cy={260} rx={44} ry={26} fill={FILL.sky} stroke={BLUE} strokeWidth={1.6} />
+      <He x={380} y={226} size={10.5} color={MUTED}>מושהה</He>
+      <Line x1={40} y1={252} x2={340} y2={252} c={PURPLE} />
+      <La x={32} y={256} size={11} color={PURPLE} anchor="end">5′</La>
+      <Line x1={90} y1={252} x2={150} y2={252} c={ORANGE} w={6} />
+      <He x={120} y={238} size={10.5} color={ORANGE}>אתר rut, עשיר ב-C</He>
+      <polygon points="216,236 236,236 246,252 236,268 216,268 206,252" fill={FILL.yellow} stroke="#b45309" strokeWidth={2} />
+      <La x={226} y={256} size={10.5} bold>Rho</La>
+      <Arrow x1={256} y1={240} x2={300} y2={240} color="#b45309" />
+      <He x={226} y={222} size={10.5} color="#b45309">הליקאז, ATP</He>
+    </Svg>
+  );
+}

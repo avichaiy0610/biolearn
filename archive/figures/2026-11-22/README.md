@@ -28,3 +28,12 @@
 - `molecularFigures.tsx`: ChromatinLevels (`chromatin-levels`, יחידה mol-chromatin)
 - `molecularFigures.tsx`: OricInitiation (`oric-initiation`, יחידה mol-replication-origins)
 אותו מבנה ואותו שחזור כמו למעלה.
+
+## סבב 13 (עדיפות 2, עיצוב משופר) — אישור אביחי
+- `molecularFigures.tsx`: Telomerase (`telomerase`, יחידה mol-replication-origins)
+- `molecularFigures.tsx`: BacterialPromoter (`bacterial-promoter`, יחידה mol-transcription-prok)
+- `molecularFigures.tsx`: Terminators (`terminators`, יחידה mol-transcription-prok)
+- `molecularFigures.tsx`: EnhancerLoop (`enhancer-loop`, יחידה gx-cis-elements, mol-transcription-euk, gx-cis-elements.full)
+- `molecularFigures.tsx`: Aminoacylation (`aminoacylation`, יחידה mol-genetic-code)
+- `molecularFigures.tsx`: InitiationCompare (`initiation-compare`, יחידה mol-ribosome-initiation)
+אותו מבנה ואותו שחזור כמו למעלה.

@@ -1,0 +1,19 @@
+function EnhancerLoop() {
+  return (
+    <Svg h={270} label="מגביר רחוק משפיע על הפרומוטור דרך לולאה ב-DNA: מפעיל שנקשר למגביר פונה דרך המדיאטור אל RNA פולימראז II וגורמי השעתוק הכלליים בפרומוטור">
+      <path d="M20 220 L150 220 C150 220 60 70 190 70 C320 70 230 220 230 220 L460 220" fill="none" stroke={INK} strokeWidth={3} />
+      <rect x={168} y={62} width={44} height={16} rx={3} fill={FILL.red} stroke={RED} strokeWidth={1.5} />
+      <He x={190} y={48} size={12} bold color={RED}>מגביר</He>
+      <ellipse cx={192} cy={98} rx={30} ry={15} fill={FILL.orange} stroke={ORANGE} strokeWidth={1.8} />
+      <He x={192} y={103} size={11.5} bold>מפעיל</He>
+      <rect x={224} y={110} width={140} height={44} rx={16} fill={FILL.purple} stroke={PURPLE} strokeWidth={1.6} />
+      <He x={294} y={137} size={12.5} bold color={PURPLE}>מדיאטור</He>
+      <rect x={300} y={214} width={30} height={14} rx={3} fill={FILL.gray} stroke={MUTED} strokeWidth={1.2} />
+      <La x={315} y={246} size={10.5} color={MUTED}>TATA</La>
+      <ellipse cx={372} cy={192} rx={48} ry={26} fill={FILL.sky} stroke={BLUE} strokeWidth={1.8} />
+      <La x={372} y={197} size={12.5} bold>Pol II</La>
+      <path d="M402 214 L402 200 L436 200" fill="none" stroke={GREEN} strokeWidth={2} markerEnd="url(#bfArrow)" />
+      <He x={100} y={256} size={11} color={MUTED}>המגביר יכול להיות רחוק עשרות אלפי ז״ב</He>
+    </Svg>
+  );
+}

@@ -1,0 +1,18 @@
+function Aminoacylation() {
+  return (
+    <Svg h={260} label="טעינת tRNA בשני שלבים: חומצת אמינו ו-ATP יוצרים אמינואציל-AMP ופירופוספט; אחר כך חומצת האמינו עוברת ל-tRNA ו-AMP משתחרר; טעינה שגויה מפורקת באתר העריכה">
+      <LBox x={110} y={30} w={170} label="aa + ATP" c={BLUE} fill={FILL.blue} />
+      <Arrow x1={200} y1={45} x2={262} y2={45} />
+      <He x={231} y={30} size={11} bold>שלב 1</He>
+      <LBox x={360} y={30} w={190} label="aa–AMP + PPᵢ" c={BLUE} fill={FILL.blue} />
+      <La x={430} y={84} size={11} color={MUTED}>PPᵢ → 2 Pᵢ</La>
+      <LBox x={110} y={110} w={170} label="aa–AMP + tRNA" c={GREEN} fill={FILL.green} />
+      <Arrow x1={200} y1={125} x2={262} y2={125} />
+      <He x={231} y={110} size={11} bold>שלב 2</He>
+      <LBox x={360} y={110} w={190} label="aa–tRNA + AMP" c={GREEN} fill={FILL.green} />
+      <Arrow x1={360} y1={142} x2={360} y2={186} color={ORANGE} dashed />
+      <HBox x={360} y={190} w={200} label="אתר עריכה — טעינה שגויה מפורקת" c={ORANGE} fill={FILL.orange} size={11.5} />
+      <HBox x={110} y={190} w={190} label="מחיר: 2 קשרים עתירי אנרגיה" c={MUTED} fill={FILL.gray} size={11.5} />
+    </Svg>
+  );
+}

@@ -1,0 +1,24 @@
+function Telomerase() {
+  const step = 17, x0 = 44;
+  const top = "TTAGGGTTAG".split(""), add = "GGTTAG".split(""), rna = "CAAUCCCAAUC".split("");
+  return (
+    <Svg h={260} label="טלומראז מאריך את קצה ה-3′ של הגדיל העשיר ב-G: ה-RNA שלו מזדווג לקצה הבולט, וה-TERT מוסיף חזרה חדשה (GGTTAG, בכתום) לפי התבנית; אחר כך האנזים זז קדימה, והגדיל השני מושלם בידי Pol α–פרימאז">
+      <rect x={x0 + 4 * step - 8} y={58} width={12 * step + 22} height={74} rx={18} fill={FILL.purple} stroke={PURPLE} strokeWidth={1.2} opacity={0.55} />
+      <La x={x0 - 22} y={84} size={12} bold>5′…</La>
+      {top.map((c, i) => <La key={i} x={x0 + i * step} y={84} size={14} bold color={BLUE}>{c}</La>)}
+      {add.map((c, i) => <La key={`a${i}`} x={x0 + (10 + i) * step} y={84} size={14} bold color={ORANGE}>{c}</La>)}
+      <La x={x0 + 16 * step + 4} y={84} size={12} bold>3′</La>
+      {"AATC".split("").map((c, i) => <La key={`b${i}`} x={x0 + i * step} y={106} size={14} bold color={BLUE}>{c}</La>)}
+      <La x={x0 - 22} y={106} size={12} bold>3′…</La>
+      <La x={x0 + 4 * step - 2} y={106} size={12} bold>5′</La>
+      {rna.map((c, i) => <La key={`r${i}`} x={x0 + (5 + i) * step} y={118} size={14} bold color={PURPLE}>{c}</La>)}
+      <La x={x0 + 4 * step + 6} y={128} size={11} color={PURPLE}>3′</La>
+      <La x={x0 + 16 * step + 4} y={118} size={11} color={PURPLE}>5′</La>
+      <He x={390} y={150} size={11.5} color={PURPLE}>טלומראז: TERT + RNA</He>
+      <He x={240} y={182} size={12}>1. ה-RNA מזדווג לקצה ה-3′ הבולט</He>
+      <He x={240} y={202} size={12}>2. TERT מוסיף GGTTAG לפי התבנית (כתום)</He>
+      <He x={240} y={222} size={12}>3. האנזים זז קדימה וחוזר על המחזור</He>
+      <He x={240} y={242} size={12}>4. Pol α–פרימאז משלים את הגדיל העשיר ב-C</He>
+    </Svg>
+  );
+}

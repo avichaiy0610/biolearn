@@ -18,6 +18,12 @@ import { NucleotideStructure } from "./redraws/NucleotideStructure";
 import { DoubleHelix } from "./redraws/DoubleHelix";
 import { ChromatinLevels } from "./redraws/ChromatinLevels";
 import { OricInitiation } from "./redraws/OricInitiation";
+import { Telomerase } from "./redraws/Telomerase";
+import { BacterialPromoter } from "./redraws/BacterialPromoter";
+import { Terminators } from "./redraws/Terminators";
+import { EnhancerLoop } from "./redraws/EnhancerLoop";
+import { Aminoacylation } from "./redraws/Aminoacylation";
+import { InitiationCompare } from "./redraws/InitiationCompare";
 const PURPLE = "#7c3aed";
 const RED = "#b91c1c";
 const FILL = { blue: "#dbeafe", green: "#dcfce7", orange: "#ffedd5", purple: "#ede9fe", yellow: "#fef3c7", gray: "#f1f5f9", red: "#fee2e2", sky: "#e0f2fe" };
@@ -32,18 +38,6 @@ const Line = ({ x1, y1, x2, y2, c = BLUE, w = 3 }: { x1: number; y1: number; x2:
   <line x1={x1} y1={y1} x2={x2} y2={y2} stroke={c} strokeWidth={w} strokeLinecap="round" />
 );
 // Box with a Latin label (He would also work, but Latin is safer LTR).
-const LBox = ({ x, y, w, h = 30, label, c = BLUE, fill = FILL.blue, size = 13, bold = false }: { x: number; y: number; w: number; h?: number; label: React.ReactNode; c?: string; fill?: string; size?: number; bold?: boolean }) => (
-  <g>
-    <rect x={x - w / 2} y={y} width={w} height={h} rx={8} fill={fill} stroke={c} strokeWidth={1.6} />
-    <La x={x} y={y + h / 2 + size * 0.36} size={size} bold={bold}>{label}</La>
-  </g>
-);
-const HBox = ({ x, y, w, h = 30, label, c = BLUE, fill = FILL.blue, size = 12.5, bold = false }: { x: number; y: number; w: number; h?: number; label: React.ReactNode; c?: string; fill?: string; size?: number; bold?: boolean }) => (
-  <g>
-    <rect x={x - w / 2} y={y} width={w} height={h} rx={8} fill={fill} stroke={c} strokeWidth={1.6} />
-    <He x={x} y={y + h / 2 + size * 0.36} size={size} bold={bold}>{label}</He>
-  </g>
-);
 
 // ── mol-nucleic-acids ────────────────────────────────────────────────────────
 
@@ -85,30 +79,7 @@ function DnaMelting() {
 
 // OriginLicensing: redrawn at textbook level (2026-11-02) — see ./redraws/OriginLicensing.tsx; old code in archive/figures/2026-11-02/.
 
-function Telomerase() {
-  const step = 17, x0 = 44;
-  const top = "TTAGGGTTAG".split(""), add = "GGTTAG".split(""), rna = "CAAUCCCAAUC".split("");
-  return (
-    <Svg h={260} label="טלומראז מאריך את קצה ה-3′ של הגדיל העשיר ב-G: ה-RNA שלו מזדווג לקצה הבולט, וה-TERT מוסיף חזרה חדשה (GGTTAG, בכתום) לפי התבנית; אחר כך האנזים זז קדימה, והגדיל השני מושלם בידי Pol α–פרימאז">
-      <rect x={x0 + 4 * step - 8} y={58} width={12 * step + 22} height={74} rx={18} fill={FILL.purple} stroke={PURPLE} strokeWidth={1.2} opacity={0.55} />
-      <La x={x0 - 22} y={84} size={12} bold>5′…</La>
-      {top.map((c, i) => <La key={i} x={x0 + i * step} y={84} size={14} bold color={BLUE}>{c}</La>)}
-      {add.map((c, i) => <La key={`a${i}`} x={x0 + (10 + i) * step} y={84} size={14} bold color={ORANGE}>{c}</La>)}
-      <La x={x0 + 16 * step + 4} y={84} size={12} bold>3′</La>
-      {"AATC".split("").map((c, i) => <La key={`b${i}`} x={x0 + i * step} y={106} size={14} bold color={BLUE}>{c}</La>)}
-      <La x={x0 - 22} y={106} size={12} bold>3′…</La>
-      <La x={x0 + 4 * step - 2} y={106} size={12} bold>5′</La>
-      {rna.map((c, i) => <La key={`r${i}`} x={x0 + (5 + i) * step} y={118} size={14} bold color={PURPLE}>{c}</La>)}
-      <La x={x0 + 4 * step + 6} y={128} size={11} color={PURPLE}>3′</La>
-      <La x={x0 + 16 * step + 4} y={118} size={11} color={PURPLE}>5′</La>
-      <He x={390} y={150} size={11.5} color={PURPLE}>טלומראז: TERT + RNA</He>
-      <He x={240} y={182} size={12}>1. ה-RNA מזדווג לקצה ה-3′ הבולט</He>
-      <He x={240} y={202} size={12}>2. TERT מוסיף GGTTAG לפי התבנית (כתום)</He>
-      <He x={240} y={222} size={12}>3. האנזים זז קדימה וחוזר על המחזור</He>
-      <He x={240} y={242} size={12}>4. Pol α–פרימאז משלים את הגדיל העשיר ב-C</He>
-    </Svg>
-  );
-}
+
 
 // ── mol-repair ───────────────────────────────────────────────────────────────
 function ExcisionRepair() {
@@ -208,33 +179,7 @@ function HollidayResolution() {
 }
 
 // ── mol-transcription-prok ───────────────────────────────────────────────────
-function BacterialPromoter() {
-  const X = (p: number) => 300 + 4 * p;
-  return (
-    <Svg h={220} label="פרומוטור חיידקי: אזור −35 (TTGACA) ואזור −10 (TATAAT) במרווח של 16–18 זוגות בסיסים; פקטור סיגמא של ההולואנזים מזהה את שניהם; השעתוק מתחיל ב-+1">
-      <ellipse cx={270} cy={36} rx={110} ry={24} fill={FILL.sky} stroke={BLUE} strokeWidth={1.6} />
-      <He x={270} y={41} size={12.5}>אנזים הליבה</He>
-      <rect x={146} y={62} width={140} height={20} rx={8} fill={FILL.orange} stroke={ORANGE} strokeWidth={1.6} />
-      <La x={216} y={77} size={12} bold color={ORANGE}>σ⁷⁰</La>
-      <Line x1={170} y1={82} x2={170} y2={108} c={ORANGE} w={2} />
-      <Line x1={262} y1={82} x2={262} y2={108} c={ORANGE} w={2} />
-      <Line x1={20} y1={112} x2={460} y2={112} c={INK} />
-      <Line x1={20} y1={122} x2={460} y2={122} c={INK} />
-      <rect x={X(-60)} y={108} width={80} height={18} rx={3} fill={FILL.gray} stroke={MUTED} strokeWidth={1} />
-      <rect x={X(-35)} y={106} width={24} height={22} rx={3} fill={FILL.red} stroke={RED} strokeWidth={1.5} />
-      <rect x={X(-12)} y={106} width={24} height={22} rx={3} fill={FILL.red} stroke={RED} strokeWidth={1.5} />
-      <path d={`M${X(1)} 106 L${X(1)} 86 L${X(1) + 44} 86`} fill="none" stroke={GREEN} strokeWidth={2.5} markerEnd="url(#bfArrow)" />
-      <He x={100} y={148} size={10.5} color={MUTED}>אלמנט UP</He>
-      <La x={X(-32.5)} y={148} size={12} bold color={RED}>TTGACA</La>
-      <La x={X(-9.5)} y={148} size={12} bold color={RED}>TATAAT</La>
-      <La x={X(-32.5)} y={166} size={11.5}>−35</La>
-      <La x={X(-9.5)} y={166} size={11.5}>−10</La>
-      <La x={X(1)} y={166} size={11.5} color={GREEN} bold>+1</La>
-      <path d={`M${X(-29)} 178 L${X(-29)} 184 L${X(-13)} 184 L${X(-13)} 178`} fill="none" stroke={INK} strokeWidth={1.2} />
-      <He x={X(-21)} y={202} size={11}>16–18 ז״ב</He>
-    </Svg>
-  );
-}
+
 
 function SigmaCycle() {
   const nodes = ["ליבה + σ", "הולואנזים", "קומפלקס סגור", "קומפלקס פתוח", "התחלות כושלות", "התארכות", "סיום"];
@@ -249,60 +194,12 @@ function SigmaCycle() {
   );
 }
 
-function Terminators() {
-  return (
-    <Svg h={300} label="שתי דרכים לסיום שעתוק בחיידקים: סיום עצמי — סיכת ראש עשירה ב-G-C ב-RNA ואחריה רצף של U; סיום תלוי-Rho — Rho נקשר לאתר rut ב-RNA, נע 5′→3′ ומפריד את ה-RNA מהפולימראז המושהה">
-      <He x={240} y={20} size={13} bold>סיום עצמי</He>
-      <Line x1={30} y1={118} x2={450} y2={118} c={BLUE} />
-      <ellipse cx={360} cy={108} rx={44} ry={26} fill={FILL.sky} stroke={BLUE} strokeWidth={1.6} />
-      <He x={360} y={150} size={10.5} color={MUTED}>RNA פולימראז</He>
-      <Line x1={40} y1={98} x2={232} y2={98} c={PURPLE} />
-      <La x={32} y={102} size={11} color={PURPLE} anchor="end">5′</La>
-      <Line x1={236} y1={96} x2={236} y2={50} c={PURPLE} />
-      <Line x1={250} y1={96} x2={250} y2={50} c={PURPLE} />
-      {[60, 70, 80, 90].map((y) => <line key={y} x1={236} x2={250} y1={y} y2={y} stroke={PURPLE} strokeWidth={1.4} />)}
-      <circle cx={243} cy={42} r={10} fill="none" stroke={PURPLE} strokeWidth={3} />
-      <La x={290} y={102} size={11} color={PURPLE} bold>UUUUUU</La>
-      <He x={160} y={52} size={11} color={PURPLE}>סיכה עשירה ב-G-C</He>
 
-      <He x={240} y={180} size={13} bold>סיום תלוי-Rho</He>
-      <Line x1={30} y1={270} x2={450} y2={270} c={BLUE} />
-      <ellipse cx={380} cy={260} rx={44} ry={26} fill={FILL.sky} stroke={BLUE} strokeWidth={1.6} />
-      <He x={380} y={226} size={10.5} color={MUTED}>מושהה</He>
-      <Line x1={40} y1={252} x2={340} y2={252} c={PURPLE} />
-      <La x={32} y={256} size={11} color={PURPLE} anchor="end">5′</La>
-      <Line x1={90} y1={252} x2={150} y2={252} c={ORANGE} w={6} />
-      <He x={120} y={238} size={10.5} color={ORANGE}>אתר rut, עשיר ב-C</He>
-      <polygon points="216,236 236,236 246,252 236,268 216,268 206,252" fill={FILL.yellow} stroke="#b45309" strokeWidth={2} />
-      <La x={226} y={256} size={10.5} bold>Rho</La>
-      <Arrow x1={256} y1={240} x2={300} y2={240} color="#b45309" />
-      <He x={226} y={222} size={10.5} color="#b45309">הליקאז, ATP</He>
-    </Svg>
-  );
-}
 
 // ── mol-transcription-euk ────────────────────────────────────────────────────
 // PicAssembly: redrawn at textbook level (2026-11-02) — see ./redraws/PicAssembly.tsx; old code in archive/figures/2026-11-02/.
 
-function EnhancerLoop() {
-  return (
-    <Svg h={270} label="מגביר רחוק משפיע על הפרומוטור דרך לולאה ב-DNA: מפעיל שנקשר למגביר פונה דרך המדיאטור אל RNA פולימראז II וגורמי השעתוק הכלליים בפרומוטור">
-      <path d="M20 220 L150 220 C150 220 60 70 190 70 C320 70 230 220 230 220 L460 220" fill="none" stroke={INK} strokeWidth={3} />
-      <rect x={168} y={62} width={44} height={16} rx={3} fill={FILL.red} stroke={RED} strokeWidth={1.5} />
-      <He x={190} y={48} size={12} bold color={RED}>מגביר</He>
-      <ellipse cx={192} cy={98} rx={30} ry={15} fill={FILL.orange} stroke={ORANGE} strokeWidth={1.8} />
-      <He x={192} y={103} size={11.5} bold>מפעיל</He>
-      <rect x={224} y={110} width={140} height={44} rx={16} fill={FILL.purple} stroke={PURPLE} strokeWidth={1.6} />
-      <He x={294} y={137} size={12.5} bold color={PURPLE}>מדיאטור</He>
-      <rect x={300} y={214} width={30} height={14} rx={3} fill={FILL.gray} stroke={MUTED} strokeWidth={1.2} />
-      <La x={315} y={246} size={10.5} color={MUTED}>TATA</La>
-      <ellipse cx={372} cy={192} rx={48} ry={26} fill={FILL.sky} stroke={BLUE} strokeWidth={1.8} />
-      <La x={372} y={197} size={12.5} bold>Pol II</La>
-      <path d="M402 214 L402 200 L436 200" fill="none" stroke={GREEN} strokeWidth={2} markerEnd="url(#bfArrow)" />
-      <He x={100} y={256} size={11} color={MUTED}>המגביר יכול להיות רחוק עשרות אלפי ז״ב</He>
-    </Svg>
-  );
-}
+
 
 // ── mol-rna-processing ───────────────────────────────────────────────────────
 function SplicingMechanism() {
@@ -365,24 +262,7 @@ function AlternativeSplicing() {
 // ── mol-genetic-code ─────────────────────────────────────────────────────────
 // TrnaStructure: redrawn at textbook level (2026-11-02) — see ./redraws/TrnaStructure.tsx; old code in archive/figures/2026-11-02/.
 
-function Aminoacylation() {
-  return (
-    <Svg h={260} label="טעינת tRNA בשני שלבים: חומצת אמינו ו-ATP יוצרים אמינואציל-AMP ופירופוספט; אחר כך חומצת האמינו עוברת ל-tRNA ו-AMP משתחרר; טעינה שגויה מפורקת באתר העריכה">
-      <LBox x={110} y={30} w={170} label="aa + ATP" c={BLUE} fill={FILL.blue} />
-      <Arrow x1={200} y1={45} x2={262} y2={45} />
-      <He x={231} y={30} size={11} bold>שלב 1</He>
-      <LBox x={360} y={30} w={190} label="aa–AMP + PPᵢ" c={BLUE} fill={FILL.blue} />
-      <La x={430} y={84} size={11} color={MUTED}>PPᵢ → 2 Pᵢ</La>
-      <LBox x={110} y={110} w={170} label="aa–AMP + tRNA" c={GREEN} fill={FILL.green} />
-      <Arrow x1={200} y1={125} x2={262} y2={125} />
-      <He x={231} y={110} size={11} bold>שלב 2</He>
-      <LBox x={360} y={110} w={190} label="aa–tRNA + AMP" c={GREEN} fill={FILL.green} />
-      <Arrow x1={360} y1={142} x2={360} y2={186} color={ORANGE} dashed />
-      <HBox x={360} y={190} w={200} label="אתר עריכה — טעינה שגויה מפורקת" c={ORANGE} fill={FILL.orange} size={11.5} />
-      <HBox x={110} y={190} w={190} label="מחיר: 2 קשרים עתירי אנרגיה" c={MUTED} fill={FILL.gray} size={11.5} />
-    </Svg>
-  );
-}
+
 
 // ── ribosome helpers ─────────────────────────────────────────────────────────
 type Slot = "empty" | "trna" | "aa" | "peptide" | "rf";
@@ -411,45 +291,7 @@ function Ribo({ cx, cy, E = "empty", P = "empty", A = "empty", codons, k = 1, pe
 // ── mol-ribosome-initiation ──────────────────────────────────────────────────
 // RibosomeSites: recomposed at textbook level, one picture on desktop (2026-11-07) — see ./redraws/RibosomeSites.tsx; old code in archive/figures/2026-11-07/.
 
-function InitiationCompare() {
-  return (
-    <Svg h={340} label="התחלת תרגום: בחיידקים רצף שיין-דלגרנו מזדווג עם קצה ה-16S rRNA ומציב את AUG באתר P; באאוקריוטים eIF4F נקשר לכובע, ה-mRNA יוצר מעגל עם PABP, וקומפלקס 43S סורק מ-5′ עד AUG בהקשר קוזאק">
-      <He x={240} y={22} size={13} bold>חיידקים</He>
-      <rect x={100} y={56} width={210} height={84} rx={20} fill={FILL.sky} stroke={BLUE} strokeWidth={1.2} opacity={0.7} />
-      <La x={300} y={72} size={11} bold color={BLUE}>30S</La>
-      <Line x1={30} y1={110} x2={450} y2={110} c={PURPLE} w={2.5} />
-      <La x={24} y={114} size={11} color={PURPLE} anchor="end">5′</La>
-      <rect x={124} y={100} width={62} height={20} rx={3} fill={FILL.red} stroke={RED} strokeWidth={1.2} />
-      <La x={155} y={115} size={11} bold>AGGAGG</La>
-      <rect x={236} y={100} width={40} height={20} rx={3} fill={FILL.green} stroke={GREEN} strokeWidth={1.2} />
-      <La x={256} y={115} size={11} bold>AUG</La>
-      <La x={155} y={138} size={11} bold color={BLUE}>UCCUCC</La>
-      <He x={70} y={138} size={10} color={BLUE}>קצה ה-16S</He>
-      <rect x={248} y={62} width={16} height={36} rx={3} fill={FILL.green} stroke={GREEN} strokeWidth={1.2} />
-      <circle cx={256} cy={56} r={9} fill={ORANGE} />
-      <La x={256} y={44} size={10} bold color={ORANGE}>fMet</La>
-      <ellipse cx={226} cy={78} rx={14} ry={9} fill={FILL.yellow} stroke="#b45309" strokeWidth={1.2} /><La x={226} y={82} size={8.5} bold>IF2</La>
-      <He x={390} y={70} size={10.5} color={MUTED}>כ-10 נוקלאוטידים</He>
-      <He x={390} y={86} size={10.5} color={MUTED}>בין SD ל-AUG</He>
 
-      <He x={240} y={186} size={13} bold>אאוקריוטים</He>
-      <path d="M418 262 Q420 206 240 206 Q80 206 82 252" fill="none" stroke={MUTED} strokeWidth={1.5} {...dash} />
-      <Line x1={60} y1={278} x2={440} y2={278} c={PURPLE} w={2.5} />
-      <circle cx={50} cy={278} r={13} fill={FILL.yellow} stroke={ORANGE} strokeWidth={1.6} /><La x={50} y={282} size={8.5} bold>m⁷G</La>
-      <ellipse cx={84} cy={258} rx={24} ry={12} fill={FILL.orange} stroke={ORANGE} strokeWidth={1.4} /><La x={84} y={262} size={9.5} bold>eIF4F</La>
-      <La x={420} y={298} size={11} bold color={PURPLE}>AAAA…</La>
-      <circle cx={418} cy={266} r={10} fill={FILL.gray} stroke={INK} strokeWidth={1.2} /><La x={444} y={248} size={9} bold>PABP</La>
-      <ellipse cx={182} cy={268} rx={40} ry={18} fill={FILL.sky} stroke={BLUE} strokeWidth={1.6} /><La x={182} y={272} size={11} bold>43S</La>
-      <Arrow x1={226} y1={252} x2={290} y2={252} color={BLUE} />
-      <He x={258} y={242} size={10.5} color={BLUE}>סריקה</He>
-      <rect x={312} y={268} width={40} height={20} rx={3} fill={FILL.green} stroke={GREEN} strokeWidth={1.2} />
-      <La x={332} y={283} size={11} bold>AUG</La>
-      <La x={332} y={308} size={11} color={GREEN}>gccRccAUGG</La>
-      <He x={332} y={326} size={10.5} color={MUTED}>הקשר קוזאק</He>
-      <He x={240} y={222} size={10.5} color={MUTED}>מעגל: כובע + זנב</He>
-    </Svg>
-  );
-}
 
 // ── mol-translation-elongation ───────────────────────────────────────────────
 // ElongationCycle: recomposed at textbook level, one picture on desktop (2026-11-07) — see ./redraws/ElongationCycle.tsx; old code in archive/figures/2026-11-07/.

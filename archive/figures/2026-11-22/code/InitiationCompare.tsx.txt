@@ -1,0 +1,39 @@
+function InitiationCompare() {
+  return (
+    <Svg h={340} label="התחלת תרגום: בחיידקים רצף שיין-דלגרנו מזדווג עם קצה ה-16S rRNA ומציב את AUG באתר P; באאוקריוטים eIF4F נקשר לכובע, ה-mRNA יוצר מעגל עם PABP, וקומפלקס 43S סורק מ-5′ עד AUG בהקשר קוזאק">
+      <He x={240} y={22} size={13} bold>חיידקים</He>
+      <rect x={100} y={56} width={210} height={84} rx={20} fill={FILL.sky} stroke={BLUE} strokeWidth={1.2} opacity={0.7} />
+      <La x={300} y={72} size={11} bold color={BLUE}>30S</La>
+      <Line x1={30} y1={110} x2={450} y2={110} c={PURPLE} w={2.5} />
+      <La x={24} y={114} size={11} color={PURPLE} anchor="end">5′</La>
+      <rect x={124} y={100} width={62} height={20} rx={3} fill={FILL.red} stroke={RED} strokeWidth={1.2} />
+      <La x={155} y={115} size={11} bold>AGGAGG</La>
+      <rect x={236} y={100} width={40} height={20} rx={3} fill={FILL.green} stroke={GREEN} strokeWidth={1.2} />
+      <La x={256} y={115} size={11} bold>AUG</La>
+      <La x={155} y={138} size={11} bold color={BLUE}>UCCUCC</La>
+      <He x={70} y={138} size={10} color={BLUE}>קצה ה-16S</He>
+      <rect x={248} y={62} width={16} height={36} rx={3} fill={FILL.green} stroke={GREEN} strokeWidth={1.2} />
+      <circle cx={256} cy={56} r={9} fill={ORANGE} />
+      <La x={256} y={44} size={10} bold color={ORANGE}>fMet</La>
+      <ellipse cx={226} cy={78} rx={14} ry={9} fill={FILL.yellow} stroke="#b45309" strokeWidth={1.2} /><La x={226} y={82} size={8.5} bold>IF2</La>
+      <He x={390} y={70} size={10.5} color={MUTED}>כ-10 נוקלאוטידים</He>
+      <He x={390} y={86} size={10.5} color={MUTED}>בין SD ל-AUG</He>
+
+      <He x={240} y={186} size={13} bold>אאוקריוטים</He>
+      <path d="M418 262 Q420 206 240 206 Q80 206 82 252" fill="none" stroke={MUTED} strokeWidth={1.5} {...dash} />
+      <Line x1={60} y1={278} x2={440} y2={278} c={PURPLE} w={2.5} />
+      <circle cx={50} cy={278} r={13} fill={FILL.yellow} stroke={ORANGE} strokeWidth={1.6} /><La x={50} y={282} size={8.5} bold>m⁷G</La>
+      <ellipse cx={84} cy={258} rx={24} ry={12} fill={FILL.orange} stroke={ORANGE} strokeWidth={1.4} /><La x={84} y={262} size={9.5} bold>eIF4F</La>
+      <La x={420} y={298} size={11} bold color={PURPLE}>AAAA…</La>
+      <circle cx={418} cy={266} r={10} fill={FILL.gray} stroke={INK} strokeWidth={1.2} /><La x={444} y={248} size={9} bold>PABP</La>
+      <ellipse cx={182} cy={268} rx={40} ry={18} fill={FILL.sky} stroke={BLUE} strokeWidth={1.6} /><La x={182} y={272} size={11} bold>43S</La>
+      <Arrow x1={226} y1={252} x2={290} y2={252} color={BLUE} />
+      <He x={258} y={242} size={10.5} color={BLUE}>סריקה</He>
+      <rect x={312} y={268} width={40} height={20} rx={3} fill={FILL.green} stroke={GREEN} strokeWidth={1.2} />
+      <La x={332} y={283} size={11} bold>AUG</La>
+      <La x={332} y={308} size={11} color={GREEN}>gccRccAUGG</La>
+      <He x={332} y={326} size={10.5} color={MUTED}>הקשר קוזאק</He>
+      <He x={240} y={222} size={10.5} color={MUTED}>מעגל: כובע + זנב</He>
+    </Svg>
+  );
+}
