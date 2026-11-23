@@ -1,0 +1,37 @@
+function AcidGrowth() {
+  const fib = [80, 120, 160];
+  return (
+    <Svg h={320} label="גדילה חומצית: אוקסין מפעיל את משאבת הפרוטונים בממברנת התא, הפרוטונים מחמיצים את הדופן ל-pH 4.5–5, ואקספנסינים פעילים ב-pH הזה מחלישים את קשרי המימן בין שרשרות הקסילוגלוקן למיקרופיברילי התאית. תחת לחץ הטורגור המיקרופיברילים מחליקים, והדופן נמתחת">
+      <rect x={20} y={56} width={440} height={140} fill={WALL} stroke={WALL_EDGE} />
+      <He x={450} y={70} size={10.5} bold color={WALL_EDGE} anchor="end">דופן (pH 4.5–5)</He>
+      {fib.map((y) => <rect key={y} x={30} y={y - 6} width={420} height={12} rx={6} fill="#fafaf9" stroke={MUTED} strokeWidth={1.2} />)}
+      <He x={86} y={fib[0] - 12} size={10} color={MUTED}>מיקרופיבריל תאית</He>
+      {/* xyloglucan tethers */}
+      {[[110, 0], [210, 0], [330, 0], [160, 1], [280, 1], [400, 1]].map(([x, r], i) => {
+        const y1 = fib[r] + 6, y2 = fib[r + 1] - 6;
+        return <path key={i} d={`M${x} ${y1} C ${x + 10} ${(y1 + y2) / 2 - 6}, ${x - 10} ${(y1 + y2) / 2 + 6}, ${x + 4} ${y2}`} fill="none" stroke={GREEN} strokeWidth={2} />;
+      })}
+      <He x={380} y={104} size={10} color={GREEN}>קסילוגלוקן</He>
+      {/* expansins at junctions */}
+      {[[214, 108], [284, 148], [114, 108]].map(([x, y], i) => <g key={i}><circle cx={x} cy={y} r={8} fill={FILL.purple} stroke={PURPLE} strokeWidth={1.4} /><He x={x - 44} y={y + 4} size={9.5} color={PURPLE}>{i === 2 ? "אקספנסין" : ""}</He></g>)}
+      {/* H+ in wall */}
+      {[60, 140, 250, 360, 430].map((x, i) => <La key={i} x={x} y={188} size={10.5} bold color={RED}>H⁺</La>)}
+      {/* membrane and pump */}
+      <Membrane x1={20} x2={460} y={208} />
+      <rect x={20} y={216} width={440} height={56} fill={FILL.cyto} />
+      <rect x={196} y={200} width={28} height={16} rx={4} fill={FILL.purple} stroke={PURPLE} />
+      <Arrow x1={210} y1={226} x2={210} y2={190} color={RED} />
+      <La x={262} y={234} size={10.5} color={PURPLE} anchor="start">H⁺-ATPase</La>
+      <Hormone x={150} y={248} />
+      <He x={128} y={252} size={10.5} color={ORANGE} anchor="end">אוקסין</He>
+      <Arrow x1={160} y1={244} x2={196} y2={220} color={ORANGE} />
+      <He x={330} y={252} size={10.5} color={MUTED}>ציטופלזמה</He>
+      {/* turgor and extension */}
+      <Arrow x1={240} y1={270} x2={240} y2={230} color={BLUE} width={2.6} />
+      <He x={290} y={286} size={10.5} color={BLUE}>לחץ טורגור</He>
+      <path d="M30 40 L450 40" stroke={INK} strokeWidth={1.8} markerEnd="url(#bfArrow)" markerStart="url(#bfArrow)" />
+      <He x={240} y={32} size={10.5}>המיקרופיברילים מחליקים ← הדופן נמתחת</He>
+      <He x={240} y={310} size={10} color={MUTED}>סכמטי — לא בקנה מידה</He>
+    </Svg>
+  );
+}

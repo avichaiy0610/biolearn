@@ -8,6 +8,9 @@ import { ArrowDefs, BLUE, GREEN, INK, MUTED, ORANGE, He, La, dash, scale } from 
 import { Arrow } from "./metabolicFigures";
 import { ThylakoidMembrane } from "./redraws/ThylakoidMembrane";
 import { Plasmodesma } from "./redraws/Plasmodesma";
+import { GuardCellOpening } from "./redraws/GuardCellOpening";
+import { AcidGrowth } from "./redraws/AcidGrowth";
+import { ShootMeristem } from "./redraws/ShootMeristem";
 
 const PURPLE = "#7c3aed";
 const RED = "#b91c1c";
@@ -155,147 +158,13 @@ function CellWaterPotential() {
 }
 
 // ── pp-water-balance: guard cells and the ion fluxes of opening ─────────────
-function GuardCellOpening() {
-  const Pair = ({ x, open }: { x: number; open: boolean }) => {
-    // Kidney-shaped guard cells joined at the tips; when turgid the inner (pore) walls bow apart.
-    const b = open ? 16 : 0, w = 34;
-    const cell = (side: -1 | 1) => `M${x} 50 C ${x + side * (w + 8)} 58, ${x + side * (w + 8)} 162, ${x} 170 C ${x + side * b} 140, ${x + side * b} 80, ${x} 50 Z`;
-    const spokes = (side: -1 | 1) => [-0.8, -0.45, -0.1, 0.25, 0.6].map((t, k) => {
-      const yy = 110 + t * 50, inner = x + side * b * (1 - t * t) * 0.85;
-      return <line key={k} x1={inner + side * 2} y1={yy} x2={x + side * (w - 2 - Math.abs(t) * 10)} y2={110 + t * 56} stroke={WALL_EDGE} strokeWidth={0.9} />;
-    });
-    return (
-      <g>
-        <path d={cell(-1)} fill={FILL.green} stroke={GREEN} strokeWidth={1.5} />
-        <path d={cell(1)} fill={FILL.green} stroke={GREEN} strokeWidth={1.5} />
-        {spokes(-1)}{spokes(1)}
-        <path d={`M${x} 56 C ${x - b} 84, ${x - b} 136, ${x} 164`} fill="none" stroke={WALL_EDGE} strokeWidth={3} />
-        <path d={`M${x} 56 C ${x + b} 84, ${x + b} 136, ${x} 164`} fill="none" stroke={WALL_EDGE} strokeWidth={3} />
-      </g>
-    );
-  };
-  return (
-    <Svg h={330} label="פתיחת פיונית: משמאל, זוג תאי שמירה סגורים ופתוחים, עם מיקרופיברילי תאית רדיאליים שיוצאים מהפתח ודופן עבה בצד הפתח. מימין, היונים בתא שמירה בפתיחה: אור כחול מפעיל את הפוטוטרופין ואת משאבת הפרוטונים; ההיפרפולריזציה פותחת תעלות K+; Cl- נכנס ומלאט נבנה מעמילן; מים נכנסים והטורגור עולה. ABA הופך את התהליך">
-      <He x={60} y={30} size={11.5} bold>סגורה</He>
-      <He x={150} y={30} size={11.5} bold>פתוחה</He>
-      <Pair x={60} open={false} />
-      <Pair x={150} open={true} />
-      <He x={105} y={196} size={10} color={WALL_EDGE}>תאית רדיאלית, דופן עבה בצד הפתח</He>
-      <He x={105} y={212} size={10} color={MUTED}>← התאים מתכופפים החוצה</He>
-      {/* ion flux cell */}
-      <rect x={250} y={40} width={210} height={180} rx={30} fill={FILL.green} stroke={GREEN} strokeWidth={2} />
-      <ellipse cx={355} cy={130} rx={58} ry={40} fill={FILL.sky} stroke={BLUE} strokeWidth={1} />
-      <He x={355} y={134} size={10.5} color={BLUE}>ואקואולה</He>
-      <He x={355} y={34} size={11.5} bold color={GREEN}>תא שמירה בפתיחה</He>
-      {/* pump */}
-      <circle cx={250} cy={80} r={9} fill={FILL.purple} stroke={PURPLE} strokeWidth={1.4} />
-      <La x={264} y={84} size={10} color={PURPLE} anchor="start">H⁺-ATPase</La>
-      <Arrow x1={242} y1={80} x2={220} y2={80} color={PURPLE} />
-      <La x={216} y={84} size={11} bold color={PURPLE} anchor="end">H⁺</La>
-      <He x={380} y={62} size={9.5} color={BLUE}>אור כחול ← פוטוטרופין</He>
-      <Arrow x1={330} y1={66} x2={262} y2={78} color={BLUE} />
-      {/* K+ channel */}
-      <rect x={244} y={118} width={12} height={20} rx={3} fill={FILL.yellow} stroke={ORANGE} />
-      <Arrow x1={220} y1={128} x2={242} y2={128} color={ORANGE} />
-      <La x={216} y={132} size={11} bold color={ORANGE} anchor="end">K⁺</La>
-      <Arrow x1={220} y1={168} x2={250} y2={168} color={TEAL} />
-      <La x={216} y={172} size={11} bold color={TEAL} anchor="end">Cl⁻</La>
-      <He x={370} y={196} size={10} color={TEAL}>מלאט ← מעמילן</He>
-      <Arrow x1={300} y1={180} x2={318} y2={160} color={ORANGE} />
-      <Arrow x1={300} y1={130} x2={318} y2={130} color={ORANGE} />
-      {/* water */}
-      <path d="M440 60 C 470 90, 470 160, 440 190" fill="none" stroke={BLUE} strokeWidth={2.4} markerEnd="url(#bfArrow)" />
-      <He x={470} y={238} size={10} color={BLUE} anchor="end">Ψs יורד ← מים נכנסים ← טורגור</He>
-      {/* steps strip */}
-      <rect x={20} y={252} width={440} height={66} rx={10} fill="#f8fafc" stroke={LINE_GRAY} />
-      <He x={240} y={274} size={10.5}>1. משאבת פרוטונים ← היפרפולריזציה   2. תעלות K⁺ פנימה נפתחות</He>
-      <He x={240} y={292} size={10.5}>3. Cl⁻ נכנס ומלאט נבנה   4. מים נכנסים ← הפיונית נפתחת</He>
-      <He x={240} y={310} size={10.5} color={RED}>ABA הופך את התהליך: אניונים ו-K⁺ יוצאים ← סגירה</He>
-    </Svg>
-  );
-}
+
 
 // ── pp-cell-growth: acid growth ─────────────────────────────────────────────
-function AcidGrowth() {
-  const fib = [80, 120, 160];
-  return (
-    <Svg h={320} label="גדילה חומצית: אוקסין מפעיל את משאבת הפרוטונים בממברנת התא, הפרוטונים מחמיצים את הדופן ל-pH 4.5–5, ואקספנסינים פעילים ב-pH הזה מחלישים את קשרי המימן בין שרשרות הקסילוגלוקן למיקרופיברילי התאית. תחת לחץ הטורגור המיקרופיברילים מחליקים, והדופן נמתחת">
-      <rect x={20} y={56} width={440} height={140} fill={WALL} stroke={WALL_EDGE} />
-      <He x={450} y={70} size={10.5} bold color={WALL_EDGE} anchor="end">דופן (pH 4.5–5)</He>
-      {fib.map((y) => <rect key={y} x={30} y={y - 6} width={420} height={12} rx={6} fill="#fafaf9" stroke={MUTED} strokeWidth={1.2} />)}
-      <He x={86} y={fib[0] - 12} size={10} color={MUTED}>מיקרופיבריל תאית</He>
-      {/* xyloglucan tethers */}
-      {[[110, 0], [210, 0], [330, 0], [160, 1], [280, 1], [400, 1]].map(([x, r], i) => {
-        const y1 = fib[r] + 6, y2 = fib[r + 1] - 6;
-        return <path key={i} d={`M${x} ${y1} C ${x + 10} ${(y1 + y2) / 2 - 6}, ${x - 10} ${(y1 + y2) / 2 + 6}, ${x + 4} ${y2}`} fill="none" stroke={GREEN} strokeWidth={2} />;
-      })}
-      <He x={380} y={104} size={10} color={GREEN}>קסילוגלוקן</He>
-      {/* expansins at junctions */}
-      {[[214, 108], [284, 148], [114, 108]].map(([x, y], i) => <g key={i}><circle cx={x} cy={y} r={8} fill={FILL.purple} stroke={PURPLE} strokeWidth={1.4} /><He x={x - 44} y={y + 4} size={9.5} color={PURPLE}>{i === 2 ? "אקספנסין" : ""}</He></g>)}
-      {/* H+ in wall */}
-      {[60, 140, 250, 360, 430].map((x, i) => <La key={i} x={x} y={188} size={10.5} bold color={RED}>H⁺</La>)}
-      {/* membrane and pump */}
-      <Membrane x1={20} x2={460} y={208} />
-      <rect x={20} y={216} width={440} height={56} fill={FILL.cyto} />
-      <rect x={196} y={200} width={28} height={16} rx={4} fill={FILL.purple} stroke={PURPLE} />
-      <Arrow x1={210} y1={226} x2={210} y2={190} color={RED} />
-      <La x={262} y={234} size={10.5} color={PURPLE} anchor="start">H⁺-ATPase</La>
-      <Hormone x={150} y={248} />
-      <He x={128} y={252} size={10.5} color={ORANGE} anchor="end">אוקסין</He>
-      <Arrow x1={160} y1={244} x2={196} y2={220} color={ORANGE} />
-      <He x={330} y={252} size={10.5} color={MUTED}>ציטופלזמה</He>
-      {/* turgor and extension */}
-      <Arrow x1={240} y1={270} x2={240} y2={230} color={BLUE} width={2.6} />
-      <He x={290} y={286} size={10.5} color={BLUE}>לחץ טורגור</He>
-      <path d="M30 40 L450 40" stroke={INK} strokeWidth={1.8} markerEnd="url(#bfArrow)" markerStart="url(#bfArrow)" />
-      <He x={240} y={32} size={10.5}>המיקרופיברילים מחליקים ← הדופן נמתחת</He>
-      <He x={240} y={310} size={10} color={MUTED}>סכמטי — לא בקנה מידה</He>
-    </Svg>
-  );
-}
+
 
 // ── pp-development: the shoot apical meristem ───────────────────────────────
-function ShootMeristem() {
-  return (
-    <Svg h={330} label="המריסטמה של הנבט: בראש — האזור המרכזי עם תאי הגזע; סביבו — האזור ההיקפי שממנו נוצרים עלים; מתחת — אזור הצלע. מתחת לתאי הגזע נמצא מרכז הארגון שמבטא WUS. WUS נע לתאי הגזע ומפעיל את CLV3; CLV3 נקשר לקולטן CLV1 ומדכא את WUS — משוב שלילי ששומר על גודל קבוע">
-      <path d="M40 300 L40 170 C 40 60, 340 60, 340 170 L340 300" fill={FILL.green} stroke={GREEN} strokeWidth={2} />
-      <path d="M50 170 C 50 74, 330 74, 330 170" fill="none" stroke={GREEN} strokeWidth={1} {...dash} />
-      <La x={262} y={86} size={10} color={GREEN} anchor="start">L1, L2</La>
-      {/* primordia */}
-      <ellipse cx={36} cy={180} rx={22} ry={34} fill="#bbf7d0" stroke={GREEN} transform="rotate(-25 36 180)" />
-      <ellipse cx={344} cy={180} rx={22} ry={34} fill="#bbf7d0" stroke={GREEN} transform="rotate(25 344 180)" />
-      <line x1={354} y1={206} x2={392} y2={252} stroke={GREEN} strokeWidth={1} />
-      <He x={410} y={266} size={10} color={GREEN}>ראשית עלה</He>
-      {/* zones */}
-      <ellipse cx={190} cy={110} rx={52} ry={26} fill={FILL.yellow} stroke={ORANGE} strokeWidth={1.4} />
-      <He x={190} y={108} size={10.5} bold color={ORANGE}>אזור מרכזי</He>
-      <He x={190} y={122} size={9.5} color={ORANGE}>תאי גזע · CLV3</He>
-      <ellipse cx={190} cy={168} rx={38} ry={20} fill={FILL.purple} stroke={PURPLE} strokeWidth={1.4} />
-      <He x={190} y={166} size={10} bold color={PURPLE}>מרכז הארגון</He>
-      <La x={190} y={180} size={10} color={PURPLE}>WUS</La>
-      <He x={90} y={200} size={10} color={GREEN}>אזור היקפי</He>
-      <He x={290} y={150} size={10} color={GREEN}>אזור היקפי</He>
-      <rect x={150} y={210} width={80} height={80} rx={8} fill="#d1fae5" stroke={GREEN} {...dash} />
-      <He x={190} y={256} size={10} color={GREEN}>אזור הצלע</He>
-      {/* loop */}
-      <Arrow x1={212} y1={152} x2={212} y2={128} color={PURPLE} width={2.4} />
-      <path d="M150 116 C 110 130, 110 160, 148 170" fill="none" stroke={RED} strokeWidth={2} markerEnd="url(#ppInhib)" />
-      <La x={112} y={156} size={9.5} bold color={RED} anchor="end">CLV3→CLV1</La>
-      {/* side panel */}
-      <rect x={360} y={70} width={110} height={170} rx={10} fill="#f8fafc" stroke={LINE_GRAY} />
-      <He x={415} y={90} size={11} bold>הלולאה</He>
-      <La x={415} y={112} size={11} bold color={PURPLE}>WUS</La>
-      <Arrow x1={415} y1={118} x2={415} y2={138} color={PURPLE} />
-      <He x={415} y={152} size={10.5} color={ORANGE}>תאי גזע</He>
-      <Arrow x1={415} y1={158} x2={415} y2={176} color={ORANGE} />
-      <La x={415} y={190} size={11} bold color={ORANGE}>CLV3</La>
-      <path d="M440 186 C 470 160, 470 120, 440 110" fill="none" stroke={RED} strokeWidth={2} markerEnd="url(#ppInhib)" />
-      <He x={415} y={214} size={9.5} color={MUTED}>יותר תאי גזע ←</He>
-      <He x={415} y={228} size={9.5} color={MUTED}>פחות WUS</He>
-      <He x={190} y={318} size={10} color={MUTED}>סכמטי — חתך אורכי דרך קצה הנבט</He>
-    </Svg>
-  );
-}
+
 
 // ── pp-auxin: chemiosmotic polar transport ──────────────────────────────────
 function AuxinChemiosmotic() {

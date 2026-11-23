@@ -1,0 +1,16 @@
+function DiureticSites() {
+  return (
+    <Svg h={290} label="אתרי הפעולה של המשתנים: מעכבי קרבוניק אנהידראזה באבובית המקורבת; משתני לולאה (פורוסמיד) על NKCC2 בחלק העולה העבה; תיאזידים על NCC באבובית המרוחקת; אמילוריד על ENaC וספירונולקטון על קולטן האלדוסטרון בצינורית המאספת — שני האחרונים חוסכי אשלגן">
+      <NephronShape>
+        <He x={150} y={40} size={11} bold color={MUTED}>אצטזולאמיד</He>
+        <He x={150} y={56} size={10} color={MUTED}>(קרבוניק אנהידראזה)</He>
+        <He x={212} y={200} size={11.5} bold color={RED} anchor="start">פורוסמיד</He>
+        <La x={212} y={216} size={10} color={MUTED} anchor="start">NKCC2 — הכי חזק</La>
+        <He x={270} y={66} size={11.5} bold color={ORANGE}>תיאזיד</He>
+        <La x={270} y={104} size={10} color={MUTED}>NCC</La>
+        <He x={344} y={200} size={11} bold color={GREEN} anchor="start">אמילוריד · ספירונולקטון</He>
+        <He x={344} y={216} size={10} color={MUTED} anchor="start">חוסכי K⁺</He>
+      </NephronShape>
+    </Svg>
+  );
+}

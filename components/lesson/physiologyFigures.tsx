@@ -9,6 +9,9 @@ import { CicrCardiac } from "./redraws/CicrCardiac";
 import { SaltatoryConduction } from "./redraws/SaltatoryConduction";
 import { Sarcomere } from "./redraws/Sarcomere";
 import { GlomerularStarling } from "./redraws/GlomerularStarling";
+import { NephronSegments } from "./redraws/NephronSegments";
+import { DiureticSites } from "./redraws/DiureticSites";
+import { Countercurrent } from "./redraws/Countercurrent";
 
 const PURPLE = "#7c3aed";
 const RED = "#b91c1c";
@@ -275,87 +278,13 @@ function CoagulationCascade() {
 
 
 // ── ph-kidney-tubules ────────────────────────────────────────────────────────
-function NephronShape({ children }: { children?: React.ReactNode }) {
-  return (
-    <g>
-      <circle cx={70} cy={60} r={22} fill={FILL.red} stroke={RED} strokeWidth={1.5} />
-      <path d="M90 66 C 140 60, 150 90, 160 100 L160 230 Q180 262 200 230 L200 120 C 210 90, 240 80, 270 80 L330 80 L330 260" fill="none" stroke={BLUE} strokeWidth={10} strokeLinecap="round" strokeLinejoin="round" />
-      <line x1={20} x2={460} y1={140} y2={140} stroke={LINE} {...dash} />
-      <He x={455} y={130} size={10} anchor="end" color={MUTED}>קליפה</He>
-      <He x={455} y={156} size={10} anchor="end" color={MUTED}>ליבה</He>
-      {children}
-    </g>
-  );
-}
 
-function NephronSegments() {
-  return (
-    <Svg h={290} label="מקטעי הנפרון והנשאים העיקריים, עם אחוז ספיגת ה-Na⁺ שסונן: אבובית מקורבת כ-67% (SGLT2, NHE3, אקוופורין 1); החלק העולה העבה כ-25% (NKCC2, אטום למים); אבובית מרוחקת כ-5% (NCC); צינורית מאספת כ-3% (ENaC בתאים ראשיים, אקוופורין 2 בהשפעת ADH)">
-      <NephronShape>
-        <He x={145} y={40} size={11.5} bold color={BLUE}>מקורבת כ-67%</He>
-        <La x={145} y={56} size={10} color={MUTED}>SGLT2 · NHE3 · AQP1</La>
-        <He x={120} y={200} size={10.5} color={BLUE} anchor="end">יורד: מים יוצאים</He>
-        <He x={212} y={200} size={10.5} bold color={ORANGE} anchor="start">עולה עבה כ-25%</He>
-        <La x={212} y={216} size={10} color={MUTED} anchor="start">NKCC2 · אטום למים</La>
-        <He x={270} y={66} size={11} bold color={GREEN}>מרוחקת כ-5%</He>
-        <La x={270} y={104} size={10} color={MUTED}>NCC</La>
-        <He x={344} y={200} size={11} bold color={PURPLE} anchor="start">מאספת כ-3%</He>
-        <La x={344} y={216} size={10} color={MUTED} anchor="start">ENaC · AQP2 (ADH)</La>
-        <He x={344} y={232} size={10} color={MUTED} anchor="start">אלדוסטרון</He>
-      </NephronShape>
-    </Svg>
-  );
-}
 
-function DiureticSites() {
-  return (
-    <Svg h={290} label="אתרי הפעולה של המשתנים: מעכבי קרבוניק אנהידראזה באבובית המקורבת; משתני לולאה (פורוסמיד) על NKCC2 בחלק העולה העבה; תיאזידים על NCC באבובית המרוחקת; אמילוריד על ENaC וספירונולקטון על קולטן האלדוסטרון בצינורית המאספת — שני האחרונים חוסכי אשלגן">
-      <NephronShape>
-        <He x={150} y={40} size={11} bold color={MUTED}>אצטזולאמיד</He>
-        <He x={150} y={56} size={10} color={MUTED}>(קרבוניק אנהידראזה)</He>
-        <He x={212} y={200} size={11.5} bold color={RED} anchor="start">פורוסמיד</He>
-        <La x={212} y={216} size={10} color={MUTED} anchor="start">NKCC2 — הכי חזק</La>
-        <He x={270} y={66} size={11.5} bold color={ORANGE}>תיאזיד</He>
-        <La x={270} y={104} size={10} color={MUTED}>NCC</La>
-        <He x={344} y={200} size={11} bold color={GREEN} anchor="start">אמילוריד · ספירונולקטון</He>
-        <He x={344} y={216} size={10} color={MUTED} anchor="start">חוסכי K⁺</He>
-      </NephronShape>
-    </Svg>
-  );
-}
+
+
 
 // ── ph-volume-pressure ───────────────────────────────────────────────────────
-function Countercurrent() {
-  const lvl = [300, 600, 900, 1200];
-  return (
-    <Svg h={300} label="מכפל הזרם הנגדי: בחלק היורד של הלולאה מים יוצאים והנוזל מתרכז עד כ-1200; בחלק העולה, שאטום למים, NaCl נשאב החוצה והנוזל מתמהל עד כ-100. הנוזל הבין-תאי בליבה מתרכז בהדרגה מ-300 עד 1200. בצינורית המאספת, בנוכחות ADH, מים יוצאים לליבה והשתן מתרכז">
-      {lvl.map((v, i) => (
-        <g key={v}>
-          <rect x={20} y={50 + i * 55} width={440} height={55} fill={["#fff7ed", "#ffedd5", "#fed7aa", "#fdba74"][i]} opacity={0.55} />
-          <La x={40} y={82 + i * 55} size={11} bold color={ORANGE}>{v}</La>
-        </g>
-      ))}
-      <He x={50} y={40} size={10.5} color={ORANGE}>נוזל בין-תאי</He>
-      {/* descending */}
-      <Line x1={150} y1={50} x2={150} y2={262} c={BLUE} w={8} />
-      {/* ascending */}
-      <Line x1={210} y1={262} x2={210} y2={50} c={GREEN} w={8} />
-      <path d="M150 262 Q180 290 210 262" fill="none" stroke={BLUE} strokeWidth={8} />
-      {[90, 145, 200].map((y) => <Arrow key={y} x1={146} y1={y} x2={116} y2={y} color={BLUE} />)}
-      {[90, 145, 200].map((y) => <Arrow key={y} x1={214} y1={y} x2={244} y2={y} color={GREEN} />)}
-      <He x={130} y={295} size={10.5} color={BLUE}>יורד: H₂O יוצא</He>
-      <He x={240} y={295} size={10.5} color={GREEN}>עולה: NaCl נשאב</He>
-      <La x={162} y={70} size={10} anchor="start">300</La><La x={162} y={250} size={10} anchor="start">1200</La>
-      <La x={222} y={250} size={10} anchor="start">1200</La><La x={222} y={70} size={10} anchor="start">~100</La>
-      {/* collecting duct */}
-      <Line x1={350} y1={50} x2={350} y2={262} c={PURPLE} w={8} />
-      {[100, 160, 220].map((y) => <Arrow key={y} x1={346} y1={y} x2={310} y2={y} color={PURPLE} />)}
-      <He x={400} y={160} size={11} bold color={PURPLE}>מאספת + ADH</He>
-      <He x={400} y={176} size={10} color={MUTED}>מים יוצאים</He>
-      <La x={350} y={286} size={11} bold color={PURPLE}>~1200</La>
-    </Svg>
-  );
-}
+
 
 function Raas() {
   return (

@@ -1,0 +1,18 @@
+function NephronSegments() {
+  return (
+    <Svg h={290} label="מקטעי הנפרון והנשאים העיקריים, עם אחוז ספיגת ה-Na⁺ שסונן: אבובית מקורבת כ-67% (SGLT2, NHE3, אקוופורין 1); החלק העולה העבה כ-25% (NKCC2, אטום למים); אבובית מרוחקת כ-5% (NCC); צינורית מאספת כ-3% (ENaC בתאים ראשיים, אקוופורין 2 בהשפעת ADH)">
+      <NephronShape>
+        <He x={145} y={40} size={11.5} bold color={BLUE}>מקורבת כ-67%</He>
+        <La x={145} y={56} size={10} color={MUTED}>SGLT2 · NHE3 · AQP1</La>
+        <He x={120} y={200} size={10.5} color={BLUE} anchor="end">יורד: מים יוצאים</He>
+        <He x={212} y={200} size={10.5} bold color={ORANGE} anchor="start">עולה עבה כ-25%</He>
+        <La x={212} y={216} size={10} color={MUTED} anchor="start">NKCC2 · אטום למים</La>
+        <He x={270} y={66} size={11} bold color={GREEN}>מרוחקת כ-5%</He>
+        <La x={270} y={104} size={10} color={MUTED}>NCC</La>
+        <He x={344} y={200} size={11} bold color={PURPLE} anchor="start">מאספת כ-3%</He>
+        <La x={344} y={216} size={10} color={MUTED} anchor="start">ENaC · AQP2 (ADH)</La>
+        <He x={344} y={232} size={10} color={MUTED} anchor="start">אלדוסטרון</He>
+      </NephronShape>
+    </Svg>
+  );
+}

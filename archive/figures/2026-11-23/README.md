@@ -19,3 +19,12 @@
 - `physiologyFigures.tsx`: Sarcomere (`sarcomere`, יחידה ph-skeletal-muscle)
 - `physiologyFigures.tsx`: GlomerularStarling (`glomerular-starling`, יחידה ph-kidney-filtration)
 אותו מבנה ואותו שחזור כמו למעלה.
+
+## סבב 16 (עדיפות 2) — אישור אביחי
+- `physiologyFigures.tsx`: NephronSegments (`nephron-segments`, יחידה ph-kidney-tubules)
+- `physiologyFigures.tsx`: DiureticSites (`diuretic-sites`, יחידה ph-kidney-tubules)
+- `physiologyFigures.tsx`: Countercurrent (`countercurrent`, יחידה ph-volume-pressure)
+- `plantFigures.tsx`: GuardCellOpening (`guard-cell-opening`, יחידה pp-water-balance)
+- `plantFigures.tsx`: AcidGrowth (`acid-growth`, יחידה pp-cell-growth)
+- `plantFigures.tsx`: ShootMeristem (`shoot-meristem`, יחידה pp-development)
+אותו מבנה ואותו שחזור כמו למעלה.

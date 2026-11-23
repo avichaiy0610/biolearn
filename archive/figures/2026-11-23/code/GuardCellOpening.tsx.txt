@@ -1,0 +1,59 @@
+function GuardCellOpening() {
+  const Pair = ({ x, open }: { x: number; open: boolean }) => {
+    // Kidney-shaped guard cells joined at the tips; when turgid the inner (pore) walls bow apart.
+    const b = open ? 16 : 0, w = 34;
+    const cell = (side: -1 | 1) => `M${x} 50 C ${x + side * (w + 8)} 58, ${x + side * (w + 8)} 162, ${x} 170 C ${x + side * b} 140, ${x + side * b} 80, ${x} 50 Z`;
+    const spokes = (side: -1 | 1) => [-0.8, -0.45, -0.1, 0.25, 0.6].map((t, k) => {
+      const yy = 110 + t * 50, inner = x + side * b * (1 - t * t) * 0.85;
+      return <line key={k} x1={inner + side * 2} y1={yy} x2={x + side * (w - 2 - Math.abs(t) * 10)} y2={110 + t * 56} stroke={WALL_EDGE} strokeWidth={0.9} />;
+    });
+    return (
+      <g>
+        <path d={cell(-1)} fill={FILL.green} stroke={GREEN} strokeWidth={1.5} />
+        <path d={cell(1)} fill={FILL.green} stroke={GREEN} strokeWidth={1.5} />
+        {spokes(-1)}{spokes(1)}
+        <path d={`M${x} 56 C ${x - b} 84, ${x - b} 136, ${x} 164`} fill="none" stroke={WALL_EDGE} strokeWidth={3} />
+        <path d={`M${x} 56 C ${x + b} 84, ${x + b} 136, ${x} 164`} fill="none" stroke={WALL_EDGE} strokeWidth={3} />
+      </g>
+    );
+  };
+  return (
+    <Svg h={330} label="פתיחת פיונית: משמאל, זוג תאי שמירה סגורים ופתוחים, עם מיקרופיברילי תאית רדיאליים שיוצאים מהפתח ודופן עבה בצד הפתח. מימין, היונים בתא שמירה בפתיחה: אור כחול מפעיל את הפוטוטרופין ואת משאבת הפרוטונים; ההיפרפולריזציה פותחת תעלות K+; Cl- נכנס ומלאט נבנה מעמילן; מים נכנסים והטורגור עולה. ABA הופך את התהליך">
+      <He x={60} y={30} size={11.5} bold>סגורה</He>
+      <He x={150} y={30} size={11.5} bold>פתוחה</He>
+      <Pair x={60} open={false} />
+      <Pair x={150} open={true} />
+      <He x={105} y={196} size={10} color={WALL_EDGE}>תאית רדיאלית, דופן עבה בצד הפתח</He>
+      <He x={105} y={212} size={10} color={MUTED}>← התאים מתכופפים החוצה</He>
+      {/* ion flux cell */}
+      <rect x={250} y={40} width={210} height={180} rx={30} fill={FILL.green} stroke={GREEN} strokeWidth={2} />
+      <ellipse cx={355} cy={130} rx={58} ry={40} fill={FILL.sky} stroke={BLUE} strokeWidth={1} />
+      <He x={355} y={134} size={10.5} color={BLUE}>ואקואולה</He>
+      <He x={355} y={34} size={11.5} bold color={GREEN}>תא שמירה בפתיחה</He>
+      {/* pump */}
+      <circle cx={250} cy={80} r={9} fill={FILL.purple} stroke={PURPLE} strokeWidth={1.4} />
+      <La x={264} y={84} size={10} color={PURPLE} anchor="start">H⁺-ATPase</La>
+      <Arrow x1={242} y1={80} x2={220} y2={80} color={PURPLE} />
+      <La x={216} y={84} size={11} bold color={PURPLE} anchor="end">H⁺</La>
+      <He x={380} y={62} size={9.5} color={BLUE}>אור כחול ← פוטוטרופין</He>
+      <Arrow x1={330} y1={66} x2={262} y2={78} color={BLUE} />
+      {/* K+ channel */}
+      <rect x={244} y={118} width={12} height={20} rx={3} fill={FILL.yellow} stroke={ORANGE} />
+      <Arrow x1={220} y1={128} x2={242} y2={128} color={ORANGE} />
+      <La x={216} y={132} size={11} bold color={ORANGE} anchor="end">K⁺</La>
+      <Arrow x1={220} y1={168} x2={250} y2={168} color={TEAL} />
+      <La x={216} y={172} size={11} bold color={TEAL} anchor="end">Cl⁻</La>
+      <He x={370} y={196} size={10} color={TEAL}>מלאט ← מעמילן</He>
+      <Arrow x1={300} y1={180} x2={318} y2={160} color={ORANGE} />
+      <Arrow x1={300} y1={130} x2={318} y2={130} color={ORANGE} />
+      {/* water */}
+      <path d="M440 60 C 470 90, 470 160, 440 190" fill="none" stroke={BLUE} strokeWidth={2.4} markerEnd="url(#bfArrow)" />
+      <He x={470} y={238} size={10} color={BLUE} anchor="end">Ψs יורד ← מים נכנסים ← טורגור</He>
+      {/* steps strip */}
+      <rect x={20} y={252} width={440} height={66} rx={10} fill="#f8fafc" stroke={LINE_GRAY} />
+      <He x={240} y={274} size={10.5}>1. משאבת פרוטונים ← היפרפולריזציה   2. תעלות K⁺ פנימה נפתחות</He>
+      <He x={240} y={292} size={10.5}>3. Cl⁻ נכנס ומלאט נבנה   4. מים נכנסים ← הפיונית נפתחת</He>
+      <He x={240} y={310} size={10.5} color={RED}>ABA הופך את התהליך: אניונים ו-K⁺ יוצאים ← סגירה</He>
+    </Svg>
+  );
+}
