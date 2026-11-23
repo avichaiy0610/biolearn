@@ -6,6 +6,9 @@ import { ArrowDefs, BLUE, GREEN, INK, LINE, MUTED, ORANGE, He, La, curve, dash, 
 import { Arrow } from "./metabolicFigures";
 import AnatomyEmbed from "./anatomy/AnatomyEmbed";
 import { CicrCardiac } from "./redraws/CicrCardiac";
+import { SaltatoryConduction } from "./redraws/SaltatoryConduction";
+import { Sarcomere } from "./redraws/Sarcomere";
+import { GlomerularStarling } from "./redraws/GlomerularStarling";
 
 const PURPLE = "#7c3aed";
 const RED = "#b91c1c";
@@ -127,26 +130,7 @@ function ApConductances() {
   );
 }
 
-function SaltatoryConduction() {
-  const nodes = [70, 170, 270, 370];
-  return (
-    <Svg h={250} label="הולכה קופצנית: באקסון ממוילן פוטנציאל הפעולה מתחדש רק בצמתי רנוויה, שבהם מרוכזות תעלות Na⁺, ו'קופץ' מצומת לצומת. למטה, באקסון לא ממוילן, פוטנציאל הפעולה מתחדש בכל נקודה לאורך הממברנה ומתקדם לאט">
-      <He x={240} y={22} size={12.5} bold>אקסון ממוילן — הולכה קופצנית</He>
-      <Line x1={30} y1={90} x2={450} y2={90} c={MUTED} w={10} />
-      {nodes.slice(0, -1).map((x) => <rect key={x} x={x + 10} y={72} width={80} height={36} rx={14} fill={FILL.yellow} stroke={ORANGE} strokeWidth={1.4} />)}
-      <rect x={380} y={72} width={70} height={36} rx={14} fill={FILL.yellow} stroke={ORANGE} strokeWidth={1.4} />
-      {nodes.map((x) => <g key={x}>{[-6, 0, 6].map((d) => <circle key={d} cx={x + d} cy={90} r={2.6} fill={ORANGE} />)}</g>)}
-      {nodes.slice(0, -1).map((x, i) => <path key={i} d={`M${x} 66 Q${x + 50} 30 ${x + 98} 66`} fill="none" stroke={RED} strokeWidth={2} markerEnd="url(#bfArrowS)" />)}
-      <He x={120} y={130} size={10.5} color={ORANGE}>מיאלין</He>
-      <He x={70} y={130} size={10.5} color={RED}>צומת</He>
-      <He x={240} y={160} size={12.5} bold>אקסון לא ממוילן — הולכה רציפה</He>
-      <Line x1={30} y1={210} x2={450} y2={210} c={MUTED} w={10} />
-      {Array.from({ length: 21 }, (_, i) => <circle key={i} cx={40 + i * 20} cy={210} r={2.3} fill={ORANGE} />)}
-      <Arrow x1={60} y1={232} x2={200} y2={232} color={RED} />
-      <He x={330} y={238} size={10.5} color={MUTED}>מתקדם לאט, נקודה אחרי נקודה</He>
-    </Svg>
-  );
-}
+
 
 // ── ph-nervous-system ────────────────────────────────────────────────────────
 function GliaTypes() {
@@ -208,37 +192,7 @@ function EpspIpspReversal() {
 }
 
 // ── ph-skeletal-muscle ───────────────────────────────────────────────────────
-function Sarcomere() {
-  const row = (y: number, half: number, label: string) => {
-    const cx = 240, zL = cx - half, zR = cx + half, thick = 80, thin = 95;
-    return (
-      <g>
-        <He x={470} y={y + 4} size={11.5} anchor="end" bold>{label}</He>
-        <Line x1={zL} y1={y - 30} x2={zL} y2={y + 30} c={INK} w={3} />
-        <Line x1={zR} y1={y - 30} x2={zR} y2={y + 30} c={INK} w={3} />
-        {[-18, -6, 6, 18].map((d) => <g key={d}><Line x1={zL} y1={y + d} x2={zL + thin} y2={y + d} c={RED} w={2} /><Line x1={zR} y1={y + d} x2={zR - thin} y2={y + d} c={RED} w={2} /></g>)}
-        {[-12, 0, 12].map((d) => <Line key={d} x1={cx - thick} y1={y + d} x2={cx + thick} y2={y + d} c={BLUE} w={5} />)}
-      </g>
-    );
-  };
-  return (
-    <Svg h={300} label="סרקומר רפוי ומכווץ: בין שני קווי Z, סיבים דקים של אקטין (אדום) מעוגנים בקווי ה-Z, וסיבים עבים של מיוזין (כחול) במרכז. בהתכווצות הסיבים הדקים מחליקים פנימה: פס A (אורך הסיבים העבים) קבוע, ופס I ואזור H מתקצרים">
-      {row(70, 140, "רפוי")}
-      {row(200, 105, "מכווץ")}
-      {/* labels on relaxed */}
-      <line x1={160} x2={320} y1={112} y2={112} stroke={BLUE} strokeWidth={1.2} />
-      <La x={240} y={128} size={11.5} bold color={BLUE}>A band</La>
-      <line x1={100} x2={160} y1={34} y2={34} stroke={RED} strokeWidth={1.2} />
-      <La x={130} y={28} size={11} bold color={RED}>I</La>
-      <line x1={195} x2={285} y1={34} y2={34} stroke={MUTED} strokeWidth={1.2} />
-      <La x={240} y={28} size={11} bold color={MUTED}>H</La>
-      <La x={100} y={112} size={11} color={INK}>Z</La><La x={380} y={112} size={11} color={INK}>Z</La>
-      <line x1={160} x2={320} y1={242} y2={242} stroke={BLUE} strokeWidth={1.2} />
-      <La x={240} y={258} size={11.5} bold color={BLUE}>A band — ללא שינוי</La>
-      <He x={240} y={290} size={11} color={MUTED}>הסיבים לא מתקצרים — הם מחליקים זה על זה</He>
-    </Svg>
-  );
-}
+
 
 // ── ph-smooth-cardiac-muscle ─────────────────────────────────────────────────
 
@@ -318,26 +272,7 @@ function CoagulationCascade() {
 }
 
 // ── ph-kidney-filtration ─────────────────────────────────────────────────────
-function GlomerularStarling() {
-  return (
-    <Svg h={270} label="כוחות סטרלינג בפקעית: לחץ הדם בנימים (כ-55 מ״מ כספית) דוחף נוזל החוצה; הלחץ בכופסית באומן (כ-15) והלחץ האוסמוטי של חלבוני הפלזמה (כ-25, עולה לאורך הנים) מתנגדים. הדם נכנס בעורקיק המוביל ויוצא בעורקיק המוציא">
-      <Line x1={30} y1={130} x2={110} y2={130} c={RED} w={10} />
-      <He x={70} y={112} size={10.5} color={RED}>עורקיק מוביל</He>
-      <path d="M110 130 C 160 60, 320 60, 370 130" fill="none" stroke={RED} strokeWidth={14} strokeLinecap="round" />
-      <Line x1={370} y1={130} x2={450} y2={130} c={RED} w={8} />
-      <He x={410} y={112} size={10.5} color={RED}>עורקיק מוציא</He>
-      <path d="M90 150 C 160 250, 320 250, 390 150" fill="none" stroke={MUTED} strokeWidth={2} {...dash} />
-      <He x={240} y={238} size={11.5} color={MUTED}>כופסית באומן — הסנן</He>
-      <Arrow x1={190} y1={95} x2={190} y2={150} color={RED} width={3} />
-      <La x={202} y={130} size={12} bold color={RED} anchor="start">P_GC ≈ 55</La>
-      <Arrow x1={280} y1={180} x2={280} y2={118} color={MUTED} />
-      <La x={292} y={160} size={12} bold color={MUTED} anchor="start">P_BS ≈ 15</La>
-      <Arrow x1={150} y1={150} x2={150} y2={96} color={BLUE} />
-      <La x={158} y={174} size={12} bold color={BLUE} anchor="start">π_GC ≈ 25→35</La>
-      <He x={240} y={30} size={12.5} bold>כוח נטו ≈ 55 − 15 − 25 ≈ 15 מ״מ כספית (בתחילת הנים)</He>
-    </Svg>
-  );
-}
+
 
 // ── ph-kidney-tubules ────────────────────────────────────────────────────────
 function NephronShape({ children }: { children?: React.ReactNode }) {

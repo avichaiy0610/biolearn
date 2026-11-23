@@ -1,0 +1,28 @@
+function MicrogliaStates() {
+  const ramified = (x: number, y: number) => (
+    <g>
+      <ellipse cx={x} cy={y} rx={10} ry={7} fill={FILL.purple} stroke={PURPLE} strokeWidth={1.4} />
+      {[[-46, -30], [44, -32], [-48, 28], [46, 30], [0, -48], [0, 46]].map(([dx, dy], i) => (
+        <g key={i}>
+          <line x1={x} y1={y} x2={x + dx} y2={y + dy} stroke={PURPLE} strokeWidth={1.6} />
+          <line x1={x + dx} y1={y + dy} x2={x + dx * 1.2 + (i % 2 ? 8 : -8)} y2={y + dy * 1.2} stroke={PURPLE} strokeWidth={1.1} />
+        </g>
+      ))}
+    </g>
+  );
+  return (
+    <Svg h={236} label="מצבי המיקרוגלייה: במצב 'סורק' — תא קטן עם שלוחות ארוכות ומסועפות שזזות כל הזמן; אחרי פגיעה (ATP מתאים פגועים, חלבונים מצטברים, פתוגנים) — התא מתכנס לצורה אמבית, נודד, בולע ומפריש ציטוקינים. בפועל יש מצבים רבים בין שני הקצוות.">
+      {ramified(110, 110)}
+      <He x={110} y={200} size={10.5} bold color={PURPLE}>סורק</He>
+      <He x={110} y={218} size={9.5} color={MUTED}>שלוחות זזות כל הזמן</He>
+      <Arrow x1={190} y1={110} x2={280} y2={110} color={MUTED} width={1.8} />
+      <He x={235} y={96} size={9.5} color={RED}>פגיעה (ATP)</He>
+      <path d="M330 92 Q352 76 372 92 Q392 110 372 128 Q350 142 330 128 Q314 110 330 92 Z" fill={FILL.purple} stroke={PURPLE} strokeWidth={1.4} />
+      <circle cx={360} cy={108} r={7} fill="#fca5a5" />
+      {[[400, 80], [410, 104], [402, 128]].map(([x, y], i) => <circle key={i} cx={x} cy={y} r={2.6} fill={ORANGE} />)}
+      <He x={352} y={200} size={10.5} bold color={RED}>מופעל</He>
+      <He x={352} y={218} size={9.5} color={MUTED}>בולע, מפריש ציטוקינים</He>
+      <He x={430} y={70} size={9} color={ORANGE}>IL-1β, TNF</He>
+    </Svg>
+  );
+}

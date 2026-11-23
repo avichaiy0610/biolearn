@@ -10,3 +10,12 @@
 
 `code/<Name>.tsx.txt` — הפונקציה הישנה בדיוק כפי שהייתה; `svg/` — רינדור בהיר/כהה.
 שחזור: להחזיר את הפונקציה לקובץ המקור, למחוק את שורת `import { <Name> } from "./redraws/<Name>"` ואת `components/lesson/redraws/<Name>.tsx`.
+
+## סבב 15 (עדיפות 2) — אישור אביחי
+- `neuroFigures.tsx`: MicrogliaStates (`nb-microglia-states`, יחידה nb-neuroimmune)
+- `neuroFigures.tsx`: Gcamp (`nb-gcamp`, יחידה nb-methods)
+- `neuroFigures.tsx`: Optogenetics (`nb-optogenetics`, יחידה nb-methods)
+- `physiologyFigures.tsx`: SaltatoryConduction (`saltatory-conduction`, יחידה ph-action-potential)
+- `physiologyFigures.tsx`: Sarcomere (`sarcomere`, יחידה ph-skeletal-muscle)
+- `physiologyFigures.tsx`: GlomerularStarling (`glomerular-starling`, יחידה ph-kidney-filtration)
+אותו מבנה ואותו שחזור כמו למעלה.

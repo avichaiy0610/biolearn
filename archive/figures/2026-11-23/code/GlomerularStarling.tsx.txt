@@ -1,0 +1,20 @@
+function GlomerularStarling() {
+  return (
+    <Svg h={270} label="כוחות סטרלינג בפקעית: לחץ הדם בנימים (כ-55 מ״מ כספית) דוחף נוזל החוצה; הלחץ בכופסית באומן (כ-15) והלחץ האוסמוטי של חלבוני הפלזמה (כ-25, עולה לאורך הנים) מתנגדים. הדם נכנס בעורקיק המוביל ויוצא בעורקיק המוציא">
+      <Line x1={30} y1={130} x2={110} y2={130} c={RED} w={10} />
+      <He x={70} y={112} size={10.5} color={RED}>עורקיק מוביל</He>
+      <path d="M110 130 C 160 60, 320 60, 370 130" fill="none" stroke={RED} strokeWidth={14} strokeLinecap="round" />
+      <Line x1={370} y1={130} x2={450} y2={130} c={RED} w={8} />
+      <He x={410} y={112} size={10.5} color={RED}>עורקיק מוציא</He>
+      <path d="M90 150 C 160 250, 320 250, 390 150" fill="none" stroke={MUTED} strokeWidth={2} {...dash} />
+      <He x={240} y={238} size={11.5} color={MUTED}>כופסית באומן — הסנן</He>
+      <Arrow x1={190} y1={95} x2={190} y2={150} color={RED} width={3} />
+      <La x={202} y={130} size={12} bold color={RED} anchor="start">P_GC ≈ 55</La>
+      <Arrow x1={280} y1={180} x2={280} y2={118} color={MUTED} />
+      <La x={292} y={160} size={12} bold color={MUTED} anchor="start">P_BS ≈ 15</La>
+      <Arrow x1={150} y1={150} x2={150} y2={96} color={BLUE} />
+      <La x={158} y={174} size={12} bold color={BLUE} anchor="start">π_GC ≈ 25→35</La>
+      <He x={240} y={30} size={12.5} bold>כוח נטו ≈ 55 − 15 − 25 ≈ 15 מ״מ כספית (בתחילת הנים)</He>
+    </Svg>
+  );
+}

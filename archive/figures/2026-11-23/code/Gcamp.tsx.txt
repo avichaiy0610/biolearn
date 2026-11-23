@@ -1,0 +1,21 @@
+function Gcamp() {
+  const s = scale(250, 460, 180, 50, 0, 10, 0, 1.2);
+  const spikes = [1, 3.5, 3.8, 4.1, 7];
+  const f = (t: number) => spikes.reduce((a, t0) => a + (t >= t0 ? 0.35 * Math.exp(-(t - t0) / 0.9) : 0), 0);
+  return (
+    <Svg h={226} label="הדמיית סידן עם GCaMP: בלי Ca²⁺ החלבון זוהר מעט; כשפוטנציאל פעולה מכניס Ca²⁺, החלבון קושר אותו ומשנה מבנה — והזוהר עולה. מימין: עקומת זוהר (אידיאלית) — קפיצה אחרי כל פוטנציאל פעולה ודעיכה איטית; פוטנציאלי פעולה קרובים מצטרפים לקפיצה אחת גדולה.">
+      <circle cx={70} cy={100} r={30} fill="#d1fae5" stroke={GREEN} strokeWidth={1.4} />
+      <He x={70} y={156} size={10}>בלי Ca²⁺ — עמום</He>
+      <circle cx={170} cy={100} r={30} fill="#4ade80" stroke={GREEN} strokeWidth={1.4} />
+      {[[160, 90], [178, 96], [168, 110]].map(([x, y], i) => <circle key={i} cx={x} cy={y} r={3} fill={PURPLE} />)}
+      <He x={170} y={156} size={10}>עם Ca²⁺ — זוהר</He>
+      <La x={120} y={40} size={11} bold color={GREEN}>GCaMP</La>
+      <Axes x0={250} y0={180} x1={460} y1={50}
+        xLabel={<He x={355} y={206} size={10}>זמן (שניות)</He>}
+        yLabel={<He x={254} y={34} size={10} anchor="start">זוהר</He>} />
+      <path d={curve(f, 0, 10, s, 400)} fill="none" stroke={GREEN} strokeWidth={2.2} />
+      {spikes.map((t) => <line key={t} x1={s.sx(t)} y1={186} x2={s.sx(t)} y2={196} stroke={INK} strokeWidth={1.6} />)}
+      <He x={250} y={222} size={9} color={MUTED} anchor="start">קווים למטה — פוטנציאלי פעולה</He>
+    </Svg>
+  );
+}

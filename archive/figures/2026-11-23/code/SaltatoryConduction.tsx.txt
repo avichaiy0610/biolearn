@@ -1,0 +1,20 @@
+function SaltatoryConduction() {
+  const nodes = [70, 170, 270, 370];
+  return (
+    <Svg h={250} label="הולכה קופצנית: באקסון ממוילן פוטנציאל הפעולה מתחדש רק בצמתי רנוויה, שבהם מרוכזות תעלות Na⁺, ו'קופץ' מצומת לצומת. למטה, באקסון לא ממוילן, פוטנציאל הפעולה מתחדש בכל נקודה לאורך הממברנה ומתקדם לאט">
+      <He x={240} y={22} size={12.5} bold>אקסון ממוילן — הולכה קופצנית</He>
+      <Line x1={30} y1={90} x2={450} y2={90} c={MUTED} w={10} />
+      {nodes.slice(0, -1).map((x) => <rect key={x} x={x + 10} y={72} width={80} height={36} rx={14} fill={FILL.yellow} stroke={ORANGE} strokeWidth={1.4} />)}
+      <rect x={380} y={72} width={70} height={36} rx={14} fill={FILL.yellow} stroke={ORANGE} strokeWidth={1.4} />
+      {nodes.map((x) => <g key={x}>{[-6, 0, 6].map((d) => <circle key={d} cx={x + d} cy={90} r={2.6} fill={ORANGE} />)}</g>)}
+      {nodes.slice(0, -1).map((x, i) => <path key={i} d={`M${x} 66 Q${x + 50} 30 ${x + 98} 66`} fill="none" stroke={RED} strokeWidth={2} markerEnd="url(#bfArrowS)" />)}
+      <He x={120} y={130} size={10.5} color={ORANGE}>מיאלין</He>
+      <He x={70} y={130} size={10.5} color={RED}>צומת</He>
+      <He x={240} y={160} size={12.5} bold>אקסון לא ממוילן — הולכה רציפה</He>
+      <Line x1={30} y1={210} x2={450} y2={210} c={MUTED} w={10} />
+      {Array.from({ length: 21 }, (_, i) => <circle key={i} cx={40 + i * 20} cy={210} r={2.3} fill={ORANGE} />)}
+      <Arrow x1={60} y1={232} x2={200} y2={232} color={RED} />
+      <He x={330} y={238} size={10.5} color={MUTED}>מתקדם לאט, נקודה אחרי נקודה</He>
+    </Svg>
+  );
+}

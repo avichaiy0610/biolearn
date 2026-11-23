@@ -1,0 +1,24 @@
+function Optogenetics() {
+  return (
+    <Svg h={236} label="אופטוגנטיקה: נוירון שמבטא Channelrhodopsin-2 — אור כחול פותח את התעלה, Na⁺ נכנס, והנוירון יורה בדיוק של אלפיות שנייה. נוירון שמבטא הלורודופסין — אור צהוב מפעיל משאבה שמכניסה Cl⁻, והנוירון מושתק. הביטוי רק בסוג תאים מסוים בעזרת Cre ונגיף DIO.">
+      <He x={120} y={20} size={11} bold color={BLUE}>הפעלה — ChR2</He>
+      <He x={360} y={20} size={11} bold color={GOLD}>השתקה — הלורודופסין</He>
+      <Membrane y={86} h={36} x={20} w={200} />
+      <Membrane y={86} h={36} x={260} w={200} />
+      <rect x={100} y={74} width={40} height={60} rx={10} fill={FILL.blue} stroke={BLUE} strokeWidth={1.4} />
+      <rect x={340} y={74} width={40} height={60} rx={10} fill={FILL.yellow} stroke={GOLD} strokeWidth={1.4} />
+      <path d="M60 36 L96 70" stroke="#3b82f6" strokeWidth={3} markerEnd="url(#bfArrow)" />
+      <path d="M300 36 L336 70" stroke="#eab308" strokeWidth={3} markerEnd="url(#bfArrow)" />
+      <He x={50} y={48} size={9.5} color="#3b82f6" anchor="end">אור כחול</He>
+      <He x={292} y={48} size={9.5} color={GOLD} anchor="end">אור צהוב</He>
+      <Arrow x1={120} y1={50} x2={120} y2={156} color={BLUE} width={2} />
+      <La x={134} y={52} size={10} anchor="start" color={BLUE}>Na⁺</La>
+      <Arrow x1={360} y1={50} x2={360} y2={156} color={GOLD} width={2} />
+      <La x={374} y={52} size={10} anchor="start" color={GOLD}>Cl⁻</La>
+      <path d="M40 200 L90 200 L96 168 L104 214 L110 200 L200 200" fill="none" stroke={BLUE} strokeWidth={2} />
+      <path d="M280 196 L340 196 L350 212 L440 212" fill="none" stroke={GOLD} strokeWidth={2} />
+      <He x={120} y={230} size={9.5} color={BLUE}>ירי</He>
+      <He x={360} y={230} size={9.5} color={GOLD}>היפר-פולריזציה — שקט</He>
+    </Svg>
+  );
+}

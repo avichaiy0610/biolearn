@@ -18,6 +18,9 @@ import { GliaTypes } from "./redraws/GliaTypes";
 import { ReceptorTypes } from "./redraws/ReceptorTypes";
 import { CortexMigration } from "./redraws/CortexMigration";
 import { AppProcessing } from "./redraws/AppProcessing";
+import { MicrogliaStates } from "./redraws/MicrogliaStates";
+import { Gcamp } from "./redraws/Gcamp";
+import { Optogenetics } from "./redraws/Optogenetics";
 const PURPLE = "#7c3aed";
 const RED = "#b91c1c";
 const TEAL = "#0f766e";
@@ -120,8 +123,8 @@ function MemorySystems() {
   return (
     <Svg h={250} label="סוגי הזיכרון לטווח ארוך ואזורי המוח: זיכרון הצהרתי — אפיזודי וסמנטי — תלוי בהיפוקמפוס ובאונה הרקתית התיכונה; זיכרון לא-הצהרתי — מיומנויות והרגלים (סטריאטום), הטרמה (קליפה), התניה קלאסית (אמיגדלה ומוחון) ולמידה לא-אסוציאטיבית (מסלולי רפלקס).">
       <Box x={180} y={12} w={120} h={30} fill={FILL.gray} stroke={MUTED} size={11} bold>זיכרון לטווח ארוך</Box>
-      <Box x={290} y={70} w={150} h={30} fill={FILL.blue} stroke={BLUE} size={11}>הצהרתי ("לדעת מה")</Box>
-      <Box x={40} y={70} w={170} h={30} fill={FILL.orange} stroke={ORANGE} size={11}>לא-הצהרתי ("לדעת איך")</Box>
+      <Box x={290} y={70} w={150} h={30} fill={FILL.blue} stroke={BLUE} size={11}>{'הצהרתי ("לדעת מה")'}</Box>
+      <Box x={40} y={70} w={170} h={30} fill={FILL.orange} stroke={ORANGE} size={11}>{'לא-הצהרתי ("לדעת איך")'}</Box>
       <Arrow x1={260} y1={42} x2={340} y2={68} color={MUTED} width={1.4} />
       <Arrow x1={220} y1={42} x2={150} y2={68} color={MUTED} width={1.4} />
       <Box2 x={290} y={124} w={70} h={40} fill={FILL.blue} stroke={BLUE} lines={["אפיזודי", "(אירועים)"]} size={9.5} />
@@ -220,34 +223,7 @@ function ProteinAggregation() {
 // ── nb-neuroimmune ───────────────────────────────────────────────────────────
 // Bbb: recomposed at textbook level, one picture on desktop (2026-11-07) — see ./redraws/Bbb.tsx; old code in archive/figures/2026-11-07/.
 
-function MicrogliaStates() {
-  const ramified = (x: number, y: number) => (
-    <g>
-      <ellipse cx={x} cy={y} rx={10} ry={7} fill={FILL.purple} stroke={PURPLE} strokeWidth={1.4} />
-      {[[-46, -30], [44, -32], [-48, 28], [46, 30], [0, -48], [0, 46]].map(([dx, dy], i) => (
-        <g key={i}>
-          <line x1={x} y1={y} x2={x + dx} y2={y + dy} stroke={PURPLE} strokeWidth={1.6} />
-          <line x1={x + dx} y1={y + dy} x2={x + dx * 1.2 + (i % 2 ? 8 : -8)} y2={y + dy * 1.2} stroke={PURPLE} strokeWidth={1.1} />
-        </g>
-      ))}
-    </g>
-  );
-  return (
-    <Svg h={236} label="מצבי המיקרוגלייה: במצב 'סורק' — תא קטן עם שלוחות ארוכות ומסועפות שזזות כל הזמן; אחרי פגיעה (ATP מתאים פגועים, חלבונים מצטברים, פתוגנים) — התא מתכנס לצורה אמבית, נודד, בולע ומפריש ציטוקינים. בפועל יש מצבים רבים בין שני הקצוות.">
-      {ramified(110, 110)}
-      <He x={110} y={200} size={10.5} bold color={PURPLE}>סורק</He>
-      <He x={110} y={218} size={9.5} color={MUTED}>שלוחות זזות כל הזמן</He>
-      <Arrow x1={190} y1={110} x2={280} y2={110} color={MUTED} width={1.8} />
-      <He x={235} y={96} size={9.5} color={RED}>פגיעה (ATP)</He>
-      <path d="M330 92 Q352 76 372 92 Q392 110 372 128 Q350 142 330 128 Q314 110 330 92 Z" fill={FILL.purple} stroke={PURPLE} strokeWidth={1.4} />
-      <circle cx={360} cy={108} r={7} fill="#fca5a5" />
-      {[[400, 80], [410, 104], [402, 128]].map(([x, y], i) => <circle key={i} cx={x} cy={y} r={2.6} fill={ORANGE} />)}
-      <He x={352} y={200} size={10.5} bold color={RED}>מופעל</He>
-      <He x={352} y={218} size={9.5} color={MUTED}>בולע, מפריש ציטוקינים</He>
-      <He x={430} y={70} size={9} color={ORANGE}>IL-1β, TNF</He>
-    </Svg>
-  );
-}
+
 
 // ── nb-methods ───────────────────────────────────────────────────────────────
 function MethodsResolution() {
@@ -278,52 +254,9 @@ function MethodsResolution() {
   );
 }
 
-function Gcamp() {
-  const s = scale(250, 460, 180, 50, 0, 10, 0, 1.2);
-  const spikes = [1, 3.5, 3.8, 4.1, 7];
-  const f = (t: number) => spikes.reduce((a, t0) => a + (t >= t0 ? 0.35 * Math.exp(-(t - t0) / 0.9) : 0), 0);
-  return (
-    <Svg h={226} label="הדמיית סידן עם GCaMP: בלי Ca²⁺ החלבון זוהר מעט; כשפוטנציאל פעולה מכניס Ca²⁺, החלבון קושר אותו ומשנה מבנה — והזוהר עולה. מימין: עקומת זוהר (אידיאלית) — קפיצה אחרי כל פוטנציאל פעולה ודעיכה איטית; פוטנציאלי פעולה קרובים מצטרפים לקפיצה אחת גדולה.">
-      <circle cx={70} cy={100} r={30} fill="#d1fae5" stroke={GREEN} strokeWidth={1.4} />
-      <He x={70} y={156} size={10}>בלי Ca²⁺ — עמום</He>
-      <circle cx={170} cy={100} r={30} fill="#4ade80" stroke={GREEN} strokeWidth={1.4} />
-      {[[160, 90], [178, 96], [168, 110]].map(([x, y], i) => <circle key={i} cx={x} cy={y} r={3} fill={PURPLE} />)}
-      <He x={170} y={156} size={10}>עם Ca²⁺ — זוהר</He>
-      <La x={120} y={40} size={11} bold color={GREEN}>GCaMP</La>
-      <Axes x0={250} y0={180} x1={460} y1={50}
-        xLabel={<He x={355} y={206} size={10}>זמן (שניות)</He>}
-        yLabel={<He x={254} y={34} size={10} anchor="start">זוהר</He>} />
-      <path d={curve(f, 0, 10, s, 400)} fill="none" stroke={GREEN} strokeWidth={2.2} />
-      {spikes.map((t) => <line key={t} x1={s.sx(t)} y1={186} x2={s.sx(t)} y2={196} stroke={INK} strokeWidth={1.6} />)}
-      <He x={250} y={222} size={9} color={MUTED} anchor="start">קווים למטה — פוטנציאלי פעולה</He>
-    </Svg>
-  );
-}
 
-function Optogenetics() {
-  return (
-    <Svg h={236} label="אופטוגנטיקה: נוירון שמבטא Channelrhodopsin-2 — אור כחול פותח את התעלה, Na⁺ נכנס, והנוירון יורה בדיוק של אלפיות שנייה. נוירון שמבטא הלורודופסין — אור צהוב מפעיל משאבה שמכניסה Cl⁻, והנוירון מושתק. הביטוי רק בסוג תאים מסוים בעזרת Cre ונגיף DIO.">
-      <He x={120} y={20} size={11} bold color={BLUE}>הפעלה — ChR2</He>
-      <He x={360} y={20} size={11} bold color={GOLD}>השתקה — הלורודופסין</He>
-      <Membrane y={86} h={36} x={20} w={200} />
-      <Membrane y={86} h={36} x={260} w={200} />
-      <rect x={100} y={74} width={40} height={60} rx={10} fill={FILL.blue} stroke={BLUE} strokeWidth={1.4} />
-      <rect x={340} y={74} width={40} height={60} rx={10} fill={FILL.yellow} stroke={GOLD} strokeWidth={1.4} />
-      <path d="M60 36 L96 70" stroke="#3b82f6" strokeWidth={3} markerEnd="url(#bfArrow)" />
-      <path d="M300 36 L336 70" stroke="#eab308" strokeWidth={3} markerEnd="url(#bfArrow)" />
-      <He x={50} y={48} size={9.5} color="#3b82f6" anchor="end">אור כחול</He>
-      <He x={292} y={48} size={9.5} color={GOLD} anchor="end">אור צהוב</He>
-      <Arrow x1={120} y1={50} x2={120} y2={156} color={BLUE} width={2} />
-      <La x={134} y={52} size={10} anchor="start" color={BLUE}>Na⁺</La>
-      <Arrow x1={360} y1={50} x2={360} y2={156} color={GOLD} width={2} />
-      <La x={374} y={52} size={10} anchor="start" color={GOLD}>Cl⁻</La>
-      <path d="M40 200 L90 200 L96 168 L104 214 L110 200 L200 200" fill="none" stroke={BLUE} strokeWidth={2} />
-      <path d="M280 196 L340 196 L350 212 L440 212" fill="none" stroke={GOLD} strokeWidth={2} />
-      <He x={120} y={230} size={9.5} color={BLUE}>ירי</He>
-      <He x={360} y={230} size={9.5} color={GOLD}>היפר-פולריזציה — שקט</He>
-    </Svg>
-  );
-}
+
+
 
 export const NEURO_FIGURES: Record<string, { el: () => React.ReactElement; captionHe: string }> = {
   "nb-neuron-parts": { el: NeuronParts, captionHe: "חלקי הנוירון. סכמטי — לא בקנה מידה (אקסון יכול להיות ארוך פי אלפים מגוף התא)." },
