@@ -2,10 +2,11 @@
    A process that matches here renders its bespoke scene instead of the
    LLM-generated step animation. Add a matcher + a component per process. */
 
-export type SceneId = "transcription" | "membrane-transport" | "cellular-respiration" | "mendelian-genetics" | "non-mendelian" | "secretory-pathway" | "photosynthesis" | "hemoglobin" | "blood-glucose" | "bacteria" | "adaptive-immunity" | "mito-inheritance" | "gluconeogenesis" | "urea-cycle";
+export type SceneId = "transcription" | "membrane-transport" | "cellular-respiration" | "mendelian-genetics" | "non-mendelian" | "secretory-pathway" | "photosynthesis" | "hemoglobin" | "blood-glucose" | "bacteria" | "adaptive-immunity" | "mito-inheritance" | "gluconeogenesis" | "urea-cycle" | "lncrna-development";
 
 const MATCHERS: { id: SceneId; re: RegExp }[] = [
   { id: "transcription", re: /transcription|שעתוק/i },
+  { id: "lncrna-development", re: /lncRNA Role in Development|תפקיד lncRNA בהתפתחות/i },
   { id: "urea-cycle", re: /urea cycle|מעגל השתנן/i },
   { id: "gluconeogenesis", re: /gluconeogenesis|גלוקונאוגנזה/i },
   { id: "mito-inheritance", re: /mitochondrial inheritance|תורשה מיטוכונדריאלית/i },
