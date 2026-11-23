@@ -1,0 +1,27 @@
+function AppProcessing() {
+  return (
+    <Svg h={262} label="עיבוד APP: חלבון APP חוצה את הממברנה, וקטע ה-Aβ נמצא חלקו בחוץ וחלקו בממברנה. במסלול הלא-עמילואידוגני, α-סקרטאז חותך באמצע קטע ה-Aβ — לא נוצר Aβ. במסלול העמילואידוגני, β-סקרטאז (BACE1) חותך קודם, ואחריו γ-סקרטאז (פרסנילין) — משתחרר Aβ40 או Aβ42 הדביק.">
+      {[0, 1].map((r) => {
+        const y = 40 + r * 110;
+        return (
+          <g key={r}>
+            <Membrane y={y + 30} h={30} x={40} w={400} />
+            <rect x={200} y={y} width={16} height={84} rx={6} fill={FILL.gray} stroke={MUTED} strokeWidth={1.2} />
+            <rect x={200} y={y + 18} width={16} height={30} fill={r ? "#fca5a5" : "#fecaca"} stroke={RED} strokeWidth={1} />
+            <He x={130} y={y + 10} size={10.5} bold color={r ? RED : GREEN}>{r ? "עמילואידוגני" : "לא-עמילואידוגני"}</He>
+          </g>
+        );
+      })}
+      <He x={250} y={38} size={10} anchor="start" color={GREEN}>α-סקרטאז — חותך באמצע Aβ</He>
+      <Lead x1={248} y1={34} x2={208} y2={64} />
+      <He x={260} y={118} size={9.5} anchor="start" color={GREEN}>לא נוצר Aβ</He>
+      <He x={250} y={148} size={10} anchor="start" color={RED}>β-סקרטאז (BACE1)</He>
+      <Lead x1={248} y1={144} x2={218} y2={168} />
+      <He x={250} y={228} size={10} anchor="start" color={RED}>γ-סקרטאז (פרסנילין)</He>
+      <Lead x1={248} y1={224} x2={218} y2={196} />
+      <He x={110} y={186} size={10} anchor="end" bold color={RED}>Aβ40 / Aβ42</He>
+      <Lead x1={114} y1={182} x2={198} y2={178} />
+      <He x={240} y={254} size={9.5} color={MUTED}>אדום — קטע ה-Aβ</He>
+    </Svg>
+  );
+}

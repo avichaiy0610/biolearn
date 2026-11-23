@@ -24,6 +24,7 @@ import { Terminators } from "./redraws/Terminators";
 import { EnhancerLoop } from "./redraws/EnhancerLoop";
 import { Aminoacylation } from "./redraws/Aminoacylation";
 import { InitiationCompare } from "./redraws/InitiationCompare";
+import { Termination } from "./redraws/Termination";
 const PURPLE = "#7c3aed";
 const RED = "#b91c1c";
 const FILL = { blue: "#dbeafe", green: "#dcfce7", orange: "#ffedd5", purple: "#ede9fe", yellow: "#fef3c7", gray: "#f1f5f9", red: "#fee2e2", sky: "#e0f2fe" };
@@ -265,28 +266,6 @@ function AlternativeSplicing() {
 
 
 // ── ribosome helpers ─────────────────────────────────────────────────────────
-type Slot = "empty" | "trna" | "aa" | "peptide" | "rf";
-function Ribo({ cx, cy, E = "empty", P = "empty", A = "empty", codons, k = 1, peptideLen = 3 }: { cx: number; cy: number; E?: Slot; P?: Slot; A?: Slot; codons?: [string, string, string]; k?: number; peptideLen?: number }) {
-  const s = (v: number) => v * k;
-  const slots: [string, number, Slot][] = [["E", -s(44), E], ["P", 0, P], ["A", s(44), A]];
-  return (
-    <g>
-      <rect x={cx - s(80)} y={cy - s(62)} width={s(160)} height={s(60)} rx={s(24)} fill={FILL.purple} stroke={PURPLE} strokeWidth={1.6} />
-      <rect x={cx - s(80)} y={cy} width={s(160)} height={s(36)} rx={s(14)} fill={FILL.sky} stroke={BLUE} strokeWidth={1.6} />
-      <Line x1={cx - s(100)} y1={cy + s(12)} x2={cx + s(100)} y2={cy + s(12)} c={PURPLE} w={2.5} />
-      {slots.map(([n, dx, st], i) => (
-        <g key={n}>
-          <La x={cx + dx} y={cy + s(52)} size={11 * k} bold color={MUTED}>{n}</La>
-          {codons && <La x={cx + dx} y={cy + s(29)} size={9.5 * k} bold>{codons[i]}</La>}
-          {(st === "trna" || st === "aa" || st === "peptide") && <rect x={cx + dx - s(9)} y={cy - s(38)} width={s(18)} height={s(52)} rx={s(4)} fill={st === "trna" ? FILL.gray : FILL.green} stroke={st === "trna" ? MUTED : GREEN} strokeWidth={1.4} />}
-          {st === "aa" && <circle cx={cx + dx} cy={cy - s(44)} r={s(6)} fill={ORANGE} />}
-          {st === "peptide" && Array.from({ length: peptideLen }, (_, j) => <circle key={j} cx={cx + dx + s(j * 8)} cy={cy - s(44) - s(j * 9)} r={s(6)} fill={ORANGE} />)}
-          {st === "rf" && <g><rect x={cx + dx - s(11)} y={cy - s(40)} width={s(22)} height={s(54)} rx={s(6)} fill={FILL.red} stroke={RED} strokeWidth={1.5} /><La x={cx + dx} y={cy - s(10)} size={9 * k} bold color={RED}>RF</La></g>}
-        </g>
-      ))}
-    </g>
-  );
-}
 
 // ── mol-ribosome-initiation ──────────────────────────────────────────────────
 // RibosomeSites: recomposed at textbook level, one picture on desktop (2026-11-07) — see ./redraws/RibosomeSites.tsx; old code in archive/figures/2026-11-07/.
@@ -296,23 +275,7 @@ function Ribo({ cx, cy, E = "empty", P = "empty", A = "empty", codons, k = 1, pe
 // ── mol-translation-elongation ───────────────────────────────────────────────
 // ElongationCycle: recomposed at textbook level, one picture on desktop (2026-11-07) — see ./redraws/ElongationCycle.tsx; old code in archive/figures/2026-11-07/.
 
-function Termination() {
-  return (
-    <Svg h={220} label="סיום התרגום: גורם שחרור נכנס לאתר A מול קודון העצירה, ומים מנתקים את השרשרת מה-tRNA; אחר כך RRF ו-EF-G מפרקים את הריבוזום">
-      <Ribo cx={120} cy={110} P="peptide" A="rf" codons={["GCU", "UUC", "UAA"]} k={1} peptideLen={4} />
-      <He x={120} y={186} size={11.5} bold>קודון עצירה באתר A</He>
-      <He x={120} y={204} size={10.5} color={MUTED}>RF1 או RF2 מזהה אותו</He>
-      <Arrow x1={226} y1={100} x2={276} y2={100} />
-      <He x={251} y={86} size={10.5}>מים</He>
-      <rect x={300} y={44} width={136} height={44} rx={18} fill={FILL.purple} stroke={PURPLE} strokeWidth={1.4} />
-      <rect x={300} y={104} width={136} height={24} rx={11} fill={FILL.sky} stroke={BLUE} strokeWidth={1.4} />
-      {[0, 1, 2, 3].map((j) => <circle key={j} cx={420 + j * 9} cy={30 - j * 8} r={6} fill={ORANGE} />)}
-      <He x={368} y={160} size={11.5} bold>החלבון משתחרר</He>
-      <He x={368} y={178} size={10.5} color={MUTED}>RF3 · RRF ו-EF-G מפרקים</He>
-      <He x={368} y={196} size={10.5} color={MUTED}>את הריבוזום לתת-יחידות</He>
-    </Svg>
-  );
-}
+
 
 function MeselsonStahlCentrifuge() {
   return <AnatomyEmbed src="/figures/anatomy/meselson-stahl-centrifuge.html" title="ניסוי מזלסון-סטאל — אולטרה-צנטריפוגה, אינטראקטיבי" />;

@@ -1,0 +1,40 @@
+function GliaTypes() {
+  return (
+    <Svg h={290} label="ארבעה סוגי תאי גלייה: אסטרוציט — שלוחות שנוגעות בכלי דם ועוטפות סינפסות; אוליגודנדרוציט — עוטף מקטעי מיאלין על כמה אקסונים במערכת המרכזית; תא שוואן — עוטף מקטע אחד באקסון אחד במערכת ההיקפית; מיקרוגלייה — תא חיסון קטן עם שלוחות מסועפות שסורקות.">
+      <He x={120} y={18} size={11} bold color={TEAL}>אסטרוציט</He>
+      <circle cx={110} cy={78} r={12} fill={FILL.teal} stroke={TEAL} strokeWidth={1.4} />
+      {[[70, 50], [150, 46], [64, 106], [156, 110], [110, 36]].map(([x, y], i) => <line key={i} x1={110} y1={78} x2={x} y2={y} stroke={TEAL} strokeWidth={2.6} strokeLinecap="round" />)}
+      <rect x={20} y={112} width={40} height={14} rx={7} fill={FILL.red} stroke={RED} strokeWidth={1} />
+      <circle cx={170} cy={118} r={9} fill={FILL.green} stroke={GREEN} strokeWidth={1} />
+      <He x={40} y={142} size={9} color={RED}>כלי דם</He>
+      <He x={186} y={142} size={9} color={GREEN}>סינפסה</He>
+
+      <He x={360} y={18} size={11} bold color={GOLD}>אוליגודנדרוציט</He>
+      <circle cx={360} cy={70} r={12} fill={FILL.yellow} stroke={GOLD} strokeWidth={1.4} />
+      {[100, 116, 132].map((y, i) => (
+        <g key={y}>
+          <line x1={270} y1={y} x2={460} y2={y} stroke="#94a3b8" strokeWidth={2} />
+          <line x1={360} y1={82} x2={300 + i * 60} y2={y - 6} stroke={GOLD} strokeWidth={1.6} />
+          <rect x={286 + i * 60} y={y - 5} width={30} height={10} rx={5} fill={FILL.yellow} stroke={GOLD} strokeWidth={1} />
+        </g>
+      ))}
+      <He x={364} y={154} size={9.5} color={MUTED}>תא אחד — כמה אקסונים (מרכזית)</He>
+
+      <He x={120} y={176} size={11} bold color={ORANGE}>תא שוואן</He>
+      <line x1={20} y1={226} x2={220} y2={226} stroke="#94a3b8" strokeWidth={2} />
+      <rect x={80} y={216} width={80} height={20} rx={10} fill={FILL.orange} stroke={ORANGE} strokeWidth={1.2} />
+      <circle cx={120} cy={210} r={6} fill={ORANGE} />
+      <He x={120} y={262} size={9.5} color={MUTED}>תא אחד — מקטע אחד (היקפית)</He>
+
+      <He x={360} y={176} size={11} bold color={PURPLE}>מיקרוגלייה</He>
+      <ellipse cx={360} cy={226} rx={10} ry={7} fill={FILL.purple} stroke={PURPLE} strokeWidth={1.4} />
+      {[[320, 204, 306, 196], [400, 204, 414, 194], [318, 246, 304, 256], [402, 246, 416, 258]].map(([a, b, c, d], i) => (
+        <g key={i}>
+          <line x1={360} y1={226} x2={a} y2={b} stroke={PURPLE} strokeWidth={1.6} />
+          <line x1={a} y1={b} x2={c} y2={d} stroke={PURPLE} strokeWidth={1.2} />
+        </g>
+      ))}
+      <He x={360} y={280} size={9.5} color={MUTED}>שלוחות סורקות — תא חיסון</He>
+    </Svg>
+  );
+}

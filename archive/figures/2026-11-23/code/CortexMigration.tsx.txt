@@ -1,0 +1,27 @@
+function CortexMigration() {
+  const layers: [string, number][] = [["2/3", 70], ["4", 104], ["5", 134], ["6", 164]];
+  return (
+    <Svg h={262} label="נדידה בקליפה המתפתחת: סיבי גלייה רדיאלית נמתחים מהאזור החדרי (למטה) עד פני השטח. נוירונים חדשים מטפסים לאורכם. השכבות העמוקות (6, 5) נוצרות ראשונות, וכל גל מאוחר עובר אותן אל השכבות החיצוניות — 'מבפנים החוצה'. בשכבה החיצונית, תאי קחאל-רציוס מפרישים ריילין שעוצר את הנדידה.">
+      <rect x={80} y={30} width={300} height={16} fill={FILL.pink} />
+      <He x={230} y={42} size={9.5} color={PINK}>שכבה 1 — ריילין</He>
+      {layers.map(([t, y], i) => (
+        <g key={t}>
+          <rect x={80} y={y - 14} width={300} height={28} fill={i % 2 ? "#f1f5f9" : "#f8fafc"} />
+          <La x={394} y={y + 4} size={10} anchor="start" bold>{t}</La>
+        </g>
+      ))}
+      <rect x={80} y={190} width={300} height={34} fill={FILL.blue} />
+      <He x={230} y={212} size={10} color={BLUE}>אזור חדרי — תאי גזע (גלייה רדיאלית)</He>
+      {[120, 200, 280, 340].map((x) => <line key={x} x1={x} y1={190} x2={x} y2={46} stroke={TEAL} strokeWidth={1.6} />)}
+      {[[124, 160, "1"], [204, 132, "2"], [284, 104, "3"], [344, 70, "4"]].map(([x, y, n]) => (
+        <g key={String(n)}>
+          <ellipse cx={Number(x) + 8} cy={Number(y)} rx={6} ry={9} fill={FILL.orange} stroke={ORANGE} strokeWidth={1.2} />
+        </g>
+      ))}
+      <He x={60} y={74} size={9} anchor="end" color={ORANGE}>נולדו אחרונים</He>
+      <He x={60} y={168} size={9} anchor="end" color={ORANGE}>נולדו ראשונים</He>
+      <Arrow x1={64} y1={160} x2={64} y2={84} color={ORANGE} width={1.4} />
+      <He x={230} y={248} size={9.5} color={TEAL}>הנוירונים מטפסים על סיבי הגלייה הרדיאלית</He>
+    </Svg>
+  );
+}

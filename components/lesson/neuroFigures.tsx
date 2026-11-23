@@ -13,11 +13,15 @@ import { LtpNmda } from "./redraws/LtpNmda";
 import { KChannel } from "./redraws/KChannel";
 import { NeuralTube } from "./redraws/NeuralTube";
 import { GrowthCone } from "./redraws/GrowthCone";
+import { NeuronParts } from "./redraws/NeuronParts";
+import { GliaTypes } from "./redraws/GliaTypes";
+import { ReceptorTypes } from "./redraws/ReceptorTypes";
+import { CortexMigration } from "./redraws/CortexMigration";
+import { AppProcessing } from "./redraws/AppProcessing";
 const PURPLE = "#7c3aed";
 const RED = "#b91c1c";
 const TEAL = "#0f766e";
 const GOLD = "#a16207";
-const PINK = "#be185d";
 const FILL = { blue: "#dbeafe", green: "#dcfce7", orange: "#ffedd5", purple: "#ede9fe", yellow: "#fef3c7", gray: "#f1f5f9", red: "#fee2e2", sky: "#e0f2fe", teal: "#ccfbf1", pink: "#fce7f3", membrane: "#fde68a" };
 
 const Svg = ({ w = 480, h, label, children }: { w?: number; h: number; label: string; children: React.ReactNode }) => (
@@ -45,93 +49,12 @@ function Box2({ x, y, w, h, fill, stroke, lines, size = 10 }: { x: number; y: nu
   );
 }
 // Latin label box (gene / ion names).
-function LBox({ x, y, w, h, fill, stroke, children, size = 11 }: { x: number; y: number; w: number; h: number; fill: string; stroke: string; children: React.ReactNode; size?: number }) {
-  return (
-    <g>
-      <rect x={x} y={y} width={w} height={h} rx={7} fill={fill} stroke={stroke} strokeWidth={1.4} />
-      <La x={x + w / 2} y={y + h / 2 + size * 0.36} size={size} bold>{children}</La>
-    </g>
-  );
-}
 const Membrane = ({ y, h = 16, x = 0, w = 480 }: { y: number; h?: number; x?: number; w?: number }) => <rect x={x} y={y} width={w} height={h} fill={FILL.membrane} />;
 
 // ── nb-cells ─────────────────────────────────────────────────────────────────
-function NeuronParts() {
-  const dend = ["M96 120 L60 92 L40 70", "M60 92 L36 96", "M96 120 L52 128 L28 140", "M52 128 L40 112", "M100 132 L70 168 L56 190", "M70 168 L48 172", "M104 108 L88 66 L92 40", "M88 66 L66 52"];
-  const myelin = [176, 222, 268, 314];
-  return (
-    <Svg h={250} label="מבנה נוירון: דנדריטים מסועפים (משמאל) עם קוצים, גוף התא עם הגרעין, גבעת האקסון ומקטע ההתחלה, אקסון עטוף במקטעי מיאלין עם צמתי רנווייה ביניהם, ובקצה — כפתורים סינפטיים עם שלפוחיות.">
-      {dend.map((d, i) => <path key={i} d={d} fill="none" stroke={BLUE} strokeWidth={3.2} strokeLinecap="round" />)}
-      {[[40, 70], [28, 140], [56, 190], [92, 40]].map(([x, y]) => <circle key={`${x}`} cx={x} cy={y} r={2.6} fill={BLUE} />)}
-      <circle cx={112} cy={120} r={24} fill={FILL.blue} stroke={BLUE} strokeWidth={1.6} />
-      <circle cx={110} cy={120} r={9} fill={BLUE} opacity={0.5} />
-      <path d="M134 114 L156 117 L156 123 L134 126 Z" fill={FILL.orange} stroke={ORANGE} strokeWidth={1} />
-      <rect x={156} y={117} width={210} height={6} fill="#94a3b8" />
-      {myelin.map((x) => <rect key={x} x={x} y={110} width={38} height={20} rx={9} fill={FILL.yellow} stroke={GOLD} strokeWidth={1.2} />)}
-      {[[366, 120, 404, 92], [366, 120, 410, 120], [366, 120, 404, 150]].map(([a, b, c, d], i) => <line key={i} x1={a} y1={b} x2={c} y2={d} stroke="#94a3b8" strokeWidth={4} strokeLinecap="round" />)}
-      {[[410, 88], [416, 120], [410, 154]].map(([x, y]) => (
-        <g key={`${x}-${y}`}>
-          <circle cx={x} cy={y} r={11} fill={FILL.green} stroke={GREEN} strokeWidth={1.4} />
-          {[[-3, -3], [3, 0], [-2, 4]].map(([dx, dy], i) => <circle key={i} cx={x + dx} cy={y + dy} r={1.8} fill={GREEN} />)}
-        </g>
-      ))}
-      <He x={50} y={222} size={10} color={BLUE}>דנדריטים</He>
-      <Lead x1={56} y1={212} x2={64} y2={172} />
-      <He x={112} y={26} size={10} color={BLUE}>גוף התא</He>
-      <Lead x1={112} y1={32} x2={112} y2={94} />
-      <He x={150} y={176} size={10} color={ORANGE}>מקטע ההתחלה</He>
-      <Lead x1={148} y1={166} x2={166} y2={120} />
-      <He x={214} y={88} size={10} color={GOLD}>מיאלין</He>
-      <Lead x1={214} y1={94} x2={196} y2={108} />
-      <He x={265} y={168} size={10} color={MUTED}>צומת רנווייה</He>
-      <Lead x1={265} y1={158} x2={264} y2={124} />
-      <He x={436} y={208} size={10} color={GREEN}>כפתורים סינפטיים</He>
-      <Lead x1={428} y1={198} x2={414} y2={166} />
-      <He x={240} y={240} size={9.5} color={MUTED}>המידע זורם: דנדריטים ← גוף התא ← אקסון ← סינפסה</He>
-    </Svg>
-  );
-}
 
-function GliaTypes() {
-  return (
-    <Svg h={290} label="ארבעה סוגי תאי גלייה: אסטרוציט — שלוחות שנוגעות בכלי דם ועוטפות סינפסות; אוליגודנדרוציט — עוטף מקטעי מיאלין על כמה אקסונים במערכת המרכזית; תא שוואן — עוטף מקטע אחד באקסון אחד במערכת ההיקפית; מיקרוגלייה — תא חיסון קטן עם שלוחות מסועפות שסורקות.">
-      <He x={120} y={18} size={11} bold color={TEAL}>אסטרוציט</He>
-      <circle cx={110} cy={78} r={12} fill={FILL.teal} stroke={TEAL} strokeWidth={1.4} />
-      {[[70, 50], [150, 46], [64, 106], [156, 110], [110, 36]].map(([x, y], i) => <line key={i} x1={110} y1={78} x2={x} y2={y} stroke={TEAL} strokeWidth={2.6} strokeLinecap="round" />)}
-      <rect x={20} y={112} width={40} height={14} rx={7} fill={FILL.red} stroke={RED} strokeWidth={1} />
-      <circle cx={170} cy={118} r={9} fill={FILL.green} stroke={GREEN} strokeWidth={1} />
-      <He x={40} y={142} size={9} color={RED}>כלי דם</He>
-      <He x={186} y={142} size={9} color={GREEN}>סינפסה</He>
 
-      <He x={360} y={18} size={11} bold color={GOLD}>אוליגודנדרוציט</He>
-      <circle cx={360} cy={70} r={12} fill={FILL.yellow} stroke={GOLD} strokeWidth={1.4} />
-      {[100, 116, 132].map((y, i) => (
-        <g key={y}>
-          <line x1={270} y1={y} x2={460} y2={y} stroke="#94a3b8" strokeWidth={2} />
-          <line x1={360} y1={82} x2={300 + i * 60} y2={y - 6} stroke={GOLD} strokeWidth={1.6} />
-          <rect x={286 + i * 60} y={y - 5} width={30} height={10} rx={5} fill={FILL.yellow} stroke={GOLD} strokeWidth={1} />
-        </g>
-      ))}
-      <He x={364} y={154} size={9.5} color={MUTED}>תא אחד — כמה אקסונים (מרכזית)</He>
 
-      <He x={120} y={176} size={11} bold color={ORANGE}>תא שוואן</He>
-      <line x1={20} y1={226} x2={220} y2={226} stroke="#94a3b8" strokeWidth={2} />
-      <rect x={80} y={216} width={80} height={20} rx={10} fill={FILL.orange} stroke={ORANGE} strokeWidth={1.2} />
-      <circle cx={120} cy={210} r={6} fill={ORANGE} />
-      <He x={120} y={262} size={9.5} color={MUTED}>תא אחד — מקטע אחד (היקפית)</He>
-
-      <He x={360} y={176} size={11} bold color={PURPLE}>מיקרוגלייה</He>
-      <ellipse cx={360} cy={226} rx={10} ry={7} fill={FILL.purple} stroke={PURPLE} strokeWidth={1.4} />
-      {[[320, 204, 306, 196], [400, 204, 414, 194], [318, 246, 304, 256], [402, 246, 416, 258]].map(([a, b, c, d], i) => (
-        <g key={i}>
-          <line x1={360} y1={226} x2={a} y2={b} stroke={PURPLE} strokeWidth={1.6} />
-          <line x1={a} y1={b} x2={c} y2={d} stroke={PURPLE} strokeWidth={1.2} />
-        </g>
-      ))}
-      <He x={360} y={280} size={9.5} color={MUTED}>שלוחות סורקות — תא חיסון</He>
-    </Svg>
-  );
-}
 
 
 // ── nb-channels ──────────────────────────────────────────────────────────────
@@ -166,31 +89,7 @@ function NavStructure() {
 
 // ── nb-synapse ───────────────────────────────────────────────────────────────
 
-function ReceptorTypes() {
-  return (
-    <Svg h={250} label="שני סוגי קולטנים. יונוטרופי: הנוירוטרנסמיטר נקשר לקולטן שהוא עצמו תעלה — היונים זורמים מיד (אלפיות שנייה). מטבוטרופי: הנוירוטרנסמיטר נקשר לקולטן בעל שבעה קטעים חוצי ממברנה, שמפעיל חלבון G; חלבון G פותח או סוגר תעלה אחרת או מפעיל שליח שני — לאט ולאורך זמן.">
-      <He x={120} y={20} size={11.5} bold color={BLUE}>יונוטרופי</He>
-      <He x={360} y={20} size={11.5} bold color={PURPLE}>מטבוטרופי</He>
-      <Membrane y={90} h={50} x={10} w={460} />
-      <rect x={90} y={76} width={24} height={78} rx={8} fill={FILL.blue} stroke={BLUE} strokeWidth={1.4} />
-      <rect x={126} y={76} width={24} height={78} rx={8} fill={FILL.blue} stroke={BLUE} strokeWidth={1.4} />
-      <circle cx={102} cy={66} r={6} fill={ORANGE} />
-      <Arrow x1={120} y1={50} x2={120} y2={176} color={BLUE} width={2} />
-      <La x={136} y={46} size={10} anchor="start" color={BLUE}>Na⁺</La>
-      <He x={120} y={206} size={10} color={MUTED}>הקולטן הוא התעלה — מהיר</He>
 
-      {[0, 1, 2, 3, 4, 5, 6].map((i) => <rect key={i} x={280 + i * 11} y={82} width={8} height={66} rx={4} fill={FILL.purple} stroke={PURPLE} strokeWidth={1} />)}
-      <circle cx={300} cy={70} r={6} fill={ORANGE} />
-      <ellipse cx={340} cy={166} rx={22} ry={11} fill={FILL.yellow} stroke={GOLD} strokeWidth={1.2} />
-      <La x={340} y={170} size={10} bold color={GOLD}>G</La>
-      <rect x={410} y={82} width={14} height={66} rx={6} fill={FILL.teal} stroke={TEAL} strokeWidth={1.2} />
-      <rect x={428} y={82} width={14} height={66} rx={6} fill={FILL.teal} stroke={TEAL} strokeWidth={1.2} />
-      <Arrow x1={364} y1={164} x2={410} y2={154} color={GOLD} width={1.6} />
-      <He x={360} y={206} size={10} color={MUTED}>דרך חלבון G ושליח שני — איטי וממושך</He>
-      <He x={430} y={70} size={9.5} color={TEAL}>תעלה</He>
-    </Svg>
-  );
-}
 
 function Summation() {
   const s = scale(50, 450, 200, 40, 0, 100, -70, -40);
@@ -267,33 +166,7 @@ function Aplysia() {
 
 // ── nb-development ───────────────────────────────────────────────────────────
 
-function CortexMigration() {
-  const layers: [string, number][] = [["2/3", 70], ["4", 104], ["5", 134], ["6", 164]];
-  return (
-    <Svg h={262} label="נדידה בקליפה המתפתחת: סיבי גלייה רדיאלית נמתחים מהאזור החדרי (למטה) עד פני השטח. נוירונים חדשים מטפסים לאורכם. השכבות העמוקות (6, 5) נוצרות ראשונות, וכל גל מאוחר עובר אותן אל השכבות החיצוניות — 'מבפנים החוצה'. בשכבה החיצונית, תאי קחאל-רציוס מפרישים ריילין שעוצר את הנדידה.">
-      <rect x={80} y={30} width={300} height={16} fill={FILL.pink} />
-      <He x={230} y={42} size={9.5} color={PINK}>שכבה 1 — ריילין</He>
-      {layers.map(([t, y], i) => (
-        <g key={t}>
-          <rect x={80} y={y - 14} width={300} height={28} fill={i % 2 ? "#f1f5f9" : "#f8fafc"} />
-          <La x={394} y={y + 4} size={10} anchor="start" bold>{t}</La>
-        </g>
-      ))}
-      <rect x={80} y={190} width={300} height={34} fill={FILL.blue} />
-      <He x={230} y={212} size={10} color={BLUE}>אזור חדרי — תאי גזע (גלייה רדיאלית)</He>
-      {[120, 200, 280, 340].map((x) => <line key={x} x1={x} y1={190} x2={x} y2={46} stroke={TEAL} strokeWidth={1.6} />)}
-      {[[124, 160, "1"], [204, 132, "2"], [284, 104, "3"], [344, 70, "4"]].map(([x, y, n]) => (
-        <g key={String(n)}>
-          <ellipse cx={Number(x) + 8} cy={Number(y)} rx={6} ry={9} fill={FILL.orange} stroke={ORANGE} strokeWidth={1.2} />
-        </g>
-      ))}
-      <He x={60} y={74} size={9} anchor="end" color={ORANGE}>נולדו אחרונים</He>
-      <He x={60} y={168} size={9} anchor="end" color={ORANGE}>נולדו ראשונים</He>
-      <Arrow x1={64} y1={160} x2={64} y2={84} color={ORANGE} width={1.4} />
-      <He x={230} y={248} size={9.5} color={TEAL}>הנוירונים מטפסים על סיבי הגלייה הרדיאלית</He>
-    </Svg>
-  );
-}
+
 
 
 function OcularDominance() {
@@ -342,33 +215,7 @@ function ProteinAggregation() {
   );
 }
 
-function AppProcessing() {
-  return (
-    <Svg h={262} label="עיבוד APP: חלבון APP חוצה את הממברנה, וקטע ה-Aβ נמצא חלקו בחוץ וחלקו בממברנה. במסלול הלא-עמילואידוגני, α-סקרטאז חותך באמצע קטע ה-Aβ — לא נוצר Aβ. במסלול העמילואידוגני, β-סקרטאז (BACE1) חותך קודם, ואחריו γ-סקרטאז (פרסנילין) — משתחרר Aβ40 או Aβ42 הדביק.">
-      {[0, 1].map((r) => {
-        const y = 40 + r * 110;
-        return (
-          <g key={r}>
-            <Membrane y={y + 30} h={30} x={40} w={400} />
-            <rect x={200} y={y} width={16} height={84} rx={6} fill={FILL.gray} stroke={MUTED} strokeWidth={1.2} />
-            <rect x={200} y={y + 18} width={16} height={30} fill={r ? "#fca5a5" : "#fecaca"} stroke={RED} strokeWidth={1} />
-            <He x={130} y={y + 10} size={10.5} bold color={r ? RED : GREEN}>{r ? "עמילואידוגני" : "לא-עמילואידוגני"}</He>
-          </g>
-        );
-      })}
-      <He x={250} y={38} size={10} anchor="start" color={GREEN}>α-סקרטאז — חותך באמצע Aβ</He>
-      <Lead x1={248} y1={34} x2={208} y2={64} />
-      <He x={260} y={118} size={9.5} anchor="start" color={GREEN}>לא נוצר Aβ</He>
-      <He x={250} y={148} size={10} anchor="start" color={RED}>β-סקרטאז (BACE1)</He>
-      <Lead x1={248} y1={144} x2={218} y2={168} />
-      <He x={250} y={228} size={10} anchor="start" color={RED}>γ-סקרטאז (פרסנילין)</He>
-      <Lead x1={248} y1={224} x2={218} y2={196} />
-      <He x={110} y={186} size={10} anchor="end" bold color={RED}>Aβ40 / Aβ42</He>
-      <Lead x1={114} y1={182} x2={198} y2={178} />
-      <He x={240} y={254} size={9.5} color={MUTED}>אדום — קטע ה-Aβ</He>
-    </Svg>
-  );
-}
+
 
 // ── nb-neuroimmune ───────────────────────────────────────────────────────────
 // Bbb: recomposed at textbook level, one picture on desktop (2026-11-07) — see ./redraws/Bbb.tsx; old code in archive/figures/2026-11-07/.

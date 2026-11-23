@@ -1,0 +1,17 @@
+function Termination() {
+  return (
+    <Svg h={220} label="סיום התרגום: גורם שחרור נכנס לאתר A מול קודון העצירה, ומים מנתקים את השרשרת מה-tRNA; אחר כך RRF ו-EF-G מפרקים את הריבוזום">
+      <Ribo cx={120} cy={110} P="peptide" A="rf" codons={["GCU", "UUC", "UAA"]} k={1} peptideLen={4} />
+      <He x={120} y={186} size={11.5} bold>קודון עצירה באתר A</He>
+      <He x={120} y={204} size={10.5} color={MUTED}>RF1 או RF2 מזהה אותו</He>
+      <Arrow x1={226} y1={100} x2={276} y2={100} />
+      <He x={251} y={86} size={10.5}>מים</He>
+      <rect x={300} y={44} width={136} height={44} rx={18} fill={FILL.purple} stroke={PURPLE} strokeWidth={1.4} />
+      <rect x={300} y={104} width={136} height={24} rx={11} fill={FILL.sky} stroke={BLUE} strokeWidth={1.4} />
+      {[0, 1, 2, 3].map((j) => <circle key={j} cx={420 + j * 9} cy={30 - j * 8} r={6} fill={ORANGE} />)}
+      <He x={368} y={160} size={11.5} bold>החלבון משתחרר</He>
+      <He x={368} y={178} size={10.5} color={MUTED}>RF3 · RRF ו-EF-G מפרקים</He>
+      <He x={368} y={196} size={10.5} color={MUTED}>את הריבוזום לתת-יחידות</He>
+    </Svg>
+  );
+}

@@ -1,0 +1,35 @@
+function NeuronParts() {
+  const dend = ["M96 120 L60 92 L40 70", "M60 92 L36 96", "M96 120 L52 128 L28 140", "M52 128 L40 112", "M100 132 L70 168 L56 190", "M70 168 L48 172", "M104 108 L88 66 L92 40", "M88 66 L66 52"];
+  const myelin = [176, 222, 268, 314];
+  return (
+    <Svg h={250} label="מבנה נוירון: דנדריטים מסועפים (משמאל) עם קוצים, גוף התא עם הגרעין, גבעת האקסון ומקטע ההתחלה, אקסון עטוף במקטעי מיאלין עם צמתי רנווייה ביניהם, ובקצה — כפתורים סינפטיים עם שלפוחיות.">
+      {dend.map((d, i) => <path key={i} d={d} fill="none" stroke={BLUE} strokeWidth={3.2} strokeLinecap="round" />)}
+      {[[40, 70], [28, 140], [56, 190], [92, 40]].map(([x, y]) => <circle key={`${x}`} cx={x} cy={y} r={2.6} fill={BLUE} />)}
+      <circle cx={112} cy={120} r={24} fill={FILL.blue} stroke={BLUE} strokeWidth={1.6} />
+      <circle cx={110} cy={120} r={9} fill={BLUE} opacity={0.5} />
+      <path d="M134 114 L156 117 L156 123 L134 126 Z" fill={FILL.orange} stroke={ORANGE} strokeWidth={1} />
+      <rect x={156} y={117} width={210} height={6} fill="#94a3b8" />
+      {myelin.map((x) => <rect key={x} x={x} y={110} width={38} height={20} rx={9} fill={FILL.yellow} stroke={GOLD} strokeWidth={1.2} />)}
+      {[[366, 120, 404, 92], [366, 120, 410, 120], [366, 120, 404, 150]].map(([a, b, c, d], i) => <line key={i} x1={a} y1={b} x2={c} y2={d} stroke="#94a3b8" strokeWidth={4} strokeLinecap="round" />)}
+      {[[410, 88], [416, 120], [410, 154]].map(([x, y]) => (
+        <g key={`${x}-${y}`}>
+          <circle cx={x} cy={y} r={11} fill={FILL.green} stroke={GREEN} strokeWidth={1.4} />
+          {[[-3, -3], [3, 0], [-2, 4]].map(([dx, dy], i) => <circle key={i} cx={x + dx} cy={y + dy} r={1.8} fill={GREEN} />)}
+        </g>
+      ))}
+      <He x={50} y={222} size={10} color={BLUE}>דנדריטים</He>
+      <Lead x1={56} y1={212} x2={64} y2={172} />
+      <He x={112} y={26} size={10} color={BLUE}>גוף התא</He>
+      <Lead x1={112} y1={32} x2={112} y2={94} />
+      <He x={150} y={176} size={10} color={ORANGE}>מקטע ההתחלה</He>
+      <Lead x1={148} y1={166} x2={166} y2={120} />
+      <He x={214} y={88} size={10} color={GOLD}>מיאלין</He>
+      <Lead x1={214} y1={94} x2={196} y2={108} />
+      <He x={265} y={168} size={10} color={MUTED}>צומת רנווייה</He>
+      <Lead x1={265} y1={158} x2={264} y2={124} />
+      <He x={436} y={208} size={10} color={GREEN}>כפתורים סינפטיים</He>
+      <Lead x1={428} y1={198} x2={414} y2={166} />
+      <He x={240} y={240} size={9.5} color={MUTED}>המידע זורם: דנדריטים ← גוף התא ← אקסון ← סינפסה</He>
+    </Svg>
+  );
+}
