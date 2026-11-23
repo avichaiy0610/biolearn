@@ -1,0 +1,64 @@
+function ChainTypes() {
+  return (
+    <Svg h={330} label="צורות הסימון. מונו-יוביקוויטין בודד; מולטי-מונו — יוביקוויטין בודד על כמה ליזינים; שרשרת K48 קומפקטית, שבה היוביקוויטינים צמודים זה לזה, היא האות הקלאסי לפרוטאזום; שרשרת K63 מוארכת כמו חרוזים על חוט ומשמשת לאיתות; שרשרת מסועפת נושאת שני ענפים מאותו יוביקוויטין.">
+      {/* mono */}
+      <Sub x={24} y={60} />
+      <Ub cx={67} cy={40} r={9} />
+      <He x={67} y={100} size={10} bold>מונו</He>
+      <He x={67} y={116} size={9} color={MUTED}>היסטונים, PCNA</He>
+      {/* multi-mono */}
+      <Sub x={134} y={60} />
+      <Ub cx={152} cy={40} r={9} />
+      <Ub cx={177} cy={34} r={9} />
+      <Ub cx={202} cy={40} r={9} />
+      <He x={177} y={100} size={10} bold>מולטי-מונו</He>
+      <He x={177} y={116} size={9} color={MUTED}>אנדוציטוזה</He>
+      {/* K48 compact */}
+      <Sub x={252} y={60} w={76} />
+      <Bond x1={290} y1={62} x2={290} y2={42} r1={0} />
+      <Bond x1={290} y1={42} x2={275} y2={27} />
+      <Bond x1={275} y1={27} x2={296} y2={13} />
+      <Ub cx={290} cy={42} r={8} />
+      <Ub cx={275} cy={27} r={8} />
+      <Ub cx={296} cy={13} r={8} />
+      <He x={290} y={100} size={10} bold>K48</He>
+      <He x={290} y={116} size={9} color={RED}>פרוטאזום</He>
+      {/* K63 extended */}
+      <Sub x={368} y={60} w={76} />
+      <Bond x1={406} y1={62} x2={406} y2={48} r1={0} />
+      <Bond x1={406} y1={48} x2={406} y2={30} />
+      <Bond x1={406} y1={30} x2={406} y2={12} />
+      <Ub cx={406} cy={48} r={8} />
+      <Ub cx={406} cy={30} r={8} />
+      <Ub cx={406} cy={12} r={8} />
+      <He x={406} y={100} size={10} bold>K63</He>
+      <He x={406} y={116} size={9} color={BLUE}>איתות, תיקון</He>
+      {/* branched */}
+      <Sub x={24} y={196} w={110} />
+      <Bond x1={79} y1={198} x2={79} y2={178} r1={0} />
+      <Bond x1={79} y1={178} x2={58} y2={158} />
+      <Bond x1={79} y1={178} x2={100} y2={158} />
+      <Ub cx={79} cy={178} r={8} />
+      <Ub cx={58} cy={158} r={8} />
+      <Ub cx={100} cy={158} r={8} />
+      <He x={79} y={140} size={9} color={MUTED}>יוביקוויטין אחד נושא שניים</He>
+      <He x={79} y={236} size={10} bold>מסועפת</He>
+      <He x={79} y={252} size={9} color={MUTED}>K11/K48 — זיהוי יעיל</He>
+      {/* M1 */}
+      <Sub x={174} y={196} w={96} />
+      <rect x={210} y={150} width={26} height={40} rx={5} fill={FILL.red} stroke={RED} strokeWidth={1.3} />
+      <rect x={210} y={108} width={26} height={40} rx={5} fill={FILL.red} stroke={RED} strokeWidth={1.3} />
+      <La x={223} y={174} size={9} bold color={RED}>Ub</La>
+      <La x={223} y={132} size={9} bold color={RED}>Ub</La>
+      <He x={223} y={236} size={10} bold>M1 — ליניארית</He>
+      <He x={223} y={252} size={9} color={MUTED}>ראש לזנב, קשר פפטידי</He>
+      <rect x={296} y={140} width={160} height={116} rx={8} fill={FILL.gray} stroke={MUTED} strokeWidth={1.1} />
+      <He x={444} y={162} size={10} anchor="end" bold>לא טבלת מפתח</He>
+      <He x={444} y={182} size={9.5} anchor="end">הסוג משנה את צורת השרשרת,</He>
+      <He x={444} y={200} size={9.5} anchor="end">והצורה קובעת מי יזהה אותה.</He>
+      <He x={444} y={220} size={9.5} anchor="end">גם שרשראות אחרות מובילות</He>
+      <He x={444} y={238} size={9.5} anchor="end">לפירוק — תלוי בהקשר.</He>
+      <He x={240} y={296} size={10} color={MUTED}>הקווים = קשרים קוולנטיים. K48 נארזת קומפקטית ו-K63 מוארכת — אריזה, לא קשר נוסף</He>
+    </Svg>
+  );
+}

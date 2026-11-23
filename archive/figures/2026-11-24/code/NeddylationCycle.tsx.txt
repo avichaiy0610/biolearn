@@ -1,0 +1,31 @@
+function NeddylationCycle() {
+  return (
+    <Svg h={290} label="מחזור הנדילציה של ליגאז קולין-RING: הצמדת NEDD8 לקולין משנה את תנוחת תחום ה-RING ואת גמישותו ומגבירה מאוד את פעילות הליגאז. ה-CSN מסיר את NEDD8, ובמצב הלא נדילי נקשר CAND1 ומאפשר להחליף את קולטן המצע. בלי מחזור, ליגאז שנשאר פעיל מסמן את קולטן המצע של עצמו.">
+      {/* neddylated, active */}
+      <path d="M 70 70 L 70 190" stroke={GREEN} strokeWidth={10} strokeLinecap="round" />
+      <He x={60} y={134} size={10} anchor="end" color={GREEN}>קולין</He>
+      <circle cx={70} cy={56} r={11} fill={FILL.green} stroke={GREEN} strokeWidth={1.3} />
+      <La x={70} y={60} size={8} bold color={GREEN}>N8</La>
+      <Box x={92} y={44} w={56} h={26} fill={FILL.orange} stroke={ORANGE} size={10}>RING</Box>
+      <Box x={16} y={196} w={108} h={30} fill={FILL.blue} stroke={BLUE} size={10}>קולטן מצע</Box>
+      <Ub cx={126} cy={86} r={8} />
+      <He x={70} y={252} size={10.5} bold color={GREEN}>נדילי — פעיל</He>
+      <He x={70} y={268} size={9} color={MUTED}>תחום RING נעשה גמיש ונגיש יותר</He>
+      {/* arrows */}
+      <Arrow x1={160} y1={100} x2={236} y2={100} color={PURPLE} width={1.7} />
+      <Box2 x={168} y={44} w={92} h={44} fill={FILL.purple} stroke={PURPLE} lines={["CSN", "מסיר NEDD8"]} />
+      <Arrow x1={236} y1={176} x2={160} y2={176} color={GREEN} width={1.7} />
+      <Box2 x={168} y={192} w={92} h={44} fill={FILL.green} stroke={GREEN} lines={["NAE + UBC12", "מצמידים NEDD8"]} />
+      {/* un-neddylated */}
+      <path d="M 320 70 L 320 190" stroke={MUTED} strokeWidth={10} strokeLinecap="round" />
+      <Box x={296} y={38} w={110} h={28} fill={FILL.gray} stroke={MUTED} size={10}>CAND1</Box>
+      <He x={320} y={252} size={10.5} bold color={MUTED}>לא נדילי — כבוי</He>
+      <He x={320} y={268} size={9} color={MUTED}>CAND1 מאפשר החלפת קולטן</He>
+      <Box x={274} y={196} w={92} h={28} fill={FILL.gray} stroke={MUTED} size={10}>קולטן יוצא</Box>
+      <Box x={376} y={196} w={92} h={28} fill={FILL.sky} stroke={BLUE} size={10}>קולטן נכנס</Box>
+      <Arrow x1={370} y1={210} x2={372} y2={210} color={BLUE} width={1.4} />
+      <He x={458} y={120} size={9.5} anchor="end" color={RED}>בלי מחזור — הליגאז</He>
+      <He x={458} y={136} size={9.5} anchor="end" color={RED}>מסמן את הקולטן שלו</He>
+    </Svg>
+  );
+}

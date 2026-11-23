@@ -7,6 +7,10 @@ import { Arrow } from "./metabolicFigures";
 import { ProteasomeArchitecture } from "./redraws/ProteasomeArchitecture";
 import { E3Classes } from "./redraws/E3Classes";
 import { ProteasomeCycle } from "./redraws/ProteasomeCycle";
+import { Cascade } from "./redraws/Cascade";
+import { ChainTypes } from "./redraws/ChainTypes";
+import { NeddylationCycle } from "./redraws/NeddylationCycle";
+import { Pink1Parkin } from "./redraws/Pink1Parkin";
 
 const PURPLE = "#7c3aed";
 const RED = "#b91c1c";
@@ -46,10 +50,6 @@ const Ub = ({ cx, cy, r = 9, fill = FILL.red, stroke = RED, label = "Ub" }: { cx
 );
 // Covalent bond between two ubiquitins (or substrate → ubiquitin), trimmed to the circle edges so the line never
 // runs under the "Ub" label.
-function Bond({ x1, y1, x2, y2, r1 = 8, r2 = 8 }: { x1: number; y1: number; x2: number; y2: number; r1?: number; r2?: number }) {
-  const dx = x2 - x1, dy = y2 - y1, d = Math.hypot(dx, dy) || 1;
-  return <line x1={x1 + (dx / d) * r1} y1={y1 + (dy / d) * r1} x2={x2 - (dx / d) * r2} y2={y2 - (dy / d) * r2} stroke={INK} strokeWidth={1.6} />;
-}
 
 // A blob standing for a folded protein domain.
 const Blob = ({ cx, cy, rx = 26, ry = 20, fill = FILL.gray, stroke = MUTED }: { cx: number; cy: number; rx?: number; ry?: number; fill?: string; stroke?: string }) => (
@@ -58,34 +58,7 @@ const Blob = ({ cx, cy, rx = 26, ry = 20, fill = FILL.gray, stroke = MUTED }: { 
 const Lead = ({ x1, y1, x2, y2 }: { x1: number; y1: number; x2: number; y2: number }) => <line x1={x1} y1={y1} x2={x2} y2={y2} stroke={MUTED} strokeWidth={1} />;
 
 // ── ub-conjugation ───────────────────────────────────────────────────────────
-function Cascade() {
-  return (
-    <Svg h={250} label="מפל ההצמדה: E1 קושר ATP ויוביקוויטין ויוצר קשר תיואסטר עם הציסטאין שלו, תוך שחרור פירופוספט ו-AMP. היוביקוויטין עובר לציסטאין של E2, וה-E3 מקרב את E2 אל המצע ומעביר את היוביקוויטין לליזין במצע. התוצאה: שרשרת יוביקוויטין על המצע.">
-      <Box2 x={24} y={56} w={92} h={46} fill={FILL.blue} stroke={BLUE} lines={["E1", "משפעל"]} size={11} />
-      <Ub cx={70} cy={34} />
-      <He x={70} y={122} size={9.5} color={MUTED}>קשר תיואסטר</He>
-      <La x={70} y={136} size={9} color={MUTED}>E1~Ub</La>
-      <La x={70} y={156} size={9.5} color={GOLD}>ATP → AMP + PPi</La>
-      <Arrow x1={120} y1={79} x2={158} y2={79} color={INK} width={1.6} />
-      <Box2 x={162} y={56} w={82} h={46} fill={FILL.green} stroke={GREEN} lines={["E2", "מצמיד"]} size={11} />
-      <Ub cx={203} cy={34} />
-      <La x={203} y={124} size={9} color={MUTED}>E2~Ub</La>
-      <Arrow x1={248} y1={79} x2={286} y2={79} color={INK} width={1.6} />
-      <Box2 x={290} y={46} w={92} h={66} fill={FILL.orange} stroke={ORANGE} lines={["E3", "מזהה מצע"]} size={11} />
-      <Blob cx={420} cy={79} rx={32} ry={26} fill={FILL.yellow} stroke={GOLD} />
-      <He x={420} y={83} size={11} bold>מצע</He>
-      <Arrow x1={386} y1={79} x2={404} y2={79} color={ORANGE} width={1.6} />
-      <Ub cx={420} cy={36} />
-      <Ub cx={438} cy={22} />
-      <Ub cx={456} cy={34} />
-      <He x={420} y={126} size={9.5} color={MUTED}>ליזין במצע</He>
-      <He x={420} y={140} size={9} color={MUTED}>קשר איזופפטידי</He>
-      <rect x={24} y={176} width={432} height={56} rx={8} fill={FILL.sky} stroke={BLUE} strokeWidth={1.1} />
-      <He x={444} y={196} size={10} anchor="end" bold color={BLUE}>ההיררכיה</He>
-      <He x={444} y={214} size={10} anchor="end" color={INK}>שני E1 · עשרות E2 · מאות E3 — הספציפיות נקבעת בשלב ה-E3</He>
-    </Svg>
-  );
-}
+
 
 
 
@@ -123,76 +96,7 @@ function Triage() {
 }
 
 // ── ub-code ──────────────────────────────────────────────────────────────────
-const Sub = ({ x, y, w = 86 }: { x: number; y: number; w?: number }) => (
-    <g>
-      <rect x={x} y={y} width={w} height={26} rx={6} fill={FILL.yellow} stroke={GOLD} strokeWidth={1.3} />
-      <He x={x + w / 2} y={y + 17} size={10}>מצע</He>
-    </g>
-  );
-function ChainTypes() {
-  return (
-    <Svg h={330} label="צורות הסימון. מונו-יוביקוויטין בודד; מולטי-מונו — יוביקוויטין בודד על כמה ליזינים; שרשרת K48 קומפקטית, שבה היוביקוויטינים צמודים זה לזה, היא האות הקלאסי לפרוטאזום; שרשרת K63 מוארכת כמו חרוזים על חוט ומשמשת לאיתות; שרשרת מסועפת נושאת שני ענפים מאותו יוביקוויטין.">
-      {/* mono */}
-      <Sub x={24} y={60} />
-      <Ub cx={67} cy={40} r={9} />
-      <He x={67} y={100} size={10} bold>מונו</He>
-      <He x={67} y={116} size={9} color={MUTED}>היסטונים, PCNA</He>
-      {/* multi-mono */}
-      <Sub x={134} y={60} />
-      <Ub cx={152} cy={40} r={9} />
-      <Ub cx={177} cy={34} r={9} />
-      <Ub cx={202} cy={40} r={9} />
-      <He x={177} y={100} size={10} bold>מולטי-מונו</He>
-      <He x={177} y={116} size={9} color={MUTED}>אנדוציטוזה</He>
-      {/* K48 compact */}
-      <Sub x={252} y={60} w={76} />
-      <Bond x1={290} y1={62} x2={290} y2={42} r1={0} />
-      <Bond x1={290} y1={42} x2={275} y2={27} />
-      <Bond x1={275} y1={27} x2={296} y2={13} />
-      <Ub cx={290} cy={42} r={8} />
-      <Ub cx={275} cy={27} r={8} />
-      <Ub cx={296} cy={13} r={8} />
-      <He x={290} y={100} size={10} bold>K48</He>
-      <He x={290} y={116} size={9} color={RED}>פרוטאזום</He>
-      {/* K63 extended */}
-      <Sub x={368} y={60} w={76} />
-      <Bond x1={406} y1={62} x2={406} y2={48} r1={0} />
-      <Bond x1={406} y1={48} x2={406} y2={30} />
-      <Bond x1={406} y1={30} x2={406} y2={12} />
-      <Ub cx={406} cy={48} r={8} />
-      <Ub cx={406} cy={30} r={8} />
-      <Ub cx={406} cy={12} r={8} />
-      <He x={406} y={100} size={10} bold>K63</He>
-      <He x={406} y={116} size={9} color={BLUE}>איתות, תיקון</He>
-      {/* branched */}
-      <Sub x={24} y={196} w={110} />
-      <Bond x1={79} y1={198} x2={79} y2={178} r1={0} />
-      <Bond x1={79} y1={178} x2={58} y2={158} />
-      <Bond x1={79} y1={178} x2={100} y2={158} />
-      <Ub cx={79} cy={178} r={8} />
-      <Ub cx={58} cy={158} r={8} />
-      <Ub cx={100} cy={158} r={8} />
-      <He x={79} y={140} size={9} color={MUTED}>יוביקוויטין אחד נושא שניים</He>
-      <He x={79} y={236} size={10} bold>מסועפת</He>
-      <He x={79} y={252} size={9} color={MUTED}>K11/K48 — זיהוי יעיל</He>
-      {/* M1 */}
-      <Sub x={174} y={196} w={96} />
-      <rect x={210} y={150} width={26} height={40} rx={5} fill={FILL.red} stroke={RED} strokeWidth={1.3} />
-      <rect x={210} y={108} width={26} height={40} rx={5} fill={FILL.red} stroke={RED} strokeWidth={1.3} />
-      <La x={223} y={174} size={9} bold color={RED}>Ub</La>
-      <La x={223} y={132} size={9} bold color={RED}>Ub</La>
-      <He x={223} y={236} size={10} bold>M1 — ליניארית</He>
-      <He x={223} y={252} size={9} color={MUTED}>ראש לזנב, קשר פפטידי</He>
-      <rect x={296} y={140} width={160} height={116} rx={8} fill={FILL.gray} stroke={MUTED} strokeWidth={1.1} />
-      <He x={444} y={162} size={10} anchor="end" bold>לא טבלת מפתח</He>
-      <He x={444} y={182} size={9.5} anchor="end">הסוג משנה את צורת השרשרת,</He>
-      <He x={444} y={200} size={9.5} anchor="end">והצורה קובעת מי יזהה אותה.</He>
-      <He x={444} y={220} size={9.5} anchor="end">גם שרשראות אחרות מובילות</He>
-      <He x={444} y={238} size={9.5} anchor="end">לפירוק — תלוי בהקשר.</He>
-      <He x={240} y={296} size={10} color={MUTED}>הקווים = קשרים קוולנטיים. K48 נארזת קומפקטית ו-K63 מוארכת — אריזה, לא קשר נוסף</He>
-    </Svg>
-  );
-}
+
 
 function WritersReadersErasers() {
   return (
@@ -227,37 +131,7 @@ function WritersReadersErasers() {
 
 
 // ── ub-like ──────────────────────────────────────────────────────────────────
-function NeddylationCycle() {
-  return (
-    <Svg h={290} label="מחזור הנדילציה של ליגאז קולין-RING: הצמדת NEDD8 לקולין משנה את תנוחת תחום ה-RING ואת גמישותו ומגבירה מאוד את פעילות הליגאז. ה-CSN מסיר את NEDD8, ובמצב הלא נדילי נקשר CAND1 ומאפשר להחליף את קולטן המצע. בלי מחזור, ליגאז שנשאר פעיל מסמן את קולטן המצע של עצמו.">
-      {/* neddylated, active */}
-      <path d="M 70 70 L 70 190" stroke={GREEN} strokeWidth={10} strokeLinecap="round" />
-      <He x={60} y={134} size={10} anchor="end" color={GREEN}>קולין</He>
-      <circle cx={70} cy={56} r={11} fill={FILL.green} stroke={GREEN} strokeWidth={1.3} />
-      <La x={70} y={60} size={8} bold color={GREEN}>N8</La>
-      <Box x={92} y={44} w={56} h={26} fill={FILL.orange} stroke={ORANGE} size={10}>RING</Box>
-      <Box x={16} y={196} w={108} h={30} fill={FILL.blue} stroke={BLUE} size={10}>קולטן מצע</Box>
-      <Ub cx={126} cy={86} r={8} />
-      <He x={70} y={252} size={10.5} bold color={GREEN}>נדילי — פעיל</He>
-      <He x={70} y={268} size={9} color={MUTED}>תחום RING נעשה גמיש ונגיש יותר</He>
-      {/* arrows */}
-      <Arrow x1={160} y1={100} x2={236} y2={100} color={PURPLE} width={1.7} />
-      <Box2 x={168} y={44} w={92} h={44} fill={FILL.purple} stroke={PURPLE} lines={["CSN", "מסיר NEDD8"]} />
-      <Arrow x1={236} y1={176} x2={160} y2={176} color={GREEN} width={1.7} />
-      <Box2 x={168} y={192} w={92} h={44} fill={FILL.green} stroke={GREEN} lines={["NAE + UBC12", "מצמידים NEDD8"]} />
-      {/* un-neddylated */}
-      <path d="M 320 70 L 320 190" stroke={MUTED} strokeWidth={10} strokeLinecap="round" />
-      <Box x={296} y={38} w={110} h={28} fill={FILL.gray} stroke={MUTED} size={10}>CAND1</Box>
-      <He x={320} y={252} size={10.5} bold color={MUTED}>לא נדילי — כבוי</He>
-      <He x={320} y={268} size={9} color={MUTED}>CAND1 מאפשר החלפת קולטן</He>
-      <Box x={274} y={196} w={92} h={28} fill={FILL.gray} stroke={MUTED} size={10}>קולטן יוצא</Box>
-      <Box x={376} y={196} w={92} h={28} fill={FILL.sky} stroke={BLUE} size={10}>קולטן נכנס</Box>
-      <Arrow x1={370} y1={210} x2={372} y2={210} color={BLUE} width={1.4} />
-      <He x={458} y={120} size={9.5} anchor="end" color={RED}>בלי מחזור — הליגאז</He>
-      <He x={458} y={136} size={9.5} anchor="end" color={RED}>מסמן את הקולטן שלו</He>
-    </Svg>
-  );
-}
+
 
 // ── ub-cell-cycle ────────────────────────────────────────────────────────────
 function CycleLigases() {
@@ -540,37 +414,7 @@ function DlkAxon() {
   );
 }
 
-function Pink1Parkin() {
-  return (
-    <Svg h={320} label="מסלול PINK1 ופרקין. במיטוכונדריה בריאה PINK1 מיובא פנימה בזכות פוטנציאל הממברנה, נחתך ע״י PARL ומתפרק, ולכן אין ממנו כמעט דבר. במיטוכונדריה פגועה הייבוא נכשל, PINK1 מצטבר על הממברנה החיצונית ומזרחן יוביקוויטין על סרין 65; פוספו-יוביקוויטין מגייס את פרקין, PINK1 מזרחן גם אותו והוא נפתח ומסמן עוד חלבונים — לולאת הגברה שמסתיימת בגיוס קולטני אוטופגיה ובמיטופגיה.">
-      {/* healthy */}
-      <He x={118} y={14} size={11.5} bold color={GREEN}>מיטוכונדריה בריאה</He>
-      <rect x={34} y={40} width={168} height={76} rx={14} fill={FILL.green} stroke={GREEN} strokeWidth={1.5} />
-      <rect x={48} y={56} width={140} height={44} rx={10} fill="#ffffff" stroke={GREEN} strokeWidth={1.2} />
-      <He x={118} y={82} size={9.5} color={MUTED}>פוטנציאל ממברנה תקין</He>
-      <Arrow x1={118} y1={26} x2={118} y2={54} color={BLUE} width={1.5} />
-      <La x={128} y={34} size={9.5} anchor="start" color={BLUE}>PINK1</La>
-      <Box2 x={44} y={128} w={148} h={46} fill={FILL.gray} stroke={MUTED} lines={["PARL חותך", "← מתפרק (N-דגרון)"]} />
-      <He x={118} y={196} size={10.5} bold color={MUTED}>אין PINK1 על הממברנה</He>
-      <line x1={240} y1={24} x2={240} y2={300} stroke={MUTED} strokeWidth={1} strokeDasharray="4 4" />
-      {/* damaged */}
-      <He x={360} y={14} size={11.5} bold color={RED}>מיטוכונדריה פגועה</He>
-      <rect x={276} y={40} width={168} height={76} rx={14} fill={FILL.red} stroke={RED} strokeWidth={1.5} />
-      <rect x={290} y={56} width={140} height={44} rx={10} fill="#ffffff" stroke={RED} strokeWidth={1.2} strokeDasharray="5 4" />
-      <He x={360} y={82} size={9.5} color={MUTED}>הפוטנציאל נופל — אין ייבוא</He>
-      <rect x={300} y={24} width={120} height={15} rx={6} fill={FILL.blue} stroke={BLUE} strokeWidth={1.2} />
-      <La x={360} y={35} size={9} bold color={BLUE}>PINK1</La>
-      <Arrow x1={360} y1={120} x2={360} y2={140} color={RED} width={1.6} />
-      <Box2 x={286} y={144} w={148} h={46} fill={FILL.orange} stroke={ORANGE} lines={["מזרחן יוביקוויטין", "על Ser65"]} />
-      <Arrow x1={360} y1={194} x2={360} y2={214} color={ORANGE} width={1.5} />
-      <Box2 x={286} y={218} w={148} h={46} fill={FILL.purple} stroke={PURPLE} lines={["פרקין מגויס ונפתח", "ומסמן עוד חלבונים"]} />
-      <path d="M 448 241 q 26 -48 0 -96" fill="none" stroke={PURPLE} strokeWidth={1.6} markerEnd="url(#bfArrow)" />
-      <He x={470} y={196} size={9} anchor="start" color={PURPLE} rotate={90}>לולאת הגברה</He>
-      <Arrow x1={360} y1={268} x2={360} y2={288} color={PURPLE} width={1.5} />
-      <He x={360} y={306} size={10.5} bold color={PURPLE}>קולטני אוטופגיה ← מיטופגיה</He>
-    </Svg>
-  );
-}
+
 
 // ── ub-immune ────────────────────────────────────────────────────────────────
 function NfkbActivation() {

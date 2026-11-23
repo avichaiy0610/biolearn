@@ -8,6 +8,8 @@ import { Sponge } from "./redraws/Sponge";
 import { Cnidocyte } from "./redraws/Cnidocyte";
 import { BirdLung } from "./redraws/BirdLung";
 import { HairCell } from "./redraws/HairCell";
+import { ProtistLocomotion } from "./redraws/ProtistLocomotion";
+import { Paramecium } from "./redraws/Paramecium";
 
 const PURPLE = "#7c3aed";
 const RED = "#b91c1c";
@@ -23,18 +25,6 @@ const Svg = ({ w = 480, h, label, children }: { w?: number; h: number; label: st
 );
 const Lead = ({ x1, y1, x2, y2 }: { x1: number; y1: number; x2: number; y2: number }) => <line x1={x1} y1={y1} x2={x2} y2={y2} stroke={MUTED} strokeWidth={1} />;
 // Short radial strokes around an ellipse (cilia, bristles).
-function Fringe({ cx, cy, rx, ry, n, len, color, width = 1.2 }: { cx: number; cy: number; rx: number; ry: number; n: number; len: number; color: string; width?: number }) {
-  return (
-    <g stroke={color} strokeWidth={width} strokeLinecap="round">
-      {Array.from({ length: n }, (_, i) => {
-        const t = (i / n) * 2 * Math.PI;
-        const x = cx + rx * Math.cos(t), y = cy + ry * Math.sin(t);
-        const nx = Math.cos(t) / rx, ny = Math.sin(t) / ry, m = Math.hypot(nx, ny);
-        return <line key={i} x1={x} y1={y} x2={x + (len * nx) / m} y2={y + (len * ny) / m} />;
-      })}
-    </g>
-  );
-}
 
 // ── z-body-plans ─────────────────────────────────────────────────────────────
 function BodyPlans() {
@@ -111,75 +101,10 @@ function AnimalTree() {
 }
 
 // ── z-protist-locomotion ─────────────────────────────────────────────────────
-function ProtistLocomotion() {
-  return (
-    <Svg h={210} label="שלוש דרכי תנועה של חד-תאיים: אמבה זורמת לתוך פסאודופודים, שוטני מונע בשוטון אחד ארוך, וריסני מונע בהרבה ריסים קצרים שמכים בתיאום.">
-      <path d="M50 90 Q40 60 70 62 Q80 40 95 55 Q125 50 130 75 Q150 85 128 100 Q125 125 100 120 Q85 140 65 122 Q35 120 50 90Z" fill={FILL.orange} stroke={ORANGE} strokeWidth={1.6} />
-      <circle cx={88} cy={90} r={8} fill="white" stroke={ORANGE} />
-      <Arrow x1={60} y1={152} x2={115} y2={152} color={ORANGE} />
-      <He x={88} y={182} size={13} bold>פסאודופודים</He>
-      <He x={88} y={199} size={11} color={MUTED}>אמבה</He>
 
-      <ellipse cx={262} cy={95} rx={34} ry={15} fill={FILL.green} stroke={GREEN} strokeWidth={1.6} />
-      <circle cx={236} cy={92} r={3} fill={RED} />
-      <circle cx={268} cy={96} r={6} fill="white" stroke={GREEN} />
-      <path d="M228 95 q-6 -10 -12 0 t-12 0 t-12 0 t-12 0" fill="none" stroke={GREEN} strokeWidth={1.6} />
-      <Arrow x1={275} y1={152} x2={215} y2={152} color={GREEN} />
-      <He x={245} y={182} size={13} bold>שוטון</He>
-      <He x={245} y={199} size={11} color={MUTED}>שוטני (אוגלנה)</He>
-
-      <ellipse cx={400} cy={95} rx={44} ry={24} fill={FILL.sky} stroke={BLUE} strokeWidth={1.6} />
-      <Fringe cx={400} cy={95} rx={44} ry={24} n={34} len={7} color={BLUE} />
-      <circle cx={400} cy={95} r={8} fill="white" stroke={BLUE} />
-      <Arrow x1={375} y1={152} x2={430} y2={152} color={BLUE} />
-      <He x={400} y={182} size={13} bold>ריסים</He>
-      <He x={400} y={199} size={11} color={MUTED}>ריסני (פרמציום)</He>
-    </Svg>
-  );
-}
 
 // ── z-paramecium ─────────────────────────────────────────────────────────────
-function Paramecium() {
-  const cv = (x: number, y: number) => (
-    <g>
-      {Array.from({ length: 6 }, (_, i) => {
-        const t = (i / 6) * 2 * Math.PI;
-        return <line key={i} x1={x + 9 * Math.cos(t)} y1={y + 9 * Math.sin(t)} x2={x + 20 * Math.cos(t)} y2={y + 20 * Math.sin(t)} stroke={BLUE} strokeWidth={1.4} />;
-      })}
-      <circle cx={x} cy={y} r={9} fill="white" stroke={BLUE} strokeWidth={1.4} />
-    </g>
-  );
-  return (
-    <Svg h={250} label="פרמציום: תא בצורת סוליה מכוסה ריסים, עם חריץ פה, בועיות מזון, מקרוגרעין גדול ומיקרוגרעין קטן, שתי בועיות מתכווצות עם תעלות, וטריכוציסטים מתחת לפליקולה.">
-      <ellipse cx={240} cy={125} rx={150} ry={56} fill={FILL.sky} stroke={BLUE} strokeWidth={1.8} />
-      <Fringe cx={240} cy={125} rx={150} ry={56} n={80} len={8} color={BLUE} width={1} />
-      {[290, 310, 330, 350, 370].map((x) => {
-        const y = 125 + 56 * Math.sqrt(1 - ((x - 240) / 150) ** 2);
-        return <line key={x} x1={x} y1={y - 3} x2={x - 2} y2={y - 11} stroke={TEAL} strokeWidth={2} />;
-      })}
-      <path d="M118 108 Q185 152 250 140" fill="none" stroke={BLUE} strokeWidth={2.2} />
-      <circle cx={253} cy={140} r={4} fill="white" stroke={BLUE} />
-      {[[200, 112], [292, 122], [318, 100], [330, 143]].map(([x, y]) => <circle key={x} cx={x} cy={y} r={7} fill={FILL.orange} stroke={ORANGE} />)}
-      <ellipse cx={240} cy={108} rx={34} ry={17} fill={FILL.purple} stroke={PURPLE} strokeWidth={1.4} />
-      <circle cx={281} cy={100} r={5} fill={PURPLE} />
-      {cv(150, 96)}{cv(352, 112)}
-      <He x={100} y={30} size={11}>בועית מתכווצת</He>
-      <Lead x1={110} y1={36} x2={145} y2={86} />
-      <He x={222} y={30} size={11}>מקרוגרעין</He>
-      <Lead x1={226} y1={36} x2={236} y2={92} />
-      <He x={330} y={30} size={11}>מיקרוגרעין</He>
-      <Lead x1={322} y1={36} x2={284} y2={95} />
-      <He x={448} y={70} size={11}>ריסים</He>
-      <Lead x1={440} y1={76} x2={392} y2={104} />
-      <He x={135} y={222} size={11}>חריץ הפה</He>
-      <Lead x1={140} y1={212} x2={170} y2={135} />
-      <He x={250} y={222} size={11}>בועית מזון</He>
-      <Lead x1={262} y1={212} x2={326} y2={149} />
-      <He x={420} y={222} size={11}>טריכוציסטים</He>
-      <Lead x1={410} y1={212} x2={366} y2={163} />
-    </Svg>
-  );
-}
+
 
 // ── z-sponge ─────────────────────────────────────────────────────────────────
 

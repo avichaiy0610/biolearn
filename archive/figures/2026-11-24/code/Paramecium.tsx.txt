@@ -1,0 +1,41 @@
+function Paramecium() {
+  const cv = (x: number, y: number) => (
+    <g>
+      {Array.from({ length: 6 }, (_, i) => {
+        const t = (i / 6) * 2 * Math.PI;
+        return <line key={i} x1={x + 9 * Math.cos(t)} y1={y + 9 * Math.sin(t)} x2={x + 20 * Math.cos(t)} y2={y + 20 * Math.sin(t)} stroke={BLUE} strokeWidth={1.4} />;
+      })}
+      <circle cx={x} cy={y} r={9} fill="white" stroke={BLUE} strokeWidth={1.4} />
+    </g>
+  );
+  return (
+    <Svg h={250} label="פרמציום: תא בצורת סוליה מכוסה ריסים, עם חריץ פה, בועיות מזון, מקרוגרעין גדול ומיקרוגרעין קטן, שתי בועיות מתכווצות עם תעלות, וטריכוציסטים מתחת לפליקולה.">
+      <ellipse cx={240} cy={125} rx={150} ry={56} fill={FILL.sky} stroke={BLUE} strokeWidth={1.8} />
+      <Fringe cx={240} cy={125} rx={150} ry={56} n={80} len={8} color={BLUE} width={1} />
+      {[290, 310, 330, 350, 370].map((x) => {
+        const y = 125 + 56 * Math.sqrt(1 - ((x - 240) / 150) ** 2);
+        return <line key={x} x1={x} y1={y - 3} x2={x - 2} y2={y - 11} stroke={TEAL} strokeWidth={2} />;
+      })}
+      <path d="M118 108 Q185 152 250 140" fill="none" stroke={BLUE} strokeWidth={2.2} />
+      <circle cx={253} cy={140} r={4} fill="white" stroke={BLUE} />
+      {[[200, 112], [292, 122], [318, 100], [330, 143]].map(([x, y]) => <circle key={x} cx={x} cy={y} r={7} fill={FILL.orange} stroke={ORANGE} />)}
+      <ellipse cx={240} cy={108} rx={34} ry={17} fill={FILL.purple} stroke={PURPLE} strokeWidth={1.4} />
+      <circle cx={281} cy={100} r={5} fill={PURPLE} />
+      {cv(150, 96)}{cv(352, 112)}
+      <He x={100} y={30} size={11}>בועית מתכווצת</He>
+      <Lead x1={110} y1={36} x2={145} y2={86} />
+      <He x={222} y={30} size={11}>מקרוגרעין</He>
+      <Lead x1={226} y1={36} x2={236} y2={92} />
+      <He x={330} y={30} size={11}>מיקרוגרעין</He>
+      <Lead x1={322} y1={36} x2={284} y2={95} />
+      <He x={448} y={70} size={11}>ריסים</He>
+      <Lead x1={440} y1={76} x2={392} y2={104} />
+      <He x={135} y={222} size={11}>חריץ הפה</He>
+      <Lead x1={140} y1={212} x2={170} y2={135} />
+      <He x={250} y={222} size={11}>בועית מזון</He>
+      <Lead x1={262} y1={212} x2={326} y2={149} />
+      <He x={420} y={222} size={11}>טריכוציסטים</He>
+      <Lead x1={410} y1={212} x2={366} y2={163} />
+    </Svg>
+  );
+}

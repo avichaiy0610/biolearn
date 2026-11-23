@@ -1,0 +1,31 @@
+function Pink1Parkin() {
+  return (
+    <Svg h={320} label="מסלול PINK1 ופרקין. במיטוכונדריה בריאה PINK1 מיובא פנימה בזכות פוטנציאל הממברנה, נחתך ע״י PARL ומתפרק, ולכן אין ממנו כמעט דבר. במיטוכונדריה פגועה הייבוא נכשל, PINK1 מצטבר על הממברנה החיצונית ומזרחן יוביקוויטין על סרין 65; פוספו-יוביקוויטין מגייס את פרקין, PINK1 מזרחן גם אותו והוא נפתח ומסמן עוד חלבונים — לולאת הגברה שמסתיימת בגיוס קולטני אוטופגיה ובמיטופגיה.">
+      {/* healthy */}
+      <He x={118} y={14} size={11.5} bold color={GREEN}>מיטוכונדריה בריאה</He>
+      <rect x={34} y={40} width={168} height={76} rx={14} fill={FILL.green} stroke={GREEN} strokeWidth={1.5} />
+      <rect x={48} y={56} width={140} height={44} rx={10} fill="#ffffff" stroke={GREEN} strokeWidth={1.2} />
+      <He x={118} y={82} size={9.5} color={MUTED}>פוטנציאל ממברנה תקין</He>
+      <Arrow x1={118} y1={26} x2={118} y2={54} color={BLUE} width={1.5} />
+      <La x={128} y={34} size={9.5} anchor="start" color={BLUE}>PINK1</La>
+      <Box2 x={44} y={128} w={148} h={46} fill={FILL.gray} stroke={MUTED} lines={["PARL חותך", "← מתפרק (N-דגרון)"]} />
+      <He x={118} y={196} size={10.5} bold color={MUTED}>אין PINK1 על הממברנה</He>
+      <line x1={240} y1={24} x2={240} y2={300} stroke={MUTED} strokeWidth={1} strokeDasharray="4 4" />
+      {/* damaged */}
+      <He x={360} y={14} size={11.5} bold color={RED}>מיטוכונדריה פגועה</He>
+      <rect x={276} y={40} width={168} height={76} rx={14} fill={FILL.red} stroke={RED} strokeWidth={1.5} />
+      <rect x={290} y={56} width={140} height={44} rx={10} fill="#ffffff" stroke={RED} strokeWidth={1.2} strokeDasharray="5 4" />
+      <He x={360} y={82} size={9.5} color={MUTED}>הפוטנציאל נופל — אין ייבוא</He>
+      <rect x={300} y={24} width={120} height={15} rx={6} fill={FILL.blue} stroke={BLUE} strokeWidth={1.2} />
+      <La x={360} y={35} size={9} bold color={BLUE}>PINK1</La>
+      <Arrow x1={360} y1={120} x2={360} y2={140} color={RED} width={1.6} />
+      <Box2 x={286} y={144} w={148} h={46} fill={FILL.orange} stroke={ORANGE} lines={["מזרחן יוביקוויטין", "על Ser65"]} />
+      <Arrow x1={360} y1={194} x2={360} y2={214} color={ORANGE} width={1.5} />
+      <Box2 x={286} y={218} w={148} h={46} fill={FILL.purple} stroke={PURPLE} lines={["פרקין מגויס ונפתח", "ומסמן עוד חלבונים"]} />
+      <path d="M 448 241 q 26 -48 0 -96" fill="none" stroke={PURPLE} strokeWidth={1.6} markerEnd="url(#bfArrow)" />
+      <He x={470} y={196} size={9} anchor="start" color={PURPLE} rotate={90}>לולאת הגברה</He>
+      <Arrow x1={360} y1={268} x2={360} y2={288} color={PURPLE} width={1.5} />
+      <He x={360} y={306} size={10.5} bold color={PURPLE}>קולטני אוטופגיה ← מיטופגיה</He>
+    </Svg>
+  );
+}

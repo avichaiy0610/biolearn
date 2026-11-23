@@ -1,0 +1,28 @@
+function Cascade() {
+  return (
+    <Svg h={250} label="מפל ההצמדה: E1 קושר ATP ויוביקוויטין ויוצר קשר תיואסטר עם הציסטאין שלו, תוך שחרור פירופוספט ו-AMP. היוביקוויטין עובר לציסטאין של E2, וה-E3 מקרב את E2 אל המצע ומעביר את היוביקוויטין לליזין במצע. התוצאה: שרשרת יוביקוויטין על המצע.">
+      <Box2 x={24} y={56} w={92} h={46} fill={FILL.blue} stroke={BLUE} lines={["E1", "משפעל"]} size={11} />
+      <Ub cx={70} cy={34} />
+      <He x={70} y={122} size={9.5} color={MUTED}>קשר תיואסטר</He>
+      <La x={70} y={136} size={9} color={MUTED}>E1~Ub</La>
+      <La x={70} y={156} size={9.5} color={GOLD}>ATP → AMP + PPi</La>
+      <Arrow x1={120} y1={79} x2={158} y2={79} color={INK} width={1.6} />
+      <Box2 x={162} y={56} w={82} h={46} fill={FILL.green} stroke={GREEN} lines={["E2", "מצמיד"]} size={11} />
+      <Ub cx={203} cy={34} />
+      <La x={203} y={124} size={9} color={MUTED}>E2~Ub</La>
+      <Arrow x1={248} y1={79} x2={286} y2={79} color={INK} width={1.6} />
+      <Box2 x={290} y={46} w={92} h={66} fill={FILL.orange} stroke={ORANGE} lines={["E3", "מזהה מצע"]} size={11} />
+      <Blob cx={420} cy={79} rx={32} ry={26} fill={FILL.yellow} stroke={GOLD} />
+      <He x={420} y={83} size={11} bold>מצע</He>
+      <Arrow x1={386} y1={79} x2={404} y2={79} color={ORANGE} width={1.6} />
+      <Ub cx={420} cy={36} />
+      <Ub cx={438} cy={22} />
+      <Ub cx={456} cy={34} />
+      <He x={420} y={126} size={9.5} color={MUTED}>ליזין במצע</He>
+      <He x={420} y={140} size={9} color={MUTED}>קשר איזופפטידי</He>
+      <rect x={24} y={176} width={432} height={56} rx={8} fill={FILL.sky} stroke={BLUE} strokeWidth={1.1} />
+      <He x={444} y={196} size={10} anchor="end" bold color={BLUE}>ההיררכיה</He>
+      <He x={444} y={214} size={10} anchor="end" color={INK}>שני E1 · עשרות E2 · מאות E3 — הספציפיות נקבעת בשלב ה-E3</He>
+    </Svg>
+  );
+}

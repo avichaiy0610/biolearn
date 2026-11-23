@@ -10,3 +10,12 @@
 
 `code/<Name>.tsx.txt` — הפונקציה הישנה בדיוק כפי שהייתה; `svg/` — רינדור בהיר/כהה.
 שחזור: להחזיר את הפונקציה לקובץ המקור, למחוק את שורת `import { <Name> } from "./redraws/<Name>"` ואת `components/lesson/redraws/<Name>.tsx`.
+
+## סבב 18 (עדיפות 2) — אישור אביחי
+- `ubiquitinFigures.tsx`: Cascade (`ub-cascade`, יחידה ub-conjugation)
+- `ubiquitinFigures.tsx`: ChainTypes (`ub-chain-types`, יחידה ub-code)
+- `ubiquitinFigures.tsx`: NeddylationCycle (`ub-neddylation-cycle`, יחידה ub-like)
+- `ubiquitinFigures.tsx`: Pink1Parkin (`ub-pink1-parkin`, יחידה ub-neurons)
+- `zoologyFigures.tsx`: ProtistLocomotion (`z-protist-locomotion`, יחידה z-protists)
+- `zoologyFigures.tsx`: Paramecium (`z-paramecium`, יחידה z-protists)
+אותו מבנה ואותו שחזור כמו למעלה.
