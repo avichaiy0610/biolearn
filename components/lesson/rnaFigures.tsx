@@ -5,6 +5,11 @@ import { ArrowDefs, BLUE, GREEN, INK, MUTED, ORANGE, He, La } from "./biochemFig
 import { Arrow } from "./metabolicFigures";
 import { RibosomePtc } from "./redraws/RibosomePtc";
 import { GroupIISpliceosome } from "./redraws/GroupIISpliceosome";
+import { Riboswitch } from "./redraws/Riboswitch";
+import { SrnaHfq } from "./redraws/SrnaHfq";
+import { PingPong } from "./redraws/PingPong";
+import { SnornaGuides } from "./redraws/SnornaGuides";
+import { Xist } from "./redraws/Xist";
 
 const PURPLE = "#7c3aed";
 const RED = "#b91c1c";
@@ -19,7 +24,6 @@ const Svg = ({ w = 480, h, label, children }: { w?: number; h: number; label: st
     {children}
   </svg>
 );
-const Lead = ({ x1, y1, x2, y2 }: { x1: number; y1: number; x2: number; y2: number }) => <line x1={x1} y1={y1} x2={x2} y2={y2} stroke={MUTED} strokeWidth={1} />;
 function Box({ x, y, w, h, fill, stroke, children, size = 11, bold }: { x: number; y: number; w: number; h: number; fill: string; stroke: string; children: React.ReactNode; size?: number; bold?: boolean }) {
   return (
     <g>
@@ -68,7 +72,7 @@ function RnaStructure() {
       <La x={146} y={208} size={10} color={MUTED}>3′</La>
       <He x={36} y={136} size={10} color={BLUE}>גבעול</He>
       <He x={190} y={40} size={10} color={ORANGE}>לולאה</He>
-      <He x={114} y={226} size={9} color={MUTED}>זוג G-U ("wobble") — לא קנוני, נפוץ ב-RNA</He>
+      <He x={114} y={226} size={9} color={MUTED}>{'זוג G-U ("wobble") — לא קנוני, נפוץ ב-RNA'}</He>
 
       <path d="M300 70 L340 50 L380 70 L366 116 L314 116 Z" fill={FILL.yellow} stroke={GOLD} strokeWidth={1.4} />
       <La x={340} y={92} size={10} color={GOLD}>ריבוז</La>
@@ -144,59 +148,9 @@ function GroupISplicing() {
 
 
 // ── rn-bacterial-rna ─────────────────────────────────────────────────────────
-function Riboswitch() {
-  const hair = (x: number, y: number, h: number, c: string) => <path d={`M${x} ${y} L${x} ${y - h} Q${x + 10} ${y - h - 14} ${x + 20} ${y - h} L${x + 20} ${y}`} fill="none" stroke={c} strokeWidth={4} strokeLinecap="round" />;
-  return (
-    <Svg h={250} label="ריבוסוויץ' שעוצר שעתוק: בלי המטבוליט, האפטמר פתוח ונוצר אנטי-טרמינטור — ה-RNA פולימראז ממשיך לשעתק את הגן. כשהמטבוליט נקשר לאפטמר, נוצר טרמינטור (גבעול ואחריו רצף U) — השעתוק נעצר לפני הגן.">
-      <He x={120} y={20} size={11} bold color={GREEN}>בלי מטבוליט — הגן מבוטא</He>
-      <He x={360} y={20} size={11} bold color={RED}>עם מטבוליט — השעתוק נעצר</He>
-      <Seg x={20} y={130} w={200} fill="#fdba74" h={8} />
-      {hair(40, 128, 40, BLUE)}
-      {hair(110, 128, 30, GREEN)}
-      <Seg x={260} y={130} w={110} fill="#fdba74" h={8} />
-      {hair(280, 128, 40, BLUE)}
-      {hair(330, 128, 34, RED)}
-      <La x={362} y={124} size={9} bold color={RED}>UUUU</La>
-      <circle cx={290} cy={74} r={6} fill={PURPLE} />
-      <ellipse cx={226} cy={134} rx={14} ry={10} fill={FILL.gray} stroke={MUTED} strokeWidth={1.2} />
-      <Arrow x1={242} y1={134} x2={256} y2={134} color={MUTED} width={1.2} />
-      <ellipse cx={392} cy={134} rx={14} ry={10} fill={FILL.gray} stroke={MUTED} strokeWidth={1.2} />
-      <He x={50} y={60} size={9.5} color={BLUE}>אפטמר</He>
-      <He x={120} y={78} size={9.5} color={GREEN}>אנטי-טרמינטור</He>
-      <He x={290} y={52} size={9.5} color={PURPLE}>מטבוליט</He>
-      <He x={342} y={68} size={9.5} color={RED}>טרמינטור</He>
-      <He x={120} y={170} size={10} color={GREEN}>הפולימראז ממשיך ← הגן משועתק</He>
-      <He x={360} y={170} size={10} color={RED}>הפולימראז משתחרר ← אין גן</He>
-      <He x={240} y={222} size={9.5} color={MUTED}>מנגנון אחר: הגבעול מסתיר את רצף שיין-דלגרנו ← אין תרגום</He>
-    </Svg>
-  );
-}
 
-function SrnaHfq() {
-  const ring = (cx: number, cy: number) => [0, 1, 2, 3, 4, 5].map((i) => <circle key={i} cx={cx + 16 * Math.cos((i * Math.PI) / 3)} cy={cy + 16 * Math.sin((i * Math.PI) / 3)} r={7} fill={FILL.purple} stroke={PURPLE} strokeWidth={1} />);
-  return (
-    <Svg h={240} label="sRNA בפעולת trans: החלבון Hfq (טבעת של שש תת-יחידות) מקרב sRNA ל-mRNA המטרה. כשה-sRNA מזווג עם האזור של רצף שיין-דלגרנו, הריבוזום לא נקשר וה-mRNA מפורק בידי RNase E (עיכוב). במקרים אחרים ה-sRNA פותח גבעול שמסתיר את רצף שיין-דלגרנו — ומאפשר תרגום (הפעלה).">
-      <He x={120} y={20} size={11} bold color={RED}>עיכוב</He>
-      <He x={360} y={20} size={11} bold color={GREEN}>הפעלה</He>
-      <Seg x={20} y={100} w={200} fill="#fdba74" h={8} />
-      <rect x={70} y={98} width={30} height={12} fill={RED} opacity={0.6} />
-      <Seg x={60} y={78} w={50} fill={TEAL} h={8} />
-      {ring(140, 60)}
-      <He x={60} y={130} size={9} color={RED}>SD מכוסה</He>
-      <He x={140} y={28} size={9.5} color={PURPLE}>Hfq</He>
-      <He x={56} y={72} size={9.5} anchor="end" color={TEAL}>sRNA</He>
-      <Box x={40} y={150} w={160} h={30} fill={FILL.red} stroke={RED} size={10}>RNase E מפרק</Box>
-      <Arrow x1={120} y1={136} x2={120} y2={148} color={RED} width={1.2} />
-      <Seg x={260} y={100} w={200} fill="#fdba74" h={8} />
-      <path d="M300 98 L300 62 Q312 48 324 62 L324 98" fill="none" stroke={ORANGE} strokeWidth={4} />
-      <Seg x={330} y={70} w={40} fill={TEAL} h={8} />
-      {ring(410, 60)}
-      <Box x={280} y={150} w={160} h={30} fill={FILL.green} stroke={GREEN} size={10}>ה-SD נחשף ← תרגום</Box>
-      <Arrow x1={360} y1={124} x2={360} y2={148} color={GREEN} width={1.2} />
-      <He x={240} y={214} size={9.5} color={MUTED}>דוגמאות: RyhB, MicF (עיכוב); DsrA על rpoS (הפעלה)</He>
-    </Svg>
-  );
-}
+
+
 
 // ── rn-pirna ─────────────────────────────────────────────────────────────────
 function PirnaCluster() {
@@ -206,7 +160,7 @@ function PirnaCluster() {
       <rect x={20} y={60} width={440} height={6} fill="#cbd5e1" />
       <rect x={60} y={52} width={200} height={22} rx={4} fill="none" stroke={INK} strokeWidth={1.2} strokeDasharray="5 3" />
       {frags.map(([x, w, c], i) => <rect key={i} x={x} y={56} width={w} height={14} fill={c} />)}
-      <He x={160} y={40} size={10.5} bold>אשכול piRNA ("ארכיון")</He>
+      <He x={160} y={40} size={10.5} bold>{'אשכול piRNA ("ארכיון")'}</He>
       <rect x={340} y={54} width={60} height={18} rx={3} fill="#fca5a5" />
       <He x={370} y={40} size={10} color={RED}>טרנספוזון פעיל</He>
       <Arrow x1={160} y1={80} x2={160} y2={108} color={INK} width={1.4} />
@@ -223,56 +177,10 @@ function PirnaCluster() {
   );
 }
 
-function PingPong() {
-  return (
-    <Svg h={250} label="מחזור הפינג-פונג: Aub, טעון ב-piRNA אנטיסנס (עם U בעמדה 1), חותך תעתיק סנס של טרנספוזון; השבר הופך ל-piRNA סנס ונטען על Ago3 (עם A בעמדה 10). Ago3 חותך תעתיק אנטיסנס מהאשכול, ויוצר piRNA אנטיסנס חדש ל-Aub. כך התעתיקים של טרנספוזון פעיל מגבירים את ה-piRNA נגדו.">
-      <Box2 x={30} y={30} w={150} h={46} fill={FILL.purple} stroke={PURPLE} lines={["Aub", "piRNA אנטיסנס (1U)"]} />
-      <Box2 x={300} y={30} w={150} h={46} fill={FILL.teal} stroke={TEAL} lines={["תעתיק סנס", "של טרנספוזון"]} />
-      <Box2 x={300} y={170} w={150} h={46} fill={FILL.orange} stroke={ORANGE} lines={["Ago3", "piRNA סנס (A10)"]} />
-      <Box2 x={30} y={170} w={150} h={46} fill={FILL.gray} stroke={MUTED} lines={["תעתיק אנטיסנס", "מהאשכול"]} />
-      <Arrow x1={182} y1={53} x2={298} y2={53} color={PURPLE} width={1.8} />
-      <He x={240} y={44} size={9.5} color={PURPLE}>חיתוך</He>
-      <Arrow x1={375} y1={78} x2={375} y2={168} color={TEAL} width={1.8} />
-      <He x={384} y={128} size={9.5} anchor="start" color={TEAL}>השבר נטען</He>
-      <Arrow x1={298} y1={193} x2={182} y2={193} color={ORANGE} width={1.8} />
-      <He x={240} y={184} size={9.5} color={ORANGE}>חיתוך</He>
-      <Arrow x1={105} y1={168} x2={105} y2={78} color={MUTED} width={1.8} />
-      <He x={96} y={128} size={9.5} anchor="end" color={MUTED}>השבר נטען</He>
-      <He x={240} y={124} size={10} bold>חפיפה של 10</He>
-      <He x={240} y={242} size={9.5} color={MUTED}>טרנספוזון פעיל יותר ← יותר piRNA נגדו</He>
-    </Svg>
-  );
-}
+
 
 // ── rn-snorna ────────────────────────────────────────────────────────────────
-function SnornaGuides() {
-  return (
-    <Svg h={260} label="שתי משפחות של snoRNA מדריכים. C/D: האזור המדריך, ממש לפני box D, מזווג עם ה-rRNA, והנוקלאוטיד ב-rRNA שמול העמדה החמישית לפני box D ממותל על ה-2′-OH בידי פיברילרין. H/ACA: גבעול עם כיס פנימי ששני צדיו מזווגים עם ה-rRNA, ובפתח הכיס נשאר U לא מזווג — דיסקרין הופך אותו לפסאודואורידין.">
-      <He x={120} y={18} size={11} bold color={BLUE}>box C/D — מתילציה</He>
-      <He x={360} y={18} size={11} bold color={ORANGE}>box H/ACA — פסאודואורידין</He>
-      <Seg x={30} y={64} w={180} fill={FILL.gray} h={10} />
-      <He x={36} y={56} size={9} anchor="start" color={MUTED}>rRNA</He>
-      <Seg x={60} y={86} w={110} fill={FILL.blue} h={10} />
-      <Seg x={170} y={86} w={30} fill={BLUE} h={10} />
-      <La x={185} y={110} size={9} bold color={BLUE}>D</La>
-      <Seg x={20} y={86} w={30} fill={BLUE} h={10} />
-      <La x={35} y={110} size={9} bold color={BLUE}>C</La>
-      <circle cx={140} cy={69} r={6} fill={RED} />
-      <La x={140} y={50} size={9} bold color={RED}>Me</La>
-      <He x={120} y={140} size={9.5}>הבסיס מול D+5 ממותל (2′-O)</He>
-      <Box x={60} y={156} w={120} h={28} fill={FILL.blue} stroke={BLUE} size={10}>פיברילרין (+SAM)</Box>
 
-      <path d="M300 200 L300 165 L320 155 L320 135 L300 125 L300 105" fill="none" stroke={ORANGE} strokeWidth={4} />
-      <path d="M380 200 L380 165 L360 155 L360 135 L380 125 L380 105" fill="none" stroke={ORANGE} strokeWidth={4} />
-      <path d="M300 105 Q340 55 380 105" fill="none" stroke={ORANGE} strokeWidth={4} />
-      <Seg x={300} y={140} w={80} fill={FILL.gray} h={8} />
-      <circle cx={340} cy={144} r={6} fill={GREEN} />
-      <La x={340} y={170} size={10} bold color={GREEN}>U → Ψ</La>
-      <He x={430} y={136} size={9} color={MUTED}>rRNA בכיס</He>
-      <Box x={290} y={214} w={110} h={28} fill={FILL.orange} stroke={ORANGE} size={10}>דיסקרין</Box>
-    </Svg>
-  );
-}
 
 // ── rn-lncrna ────────────────────────────────────────────────────────────────
 function LncrnaModes() {
@@ -303,28 +211,7 @@ function LncrnaModes() {
   );
 }
 
-function Xist() {
-  const dots: [number, number][] = [];
-  for (let y = 48; y <= 212; y += 12) for (const dx of [-12, 0, 12]) dots.push([120 + dx + ((y / 12) % 2 ? 4 : -4), y]);
-  return (
-    <Svg h={250} label="השתקת X: Xist מבוטא מה-X שיושתק ומצפה אותו ב-cis (נקודות ורודות). דרך אזור A-repeat הוא מגייס את SPEN, שמביא דה-אצטילאז (HDAC3) — השתקה ראשונית; דרך אזורים אחרים — חלבוני Polycomb (PRC1, PRC2), ובהמשך מתילציית DNA. ה-X השני נשאר פעיל, ושם מבוטא Tsix שמדכא את Xist.">
-      <rect x={100} y={40} width={40} height={180} rx={18} fill={FILL.gray} stroke={MUTED} strokeWidth={1.4} />
-      {dots.map(([x, y], i) => <circle key={i} cx={x} cy={y} r={3} fill={PINK} opacity={0.75} />)}
-      <He x={120} y={238} size={10} bold color={PINK}>X מושתק (Xi)</He>
-      <rect x={330} y={40} width={40} height={180} rx={18} fill={FILL.green} stroke={GREEN} strokeWidth={1.4} />
-      <He x={350} y={238} size={10} bold color={GREEN}>X פעיל (Xa)</He>
-      <Box x={180} y={50} w={110} h={30} fill={FILL.pink} stroke={PINK} size={10}>Xist (A-repeat)</Box>
-      <Box x={180} y={100} w={110} h={30} fill={FILL.purple} stroke={PURPLE} size={10}>SPEN ← HDAC3</Box>
-      <Box x={180} y={150} w={110} h={30} fill={FILL.blue} stroke={BLUE} size={10}>PRC1, PRC2</Box>
-      <Arrow x1={235} y1={82} x2={235} y2={98} color={INK} width={1.2} />
-      <Arrow x1={178} y1={115} x2={146} y2={115} color={INK} width={1.2} />
-      <Arrow x1={178} y1={165} x2={146} y2={165} color={INK} width={1.2} />
-      <He x={235} y={204} size={9} color={MUTED}>ובהמשך: מתילציית DNA</He>
-      <He x={420} y={130} size={9.5} color={GREEN} anchor="start">Tsix</He>
-      <Lead x1={418} y1={126} x2={372} y2={120} />
-    </Svg>
-  );
-}
+
 
 function LncrnaTests() {
   return (

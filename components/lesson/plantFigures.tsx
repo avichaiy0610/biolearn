@@ -11,6 +11,7 @@ import { Plasmodesma } from "./redraws/Plasmodesma";
 import { GuardCellOpening } from "./redraws/GuardCellOpening";
 import { AcidGrowth } from "./redraws/AcidGrowth";
 import { ShootMeristem } from "./redraws/ShootMeristem";
+import { RootGravitropism } from "./redraws/RootGravitropism";
 
 const PURPLE = "#7c3aed";
 const RED = "#b91c1c";
@@ -546,43 +547,7 @@ function PhytochromeSignaling() {
 }
 
 // ── pp-tropisms: root gravitropism ──────────────────────────────────────────
-function RootGravitropism() {
-  const Tip = ({ ox, horiz }: { ox: number; horiz: boolean }) => (
-    <g transform={horiz ? `translate(${ox} 110) rotate(-90)` : `translate(${ox} 30)`}>
-      <rect x={-34} y={0} width={68} height={170} fill={FILL.cyto} stroke={GREEN} strokeWidth={1.6} />
-      <path d="M-34 170 C -34 214, 34 214, 34 170 Z" fill="#fde68a" stroke="#b45309" strokeWidth={1.4} />
-      {/* columella cells */}
-      {[-20, 0, 20].map((dx) => <rect key={dx} x={dx - 9} y={176} width={18} height={18} rx={3} fill="#fff" stroke="#b45309" strokeWidth={0.8} />)}
-      {[-20, 0, 20].map((dx) => horiz
-        ? [0, 1].map((i) => <circle key={`${dx}${i}`} cx={dx - 6} cy={180 + i * 8} r={2.6} fill="#92400e" />)
-        : [0, 1].map((i) => <circle key={`${dx}${i}`} cx={dx - 4 + i * 8} cy={190} r={2.6} fill="#92400e" />))}
-      {/* auxin flows */}
-      <line x1={0} y1={10} x2={0} y2={166} stroke={ORANGE} strokeWidth={2} markerEnd="url(#bfArrow)" />
-      {horiz ? <>
-        <path d="M-12 196 C -30 196, -34 180, -32 120" fill="none" stroke={ORANGE} strokeWidth={4} markerEnd="url(#bfArrowS)" />
-        <path d="M12 196 C 30 196, 34 180, 32 150" fill="none" stroke={ORANGE} strokeWidth={1.2} markerEnd="url(#bfArrow)" />
-      </> : <>
-        <path d="M-12 196 C -30 196, -34 180, -32 120" fill="none" stroke={ORANGE} strokeWidth={2} markerEnd="url(#bfArrow)" />
-        <path d="M12 196 C 30 196, 34 180, 32 120" fill="none" stroke={ORANGE} strokeWidth={2} markerEnd="url(#bfArrow)" />
-      </>}
-    </g>
-  );
-  return (
-    <Svg h={330} label="גרביטרופיזם בשורש: בשורש אנכי, הסטטוליטים שוקעים לתחתית תאי הקולומלה, והאוקסין חוזר כלפי מעלה באופן שווה בשני הצדדים. בשורש אופקי, הסטטוליטים שוקעים לדופן התחתונה, נשאי PIN3 ו-PIN7 עוברים לשם, ויותר אוקסין חוזר בצד התחתון. בשורש, ריכוז גבוה של אוקסין מעכב התארכות — הצד התחתון גדל לאט, והשורש מתכופף למטה">
-      <He x={100} y={22} size={12} bold>שורש אנכי</He>
-      <Tip ox={100} horiz={false} />
-      <He x={100} y={262} size={10} color={MUTED}>זרימה שווה בשני הצדדים</He>
-      <He x={340} y={22} size={12} bold>שורש על הצד</He>
-      <Tip ox={250} horiz={true} />
-      <He x={340} y={160} size={10.5} bold color={ORANGE}>יותר אוקסין בצד התחתון</He>
-      <He x={340} y={178} size={10} color={RED}>← מעכב התארכות שם</He>
-      <He x={340} y={200} size={10} color={MUTED}>הצד העליון ממשיך לגדול</He>
-      <path d="M260 240 C 330 240, 390 250, 420 300" fill="none" stroke={GREEN} strokeWidth={3} markerEnd="url(#bfArrowS)" />
-      <He x={300} y={286} size={11} bold color={GREEN}>מתכופף למטה</He>
-      <He x={240} y={320} size={10} color={MUTED}>● סטטוליטים (עמילופלסטים) · חצים כתומים: זרימת אוקסין (מודל המזרקה)</He>
-    </Svg>
-  );
-}
+
 
 // ── pp-circadian-photoperiod: the core clock ────────────────────────────────
 function ClockLoop() {

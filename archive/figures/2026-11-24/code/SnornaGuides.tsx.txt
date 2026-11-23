@@ -1,0 +1,28 @@
+function SnornaGuides() {
+  return (
+    <Svg h={260} label="שתי משפחות של snoRNA מדריכים. C/D: האזור המדריך, ממש לפני box D, מזווג עם ה-rRNA, והנוקלאוטיד ב-rRNA שמול העמדה החמישית לפני box D ממותל על ה-2′-OH בידי פיברילרין. H/ACA: גבעול עם כיס פנימי ששני צדיו מזווגים עם ה-rRNA, ובפתח הכיס נשאר U לא מזווג — דיסקרין הופך אותו לפסאודואורידין.">
+      <He x={120} y={18} size={11} bold color={BLUE}>box C/D — מתילציה</He>
+      <He x={360} y={18} size={11} bold color={ORANGE}>box H/ACA — פסאודואורידין</He>
+      <Seg x={30} y={64} w={180} fill={FILL.gray} h={10} />
+      <He x={36} y={56} size={9} anchor="start" color={MUTED}>rRNA</He>
+      <Seg x={60} y={86} w={110} fill={FILL.blue} h={10} />
+      <Seg x={170} y={86} w={30} fill={BLUE} h={10} />
+      <La x={185} y={110} size={9} bold color={BLUE}>D</La>
+      <Seg x={20} y={86} w={30} fill={BLUE} h={10} />
+      <La x={35} y={110} size={9} bold color={BLUE}>C</La>
+      <circle cx={140} cy={69} r={6} fill={RED} />
+      <La x={140} y={50} size={9} bold color={RED}>Me</La>
+      <He x={120} y={140} size={9.5}>הבסיס מול D+5 ממותל (2′-O)</He>
+      <Box x={60} y={156} w={120} h={28} fill={FILL.blue} stroke={BLUE} size={10}>פיברילרין (+SAM)</Box>
+
+      <path d="M300 200 L300 165 L320 155 L320 135 L300 125 L300 105" fill="none" stroke={ORANGE} strokeWidth={4} />
+      <path d="M380 200 L380 165 L360 155 L360 135 L380 125 L380 105" fill="none" stroke={ORANGE} strokeWidth={4} />
+      <path d="M300 105 Q340 55 380 105" fill="none" stroke={ORANGE} strokeWidth={4} />
+      <Seg x={300} y={140} w={80} fill={FILL.gray} h={8} />
+      <circle cx={340} cy={144} r={6} fill={GREEN} />
+      <La x={340} y={170} size={10} bold color={GREEN}>U → Ψ</La>
+      <He x={430} y={136} size={9} color={MUTED}>rRNA בכיס</He>
+      <Box x={290} y={214} w={110} h={28} fill={FILL.orange} stroke={ORANGE} size={10}>דיסקרין</Box>
+    </Svg>
+  );
+}

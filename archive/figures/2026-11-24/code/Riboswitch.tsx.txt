@@ -1,0 +1,27 @@
+function Riboswitch() {
+  const hair = (x: number, y: number, h: number, c: string) => <path d={`M${x} ${y} L${x} ${y - h} Q${x + 10} ${y - h - 14} ${x + 20} ${y - h} L${x + 20} ${y}`} fill="none" stroke={c} strokeWidth={4} strokeLinecap="round" />;
+  return (
+    <Svg h={250} label="ריבוסוויץ' שעוצר שעתוק: בלי המטבוליט, האפטמר פתוח ונוצר אנטי-טרמינטור — ה-RNA פולימראז ממשיך לשעתק את הגן. כשהמטבוליט נקשר לאפטמר, נוצר טרמינטור (גבעול ואחריו רצף U) — השעתוק נעצר לפני הגן.">
+      <He x={120} y={20} size={11} bold color={GREEN}>בלי מטבוליט — הגן מבוטא</He>
+      <He x={360} y={20} size={11} bold color={RED}>עם מטבוליט — השעתוק נעצר</He>
+      <Seg x={20} y={130} w={200} fill="#fdba74" h={8} />
+      {hair(40, 128, 40, BLUE)}
+      {hair(110, 128, 30, GREEN)}
+      <Seg x={260} y={130} w={110} fill="#fdba74" h={8} />
+      {hair(280, 128, 40, BLUE)}
+      {hair(330, 128, 34, RED)}
+      <La x={362} y={124} size={9} bold color={RED}>UUUU</La>
+      <circle cx={290} cy={74} r={6} fill={PURPLE} />
+      <ellipse cx={226} cy={134} rx={14} ry={10} fill={FILL.gray} stroke={MUTED} strokeWidth={1.2} />
+      <Arrow x1={242} y1={134} x2={256} y2={134} color={MUTED} width={1.2} />
+      <ellipse cx={392} cy={134} rx={14} ry={10} fill={FILL.gray} stroke={MUTED} strokeWidth={1.2} />
+      <He x={50} y={60} size={9.5} color={BLUE}>אפטמר</He>
+      <He x={120} y={78} size={9.5} color={GREEN}>אנטי-טרמינטור</He>
+      <He x={290} y={52} size={9.5} color={PURPLE}>מטבוליט</He>
+      <He x={342} y={68} size={9.5} color={RED}>טרמינטור</He>
+      <He x={120} y={170} size={10} color={GREEN}>הפולימראז ממשיך ← הגן משועתק</He>
+      <He x={360} y={170} size={10} color={RED}>הפולימראז משתחרר ← אין גן</He>
+      <He x={240} y={222} size={9.5} color={MUTED}>מנגנון אחר: הגבעול מסתיר את רצף שיין-דלגרנו ← אין תרגום</He>
+    </Svg>
+  );
+}

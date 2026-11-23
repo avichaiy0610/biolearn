@@ -1,0 +1,22 @@
+function Xist() {
+  const dots: [number, number][] = [];
+  for (let y = 48; y <= 212; y += 12) for (const dx of [-12, 0, 12]) dots.push([120 + dx + ((y / 12) % 2 ? 4 : -4), y]);
+  return (
+    <Svg h={250} label="השתקת X: Xist מבוטא מה-X שיושתק ומצפה אותו ב-cis (נקודות ורודות). דרך אזור A-repeat הוא מגייס את SPEN, שמביא דה-אצטילאז (HDAC3) — השתקה ראשונית; דרך אזורים אחרים — חלבוני Polycomb (PRC1, PRC2), ובהמשך מתילציית DNA. ה-X השני נשאר פעיל, ושם מבוטא Tsix שמדכא את Xist.">
+      <rect x={100} y={40} width={40} height={180} rx={18} fill={FILL.gray} stroke={MUTED} strokeWidth={1.4} />
+      {dots.map(([x, y], i) => <circle key={i} cx={x} cy={y} r={3} fill={PINK} opacity={0.75} />)}
+      <He x={120} y={238} size={10} bold color={PINK}>X מושתק (Xi)</He>
+      <rect x={330} y={40} width={40} height={180} rx={18} fill={FILL.green} stroke={GREEN} strokeWidth={1.4} />
+      <He x={350} y={238} size={10} bold color={GREEN}>X פעיל (Xa)</He>
+      <Box x={180} y={50} w={110} h={30} fill={FILL.pink} stroke={PINK} size={10}>Xist (A-repeat)</Box>
+      <Box x={180} y={100} w={110} h={30} fill={FILL.purple} stroke={PURPLE} size={10}>SPEN ← HDAC3</Box>
+      <Box x={180} y={150} w={110} h={30} fill={FILL.blue} stroke={BLUE} size={10}>PRC1, PRC2</Box>
+      <Arrow x1={235} y1={82} x2={235} y2={98} color={INK} width={1.2} />
+      <Arrow x1={178} y1={115} x2={146} y2={115} color={INK} width={1.2} />
+      <Arrow x1={178} y1={165} x2={146} y2={165} color={INK} width={1.2} />
+      <He x={235} y={204} size={9} color={MUTED}>ובהמשך: מתילציית DNA</He>
+      <He x={420} y={130} size={9.5} color={GREEN} anchor="start">Tsix</He>
+      <Lead x1={418} y1={126} x2={372} y2={120} />
+    </Svg>
+  );
+}
