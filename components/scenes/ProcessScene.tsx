@@ -16,6 +16,7 @@ import MitoScene from "./MitoScene";
 import GngScene from "./GngScene";
 import UreaScene from "./UreaScene";
 import LncDevScene from "./LncDevScene";
+import LncConsScene from "./LncConsScene";
 import type { SceneId } from "./registry";
 
 const SCENES: Record<SceneId, ComponentType<{ lang?: string; processName?: string }>> = {
@@ -34,6 +35,7 @@ const SCENES: Record<SceneId, ComponentType<{ lang?: string; processName?: strin
   gluconeogenesis: GngScene,
   "urea-cycle": UreaScene,
   "lncrna-development": LncDevScene,
+  "lncrna-conservation": LncConsScene,
 };
 
 export default function ProcessScene({
