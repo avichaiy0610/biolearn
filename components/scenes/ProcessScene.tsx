@@ -17,6 +17,8 @@ import GngScene from "./GngScene";
 import UreaScene from "./UreaScene";
 import LncDevScene from "./LncDevScene";
 import LncConsScene from "./LncConsScene";
+import ActionPotentialScene from "./ActionPotentialScene";
+import SynapseScene from "./SynapseScene";
 import type { SceneId } from "./registry";
 
 const SCENES: Record<SceneId, ComponentType<{ lang?: string; processName?: string }>> = {
@@ -36,6 +38,8 @@ const SCENES: Record<SceneId, ComponentType<{ lang?: string; processName?: strin
   "urea-cycle": UreaScene,
   "lncrna-development": LncDevScene,
   "lncrna-conservation": LncConsScene,
+  "action-potential": ActionPotentialScene,
+  "synaptic-transmission": SynapseScene,
 };
 
 export default function ProcessScene({

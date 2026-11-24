@@ -2,10 +2,12 @@
    A process that matches here renders its bespoke scene instead of the
    LLM-generated step animation. Add a matcher + a component per process. */
 
-export type SceneId = "transcription" | "membrane-transport" | "cellular-respiration" | "mendelian-genetics" | "non-mendelian" | "secretory-pathway" | "photosynthesis" | "hemoglobin" | "blood-glucose" | "bacteria" | "adaptive-immunity" | "mito-inheritance" | "gluconeogenesis" | "urea-cycle" | "lncrna-development" | "lncrna-conservation";
+export type SceneId = "transcription" | "membrane-transport" | "cellular-respiration" | "mendelian-genetics" | "non-mendelian" | "secretory-pathway" | "photosynthesis" | "hemoglobin" | "blood-glucose" | "bacteria" | "adaptive-immunity" | "mito-inheritance" | "gluconeogenesis" | "urea-cycle" | "lncrna-development" | "lncrna-conservation" | "action-potential" | "synaptic-transmission";
 
 const MATCHERS: { id: SceneId; re: RegExp }[] = [
   { id: "transcription", re: /transcription|שעתוק/i },
+  { id: "action-potential", re: /^\s*(the action potential|פוטנציאל פעולה)\s*$/i },
+  { id: "synaptic-transmission", re: /chemical synaptic transmission|העברה סינפטית כימית/i },
   { id: "lncrna-conservation", re: /lncRNA Conservation and Genomic Context|שימור והקשר גנטומי של lncRNA|שימור והקשר גנומי/i },
   { id: "lncrna-development", re: /lncRNA Role in Development|תפקיד lncRNA בהתפתחות/i },
   { id: "urea-cycle", re: /urea cycle|מעגל השתנן/i },
