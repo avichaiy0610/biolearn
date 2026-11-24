@@ -10,6 +10,14 @@ import { BirdLung } from "./redraws/BirdLung";
 import { HairCell } from "./redraws/HairCell";
 import { ProtistLocomotion } from "./redraws/ProtistLocomotion";
 import { Paramecium } from "./redraws/Paramecium";
+import { PolypMedusa } from "./redraws/PolypMedusa";
+import { ArthropodPlan } from "./redraws/ArthropodPlan";
+import { Tissues } from "./redraws/Tissues";
+import { Amphioxus } from "./redraws/Amphioxus";
+import { GutComparison } from "./redraws/GutComparison";
+import { KidneySeries } from "./redraws/KidneySeries";
+import { BrainComparison } from "./redraws/BrainComparison";
+import { SkinLayers } from "./redraws/SkinLayers";
 
 const PURPLE = "#7c3aed";
 const RED = "#b91c1c";
@@ -110,37 +118,7 @@ function AnimalTree() {
 
 
 // ── z-polyp-medusa ───────────────────────────────────────────────────────────
-function PolypMedusa() {
-  const tent = { fill: "none", stroke: BLUE, strokeWidth: 3.5, strokeLinecap: "round" as const };
-  return (
-    <Svg h={262} label="פוליפ ומדוזה: אותה תוכנית גוף הפוכה. הפוליפ צמוד למצע עם הפה והזרועות למעלה ומזוגליאה דקה; המדוזה פעמון שוחה עם הפה והזרועות למטה ומזוגליאה עבה. שלוש השכבות: אפידרמיס, מזוגליאה וגסטרודרמיס סביב חלל העיכול.">
-      <path d="M103 92 Q86 64 80 40" {...tent} /><path d="M115 90 Q110 62 108 35" {...tent} />
-      <path d="M145 90 Q150 62 152 35" {...tent} /><path d="M157 92 Q174 64 180 40" {...tent} />
-      <rect x={100} y={90} width={60} height={130} rx={6} fill={FILL.sky} stroke={BLUE} strokeWidth={1.4} />
-      <rect x={106} y={96} width={48} height={120} rx={4} fill={FILL.yellow} />
-      <rect x={109} y={99} width={42} height={114} rx={4} fill={FILL.green} />
-      <rect x={115} y={105} width={30} height={102} rx={3} fill="white" />
-      <rect x={122} y={86} width={16} height={22} fill="white" />
-      <line x1={70} y1={222} x2={190} y2={222} stroke={BROWN} strokeWidth={3} />
-      <He x={130} y={62} size={11}>פה</He>
-      <He x={86} y={128} size={10} anchor="end">אפידרמיס</He><Lead x1={88} y1={125} x2={102} y2={125} />
-      <He x={86} y={150} size={10} anchor="end">מזוגליאה</He><Lead x1={88} y1={147} x2={107} y2={147} />
-      <He x={86} y={172} size={10} anchor="end">גסטרודרמיס</He><Lead x1={88} y1={169} x2={111} y2={169} />
-      <He x={86} y={196} size={10} anchor="end">חלל עיכול</He><Lead x1={88} y1={193} x2={126} y2={193} />
-      <He x={60} y={240} size={10} color={MUTED}>מצע</He>
-      <He x={130} y={255} size={13} bold>פוליפ</He>
 
-      <path d="M270 140 Q272 55 350 55 Q428 55 430 140 L414 140 Q408 84 350 84 Q292 84 286 140 Z" fill={FILL.yellow} stroke={BLUE} strokeWidth={1.4} />
-      <path d="M290 140 Q296 90 350 90 Q404 90 410 140" fill="none" stroke={GREEN} strokeWidth={2.5} />
-      <rect x={342} y={88} width={16} height={56} rx={3} fill={FILL.green} stroke={GREEN} />
-      <path d="M273 141 q-6 20 0 40 t0 40" {...tent} /><path d="M289 141 q-6 20 0 40 t0 36" {...tent} />
-      <path d="M411 141 q6 20 0 40 t0 36" {...tent} /><path d="M427 141 q6 20 0 40 t0 40" {...tent} />
-      <He x={350} y={42} size={10}>מזוגליאה עבה</He>
-      <He x={350} y={162} size={11}>פה</He>
-      <He x={350} y={255} size={13} bold>מדוזה</He>
-    </Svg>
-  );
-}
 
 // ── z-cnidocyte ──────────────────────────────────────────────────────────────
 
@@ -190,81 +168,10 @@ function WormSections() {
 }
 
 // ── z-arthropod-plan ─────────────────────────────────────────────────────────
-function ArthropodPlan() {
-  const muscle = { fill: "none", stroke: RED, strokeWidth: 5, strokeLinecap: "round" as const };
-  return (
-    <Svg h={200} label="השלד החיצוני של פרוקי רגליים. משמאל: שכבות הקוטיקולה — אפיקוטיקולה עם שעווה, פרוקוטיקולה מכיטין וחלבון (חלקה החיצוני מוקשח), ומתחתן האפידרמיס שמפריש אותן. מימין: מפרק — שני מקטעים קשיחים מחוברים בקרום גמיש, והשרירים מחוברים לשלד מבפנים.">
-      <rect x={120} y={50} width={105} height={7} fill={ORANGE} />
-      <rect x={120} y={57} width={105} height={30} fill="#fcd34d" />
-      <rect x={120} y={87} width={105} height={40} fill={FILL.yellow} />
-      {[0, 1, 2, 3, 4, 5, 6].map((i) => (
-        <g key={i}>
-          <rect x={120 + i * 15} y={127} width={15} height={24} fill={FILL.green} stroke={GREEN} strokeWidth={0.8} />
-          <circle cx={127.5 + i * 15} cy={140} r={3} fill={GREEN} />
-        </g>
-      ))}
-      <He x={112} y={57} size={10} anchor="end">אפיקוטיקולה (שעווה)</He>
-      <He x={112} y={76} size={10} anchor="end">אקסוקוטיקולה (מוקשחת)</He>
-      <He x={112} y={111} size={10} anchor="end">אנדוקוטיקולה</He>
-      <He x={112} y={143} size={10} anchor="end">אפידרמיס</He>
-      <path d="M230 57 L236 57 L236 127 L230 127" fill="none" stroke={MUTED} strokeWidth={1.2} />
-      <He x={242} y={88} size={10} anchor="start">פרוקוטיקולה:</He>
-      <He x={242} y={102} size={10} anchor="start">כיטין + חלבון</He>
-      <He x={172} y={185} size={12} bold>שכבות הקוטיקולה</He>
 
-      <rect x={322} y={60} width={68} height={50} fill="white" stroke={BROWN} strokeWidth={4} />
-      <rect x={402} y={60} width={68} height={50} fill="white" stroke={BROWN} strokeWidth={4} />
-      <path d="M390 60 q6 -6 12 0" fill="none" stroke={BROWN} strokeWidth={1.4} />
-      <path d="M390 110 q6 6 12 0" fill="none" stroke={BROWN} strokeWidth={1.4} />
-      <path d="M334 72 Q380 66 428 72" {...muscle} />
-      <path d="M334 98 Q380 104 428 98" {...muscle} />
-      <He x={378} y={38} size={10}>שריר פושט</He><Lead x1={378} y1={42} x2={378} y2={66} />
-      <He x={346} y={146} size={10}>שריר מכופף</He><Lead x1={350} y1={136} x2={354} y2={104} />
-      <He x={440} y={146} size={10}>קרום מפרקי גמיש</He><Lead x1={428} y1={136} x2={398} y2={117} />
-      <He x={396} y={185} size={12} bold>מפרק: השרירים מבפנים</He>
-    </Svg>
-  );
-}
 
 // ── z-tissues ────────────────────────────────────────────────────────────────
-function Tissues() {
-  return (
-    <Svg h={292} label="ארבעה סוגי רקמות: אפיתל — תאים צפופים על קרום בסיס; רקמת חיבור — מעט תאים בחומר בין-תאי עם סיבים; רקמת שריר — סיב שריר שלד עם פסים וגרעינים רבים; רקמת עצב — נוירון עם גוף תא, דנדריטים ואקסון.">
-      {Array.from({ length: 7 }, (_, i) => (
-        <g key={i}>
-          <rect x={30 + i * 26} y={46} width={26} height={30} fill={FILL.sky} stroke={BLUE} strokeWidth={1} />
-          <circle cx={43 + i * 26} cy={62} r={4.5} fill={BLUE} />
-        </g>
-      ))}
-      <line x1={26} y1={79} x2={216} y2={79} stroke={INK} strokeWidth={2.4} />
-      <rect x={26} y={81} width={190} height={14} fill={FILL.yellow} />
-      <He x={120} y={118} size={13} bold>אפיתל</He>
-      <He x={120} y={134} size={10} color={MUTED}>תאים צפופים על קרום בסיס</He>
 
-      <rect x={270} y={36} width={180} height={62} rx={6} fill={FILL.yellow} />
-      {[48, 64, 80].map((y, i) => <path key={y} d={`M276 ${y} q15 -${6 + i} 30 0 t30 0 t30 0 t30 0 t30 0 t18 0`} fill="none" stroke={ORANGE} strokeWidth={1.2} />)}
-      {[[300, 56], [352, 74], [410, 58], [430, 88], [326, 90]].map(([x, y]) => <ellipse key={x} cx={x} cy={y} rx={9} ry={4} fill={FILL.purple} stroke={PURPLE} strokeWidth={0.8} />)}
-      <He x={360} y={118} size={13} bold>רקמת חיבור</He>
-      <He x={360} y={134} size={10} color={MUTED}>מעט תאים, הרבה חומר בין-תאי וסיבים</He>
-
-      <rect x={30} y={182} width={180} height={36} rx={8} fill={FILL.red} stroke={RED} strokeWidth={1.2} />
-      {Array.from({ length: 28 }, (_, i) => <line key={i} x1={38 + i * 6} y1={186} x2={38 + i * 6} y2={214} stroke={RED} strokeWidth={0.7} />)}
-      {[60, 115, 170].map((x) => <ellipse key={x} cx={x} cy={185} rx={8} ry={3} fill={RED} />)}
-      <He x={120} y={258} size={13} bold>רקמת שריר</He>
-      <He x={120} y={274} size={10} color={MUTED}>סיב שריר שלד: פסים, הרבה גרעינים</He>
-
-      {[[270, 180, 262, 170], [266, 200, 254, 196], [272, 220, 262, 230], [292, 176, 288, 164]].map(([x, y, x2, y2]) => (
-        <path key={`${x}${y}`} d={`M300 200 L${x} ${y} L${x2} ${y2}`} fill="none" stroke={PURPLE} strokeWidth={1.6} />
-      ))}
-      <line x1={314} y1={200} x2={430} y2={200} stroke={PURPLE} strokeWidth={2} />
-      {[-8, 0, 8].map((d) => <line key={d} x1={430} y1={200} x2={446} y2={200 + d} stroke={PURPLE} strokeWidth={1.4} />)}
-      <circle cx={300} cy={200} r={14} fill={FILL.purple} stroke={PURPLE} strokeWidth={1.4} />
-      <circle cx={300} cy={200} r={4} fill={PURPLE} />
-      <He x={360} y={258} size={13} bold>רקמת עצב</He>
-      <He x={360} y={274} size={10} color={MUTED}>נוירון: גוף תא, דנדריטים, אקסון</He>
-    </Svg>
-  );
-}
 
 // ── z-cleavage ───────────────────────────────────────────────────────────────
 function Cleavage() {
@@ -330,120 +237,13 @@ function Organizer() {
 }
 
 // ── z-amphioxus ──────────────────────────────────────────────────────────────
-function Amphioxus() {
-  return (
-    <Svg w={520} h={232} label="האמפיוקסוס בחתך אורך: מיתר גב שנמשך עד קצה הראש, צינור עצבי גבי עם שלפוחית מוחית, מקטעי שריר, לוע עם חרכים רבים ואנדוסטיל ברצפתו, כיס כבדי, מעי, אטריופור, פי טבעת וזנב שממשיך אחרי פי הטבעת.">
-      <path d="M30 125 Q36 86 80 80 L410 82 Q470 96 504 122 Q470 146 410 164 L80 170 Q36 166 30 125 Z" fill={FILL.gray} stroke={INK} strokeWidth={1.4} />
-      {Array.from({ length: 11 }, (_, i) => 330 + i * 14).map((x) => <path key={x} d={`M${x + 9} 86 L${x} 122 L${x + 9} 158`} fill="none" stroke="#fca5a5" strokeWidth={1.2} />)}
-      <rect x={70} y={112} width={180} height={36} rx={6} fill="white" stroke={GREEN} strokeWidth={1.2} />
-      {Array.from({ length: 17 }, (_, i) => 84 + i * 9).map((x) => <line key={x} x1={x} y1={115} x2={x + 7} y2={145} stroke={GREEN} strokeWidth={1.2} />)}
-      <line x1={80} y1={148} x2={240} y2={148} stroke={PURPLE} strokeWidth={3} />
-      <path d="M256 134 L256 160 L194 160 Q190 156.5 194 153 L251 153 L251 134" fill="#fde68a" stroke={BROWN} strokeWidth={1} />
-      <rect x={250} y={124} width={160} height={10} rx={4} fill="#fde68a" stroke={BROWN} strokeWidth={1} />
-      <path d="M410 129 Q414 145 414 162" fill="none" stroke={BROWN} strokeWidth={2} />
-      <rect x={36} y={100} width={458} height={8} rx={4} fill={FILL.teal} stroke={TEAL} strokeWidth={1.2} />
-      <rect x={66} y={90} width={414} height={6} rx={3} fill={FILL.yellow} stroke={ORANGE} strokeWidth={1} />
-      <ellipse cx={64} cy={93} rx={6} ry={5} fill={FILL.yellow} stroke={ORANGE} strokeWidth={1} />
-      <circle cx={275} cy={167} r={3.5} fill="white" stroke={INK} />
-      {[36, 44, 52, 60].map((x) => <line key={x} x1={x} y1={150} x2={x - 3} y2={162} stroke={INK} strokeWidth={1} />)}
-      <He x={50} y={30} size={10}>שלפוחית מוחית</He><Lead x1={56} y1={34} x2={63} y2={88} />
-      <He x={160} y={50} size={10}>צינור עצבי גבי</He><Lead x1={160} y1={54} x2={160} y2={89} />
-      <He x={300} y={50} size={10}>מיתר הגב — עד קצה הראש</He><Lead x1={300} y1={54} x2={300} y2={100} />
-      <He x={450} y={50} size={10}>מקטעי שריר</He><Lead x1={450} y1={54} x2={452} y2={90} />
-      <He x={40} y={192} size={10}>פה וזיפים</He><Lead x1={40} y1={182} x2={44} y2={162} />
-      <He x={130} y={192} size={10}>אנדוסטיל</He><Lead x1={130} y1={182} x2={130} y2={150} />
-      <He x={290} y={192} size={10}>אטריופור</He><Lead x1={286} y1={182} x2={277} y2={171} />
-      <He x={410} y={192} size={10}>פי טבעת</He><Lead x1={412} y1={182} x2={414} y2={164} />
-      <He x={86} y={216} size={10}>חרכי הלוע</He><Lead x1={86} y1={206} x2={100} y2={140} />
-      <He x={212} y={216} size={10}>כיס כבדי</He><Lead x1={212} y1={206} x2={215} y2={161} />
-      <He x={340} y={216} size={10}>מעי</He><Lead x1={340} y1={206} x2={340} y2={135} />
-      <He x={466} y={216} size={10}>זנב אחרי פי הטבעת</He><Lead x1={480} y1={206} x2={478} y2={130} />
-    </Svg>
-  );
-}
+
 
 // ── z-gut-comparison ─────────────────────────────────────────────────────────
-function GutComparison() {
-  const st = { fill: FILL.orange, stroke: ORANGE, strokeWidth: 1.2 };
-  const ferm = { fill: FILL.green, stroke: GREEN, strokeWidth: 1.2 };
-  const tube = { fill: "#fde68a", stroke: BROWN, strokeWidth: 1 };
-  const name = (y: number, a: string, b: string) => (
-    <g>
-      <He x={475} y={y} size={12} bold anchor="end">{a}</He>
-      <He x={475} y={y + 16} size={10} color={MUTED} anchor="end">{b}</He>
-    </g>
-  );
-  return (
-    <Svg h={345} label="השוואה סכמטית של מערכות עיכול: טורף — קיבה פשוטה ומעי קצר יחסית; מעלה גירה — קיבה בת ארבעה תאים עם כרס לתסיסה; תסיסה במעי האחורי — מעי עיוור ומעי גס גדולים; ציפור — זפק, קיבה בלוטית וקורקבן שרירי.">
-      <rect x={30} y={42} width={50} height={6} {...tube} />
-      <ellipse cx={105} cy={45} rx={26} ry={16} {...st} />
-      <rect x={131} y={40} width={150} height={10} {...tube} />
-      <ellipse cx={286} cy={57} rx={6} ry={5} {...tube} />
-      <rect x={281} y={38} width={70} height={14} {...tube} />
-      <He x={105} y={80} size={10}>קיבה</He><He x={206} y={70} size={10}>מעי דק</He><He x={316} y={76} size={10}>מעי גס</He>
-      {name(42, "טורף", "כלב, חתול")}
 
-      <rect x={30} y={127} width={36} height={6} {...tube} />
-      <ellipse cx={100} cy={128} rx={34} ry={24} {...ferm} />
-      <circle cx={142} cy={115} r={10} {...ferm} />
-      <circle cx={162} cy={136} r={10} {...ferm} />
-      <ellipse cx={192} cy={128} rx={17} ry={11} {...st} />
-      <rect x={209} y={124} width={119} height={9} {...tube} />
-      <rect x={328} y={122} width={32} height={13} {...tube} />
-      <He x={100} y={170} size={10}>כרס</He><He x={142} y={98} size={10}>בית הכוסות</He><He x={162} y={162} size={10}>המסס</He>
-      <He x={194} y={156} size={10}>קבה</He><He x={268} y={152} size={10}>מעי דק</He><He x={344} y={152} size={10}>מעי גס</He>
-      {name(124, "מעלה גירה", "פרה, כבשה")}
-
-      <rect x={30} y={211} width={50} height={6} {...tube} />
-      <ellipse cx={104} cy={214} rx={24} ry={14} {...st} />
-      <rect x={128} y={210} width={120} height={9} {...tube} />
-      <ellipse cx={268} cy={240} rx={30} ry={18} {...ferm} />
-      <rect x={248} y={206} width={112} height={16} {...ferm} />
-      <He x={104} y={246} size={10}>קיבה</He><He x={188} y={240} size={10}>מעי דק</He>
-      <He x={306} y={256} size={10} anchor="start">מעי עיוור</He><He x={318} y={198} size={10}>מעי גס</He>
-      {name(210, "תסיסה במעי האחורי", "סוס, ארנבת")}
-
-      <rect x={30} y={292} width={68} height={6} {...tube} />
-      <ellipse cx={70} cy={304} rx={12} ry={9} {...tube} />
-      <ellipse cx={110} cy={295} rx={12} ry={8} {...st} />
-      <circle cx={140} cy={295} r={14} fill="#fecaca" stroke={RED} strokeWidth={3} />
-      <rect x={154} y={291} width={170} height={9} {...tube} />
-      <ellipse cx={330} cy={306} rx={10} ry={4} {...ferm} />
-      <rect x={324} y={290} width={36} height={11} {...tube} />
-      <He x={68} y={330} size={10}>זפק</He><He x={106} y={276} size={10}>קיבה בלוטית</He>
-      <He x={142} y={330} size={10}>קורקבן</He><He x={238} y={320} size={10}>מעי דק</He>
-      {name(290, "ציפור", "תרנגולת")}
-    </Svg>
-  );
-}
 
 // ── z-kidney-series ──────────────────────────────────────────────────────────
-function KidneySeries() {
-  return (
-    <Svg h={228} label="שלוש הכליות של עובר חולייתן, מקדימה לאחור: פרונפרוס, מזונפרוס ומטנפרוס. הצינור המזונפרי (צינור וולף) מוביל לביב, והשופכן יוצא מהמטנפרוס. בבוגר: המזונפרוס בדגים ובדו-חיים, המטנפרוס באמניוטים.">
-      <rect x={48} y={62} width={64} height={44} rx={6} fill={FILL.gray} stroke={MUTED} strokeDasharray="4 3" />
-      {[62, 80, 98].map((x) => <path key={x} d={`M${x} 70 q6 10 0 20 q-4 10 0 25`} fill="none" stroke={MUTED} strokeWidth={1.2} />)}
-      <rect x={130} y={62} width={170} height={44} rx={6} fill={FILL.sky} stroke={BLUE} strokeWidth={1.2} />
-      {Array.from({ length: 13 }, (_, i) => 140 + i * 12.5).map((x) => <path key={x} d={`M${x} 70 q6 10 0 20 q-4 10 0 25`} fill="none" stroke={BLUE} strokeWidth={1.2} />)}
-      <ellipse cx={350} cy={84} rx={26} ry={22} fill={FILL.green} stroke={GREEN} strokeWidth={1.4} />
-      <line x1={58} y1={115} x2={430} y2={115} stroke={BLUE} strokeWidth={2.4} />
-      <path d="M350 106 Q356 128 430 124" fill="none" stroke={GREEN} strokeWidth={2.4} />
-      <circle cx={440} cy={120} r={10} fill={FILL.gray} stroke={INK} strokeWidth={1.4} />
-      <He x={80} y={38} size={11} bold>פרונפרוס</He><He x={80} y={52} size={9} color={MUTED}>קדמית</He>
-      <He x={215} y={38} size={11} bold>מזונפרוס</He><He x={215} y={52} size={9} color={MUTED}>אמצעית</He>
-      <He x={350} y={38} size={11} bold>מטנפרוס</He><He x={350} y={52} size={9} color={MUTED}>אחורית</He>
-      <He x={215} y={134} size={10} color={BLUE}>צינור וולף</He>
-      <He x={386} y={150} size={10} color={GREEN}>שופכן</He>
-      <He x={454} y={148} size={10}>ביב</He>
-      <He x={36} y={88} size={10} color={MUTED} anchor="end">קדמי</He>
 
-      <rect x={130} y={168} width={170} height={10} rx={3} fill={BLUE} />
-      <He x={122} y={177} size={10} anchor="end">בוגר: דגים ודו-חיים</He>
-      <rect x={324} y={196} width={52} height={10} rx={3} fill={GREEN} />
-      <He x={316} y={205} size={10} anchor="end">בוגר: זוחלים, ציפורים, יונקים</He>
-    </Svg>
-  );
-}
 
 // ── z-countercurrent ─────────────────────────────────────────────────────────
 function Countercurrent() {
@@ -520,87 +320,13 @@ function Circuits() {
 }
 
 // ── z-brain-comparison ───────────────────────────────────────────────────────
-function BrainComparison() {
-  const C = { olf: GREEN, cer: BLUE, tec: ORANGE, cb: PURPLE, med: MUTED };
-  const sh = (c: string) => ({ fill: c, fillOpacity: 0.25, stroke: c, strokeWidth: 1.4 });
-  const cord = (x: number, y: number) => <rect x={x} y={y - 6} width={270 - x} height={12} rx={5} {...sh(C.med)} />;
-  const legend: [string, string][] = [["אונת ריח", C.olf], ["מוח קצה (המיספרות)", C.cer], ["טקטום — מוח תיכון (ראייה)", C.tec], ["מוחון", C.cb], ["מוח מוארך וחוט השדרה", C.med]];
-  return (
-    <Svg h={278} label="מוחות של דג, ציפור ויונק, מבט מהצד (הקדמי משמאל): בדג — אונות ריח וטקטום בולטים ומוח קצה קטן; בציפור — מוח קצה גדול, טקטום גדול ומוחון גדול; ביונק — מוח קצה ענק עם קפלים שמכסה את רוב המוח.">
-      {cord(190, 52)}
-      <ellipse cx={60} cy={52} rx={10} ry={7} {...sh(C.olf)} />
-      <ellipse cx={94} cy={52} rx={18} ry={13} {...sh(C.cer)} />
-      <ellipse cx={140} cy={48} rx={24} ry={17} {...sh(C.tec)} />
-      <ellipse cx={180} cy={50} rx={14} ry={12} {...sh(C.cb)} />
-      <He x={290} y={56} size={12} bold anchor="start">דג</He>
 
-      {cord(200, 134)}
-      <ellipse cx={56} cy={130} rx={6} ry={4} {...sh(C.olf)} />
-      <ellipse cx={150} cy={152} rx={17} ry={12} {...sh(C.tec)} />
-      <ellipse cx={108} cy={124} rx={46} ry={30} {...sh(C.cer)} />
-      <ellipse cx={184} cy={122} rx={18} ry={22} {...sh(C.cb)} />
-      {[112, 120, 128].map((y) => <line key={y} x1={172} y1={y} x2={196} y2={y} stroke={C.cb} strokeWidth={1} />)}
-      <He x={290} y={138} size={12} bold anchor="start">ציפור</He>
-
-      {cord(214, 246)}
-      <ellipse cx={44} cy={236} rx={8} ry={5} {...sh(C.olf)} />
-      <ellipse cx={204} cy={238} rx={22} ry={15} {...sh(C.cb)} />
-      {[230, 238, 246].map((y) => <line key={y} x1={186} y1={y} x2={222} y2={y} stroke={C.cb} strokeWidth={1} />)}
-      <ellipse cx={120} cy={216} rx={70} ry={40} {...sh(C.cer)} />
-      {["M80 196 q8 10 0 20 q-8 10 0 20", "M112 184 q8 12 0 24 q-8 12 0 24", "M146 188 q8 10 0 20 q-8 10 0 20"].map((d) => <path key={d} d={d} fill="none" stroke={C.cer} strokeWidth={1} />)}
-      <He x={290} y={242} size={12} bold anchor="start">יונק</He>
-
-      {legend.map(([t, c], i) => (
-        <g key={t}>
-          <rect x={456} y={78 + i * 24} width={14} height={12} rx={2} {...sh(c)} />
-          <He x={450} y={88 + i * 24} size={10} anchor="end">{t}</He>
-        </g>
-      ))}
-    </Svg>
-  );
-}
 
 // ── z-hair-cell ──────────────────────────────────────────────────────────────
 
 
 // ── z-skin-layers ────────────────────────────────────────────────────────────
-function SkinLayers() {
-  const X0 = 110, X1 = 330;
-  return (
-    <Svg h={262} label="חתך בעור של חולייתן יבשתי: אפידרמיס רב-שכבתי (מאקטודרם) — תאים מתחלקים בבסיס ושכבה עליונה מתקרנת; דרמיס (רקמת חיבור) עם כלי דם, עצבים ותאי פיגמנט; ומתחת — שכבה תת-עורית של רקמת שומן.">
-      <rect x={X0} y={40} width={X1 - X0} height={12} fill="#fdba74" />
-      {[44, 48].map((y) => <line key={y} x1={X0 + 4} y1={y} x2={X1 - 4} y2={y} stroke={BROWN} strokeWidth={0.6} />)}
-      {[[56, 12, 20], [70, 15, 18], [86, 14, 16]].map(([y, h, w], r) =>
-        Array.from({ length: Math.floor((X1 - X0) / w) }, (_, i) => (
-          <g key={`${r}-${i}`}>
-            <rect x={X0 + i * w + (r % 2) * 4} y={y - 4} width={w} height={h} fill={FILL.pink} stroke="#db2777" strokeWidth={0.6} />
-            <circle cx={X0 + i * w + (r % 2) * 4 + w / 2} cy={y - 4 + h / 2} r={2} fill="#db2777" />
-          </g>
-        )),
-      )}
-      <rect x={X0} y={96} width={X1 - X0} height={4} fill="white" />
-      <line x1={X0} y1={100} x2={X1} y2={100} stroke={INK} strokeWidth={1.4} />
-      <rect x={X0} y={101} width={X1 - X0} height={89} fill={FILL.yellow} />
-      {[120, 140, 160, 178].map((y, i) => <path key={y} d={`M${X0 + 6} ${y} q12 -${4 + i} 24 0 t24 0 t24 0 t24 0 t24 0 t24 0 t24 0 t24 0 t16 0`} fill="none" stroke={ORANGE} strokeWidth={0.8} />)}
-      <path d="M200 190 L200 128 Q210 112 220 128 L220 190" fill="none" stroke={RED} strokeWidth={2.4} />
-      <path d="M270 190 Q266 160 280 140 Q290 125 288 110" fill="none" stroke={PURPLE} strokeWidth={2} />
-      <path d="M150 106 l4 4 l6 -2 l-3 6 l4 5 l-6 0 l-3 6 l-2 -6 l-6 -1 l5 -4z" fill={BROWN} />
-      {Array.from({ length: 11 }, (_, i) => <circle key={i} cx={X0 + 10 + i * 20} cy={i % 2 ? 222 : 212} r={10} fill="#fef9c3" stroke="#ca8a04" strokeWidth={1} />)}
-      {[[338, 40, 100, "אפידרמיס (אקטודרם)"], [338, 101, 190, "דרמיס (מזודרם)"], [338, 192, 236, "תת-עור (שומן)"]].map(([x, a, b, t]) => (
-        <g key={t as string}>
-          <path d={`M${x} ${a} L${(x as number) + 6} ${a} L${(x as number) + 6} ${b} L${x} ${b}`} fill="none" stroke={MUTED} strokeWidth={1.2} />
-          <He x={(x as number) + 14} y={((a as number) + (b as number)) / 2 + 4} size={11} anchor="start">{t as string}</He>
-        </g>
-      ))}
-      <He x={100} y={50} size={10} anchor="end">שכבה מתקרנת</He>
-      <He x={100} y={92} size={10} anchor="end">תאים מתחלקים</He>
-      <He x={100} y={124} size={10} anchor="end">תא פיגמנט</He><Lead x1={102} y1={121} x2={146} y2={113} />
-      <He x={100} y={156} size={10} anchor="end">כלי דם</He><Lead x1={102} y1={153} x2={199} y2={150} />
-      <He x={100} y={256} size={10} anchor="end">תאי שומן</He><Lead x1={102} y1={250} x2={118} y2={232} />
-      <He x={300} y={256} size={10}>עצב</He><Lead x1={296} y1={246} x2={272} y2={186} />
-    </Svg>
-  );
-}
+
 
 // ── z-feather ────────────────────────────────────────────────────────────────
 function Feather() {

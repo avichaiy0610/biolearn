@@ -1,0 +1,37 @@
+function SkinLayers() {
+  const X0 = 110, X1 = 330;
+  return (
+    <Svg h={262} label="חתך בעור של חולייתן יבשתי: אפידרמיס רב-שכבתי (מאקטודרם) — תאים מתחלקים בבסיס ושכבה עליונה מתקרנת; דרמיס (רקמת חיבור) עם כלי דם, עצבים ותאי פיגמנט; ומתחת — שכבה תת-עורית של רקמת שומן.">
+      <rect x={X0} y={40} width={X1 - X0} height={12} fill="#fdba74" />
+      {[44, 48].map((y) => <line key={y} x1={X0 + 4} y1={y} x2={X1 - 4} y2={y} stroke={BROWN} strokeWidth={0.6} />)}
+      {[[56, 12, 20], [70, 15, 18], [86, 14, 16]].map(([y, h, w], r) =>
+        Array.from({ length: Math.floor((X1 - X0) / w) }, (_, i) => (
+          <g key={`${r}-${i}`}>
+            <rect x={X0 + i * w + (r % 2) * 4} y={y - 4} width={w} height={h} fill={FILL.pink} stroke="#db2777" strokeWidth={0.6} />
+            <circle cx={X0 + i * w + (r % 2) * 4 + w / 2} cy={y - 4 + h / 2} r={2} fill="#db2777" />
+          </g>
+        )),
+      )}
+      <rect x={X0} y={96} width={X1 - X0} height={4} fill="white" />
+      <line x1={X0} y1={100} x2={X1} y2={100} stroke={INK} strokeWidth={1.4} />
+      <rect x={X0} y={101} width={X1 - X0} height={89} fill={FILL.yellow} />
+      {[120, 140, 160, 178].map((y, i) => <path key={y} d={`M${X0 + 6} ${y} q12 -${4 + i} 24 0 t24 0 t24 0 t24 0 t24 0 t24 0 t24 0 t24 0 t16 0`} fill="none" stroke={ORANGE} strokeWidth={0.8} />)}
+      <path d="M200 190 L200 128 Q210 112 220 128 L220 190" fill="none" stroke={RED} strokeWidth={2.4} />
+      <path d="M270 190 Q266 160 280 140 Q290 125 288 110" fill="none" stroke={PURPLE} strokeWidth={2} />
+      <path d="M150 106 l4 4 l6 -2 l-3 6 l4 5 l-6 0 l-3 6 l-2 -6 l-6 -1 l5 -4z" fill={BROWN} />
+      {Array.from({ length: 11 }, (_, i) => <circle key={i} cx={X0 + 10 + i * 20} cy={i % 2 ? 222 : 212} r={10} fill="#fef9c3" stroke="#ca8a04" strokeWidth={1} />)}
+      {[[338, 40, 100, "אפידרמיס (אקטודרם)"], [338, 101, 190, "דרמיס (מזודרם)"], [338, 192, 236, "תת-עור (שומן)"]].map(([x, a, b, t]) => (
+        <g key={t as string}>
+          <path d={`M${x} ${a} L${(x as number) + 6} ${a} L${(x as number) + 6} ${b} L${x} ${b}`} fill="none" stroke={MUTED} strokeWidth={1.2} />
+          <He x={(x as number) + 14} y={((a as number) + (b as number)) / 2 + 4} size={11} anchor="start">{t as string}</He>
+        </g>
+      ))}
+      <He x={100} y={50} size={10} anchor="end">שכבה מתקרנת</He>
+      <He x={100} y={92} size={10} anchor="end">תאים מתחלקים</He>
+      <He x={100} y={124} size={10} anchor="end">תא פיגמנט</He><Lead x1={102} y1={121} x2={146} y2={113} />
+      <He x={100} y={156} size={10} anchor="end">כלי דם</He><Lead x1={102} y1={153} x2={199} y2={150} />
+      <He x={100} y={256} size={10} anchor="end">תאי שומן</He><Lead x1={102} y1={250} x2={118} y2={232} />
+      <He x={300} y={256} size={10}>עצב</He><Lead x1={296} y1={246} x2={272} y2={186} />
+    </Svg>
+  );
+}

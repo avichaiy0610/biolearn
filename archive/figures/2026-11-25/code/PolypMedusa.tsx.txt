@@ -1,0 +1,31 @@
+function PolypMedusa() {
+  const tent = { fill: "none", stroke: BLUE, strokeWidth: 3.5, strokeLinecap: "round" as const };
+  return (
+    <Svg h={262} label="פוליפ ומדוזה: אותה תוכנית גוף הפוכה. הפוליפ צמוד למצע עם הפה והזרועות למעלה ומזוגליאה דקה; המדוזה פעמון שוחה עם הפה והזרועות למטה ומזוגליאה עבה. שלוש השכבות: אפידרמיס, מזוגליאה וגסטרודרמיס סביב חלל העיכול.">
+      <path d="M103 92 Q86 64 80 40" {...tent} /><path d="M115 90 Q110 62 108 35" {...tent} />
+      <path d="M145 90 Q150 62 152 35" {...tent} /><path d="M157 92 Q174 64 180 40" {...tent} />
+      <rect x={100} y={90} width={60} height={130} rx={6} fill={FILL.sky} stroke={BLUE} strokeWidth={1.4} />
+      <rect x={106} y={96} width={48} height={120} rx={4} fill={FILL.yellow} />
+      <rect x={109} y={99} width={42} height={114} rx={4} fill={FILL.green} />
+      <rect x={115} y={105} width={30} height={102} rx={3} fill="white" />
+      <rect x={122} y={86} width={16} height={22} fill="white" />
+      <line x1={70} y1={222} x2={190} y2={222} stroke={BROWN} strokeWidth={3} />
+      <He x={130} y={62} size={11}>פה</He>
+      <He x={86} y={128} size={10} anchor="end">אפידרמיס</He><Lead x1={88} y1={125} x2={102} y2={125} />
+      <He x={86} y={150} size={10} anchor="end">מזוגליאה</He><Lead x1={88} y1={147} x2={107} y2={147} />
+      <He x={86} y={172} size={10} anchor="end">גסטרודרמיס</He><Lead x1={88} y1={169} x2={111} y2={169} />
+      <He x={86} y={196} size={10} anchor="end">חלל עיכול</He><Lead x1={88} y1={193} x2={126} y2={193} />
+      <He x={60} y={240} size={10} color={MUTED}>מצע</He>
+      <He x={130} y={255} size={13} bold>פוליפ</He>
+
+      <path d="M270 140 Q272 55 350 55 Q428 55 430 140 L414 140 Q408 84 350 84 Q292 84 286 140 Z" fill={FILL.yellow} stroke={BLUE} strokeWidth={1.4} />
+      <path d="M290 140 Q296 90 350 90 Q404 90 410 140" fill="none" stroke={GREEN} strokeWidth={2.5} />
+      <rect x={342} y={88} width={16} height={56} rx={3} fill={FILL.green} stroke={GREEN} />
+      <path d="M273 141 q-6 20 0 40 t0 40" {...tent} /><path d="M289 141 q-6 20 0 40 t0 36" {...tent} />
+      <path d="M411 141 q6 20 0 40 t0 36" {...tent} /><path d="M427 141 q6 20 0 40 t0 40" {...tent} />
+      <He x={350} y={42} size={10}>מזוגליאה עבה</He>
+      <He x={350} y={162} size={11}>פה</He>
+      <He x={350} y={255} size={13} bold>מדוזה</He>
+    </Svg>
+  );
+}

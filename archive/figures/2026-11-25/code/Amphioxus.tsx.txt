@@ -1,0 +1,31 @@
+function Amphioxus() {
+  return (
+    <Svg w={520} h={232} label="האמפיוקסוס בחתך אורך: מיתר גב שנמשך עד קצה הראש, צינור עצבי גבי עם שלפוחית מוחית, מקטעי שריר, לוע עם חרכים רבים ואנדוסטיל ברצפתו, כיס כבדי, מעי, אטריופור, פי טבעת וזנב שממשיך אחרי פי הטבעת.">
+      <path d="M30 125 Q36 86 80 80 L410 82 Q470 96 504 122 Q470 146 410 164 L80 170 Q36 166 30 125 Z" fill={FILL.gray} stroke={INK} strokeWidth={1.4} />
+      {Array.from({ length: 11 }, (_, i) => 330 + i * 14).map((x) => <path key={x} d={`M${x + 9} 86 L${x} 122 L${x + 9} 158`} fill="none" stroke="#fca5a5" strokeWidth={1.2} />)}
+      <rect x={70} y={112} width={180} height={36} rx={6} fill="white" stroke={GREEN} strokeWidth={1.2} />
+      {Array.from({ length: 17 }, (_, i) => 84 + i * 9).map((x) => <line key={x} x1={x} y1={115} x2={x + 7} y2={145} stroke={GREEN} strokeWidth={1.2} />)}
+      <line x1={80} y1={148} x2={240} y2={148} stroke={PURPLE} strokeWidth={3} />
+      <path d="M256 134 L256 160 L194 160 Q190 156.5 194 153 L251 153 L251 134" fill="#fde68a" stroke={BROWN} strokeWidth={1} />
+      <rect x={250} y={124} width={160} height={10} rx={4} fill="#fde68a" stroke={BROWN} strokeWidth={1} />
+      <path d="M410 129 Q414 145 414 162" fill="none" stroke={BROWN} strokeWidth={2} />
+      <rect x={36} y={100} width={458} height={8} rx={4} fill={FILL.teal} stroke={TEAL} strokeWidth={1.2} />
+      <rect x={66} y={90} width={414} height={6} rx={3} fill={FILL.yellow} stroke={ORANGE} strokeWidth={1} />
+      <ellipse cx={64} cy={93} rx={6} ry={5} fill={FILL.yellow} stroke={ORANGE} strokeWidth={1} />
+      <circle cx={275} cy={167} r={3.5} fill="white" stroke={INK} />
+      {[36, 44, 52, 60].map((x) => <line key={x} x1={x} y1={150} x2={x - 3} y2={162} stroke={INK} strokeWidth={1} />)}
+      <He x={50} y={30} size={10}>שלפוחית מוחית</He><Lead x1={56} y1={34} x2={63} y2={88} />
+      <He x={160} y={50} size={10}>צינור עצבי גבי</He><Lead x1={160} y1={54} x2={160} y2={89} />
+      <He x={300} y={50} size={10}>מיתר הגב — עד קצה הראש</He><Lead x1={300} y1={54} x2={300} y2={100} />
+      <He x={450} y={50} size={10}>מקטעי שריר</He><Lead x1={450} y1={54} x2={452} y2={90} />
+      <He x={40} y={192} size={10}>פה וזיפים</He><Lead x1={40} y1={182} x2={44} y2={162} />
+      <He x={130} y={192} size={10}>אנדוסטיל</He><Lead x1={130} y1={182} x2={130} y2={150} />
+      <He x={290} y={192} size={10}>אטריופור</He><Lead x1={286} y1={182} x2={277} y2={171} />
+      <He x={410} y={192} size={10}>פי טבעת</He><Lead x1={412} y1={182} x2={414} y2={164} />
+      <He x={86} y={216} size={10}>חרכי הלוע</He><Lead x1={86} y1={206} x2={100} y2={140} />
+      <He x={212} y={216} size={10}>כיס כבדי</He><Lead x1={212} y1={206} x2={215} y2={161} />
+      <He x={340} y={216} size={10}>מעי</He><Lead x1={340} y1={206} x2={340} y2={135} />
+      <He x={466} y={216} size={10}>זנב אחרי פי הטבעת</He><Lead x1={480} y1={206} x2={478} y2={130} />
+    </Svg>
+  );
+}

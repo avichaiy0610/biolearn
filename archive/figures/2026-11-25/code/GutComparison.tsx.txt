@@ -1,0 +1,53 @@
+function GutComparison() {
+  const st = { fill: FILL.orange, stroke: ORANGE, strokeWidth: 1.2 };
+  const ferm = { fill: FILL.green, stroke: GREEN, strokeWidth: 1.2 };
+  const tube = { fill: "#fde68a", stroke: BROWN, strokeWidth: 1 };
+  const name = (y: number, a: string, b: string) => (
+    <g>
+      <He x={475} y={y} size={12} bold anchor="end">{a}</He>
+      <He x={475} y={y + 16} size={10} color={MUTED} anchor="end">{b}</He>
+    </g>
+  );
+  return (
+    <Svg h={345} label="השוואה סכמטית של מערכות עיכול: טורף — קיבה פשוטה ומעי קצר יחסית; מעלה גירה — קיבה בת ארבעה תאים עם כרס לתסיסה; תסיסה במעי האחורי — מעי עיוור ומעי גס גדולים; ציפור — זפק, קיבה בלוטית וקורקבן שרירי.">
+      <rect x={30} y={42} width={50} height={6} {...tube} />
+      <ellipse cx={105} cy={45} rx={26} ry={16} {...st} />
+      <rect x={131} y={40} width={150} height={10} {...tube} />
+      <ellipse cx={286} cy={57} rx={6} ry={5} {...tube} />
+      <rect x={281} y={38} width={70} height={14} {...tube} />
+      <He x={105} y={80} size={10}>קיבה</He><He x={206} y={70} size={10}>מעי דק</He><He x={316} y={76} size={10}>מעי גס</He>
+      {name(42, "טורף", "כלב, חתול")}
+
+      <rect x={30} y={127} width={36} height={6} {...tube} />
+      <ellipse cx={100} cy={128} rx={34} ry={24} {...ferm} />
+      <circle cx={142} cy={115} r={10} {...ferm} />
+      <circle cx={162} cy={136} r={10} {...ferm} />
+      <ellipse cx={192} cy={128} rx={17} ry={11} {...st} />
+      <rect x={209} y={124} width={119} height={9} {...tube} />
+      <rect x={328} y={122} width={32} height={13} {...tube} />
+      <He x={100} y={170} size={10}>כרס</He><He x={142} y={98} size={10}>בית הכוסות</He><He x={162} y={162} size={10}>המסס</He>
+      <He x={194} y={156} size={10}>קבה</He><He x={268} y={152} size={10}>מעי דק</He><He x={344} y={152} size={10}>מעי גס</He>
+      {name(124, "מעלה גירה", "פרה, כבשה")}
+
+      <rect x={30} y={211} width={50} height={6} {...tube} />
+      <ellipse cx={104} cy={214} rx={24} ry={14} {...st} />
+      <rect x={128} y={210} width={120} height={9} {...tube} />
+      <ellipse cx={268} cy={240} rx={30} ry={18} {...ferm} />
+      <rect x={248} y={206} width={112} height={16} {...ferm} />
+      <He x={104} y={246} size={10}>קיבה</He><He x={188} y={240} size={10}>מעי דק</He>
+      <He x={306} y={256} size={10} anchor="start">מעי עיוור</He><He x={318} y={198} size={10}>מעי גס</He>
+      {name(210, "תסיסה במעי האחורי", "סוס, ארנבת")}
+
+      <rect x={30} y={292} width={68} height={6} {...tube} />
+      <ellipse cx={70} cy={304} rx={12} ry={9} {...tube} />
+      <ellipse cx={110} cy={295} rx={12} ry={8} {...st} />
+      <circle cx={140} cy={295} r={14} fill="#fecaca" stroke={RED} strokeWidth={3} />
+      <rect x={154} y={291} width={170} height={9} {...tube} />
+      <ellipse cx={330} cy={306} rx={10} ry={4} {...ferm} />
+      <rect x={324} y={290} width={36} height={11} {...tube} />
+      <He x={68} y={330} size={10}>זפק</He><He x={106} y={276} size={10}>קיבה בלוטית</He>
+      <He x={142} y={330} size={10}>קורקבן</He><He x={238} y={320} size={10}>מעי דק</He>
+      {name(290, "ציפור", "תרנגולת")}
+    </Svg>
+  );
+}

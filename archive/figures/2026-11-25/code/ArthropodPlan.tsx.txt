@@ -1,0 +1,35 @@
+function ArthropodPlan() {
+  const muscle = { fill: "none", stroke: RED, strokeWidth: 5, strokeLinecap: "round" as const };
+  return (
+    <Svg h={200} label="השלד החיצוני של פרוקי רגליים. משמאל: שכבות הקוטיקולה — אפיקוטיקולה עם שעווה, פרוקוטיקולה מכיטין וחלבון (חלקה החיצוני מוקשח), ומתחתן האפידרמיס שמפריש אותן. מימין: מפרק — שני מקטעים קשיחים מחוברים בקרום גמיש, והשרירים מחוברים לשלד מבפנים.">
+      <rect x={120} y={50} width={105} height={7} fill={ORANGE} />
+      <rect x={120} y={57} width={105} height={30} fill="#fcd34d" />
+      <rect x={120} y={87} width={105} height={40} fill={FILL.yellow} />
+      {[0, 1, 2, 3, 4, 5, 6].map((i) => (
+        <g key={i}>
+          <rect x={120 + i * 15} y={127} width={15} height={24} fill={FILL.green} stroke={GREEN} strokeWidth={0.8} />
+          <circle cx={127.5 + i * 15} cy={140} r={3} fill={GREEN} />
+        </g>
+      ))}
+      <He x={112} y={57} size={10} anchor="end">אפיקוטיקולה (שעווה)</He>
+      <He x={112} y={76} size={10} anchor="end">אקסוקוטיקולה (מוקשחת)</He>
+      <He x={112} y={111} size={10} anchor="end">אנדוקוטיקולה</He>
+      <He x={112} y={143} size={10} anchor="end">אפידרמיס</He>
+      <path d="M230 57 L236 57 L236 127 L230 127" fill="none" stroke={MUTED} strokeWidth={1.2} />
+      <He x={242} y={88} size={10} anchor="start">פרוקוטיקולה:</He>
+      <He x={242} y={102} size={10} anchor="start">כיטין + חלבון</He>
+      <He x={172} y={185} size={12} bold>שכבות הקוטיקולה</He>
+
+      <rect x={322} y={60} width={68} height={50} fill="white" stroke={BROWN} strokeWidth={4} />
+      <rect x={402} y={60} width={68} height={50} fill="white" stroke={BROWN} strokeWidth={4} />
+      <path d="M390 60 q6 -6 12 0" fill="none" stroke={BROWN} strokeWidth={1.4} />
+      <path d="M390 110 q6 6 12 0" fill="none" stroke={BROWN} strokeWidth={1.4} />
+      <path d="M334 72 Q380 66 428 72" {...muscle} />
+      <path d="M334 98 Q380 104 428 98" {...muscle} />
+      <He x={378} y={38} size={10}>שריר פושט</He><Lead x1={378} y1={42} x2={378} y2={66} />
+      <He x={346} y={146} size={10}>שריר מכופף</He><Lead x1={350} y1={136} x2={354} y2={104} />
+      <He x={440} y={146} size={10}>קרום מפרקי גמיש</He><Lead x1={428} y1={136} x2={398} y2={117} />
+      <He x={396} y={185} size={12} bold>מפרק: השרירים מבפנים</He>
+    </Svg>
+  );
+}
