@@ -1,0 +1,40 @@
+function RnaTranslationSwitch() {
+  const strand = (y: number, color: string) => <line x1={90} y1={y} x2={400} y2={y} stroke={color} strokeWidth={5} strokeLinecap="round" />;
+  return (
+    <Svg h={290} label="התנגשות בין תרגום לשכפול על אותו גדיל. הריבוזום נע מהקצה החמישי לשלישי, והפולימראז קורא את אותה תבנית בכיוון ההפוך. לכן צריך מעבר מסודר: קודם תרגום, ואחר כך פינוי התבנית לשכפול.">
+      {/* translation */}
+      <He x={420} y={34} size={11.5} bold color={BLUE}>שלב א: תרגום</He>
+      {strand(60, GOLD)}
+      <La x={84} y={64} size={10} anchor="end" color={MUTED}>5′</La>
+      <La x={406} y={64} size={10} anchor="start" color={MUTED}>3′</La>
+      {[0, 1, 2].map((i) => (
+        <g key={i}>
+          <ellipse cx={150 + i * 90} cy={50} rx={20} ry={14} fill={FILL.blue} stroke={BLUE} strokeWidth={1.3} />
+          <He x={150 + i * 90} y={54} size={9}>ריבוזום</He>
+        </g>
+      ))}
+      <Arrow x1={130} y1={28} x2={330} y2={28} color={BLUE} width={1.6} />
+      <La x={230} y={22} size={9.5} color={BLUE}>5′ → 3′</La>
+
+      {/* replication */}
+      <He x={420} y={128} size={11.5} bold color={RED}>שלב ב: שכפול</He>
+      {strand(154, GOLD)}
+      <La x={84} y={158} size={10} anchor="end" color={MUTED}>5′</La>
+      <La x={406} y={158} size={10} anchor="start" color={MUTED}>3′</La>
+      <g>
+        <polygon points={poly(300, 144, 16, 5)} fill={FILL.red} stroke={RED} strokeWidth={1.3} />
+        <La x={300} y={148} size={9} color={RED} bold>RdRp</La>
+      </g>
+      <Arrow x1={330} y1={122} x2={150} y2={122} color={RED} width={1.6} />
+      <He x={240} y={116} size={9.5} color={RED}>קורא את התבנית בכיוון ההפוך</He>
+      <line x1={150} y1={168} x2={300} y2={168} stroke={PURPLE} strokeWidth={3} />
+      <He x={225} y={186} size={9.5} color={PURPLE}>הגדיל החדש, המשלים</He>
+
+      {/* the clash + resolution */}
+      <rect x={60} y={204} width={360} height={70} rx={10} fill={FILL.yellow} stroke={GOLD} strokeWidth={1.2} />
+      <He x={240} y={226} size={11} bold color={GOLD}>אותה מולקולה, שני שימושים מנוגדים</He>
+      <He x={240} y={246} size={10}>ריבוזום שנע קדימה חוסם פולימראז שנע לאחור</He>
+      <He x={240} y={264} size={10}>← צריך לפנות את התבנית לפני המעבר לשכפול</He>
+    </Svg>
+  );
+}

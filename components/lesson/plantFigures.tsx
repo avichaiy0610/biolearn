@@ -12,6 +12,7 @@ import { GuardCellOpening } from "./redraws/GuardCellOpening";
 import { AcidGrowth } from "./redraws/AcidGrowth";
 import { ShootMeristem } from "./redraws/ShootMeristem";
 import { RootGravitropism } from "./redraws/RootGravitropism";
+import { PlantImmunity } from "./redraws/PlantImmunity";
 
 const PURPLE = "#7c3aed";
 const RED = "#b91c1c";
@@ -647,49 +648,7 @@ function AbcModel() {
 }
 
 // ── pp-biotic-stress: two layers of plant immunity ──────────────────────────
-function PlantImmunity() {
-  return (
-    <Svg h={330} label="שתי שכבות החיסון של הצמח: בממברנה, הקולטן FLS2 עם BAK1 מזהה flg22 מפלגלין חיידקי ומפעיל PTI — Ca2+, ROS, MAP קינאזות, סגירת פיוניות וקאלוז. החיידק מזריק אפקטורים במערכת הפרשה מסוג III, והם מדכאים את PTI. בתוך התא, קולטן NLR מזהה אפקטור — כאן לפי השינוי שהוא גורם לחלבון RIN4 שהוא שומר עליו — ומפעיל ETI ותגובה היפרסנסיטיבית">
-      <rect x={10} y={20} width={460} height={66} fill="#f0f9ff" />
-      <He x={460} y={38} size={10} color={MUTED} anchor="end">מחוץ לתא</He>
-      <rect x={60} y={28} width={86} height={40} rx={20} fill={FILL.gray} stroke={MUTED} strokeWidth={1.4} />
-      <He x={103} y={52} size={10.5} bold color={MUTED}>חיידק</He>
-      {[160, 175, 190].map((x) => <path key={x} d={`M${x} 46 q 6 -8 12 0 q 6 8 12 0`} fill="none" stroke={MUTED} strokeWidth={1.4} />)}
-      <La x={238} y={42} size={10} color={ORANGE}>flg22</La>
-      <Membrane x1={10} x2={470} y={96} t={12} />
-      <rect x={10} y={102} width={460} height={220} fill={FILL.cyto} />
-      {/* PRR */}
-      <rect x={232} y={66} width={20} height={58} rx={6} fill={FILL.blue} stroke={BLUE} strokeWidth={1.4} />
-      <rect x={256} y={74} width={14} height={50} rx={5} fill="#bfdbfe" stroke={BLUE} strokeWidth={1.2} />
-      <circle cx={242} cy={60} r={5} fill={ORANGE} />
-      <La x={232} y={138} size={10} bold color={BLUE} anchor="end">FLS2</La>
-      <La x={274} y={138} size={10} bold color={BLUE} anchor="start">BAK1</La>
-      <Arrow x1={250} y1={146} x2={250} y2={176} color={BLUE} width={2.2} />
-      <rect x={180} y={180} width={140} height={46} rx={10} fill={FILL.blue} stroke={BLUE} />
-      <He x={250} y={198} size={11} bold color={BLUE}>PTI</He>
-      <He x={250} y={216} size={9.5} color={BLUE}>Ca²⁺, ROS, MAPK, פיוניות, קאלוז</He>
-      {/* effectors */}
-      <line x1={104} y1={68} x2={104} y2={124} stroke={MUTED} strokeWidth={3} />
-      <He x={114} y={124} size={9.5} color={MUTED} anchor="start">מערכת הפרשה III</He>
-      {[[96, 140], [112, 152], [100, 166]].map(([x, y], i) => <circle key={i} cx={x} cy={y} r={6} fill="#fecaca" stroke={RED} />)}
-      <He x={60} y={160} size={10} bold color={RED} anchor="end">אפקטורים</He>
-      <Inhib x1={124} y1={160} x2={176} y2={196} />
-      {/* NLR guard */}
-      <Prot x={110} y={262} w={56} label="RIN4" c={MUTED} fill={FILL.gray} size={10.5} />
-      <Arrow x1={104} y1={174} x2={108} y2={246} color={RED} dashed />
-      <Prot x={210} y={274} w={56} label="NLR" c={PURPLE} fill={FILL.purple} />
-      <He x={170} y={300} size={9.5} color={PURPLE}>שומר על RIN4</He>
-      <Arrow x1={240} y1={268} x2={330} y2={268} color={PURPLE} width={2.4} />
-      <rect x={334} y={238} width={126} height={66} rx={10} fill={FILL.red} stroke={RED} />
-      <He x={397} y={258} size={11} bold color={RED}>ETI</He>
-      <He x={397} y={276} size={9.5} color={RED}>חזק ומהיר</He>
-      <He x={397} y={292} size={9.5} color={RED}>תגובה היפרסנסיטיבית</He>
-      <He x={397} y={130} size={10} color={MUTED}>PTI עוצר את רוב החיידקים</He>
-      <He x={397} y={148} size={10} color={MUTED}>אפקטורים מדכאים את PTI</He>
-      <He x={397} y={166} size={10} color={MUTED}>NLR מזהה אפקטור ← ETI</He>
-    </Svg>
-  );
-}
+// PlantImmunity: redrawn at textbook level (2026-11-24) - see ./redraws/PlantImmunity.tsx; old code in archive/figures/2026-11-24-viro/.
 
 export const PLANT_FIGURES: Record<string, { el: () => React.ReactElement; captionHe: string }> = {
   "plasmodesma": { el: Plasmodesma, captionHe: "פלסמודסמה בחתך אורכי, ובפינה — בחתך רוחב. ממברנת התא רציפה בין שני התאים; הדסמוטובול (ER דחוס) מחבר את ה-ER שלהם; מולקולות קטנות עוברות בשרוול הציטופלזמי. קאלוז בצוואר יכול לסגור את התעלה. סכמטי." },

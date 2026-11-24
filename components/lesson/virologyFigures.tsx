@@ -8,6 +8,10 @@ import { Arrow } from "./metabolicFigures";
 
 import { Architecture } from "./redraws/Architecture";
 import { PackagingMotor } from "./redraws/PackagingMotor";
+import { EntrySteps } from "./redraws/EntrySteps";
+import { RnaTranslationSwitch } from "./redraws/RnaTranslationSwitch";
+import { ReplicationOrigin } from "./redraws/ReplicationOrigin";
+import { ExitRoutes } from "./redraws/ExitRoutes";
 const PURPLE = "#7c3aed";
 const RED = "#b91c1c";
 const TEAL = "#0f766e";
@@ -29,13 +33,6 @@ function Box({ x, y, w, h, fill, stroke, children, size = 11, bold }: { x: numbe
     </g>
   );
 }
-
-// A regular polygon (pentagon / hexagon) used for capsid subunits.
-const poly = (cx: number, cy: number, r: number, n: number, rot = -Math.PI / 2) =>
-  Array.from({ length: n }, (_, i) => {
-    const a = rot + (2 * Math.PI * i) / n;
-    return `${(cx + r * Math.cos(a)).toFixed(1)},${(cy + r * Math.sin(a)).toFixed(1)}`;
-  }).join(" ");
 
 // ── vr-properties ────────────────────────────────────────────────────────────
 // Architecture: redrawn at textbook level (2026-11-09) — see ./redraws/Architecture.tsx; old code in archive/figures/2026-11-09/.
@@ -91,54 +88,7 @@ function OneStepGrowth() {
 }
 
 // ── vr-attachment-entry ──────────────────────────────────────────────────────
-function EntrySteps() {
-  const phage = (cx: number, cy: number, tail = 26) => (
-    <g>
-      <polygon points={poly(cx, cy, 13, 6)} fill={FILL.orange} stroke={ORANGE} strokeWidth={1.4} />
-      <line x1={cx} y1={cy + 13} x2={cx} y2={cy + 13 + tail} stroke={ORANGE} strokeWidth={3} />
-      <rect x={cx - 9} y={cy + 13 + tail} width={18} height={5} rx={1.5} fill={FILL.orange} stroke={ORANGE} strokeWidth={1.2} />
-    </g>
-  );
-  const envelope = (x: number) => (
-    <g>
-      <line x1={x} y1={168} x2={x + 128} y2={168} stroke={MUTED} strokeWidth={2.6} />
-      <rect x={x} y={176} width={128} height={7} fill={FILL.gray} stroke={MUTED} strokeWidth={1} />
-      <line x1={x} y1={191} x2={x + 128} y2={191} stroke={MUTED} strokeWidth={2.6} />
-    </g>
-  );
-  return (
-    <Svg h={300} label="שלושה שלבים בכניסה של פאג' עם זנב. בשלב הראשון הסיבים נוגעים ברכיבים על פני החיידק, והקשירה עדיין הפיכה. בשלב השני מגע נוסף משנה את הבסיס והקשירה נעשית בלתי הפיכה. בשלב השלישי נפתח נתיב מקומי דרך שתי הממברנות והדופן, רק הגנום עובר פנימה, והקפסיד הריק נשאר בחוץ.">
-      <He x={416} y={30} size={11.5} bold color={INK}>1 · ספיחה הפיכה</He>
-      {phage(416, 78)}
-      {envelope(352)}
-      <path d="M 404 120 q -8 20 -14 42 M 428 120 q 8 20 14 42" fill="none" stroke={ORANGE} strokeWidth={1.4} />
-      <He x={416} y={216} size={9.5} color={MUTED}>מגע חולף — אפשר להשתחרר</He>
-
-      <He x={240} y={30} size={11.5} bold color={INK}>2 · בלתי הפיכה</He>
-      {phage(240, 78)}
-      {envelope(176)}
-      <path d="M 228 120 q -6 22 -10 44 M 252 120 q 6 22 10 44" fill="none" stroke={RED} strokeWidth={1.6} />
-      <ellipse cx={240} cy={166} rx={16} ry={5} fill={FILL.red} stroke={RED} strokeWidth={1.2} />
-      <He x={240} y={216} size={9.5} color={RED}>נקודת ההתחייבות</He>
-
-      <He x={64} y={30} size={11.5} bold color={INK}>3 · הגנום נכנס</He>
-      <g opacity={0.95}>
-        <polygon points={poly(64, 78, 13, 6)} fill="#fff" stroke={ORANGE} strokeWidth={1.4} strokeDasharray="3 2" />
-        <line x1={64} y1={91} x2={64} y2={117} stroke={ORANGE} strokeWidth={3} />
-        <rect x={55} y={117} width={18} height={5} rx={1.5} fill={FILL.orange} stroke={ORANGE} strokeWidth={1.2} />
-      </g>
-      {envelope(0)}
-      <rect x={58} y={166} width={12} height={27} fill="#fff" stroke={TEAL} strokeWidth={1.2} />
-      <line x1={64} y1={122} x2={64} y2={200} stroke={GOLD} strokeWidth={2.4} />
-      <Arrow x1={64} y1={194} x2={64} y2={222} color={GOLD} width={1.6} />
-      <He x={100} y={150} size={9} anchor="start" color={TEAL}>נתיב מקומי</He>
-      <He x={64} y={242} size={9.5} color={GOLD}>רק ה-DNA נכנס</He>
-      <He x={64} y={260} size={9.5} color={MUTED}>הקפסיד נשאר בחוץ</He>
-
-      <He x={240} y={286} size={10} color={MUTED}>סכמטי · הקווים האופקיים: שתי הממברנות והדופן ביניהן</He>
-    </Svg>
-  );
-}
+// EntrySteps: redrawn at textbook level (2026-11-24) - see ./redraws/EntrySteps.tsx; old code in archive/figures/2026-11-24-viro/.
 
 // ── vr-dna-expression ────────────────────────────────────────────────────────
 function TemporalCascade() {
@@ -173,129 +123,16 @@ function TemporalCascade() {
 }
 
 // ── vr-rna-expression ────────────────────────────────────────────────────────
-function RnaTranslationSwitch() {
-  const strand = (y: number, color: string) => <line x1={90} y1={y} x2={400} y2={y} stroke={color} strokeWidth={5} strokeLinecap="round" />;
-  return (
-    <Svg h={290} label="התנגשות בין תרגום לשכפול על אותו גדיל. הריבוזום נע מהקצה החמישי לשלישי, והפולימראז קורא את אותה תבנית בכיוון ההפוך. לכן צריך מעבר מסודר: קודם תרגום, ואחר כך פינוי התבנית לשכפול.">
-      {/* translation */}
-      <He x={420} y={34} size={11.5} bold color={BLUE}>שלב א: תרגום</He>
-      {strand(60, GOLD)}
-      <La x={84} y={64} size={10} anchor="end" color={MUTED}>5′</La>
-      <La x={406} y={64} size={10} anchor="start" color={MUTED}>3′</La>
-      {[0, 1, 2].map((i) => (
-        <g key={i}>
-          <ellipse cx={150 + i * 90} cy={50} rx={20} ry={14} fill={FILL.blue} stroke={BLUE} strokeWidth={1.3} />
-          <He x={150 + i * 90} y={54} size={9}>ריבוזום</He>
-        </g>
-      ))}
-      <Arrow x1={130} y1={28} x2={330} y2={28} color={BLUE} width={1.6} />
-      <La x={230} y={22} size={9.5} color={BLUE}>5′ → 3′</La>
-
-      {/* replication */}
-      <He x={420} y={128} size={11.5} bold color={RED}>שלב ב: שכפול</He>
-      {strand(154, GOLD)}
-      <La x={84} y={158} size={10} anchor="end" color={MUTED}>5′</La>
-      <La x={406} y={158} size={10} anchor="start" color={MUTED}>3′</La>
-      <g>
-        <polygon points={poly(300, 144, 16, 5)} fill={FILL.red} stroke={RED} strokeWidth={1.3} />
-        <La x={300} y={148} size={9} color={RED} bold>RdRp</La>
-      </g>
-      <Arrow x1={330} y1={122} x2={150} y2={122} color={RED} width={1.6} />
-      <He x={240} y={116} size={9.5} color={RED}>קורא את התבנית בכיוון ההפוך</He>
-      <line x1={150} y1={168} x2={300} y2={168} stroke={PURPLE} strokeWidth={3} />
-      <He x={225} y={186} size={9.5} color={PURPLE}>הגדיל החדש, המשלים</He>
-
-      {/* the clash + resolution */}
-      <rect x={60} y={204} width={360} height={70} rx={10} fill={FILL.yellow} stroke={GOLD} strokeWidth={1.2} />
-      <He x={240} y={226} size={11} bold color={GOLD}>אותה מולקולה, שני שימושים מנוגדים</He>
-      <He x={240} y={246} size={10}>ריבוזום שנע קדימה חוסם פולימראז שנע לאחור</He>
-      <He x={240} y={264} size={10}>← צריך לפנות את התבנית לפני המעבר לשכפול</He>
-    </Svg>
-  );
-}
+// RnaTranslationSwitch: redrawn at textbook level (2026-11-24) - see ./redraws/RnaTranslationSwitch.tsx; old code in archive/figures/2026-11-24-viro/.
 
 // ── vr-genome-replication ────────────────────────────────────────────────────
-function ReplicationOrigin() {
-  return (
-    <Svg h={300} label="שכפול מגנום מעגלי קטן בגרעין. חלבון זיהוי מוצא נקשר לאזור המוצא, פותח את הגדילים ויוצר שני מזלגות שנעים בכיוונים מנוגדים. המכונה שמאריכה את הגדילים היא של התא. בכל מזלג גדיל מוביל רציף וגדיל מתעכב במקטעים.">
-      <circle cx={150} cy={120} r={66} fill="none" stroke={GOLD} strokeWidth={3} />
-      <circle cx={150} cy={54} r={9} fill={FILL.orange} stroke={ORANGE} strokeWidth={1.5} />
-      <He x={150} y={30} size={10.5} bold color={ORANGE}>אזור מוצא</He>
-      <He x={150} y={200} size={10.5} color={MUTED}>גנום מעגלי</He>
-      <He x={150} y={215} size={9.5} color={MUTED}>כרומטין של התא סביב הגנום</He>
-
-      <Arrow x1={300} y1={60} x2={250} y2={60} color={MUTED} width={1.4} />
-      <He x={376} y={64} size={10.5} color={INK}>זיהוי המוצא ופתיחה</He>
-
-      <g>
-        <circle cx={360} cy={130} r={54} fill="none" stroke={GOLD} strokeWidth={3} />
-        <circle cx={360} cy={76} r={10} fill={FILL.orange} stroke={ORANGE} strokeWidth={1.5} />
-        <path d="M 360 76 A 54 54 0 0 1 404 108" fill="none" stroke={PURPLE} strokeWidth={3} />
-        <path d="M 360 76 A 54 54 0 0 0 316 108" fill="none" stroke={PURPLE} strokeWidth={3} />
-        <Arrow x1={400} y1={96} x2={414} y2={122} color={PURPLE} width={1.5} />
-        <Arrow x1={320} y1={96} x2={306} y2={122} color={PURPLE} width={1.5} />
-        <He x={360} y={198} size={10} color={PURPLE}>שני מזלגות, כיוונים מנוגדים</He>
-      </g>
-
-      <rect x={40} y={236} width={400} height={56} rx={10} fill={FILL.sky} stroke={BLUE} strokeWidth={1.2} />
-      <He x={430} y={256} size={10.5} anchor="end" bold color={BLUE}>בכל מזלג</He>
-      <He x={430} y={276} size={10} anchor="end">גדיל מוביל — סינתזה רציפה · גדיל מתעכב — מקטעים שמחוברים אחר כך</He>
-      <He x={240} y={232} size={9.5} color={MUTED}>זיהוי ופתיחה: T antigen · הארכה: גורמי תא</He>
-    </Svg>
-  );
-}
+// ReplicationOrigin: redrawn at textbook level (2026-11-24) - see ./redraws/ReplicationOrigin.tsx; old code in archive/figures/2026-11-24-viro/.
 
 // ── vr-assembly-packaging ────────────────────────────────────────────────────
 // PackagingMotor: redrawn at textbook level (2026-11-09) — see ./redraws/PackagingMotor.tsx; old code in archive/figures/2026-11-09/.
 
 // ── vr-exit ──────────────────────────────────────────────────────────────────
-function ExitRoutes() {
-  const cell = (x: number, y: number, w: number, h: number) => <rect x={x} y={y} width={w} height={h} rx={14} fill={FILL.gray} stroke={MUTED} strokeWidth={1.6} />;
-  const virion = (cx: number, cy: number, r = 7, c = ORANGE, f = FILL.orange) => <polygon points={poly(cx, cy, r, 6)} fill={f} stroke={c} strokeWidth={1.2} />;
-  return (
-    <Svg h={330} label="ארבע דרכי יציאה. ליזיס מפרק מחסומים תאיים. הנצה מקנה מעטפת ואינה מחייבת מוות מיידי של התא. יציאה דרך מדור פנימי יכולה להיעזר בנשא ממברנלי ואיחוי. פאג חוטי יכול לצאת דרך מערכת הפרשה בלי ליזיס.">
-      {/* lysis */}
-      <He x={420} y={26} size={11.5} bold color={RED}>ליזיס</He>
-      {cell(330, 40, 120, 80)}
-      <line x1={330} y1={70} x2={450} y2={70} stroke={RED} strokeWidth={2} {...dash} />
-      {[0, 1, 2, 3].map((i) => <g key={i}>{virion(352 + i * 22, 96)}</g>)}
-      {[0, 1, 2].map((i) => <g key={i}>{virion(465, 51 + i * 26, 6, RED, FILL.red)}</g>)}
-      <He x={390} y={134} size={9.5} color={RED}>פירוק הדופן — התא מת</He>
-
-      {/* budding at the plasma membrane */}
-      <He x={240} y={26} size={11.5} bold color={BLUE}>הנצה בממברנת התא</He>
-      {cell(180, 40, 100, 80)}
-      <path d="M 280 70 q 18 -14 18 2 q 0 16 -18 2" fill={FILL.blue} stroke={BLUE} strokeWidth={1.4} />
-      {virion(286, 72, 6, BLUE, FILL.blue)}
-      {virion(314, 72, 7, BLUE, FILL.blue)}
-      <circle cx={314} cy={72} r={11} fill="none" stroke={BLUE} strokeWidth={1.4} />
-      <Arrow x1={295} y1={94} x2={309} y2={94} color={BLUE} width={1.3} />
-      <He x={240} y={134} size={9.5} color={BLUE}>התא יכול לשרוד; המעטפת מהממברנה</He>
-
-      {/* budding into a compartment + exocytosis */}
-      <He x={420} y={176} size={11.5} bold color={PURPLE}>הנצה אל חלל פנימי</He>
-      {cell(300, 190, 150, 80)}
-      <ellipse cx={346} cy={230} rx={30} ry={20} fill="#fff" stroke={PURPLE} strokeWidth={1.4} />
-      {virion(346, 230, 6, PURPLE, FILL.purple)}
-      <He x={346} y={258} size={9} color={PURPLE}>מדור פנימי</He>
-      <Arrow x1={382} y1={230} x2={414} y2={230} color={PURPLE} width={1.4} />
-      <path d="M 450 214 q 10 16 0 32" fill="none" stroke={PURPLE} strokeWidth={1.6} />
-      {virion(466, 230, 6, PURPLE, FILL.purple)}
-      <He x={372} y={282} size={9.5} color={PURPLE}>איחוי הנשא עם ממברנת התא</He>
-
-      {/* extrusion */}
-      <He x={210} y={176} size={11.5} bold color={TEAL}>הפרשה מתמשכת</He>
-      {cell(120, 190, 150, 80)}
-      <line x1={150} y1={230} x2={270} y2={230} stroke={TEAL} strokeWidth={3} />
-      <line x1={270} y1={230} x2={296} y2={230} stroke={TEAL} strokeWidth={3} />
-      <He x={196} y={212} size={9} color={TEAL}>חלקיק חוטי</He>
-      <Arrow x1={276} y1={248} x2={300} y2={248} color={TEAL} width={1.3} />
-      <He x={196} y={282} size={9.5} color={TEAL}>התא ממשיך לגדול ולהפריש</He>
-
-      <He x={240} y={314} size={10} color={MUTED}>סכמטי, לא בקנה מידה · משושה = חלקיק; עיגול סביבו = מעטפת</He>
-    </Svg>
-  );
-}
+// ExitRoutes: redrawn at textbook level (2026-11-24) - see ./redraws/ExitRoutes.tsx; old code in archive/figures/2026-11-24-viro/.
 
 // ── vr-latency ───────────────────────────────────────────────────────────────
 function LatencySwitch() {

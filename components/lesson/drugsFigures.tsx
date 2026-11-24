@@ -5,6 +5,7 @@ import type { ReactElement, ReactNode } from "react";
 import { ArrowDefs, BLUE, GREEN, INK, MUTED, ORANGE, He, La } from "./biochemFigures";
 import { Arrow } from "./metabolicFigures";
 import { AntibodyFormats } from "./redraws/AntibodyFormats";
+import { PhageDisplay } from "./redraws/PhageDisplay";
 
 const PURPLE = "#7c3aed";
 const Svg = ({ h, label, children }: { h: number; label: string; children: ReactNode }) => (
@@ -50,26 +51,7 @@ function LibrarySpace() {
   </Svg>;
 }
 
-function PhageDisplay() {
-  return <Svg h={385} label="פאג' חוטי נושא בתוכו מידע גנטי ומציג מקטע נוגדן בקצה המעטפת. הפרדת חלקיקים קושרים שומרת את הקשר לרצף, אך נדרש אימות בחלבון חופשי.">
-    <He x={200} y={25} size={16} bold>תכונת החלבון נשארת קשורה לזהותו</He>
-    <rect x={40} y={85} width={250} height={30} rx={15} fill="#e0f2fe" stroke={BLUE} strokeWidth={2} />
-    {Array.from({ length: 17 }, (_, i) => <line key={i} x1={55 + i * 13} y1={88} x2={48 + i * 13} y2={112} stroke={BLUE} strokeWidth={0.6} />)}
-    <path d="M 70 100 q 15 -10 30 0 t 30 0 t 30 0 t 30 0 t 30 0" fill="none" stroke={PURPLE} strokeWidth={2} />
-    <line x1={290} y1={100} x2={314} y2={100} stroke={BLUE} strokeWidth={3} />
-    <ellipse cx={324} cy={91} rx={11} ry={16} fill="#ffedd5" stroke={ORANGE} strokeWidth={1.5} />
-    <ellipse cx={354} cy={91} rx={10} ry={16} fill="#dcfce7" stroke={GREEN} strokeWidth={1.5} />
-    <path d="M 335 91 q 4 22 9 0" fill="none" stroke={MUTED} strokeWidth={1.7} />
-    <He x={155} y={64} size={14} color={BLUE}>מעטפת פאג׳ חוטי</He>
-    <La x={330} y={137} size={14} color={ORANGE}>scFv</La>
-    <He x={155} y={153} size={14} color={PURPLE}>מידע גנטי נישא בחלקיק</He>
-    <Arrow x1={200} y1={171} x2={200} y2={198} color={INK} />
-    <Panel x={55} y={205} w={290} lines={["ברירה לפי קישור למטרה", "העשרה ושחזור זהויות"]} />
-    <Arrow x1={200} y1={271} x2={200} y2={296} color={INK} />
-    <He x={200} y={324} size={16} bold>רצף מועמד ← חלבון מסיס לבדיקה</He>
-    <He x={200} y={364} size={14} color={MUTED}>סכמטי, לא בקנה מידה · לא פאג׳ ראש–זנב</He>
-  </Svg>;
-}
+// PhageDisplay: redrawn at textbook level (2026-11-24) - see ./redraws/PhageDisplay.tsx; old code in archive/figures/2026-11-24-viro/.
 
 function EvolutionCycle() {
   return <Svg h={350} label="מחזור אבולוציה מכוונת: שונות, ביטוי ומדידה, בחירת מועמדים, דור נוסף. הבחירה משפרת את המדד שנבדק, ולא מבטיחה שיפור בכל תכונות החלבון.">

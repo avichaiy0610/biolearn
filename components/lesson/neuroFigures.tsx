@@ -21,6 +21,7 @@ import { AppProcessing } from "./redraws/AppProcessing";
 import { MicrogliaStates } from "./redraws/MicrogliaStates";
 import { Gcamp } from "./redraws/Gcamp";
 import { Optogenetics } from "./redraws/Optogenetics";
+import { ProteinAggregation } from "./redraws/ProteinAggregation";
 const PURPLE = "#7c3aed";
 const RED = "#b91c1c";
 const TEAL = "#0f766e";
@@ -200,23 +201,7 @@ function OcularDominance() {
 }
 
 // ── nb-neurodegeneration ─────────────────────────────────────────────────────
-function ProteinAggregation() {
-  const X = [384, 290, 196, 102, 8];
-  const steps: [string, string][] = [["חלבון", "מקופל נכון"], ["קיפול", "שגוי (β)"], ["אוליגומרים", "(רעילים?)"], ["סיבים", "(fibrils)"], ["צברים", "רבדים, סבכים"]];
-  return (
-    <Svg h={240} label="צבירת חלבונים: חלבון מקופל נכון עובר קיפול שגוי עשיר במבנה בטא, נצמד לעותקים נוספים ויוצר אוליגומרים קטנים — שנחשבים לרעילים ביותר — ואחר כך סיבים וצברים גדולים. שפרונים מתקנים קיפול, והפרוטאזום והאוטופגיה מפרקים חלבונים פגומים; עם הגיל המערכות האלה נחלשות.">
-      {steps.map((l, i) => <Box2 key={i} x={X[i]} y={40} w={86} h={44} fill={i === 0 ? FILL.green : i === 2 ? FILL.red : FILL.orange} stroke={i === 0 ? GREEN : i === 2 ? RED : ORANGE} lines={l} />)}
-      {[0, 1, 2, 3].map((i) => <Arrow key={i} x1={X[i] - 2} y1={62} x2={X[i + 1] + 88} y2={62} color={INK} />)}
-      <Box x={290} y={150} w={86} h={30} fill={FILL.blue} stroke={BLUE} size={10}>שפרונים</Box>
-      <Box x={150} y={150} w={110} h={30} fill={FILL.purple} stroke={PURPLE} size={10}>פרוטאזום, אוטופגיה</Box>
-      <Arrow x1={333} y1={148} x2={333} y2={88} color={BLUE} width={1.4} />
-      <Arrow x1={238} y1={88} x2={214} y2={148} color={PURPLE} width={1.4} />
-      <He x={344} y={124} size={9.5} anchor="start" color={BLUE}>מתקנים</He>
-      <He x={190} y={124} size={9.5} anchor="end" color={PURPLE}>מפרקים</He>
-      <He x={240} y={218} size={9.5} color={MUTED}>עם הגיל — הפירוק והתיקון נחלשים</He>
-    </Svg>
-  );
-}
+// ProteinAggregation: redrawn at textbook level (2026-11-24) - see ./redraws/ProteinAggregation.tsx; old code in archive/figures/2026-11-24-viro/.
 
 
 

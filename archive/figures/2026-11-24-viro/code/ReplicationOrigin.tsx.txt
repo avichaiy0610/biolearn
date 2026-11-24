@@ -1,0 +1,29 @@
+function ReplicationOrigin() {
+  return (
+    <Svg h={300} label="שכפול מגנום מעגלי קטן בגרעין. חלבון זיהוי מוצא נקשר לאזור המוצא, פותח את הגדילים ויוצר שני מזלגות שנעים בכיוונים מנוגדים. המכונה שמאריכה את הגדילים היא של התא. בכל מזלג גדיל מוביל רציף וגדיל מתעכב במקטעים.">
+      <circle cx={150} cy={120} r={66} fill="none" stroke={GOLD} strokeWidth={3} />
+      <circle cx={150} cy={54} r={9} fill={FILL.orange} stroke={ORANGE} strokeWidth={1.5} />
+      <He x={150} y={30} size={10.5} bold color={ORANGE}>אזור מוצא</He>
+      <He x={150} y={200} size={10.5} color={MUTED}>גנום מעגלי</He>
+      <He x={150} y={215} size={9.5} color={MUTED}>כרומטין של התא סביב הגנום</He>
+
+      <Arrow x1={300} y1={60} x2={250} y2={60} color={MUTED} width={1.4} />
+      <He x={376} y={64} size={10.5} color={INK}>זיהוי המוצא ופתיחה</He>
+
+      <g>
+        <circle cx={360} cy={130} r={54} fill="none" stroke={GOLD} strokeWidth={3} />
+        <circle cx={360} cy={76} r={10} fill={FILL.orange} stroke={ORANGE} strokeWidth={1.5} />
+        <path d="M 360 76 A 54 54 0 0 1 404 108" fill="none" stroke={PURPLE} strokeWidth={3} />
+        <path d="M 360 76 A 54 54 0 0 0 316 108" fill="none" stroke={PURPLE} strokeWidth={3} />
+        <Arrow x1={400} y1={96} x2={414} y2={122} color={PURPLE} width={1.5} />
+        <Arrow x1={320} y1={96} x2={306} y2={122} color={PURPLE} width={1.5} />
+        <He x={360} y={198} size={10} color={PURPLE}>שני מזלגות, כיוונים מנוגדים</He>
+      </g>
+
+      <rect x={40} y={236} width={400} height={56} rx={10} fill={FILL.sky} stroke={BLUE} strokeWidth={1.2} />
+      <He x={430} y={256} size={10.5} anchor="end" bold color={BLUE}>בכל מזלג</He>
+      <He x={430} y={276} size={10} anchor="end">גדיל מוביל — סינתזה רציפה · גדיל מתעכב — מקטעים שמחוברים אחר כך</He>
+      <He x={240} y={232} size={9.5} color={MUTED}>זיהוי ופתיחה: T antigen · הארכה: גורמי תא</He>
+    </Svg>
+  );
+}

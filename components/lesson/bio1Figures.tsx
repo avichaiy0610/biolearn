@@ -10,6 +10,7 @@ import { EnzymeRegulation } from "./redraws/EnzymeRegulation";
 import { ProkEuk } from "./redraws/ProkEuk";
 import { AnimalPlantCell } from "./redraws/AnimalPlantCell";
 import { TransportModes } from "./redraws/TransportModes";
+import { Virus } from "./redraws/Virus";
 
 const PURPLE = "#7c3aed";
 const RED = "#b91c1c";
@@ -176,40 +177,7 @@ function AminoAcid() {
 
 
 // ── b1-virus ─────────────────────────────────────────────────────────────────
-function Virus() {
-  const hex = (cx: number, cy: number, r: number) => Array.from({ length: 6 }, (_, i) => { const a = Math.PI / 6 + (i * Math.PI) / 3; return `${(cx + r * Math.cos(a)).toFixed(1)},${(cy + r * Math.sin(a)).toFixed(1)}`; }).join(" ");
-  const spikes = Array.from({ length: 16 }, (_, i) => (i * 2 * Math.PI) / 16);
-  return (
-    <Svg h={240} label="שני סוגי וירוסים. בקטריופאג': ראש (קפסיד) עם DNA, זנב וסיבי זנב שנצמדים לחיידק. וירוס עטוף (כמו שפעת או HIV): מעטפת שומנית עם חלבוני מעטפת בולטים, ובתוכה קפסיד וגנום של RNA.">
-      <polygon points={hex(370, 60, 34)} fill={FILL.blue} stroke={BLUE} strokeWidth={1.8} />
-      <path d="M356 50 c8 -10 18 10 26 0 s-6 20 -14 12 s-12 4 -12 -12" fill="none" stroke={RED} strokeWidth={1.6} />
-      <rect x={362} y={94} width={16} height={60} fill={FILL.gray} stroke={MUTED} strokeWidth={1.4} />
-      {[0, 1, 2, 3].map((i) => <line key={i} x1={362} x2={378} y1={104 + i * 13} y2={104 + i * 13} stroke={MUTED} strokeWidth={1} />)}
-      <rect x={352} y={154} width={36} height={6} fill={MUTED} />
-      <path d="M354 160 L332 186 L324 200 M386 160 L408 186 L416 200 M362 160 L352 196 M378 160 L388 196" fill="none" stroke={INK} strokeWidth={1.4} />
-      <He x={430} y={48} size={10.5} anchor="start">קפסיד</He><Lead x1={428} y1={44} x2={402} y2={52} />
-      <La x={300} y={48} size={10.5} color={RED} anchor="end">DNA</La><Lead x1={302} y1={44} x2={356} y2={52} />
-      <He x={430} y={124} size={10.5} anchor="start">זנב</He><Lead x1={428} y1={120} x2={380} y2={120} />
-      <He x={440} y={196} size={10.5} anchor="start">סיבי זנב</He><Lead x1={438} y1={192} x2={414} y2={190} />
-      <He x={370} y={226} size={12.5} bold>{"בקטריופאג'"}</He>
-
-      <circle cx={120} cy={110} r={60} fill={FILL.yellow} stroke="#ca8a04" strokeWidth={2.4} />
-      {spikes.map((a, i) => (
-        <g key={i}>
-          <line x1={120 + 60 * Math.cos(a)} y1={110 + 60 * Math.sin(a)} x2={120 + 72 * Math.cos(a)} y2={110 + 72 * Math.sin(a)} stroke={GREEN} strokeWidth={2} />
-          <circle cx={120 + 74 * Math.cos(a)} cy={110 + 74 * Math.sin(a)} r={3} fill={GREEN} />
-        </g>
-      ))}
-      <polygon points={hex(120, 110, 34)} fill={FILL.blue} stroke={BLUE} strokeWidth={1.6} />
-      <path d="M102 104 c8 -12 16 12 24 0 s8 14 14 4 M104 120 c8 -8 16 8 26 -2" fill="none" stroke={RED} strokeWidth={1.6} />
-      <He x={10} y={24} size={10.5} anchor="start">חלבוני מעטפת</He><Lead x1={40} y1={30} x2={62} y2={60} />
-      <He x={236} y={60} size={10.5} anchor="end">מעטפת שומנית</He><Lead x1={200} y1={66} x2={168} y2={78} />
-      <He x={236} y={150} size={10.5} anchor="end">קפסיד</He><Lead x1={204} y1={146} x2={150} y2={126} />
-      <La x={10} y={170} size={10.5} color={RED} anchor="start">RNA</La><Lead x1={36} y1={166} x2={104} y2={120} />
-      <He x={120} y={226} size={12.5} bold>וירוס עטוף</He>
-    </Svg>
-  );
-}
+// Virus: redrawn at textbook level (2026-11-24) - see ./redraws/Virus.tsx; old code in archive/figures/2026-11-24-viro/.
 
 // ── b1-animal-plant-cell ─────────────────────────────────────────────────────
 
