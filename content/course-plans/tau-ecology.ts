@@ -21,7 +21,7 @@ const LECTURES: CoursePlan["lectures"] = [
   { n: 5, titleHe: "מהלכי חיים", items: [prg("life-history"), pg("life-tables"), pg("survivorship")] },
   { n: 6, titleHe: "אוכלוסיות", items: [pg("bookkeeping"), pg("dispersion"), pg("exponential"), pg("logistic"), pg("age-structure"), prg("density-dependence"), prg("fluctuations"), prg("metapopulations")] },
   { n: 7, titleHe: "תחרות", items: [prg("intraspecific"), comp()] },
-  { n: 8, titleHe: "אינטראקציות נוספות", items: [pred(), L("mv-ecology")("symbiosis"), soon("יחידה מלאה: הדדיות, טפילות ומחלות באוכלוסיות")] },
+  { n: 8, titleHe: "אינטראקציות נוספות", items: [pred(), L("mv-ecology")("symbiosis"), L("sh-mutualism-parasitism")()] },
   { n: 9, titleHe: "חברות I", items: [div("measuring"), div("local"), pred("cascades")] },
   { n: 10, titleHe: "חברות II", items: [succ(), div("function")] },
   { n: 11, titleHe: "זרימת אנרגיה ומארגי מזון", items: [ef(), bgc()] },

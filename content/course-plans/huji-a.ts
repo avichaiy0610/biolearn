@@ -12,7 +12,7 @@ export const hujiOrganismPlan = hujiPlan("huji-organism", "72128", [
   { titleHe: "5. חיות יחידות ומושבתיות; תחרות; אברי חוש ומערכות עצבים; צורבים", items: [L("z-sponges-cnidarians")(), L("z-nervous-senses")("brain"), L("ec-competition")("what")] },
   { titleHe: "6. צפליזציה; סימטריה דו-צדית ושלוש שכבות נבט; הפיצוץ הקמבריוני; סקאלת הזמן", items: [L("z-intro")("symmetry"), L("z-intro")("coelom"), L("z-intro")("lineages"), L("ev-animals")("origin"), L("ev-animals")("cambrian"), L("ev-origins")("fossils")] },
   { titleHe: "7. מגוון הבילטריים; אבולוציה של טפילות; תולעים שטוחות", items: [L("z-worms")("comparison"), L("z-worms")("flatworms")] },
-  { titleHe: "8. מערכות נשימה והובלה; הצלום; רכיכות", items: [L("z-respiration")(), L("z-intro")("coelom"), soon("יחידה מלאה: רכיכות (Mollusca)")] },
+  { titleHe: "8. מערכות נשימה והובלה; הצלום; רכיכות", items: [L("z-respiration")(), L("z-intro")("coelom"), L("sh-molluscs")()] },
   { titleHe: "9. סגמנטציה; תולעים טבעתיות; שרירים ותנועה; פגיות ומחזורי חיים", items: [L("z-worms")("annelids"), L("z-histology")("muscle")] },
   { titleHe: "10. המעבר ליבשה; שלד חיצוני ופנימי; מתנשלים; פרוקי רגליים", items: [L("z-arthropods")(), L("z-worms")("nematodes")] },
   { titleHe: "11. חרקים; מערכות הפרשה", items: [L("z-arthropods")("groups"), L("z-arthropods")("systems"), L("z-urogenital")("kidney-series"), L("z-urogenital")("nitrogen")] },

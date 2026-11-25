@@ -1,5 +1,5 @@
 import type { CoursePlan } from "./types";
-import { REUSE_NOTE_HE, sessionsFromTopics, soon } from "./helpers";
+import { L, REUSE_NOTE_HE, sessionsFromTopics, soon } from "./helpers";
 
 /* Hebrew University, phase-1 mapping (2026-11-25), no insider input. Every HUJI syllabus in the shnaton (2027,
    synced) is a topic list without dates or lesson numbers, so the lectures view is one session per official topic, in
@@ -21,19 +21,19 @@ export const hujiPlan = (courseSlug: string, code: string, topics: CoursePlan["t
 
 /* Gaps that recur across universities — one title each, so the cross-university gap table groups them. */
 export const GAP = {
-  homeostasis: soon("יחידה מלאה: הומאוסטזיס ומערכת העצבים האוטונומית"),
-  heart: soon("יחידה מלאה: הלב — מחזור הלב, מערכת ההולכה, אק\"ג ותפוקת הלב"),
-  vessels: soon("יחידה מלאה: כלי הדם והמודינמיקה"),
-  lung: soon("יחידה מלאה: פיזיולוגיה של הנשימה — אוורור, חילוף גזים והסעתם ובקרה"),
+  homeostasis: L("sh-homeostasis-autonomic")(),
+  heart: L("sh-heart")(),
+  vessels: L("sh-vessels")(),
+  lung: L("sh-respiration")(),
   digestion: soon("יחידה מלאה: מערכת העיכול — עיכול וספיגה"),
-  somatosensory: soon("יחידה מלאה: המערכת הסומטו-סנסורית — קולטני מישוש ומסלולים"),
-  motor: soon("יחידה מלאה: בקרה מוטורית — חוט השדרה, הקורטקס, המוח הקטן והגרעינים הבסיסיים"),
-  plantDiversity: soon("יחידה מלאה: מגוון הצמחים — מטחבים ושרכים לצמחי זרע"),
-  mineral: soon("יחידה מלאה: תזונה מינרלית והובלה בשיפה"),
+  somatosensory: L("sh-somatosensory")(),
+  motor: L("sh-motor-control")(),
+  plantDiversity: L("sh-plant-diversity")(),
+  mineral: L("sh-mineral-phloem")(),
   plantReproduction: soon("יחידה מלאה: רבייה בצמחים — גמטופיטים, האבקה, הפריה כפולה ופירות"),
   fungi: soon("יחידה מלאה: פטריות — ביולוגיה של התא ומחלות"),
-  quantitative: soon("יחידה מלאה: גנטיקה של תכונות כמותיות"),
-  sexualSelection: soon("יחידה מלאה: ברירה זוויגית"),
+  quantitative: L("sh-quantitative-genetics")(),
+  sexualSelection: L("sh-sexual-selection")(),
   gametogenesis: soon("יחידה מלאה: גמטוגנזה והפריה"),
   aging: soon("יחידה מלאה: הזדקנות — מנגנונים ומודלים גנטיים"),
   transgenic: soon("סעיף: עכברים טרנסגניים ועכברי knockout"),

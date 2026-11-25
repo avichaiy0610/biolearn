@@ -1,5 +1,5 @@
 import type { CoursePlan } from "./types";
-import { L, soon, REUSE_NOTE_HE, sessionsFromTopics } from "./helpers";
+import { L, REUSE_NOTE_HE, sessionsFromTopics } from "./helpers";
 
 // TAU 0455-1513 "מבוא לביולוגיה ב'" — phase-1 mapping (2026-11-25), no insider input.
 // Topics: the official IMS syllabus (2026) names three parts — evolution theory, the diversity of life
@@ -21,8 +21,8 @@ const TOPICS: CoursePlan["topics"] = [
   { titleHe: "המגוון הביולוגי: חד-תאיים אאוקריוטים", items: [eukO("diversity"), pr()] },
   { titleHe: "המגוון הביולוגי: בעלי חיים — חסרי חוליות", items: [zi(), anim("origin"), anim("cambrian"), anim("body-plans"), sc(), wo(), ar()] },
   { titleHe: "המגוון הביולוגי: בעלי חיים — חולייתנים", items: [ch(), anim("vertebrates"), L("ev-human")()] },
-  { titleHe: "עולם הצומח: מגוון ואבולוציה של הצמחים", items: [soon("יחידה מלאה: מגוון הצמחים — מטחבים ושרכים לצמחי זרע")] },
-  { titleHe: "עולם הצומח: מבנה ותפקוד", items: [pc(), wb(), dev(), L("pp-light-reactions")(), L("pp-auxin")(), L("pp-flowering")(), soon("יחידה מלאה: תזונה מינרלית והובלה בשיפה")] },
+  { titleHe: "עולם הצומח: מגוון ואבולוציה של הצמחים", items: [L("sh-plant-diversity")()] },
+  { titleHe: "עולם הצומח: מבנה ותפקוד", items: [pc(), wb(), dev(), L("pp-light-reactions")(), L("pp-auxin")(), L("pp-flowering")(), L("sh-mineral-phloem")()] },
 ];
 
 const IMS = { labelHe: "הסילבוס ב-IMS (תשפ\"ז)", url: "https://www.ims.tau.ac.il/Tal/Syllabus/Syllabus_L.aspx?course=0455151301&year=2026" };

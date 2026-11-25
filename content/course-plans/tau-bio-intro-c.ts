@@ -18,8 +18,8 @@ const DETAILED = { labelHe: "הסילבוס המפורט (תשפ\"ו, סמסטר
 const IMS = { labelHe: "הסילבוס ב-IMS", url: "https://www.ims.tau.ac.il/Tal/Syllabus/Syllabus_L.aspx?course=0455151401&year=2026" };
 
 const LECTURES: CoursePlan["lectures"] = [
-  { n: 1, titleHe: "צורה, תפקוד ותרמורגולציה; אותות כימיים בבעלי חיים", items: [hi(), soon("יחידה מלאה: הומאוסטזיס ותרמורגולציה"), enI()] },
-  { n: 2, titleHe: "תזונה ומאזן אנרגיה; נשימה ומחזור הדם", items: [dig(), resp(), soon("יחידה מלאה: הלב — מחזור הלב, מערכת ההולכה, אק\"ג ותפוקת הלב"), soon("יחידה מלאה: כלי הדם והמודינמיקה")] },
+  { n: 1, titleHe: "צורה, תפקוד ותרמורגולציה; אותות כימיים בבעלי חיים", items: [hi(), L("sh-homeostasis-autonomic")(), enI()] },
+  { n: 2, titleHe: "תזונה ומאזן אנרגיה; נשימה ומחזור הדם", items: [dig(), resp(), L("sh-heart")(), L("sh-vessels")()] },
   { n: 3, titleHe: "מערכות הפרשה; מערכות רבייה", items: [uro(), L("ph-kidney-filtration")(), L("ph-kidney-tubules")(), enR()] },
   { n: 4, titleHe: "התפתחות בבעלי חיים", items: [emb(), L("dv-principles")()] },
   { n: 5, titleHe: "הגנות מפני זיהום (א): חסינות מולדת", items: [imI(), imN()] },

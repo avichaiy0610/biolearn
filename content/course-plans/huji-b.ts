@@ -85,7 +85,7 @@ export const hujiEcologyAdvPlan = hujiPlan("huji-ecology-adv", "72604", [
   { titleHe: "דמוגרפיה, בקרה תלוית צפיפות ותנודות אקראיות", items: [L("ec-population-growth")(), L("ec-population-regulation")()] },
   { titleHe: "ארבעת הכוחות הבסיסיים בחברות אקולוגיות", items: [soon("סעיף: ארבעת התהליכים בחברות — ברירה, סחף, פיזור והתפצלות")] },
   { titleHe: "השפעת שטח, פרודוקטיביות, הטרוגניות והפרעה על מגוון", items: [L("ec-diversity")("species-area"), L("ec-diversity")("local"), L("ec-succession")("mechanisms")] },
-  { titleHe: "תאוריית הקיום יחדיו", items: [L("ec-competition")(), soon("יחידה מלאה: תאוריית הקיום יחדיו")] },
+  { titleHe: "תאוריית הקיום יחדיו", items: [L("ec-competition")(), L("sh-coexistence")()] },
   { titleHe: "השפעת ההיסטוריה על חברות; מצבי שיווי משקל חלופיים", items: [L("ec-succession")(), soon("סעיף: מצבי שיווי משקל חלופיים וקטסטרופות")] },
   { titleHe: "השפעת המגוון על תפקוד אקוסיסטמות", items: [L("ec-diversity")("function")] },
   { titleHe: "מודלי אפס", items: [soon("סעיף: מודלי אפס באקולוגיה")] },

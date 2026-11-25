@@ -109,11 +109,11 @@ const MOLB: CoursePlan["lectures"] = [
 export const biuMolecularBPlan = base("biu-molecular-b", MOLB, biuOrder("https://life-sciences.biu.ac.il/sites/life-sciences/files/shared/Med%20Mechina/Sylabi24/80-377-30%D7%91%D7%99%D7%95%D7%9C%D7%95%D7%92%D7%99%D7%94-%D7%9E%D7%95%D7%9C%D7%A7%D7%95%D7%9C%D7%A8%D7%99%D7%AA-%D7%95%D7%94%D7%A0%D7%93%D7%A1%D7%94-%D7%92%D7%A0%D7%98%D7%99%D7%AA-%D7%91_0.pdf", "תשפ\"ד"), "תשפ\"ד");
 
 /* ---------- 80214 פיזיולוגיה של מערכות (Tortora) ---------- */
-const HEART = soon("יחידה מלאה: הלב — מחזור הלב, מערכת ההולכה, אק\"ג ותפוקת הלב");
-const VESSELS = soon("יחידה מלאה: כלי הדם והמודינמיקה");
-const LUNG = soon("יחידה מלאה: פיזיולוגיה של הנשימה — אוורור, חילוף גזים והסעתם ובקרה");
+const HEART = L("sh-heart")();
+const VESSELS = L("sh-vessels")();
+const LUNG = L("sh-respiration")();
 const SYS: CoursePlan["lectures"] = [
-  { n: 1, titleHe: "מבוא: רמות הארגון, הומאוסטזיס, מערכת העצבים האוטונומית והמערכת האנדוקרינית", items: [L("ph-anatomy")("terms"), L("en-intro")(), L("en-control")("negative"), soon("יחידה מלאה: הומאוסטזיס ומערכת העצבים האוטונומית")] },
+  { n: 1, titleHe: "מבוא: רמות הארגון, הומאוסטזיס, מערכת העצבים האוטונומית והמערכת האנדוקרינית", items: [L("ph-anatomy")("terms"), L("en-intro")(), L("en-control")("negative"), L("sh-homeostasis-autonomic")()] },
   { n: 2, titleHe: "מרכיבי הדם; אנטומיה של הלב; מחזורי הדם; מחזור הדם בעובר", items: [L("ph-blood")("composition"), L("ph-anatomy")("thorax"), L("z-respiration")("circulation"), HEART] },
   { n: 3, titleHe: "מעבר הדם בלב; המעגל הכלילי; התכווצות תא שריר הלב", items: [L("ph-smooth-cardiac-muscle")("cardiac-structure"), L("ph-smooth-cardiac-muscle")("cicr"), HEART] },
   { n: 4, titleHe: "מערכת ההולכה החשמלית בלב; חשמל מול התכווצות", items: [L("ph-smooth-cardiac-muscle")("cardiac-regulation"), HEART] },
