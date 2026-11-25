@@ -19,7 +19,7 @@ const IMS = { labelHe: "הסילבוס ב-IMS", url: "https://www.ims.tau.ac.il/
 
 const LECTURES: CoursePlan["lectures"] = [
   { n: 1, titleHe: "צורה, תפקוד ותרמורגולציה; אותות כימיים בבעלי חיים", items: [hi(), soon("יחידה מלאה: הומאוסטזיס ותרמורגולציה"), enI()] },
-  { n: 2, titleHe: "תזונה ומאזן אנרגיה; נשימה ומחזור הדם", items: [dig(), resp(), soon("יחידה מלאה: מחזור הדם — הלב, כלי הדם וחילוף גזים")] },
+  { n: 2, titleHe: "תזונה ומאזן אנרגיה; נשימה ומחזור הדם", items: [dig(), resp(), soon("יחידה מלאה: הלב — מחזור הלב, מערכת ההולכה, אק\"ג ותפוקת הלב"), soon("יחידה מלאה: כלי הדם והמודינמיקה")] },
   { n: 3, titleHe: "מערכות הפרשה; מערכות רבייה", items: [uro(), L("ph-kidney-filtration")(), L("ph-kidney-tubules")(), enR()] },
   { n: 4, titleHe: "התפתחות בבעלי חיים", items: [emb(), L("dv-principles")()] },
   { n: 5, titleHe: "הגנות מפני זיהום (א): חסינות מולדת", items: [imI(), imN()] },
