@@ -1,6 +1,7 @@
 "use client";
 
-import type { ComponentType } from "react";
+import { useEffect, useRef, type ComponentType } from "react";
+import { watchSvgBidi } from "./svgBidiFix";
 import TranscriptionScene from "./TranscriptionScene";
 import TransportScene from "./TransportScene";
 import RespirationScene from "./RespirationScene";
@@ -19,6 +20,8 @@ import LncDevScene from "./LncDevScene";
 import LncConsScene from "./LncConsScene";
 import ActionPotentialScene from "./ActionPotentialScene";
 import SynapseScene from "./SynapseScene";
+import HeartScene from "./HeartScene";
+import MuscleScene from "./MuscleScene";
 import type { SceneId } from "./registry";
 
 const SCENES: Record<SceneId, ComponentType<{ lang?: string; processName?: string }>> = {
@@ -40,6 +43,8 @@ const SCENES: Record<SceneId, ComponentType<{ lang?: string; processName?: strin
   "lncrna-conservation": LncConsScene,
   "action-potential": ActionPotentialScene,
   "synaptic-transmission": SynapseScene,
+  cardiovascular: HeartScene,
+  "muscle-contraction": MuscleScene,
 };
 
 export default function ProcessScene({
@@ -52,5 +57,11 @@ export default function ProcessScene({
   processName?: string;
 }) {
   const Scene = SCENES[sceneId];
-  return Scene ? <Scene lang={lang} processName={processName} /> : null;
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => (ref.current ? watchSvgBidi(ref.current) : undefined), [sceneId, lang]);
+  return Scene ? (
+    <div ref={ref} style={{ display: "contents" }}>
+      <Scene lang={lang} processName={processName} />
+    </div>
+  ) : null;
 }

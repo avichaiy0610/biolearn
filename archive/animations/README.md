@@ -15,3 +15,7 @@
 מוחקים את שורת ה-matcher שלה ב-`components/scenes/registry.ts`. הדף יחזור מיד לנגן השלבים הישן, עם הנתונים הקיימים ממסד הנתונים.
 
 כדי להחזיר רק את הלשונית: ב-`components/ProcessVisual.tsx` מחזירים את מתג "אנימציה רציפה / שלב-אחר-שלב". הגרסה הקודמת נמצאת ב-git, לפני `df5eeb3`.
+
+## 25.11 — לב ושריר + תיקון ספארי
+- נוספו סרטים רציפים: `cardiovascular` (מערכת הלב וכלי הדם, `HeartScene.tsx`) ו-`muscle-contraction` (כיווץ שריר השלד, `MuscleScene.tsx`). הישנות נשארו: `content/process-scenes/heart.ts` והשלבים במסד הנתונים.
+- ב-`ProcessScene.tsx` נוסף `watchSvgBidi` (`components/scenes/svgBidiFix.ts`): ספארי מתעלם מסימני isolate בטקסט SVG, ולכן תוויות עבריות עם שמות לטיניים התבלגנו באייפד. התיקון מוסיף RLM/LRM בזמן ריצה לכל התוויות. כדי לבטל אותו, מוחקים את שורת ה-`useEffect` ב-`ProcessScene.tsx`.
