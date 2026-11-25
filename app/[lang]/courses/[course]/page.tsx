@@ -36,7 +36,7 @@ export default async function CoursePage({ params, searchParams }: PageProps<"/[
   const L = he ? "he" : "en";
   const uni = universityBySlug(course.university);
   const plan = planForCourse(course.slug);
-  const view: PlanView = viewParam === "lectures" || viewParam === "tutorials" ? viewParam : "topics";
+  const view: PlanView = viewParam === "lectures" || (viewParam === "tutorials" && (plan?.tutorials.length ?? 0) > 0) ? viewParam : "topics";
   const email = plan ? (await auth().catch(() => null))?.user?.email : null;
   const [resolved, readRows] = await Promise.all([
     plan ? resolvePlan(plan, lang) : Promise.resolve(null),
@@ -84,7 +84,7 @@ export default async function CoursePage({ params, searchParams }: PageProps<"/[
       )}
 
       {plan && planGroups ? (
-        <CoursePlanView lang={lang} courseSlug={course.slug} view={view} groups={planGroups} scheduleNoteHe={plan.scheduleNoteHe} suggested={plan.schedule === "suggested"} lectureOrder={plan.lectureOrder} tutorialOrder={plan.tutorialOrder} />
+        <CoursePlanView lang={lang} courseSlug={course.slug} view={view} groups={planGroups} scheduleNoteHe={plan.scheduleNoteHe} suggested={plan.schedule === "suggested"} lectureOrder={plan.lectureOrder} tutorialOrder={plan.tutorialOrder} hasTutorials={plan.tutorials.length > 0} />
       ) : (
       <section className="mb-10">
         <h2 className="text-xl font-semibold text-zinc-800 dark:text-zinc-200 mb-4">{he ? "יחידות הלימוד לפי הסדר" : "Units in order"}</h2>

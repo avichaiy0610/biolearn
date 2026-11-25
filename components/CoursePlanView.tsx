@@ -35,9 +35,10 @@ const TABS: { id: PlanView; he: string }[] = [
 ];
 
 // The same course material by syllabus topic, by lecture or by tutorial.
-export default function CoursePlanView({ lang, courseSlug, view, groups, scheduleNoteHe, suggested, lectureOrder, tutorialOrder }: {
+export default function CoursePlanView({ lang, courseSlug, view, groups, scheduleNoteHe, suggested, lectureOrder, tutorialOrder, hasTutorials = true }: {
   lang: string; courseSlug: string; view: PlanView; groups: Group[]; scheduleNoteHe: string; suggested: boolean;
   lectureOrder?: OrderSource; tutorialOrder?: OrderSource | null;
+  hasTutorials?: boolean; // false: the plan has no tutorial material yet, so the tab is hidden
 }) {
   // Provenance shown above the list; tutorials without a source are labelled per lecture.
   const tutorialsByLecture = view === "tutorials" && tutorialOrder === null;
@@ -46,7 +47,7 @@ export default function CoursePlanView({ lang, courseSlug, view, groups, schedul
     <section aria-labelledby="plan-title" className="mb-10">
       <h2 id="plan-title" className="sr-only">חומר הקורס</h2>
       <div role="tablist" aria-label="סידור החומר" className="flex gap-1 rounded-xl border border-line bg-surface p-1">
-        {TABS.map((t) => (
+        {TABS.filter((t) => hasTutorials || t.id !== "tutorials").map((t) => (
           <Link key={t.id} role="tab" aria-selected={t.id === view} href={`/${lang}/courses/${courseSlug}?view=${t.id}`} scroll={false}
             className={`flex-1 rounded-lg px-3 py-2 text-center text-sm font-bold transition-colors ${t.id === view ? "bg-brand text-surface" : "text-muted hover:text-ink"}`}>
             {t.he}

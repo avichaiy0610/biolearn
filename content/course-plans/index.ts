@@ -31,8 +31,15 @@ import { technionComputationalPlan } from "./technion-computational";
 import { technionPathogensPlan } from "./technion-pathogens";
 import { technionStemCellsPlan } from "./technion-stem-cells";
 import { technionSystemsPlan } from "./technion-systems";
+import { tauBioIntroAPlan } from "./tau-bio-intro-a";
+import { tauBioIntroBPlan } from "./tau-bio-intro-b";
+import { tauBioIntroCPlan } from "./tau-bio-intro-c";
+import { tauEvolutionPlan } from "./tau-evolution";
+import { tauEcologyPlan } from "./tau-ecology";
+import { tauBioinformaticsPlan } from "./tau-bioinformatics";
+import { tauMicrobiologyPlan } from "./tau-microbiology";
 
-export const COURSE_PLANS: CoursePlan[] = [technionGeneticsPlan, tauGeneticsPlan, technionBiochemIntroPlan, technionMetabolicPlan, technionMolecularPlan, technionCellPlan, technionGeneExpressionPlan, technionPhysiologyPlan, technionMicroViroPlan, technionPlantPhysiologyPlan, technionBiology1Plan, technionEvolutionPlan, technionZoologyPlan, technionEndocrinologyPlan, technionImmunologyPlan, technionDevelopmentalPlan, technionEcologyPlan, technionNeurobiologyPlan, technionRnaPlan, technionUbiquitinPlan, technionDrugsPlan, technionBiostatisticsPlan, technionVirologyPlan, technionBioinformaticsPlan, technionHumanGeneticsPlan, technionCancerPlan, technionMetabolicDiseasePlan, technionBiophysicsPlan, technionComputationalPlan, technionPathogensPlan, technionStemCellsPlan, technionSystemsPlan];
+export const COURSE_PLANS: CoursePlan[] = [technionGeneticsPlan, tauGeneticsPlan, technionBiochemIntroPlan, technionMetabolicPlan, technionMolecularPlan, technionCellPlan, technionGeneExpressionPlan, technionPhysiologyPlan, technionMicroViroPlan, technionPlantPhysiologyPlan, technionBiology1Plan, technionEvolutionPlan, technionZoologyPlan, technionEndocrinologyPlan, technionImmunologyPlan, technionDevelopmentalPlan, technionEcologyPlan, technionNeurobiologyPlan, technionRnaPlan, technionUbiquitinPlan, technionDrugsPlan, technionBiostatisticsPlan, technionVirologyPlan, technionBioinformaticsPlan, technionHumanGeneticsPlan, technionCancerPlan, technionMetabolicDiseasePlan, technionBiophysicsPlan, technionComputationalPlan, technionPathogensPlan, technionStemCellsPlan, technionSystemsPlan, tauBioIntroAPlan, tauBioIntroBPlan, tauBioIntroCPlan, tauEvolutionPlan, tauEcologyPlan, tauBioinformaticsPlan, tauMicrobiologyPlan];
 
 export const planForCourse = (slug: string) => COURSE_PLANS.find((p) => p.courseSlug === slug);
 
