@@ -55,6 +55,9 @@ export const shQuantitativeGenetics: Lesson = {
 
 [[figure:sh-nilsson-ehle]]
 
+
+[[animation:mendelian-genetics-animation-1780786392025]]
+
 ## פירוק השונות ותורשתיות במובן הרחב {#broad}
 
 פנוטיפ (P) של פרט נובע מגנוטיפ (G) ומסביבה (E). השונות הפנוטיפית באוכלוסייה מתפרקת:

@@ -82,6 +82,9 @@ export const shHomeostasisAutonomic: Lesson = {
 
 [[figure:en-feedback-axis]]
 
+
+[[animation:blood-glucose-regulation]]
+
 ## בקרה עצבית מול הורמונלית {#two-systems}
 
 מערכת העצבים והמערכת האנדוקרינית הן שתי מערכות התקשורת לטווח ארוך בגוף:
@@ -130,6 +133,9 @@ export const shHomeostasisAutonomic: Lesson = {
 
 
 [[figure:sh-ans-pathways]]
+
+
+[[animation:synaptic-transmission]]
 
 ## סימפתטי מול פאראסימפתטי {#effects}
 

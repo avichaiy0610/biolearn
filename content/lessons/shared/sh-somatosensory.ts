@@ -34,6 +34,9 @@ export const shSomatosensory: Lesson = {
 - **מיקום** — לפי **השדה הקולטני** של הנוירונים שיורים.
 - **משך** — לפי **הסתגלות** הקולטן.
 
+
+[[animation:action-potential]]
+
 ## הסתגלות ושדות קולטניים {#adaptation}
 
 **הסתגלות (adaptation)** — ירידה בתגובה בזמן גירוי קבוע:

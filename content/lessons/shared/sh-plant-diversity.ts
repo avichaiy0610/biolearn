@@ -59,6 +59,9 @@ export const shPlantDiversity: Lesson = {
 
 [[figure:sh-alternation-generations]]
 
+
+[[animation:meiosis]]
+
 ## טחבים וקרוביהם (צמחים בלי צינורות) {#bryophytes}
 
 שלוש קבוצות שנקראות יחד **ברופיטים**: **טחבי כבד**, **טחבי קרן** ו**טחבים**. האם הן קבוצה אחת מאב משותף (מונופילטית) עדיין נבדק — עצים מולקולריים חדשים תומכים בזה.

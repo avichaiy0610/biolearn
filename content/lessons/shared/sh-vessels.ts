@@ -129,6 +129,9 @@ export const shVessels: Lesson = {
 
 [[figure:raas]]
 
+
+[[animation:nephron-urine-formation]]
+
 ## מצבים: דימום, עמידה ומאמץ {#patterns}
 
 **דימום ושוק היפוולמי.** איבוד דם מוריד את ההחזר הוורידי → נפח הפעימה, תפוקת הלב ולחץ הדם יורדים. התגובות:
