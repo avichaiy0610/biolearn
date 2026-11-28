@@ -159,7 +159,7 @@ export const hujiMicroAdvPlan = hujiPlan("huji-micro-adv", "72342", [
 
 // 72346 מדעי הצמח מורחב — papers + lab
 export const hujiPlantAdvPlan = hujiPlan("huji-plant-adv", "72346", [
-  { titleHe: "אמבריוגנזה: מקורה של אדריכלות הצמח", items: [L("pp-development")("seed-formation"), soon("סעיף: אמבריוגנזה בצמחים — צירים ומריסטמות")] },
+  { titleHe: "אמבריוגנזה: מקורה של אדריכלות הצמח", items: [L("pp-development")("seed-formation"), L("sh-plant-reproduction")("embryogenesis"), L("sh-plant-reproduction")("auxin-patterning")] },
   { titleHe: "נביטה והתבססות", items: [L("pp-development")("dormancy"), L("pp-development")("germination"), L("pp-development")("seedling"), L("pp-photoreceptors")()] },
   { titleHe: "בקרה על פריחה והתפתחות פרחונית", items: [L("pp-flowering")(), L("pp-circadian-photoperiod")()] },
   { titleHe: "התפתחות גמטופיטים, האבקה והתפתחות פירות", items: [GAP.plantReproduction] },

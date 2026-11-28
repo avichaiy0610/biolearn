@@ -55,7 +55,7 @@ export const biuCellFunctionPlan = base("biu-cell-function", CF, biuOrder("https
 const mp = L("mendel-probability"), lm = L("linkage-mapping"), gi = L("gene-interaction"), mu = L("mutations");
 const GEN: CoursePlan["lectures"] = [
   { n: 1, titleHe: "שיעורים 1–7: מנדל, סגרגציה, הבסיס הכרומוזומלי, שושלות, מיפוי ואינטראקציות", items: [mp(), L("chromosomal-theory")(), L("dominance-alleles")(), L("pedigrees")(), L("sex-determination")("sex-linkage"), lm("intro"), lm("crossover"), lm("rf"), lm("three-point"), L("nature-of-gene")("complementation"), gi("epistasis"), gi("suppression"), mu("definition")] },
-  { n: 2, titleHe: "שיעורים 7–14: טטרדות, מיפוי בחיידקים, גנטיקה מולקולרית ומוטציות", items: [lm("tetrads"), L("mv-gene-transfer")("conjugation"), soon("סעיף: מיפוי בחיידקים — זיווג מופרע ומיפוי עדין"), gi("one-gene-one-enzyme"), gi("ordering"), gi("analysis"), L("hg-cancer")("synthetic-lethality"), mu("point"), mu("reversion")] },
+  { n: 2, titleHe: "שיעורים 7–14: טטרדות, מיפוי בחיידקים, גנטיקה מולקולרית ומוטציות", items: [lm("tetrads"), L("mv-gene-transfer")("conjugation"), L("sh-bacterial-genetics-methods")("mapping"), gi("one-gene-one-enzyme"), gi("ordering"), gi("analysis"), L("hg-cancer")("synthetic-lethality"), mu("point"), mu("reversion")] },
   { n: 3, titleHe: "שיעורים 14–20: יציבות הגנום, שינויים כרומוזומליים, תורשה חוץ-גרעינית, אוכלוסיות ואפיגנטיקה", items: [L("hg-repeats")(), L("gx-repeats-mobile")(), L("mv-gene-transfer")("transposons"), L("chromosome-structure")(), L("chromosome-number")(), L("gx-epigenetics")("x-inactivation"), L("non-mendelian")(), L("hg-mitochondrial")(), L("hg-imprinting")(), L("pedigrees")("hardy-weinberg"), L("ev-selection")("hardy-weinberg"), L("mol-recombination")(), L("gx-epigenetics")("definition"), L("gx-chromatin-modifications")("marks")] },
 ];
 export const biuGeneticsPlan = base("biu-genetics", GEN, biuOrder("https://life-sciences.biu.ac.il/sites/life-sciences/files/shared/Med%20Mechina/Sylabi24/80-208-30-%D7%92%D7%A0%D7%98%D7%99%D7%A7%D7%94-%D7%AA%D7%A9%D7%A4%D7%93.pdf", "תשפ\"ד", "הסילבוס מחלק את הקורס לשלושה גושי שיעורים של שלושה מרצים, וגם מפרט מה לא נלמד באותה שנה (למשל קביעת מין, מוטגנים, טרנספורמציה וטרנסדוקציה). "), "תשפ\"ד");
@@ -68,7 +68,7 @@ const MIC: CoursePlan["lectures"] = [
   { n: 4, titleHe: "מחזורי פחמן, חנקן וגופרית; מרבדים מיקרוביאליים", items: [L("mv-nutrient-cycles")(), L("mv-ecology")("biofilm")] },
   { n: 5, titleHe: "חומרים אנטי-מיקרוביאליים, אנטיביוטיקה ועמידות", items: [L("mv-antibiotics")()] },
   { n: 6, titleHe: "בקרת גנים בחיידקים: דיכוי, השראה, בקרה גלובלית ומערכות דו-רכיביות", items: [L("gx-operons")(), L("mol-transcription-prok")("alt-sigma"), L("pg-evasion-regulation")("two-component")] },
-  { n: 7, titleHe: "תוכניות גנטיות: נבגים, התגובה הסטרינגנטית ותיקון SOS", items: [L("mv-endospores")("sporulation"), L("mol-repair")("tls"), soon("סעיף: התגובה הסטרינגנטית ותגובת SOS")] },
+  { n: 7, titleHe: "תוכניות גנטיות: נבגים, התגובה הסטרינגנטית ותיקון SOS", items: [L("mv-endospores")("sporulation"), L("mol-repair")("tls"), L("sh-bacterial-genetics-methods")("stringent"), L("sh-bacterial-genetics-methods")("sos")] },
   { n: 8, titleHe: "גנטיקה של חיידקים: טרנספורמציה, טרנסדוקציה, קוניוגציה ופלסמידים", items: [L("mv-gene-transfer")()] },
   { n: 9, titleHe: "חסינות חיידקית: אנזימי רסטריקציה, הדבקה מופסקת, CBASS ו-CRISPR", items: [L("vr-bacterial-defenses")(), L("mv-phages")("defenses")] },
   { n: 10, titleHe: "אלימות חיידקית ויחסי מאכסן-מיקרוביום", items: [L("pg-microbiome")(), L("mv-ecology")("microbiome"), L("pg-adhesion")(), L("pg-toxins")(), L("mv-clinical")()] },
@@ -79,16 +79,16 @@ export const biuMicrobiologyPlan = base("biu-microbiology", MIC, biuOrder("https
 const MOLA: CoursePlan["lectures"] = [
   { n: 1, titleHe: "מבוא; DNA: אנזימי רסטריקציה והפרדה בג'ל", items: [L("b1-dna")("genetic-engineering"), L("catalytic-mechanisms")("restriction"), L("mol-nucleic-acids")("blotting")] },
   { n: 2, titleHe: "שיבוט, פלסמידים ווקטורי ביטוי", items: [L("mol-pcr-sequencing")("cloning")] },
-  { n: 3, titleHe: "סימון DNA, היברידיזציה, Southern, ספרייה גנומית; SKY ו-FISH", items: [L("mol-nucleic-acids")("melting"), L("mol-nucleic-acids")("blotting"), L("mv-methods")("fish"), soon("סעיף: ספריות גנומיות ו-cDNA, סימון והכלאה")] },
+  { n: 3, titleHe: "סימון DNA, היברידיזציה, Southern, ספרייה גנומית; SKY ו-FISH", items: [L("mol-nucleic-acids")("melting"), L("mol-nucleic-acids")("blotting"), L("mv-methods")("fish"), L("sh-mol-methods")("hybridization"), L("sh-mol-methods")("libraries")] },
   { n: 4, titleHe: "קביעת רצף DNA: משיטות בסיסיות ועד ריצוף גנום", items: [L("mol-pcr-sequencing")("sanger"), L("bi-sequencing")("technologies")] },
   { n: 5, titleHe: "שיטות אבחון גנטי (כולל RFLP)", items: [L("hg-diagnosis")(), L("hg-mapping-cloning")("linkage")] },
   { n: 6, titleHe: "RNA: ביטוי ייחודי לרקמה; Northern; ספריית cDNA; RNA-seq ומערכים", items: [L("mol-transcription-methods")("northern"), L("gx-expression-data")("rna-seq"), L("bi-rnaseq")()] },
   { n: 7, titleHe: "RT-PCR ו-Real-Time PCR; השוואת שיטות לבחינת ביטוי", items: [L("gx-expression-data")("rt"), L("gx-expression-data")("qpcr"), L("gx-expression-data")("ddct"), L("gx-expression-data")("primers")] },
   { n: 8, titleHe: "חלבונים: ג'ל חד- ודו-ממדי, ספקטרומטריית מסות, נוגדנים וצביעה", items: [L("protein-methods")("electrophoresis"), L("protein-methods")("mass"), L("im-antibodies")("hybridomas"), L("cell-methods")("antibodies"), L("cell-methods")("immunofluorescence")] },
   { n: 9, titleHe: "Western blot, תיוג אפיטופים וחלבונים פלואורסצנטיים", items: [L("mol-genetic-code")("western"), L("cell-methods")("gfp"), L("cell-methods")("fluorescence")] },
-  { n: 10, titleHe: "קישור בין חלבונים: GST, שמרים דו-היברידיים, FRET, IP-WB", items: [soon("יחידה מלאה: שיטות לזיהוי קישור בין חלבונים — GST, שמרים דו-היברידיים, FRET ו-IP")] },
+  { n: 10, titleHe: "קישור בין חלבונים: GST, שמרים דו-היברידיים, FRET, IP-WB", items: [L("sh-mol-methods")("pulldown-ip"), L("sh-mol-methods")("y2h"), L("sh-mol-methods")("fret"), L("sh-mol-methods")("comparison")] },
   { n: 11, titleHe: "עבודה עם תאים: תרבית, FACS, ביטוי זמני ויציב, גנים מדווחים", items: [L("cell-methods")("flow"), L("mol-transcription-methods")("reporter"), L("sc-culture")("conditions")] },
-  { n: 12, titleHe: "קישור חלבון-DNA; מוטגנזה מכוונת", items: [L("mol-transcription-methods")("emsa"), L("mol-transcription-methods")("footprint"), L("mol-transcription-methods")("chip"), L("gx-genomic-tracks")("chip-seq"), soon("סעיף: מוטגנזה מכוונת")] },
+  { n: 12, titleHe: "קישור חלבון-DNA; מוטגנזה מכוונת", items: [L("mol-transcription-methods")("emsa"), L("mol-transcription-methods")("footprint"), L("mol-transcription-methods")("chip"), L("gx-genomic-tracks")("chip-seq"), L("sh-mol-methods")("mutagenesis")] },
   { n: 13, titleHe: "חיות טרנסגניות; השתקת גנים; עכברי knockout; CRISPR", items: [L("gx-crispr-tools")(), L("gx-ncrna")("sirna"), L("pp-research-tools")("silencing-editing"), soon("סעיף: עכברים טרנסגניים ועכברי knockout")] },
 ];
 export const biuMolecularAPlan = base("biu-molecular-a", MOLA, biuOrder("https://life-sciences.biu.ac.il/sites/life-sciences/files/shared/Med%20Mechina/Sylabi25/%D7%A1%D7%99%D7%9C%D7%91%D7%95%D7%A1-%D7%92%D7%A8%D7%A1%D7%94-%D7%97%D7%93%D7%A9%D7%94-2025-%D7%9E%D7%95%D7%9C%D7%A7%D7%95%D7%9C%D7%A8%D7%99%D7%AA-242-30.pdf", "תשפ\"ה"), "תשפ\"ה");

@@ -26,9 +26,9 @@ const PHYS: CoursePlan["lectures"] = [
   { n: 8, titleHe: "חוש המישוש", items: [sen("senses"), L("sh-somatosensory")()] },
   { n: 9, titleHe: "חוש המישוש (המשך)", items: [L("sh-somatosensory")()] },
   { n: 10, titleHe: "בקרה על תנועה", items: [L("ph-nervous-system")("reflex"), sen("reflex-circuit"), L("ph-skeletal-muscle")("motor-units"), L("sh-motor-control")()] },
-  { n: 11, titleHe: "החושים הכימיים", items: [zns("olfaction"), soon("סעיף: טעם וריח — קולטנים ותמסורת")] },
-  { n: 12, titleHe: "חוש השמע", items: [zns("hair-cells"), zns("middle-ear"), soon("סעיף: השבלול וקידוד תדר")] },
-  { n: 13, titleHe: "חוש הראייה", items: [zns("eye"), L("cell-gpcr")("vision"), soon("סעיף: הרשתית ועיבוד ראייה")] },
+  { n: 11, titleHe: "החושים הכימיים", items: [zns("olfaction"), L("sh-special-senses")("taste"), L("sh-special-senses")("smell")] },
+  { n: 12, titleHe: "חוש השמע", items: [zns("hair-cells"), zns("middle-ear"), L("sh-special-senses")("ear"), L("sh-special-senses")("hair-cells")] },
+  { n: 13, titleHe: "חוש הראייה", items: [zns("eye"), L("cell-gpcr")("vision"), L("sh-special-senses")("photoreceptors"), L("sh-special-senses")("retinal-processing"), L("sh-special-senses")("color")] },
 ];
 export const biuAnimalPhysiologyPlan: CoursePlan = {
   courseSlug: "biu-animal-physiology",

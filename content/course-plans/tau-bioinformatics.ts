@@ -21,7 +21,7 @@ const LECTURES: CoursePlan["lectures"] = [
   { n: 5, titleHe: "מבוא לעימוד רצפים", items: [pw("homology"), pw("dot-plot"), pw("matrices")] },
   { n: 6, titleHe: "עימוד רצפים", items: [pw("global-local"), pw("gaps"), pw("dp"), L("cb-alignment")(), blast()] },
   { n: 7, titleHe: "עימוד רצפים מרובה ושחזור עצים פילוגנטיים", items: [msa("progressive"), msa("conservation"), msa("trees")] },
-  { n: 8, titleHe: "שחזור עצים פילוגנטיים", items: [evid("trees"), evid("reconstruction"), soon("יחידה מלאה: שחזור עצים — UPGMA, Neighbor-Joining, פרסימוניה ונראות מרבית")] },
+  { n: 8, titleHe: "שחזור עצים פילוגנטיים", items: [evid("trees"), evid("reconstruction"), L("sh-phylogenetics")()] },
   { n: 9, titleHe: "רשתות בביולוגיה — מבנה גלובלי ותכונות", items: [net("graphs"), net("centrality"), net("hubs-modules"), L("cb-networks")()] },
   { n: 10, titleHe: "רשתות בביולוגיה — מוטיבי רשת ומעגלי משוב", items: [net("motifs"), L("sy-ffl-coherent")(), L("sy-ffl-incoherent")(), L("sy-response-feedback")()] },
   { n: 11, titleHe: "מוטיבי רשת; אנליזת ביטוי מתאים בודדים", items: [net("motifs"), sc("why"), sc("barcodes"), sc("qc")] },

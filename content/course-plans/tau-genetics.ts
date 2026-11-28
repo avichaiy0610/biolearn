@@ -63,7 +63,7 @@ export const tauGeneticsPlan: CoursePlan = {
     { titleHe: "טבע הגן, תרגום ופיענוח הקוד הגנטי", items: [ng(), sub(S.dogma, M), proc("translation", M), L("mol-genetic-code")("triplet"), L("mol-genetic-code")("cracking")] },
     { titleHe: "סוגי המוטציות ופעולת חומרים מוטגניים", items: [mu()] },
     { titleHe: "בקרה על פעולת הגנים", items: [proc("lac-operon", M), sub(S.expression, M), L("gx-operons")(), L("gx-transcription-factors")()] },
-    { titleHe: "עקרונות של מניפולציית גנים", items: [sub(S.pcr, M), proc("pcr", M), L("mol-pcr-sequencing")("cloning"), L("gx-crispr-tools")(), soon("סעיף: גנטיקה הפוכה וסריקת ספריות")] },
+    { titleHe: "עקרונות של מניפולציית גנים", items: [sub(S.pcr, M), proc("pcr", M), L("mol-pcr-sequencing")("cloning"), L("gx-crispr-tools")(), L("sh-mol-methods")("libraries"), L("sh-mol-methods")("mutagenesis")] },
     { titleHe: "גנים באוכלוסיות", items: [L("ev-selection")("hardy-weinberg"), pd("hardy-weinberg"), L("ev-drift")(), L("hg-multifactorial")("gwas")] },
     { titleHe: "גנטיקה של מערכת החיסון ושל סרטן", items: [L("im-ig-genetics")(), L("hg-cancer")()] },
     { titleHe: "המהפכה הגנומית; אבולוציה של גנים וגנומים", items: [L("gx-genome-structure")(), L("gx-gene-families")(), L("gx-repeats-mobile")()] },

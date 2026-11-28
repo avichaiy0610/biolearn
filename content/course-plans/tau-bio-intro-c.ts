@@ -1,5 +1,5 @@
 import type { CoursePlan } from "./types";
-import { L, soon, REUSE_NOTE_HE } from "./helpers";
+import { L, REUSE_NOTE_HE } from "./helpers";
 
 // TAU 0455-1514 "מבוא לביולוגיה ג'" — phase-1 mapping (2026-11-25), no insider input.
 // Lectures: the course's detailed syllabus for 2026 sem. B (Bernshtein, Domer, Scharf, Yovel) — 13 lessons,
@@ -30,7 +30,7 @@ const LECTURES: CoursePlan["lectures"] = [
   { n: 10, titleHe: "מבוא לאקולוגיה; אקולוגיה של אוכלוסיות ומהלכי חיים", items: [ecE(), ecB(), pg(), prg()] },
   { n: 11, titleHe: "מגוון ביולוגי וחברות", items: [comp(), pred(), div(), succ()] },
   { n: 12, titleHe: "זרימת אנרגיה ומחזורי חומרים; שמירת טבע ואקולוגיה גלובלית", items: [ef(), bgc(), hum()] },
-  { n: 13, titleHe: "אקולוגיה התנהגותית", items: [L("ev-social")(), soon("יחידה מלאה: אקולוגיה התנהגותית — חיפוש מזון, טריטוריה וברירה זוויגית")] },
+  { n: 13, titleHe: "אקולוגיה התנהגותית", items: [L("ev-social")(), L("sh-behavioral-ecology")()] },
 ];
 
 export const tauBioIntroCPlan: CoursePlan = {
